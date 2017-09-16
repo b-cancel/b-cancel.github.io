@@ -1,0 +1,157 @@
+/*-----EXTRA RESETS-----*/
+
+body{
+	font-family: Consolas, monaco, monospace;
+	background-color: #161713;
+	color: white;
+}
+
+a:link {
+    color: #47b2dc;
+}
+
+/* visited link */
+a:visited {
+    color: #7ede2a;
+}
+
+/*----Colors-----
+
+---Greys
+HEX			NAME 		
+#161713 - 1st dark grey 
+#262626 - 2nd dark grey 
+#272822 - 3rd dark grey 
+#383830 - 4th			
+#474747 - 5th			
+#595959 - 6th		
+
+---Soft Colors
+dce9de - white
+ab7ffa - purple
+47b2dc - blue
+ddd162 - yellow
+ac2755 - red
+7ede2a - green
+fa951f - orange
+
+---Hard Colors
+00fbb1 - blue green
+b0167a - pink purple
+*/
+
+/*-----FONTS -|- COLORS-----*/
+
+body {
+	background-color: #161713;
+}
+
+#name{
+	background-color: #161713;
+}
+
+#myName1{
+	background-color: rgba(0, 0, 0, 0);
+}
+
+.nameSmall1{
+	color: #dce9de;
+}
+
+.nameLarge1{
+	color:  #00fbb1;
+}
+
+#myName2{
+	background-color: #383830;
+	border-top:  2px solid #595959;
+	border-bottom:  2px solid #595959;
+}
+
+.nameSmall2{
+	color:  rgba(0, 0, 0, 0);
+}
+
+.nameLarge2{
+	color:  #b0167a;
+}
+
+#mainDiv{
+
+}
+
+.underConstruction{
+	color: black;
+	background-color: white;
+	padding: auto;
+}
+
+/*-----FORMATTING-----*/
+
+#name{
+	position: fixed;
+	width: 100%;
+	padding-top: 15px;
+	z-index: 1;
+}
+
+#myName1 > div > div, #myName2 > div > div{
+	display: inline-block;
+}
+
+#myName1, #myName2{
+	position: fixed;
+	width: 100%;
+	padding: 5px;
+}
+
+#myName1 > div, #myName2 > div{
+	max-width: 1000px;
+	margin: auto;
+}
+
+.nameLarge1, .nameLarge2{
+	font-size: 48px;
+}
+
+.nameSmall1, .nameSmall2{
+	font-size: 12px;
+}
+
+/*only difference*/
+
+#myName1{
+	z-index: 1;
+}
+
+#myName2{
+	padding: 8px;
+}
+
+#mainDiv{
+	max-width: 1000px;
+	margin: auto;
+	padding-top: 125px;
+}
+
+.underConstruction{
+	text-align: center;
+}
+
+#contactTable{
+	table-layout: fixed;
+	width: 100%;
+}
+
+#contactTable tr td{
+    text-align: center;
+    vertical-align: middle;
+}
+
+.tableImage{
+	opacity: .75;
+}
+
+.tableImage:hover{
+	opacity: 1;
+}
