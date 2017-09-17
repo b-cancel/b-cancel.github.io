@@ -148,10 +148,28 @@ body {
     vertical-align: middle;
 }
 
-.tableImage{
+.tblImageOpacityOnHover{
 	opacity: .75;
 }
 
-.tableImage:hover{
+.tblImageOpacityOnHover:hover{
 	opacity: 1;
+}
+
+#tblImagePhone{
+	content: url(".././images/phone.png");
+	height: 35px;
+}
+
+#tblImagePhone:hover{
+	content: url(".././images/phoneHover.png");
+}
+
+#tblImageMail{
+	content: url(".././images/email.png");
+	height: 35px;
+}
+
+#tblImageMail:hover{
+	content: url(".././images/emailHover.png");
 }
