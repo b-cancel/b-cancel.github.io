@@ -4,6 +4,8 @@ body{
 	font-family: Consolas, monaco, monospace;
 	background-color: #161713;
 	color: white;
+
+	position: static;
 }
 
 a:link {
@@ -46,8 +48,9 @@ body {
 	background-color: #161713;
 }
 
-#name{
+.name{
 	background-color: #161713;
+	background-color: green;
 }
 
 #myName1{
@@ -55,9 +58,14 @@ body {
 	border-bottom:  2px solid #595959;
 }
 
-#myName2, #myName3{
-	border-top:  2px rgba(0, 0, 0, 0);
-	border-bottom:  2px rgba(0, 0, 0, 0);
+#myName2{
+	border-top:  2px solid blue;
+	border-bottom:  2px solid blue;
+}
+
+#myName3{
+	border-top:  2px solid blue;
+	border-bottom:  2px solid blue;
 }
 
 .nameSmall1{
@@ -72,9 +80,11 @@ body {
 	background-color: #383830;
 }
 
+/*
 .nameSmall2, .nameSmall3, .nameLarge3{
 	color:  rgba(0, 0, 0, 0);
 }
+*/
 
 .nameLarge2{
 	color:  #b0167a;
@@ -119,11 +129,10 @@ body {
 	height: 50px;
 }
 
-#name{
-	position: fixed;
+.name{
 	width: 100%;
-	padding-top: 15px;
 	z-index: 1;
+	padding-top: 15px;
 }
 
 #myName1 > div > div, #myName2 > div > div, #myName3 > div >div{
@@ -145,7 +154,7 @@ body {
 }
 
 #myName3{
-	position: relative;
+	background-color: red;
 }
 
 .nameLarge3{
@@ -171,7 +180,7 @@ body {
 }
 
 #myName2{
-	padding: 7px;
+	padding: 0px;
 }
 
 #mainDiv{
