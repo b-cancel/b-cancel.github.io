@@ -110,6 +110,14 @@ body {
 	}
 }
 
+.mobile{
+		display: none;
+}
+
+.desktop{
+	display: block;
+}
+
 
 .mobile img{
 	height: 50px;
