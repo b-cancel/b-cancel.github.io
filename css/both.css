@@ -109,6 +109,10 @@ body {
 	#smallTitle{
 		display: none;
 	}
+
+	#largeTitle{
+		display: block;
+	}
 }
 
 /*mobile*/
@@ -131,6 +135,10 @@ body {
 
 	#smallTitle{
 		display: block;
+	}
+
+	#largeTitle{
+		display: none;
 	}
 }
 
