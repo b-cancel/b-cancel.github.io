@@ -192,3 +192,7 @@ body {
 #tblImageMail:hover{
 	content: url(".././images/emailHover.png");
 }
+
+.mobile img{
+	height: 50px;
+}
