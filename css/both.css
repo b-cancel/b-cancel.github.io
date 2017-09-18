@@ -154,9 +154,8 @@ body {
 }
 
 #mainDiv{
-	max-width: 998px;
+	max-width: 1000px;
 	margin: auto;
-	padding: 5px;
 }
 
 .underConstruction{
