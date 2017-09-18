@@ -53,10 +53,10 @@ body {
 }
 
 #myName2{
-	background-color: #595959;
+	background-color: #383830;
 
-	border-top:  2px solid #383830;
-	border-bottom:  2px solid #383830;
+	border-top:  2px solid #595959;
+	border-bottom:  2px solid #595959;
 }
 
 #myName1, #myName3{
@@ -133,6 +133,8 @@ body {
 	width: 98%;
 	padding-left: 1%;
 	padding-right: 1%;
+	padding-top: 5px;
+	padding-bottom: 5px;
 }
 
 .nameLarge1, .nameLarge2, .nameLarge3{
