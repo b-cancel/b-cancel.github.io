@@ -105,6 +105,10 @@ body {
 	#aboutMeLine{
 		width: 75%;
 	}
+
+	#smallTitle{
+		display: none;
+	}
 }
 
 /*mobile*/
@@ -123,6 +127,10 @@ body {
 
 	#aboutMeLine{
 		width: 100%;
+	}
+
+	#smallTitle{
+		display: block;
 	}
 }
 
