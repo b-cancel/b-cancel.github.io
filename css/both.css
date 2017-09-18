@@ -48,52 +48,36 @@ body {
 	background-color: #161713;
 }
 
-.name{
-	/*background-color: #161713;*/
-	background-color: #00ff00;
-}
-
-#myName1{
-	border-top:  2px solid #595959;
-	border-bottom:  2px solid #595959;
+.name {
+	background-color: #161713;
 }
 
 #myName2{
-	border-top:  2px solid blue;
-	border-bottom:  2px solid blue;
+	background-color: #595959;
+
+	border-top:  2px solid #383830;
+	border-bottom:  2px solid #383830;
 }
 
-#myName3{
-	background-color: #ff0000;
-
-	border-top:  2px solid #0000ff;
-	border-bottom:  2px solid #0000ff;
+#myName1, #myName3{
+	border-top:  2px solid rgba(0, 0, 0, 0);
+	border-bottom:  2px solid rgba(0, 0, 0, 0);
 }
 
-.nameSmall1{
+.nameSmall2{
 	color: #dce9de;
+}
+
+.nameSmall1, .nameSmall3, .nameLarge3{
+	color:  rgba(0, 0, 0, 0);
 }
 
 .nameLarge1{
 	color:  #00fbb1;
 }
 
-#myName2{
-	background-color: #383830;
-}
-
-/*
-.nameSmall2, .nameSmall3, .nameLarge3{
-	color:  rgba(0, 0, 0, 0);
-}
-*/
-
 .nameLarge2{
 	color:  #b0167a;
-}
-
-#mainDiv{
-
 }
 
 .underConstruction{
@@ -151,34 +135,22 @@ body {
 	padding: 5px;
 }
 
-#myName1, #myName2{
-	position: fixed;
-}
-
-.nameLarge3{
-	font-size: 63px;
-}
-
-.nameLarge1, .nameLarge2{
+.nameLarge1, .nameLarge2, .nameLarge3{
 	font-size: 48px;
 }
 
-.nameSmall3{
-	font-size: 9px;
+.nameSmall1, .nameSmall2, .nameSmall3{
+	font-size: 12px;
 }
 
-.nameSmall1, .nameSmall2{
-	font-size: 12px;
+#myName1, #myName2{
+	position: fixed;
 }
 
 /*only difference*/
 
 #myName1{
 	z-index: 1;
-}
-
-#myName2{
-	padding: 0px;
 }
 
 #mainDiv{
