@@ -97,6 +97,14 @@ body {
 	.desktop{
 		display: block;
 	}
+
+	#myFace{
+		float: right;
+	}
+
+	#aboutMeLine{
+		width: 75%;
+	}
 }
 
 /*mobile*/
@@ -107,6 +115,14 @@ body {
 
 	.desktop{
 		display: none;
+	}
+
+	#myFace{
+		float: none;
+	}
+
+	#aboutMeLine{
+		width: 100%;
 	}
 }
 
