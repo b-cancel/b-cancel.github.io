@@ -49,7 +49,7 @@ body {
 }
 
 .name{
-	background-color: #161713;
+	/*background-color: #161713;*/
 	background-color: green;
 }
 
@@ -64,6 +64,8 @@ body {
 }
 
 #myName3{
+	background-color: red;
+
 	border-top:  2px solid blue;
 	border-bottom:  2px solid blue;
 }
@@ -151,10 +153,6 @@ body {
 
 #myName1, #myName2{
 	position: fixed;
-}
-
-#myName3{
-	background-color: red;
 }
 
 .nameLarge3{
