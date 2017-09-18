@@ -102,22 +102,13 @@ body {
 /*mobile*/
 @media only screen and (max-width: 1000px), only screen and (max-device-width: 1000px){
 	.mobile{
-		display: none;
+		display: block;
 	}
 
 	.desktop{
-		display: block;
+		display: none;
 	}
 }
-
-.mobile{
-		display: none;
-}
-
-.desktop{
-	display: block;
-}
-
 
 .mobile img{
 	height: 50px;
