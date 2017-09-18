@@ -116,7 +116,6 @@ body {
 
 .name{
 	width: 100%;
-	z-index: 1;
 	padding-top: 15px;
 }
 
@@ -130,8 +129,8 @@ body {
 }
 
 #myName1, #myName2, #myName3{
-	width: 100%;
-	padding: 0px;
+	width: 98%;
+	padding: 1%;
 }
 
 .nameLarge1, .nameLarge2, .nameLarge3{
@@ -147,10 +146,6 @@ body {
 }
 
 /*only difference*/
-
-#myName1{
-	z-index: 1;
-}
 
 #mainDiv{
 	max-width: 1000px;
