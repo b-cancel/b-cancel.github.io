@@ -92,6 +92,33 @@ body {
 
 /*-----FORMATTING-----*/
 
+/*desktop*/
+@media only screen and (min-width: 1200px), only screen and (min-device-width: 1200px){
+	.mobile{
+		display: none;
+	}
+
+	.desktop{
+		display: block;
+	}
+}
+
+/*mobile*/
+@media only screen and (max-width: 1200px), only screen and (max-device-width: 1200px){
+	.mobile{
+		display: block;
+	}
+
+	.desktop{
+		display: none;
+	}
+}
+
+
+.mobile img{
+	height: 50px;
+}
+
 #name{
 	position: fixed;
 	width: 100%;
@@ -191,8 +218,4 @@ body {
 
 #tblImageMail:hover{
 	content: url(".././images/emailHover.png");
-}
-
-.mobile img{
-	height: 50px;
 }
