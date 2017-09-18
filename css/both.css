@@ -50,7 +50,7 @@ body {
 
 .name{
 	/*background-color: #161713;*/
-	background-color: green;
+	background-color: #00ff00;
 }
 
 #myName1{
@@ -64,10 +64,10 @@ body {
 }
 
 #myName3{
-	background-color: red;
+	background-color: #ff0000;
 
-	border-top:  2px solid blue;
-	border-bottom:  2px solid blue;
+	border-top:  2px solid #0000ff;
+	border-bottom:  2px solid #0000ff;
 }
 
 .nameSmall1{
