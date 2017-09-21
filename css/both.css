@@ -64,15 +64,15 @@ body {
 	border-bottom:  2px solid rgba(0, 0, 0, 0);
 }
 
-.nameSmall2{
+.nameSmall2, .nameSmall3{
 	color: #dce9de;
 }
 
-.nameSmall1, .nameSmall3, .nameLarge3{
+.nameSmall1, .nameLarge3{
 	color:  rgba(0, 0, 0, 0);
 }
 
-.nameLarge1{
+.nameLarge1, .nameLarge3{
 	color:  #00fbb1;
 }
 
@@ -86,61 +86,7 @@ body {
 	padding: auto;
 }
 
-/*-----FORMATTING-----*/
-
-/*desktop*/
-@media only screen and (min-width: 1000px), only screen and (min-device-width: 1000px){
-	.mobile{
-		display: none;
-	}
-
-	.desktop{
-		display: block;
-	}
-
-	#myFace{
-		float: right;
-	}
-
-	#aboutMeLine{
-		width: 75%;
-	}
-
-	#smallTitle{
-		display: none;
-	}
-
-	#largeTitle{
-		display: block;
-	}
-}
-
-/*mobile*/
-@media only screen and (max-width: 1000px), only screen and (max-device-width: 1000px){
-	.mobile{
-		display: block;
-	}
-
-	.desktop{
-		display: none;
-	}
-
-	#myFace{
-		float: none;
-	}
-
-	#aboutMeLine{
-		width: 100%;
-	}
-
-	#smallTitle{
-		display: block;
-	}
-
-	#largeTitle{
-		display: none;
-	}
-}
+/*Formatting*/
 
 .mobile img{
 	height: 50px;
@@ -206,6 +152,10 @@ body {
     vertical-align: middle;
 }
 
+#contactTable tr td div a{
+	word-wrap: break-word;
+}
+
 .tblImageOpacityOnHover{
 	opacity: .75;
 }
@@ -214,20 +164,112 @@ body {
 	opacity: 1;
 }
 
-#tblImagePhone{
-	content: url(".././images/phone.png");
-	height: 35px;
+/*Special Mail Footer Code*/
+
+.hoverIcon > .iconImg{
+	height: 100%;
+	max-height: 35px;
+	opacity: 1;
 }
 
-#tblImagePhone:hover{
-	content: url(".././images/phoneHover.png");
+.hoverIcon > .iconText{
+	font-size: 0;
+
+	size: 0%;
+	height: 0%;
+	width: 0%;
 }
 
-#tblImageMail{
-	content: url(".././images/email.png");
-	height: 35px;
+/*
+.hoverIcon:hover > .iconImg{
+	height: 0px;
+	width: 0px;
+	opacity: 0;
+}
+*/
+
+.hoverIcon:hover > .iconText{
+	font-size: 14px;
+
+	size: 100%;
+	height: 100%;
+	width: 100%;
 }
 
-#tblImageMail:hover{
-	content: url(".././images/emailHover.png");
+/*-----FORMATTING-----*/
+
+/*desktop*/
+@media only screen and (min-width: 1000px), only screen and (min-device-width: 1000px){
+	.mobile{
+		display: none;
+	}
+
+	.desktop{
+		display: block;
+	}
+
+	#myFace{
+		float: right;
+	}
+
+	#aboutMeLine{
+		width: 75%;
+	}
+
+	#smallTitle{
+		display: none;
+	}
+
+	#largeTitle{
+		display: block;
+	}
+
+	#nameMobile{
+		padding-top: 0px;
+	}
+
+	#nameMobile > .nameSmall3 {
+	}
+
+	#nameMobile > .nameLarge3 {
+		font-size: 48px;
+	}
+}
+
+/*mobile*/
+@media only screen and (max-width: 1000px), only screen and (max-device-width: 1000px){
+	.mobile{
+		display: block;
+	}
+
+	.desktop{
+		display: none;
+	}
+
+	#myFace{
+		float: none;
+	}
+
+	#aboutMeLine{
+		width: 100%;
+	}
+
+	#smallTitle{
+		display: block;
+	}
+
+	#largeTitle{
+		display: none;
+	}
+
+	#nameMobile{
+		padding-top: 0px;
+	}
+
+	#nameMobile > .nameSmall3 {
+	}
+
+	#nameMobile > .nameLarge3 {
+		font-size: 32px;
+	}
 }
