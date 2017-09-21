@@ -149,7 +149,7 @@ body {
 
 #contactTable tr td{
     text-align: center;
-    vertical-align: middle;
+    vertical-align: top;
 }
 
 #contactTable tr td div a{
