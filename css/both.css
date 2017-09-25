@@ -253,7 +253,6 @@ body {
 
 .title{
 	color: #ab7ffa; 
-	font-size: 48px;
 }
 
 .sectionLine{
@@ -331,6 +330,10 @@ body {
 		display: inline-block;
 		text-align: left;
 	}
+
+	.title{
+		font-size: 48px;
+	}
 }
 
 /*mobile*/
@@ -370,5 +373,9 @@ body {
 		width: 100%;
 		display: block;
 		text-align: center;
+	}
+
+	.title{
+		font-size: 32px;
 	}
 }
