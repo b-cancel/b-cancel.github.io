@@ -56,6 +56,10 @@
 	
 	<link rel = "stylesheet" type = "text/css" href = "./css/both.css" />
 
+	<!--javascript-->
+
+	<script src = "./javascript/regions.js"></script>
+
 </head>
 <body>
 
@@ -70,7 +74,7 @@
 				<div class="nameSmall1" style="padding-left: 2px;">O:\User\I_AM_</div><div class="nameLarge1">Bryan_Cancel</div><div class="nameSmall1">> echo "yes... like cancel my order of fries :P"</div>
 			</div>
 			<div class="mobile">
-				<a href="#AboutMe">
+				<a href="#MyName">
 					<img src="./images/logo.png" alt="Smiley face" style="float: left;">
 				</a>
 				<img src="./images/menu.png" alt="Smiley face" style="float: right; opacity: 0;">
@@ -88,7 +92,7 @@
 
 	<!--RELATIVE-->
 	
-	<div class="name" id="AboutMe">
+	<div class="name" id="MyName">
 		<div id="myName3">
 			<div class="mobile">
 				<img src="./images/logo.png" alt="Smiley face" style="opacity: 0">
@@ -104,57 +108,117 @@
 
 	<div id="mainDiv">
 
-		<br>
+		<!--About Me Section-->
 
-		<div id="aboutMe" style="width: 100%; text-align: left; min-height: 250px;">
-
-			<div id="myFace" style="text-align: center;">
-				<img src="./images/myFaceWhite.png" alt="myFace" style="max-width: 250px; width: 100%; padding-top: 5px; padding-bottom: 5px;">
-			</div>
-
-			<div id="smallTitle" style="width: 100%; text-align: center; padding-top: 5px; padding-bottom: 5px;">
-				<img src="./images/gifs/titlesSmall.gif" alt="Job Titles" style="max-width: 350px; width: 100%;">
-			</div>
-
-			<div>
-				<div style="color: #595959; display: inline-block;">
-					#region
-				</div>
-				<div style="display: inline-block; color: #ab7ffa; font-size: 48px;">
-					"About Me"
+		<div class="section">
+			<div class="sectionClosed" id="aboutMeClosed">
+				<div class="close">
+					<img src="./images/plus.png" class="openImg" onclick="clickedPlus(this.parentElement.parentElement.id)">
+					<div class="closedSection">About Me</div>
 				</div>
 			</div>
-			
-			<div id="aboutMeLine" style="border-bottom: 5px solid #ab7ffa;">
-				
+
+			<div class="sectionOpened" id="aboutMeOpened">
+
+				<!--Header-->
+
+				<div class="open">
+					<img src="./images/minus.png" class="openImg" onclick="clickedMinus(this.parentElement.parentElement.id)">
+					<div class="region">#region</div>
+					<div class="title">"About Me"</div>
+				</div>
+
+				<!--Content-->
+
+				<div class="content">
+
+					<div class="sectionLine"></div>
+
+					<div id="myFace" style="text-align: center;">
+						<img src="./images/myFaceWhite.png" alt="myFace" style="max-width: 250px; width: 100%; padding-top: 5px; padding-bottom: 5px;">
+					</div>
+
+					<div id="smallTitle" style="width: 100%; text-align: center; padding-top: 5px; padding-bottom: 5px;">
+						<img src="./images/gifs/titlesSmall.gif" alt="Job Titles" style="max-width: 350px; width: 100%;">
+					</div>
+
+					<div>
+						<br>
+						&nbsp;&nbsp;&nbsp;Hi! My Name is Bryan Cancel.<br>
+						<br>
+						&nbsp;&nbsp;&nbsp;I love to solve problems with creative, fast, and efficient solutions. <br>
+						Currently I am Junior in College working towards my "Bachelors in Computer Science". <br>
+						I dedicate my free time to developing Useful Software!<br>
+						I'm on the verge of releasing 3 Developer tools for Unity 3D (listed below)<br>
+						<br>
+						&nbsp;&nbsp;&nbsp;I'm also working on Project Squishables! Its a 2D Physics Based Cooperative Platformer where you use only a joystick to control your own velocity, accelaration, and impulse(or jerk) vector to keep yourself and your friend alive!<br>
+						<br>
+						P.S. Sorry for the mess... this website is still under development and might be for another 3 weeks...
+						<br>
+						P.P.S. My Contact Info is below<br>
+						<br>
+					</div>
+
+					<div id="largeTitle" style="width: 100%; text-align: center;">
+						<img src="./images/gifs/titlesLarge.gif" alt="Job Titles" style="max-width: 350px; width: 100%;">
+					</div>
+
+				</div>
+
+				<!--Footer-->
+
+				<div class="close">
+					<div class="corner">&nbsp;</div>
+					<div>#endregion</div>
+				</div>
+
+			</div>			
+		</div>
+
+		<!--Test Section-->
+		
+		<div class="section" style="display: none;">
+			<div class="sectionClosed" id="testClosed">
+				<div class="close">
+					<img src="./images/plus.png" class="openImg" onclick="clickedPlus(this.parentElement.parentElement.id)">
+					<div class="closedSection">Test Section</div>
+				</div>
 			</div>
 
-			<br>
-			&nbsp;&nbsp;&nbsp;Hi! My Name is Bryan Cancel.<br>
-			<br>
-			&nbsp;&nbsp;&nbsp;I love to solve problems with creative, fast, and efficient solutions. <br>
-			Currently I am Junior in College working towards my "Bachelors in Computer Science". <br>
-			I dedicate my free time to developing Useful Software!<br>
-			I'm on the verge of releasing 3 Developer tools for Unity 3D (listed below)<br>
-			<br>
-			&nbsp;&nbsp;&nbsp;I'm also working on Project Squishables! Its a 2D Physics Based Cooperative Platformer where you use only a joystick to control your own velocity, accelaration, and impulse(or jerk) vector to keep yourself and your friend alive!<br>
-			<br>
-			P.S. Sorry for the mess... this website is still under development and might be for another 3 weeks...
-			<br>
-			P.P.S. My Contact Info is below<br>
-			<br>
+			<div class="sectionOpened" id="testOpened">
 
-			<div id="largeTitle" style="width: 100%; text-align: center;">
-				<img src="./images/gifs/titlesLarge.gif" alt="Job Titles" style="max-width: 350px; width: 100%;">
-			</div>
+				<!--Header-->
 
-			<div style="color: #595959; display: inline-block; float: left;">#endregion</div>
+				<div class="open">
+					<img src="./images/minus.png" class="openImg" onclick="clickedMinus(this.parentElement.parentElement.id)">
+					<div class="region">#region</div>
+					<div class="title">"Test Section"</div>
+				</div>
 
-		</div>	
+				<!--Content-->
 
-		<br>
-		<br>
-		<br>
+				<div class="content">
+
+					<div class="sectionLine"></div>
+
+				content here
+
+				</div>
+
+				<!--Footer-->
+
+				<div class="close">
+					<div class="corner">&nbsp;</div>
+					<div>#endregion</div>
+				</div>
+
+			</div>			
+		</div>
+
+
+
+
+
 
 		<div class="underConstruction">
 			Everything ->BELOW<- This Line Is Under Construction
@@ -240,73 +304,215 @@
 		<div class="underConstruction">
 			Everything ->ABOVE<- This Line Is Under Construction
 		</div>
+		<br>
 
-		<br>
-		<hr>
-		<br>
+
+
+
+
+
+
+		<!--References Section-->
+
+		<div class="section">
+			<div class="sectionClosed" id="referencesClosed">
+				<div class="close">
+					<img src="./images/plus.png" class="openImg" onclick="clickedPlus(this.parentElement.parentElement.id)">
+					<div class="closedSection">References</div>
+				</div>
+			</div>
+
+			<div class="sectionOpened" id="referencesOpened">
+
+				<!--Header-->
+
+				<div class="open">
+					<img src="./images/minus.png" class="openImg" onclick="clickedMinus(this.parentElement.parentElement.id)">
+					<div class="region">#region</div>
+					<div class="title">"References"</div>
+				</div>
+
+				<!--Content-->
+
+				<div class="content">
+
+					<div class="sectionLine"></div>
+
+					<div id="leftRefs">
+
+						<!--layout ref-->
+
+						<div class="ref" style="display: none;">
+							<div class="theirName"></div>
+							<div class="theirTitle"></div>
+							<div class="location"></div>
+							<div class="email"><a href="mailto:"></a></div>
+						</div>
+
+						<!--actual refs-->
+
+						<div class="ref">
+							<div class="theirName">Dr. Constantine M. Tarawneh</div>
+							<div class="theirTitle">Director of the Center for Railway Safety</div>
+							<div class="location">UTRGV – Edinburg, TX</div>
+							<div class="email"><a href="mailto:constantine.tarawneh@utrgv.edu">constantine.tarawneh@utrgv.edu</a></div>
+						</div>
+
+						<br>
+
+						<div class="ref">
+							<div class="theirName">Mrs. Vickie Roge</div>
+							<div class="theirTitle">Founder of BETA TSA</div>
+							<div class="location">BETA – Edinburg, TX</div>
+							<div class="email"><a href="mailto:vickie.roge@stisd.net">vickie.roge@stisd.net</a></div>
+						</div>
+
+						<br>
+
+						<div class="ref">
+							<div class="theirName">Jesus Reyes</div>
+							<div class="theirTitle">Peer, Major: Computer Science</div>
+							<div class="location">UTRGV – Edinburg, TX</div>
+							<div class="email"><a href="mailto:jesus.e.reyes01@utrgv.edu">jesus.e.reyes01@utrgv.edu</a></div>
+						</div>
+					</div>
+					<div id="rightRefs">
+
+						<div class="ref">
+							<div class="theirName">Mrs. Nashla Showery</div>
+							<div class="theirTitle">Internship Coordinator</div>
+							<div class="location">BETA – Edinburg, TX</div>
+							<div class="email"><a href="mailto:nashla.showery@stisd.net">nashla.showery@stisd.net</a></div>
+						</div>
+
+						<br>
+
+						<div class="ref">
+							<div class="theirName">Mr. Alejandro Garcia</div>
+							<div class="theirTitle">TSA Chapter 513 Sponsor</div>
+							<div class="location">BETA – Edinburg, TX</div>
+							<div class="email"><a href="mailto:alejandro.garcia@stisd.net">alejandro.garcia@stisd.net</a></div>
+						</div>
+
+						<br>
+
+						<div class="ref">
+							<div class="theirName">Mrs. Irma Hermida</div>
+							<div class="theirTitle">Internship Director</div>
+							<div class="location">UTPA – Edinburg, TX</div>
+							<div class="email"><a href="mailto:hermidaid@utpa.edu">hermidaid@utpa.edu</a></div>
+						</div>
+						
+					</div>
+
+				</div>
+
+				<!--Footer-->
+
+				<div class="close">
+					<div class="corner">&nbsp;</div>
+					<div>#endregion</div>
+				</div>
+
+			</div>			
+		</div>
 
 		<!--Conact Section-->
 
-		<table id="contactTable">
-			<tr>
-				<td class="hoverIcon">
-					<img class="iconImg" id="tblImagePhone" src="./images/phone.png">
-					<div class="iconText">
-						<a href="tel:+1-956-777-2692">(956)-777-2692</a>
-					</div>
-				</td>
-				<td class="hoverIcon">
-					<img class="iconImg" src="./images/email.png">
-					<div class="iconText">
-						<a href="mailto:bryan.o.cancel@gmail.com">bryan.o.cancel@gmail.com</a>
-						<hr class="hoverIconHr">
-						<a href="mailto:bryan.cancel01@utrgv.edu">bryan.cancel01@utrgv.edu</a>
-					</div>
-				</td>
-				<td>
-					<a href="https://github.com/b-cancel">
-						<img class="tblImageOpacityOnHover" src="./images/github.png" alt="Smiley face">
-					</a>
-				</td>
-				<td>
-					<a href="https://www.linkedin.com/in/bryan-cancel-069a197a/">
-						<img class="tblImageOpacityOnHover" src="./images/linkedin.png" alt="Smiley face">
-					</a>
-				</td>
-				<td>
-					<a href="https://www.youtube.com/channel/UC3o8BqVBC17PcewqHsEwzBg">
-						<img class="tblImageOpacityOnHover" src="./images/youtube.png" alt="Smiley face">
-					</a>
-				</td>
-			</tr>
-		</table>
-
-		<br>
-
-		<div style="text-align: center;">
-			IFF you want my<br>
-			V-Card / Contact Info<br>
-			<div style="display: inline-block; font-size: 28px;">
-				(Click || Scan) 
+		<div class="section">
+			<div class="sectionClosed" id="contactMeClosed">
+				<div class="close">
+					<img src="./images/plus.png" class="openImg" onclick="clickedPlus(this.parentElement.parentElement.id)">
+					<div class="closedSection">Contact Me</div>
+				</div>
 			</div>
-			<br>
-			this QR Code
+
+			<div class="sectionOpened" id="contactMeOpened">
+
+				<!--Header-->
+
+				<div class="open">
+					<img src="./images/minus.png" class="openImg" onclick="clickedMinus(this.parentElement.parentElement.id)">
+					<div class="region">#region</div>
+					<div class="title">"Contact Me"</div>
+				</div>
+
+				<!--Content-->
+
+				<div class="content">
+
+					<div class="sectionLine"></div>
+
+					<table id="contactTable">
+						<tr>
+							<td class="hoverIcon">
+								<img class="iconImg" id="tblImagePhone" src="./images/phone.png">
+								<div class="iconText">
+									<a href="tel:+1-956-777-2692">(956)-777-2692</a>
+								</div>
+							</td>
+							<td class="hoverIcon">
+								<img class="iconImg" src="./images/email.png">
+								<div class="iconText">
+									<a href="mailto:bryan.o.cancel@gmail.com">bryan.o.cancel@gmail.com</a>
+									<hr class="hoverIconHr">
+									<a href="mailto:bryan.cancel01@utrgv.edu">bryan.cancel01@utrgv.edu</a>
+								</div>
+							</td>
+							<td>
+								<a href="https://github.com/b-cancel">
+									<img class="tblImageOpacityOnHover" src="./images/github.png" alt="Smiley face">
+								</a>
+							</td>
+							<td>
+								<a href="https://www.linkedin.com/in/bryan-cancel-069a197a/">
+									<img class="tblImageOpacityOnHover" src="./images/linkedin.png" alt="Smiley face">
+								</a>
+							</td>
+							<td>
+								<a href="https://www.youtube.com/channel/UC3o8BqVBC17PcewqHsEwzBg">
+									<img class="tblImageOpacityOnHover" src="./images/youtube.png" alt="Smiley face">
+								</a>
+							</td>
+						</tr>
+					</table>
+
+					<br>
+
+					<div style="text-align: center;">
+						IFF you want my<br>
+						V-Card / Contact Info<br>
+						<div style="display: inline-block; font-size: 28px;">
+							(Click || Scan) 
+						</div>
+						<br>
+						this QR Code
+					</div>
+
+					<br>
+
+					<div style="text-align: center;">
+						<a href="./other/Bryan_Cancel_v4.vcf"><img style="height: 250px; width: 250px;" src="./images/qrCodes/qrCenter.png"></a>
+					</div>
+				</div>
+
+				<!--Footer-->
+
+				<div class="close">
+					<div class="corner">&nbsp;</div>
+					<div>#endregion</div>
+				</div>
+
+			</div>
+
 		</div>
 
-		<br>
-
-		<div style="text-align: center;">
-			<a href="./other/Bryan_Cancel_v4.vcf">
-				<img style="height: 250px; width: 250px; background-color: red;" src="./images/qrCodes/qrCenter.png">
-			</a>
-		</div>
-		
-		<br>
+		<!--Right Reserved-->
 
 		<div style="text-align: center; font-size: 12px">
 			All Rights Reserved @ 2017<br>
 			<br>
-			Designed and Developed<br>
+			Developed and Designed<br>
 			by Bryan Cancel<br>
 		</div>
 
