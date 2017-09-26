@@ -50,6 +50,16 @@
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
 
+	<!--Colors Browser Search Bar-->
+
+	<!-- Chrome, Firefox OS and Opera -->
+	<meta name="theme-color" content="#262626"> <!--272822-->
+	<!-- Windows Phone -->
+	<meta name="msapplication-navbutton-color" content="#262626">
+	<!-- iOS Safari -->
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="#262626">
+
 	<!--link tags-->
 
 	<link rel = "stylesheet" type = "text/css" href = "./css/reset.css" />
@@ -59,7 +69,6 @@
 	<!--javascript-->
 
 	<script src = "./javascript/regions.js"></script>
-
 </head>
 <body>
 
@@ -75,7 +84,7 @@
 			</div>
 			<div class="mobile">
 				<a href="#MyName">
-					<img src="./images/logo.png" alt="Smiley face" style="float: left;">
+					<img src="./images/logo.png" alt="Smiley face" style="float: left;" >
 				</a>
 				<img src="./images/menu.png" alt="Smiley face" style="float: right; opacity: 0;">
 			</div>
@@ -103,6 +112,18 @@
 		</div>
 	</div>
 
+	<!--Google Translate-->
+
+	<!--MAKE THIS FASTER SO I CAN USE IT-->
+	
+	<script type="text/javascript">
+		function googleTranslateElementInit() {
+		  new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.FloatPosition.TOP_LEFT, gaTrack: true, gaId: 'UA-106844857-1'}, 'google_translate_element');
+		}
+	</script>
+	<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <div id="google_translate_element"></div>
+    
 
 	<!-- MAIN SECTION -->
 
@@ -113,7 +134,7 @@
 		<div class="section">
 			<div class="sectionClosed" id="aboutMeClosed">
 				<div class="close">
-					<img src="./images/plus.png" class="openImg" onclick="clickedPlus(this.parentElement.parentElement.id)">
+					<img title="Click Me!" src="./images/plus.png" class="openImg" onclick="clickedPlus(this.parentElement.parentElement.id)">
 					<div class="closedSection">About Me</div>
 				</div>
 			</div>
@@ -123,7 +144,7 @@
 				<!--Header-->
 
 				<div class="open">
-					<img src="./images/minus.png" class="openImg" onclick="clickedMinus(this.parentElement.parentElement.id)">
+					<img title="Click Me!" src="./images/minus.png" class="openImg" onclick="clickedMinus(this.parentElement.parentElement.id)">
 					<div class="region">#region</div>
 					<div class="title">"About Me"</div>
 				</div>
@@ -180,7 +201,7 @@
 		<div class="section" style="display: none;">
 			<div class="sectionClosed" id="testClosed">
 				<div class="close">
-					<img src="./images/plus.png" class="openImg" onclick="clickedPlus(this.parentElement.parentElement.id)">
+					<img title="Click Me!" src="./images/plus.png" class="openImg" onclick="clickedPlus(this.parentElement.parentElement.id)">
 					<div class="closedSection">Test Section</div>
 				</div>
 			</div>
@@ -190,7 +211,7 @@
 				<!--Header-->
 
 				<div class="open">
-					<img src="./images/minus.png" class="openImg" onclick="clickedMinus(this.parentElement.parentElement.id)">
+					<img title="Click Me!" src="./images/minus.png" class="openImg" onclick="clickedMinus(this.parentElement.parentElement.id)">
 					<div class="region">#region</div>
 					<div class="title">"Test Section"</div>
 				</div>
@@ -236,7 +257,7 @@
 		<div class="section">
 			<div class="sectionClosed" id="projectsClosed">
 				<div class="close">
-					<img src="./images/plus.png" class="openImg" onclick="clickedPlus(this.parentElement.parentElement.id)">
+					<img title="Click Me!" src="./images/plus.png" class="openImg" onclick="clickedPlus(this.parentElement.parentElement.id)">
 					<div class="closedSection">Project Links</div>
 				</div>
 			</div>
@@ -246,7 +267,7 @@
 				<!--Header-->
 
 				<div class="open">
-					<img src="./images/minus.png" class="openImg" onclick="clickedMinus(this.parentElement.parentElement.id)">
+					<img title="Click Me!" src="./images/minus.png" class="openImg" onclick="clickedMinus(this.parentElement.parentElement.id)">
 					<div class="region">#region</div>
 					<div class="title">"Project Links"</div>
 				</div>
@@ -367,7 +388,7 @@
 		<div class="section">
 			<div class="sectionClosed" id="referencesClosed">
 				<div class="close">
-					<img src="./images/plus.png" class="openImg" onclick="clickedPlus(this.parentElement.parentElement.id)">
+					<img title="Click Me!" src="./images/plus.png" class="openImg" onclick="clickedPlus(this.parentElement.parentElement.id)">
 					<div class="closedSection">References</div>
 				</div>
 			</div>
@@ -377,7 +398,7 @@
 				<!--Header-->
 
 				<div class="open">
-					<img src="./images/minus.png" class="openImg" onclick="clickedMinus(this.parentElement.parentElement.id)">
+					<img title="Click Me!" src="./images/minus.png" class="openImg" onclick="clickedMinus(this.parentElement.parentElement.id)">
 					<div class="region">#region</div>
 					<div class="title">"References"</div>
 				</div>
@@ -472,7 +493,7 @@
 		<div class="section">
 			<div class="sectionClosed" id="contactMeClosed">
 				<div class="close">
-					<img src="./images/plus.png" class="openImg" onclick="clickedPlus(this.parentElement.parentElement.id)">
+					<img title="Click Me!" src="./images/plus.png" class="openImg" onclick="clickedPlus(this.parentElement.parentElement.id)">
 					<div class="closedSection">Contact Me</div>
 				</div>
 			</div>
@@ -482,7 +503,7 @@
 				<!--Header-->
 
 				<div class="open">
-					<img src="./images/minus.png" class="openImg" onclick="clickedMinus(this.parentElement.parentElement.id)">
+					<img title="Click Me!" src="./images/minus.png" class="openImg" onclick="clickedMinus(this.parentElement.parentElement.id)">
 					<div class="region">#region</div>
 					<div class="title">"Contact Me"</div>
 				</div>
