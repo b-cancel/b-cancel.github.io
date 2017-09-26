@@ -281,14 +281,42 @@ body {
 	font-size: 32px;
 }
 
-.sectionClosed{
-	display: none;
+#leftRefs, #rightRefs{
+	display: inline-block;
 }
 
 /*References CSS*/
 
 .theirName{
 	font-size: 22px;
+}
+
+#aboutMeClosed{
+	display: none;
+}
+#aboutMeOpened{
+	display: block;
+}
+
+#projectsClosed{
+	display: block;
+}
+#projectsOpened{
+	display: none;
+}
+
+#referencesClosed{
+	display: block;
+}
+#referencesOpened{
+	display: none;
+}
+
+#contactMeClosed{
+	display: none;
+}
+#contactMeOpened{
+	display: block;
 }
 
 /*-----FORMATTING-----*/
@@ -324,12 +352,6 @@ body {
 
 	#nameMobile > .nameLarge3 {
 		font-size: 48px;
-	}
-
-	#leftRefs, #rightRefs{
-		width: 48%;
-		display: inline-block;
-		text-align: left;
 	}
 
 	.title{
@@ -370,13 +392,23 @@ body {
 		font-size: 32px;
 	}
 
-	#leftRefs, #rightRefs{
-		width: 100%;
-		display: block;
-		text-align: center;
-	}
-
 	.title{
 		font-size: 32px;
+	}
+}
+
+/*desktop*/
+@media only screen and (min-width: 850px), only screen and (min-device-width: 850px){
+	#leftRefs, #rightRefs{
+		text-align: left;
+		width: 48%;
+	}
+}
+
+/*mobile*/
+@media only screen and (max-width: 850px), only screen and (max-device-width: 850px){
+	#leftRefs, #rightRefs{
+		text-align: center;
+		width: 100%;
 	}
 }
