@@ -105,15 +105,14 @@
 
 		<!--Google Translate-->
 
-		<!--MAKE THIS FASTER SO I CAN USE IT-->
-		
+		<!--MAKE THIS FASTER SO I CAN USE IT		
 		<script type="text/javascript">
 			function googleTranslateElementInit() {
 			  new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.FloatPosition.TOP_LEFT, gaTrack: true, gaId: 'UA-106844857-1'}, 'google_translate_element');
 			}
 		</script>
 		<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-	    <div id="google_translate_element"></div>
+	    <div id="google_translate_element"></div>-->
 
 	    <!--RELATIVE NAME-->
 	
@@ -145,14 +144,19 @@
 				<div class="open">
 					<img title="Click Me!" src="./images/minus.png" class="openImg" onclick="clickedMinus(this.parentElement.parentElement.id)">
 					<div class="region">#region</div>
-					<div class="title">"About Me"</div>
-				</div>
+				</div>		
 
 				<!--Content-->
 
 				<div class="content">
 
+					<!--Title-->
+
+					<div class="title">"About Me"</div>
+
 					<div class="sectionLine"></div>
+
+					<!--Text-->
 
 					<div id="myFace" style="text-align: center;">
 						<img src="./images/myFaceWhite.png" alt="myFace" style="max-width: 250px; width: 100%; padding-top: 5px; padding-bottom: 5px;">
@@ -212,12 +216,15 @@
 				<div class="open">
 					<img title="Click Me!" src="./images/minus.png" class="openImg" onclick="clickedMinus(this.parentElement.parentElement.id)">
 					<div class="region">#region</div>
-					<div class="title">"Test Section"</div>
-				</div>
+				</div>		
 
 				<!--Content-->
 
 				<div class="content">
+
+					<!--Title-->
+
+					<div class="title">"Test Section"</div>
 
 					<div class="sectionLine"></div>
 
@@ -268,12 +275,15 @@
 				<div class="open">
 					<img title="Click Me!" src="./images/minus.png" class="openImg" onclick="clickedMinus(this.parentElement.parentElement.id)">
 					<div class="region">#region</div>
-					<div class="title">"Project Links"</div>
-				</div>
+				</div>		
 
 				<!--Content-->
 
 				<div class="content">
+
+					<!--Title-->
+
+					<div class="title">"Project Links"</div>
 
 					<div class="sectionLine"></div>
 
@@ -385,94 +395,181 @@
 		<!--References Section-->
 
 		<div class="section">
-			<div class="sectionClosed" id="referencesClosed">
+			<div class="sectionClosed" id="endorsementsClosed">
 				<div class="close">
 					<img title="Click Me!" src="./images/plus.png" class="openImg" onclick="clickedPlus(this.parentElement.parentElement.id)">
-					<div class="closedSection">References</div>
+					<div class="closedSection">Endorsements</div>
 				</div>
 			</div>
 
-			<div class="sectionOpened" id="referencesOpened">
+			<div class="sectionOpened" id="endorsementsOpened">
 
 				<!--Header-->
 
 				<div class="open">
 					<img title="Click Me!" src="./images/minus.png" class="openImg" onclick="clickedMinus(this.parentElement.parentElement.id)">
 					<div class="region">#region</div>
-					<div class="title">"References"</div>
-				</div>
+				</div>		
 
 				<!--Content-->
 
 				<div class="content">
 
+					<!--Title-->
+
+					<div class="title">"Endorsements"</div>
+
 					<div class="sectionLine"></div>
 
-					<div id="leftRefs">
+					<!--References Section-->
 
-						<!--layout ref-->
-
-						<div class="ref" style="display: none;">
-							<div class="theirName"></div>
-							<div class="theirTitle"></div>
-							<div class="location"></div>
-							<div class="email"><a href="mailto:"></a></div>
+					<div class="section">
+						<div class="sectionClosed" id="referencesClosed">
+							<div class="close">
+								<img title="Click Me!" src="./images/plus.png" class="openImg" onclick="clickedPlus(this.parentElement.parentElement.id)">
+								<div class="closedSection">References</div>
+							</div>
 						</div>
 
-						<!--actual refs-->
+						<div class="sectionOpened" id="referencesOpened">
 
-						<div class="ref">
-							<div class="theirName">Dr. Constantine M. Tarawneh</div>
-							<div class="theirTitle">Director of the Center for Railway Safety</div>
-							<div class="location">UTRGV – Edinburg, TX</div>
-							<div class="email"><a href="mailto:constantine.tarawneh@utrgv.edu">constantine.tarawneh@utrgv.edu</a></div>
-						</div>
+							<!--Header-->
 
-						<br>
+							<div class="open">
+								<img title="Click Me!" src="./images/minus.png" class="openImg" onclick="clickedMinus(this.parentElement.parentElement.id)">
+								<div class="region">#region</div>
+							</div>		
 
-						<div class="ref">
-							<div class="theirName">Mrs. Vickie Roge</div>
-							<div class="theirTitle">Founder of BETA TSA</div>
-							<div class="location">BETA – Edinburg, TX</div>
-							<div class="email"><a href="mailto:vickie.roge@stisd.net">vickie.roge@stisd.net</a></div>
-						</div>
+							<!--Content-->
 
-						<br>
+							<div class="content">
 
-						<div class="ref">
-							<div class="theirName">Jesus Reyes</div>
-							<div class="theirTitle">Peer, Major: Computer Science</div>
-							<div class="location">UTRGV – Edinburg, TX</div>
-							<div class="email"><a href="mailto:jesus.e.reyes01@utrgv.edu">jesus.e.reyes01@utrgv.edu</a></div>
-						</div>
+								<!--Title-->
+
+								<div class="title">"References"</div>
+
+								<div class="sectionLine"></div>
+
+								<div id="leftRefs">
+
+									<!--layout ref-->
+
+									<div class="ref" style="display: none;">
+										<div class="theirName"></div>
+										<div class="theirTitle"></div>
+										<div class="location"></div>
+										<div class="email"><a href="mailto:"></a></div>
+									</div>
+
+									<!--actual refs-->
+
+									<div class="ref">
+										<div class="theirName">Dr. Constantine M. Tarawneh</div>
+										<div class="theirTitle">Director of the Center for Railway Safety</div>
+										<div class="location">UTRGV – Edinburg, TX</div>
+										<div class="email"><a href="mailto:constantine.tarawneh@utrgv.edu">constantine.tarawneh@utrgv.edu</a></div>
+									</div>
+
+									<br>
+
+									<div class="ref">
+										<div class="theirName">Mrs. Vickie Roge</div>
+										<div class="theirTitle">Founder of BETA TSA</div>
+										<div class="location">BETA – Edinburg, TX</div>
+										<div class="email"><a href="mailto:vickie.roge@stisd.net">vickie.roge@stisd.net</a></div>
+									</div>
+
+									<br>
+
+									<div class="ref">
+										<div class="theirName">Jesus Reyes</div>
+										<div class="theirTitle">Peer, Major: Computer Science</div>
+										<div class="location">UTRGV – Edinburg, TX</div>
+										<div class="email"><a href="mailto:jesus.e.reyes01@utrgv.edu">jesus.e.reyes01@utrgv.edu</a></div>
+									</div>
+								</div>
+								<div id="rightRefs">
+
+									<div class="ref">
+										<div class="theirName">Mrs. Nashla Showery</div>
+										<div class="theirTitle">Internship Coordinator</div>
+										<div class="location">BETA – Edinburg, TX</div>
+										<div class="email"><a href="mailto:nashla.showery@stisd.net">nashla.showery@stisd.net</a></div>
+									</div>
+
+									<br>
+
+									<div class="ref">
+										<div class="theirName">Mr. Alejandro Garcia</div>
+										<div class="theirTitle">TSA Chapter 513 Sponsor</div>
+										<div class="location">BETA – Edinburg, TX</div>
+										<div class="email"><a href="mailto:alejandro.garcia@stisd.net">alejandro.garcia@stisd.net</a></div>
+									</div>
+
+									<br>
+
+									<div class="ref">
+										<div class="theirName">Mrs. Irma Hermida</div>
+										<div class="theirTitle">Internship Director</div>
+										<div class="location">UTPA – Edinburg, TX</div>
+										<div class="email"><a href="mailto:hermidaid@utpa.edu">hermidaid@utpa.edu</a></div>
+									</div>
+									
+								</div>
+
+							</div>
+
+							<!--Footer-->
+
+							<div class="close">
+								<div class="corner">&nbsp;</div>
+								<div>#endregion</div>
+							</div>
+
+						</div>			
 					</div>
-					<div id="rightRefs">
 
-						<div class="ref">
-							<div class="theirName">Mrs. Nashla Showery</div>
-							<div class="theirTitle">Internship Coordinator</div>
-							<div class="location">BETA – Edinburg, TX</div>
-							<div class="email"><a href="mailto:nashla.showery@stisd.net">nashla.showery@stisd.net</a></div>
+					<!--Test Section-->
+					
+					<div class="section">
+						<div class="sectionClosed" id="recommendationClosed">
+							<div class="close">
+								<img title="Click Me!" src="./images/plus.png" class="openImg" onclick="clickedPlus(this.parentElement.parentElement.id)">
+								<div class="closedSection">Recommendation Letters</div>
+							</div>
 						</div>
 
-						<br>
+						<div class="sectionOpened" id="recommendationOpened">
 
-						<div class="ref">
-							<div class="theirName">Mr. Alejandro Garcia</div>
-							<div class="theirTitle">TSA Chapter 513 Sponsor</div>
-							<div class="location">BETA – Edinburg, TX</div>
-							<div class="email"><a href="mailto:alejandro.garcia@stisd.net">alejandro.garcia@stisd.net</a></div>
-						</div>
+							<!--Header-->
 
-						<br>
+							<div class="open">
+								<img title="Click Me!" src="./images/minus.png" class="openImg" onclick="clickedMinus(this.parentElement.parentElement.id)">
+								<div class="region">#region</div>
+							</div>		
 
-						<div class="ref">
-							<div class="theirName">Mrs. Irma Hermida</div>
-							<div class="theirTitle">Internship Director</div>
-							<div class="location">UTPA – Edinburg, TX</div>
-							<div class="email"><a href="mailto:hermidaid@utpa.edu">hermidaid@utpa.edu</a></div>
-						</div>
-						
+							<!--Content-->
+
+							<div class="content">
+
+								<!--Title-->
+
+								<div class="title">"Recommendation Letters"</div>
+
+								<div class="sectionLine"></div>
+
+							content here
+
+							</div>
+
+							<!--Footer-->
+
+							<div class="close">
+								<div class="corner">&nbsp;</div>
+								<div>#endregion</div>
+							</div>
+
+						</div>			
 					</div>
 
 				</div>
@@ -504,12 +601,15 @@
 				<div class="open">
 					<img title="Click Me!" src="./images/minus.png" class="openImg" onclick="clickedMinus(this.parentElement.parentElement.id)">
 					<div class="region">#region</div>
-					<div class="title">"Contact Me"</div>
-				</div>
+				</div>		
 
 				<!--Content-->
 
 				<div class="content">
+
+					<!--Title-->
+
+					<div class="title">"Contact Me"</div>
 
 					<div class="sectionLine"></div>
 
