@@ -321,7 +321,7 @@ body {
 
 /*translate mods*/
 
-.goog-te-mod{
+#google_translate_element select.goog-te-mod{
 	background-color: rgba(0,0,0,0) !important;
 	color: #FFFFFF !important; 
 }
