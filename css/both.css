@@ -319,7 +319,7 @@ body {
 	display: block;
 }
 
-/*translate mods*/
+/*translate mods (dont work)*/
 
 #google_translate_element select.goog-te-mod{
 	background-color: rgba(0,0,0,0) !important;
