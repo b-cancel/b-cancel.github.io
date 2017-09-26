@@ -319,6 +319,13 @@ body {
 	display: block;
 }
 
+/*translate mods*/
+
+.goog-te-mod{
+	background-color: rgba(0,0,0,0) !important;
+	color: #FFFFFF !important; 
+}
+
 /*-----FORMATTING-----*/
 
 /*desktop*/
