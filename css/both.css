@@ -310,7 +310,7 @@ body {
 	overflow: hidden;
 }
 
-.recomBlock a img{
+.recomImg{
 	height: 100%; 
 	max-height: 35px; 
 	margin: 15px;
@@ -361,17 +361,17 @@ body {
 /*Level 2 (All shown)*/ 
 
 #referencesClosed{
-	display: none;
+	display: block;
 }
 #referencesOpened{
-	display: block;
+	display: none;
 }
 
 #recommendationClosed{
-	display: none;
+	display: block;
 }
 #recommendationOpened{
-	display: block;
+	display: none;
 }
 
 /*translate mods (dont work)*/
