@@ -426,9 +426,13 @@ body {
 	#nameMobile > .nameLarge3 {
 		font-size: 48px;
 	}
-
-	.title{
+	
+	.section > .sectionOpened > .content > .title{
 		font-size: 48px;
+	}
+
+	.section > .sectionOpened > .content > .section > .sectionOpened > .content > .title{
+		font-size: 36px;
 	}
 }
 
@@ -467,6 +471,14 @@ body {
 
 	.title{
 		font-size: 32px;
+	}
+	
+	.section > .sectionOpened > .content > .title{
+		font-size: 32px;
+	}
+
+	.section > .sectionOpened > .content > .section > .sectionOpened > .content > .title{
+		font-size: 26px;
 	}
 }
 
