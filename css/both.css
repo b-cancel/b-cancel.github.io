@@ -308,6 +308,7 @@ body {
 	display: block; 
 	width: 100%;
 	overflow: hidden;
+	background-color: blue;
 }
 
 .recomImg{
@@ -323,6 +324,10 @@ body {
 .recomName{
 	font-size: 22px;
 	display: inline-block;
+}
+
+.section > div{
+	overflow: hidden;
 }
 
 /*References CSS*/
