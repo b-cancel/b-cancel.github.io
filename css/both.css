@@ -8,6 +8,10 @@ body{
 	position: static;
 }
 
+body div{
+	word-break; break-all;
+}
+
 a:link {
     color: #47b2dc;
 }
@@ -308,7 +312,6 @@ body {
 	display: block; 
 	width: 100%;
 	overflow: hidden;
-	background-color: blue;
 }
 
 .recomImg{
