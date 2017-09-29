@@ -224,7 +224,7 @@ body {
 .section{
 	margin-top: 15px;
 	margin-bottom: 15px;
-	margin-left: 30px;
+	margin-left: 25px;
 }
 
 #mainDiv > .section{
@@ -251,10 +251,6 @@ body {
 	width:20px; 
 	margin-left: -10px; /* should be [- (openImg width / 2) - (innerSection border-left width / 2)]*/
 	vertical-align: middle;
-}
-
-.region{
-
 }
 
 /*section title colors START*/
@@ -286,7 +282,7 @@ body {
 
 .content{
 	border-left: 4px solid #a7a7a7;
-	padding: 15px;
+	padding: 25px;
 }
 
 .close{
@@ -304,6 +300,25 @@ body {
 }
 
 #leftRefs, #rightRefs{
+	display: inline-block;
+	text-align: left;
+}
+
+.recomBlock{
+	display: block; 
+	width: 100%;
+	overflow: hidden;
+}
+
+.recomBlock a img{
+	height: 100%; 
+	max-height: 35px; 
+	margin: 15px;
+	float: left;
+}
+
+.recomName{
+	font-size: 22px;
 	display: inline-block;
 }
 
@@ -447,7 +462,6 @@ body {
 /*desktop*/
 @media only screen and (min-width: 850px), only screen and (min-device-width: 850px){
 	#leftRefs, #rightRefs{
-		text-align: left;
 		width: 48%;
 	}
 }
@@ -455,7 +469,6 @@ body {
 /*mobile*/
 @media only screen and (max-width: 850px), only screen and (max-device-width: 850px){
 	#leftRefs, #rightRefs{
-		text-align: center;
 		width: 100%;
 	}
 }
