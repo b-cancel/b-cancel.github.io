@@ -8,6 +8,13 @@ body{
 	position: static;
 }
 
+body div{
+	word-wrap: break-word;
+	text-overflow: ellipsis;
+	word-break; break-all;
+	overflow-wrap: break-word;
+}
+
 a:link {
     color: #47b2dc;
 }
@@ -308,7 +315,6 @@ body {
 	display: block; 
 	width: 100%;
 	overflow: hidden;
-	background-color: blue;
 }
 
 .recomImg{
@@ -324,11 +330,7 @@ body {
 .recomName{
 	font-size: 22px;
 	display: inline-block;
-}
-
-.section > div{
-	overflow: hidden;
-}
+}	
 
 /*References CSS*/
 
@@ -424,9 +426,13 @@ body {
 	#nameMobile > .nameLarge3 {
 		font-size: 48px;
 	}
-
-	.title{
+	
+	.section > .sectionOpened > .content > .title{
 		font-size: 48px;
+	}
+
+	.section > .sectionOpened > .content > .section > .sectionOpened > .content > .title{
+		font-size: 36px;
 	}
 }
 
@@ -465,6 +471,14 @@ body {
 
 	.title{
 		font-size: 32px;
+	}
+	
+	.section > .sectionOpened > .content > .title{
+		font-size: 32px;
+	}
+
+	.section > .sectionOpened > .content > .section > .sectionOpened > .content > .title{
+		font-size: 26px;
 	}
 }
 
