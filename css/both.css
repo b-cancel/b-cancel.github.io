@@ -255,8 +255,8 @@ body {
 }
 
 .openImg{
-	width:20px; 
-	margin-left: -10px; /* should be [- (openImg width / 2) - (innerSection border-left width / 2)]*/
+	width:40px; /*20px regular, 40px for gif*/
+	margin-left: -20px; /* should be [- (openImg width / 2) - (innerSection border-left width / 2)]*/
 	vertical-align: middle;
 }
 
