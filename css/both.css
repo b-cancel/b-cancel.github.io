@@ -24,6 +24,26 @@ a:visited {
     color: #7ede2a;
 }
 
+h3, h4, h5{
+	display: inline-block;
+	padding: 0px;
+}
+
+h3{
+	font-size: 26px;
+	margin: 5px;
+}
+
+h4{
+	font-size: 22px;
+	margin: 2.5px;
+}
+
+h5{
+	font-size: 18px;
+	margin: 0px;
+}
+
 /*----Colors-----
 
 ---Greys
