@@ -327,6 +327,8 @@
 									<ul>
 										<li>
 											Experiment with different Color Mixing Algorithms and Color Interpolation Algorithms in different Color Spaces.
+											<br>
+											Based on the research recorded (in part) <a href="https://gist.github.com/b-cancel/70de2dfa0705e94045574931b5c8e664">Here</a>
 										</li>
 										<li>
 											<a href="">Link To Documentation</a>
@@ -351,7 +353,7 @@
 											<a href="https://docs.google.com/document/d/1UCxu07cAwVSxPS3i7ouwJIBSrV2yh9v0bNlYWYeJJcs/edit?usp=sharing">Link To Documentation</a>
 										</li>
 										<li>
-											<a href="https://docs.google.com/document/d/1wpzp4dFecQ3u8pj6IuYlhem_of8CiI_OEGuR32aKG_w/edit?usp=sharing">Link to Comparison Sheet</a>
+											<a href="https://docs.google.com/document/d/1wpzp4dFecQ3u8pj6IuYlhem_of8CiI_OEGuR32aKG_w/edit?usp=sharing">Link To Comparison Sheet</a>
 										</li>
 									</ul>
 								</li>
@@ -369,16 +371,52 @@
 							<h4>Tool in Development</h4>
 							<ul>
 								<li>
-									<h5>Tap Sequence Detector</h5> -> Detect "N" (hold or release)taps and "T" time held after the Taps to Trigger Commands in your Games
+									<h5>Tap Sequence Detector</h5>
+									<ul>
+										<li>
+											Detect "N" (hold or release)taps and "T" time held after the Taps per Button to Trigger Commands in your Games
+											<br>
+											EX: Quandruple Tap + Hold for 2.5 seconds = CMD, Single Tap + Release for 1 seconds = CMD
+										</li>
+									</ul>
 								</li>
 								<li>
-									<h5>Selection Tool (In Game)</h5> -> Select objects like you would in the windows file explorer, use the Lasso/Polygonal Lasso Tool to select many objects
+									<h5>Button Combo Detector</h5>
+									<ul>
+										<li>
+											Using the "Tap Sequence Detector" above we can gather and inspect multiple tap sequences for multiple buttons to detect Button Combos
+											<br>
+											EX: up -> up -> down -> down -> left -> right -> left -> right -> B -> A = CMD
+										</li>
+									</ul>
 								</li>
 								<li>
-									<h5>Transform Tool (In Game)</h5> -> Translate, Rotate, and Scale Objects Exactly like you di in Photoshop
+									<h5>Selection Tool (In Game)</h5>
+									<ul>
+										<li>
+											Select objects like you would in the windows file explorer OR use the custom Lasso/Polygonal Lasso Tool to select many objects at once.
+											<br>
+											I will (Expand && Refine) the implementation described <a href="https://github.com/b-cancel/Unity_InGameSelectionTool">Here</a>
+										</li>
+									</ul>
 								</li>
 								<li>
-									<h5>Polygon Edit Tool (In Game)</h5> -> Shift the Points of your polygon, and drag edges away or into the polygon
+									<h5>Transform Tool (In Game)</h5>
+									<ul>
+										<li>
+											Translate, Rotate, and Scale Objects Exactly as described <a href="https://helpx.adobe.com/photoshop/using/free-transformations-images-shapes-paths.html">Here</a>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<h5>Polygon Edit Tool (In Game)</h5>
+									<ul>
+										<li>
+											Add or Remove a polygon, Add or Remove the Vertices of your polygon, Shift the Points of your polygon, and Drag the edges of your polygon 
+											<br>
+											I will (Expand && Refine) the implementation described <a href="https://www.youtube.com/watch?v=bPO7_JNWNmI">Here</a>
+										</li>
+									</ul>
 								</li>
 							</ul>
 						</li>
@@ -386,10 +424,24 @@
 							<h4>Design in Development</h4>
 							<ul>
 								<li>
-									<h5>Joystick Deadzone Kit</h5> -> Create Different Zones on a Joystick's coordinate plane to 1. trigger commands 2. dampen input 3. ignore input 4. modify the joysticks input contextually (inspired by https://www.gamasutra.com/blogs/JoshSutphin/20130416/190541/Doing_Thumbstick_Dead_Zones_Right.php)
+									<h5>Joystick Deadzone Kit</h5> 
+									<ul>
+										<li>
+											Create Different Zones on a Joystick's coordinate plane to 1. trigger commands 2. dampen input 3. ignore input 4. modify the joysticks input contextually 
+											<br>
+											I will (Expand && Refine) the implementations described <a href="https://www.gamasutra.com/blogs/JoshSutphin/20130416/190541/Doing_Thumbstick_Dead_Zones_Right.php">Here</a> 
+										</li>
+									</ul>
 								</li>
 								<li>
-									<h5>2D Joystick Shooter kit</h5> -> Experiment with different aiming options to make it easier to decide what alternative to pick for your twin stick shooter (inspired by https://www.gamasutra.com/blogs/MarkVenturelli/20150817/251387/Everything_I_Learned_About_DualStick_Shooter_Controls.php)
+									<h5>2D Joystick Shooter kit</h5> 
+									<ul>
+										<li>
+											Experiment with different aiming options to make it easier to decide what alternative to pick for your twin stick shooter 
+											<br>
+											I will (Expand && Refine) the implementations described <a href="https://www.gamasutra.com/blogs/MarkVenturelli/20150817/251387/Everything_I_Learned_About_DualStick_Shooter_Controls.php">Here</a>
+										</li>
+									</ul>
 								</li>
 							</ul>
 						</li>
