@@ -70,78 +70,94 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     List<Widget> sliverSections = [
       SliverSection(
-        title: "About Me", 
+        title: "About Me",
         body: Text("About me stuff here"),
+        initiallyOpened: true,
       ),
       //TODO: add soft skills
       //TODO: relevant coursework
       //TODO: add language, frameworks, etc
       //TODO: add work experience
       SliverSection(
-        title: "Projects", 
+        title: "Projects",
         body: Text("project"),
       ),
       SliverSection(
-        title: "Endorsements", 
+        title: "Endorsements",
         body: Text("endor"),
       ),
       SliverSection(
-        title: "Contact Me", 
+        title: "Contact Me",
         body: Text("contact stuff"),
+        initiallyOpened: true,
       ),
     ];
 
     //build
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: MyApp.headerColor,
-        title: DefaultTextStyle(
-          style: GoogleFonts.robotoMono(
-            fontSize: 14,
-            color: Colors.white,
+      backgroundColor: MyApp.bodyColor,
+      body: Column(
+        mainAxisSize: MainAxisSize.max,
+        verticalDirection: VerticalDirection.up,
+        children: <Widget>[
+          Expanded(
+            child: CustomScrollView(
+              slivers: sliverSections,
+            ),
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children:[
-              Text(
-                'O:' + '\\' + ' User' + '\\' + 'I_AM_',
+          //app bar after so elevation shows
+          Material(
+            color: MyApp.headerColor,
+            elevation: 4,
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              padding: EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 8,
               ),
-              DefaultTextStyle(
-                style: TextStyle(
-                  fontSize: 36,
-                  fontWeight: FontWeight.bold,
+              child: DefaultTextStyle(
+                style: GoogleFonts.robotoMono(
+                  fontSize: 14,
+                  color: Colors.white,
                 ),
-                child: Stack(
+                child: Wrap(
+                  crossAxisAlignment: WrapCrossAlignment.end,
                   children: [
-                    Transform.translate(
-                      offset: Offset(4, 0), 
-                      child: Text(
-                        "Bryan_Cancel",
-                        style: TextStyle(
-                          color: MyApp.highlightPink,
-                        ),
+                    Text(
+                      "O:\\User\\I_AM_",
+                    ),
+                    DefaultTextStyle(
+                      style: TextStyle(
+                        fontSize: 36,
+                        fontWeight: FontWeight.bold,
                       ),
+                      child: Stack(children: [
+                        Transform.translate(
+                          offset: Offset(4, 0),
+                          child: Text(
+                            "Bryan_Cancel",
+                            style: TextStyle(
+                              color: MyApp.highlightPink,
+                            ),
+                          ),
+                        ),
+                        Text(
+                          "Bryan_Cancel",
+                          style: TextStyle(
+                            color: MyApp.highlightGreen,
+                          ),
+                        ),
+                      ]),
                     ),
                     Text(
-                      "Bryan_Cancel",
-                      style: TextStyle(
-                        color: MyApp.highlightGreen,
-                      ),
+                      " > echo \"yes... like cancel my order of fries :P\"",
                     ),
-                  ]
+                  ],
                 ),
               ),
-              Text(
-                " echo \"yes... like cancel my order of fries :P\"",
-              ),
-            ],
+            ),
           ),
-        ),
-      ),
-      backgroundColor: MyApp.bodyColor,
-      body: CustomScrollView(
-        slivers: sliverSections,
+        ],
       ),
     );
   }
