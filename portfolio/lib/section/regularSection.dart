@@ -13,6 +13,7 @@ class RegularSection extends StatefulWidget {
     this.icon,
     @required this.body,
     this.initiallyOpened: false,
+    this.horizontalSpacing: true,
   });
 
   final String title;
@@ -20,6 +21,7 @@ class RegularSection extends StatefulWidget {
   final Icon icon;
   final Widget body;
   final bool initiallyOpened;
+  final bool horizontalSpacing;
 
   @override
   _RegularSectionState createState() => _RegularSectionState();
@@ -48,6 +50,7 @@ class _RegularSectionState extends State<RegularSection> {
         SectionBody(
           sectionOpened: sectionOpened,
           child: widget.body,
+          horizontalSpacing: widget.horizontalSpacing,
         ),
       ],
     );

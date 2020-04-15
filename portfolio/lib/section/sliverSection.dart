@@ -54,6 +54,7 @@ class _SliverSectionState extends State<SliverSection> {
             SectionBody(
               sectionOpened: sectionOpened, 
               child: widget.body,
+              horizontalSpacing: true,
             ),
           ],
         ),
