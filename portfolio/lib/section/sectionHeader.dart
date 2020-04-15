@@ -185,7 +185,7 @@ class _SectionHeaderState extends State<SectionHeader> {
                             ),
                             Flexible(
                               child: Text(
-                                widget.title,
+                                "\"" + widget.title + "\"",
                                 style: TextStyle(
                                   color: widget.titleColor,
                                   fontSize: 36,

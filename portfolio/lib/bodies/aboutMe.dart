@@ -5,8 +5,9 @@ class AboutMeBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return OrientationBuilder(
       builder: (BuildContext context, Orientation orientation) {
+        //TODO: get oreintation to effect layout
         if (true) { //orientation == Orientation.portrait
-          print("-------------------------portrait");
+          //print("-------------------------portrait");
           return Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
@@ -41,7 +42,7 @@ class AboutMeBody extends StatelessWidget {
             ],
           );
         } else {
-          print("-------------------------landscape");
+          //print("-------------------------landscape");
           return Column(
             children: <Widget>[
               Row(

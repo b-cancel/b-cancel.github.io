@@ -33,6 +33,7 @@ dependencies:
   flutter_sticky_header: "^0.4.2"
   flutter_icons: ^1.0.0+1
   google_fonts: ^0.4.3
+  url_launcher: ^5.4.2
 
 dev_dependencies:
   flutter_test:
@@ -54,6 +55,8 @@ flutter:
     - assets/face/white.png
     - assets/title/small.gif
     - assets/title/large.gif
+    - assets/qrCode.png
+    - assets/vcards/Bryan_Cancel_Contact_V2P1.vcf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

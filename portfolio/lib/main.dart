@@ -158,6 +158,7 @@ class _HomeState extends State<Home> {
         title: "Contact Me",
         body: ContactMeBody(),
         initiallyOpened: true,
+        horizontalSpacing: true,
       ),
       SliverFillRemaining(
         hasScrollBody: false, //it should be as small as possible
