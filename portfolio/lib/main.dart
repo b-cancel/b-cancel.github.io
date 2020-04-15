@@ -1,5 +1,11 @@
+//flutter
 import 'package:flutter/material.dart';
 
+//plugins
+import 'package:portfolio/sliverSection.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+//other
 void main() {
   runApp(MyApp());
 }
@@ -28,7 +34,12 @@ class MyApp extends StatelessWidget {
   static Color pinkText = Color(0xFF9D5660);
   static Color redText = Color(0xFFCD3D33);
   static Color greyText = Color(0xFF646465);
-  
+
+  //from before
+  static Color highlightGreen = Color(0xFF00FBB1);
+  static Color highlightPink = Color(0xFFB0167A);
+  static Color oldPurple = const Color(0xFFAB7FFA);
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -57,14 +68,80 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
+    List<Widget> sliverSections = [
+      SliverSection(
+        title: "About Me", 
+        body: Text("About me stuff here"),
+      ),
+      //TODO: add soft skills
+      //TODO: relevant coursework
+      //TODO: add language, frameworks, etc
+      //TODO: add work experience
+      SliverSection(
+        title: "Projects", 
+        body: Text("project"),
+      ),
+      SliverSection(
+        title: "Endorsements", 
+        body: Text("endor"),
+      ),
+      SliverSection(
+        title: "Contact Me", 
+        body: Text("contact stuff"),
+      ),
+    ];
+
+    //build
     return Scaffold(
       appBar: AppBar(
-        title: Text("app bar here"),
+        backgroundColor: MyApp.headerColor,
+        title: DefaultTextStyle(
+          style: GoogleFonts.robotoMono(
+            fontSize: 14,
+            color: Colors.white,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children:[
+              Text(
+                'O:' + '\\' + ' User' + '\\' + 'I_AM_',
+              ),
+              DefaultTextStyle(
+                style: TextStyle(
+                  fontSize: 36,
+                  fontWeight: FontWeight.bold,
+                ),
+                child: Stack(
+                  children: [
+                    Transform.translate(
+                      offset: Offset(4, 0), 
+                      child: Text(
+                        "Bryan_Cancel",
+                        style: TextStyle(
+                          color: MyApp.highlightPink,
+                        ),
+                      ),
+                    ),
+                    Text(
+                      "Bryan_Cancel",
+                      style: TextStyle(
+                        color: MyApp.highlightGreen,
+                      ),
+                    ),
+                  ]
+                ),
+              ),
+              Text(
+                " echo \"yes... like cancel my order of fries :P\"",
+              ),
+            ],
+          ),
+        ),
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Text("content and stuff")
+      backgroundColor: MyApp.bodyColor,
+      body: CustomScrollView(
+        slivers: sliverSections,
       ),
     );
   }
