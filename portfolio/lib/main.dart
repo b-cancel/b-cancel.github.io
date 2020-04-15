@@ -2,20 +2,20 @@
 import 'package:flutter/material.dart';
 
 //plugins
-import 'package:portfolio/sliverSection.dart';
+import 'package:portfolio/section/sliverSection.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 //internal: sections
-import 'package:portfolio/sections/aboutMe.dart';
-import 'package:portfolio/sections/contactMe.dart';
-import 'package:portfolio/sections/endorsements.dart';
-import 'package:portfolio/sections/hardSkills.dart';
-import 'package:portfolio/sections/projects.dart';
-import 'package:portfolio/sections/softSkills.dart';
-import 'package:portfolio/sections/work.dart';
+import 'package:portfolio/bodies/aboutMe.dart';
+import 'package:portfolio/bodies/contactMe.dart';
+import 'package:portfolio/bodies/endorsements.dart';
+import 'package:portfolio/bodies/hardSkills.dart';
+import 'package:portfolio/bodies/projects.dart';
+import 'package:portfolio/bodies/softSkills.dart';
+import 'package:portfolio/bodies/work.dart';
 
 //internal: other
-import 'package:portfolio/scrollToTop.dart';
+import 'package:portfolio/utils/scrollToTop.dart';
 
 //other
 void main() {

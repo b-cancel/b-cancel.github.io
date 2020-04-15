@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/main.dart';
-import 'package:portfolio/regularSection.dart';
+import 'package:portfolio/section/regularSection.dart';
 
 class HardSkillsBody extends StatelessWidget {
   @override

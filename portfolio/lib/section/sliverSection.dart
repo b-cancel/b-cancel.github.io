@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_sticky_header/flutter_sticky_header.dart';
 
 //internal
-import 'package:portfolio/sectionBody.dart';
-import 'package:portfolio/sectionHeader.dart';
+import 'package:portfolio/section/sectionBody.dart';
+import 'package:portfolio/section/sectionHeader.dart';
 
 //internal
-import 'main.dart';
+import 'package:portfolio/main.dart';
 
 //widget
 class SliverSection extends StatefulWidget {

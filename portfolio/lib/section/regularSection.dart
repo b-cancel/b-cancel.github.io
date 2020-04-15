@@ -1,15 +1,9 @@
 //flutter
 import 'package:flutter/material.dart';
 
-//plugin
-import 'package:flutter_sticky_header/flutter_sticky_header.dart';
-
 //internal
-import 'package:portfolio/sectionBody.dart';
-import 'package:portfolio/sectionHeader.dart';
-
-//internal
-import 'main.dart';
+import 'package:portfolio/section/sectionBody.dart';
+import 'package:portfolio/section/sectionHeader.dart';
 
 //widget
 class RegularSection extends StatefulWidget {

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
 //internal
-import 'package:portfolio/conditional.dart';
+import 'package:portfolio/utils/conditional.dart';
 import 'package:portfolio/main.dart';
 
 //widget
