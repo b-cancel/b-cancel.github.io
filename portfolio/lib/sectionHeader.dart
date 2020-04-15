@@ -130,8 +130,9 @@ class _SectionHeaderState extends State<SectionHeader> {
                 padding: EdgeInsets.symmetric(
                   vertical: 8.0,
                 ),
-                child: widget.sectionOpened.value ?
-                  Row(
+                child: Ternary(
+                  condition: widget.sectionOpened.value,
+                  isTrue: Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: <Widget>[
                       Padding(
@@ -154,10 +155,11 @@ class _SectionHeaderState extends State<SectionHeader> {
                             fontSize: 36,
                             height: 1,
                           ),
-                        )
+                        ),
                       ),
                     ],
-                  ) : Row(
+                  ),
+                  isFalse: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       Flexible(
@@ -183,6 +185,7 @@ class _SectionHeaderState extends State<SectionHeader> {
                       ),
                     ],
                   ),
+                ),
               ),
             ),
           ),

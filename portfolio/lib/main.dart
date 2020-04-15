@@ -1,6 +1,7 @@
 //flutter
 import 'package:flutter/material.dart';
 import 'package:portfolio/regularSection.dart';
+import 'package:portfolio/scrollToTop.dart';
 
 //plugins
 import 'package:portfolio/sliverSection.dart';
@@ -68,6 +69,48 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  //scroll to top function
+  final ScrollController scrollController = new ScrollController();
+  final ValueNotifier<bool> onTop = new ValueNotifier(true);
+  final ValueNotifier<double> overScroll = new ValueNotifier<double>(0);
+
+  //If we scroll down have the scroll up button come up
+  updateOnTopValue() {
+    ScrollPosition position = scrollController.position;
+    //double currentOffset = scrollController.offset;
+
+    //update overscroll to cover pill bottle if possible
+    double curr = position.pixels;
+    double max = position.maxScrollExtent;
+    overScroll.value = (curr < max) ? 0 : curr - max;
+
+    //Determine whether we are on the top of the scroll area
+    if (curr <= position.minScrollExtent) {
+      onTop.value = true;
+    } else
+      onTop.value = false;
+  }
+
+  //init
+  @override
+  void initState() {
+    //super init
+    super.initState();
+
+    //show or hide the to top button
+    scrollController.addListener(updateOnTopValue);
+  }
+
+  //dipose
+  @override
+  void dispose() {
+    //remove listener
+    scrollController.removeListener(updateOnTopValue);
+
+    //super dispose
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     List<Widget> sliverSections = [
@@ -163,15 +206,39 @@ class _HomeState extends State<Home> {
         body: TestBody(),
         initiallyOpened: true,
       ),
+      SliverFillRemaining(
+        hasScrollBody: false, //it should be as small as possible
+        fillOverscroll: true, //only if above is false
+        child: Opacity(
+          opacity: 0.0, 
+          child: Padding(
+            padding: EdgeInsets.all(28.0 + 4),
+            child: Icon(
+              Icons.adb,
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ),
     ];
 
     //build
     return Scaffold(
       backgroundColor: MyApp.bodyColor,
-      body: SafeArea(
-        child: CustomScrollView(
-          slivers: sliverSections,
-        ),
+      body: Stack(
+        children: <Widget>[
+          SafeArea(
+            child: CustomScrollView(
+              controller: scrollController,
+              slivers: sliverSections,
+            ),
+          ),
+          ScrollToTopButton(
+            onTop: onTop,
+            overScroll: overScroll,
+            scrollController: scrollController,
+          ),
+        ],
       ),
     );
   }
@@ -239,7 +306,7 @@ class NameTitle extends StatelessWidget {
                       color: MyApp.highlightGreen,
                     ),
                   ),
-                ]),
+                ],),
               ),
               Text(
                 " > echo \"yes... like cancel my order of fries :P\"",
