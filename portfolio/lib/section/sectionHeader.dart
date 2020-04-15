@@ -61,22 +61,10 @@ class _SectionHeaderState extends State<SectionHeader> {
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Stack(
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Visibility(
-                      visible: widget.sectionOpened.value,
-                      child: Container(
-                        margin: EdgeInsets.only(
-                          left: 22,
-                          right: 16,
-                        ),
-                        color: MyApp.oldGrey,
-                        width: 4,
-                      ),
-                    ),
-                    Container(
-                      alignment: Alignment.topCenter,
-                      child: Stack(
+                    Stack(
                         alignment: Alignment.topCenter,
                         children: [
                           Visibility(
@@ -100,19 +88,6 @@ class _SectionHeaderState extends State<SectionHeader> {
                           Positioned.fill(
                             child: Stack(
                               children: <Widget>[
-                                Positioned.fill(
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Expanded(
-                                        child: Container(
-                                          color: MyApp.bodyColor,
-                                        ),
-                                      ),
-                                      Spacer(),
-                                    ],
-                                  ),
-                                ),
                                 Container(
                                   padding: EdgeInsets.only(
                                     top: 12,
@@ -158,38 +133,20 @@ class _SectionHeaderState extends State<SectionHeader> {
                           ),
                         ],
                       ),
-                    ),
-                  ],
-                ),
-                /*
-                Stack(
-                  children: [
-                    Visibility(
-                      visible: widget.sectionOpened.value,
-                      child: Positioned.fill(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Spacer(),
-                            Expanded(
-                              child: Container(
-                                color: MyApp.oldGrey,
-                                width: 4,
-                              ),
-                            ),
-                          ],
+                    Expanded(
+                      child: Visibility(
+                        visible: widget.sectionOpened.value,
+                        child: Container(
+                          margin: EdgeInsets.only(
+                            left: 22,
+                          ),
+                          width: 4,
+                          color: MyApp.oldGrey,
                         ),
                       ),
                     ),
-                    Stack(
-                      children: [
-                        
-                      ]
-                    )
                   ],
                 ),
-                */
                 Expanded(
                   child: Container(
                     decoration: BoxDecoration(
