@@ -12,24 +12,26 @@ import 'package:portfolio/sectionHeader.dart';
 import 'main.dart';
 
 //widget
-class SliverSection extends StatefulWidget {
-  SliverSection({
+class RegularSection extends StatefulWidget {
+  RegularSection({
     @required this.title,
+    @required this.titleColor,
     this.icon,
     @required this.body,
     this.initiallyOpened: false,
   });
 
   final String title;
+  final Color titleColor;
   final Icon icon;
   final Widget body;
   final bool initiallyOpened;
 
   @override
-  _SliverSectionState createState() => _SliverSectionState();
+  _RegularSectionState createState() => _RegularSectionState();
 }
 
-class _SliverSectionState extends State<SliverSection> {
+class _RegularSectionState extends State<RegularSection> {
   ValueNotifier<bool> sectionOpened;
 
   @override
@@ -42,22 +44,18 @@ class _SliverSectionState extends State<SliverSection> {
 
   @override
   Widget build(BuildContext context) {
-    return SliverStickyHeader(
-      header: SectionHeader(
-        sectionOpened: sectionOpened, 
-        title: widget.title,
-        titleColor: MyApp.oldPurple,
-      ),
-      sliver: SliverList(
-        delegate: SliverChildListDelegate(
-          [
-            SectionBody(
-              sectionOpened: sectionOpened, 
-              child: widget.body,
-            ),
-          ],
+    return Column(
+      children: <Widget>[
+        SectionHeader(
+          sectionOpened: sectionOpened,
+          title: widget.title,
+          titleColor: widget.titleColor
         ),
-      ),
+        SectionBody(
+          sectionOpened: sectionOpened,
+          child: widget.body,
+        ),
+      ],
     );
   }
 }
