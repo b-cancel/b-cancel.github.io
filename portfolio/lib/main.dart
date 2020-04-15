@@ -39,6 +39,7 @@ class MyApp extends StatelessWidget {
   static Color highlightGreen = Color(0xFF00FBB1);
   static Color highlightPink = Color(0xFFB0167A);
   static Color oldPurple = const Color(0xFFAB7FFA);
+  static Color oldGrey = Color(0xFF808080);
 
   // This widget is the root of your application.
   @override
@@ -69,9 +70,12 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     List<Widget> sliverSections = [
+      SliverToBoxAdapter(
+        child: NameTitle(),
+      ),
       SliverSection(
         title: "About Me",
-        body: Text("About me stuff here"),
+        body: TestBody(),
         initiallyOpened: true,
       ),
       //TODO: add soft skills
@@ -80,15 +84,15 @@ class _HomeState extends State<Home> {
       //TODO: add work experience
       SliverSection(
         title: "Projects",
-        body: Text("project"),
+        body: TestBody(),
       ),
       SliverSection(
         title: "Endorsements",
-        body: Text("endor"),
+        body: TestBody(),
       ),
       SliverSection(
         title: "Contact Me",
-        body: Text("contact stuff"),
+        body: TestBody(),
         initiallyOpened: true,
       ),
     ];
@@ -96,68 +100,85 @@ class _HomeState extends State<Home> {
     //build
     return Scaffold(
       backgroundColor: MyApp.bodyColor,
-      body: Column(
-        mainAxisSize: MainAxisSize.max,
-        verticalDirection: VerticalDirection.up,
-        children: <Widget>[
-          Expanded(
-            child: CustomScrollView(
-              slivers: sliverSections,
-            ),
+      body: SafeArea(
+        child: CustomScrollView(
+          slivers: sliverSections,
+        ),
+      ),
+    );
+  }
+}
+
+class TestBody extends StatelessWidget {
+  const TestBody({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.red,
+      child: Text("body\n\n\n\n\n\n\n\n\n\n\n\n\n\nend"),
+    );
+  }
+}
+
+class NameTitle extends StatelessWidget {
+  const NameTitle({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: MyApp.headerColor,
+      elevation: 4,
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        padding: EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 8,
+        ),
+        child: DefaultTextStyle(
+          style: GoogleFonts.robotoMono(
+            fontSize: 12,
+            color: Colors.white,
           ),
-          //app bar after so elevation shows
-          Material(
-            color: MyApp.headerColor,
-            elevation: 4,
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              padding: EdgeInsets.symmetric(
-                horizontal: 16,
-                vertical: 8,
+          child: Wrap(
+            crossAxisAlignment: WrapCrossAlignment.end,
+            children: [
+              Text(
+                "O:\\User\\I_AM_",
               ),
-              child: DefaultTextStyle(
-                style: GoogleFonts.robotoMono(
-                  fontSize: 14,
-                  color: Colors.white,
+              DefaultTextStyle(
+                style: TextStyle(
+                  fontSize: 36,
+                  fontWeight: FontWeight.bold,
                 ),
-                child: Wrap(
-                  crossAxisAlignment: WrapCrossAlignment.end,
-                  children: [
-                    Text(
-                      "O:\\User\\I_AM_",
-                    ),
-                    DefaultTextStyle(
+                child: Stack(children: [
+                  Transform.translate(
+                    offset: Offset(4, 0),
+                    child: Text(
+                      "Bryan_Cancel",
                       style: TextStyle(
-                        fontSize: 36,
-                        fontWeight: FontWeight.bold,
+                        color: MyApp.highlightPink,
                       ),
-                      child: Stack(children: [
-                        Transform.translate(
-                          offset: Offset(4, 0),
-                          child: Text(
-                            "Bryan_Cancel",
-                            style: TextStyle(
-                              color: MyApp.highlightPink,
-                            ),
-                          ),
-                        ),
-                        Text(
-                          "Bryan_Cancel",
-                          style: TextStyle(
-                            color: MyApp.highlightGreen,
-                          ),
-                        ),
-                      ]),
                     ),
-                    Text(
-                      " > echo \"yes... like cancel my order of fries :P\"",
+                  ),
+                  Text(
+                    "Bryan_Cancel",
+                    style: TextStyle(
+                      color: MyApp.highlightGreen,
                     ),
-                  ],
-                ),
+                  ),
+                ]),
               ),
-            ),
+              Text(
+                " > echo \"yes... like cancel my order of fries :P\"",
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
