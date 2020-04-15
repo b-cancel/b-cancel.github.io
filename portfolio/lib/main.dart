@@ -1,11 +1,21 @@
 //flutter
 import 'package:flutter/material.dart';
-import 'package:portfolio/regularSection.dart';
-import 'package:portfolio/scrollToTop.dart';
 
 //plugins
 import 'package:portfolio/sliverSection.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+//internal: sections
+import 'package:portfolio/sections/aboutMe.dart';
+import 'package:portfolio/sections/contactMe.dart';
+import 'package:portfolio/sections/endorsements.dart';
+import 'package:portfolio/sections/hardSkills.dart';
+import 'package:portfolio/sections/projects.dart';
+import 'package:portfolio/sections/softSkills.dart';
+import 'package:portfolio/sections/work.dart';
+
+//internal: other
+import 'package:portfolio/scrollToTop.dart';
 
 //other
 void main() {
@@ -119,91 +129,32 @@ class _HomeState extends State<Home> {
       ),
       SliverSection(
         title: "About Me",
-        body: TestBody(),
+        body: AboutMeBody(),
         initiallyOpened: true,
       ),
       SliverSection(
         title: "Hard Skills",
-        //education
-        //certifications
-        body: Column(
-          children: [
-            RegularSection(
-              title: "Formal Education",
-              titleColor: MyApp.yellowText,
-              body: Column(
-                children: <Widget>[
-                  Text("college stuff"),
-                  RegularSection(
-                    title: "Coursework",
-                    titleColor: MyApp.orangeText,
-                    body: Column(
-                      children: <Widget>[
-                        Text("c1"),
-                        
-                        Text("c2"),
-                      ],
-                    ),
-                  ),
-                  Text("high school stuff"),
-                ],
-              ),
-            ),
-            RegularSection(
-              title: "Languages/Frameworks beep boop bap",
-              titleColor: MyApp.greenText,
-              body: Column(
-                children: <Widget>[
-                  Text("all languages with paired framework with profficiency"),
-                ],
-              ),
-            ),
-            RegularSection(
-              title: "Tools",
-              titleColor: MyApp.yellowText,
-              body: Column(
-                children: <Widget>[
-                  Text("IDEs, version control"),
-                ],
-              ),
-            ),
-            RegularSection(
-              title: "Certifications",
-              titleColor: MyApp.blueText,
-              body: Column(
-                children: <Widget>[
-                  Text("adobe stuff"),
-                ],
-              ),
-            ),
-          ]
-        ),
+        body: HardSkillsBody(),
       ),
       SliverSection(
         title: "Soft Skills",
-        //education
-        //certifications
-        body: Column(
-          children: [
-            Text("languages, leadership, project planing, problem solving, etc"),
-          ]
-        ),
+        body: SoftSkillsBody(),
       ),
-      //TODO: add soft skills
-      //TODO: relevant coursework
-      //TODO: add language, frameworks, etc
-      //TODO: add work experience
+      SliverSection(
+        title: "Work Experience",
+        body: WorkExperienceBody(),
+      ),
       SliverSection(
         title: "Projects",
-        body: TestBody(),
+        body: ProjectsBody(),
       ),
       SliverSection(
         title: "Endorsements",
-        body: TestBody(),
+        body: EndorsementsBody(),
       ),
       SliverSection(
         title: "Contact Me",
-        body: TestBody(),
+        body: ContactMeBody(),
         initiallyOpened: true,
       ),
       SliverFillRemaining(
@@ -240,20 +191,6 @@ class _HomeState extends State<Home> {
           ),
         ],
       ),
-    );
-  }
-}
-
-class TestBody extends StatelessWidget {
-  const TestBody({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.red,
-      child: Text("body\n\n\n\n\n\n\n\n\n\n\n\n\n\nend"),
     );
   }
 }
@@ -315,6 +252,20 @@ class NameTitle extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class TestBody extends StatelessWidget {
+  const TestBody({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.red,
+      child: Text("body\n\n\n\n\n\n\n\n\n\n\n\n\n\nend"),
     );
   }
 }
