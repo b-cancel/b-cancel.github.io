@@ -160,6 +160,38 @@ class _HomeState extends State<Home> {
         initiallyOpened: true,
         horizontalSpacing: true,
       ),
+      SliverToBoxAdapter(
+        child: Padding(
+          padding: EdgeInsets.only(
+            top: 16.0,
+          ),
+          child: DefaultTextStyle(
+            style: TextStyle(
+              fontSize: 12,
+            ),
+            child: Column(
+              children: <Widget>[
+                Text("All Rights Reserved @ 2020\n"),
+                Text("Inspired By IDEs Everywhere"),
+                Text("Developed And Designed"),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Text("by "),
+                    Text(
+                      "Bryan Cancel",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+                Text("using Dart/Flutter"),
+              ],
+            ),
+          ),
+        )
+      ),
       SliverFillRemaining(
         hasScrollBody: false, //it should be as small as possible
         fillOverscroll: true, //only if above is false
