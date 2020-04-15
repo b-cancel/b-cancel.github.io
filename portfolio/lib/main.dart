@@ -131,6 +131,7 @@ class _HomeState extends State<Home> {
         title: "About Me",
         body: AboutMeBody(),
         initiallyOpened: true,
+        horizontalSpacing: true,
       ),
       SliverSection(
         title: "Hard Skills",
@@ -139,6 +140,7 @@ class _HomeState extends State<Home> {
       SliverSection(
         title: "Soft Skills",
         body: SoftSkillsBody(),
+        horizontalSpacing: true,
       ),
       SliverSection(
         title: "Work Experience",
@@ -203,52 +205,57 @@ class NameTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: MyApp.headerColor,
+      color: MyApp.inactiveTabColor,
       elevation: 4,
       child: Container(
         width: MediaQuery.of(context).size.width,
         padding: EdgeInsets.symmetric(
           horizontal: 16,
-          vertical: 8,
         ),
-        child: DefaultTextStyle(
-          style: GoogleFonts.robotoMono(
-            fontSize: 12,
-            color: Colors.white,
+        child: Padding(
+          padding: EdgeInsets.only(
+            top: 8.0,
+            bottom: 16,
           ),
-          child: Wrap(
-            crossAxisAlignment: WrapCrossAlignment.end,
-            children: [
-              Text(
-                "O:\\User\\I_AM_",
-              ),
-              DefaultTextStyle(
-                style: TextStyle(
-                  fontSize: 36,
-                  fontWeight: FontWeight.bold,
+          child: DefaultTextStyle(
+            style: GoogleFonts.robotoMono(
+              fontSize: 12,
+              color: Colors.white,
+            ),
+            child: Wrap(
+              crossAxisAlignment: WrapCrossAlignment.end,
+              children: [
+                Text(
+                  "O:\\User\\I_AM_",
                 ),
-                child: Stack(children: [
-                  Transform.translate(
-                    offset: Offset(4, 0),
-                    child: Text(
-                      "Bryan_Cancel",
-                      style: TextStyle(
-                        color: MyApp.highlightPink,
+                DefaultTextStyle(
+                  style: TextStyle(
+                    fontSize: 36,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  child: Stack(children: [
+                    Transform.translate(
+                      offset: Offset(4, 0),
+                      child: Text(
+                        "Bryan_Cancel",
+                        style: TextStyle(
+                          color: MyApp.highlightPink,
+                        ),
                       ),
                     ),
-                  ),
-                  Text(
-                    "Bryan_Cancel",
-                    style: TextStyle(
-                      color: MyApp.highlightGreen,
+                    Text(
+                      "Bryan_Cancel",
+                      style: TextStyle(
+                        color: MyApp.highlightGreen,
+                      ),
                     ),
-                  ),
-                ],),
-              ),
-              Text(
-                " > echo \"yes... like cancel my order of fries :P\"",
-              ),
-            ],
+                  ],),
+                ),
+                Text(
+                  " > echo \"yes... like cancel my order of fries :P\"",
+                ),
+              ],
+            ),
           ),
         ),
       ),

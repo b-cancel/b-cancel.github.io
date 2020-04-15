@@ -49,152 +49,226 @@ class _SectionHeaderState extends State<SectionHeader> {
     return Material(
       color: MyApp.bodyColor,
       child: InkWell(
-        onTap: (){
+        onTap: () {
           widget.sectionOpened.value = !widget.sectionOpened.value;
         },
         child: Container(
           padding: EdgeInsets.only(
             top: 8.0,
           ),
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: <Widget>[
-              Stack(
-                children: [
-                  Visibility(
-                    visible: widget.sectionOpened.value,
-                    child: Positioned.fill(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Spacer(),
-                          Expanded(
-                            child: Container(
-                              color: MyApp.oldGrey,
-                              width: 4,
+          child: IntrinsicHeight(
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Stack(
+                  children: <Widget>[
+                    Visibility(
+                      visible: widget.sectionOpened.value,
+                      child: Container(
+                        margin: EdgeInsets.only(
+                          left: 22,
+                          right: 16,
+                        ),
+                        color: MyApp.oldGrey,
+                        width: 4,
+                      ),
+                    ),
+                    Container(
+                      alignment: Alignment.topCenter,
+                      child: Stack(
+                        alignment: Alignment.topCenter,
+                        children: [
+                          Visibility(
+                            visible: widget.sectionOpened.value,
+                            child: Positioned.fill(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  Spacer(),
+                                  Expanded(
+                                    child: Container(
+                                      color: MyApp.oldGrey,
+                                      width: 4,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
+                          ),
+                          Positioned.fill(
+                            child: Stack(
+                              children: <Widget>[
+                                Positioned.fill(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Expanded(
+                                        child: Container(
+                                          color: MyApp.bodyColor,
+                                        ),
+                                      ),
+                                      Spacer(),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  padding: EdgeInsets.only(
+                                    top: 12,
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 12.0,
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsets.only(
+                                        bottom: 12.0,
+                                      ),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          color: MyApp.bodyColor,
+                                          border: Border.all(
+                                            width: 2,
+                                            color: MyApp.oldGrey,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          IconButton(
+                            icon: widget.sectionOpened.value == false
+                                ? Icon(
+                                    Icons.add,
+                                    color: MyApp.oldGrey,
+                                  )
+                                : Icon(
+                                    FontAwesome.minus,
+                                    size: 14,
+                                    color: MyApp.oldGrey,
+                                  ),
+                            onPressed: () {
+                              widget.sectionOpened.value =
+                                  !widget.sectionOpened.value;
+                            },
                           ),
                         ],
                       ),
                     ),
-                  ),
-                  Positioned.fill(
-                    child: Padding(
-                      padding: EdgeInsets.all(
-                        12.0,
+                  ],
+                ),
+                /*
+                Stack(
+                  children: [
+                    Visibility(
+                      visible: widget.sectionOpened.value,
+                      child: Positioned.fill(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Spacer(),
+                            Expanded(
+                              child: Container(
+                                color: MyApp.oldGrey,
+                                width: 4,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: MyApp.bodyColor,
-                          border: Border.all(
-                            width: 2,
-                            color: MyApp.oldGrey,
-                          ),
+                    ),
+                    Stack(
+                      children: [
+                        
+                      ]
+                    )
+                  ],
+                ),
+                */
+                Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(
+                          width: 4,
+                          color: widget.sectionOpened.value
+                              ? widget.titleColor
+                              : Colors.transparent,
+                        ),
+                      ),
+                    ),
+                    padding: EdgeInsets.only(
+                      right: 16.0,
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        vertical: 8.0,
+                      ),
+                      child: Ternary(
+                        condition: widget.sectionOpened.value,
+                        isTrue: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Padding(
+                              padding: EdgeInsets.only(
+                                right: 8,
+                              ),
+                              child: Text(
+                                "#region",
+                                style: TextStyle(
+                                  color: MyApp.oldGrey,
+                                ),
+                              ),
+                            ),
+                            Flexible(
+                              child: Text(
+                                widget.title,
+                                style: TextStyle(
+                                  color: widget.titleColor,
+                                  fontSize: 36,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        isFalse: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            Flexible(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    width: 2,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 16,
+                                  vertical: 8,
+                                ),
+                                child: Text(
+                                  widget.title,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 24,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
                   ),
-                  Material(
-                    color: Colors.transparent,
-                    child: IconButton(
-                      icon: widget.sectionOpened.value == false
-                          ? Icon(
-                              Icons.add,
-                              color: MyApp.oldGrey,
-                            )
-                          : Icon(
-                              FontAwesome.minus,
-                              size: 14,
-                              color: MyApp.oldGrey,
-                            ),
-                      onPressed: () {
-                        widget.sectionOpened.value = !widget.sectionOpened.value;
-                      },
-                    ),
-                  ),
-                ],
-              ),
-              Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(
-                        width: 4,
-                        color: widget.sectionOpened.value
-                            ? widget.titleColor
-                            : Colors.transparent,
-                      ),
-                    ),
-                  ),
-                  padding: EdgeInsets.only(
-                    right: 16.0,
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                      vertical: 8.0,
-                    ),
-                    child: Ternary(
-                      condition: widget.sectionOpened.value,
-                      isTrue: Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: <Widget>[
-                          Padding(
-                            padding: EdgeInsets.only(
-                              right: 8,
-                            ),
-                            child: Text(
-                              "#region",
-                              style: TextStyle(
-                                color: MyApp.oldGrey,
-                                height: 1,
-                              ),
-                            ),
-                          ),
-                          Flexible(
-                            child: Text(
-                              widget.title,
-                              style: TextStyle(
-                                color: widget.titleColor,
-                                fontSize: 36,
-                                height: 1,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      isFalse: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          Flexible(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  width: 2,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 16,
-                                vertical: 8,
-                              ),
-                              child: Text(
-                                widget.title,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 24,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

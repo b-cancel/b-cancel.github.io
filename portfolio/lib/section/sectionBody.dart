@@ -44,11 +44,13 @@ class _SectionBodyState extends State<SectionBody> {
   Widget build(BuildContext context) {
     return Visibility(
       visible: widget.sectionOpened.value,
-      child: IntrinsicHeight(
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Material(
+      child: Stack(
+        children: <Widget>[
+          Positioned(
+            left: 0,
+            top: 0,
+            bottom: 0,
+            child: Material(
               color: MyApp.bodyColor,
               child: InkWell(
                 onTap: (){
@@ -71,61 +73,74 @@ class _SectionBodyState extends State<SectionBody> {
                 ),
               ),
             ),
-            Expanded(
-              child: Container(
-                color: Colors.blue,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                        vertical: 16,
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.only(
-                          right: 16,
-                        ),
-                        child: widget.child,
-                      ),
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(
+                  left: 26.0 + (widget.horizontalSpacing ? 24 : 0),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                    vertical: 16,
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                      right: 16,
                     ),
-                    Material(
-                      color: MyApp.bodyColor,
-                      child: InkWell(
-                        onTap: () {
-                          widget.sectionOpened.value = !widget.sectionOpened.value;
-                        },
-                        child: Transform.translate(
-                          offset: Offset(widget.horizontalSpacing ? -24 : 0, 0),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: <Widget>[
-                              Container(
-                                height: 4,
-                                width: 16,
-                                color: MyApp.oldGrey,
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                  left: 8,
-                                ),
-                                child: Text(
-                                  "#endregion",
-                                  style: TextStyle(
-                                    color: MyApp.oldGrey,
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
+                    child: widget.child,
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
+              Material(
+                color: MyApp.bodyColor,
+                child: InkWell(
+                  onTap: () {
+                    widget.sectionOpened.value = !widget.sectionOpened.value;
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                      left: 16.0 + 6,
+                    ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: <Widget>[
+                        Container(
+                          height: 16,
+                          width: 16,
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                color: MyApp.oldGrey,
+                                width: 4,
+                              ),
+                              left: BorderSide(
+                                color: MyApp.oldGrey,
+                                width: 4,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(
+                            left: 8,
+                          ),
+                          child: Text(
+                            "#endregion",
+                            style: TextStyle(
+                              color: MyApp.oldGrey,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
+        ],
       ),
     );
   }

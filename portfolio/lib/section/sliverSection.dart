@@ -18,12 +18,14 @@ class SliverSection extends StatefulWidget {
     this.icon,
     @required this.body,
     this.initiallyOpened: false,
+    this.horizontalSpacing: false,
   });
 
   final String title;
   final Icon icon;
   final Widget body;
   final bool initiallyOpened;
+  final bool horizontalSpacing;
 
   @override
   _SliverSectionState createState() => _SliverSectionState();
@@ -54,7 +56,7 @@ class _SliverSectionState extends State<SliverSection> {
             SectionBody(
               sectionOpened: sectionOpened, 
               child: widget.body,
-              horizontalSpacing: true,
+              horizontalSpacing: widget.horizontalSpacing,
             ),
           ],
         ),

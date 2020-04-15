@@ -13,7 +13,7 @@ class RegularSection extends StatefulWidget {
     this.icon,
     @required this.body,
     this.initiallyOpened: false,
-    this.horizontalSpacing: true,
+    this.horizontalSpacing: false,
   });
 
   final String title;
