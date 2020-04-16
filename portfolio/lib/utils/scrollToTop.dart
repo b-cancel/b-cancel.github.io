@@ -4,6 +4,8 @@ import 'package:vector_math/vector_math_64.dart' as vect;
 //flutter
 import 'package:flutter/material.dart';
 
+import '../main.dart';
+
 //widget
 class ScrollToTopButton extends StatefulWidget {
   const ScrollToTopButton({
@@ -67,7 +69,7 @@ class _ScrollToTopButtonState extends State<ScrollToTopButton> {
             ),
             child: FloatingActionButton(
               heroTag: 'toTop',
-              backgroundColor: Theme.of(context).accentColor,
+              backgroundColor: MyApp.highlightGreen,
               onPressed: (){
                 widget.scrollController.jumpTo(0);
               },

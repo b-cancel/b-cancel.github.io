@@ -13,9 +13,11 @@ import 'package:portfolio/utils/platformChecker.dart';
 import 'package:portfolio/utils/copyToClipboard.dart';
 import 'package:portfolio/utils/mySnackBar.dart';
 
+import 'platformChecker.dart';
+
 //falls back with url launcher
 openWithHtml(BuildContext context, String url, {bool openHere}) {
-  if (isNotMobile()) {
+  if (isWeb()) {
     //NOTE: anything using HTML only works on web
     if (openHere) {
       try {
@@ -61,11 +63,7 @@ openWithUrlLauncher(BuildContext context, String url, {bool openHere}) async {
 
 //launch it with url launcher in try catch
 _launchLink(BuildContext context, String url, {bool openHere}) async {
-  print("platform checking");
-  bool isWeeb = isWeb();
-  print("is weeb ");
-  print("is weeb " + isWeeb.toString());
-  if (isWeeb) {
+  if (isWeb()) {
     print("Web");
     _launchRawLink(context, url);
   }
@@ -99,8 +97,7 @@ _launchLink(BuildContext context, String url, {bool openHere}) async {
         _launchRawLink(context, url);
       }
     }
-    else{
-      print("other");
+    else{ //handle windows, macOS, and linus the same
       _launchRawLink(context, url);
     }
   }
