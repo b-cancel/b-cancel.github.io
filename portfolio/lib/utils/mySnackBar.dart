@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/main.dart';
 
-showSnackBar(BuildContext context, {String text, IconData icon}) {
+showSnackBar(BuildContext context, {
+  String text, 
+  IconData icon,
+  Duration duration: const Duration(seconds: 7),
+}) {
   Scaffold.of(context).showSnackBar(
     SnackBar(
       backgroundColor: MyApp.inactiveTabColor,
@@ -18,12 +22,12 @@ showSnackBar(BuildContext context, {String text, IconData icon}) {
                   right: 8.0,
                 ),
                 child: Icon(
-                  Icons.warning,
-                  color: Colors.yellow,
+                  icon ?? Icons.warning,
+                  color : icon != null ? Colors.white : Colors.yellow,
                 ),
               ),
               Expanded(
-                child: Text(
+                child: SelectableText(
                   text,
                   style: TextStyle(
                     color: Colors.white,
@@ -34,7 +38,7 @@ showSnackBar(BuildContext context, {String text, IconData icon}) {
           ),
         ),
       ),
-      duration: Duration(seconds: 7),
+      duration: duration,
       behavior: SnackBarBehavior.floating,
     ),
   );

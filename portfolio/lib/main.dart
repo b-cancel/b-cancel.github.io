@@ -168,6 +168,7 @@ class _HomeState extends State<Home> {
           child: DefaultTextStyle(
             style: TextStyle(
               fontSize: 12,
+              color: Colors.white,
             ),
             child: Column(
               children: <Widget>[

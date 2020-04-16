@@ -1,8 +1,15 @@
+//fluter
 import 'package:flutter/material.dart';
+
+//plugins
+import 'package:flutter_clipboard_manager/flutter_clipboard_manager.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:portfolio/utils/conditional.dart';
+import 'package:portfolio/utils/copyAndLaunch.dart';
 import 'package:portfolio/utils/mySnackBar.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+//widget
 class ContactMeBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -18,32 +25,68 @@ class ContactMeBody extends StatelessWidget {
             spacing: 16,
             children: <Widget>[
               IconTextButton(
-                onPressed: (){}, 
-                icon: Icons.phone, 
+                onPressed: (){
+                  launchLink(context, 0);
+                  /*
+                  String number = "(956) 777-2692";
+                  copyItem(
+                    context,
+                    Icons.phone,
+                    item: number,
+                    message: "Call or Text Me @ " + number,
+                  );
+                  */
+                },
+                onLongPress: (){
+                  //url: "tel:" + number,
+                },
+                icon: Icons.phone,
                 text: "Number",
               ),
               IconTextButton(
-                onPressed: (){}, 
-                icon: Icons.email, 
+                onPressed: () {
+                  launchLink(context, 1);
+                  /*
+                  String email = "bryan.o.cancel@gmail.com";
+                  copyItem(
+                    context,
+                    Icons.email,
+                    item: email,
+                    message: "Email Me @ " + email,
+                  );
+                  */
+                },
+                onLongPress: (){
+                  //mailto:smith@example.org?subject=News&body=New%20plugin
+                },
+                icon: Icons.email,
                 text: "Email",
               ),
               IconTextButton(
-                onPressed: (){}, 
+                onPressed: () {
+                  launchLink(context, 2);
+                },
                 icon: FontAwesome.github,
                 text: "Github",
               ),
               IconTextButton(
-                onPressed: (){}, 
+                onPressed: () {
+                  launchLink(context, 3);
+                },
                 icon: FontAwesome.file_text,
                 text: "Resume",
               ),
               IconTextButton(
-                onPressed: (){}, 
+                onPressed: () {
+                  launchLink(context, 4);
+                },
                 icon: FontAwesome5Brands.hackerrank,
                 text: "Hacker Rank",
               ),
               IconTextButton(
-                onPressed: (){}, 
+                onPressed: () {
+                  launchLink(context, 5);
+                },
                 icon: FontAwesome5Brands.linkedin,
                 text: "Linked In",
               ),
@@ -57,6 +100,7 @@ class ContactMeBody extends StatelessWidget {
               child: DefaultTextStyle(
                 style: TextStyle(
                   fontSize: 16,
+                  color: Colors.white,
                 ),
                 child: IntrinsicWidth(
                   child: Column(
@@ -138,28 +182,41 @@ class IconTextButton extends StatelessWidget {
   const IconTextButton({
     Key key,
     @required this.onPressed,
+    this.onLongPress,
     @required this.icon,
     @required this.text,
   }) : super(key: key);
 
   final Function onPressed;
+  final Function onLongPress;
   final IconData icon;
   final String text;
 
   @override
   Widget build(BuildContext context) {
+    //basic button
+    Widget button = IconButton(
+      onPressed: () => onPressed(),
+      icon: Icon(
+        icon,
+        size: 36,
+      ),
+    );
+
+    //build
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         Text(text),
-        IconButton(
-          onPressed: () => onPressed(),
-          icon: Icon(
-            icon,
-            size: 36,
+        Ternary(
+          condition: onLongPress == null,
+          isTrue: button,
+          isFalse: GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            onLongPress: () => onLongPress(),
+            child: button,
           ),
-        ),
-        
+        )
       ],
     );
   }

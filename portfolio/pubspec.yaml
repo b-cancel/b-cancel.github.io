@@ -31,6 +31,7 @@ dependencies:
 
   # eternal
   flutter_sticky_header: "^0.4.2"
+  flutter_clipboard_manager: ^0.0.2
   flutter_icons: ^1.0.0+1
   google_fonts: ^0.4.3
   url_launcher: ^5.4.2
