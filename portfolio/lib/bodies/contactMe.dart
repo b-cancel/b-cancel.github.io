@@ -25,8 +25,9 @@ class ContactMeBody extends StatelessWidget {
             spacing: 16,
             children: <Widget>[
               IconTextButton(
-                onPressed: (){
-                  copyWithClippy("clippy one");
+                onPressed: ()async{
+                  bool worked = await copyWithClippy("clippy one");
+                  showSnackBar(context,text: "clip worked? " + worked.toString());
                   //openLinkHere(context, "https://www.google.com");
                   /*
                   String number = "(956) 777-2692";
@@ -45,8 +46,10 @@ class ContactMeBody extends StatelessWidget {
                 text: "Number",
               ),
               IconTextButton(
-                onPressed: () {
-                  copyWithClipboardManager("CM one");
+                onPressed: () async{
+                  
+                  bool worked = await copyWithClipboardManager("CM one");
+                  showSnackBar(context,text: "clip worked? " + worked.toString());
                   //openLinkHere(context, "https://www.google.com");
                   /*
                   String email = "bryan.o.cancel@gmail.com";
@@ -65,8 +68,9 @@ class ContactMeBody extends StatelessWidget {
                 text: "Email",
               ),
               IconTextButton(
-                onPressed: () {
-                  copyWithFlutterClipboardManager("FCM one");
+                onPressed: () async{
+                  bool worked = await copyWithFlutterClipboardManager("FCM one");
+                  showSnackBar(context,text: "clip worked? " + worked.toString());
                   //openLinkHere(context, "https://www.google.com");
                 },
                 icon: FontAwesome.github,
@@ -90,7 +94,7 @@ class ContactMeBody extends StatelessWidget {
               ),
               IconTextButton(
                 onPressed: () {
-                  copyWithFlutterClipboardManager("CM three");
+                  copyWithFlutterClipboardManager("FCM two");
                   //openLinkHere(context, "https://www.google.com");
                 },
                 icon: FontAwesome5Brands.linkedin,

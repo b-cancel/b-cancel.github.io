@@ -1,4 +1,5 @@
-//import 'package:clippy/browser.dart' as clippy;
+//TODO: uncomment when ready to release (leave commented for quick debuggin on Android)
+import 'package:clippy/browser.dart' as clippy;
 import 'package:portfolio/utils/mySnackBar.dart';
 import 'package:portfolio/utils/platformChecker.dart';
 import 'package:flutter_clipboard_manager/flutter_clipboard_manager.dart';
@@ -14,18 +15,22 @@ Future<bool> copyToClipboard(String string)async{
   }
 }
 
-//should only work for desktop
+//should only work for desktop 
+//confirmed not working on Android, presumed not working on iOS
 Future<bool> copyWithClippy(String string)async{
-  return await copyWithClipboardManager(string);
-  //return await clippy.write(string);
+  //return await copyWithClipboardManager(string);
+  //TODO: uncomment when ready to release (leave commented for quick debuggin on Android)
+  return await clippy.write(string);
 }
 
 //should only work for mobile
+//confirmed working on Android, presumed workin on iOS
 copyWithClipboardManager(String string)async{
   return await FlutterClipboardManager.copyToClipBoard(string);
 }
 
 //MIGHT work with both (unknwon untested)
+//confirmed working on Android, presumed workin on iOS
 copyWithFlutterClipboardManager(String string)async{
   return await ClipboardManager.copyToClipBoard(string);
 }

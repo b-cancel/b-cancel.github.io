@@ -1,4 +1,5 @@
 //dart
+//TODO: uncomment when ready to release (leave commented for quick debuggin on Android)
 //import 'dart:html' as html; //web only
 
 //flutter
@@ -16,10 +17,12 @@ openLinkHere(BuildContext context, String url) {
     //NOTE: anything using HTML only work on web
     try {
       //try to use function first
+      //TODO: uncomment when ready to release (leave commented for quick debuggin on Android)
       //html.window.location.assign(url);
     } catch (e) {
       try {
         //flat our just set the variable
+        //TODO: uncomment when ready to release (leave commented for quick debuggin on Android)
         //html.window.location.href = url;
       } catch (e) {
         //try other methods
@@ -52,6 +55,7 @@ _launchLink(BuildContext context, String url) async {
     if(isWeb()){
       //NOTE: anything using HTML only work on web
       try{ 
+        //TODO: uncomment when ready to release (leave commented for quick debuggin on Android)
         //html.window.open(url, '');
       }
       catch (e) { 
