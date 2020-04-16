@@ -1,9 +1,11 @@
+//plugins
 //TODO: uncomment when ready to release (leave commented for quick debuggin on Android)
 //import 'package:clippy/browser.dart' as clippy;
-import 'package:portfolio/utils/mySnackBar.dart';
-import 'package:portfolio/utils/platformChecker.dart';
 import 'package:flutter_clipboard_manager/flutter_clipboard_manager.dart';
 import 'package:clipboard_manager/clipboard_manager.dart';
+
+//internal
+import 'package:portfolio/utils/platformChecker.dart';
 
 //report back if it failed
 Future<bool> copyToClipboard(String string)async{

@@ -12,3 +12,13 @@ isWeb(){
   || Platform.isLinux 
   || Platform.isMacOS;
 }
+
+//specific systems
+
+isAndroid(){
+  return Platform.isAndroid;
+}
+
+isiOS(){
+  return Platform.isIOS;
+}

@@ -9,6 +9,23 @@ import 'package:portfolio/utils/mySnackBar.dart';
 import 'package:portfolio/utils/openLink.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+/*
+showSnackBar(
+          context,
+          text: item + " Copied To Clipboard",
+          duration: Duration(minutes: 1),
+          icon: Icons.content_copy,
+        );
+      } else {
+        print("no");
+        showSnackBar(
+          context,
+          text: message,
+          duration: Duration(minutes: 1),
+          icon: Icons.phone,
+        );
+*/
+
 //widget
 class ContactMeBody extends StatelessWidget {
   @override
