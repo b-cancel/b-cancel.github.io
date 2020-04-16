@@ -59,6 +59,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BotToastInit(
       child: MaterialApp(
+        navigatorObservers: [BotToastNavigatorObserver()],
         title: 'Bryan\'s Portfolio',
         theme: ThemeData(
           //dark mode default

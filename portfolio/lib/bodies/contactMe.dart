@@ -15,6 +15,7 @@ import '../utils/copyToClipboard.dart';
 import '../utils/mySnackBar.dart';
 import '../utils/mySnackBar.dart';
 import '../utils/openLink.dart';
+import '../utils/openLink.dart';
 
 /*
 showSnackBar(
@@ -111,29 +112,77 @@ class ContactMeBody extends StatelessWidget {
                 text: "Email",
               ),
               IconTextButton(
-                onPressed: () async {
-                  openWithHtml(context, "https://www.google.com");
+                onPressed: (){
+                  openWithUrlLauncher(
+                    context, 
+                    "https://www.google.com", 
+                    openHere: true,
+                  );
+                },
+                longPressMessage: "open in another tab",
+                onLongPress: (){
+                  openWithUrlLauncher(
+                    context, 
+                    "https://www.google.com", 
+                    openHere: false,
+                  );
                 },
                 icon: FontAwesome.github,
                 text: "Github",
               ),
               IconTextButton(
-                onPressed: () {
-                  openWithHtml(context, "https://www.google.com");
+                onPressed: (){
+                  openWithUrlLauncher(
+                    context, 
+                    "https://www.google.com", 
+                    openHere: true,
+                  );
+                },
+                longPressMessage: "open in another tab",
+                onLongPress: (){
+                  openWithUrlLauncher(
+                    context, 
+                    "https://www.google.com", 
+                    openHere: false,
+                  );
                 },
                 icon: FontAwesome.file_text,
                 text: "Resume",
               ),
               IconTextButton(
-                onPressed: () {
-                  openWithHtml(context, "https://www.google.com");
+                onPressed: (){
+                  openWithUrlLauncher(
+                    context, 
+                    "https://www.google.com", 
+                    openHere: true,
+                  );
+                },
+                longPressMessage: "open in another tab",
+                onLongPress: (){
+                  openWithUrlLauncher(
+                    context, 
+                    "https://www.google.com", 
+                    openHere: false,
+                  );
                 },
                 icon: FontAwesome5Brands.hackerrank,
                 text: "Hacker Rank",
               ),
               IconTextButton(
-                onPressed: () {
-                  openWithHtml(context, "https://www.google.com");
+                onPressed: (){
+                  openWithUrlLauncher(
+                    context, 
+                    "https://www.google.com", 
+                    openHere: true,
+                  );
+                },
+                longPressMessage: "open in another tab",
+                onLongPress: (){
+                  openWithUrlLauncher(
+                    context, 
+                    "https://www.google.com", 
+                    openHere: false,
+                  );
                 },
                 icon: FontAwesome5Brands.linkedin,
                 text: "Linked In",
@@ -250,7 +299,7 @@ class IconTextButton extends StatelessWidget {
 
         //inform the user of the other action
         if(onLongPress != null){
-          showOnLongPressAction(longPressMessage);
+          showOnLongPressAction(context, longPressMessage);
         }
       },
       icon: Icon(
@@ -278,14 +327,17 @@ class IconTextButton extends StatelessWidget {
   }
 }
 
-showOnLongPressAction(String action) {
+showOnLongPressAction(BuildContext context, String action) {
   BotToast.showAttachedWidget(
+    targetContext: context,
+    duration: Duration(seconds: 5),
     attachedBuilder: (_) => Card(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Text(
           "Long Press To"
           + "\n" + action,
+          textAlign: TextAlign.center,
         ),
       ),
     ),

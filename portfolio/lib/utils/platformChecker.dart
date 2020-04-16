@@ -2,23 +2,24 @@ import 'dart:io';
 
 //we pretend fuchsia doesn't exist
 
-isMobile(){
-  return Platform.isAndroid 
-  || Platform.isIOS;
+bool isMobile(){
+  return Platform.isAndroid || Platform.isIOS;
 }
 
-isWeb(){
-  return Platform.isWindows 
-  || Platform.isLinux 
-  || Platform.isMacOS;
+bool isNotMobile(){
+  return (isMobile() == false);
+}
+
+bool isWeb(){
+  return Platform.isWindows || Platform.isLinux || Platform.isMacOS;
 }
 
 //specific systems
 
-isAndroid(){
+bool isAndroid(){
   return Platform.isAndroid;
 }
 
-isiOS(){
+bool isiOS(){
   return Platform.isIOS;
 }

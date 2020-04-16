@@ -41,7 +41,7 @@ Future<bool> actualOpenNonWebUrl(url)async{
 Future<bool> downloadFile(String file)async{
   //flutter web build will automatically 
   //place things into another assets folder
-  if(isWeb()){
+  if(isNotMobile()){
     file = "assets/" + file;
   }
 

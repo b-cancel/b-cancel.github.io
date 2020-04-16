@@ -9,7 +9,7 @@ import 'package:portfolio/utils/platformChecker.dart';
 
 //report back if it failed
 Future<bool> copyToClipboard(String string)async{
-  if(isWeb()){
+  if(isNotMobile()){
     try{
       //will always return null
       await copyWithClippy(string);
