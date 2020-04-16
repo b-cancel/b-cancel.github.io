@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 //plugins
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:platform_detect/platform_detect.dart';
 import 'package:portfolio/utils/conditional.dart';
 import 'package:portfolio/utils/copyToClipboard.dart';
 import 'package:portfolio/utils/mySnackBar.dart';
@@ -54,7 +55,7 @@ class ContactMeBody extends StatelessWidget {
             spacing: 16,
             children: <Widget>[
               IconTextButton(
-                onPressed: () async {
+                onTap: () async {
                   print("Clicked phone");
                   if(await copyToClipboard(number)){
                     print("copied to clipboard");
@@ -73,8 +74,8 @@ class ContactMeBody extends StatelessWidget {
                     );
                   }
                 },
-                longPressMessage: "Message Me",
-                onLongPress: () async{
+                secondaryActionMessage: "Message Me",
+                onSecondaryAction: () async{
                   if (await messageNumber(number) == false) {
                     showSnackBar(
                       context,
@@ -86,7 +87,7 @@ class ContactMeBody extends StatelessWidget {
                 text: "Number",
               ),
               IconTextButton(
-                onPressed: () async {
+                onTap: () async {
                   if(await copyToClipboard(email)){
                     showSnackBar(
                       context,
@@ -102,8 +103,8 @@ class ContactMeBody extends StatelessWidget {
                     );
                   }
                 },
-                longPressMessage: "Email Me",
-                onLongPress: ()async{
+                secondaryActionMessage: "Email Me",
+                onSecondaryAction: ()async{
                   if (await sendEmail(email) == false) {
                     showSnackBar(
                       context,
@@ -115,15 +116,15 @@ class ContactMeBody extends StatelessWidget {
                 text: "Email",
               ),
               IconTextButton(
-                onPressed: (){
+                onTap: (){
                   openWithHtml(
                     context, 
                     "https://www.google.com", 
                     openHere: true,
                   );
                 },
-                longPressMessage: "open in another tab",
-                onLongPress: (){
+                secondaryActionMessage: "open in another tab",
+                onSecondaryAction: (){
                   openWithHtml(
                     context, 
                     "https://www.google.com", 
@@ -134,15 +135,15 @@ class ContactMeBody extends StatelessWidget {
                 text: "Github",
               ),
               IconTextButton(
-                onPressed: (){
+                onTap: (){
                   openWithHtml(
                     context, 
                     "https://www.google.com", 
                     openHere: true,
                   );
                 },
-                longPressMessage: "open in another tab",
-                onLongPress: (){
+                secondaryActionMessage: "open in another tab",
+                onSecondaryAction: (){
                   openWithHtml(
                     context, 
                     "https://www.google.com", 
@@ -153,15 +154,15 @@ class ContactMeBody extends StatelessWidget {
                 text: "Resume",
               ),
               IconTextButton(
-                onPressed: (){
+                onTap: (){
                   openWithHtml(
                     context, 
                     "https://www.google.com", 
                     openHere: true,
                   );
                 },
-                longPressMessage: "open in another tab",
-                onLongPress: (){
+                secondaryActionMessage: "open in another tab",
+                onSecondaryAction: (){
                   openWithHtml(
                     context, 
                     "https://www.google.com", 
@@ -172,15 +173,15 @@ class ContactMeBody extends StatelessWidget {
                 text: "Hacker Rank",
               ),
               IconTextButton(
-                onPressed: (){
+                onTap: (){
                   openWithHtml(
                     context, 
                     "https://www.google.com", 
                     openHere: true,
                   );
                 },
-                longPressMessage: "open in another tab",
-                onLongPress: (){
+                secondaryActionMessage: "open in another tab",
+                onSecondaryAction: (){
                   openWithHtml(
                     context, 
                     "https://www.google.com", 
@@ -279,16 +280,16 @@ class ContactMeBody extends StatelessWidget {
 class IconTextButton extends StatelessWidget {
   const IconTextButton({
     Key key,
-    @required this.onPressed,
-    this.onLongPress,
-    this.longPressMessage,
+    @required this.onTap,
+    this.onSecondaryAction,
+    this.secondaryActionMessage,
     @required this.icon,
     @required this.text,
   }) : super(key: key);
 
-  final Function onPressed;
-  final Function onLongPress;
-  final String longPressMessage;
+  final Function onTap;
+  final Function onSecondaryAction;
+  final String secondaryActionMessage;
   final IconData icon;
   final String text;
 
@@ -303,17 +304,28 @@ class IconTextButton extends StatelessWidget {
             color: Colors.transparent,
             child: InkWell(
               onTap: (){
-                onPressed();
-              },
-              onHover: (h){
-                if(onLongPress != null){
-                  showOnLongPressAction(
+                onTap();
+                //for mobile
+                if(onSecondaryAction != null){
+                  showOnSecondaryAction(
                     context, 
-                    longPressMessage,
+                    secondaryActionMessage,
                   );
                 }
               },
-              onLongPress: onLongPress,
+              onHover: (h){
+                //for desktop
+                if(onSecondaryAction != null){
+                  showOnSecondaryAction(
+                    context, 
+                    secondaryActionMessage,
+                  );
+                }
+              },
+              //safari doesn't seems to allow holding
+              onDoubleTap: browser.isSafari ? onSecondaryAction : null,
+              onLongPress: browser.isSafari ? null : onSecondaryAction,
+              //widget
               child: Padding(
                 padding: EdgeInsets.all(12.0),
                 child: Icon(
@@ -329,7 +341,7 @@ class IconTextButton extends StatelessWidget {
   }
 }
 
-showOnLongPressAction(BuildContext context, String action) {
+showOnSecondaryAction(BuildContext context, String action) {
   BotToast.showAttachedWidget(
     targetContext: context,
     duration: Duration(seconds: 5),
@@ -338,7 +350,7 @@ showOnLongPressAction(BuildContext context, String action) {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Text(
-          "Long Press To"
+          (browser.isSafari ? "Double Tap To" : "Long Hold To")
           + "\n" + action,
           textAlign: TextAlign.center,
         ),

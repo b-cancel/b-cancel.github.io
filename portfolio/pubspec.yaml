@@ -34,6 +34,7 @@ dependencies:
   flutter_icons: ^1.0.0+1
   google_fonts: ^0.4.3
   url_launcher: ^5.4.2
+  platform_detect: ^1.4.0
 
   #toast like
   bot_toast: ^2.4.0
