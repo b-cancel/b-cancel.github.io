@@ -2,11 +2,10 @@
 import 'package:flutter/material.dart';
 
 //plugins
-import 'package:flutter_clipboard_manager/flutter_clipboard_manager.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:portfolio/utils/conditional.dart';
-import 'package:portfolio/utils/copyAndLaunch.dart';
 import 'package:portfolio/utils/mySnackBar.dart';
+import 'package:portfolio/utils/openLink.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 //widget
@@ -26,7 +25,7 @@ class ContactMeBody extends StatelessWidget {
             children: <Widget>[
               IconTextButton(
                 onPressed: (){
-                  launchLink(context, 0);
+                  openHere(context, "https://www.google.com");
                   /*
                   String number = "(956) 777-2692";
                   copyItem(
@@ -45,7 +44,7 @@ class ContactMeBody extends StatelessWidget {
               ),
               IconTextButton(
                 onPressed: () {
-                  launchLink(context, 1);
+                  openHere(context, "https://www.google.com");
                   /*
                   String email = "bryan.o.cancel@gmail.com";
                   copyItem(
@@ -64,28 +63,28 @@ class ContactMeBody extends StatelessWidget {
               ),
               IconTextButton(
                 onPressed: () {
-                  launchLink(context, 2);
+                  openHere(context, "https://www.google.com");
                 },
                 icon: FontAwesome.github,
                 text: "Github",
               ),
               IconTextButton(
                 onPressed: () {
-                  launchLink(context, 3);
+                  openHere(context, "https://www.google.com");
                 },
                 icon: FontAwesome.file_text,
                 text: "Resume",
               ),
               IconTextButton(
                 onPressed: () {
-                  launchLink(context, 4);
+                  openHere(context, "https://www.google.com");
                 },
                 icon: FontAwesome5Brands.hackerrank,
                 text: "Hacker Rank",
               ),
               IconTextButton(
                 onPressed: () {
-                  launchLink(context, 5);
+                  openHere(context, "https://www.google.com");
                 },
                 icon: FontAwesome5Brands.linkedin,
                 text: "Linked In",
