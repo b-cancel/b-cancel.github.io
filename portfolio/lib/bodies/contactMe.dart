@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 //plugins
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:portfolio/utils/conditional.dart';
+import 'package:portfolio/utils/copyToClipboard.dart';
 import 'package:portfolio/utils/mySnackBar.dart';
 import 'package:portfolio/utils/openLink.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -25,7 +26,8 @@ class ContactMeBody extends StatelessWidget {
             children: <Widget>[
               IconTextButton(
                 onPressed: (){
-                  openHere(context, "https://www.google.com");
+                  copyWithClippy("clippy one");
+                  //openLinkHere(context, "https://www.google.com");
                   /*
                   String number = "(956) 777-2692";
                   copyItem(
@@ -44,7 +46,8 @@ class ContactMeBody extends StatelessWidget {
               ),
               IconTextButton(
                 onPressed: () {
-                  openHere(context, "https://www.google.com");
+                  copyWithClipboardManager("CM one");
+                  //openLinkHere(context, "https://www.google.com");
                   /*
                   String email = "bryan.o.cancel@gmail.com";
                   copyItem(
@@ -63,28 +66,32 @@ class ContactMeBody extends StatelessWidget {
               ),
               IconTextButton(
                 onPressed: () {
-                  openHere(context, "https://www.google.com");
+                  copyWithFlutterClipboardManager("FCM one");
+                  //openLinkHere(context, "https://www.google.com");
                 },
                 icon: FontAwesome.github,
                 text: "Github",
               ),
               IconTextButton(
                 onPressed: () {
-                  openHere(context, "https://www.google.com");
+                  copyWithClippy("clippy two");
+                  //openLinkHere(context, "https://www.google.com");
                 },
                 icon: FontAwesome.file_text,
                 text: "Resume",
               ),
               IconTextButton(
                 onPressed: () {
-                  openHere(context, "https://www.google.com");
+                  copyWithClipboardManager("CM two");
+                  //openLinkHere(context, "https://www.google.com");
                 },
                 icon: FontAwesome5Brands.hackerrank,
                 text: "Hacker Rank",
               ),
               IconTextButton(
                 onPressed: () {
-                  openHere(context, "https://www.google.com");
+                  copyWithFlutterClipboardManager("CM three");
+                  //openLinkHere(context, "https://www.google.com");
                 },
                 icon: FontAwesome5Brands.linkedin,
                 text: "Linked In",

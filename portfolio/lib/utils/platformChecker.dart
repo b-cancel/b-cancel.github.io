@@ -1,17 +1,14 @@
 import 'dart:io';
 
-//we assume fuchsia is both mobile and web
-//NOTE: this will probably cause things to break
+//we pretend fuchsia doesn't exist
 
 isMobile(){
   return Platform.isAndroid 
-  || Platform.isIOS
-  || Platform.isFuchsia;
+  || Platform.isIOS;
 }
 
 isWeb(){
   return Platform.isWindows 
   || Platform.isLinux 
-  || Platform.isMacOS 
-  || Platform.isFuchsia;
+  || Platform.isMacOS;
 }

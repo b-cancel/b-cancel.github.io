@@ -1,5 +1,5 @@
 //dart
-import 'dart:html' as html; //web only
+//import 'dart:html' as html; //web only
 
 //flutter
 import 'package:flutter/material.dart';
@@ -9,37 +9,62 @@ import 'package:url_launcher/url_launcher.dart';
 
 //internal
 import 'package:portfolio/utils/platformChecker.dart';
-import 'package:portfolio/utils/mySnackBar.dart';
 
 //opens in this window
-openHere(BuildContext context, String url){
-  //html is only for web
-  if(isWeb()){
-    html.window.location.href = url;
-    //alt: html.window.location.assign(url);
-  }
-  else{
+openLinkHere(BuildContext context, String url) {
+  if (isWeb()) {
+    //NOTE: anything using HTML only work on web
+    try {
+      //try to use function first
+      //html.window.location.assign(url);
+    } catch (e) {
+      try {
+        //flat our just set the variable
+        //html.window.location.href = url;
+      } catch (e) {
+        //try other methods
+        openInNewTab(context, url);
+      }
+    }
+  } else {
+    //you can't open a link in the app if you are not a web browser
+    //NOTE: maybe if you use webviews but I'm not going to use them
     openInNewTab(context, url);
   }
 }
 
 //open in another window
 openInNewTab(BuildContext context, String url) async {
+  //try to properly check if we can launch first
+  if (await canLaunch(url)) {
+    _launchLink(context, url);
+  } else {
+    //don't check if it can launch just do it
+    _launchLink(context, url);
+  }
+}
+
+//launch it with url launcher in try catch
+_launchLink(BuildContext context, String url) async {
   try {
     await launch(url);
-  } catch(e) {
-    showSnackBar(context, text: "LAUNCH failed");
+  } catch (e) {
+    if(isWeb()){
+      //NOTE: anything using HTML only work on web
+      try{ 
+        //html.window.open(url, '');
+      }
+      catch (e) { 
+        copyLinkToClipboard(context, url);
+      }
+    }
+    copyLinkToClipboard(context, url);
   }
+}
 
-  //Alternatives-------------------------
-  //1. only for web
-  //html.window.open(url, "linkName");
-  //2. for both
-  /*
-  if (await canLaunch(url)) {
-    await launch(url);
-  } else {
-    showSnackBar(context, text: "CAN LAUNCH failed");
-  }
-  */
+//if all the launching methods failed 
+//atleast try to copy the link to the clipboard
+//and notify the user
+copyLinkToClipboard(BuildContext context, String url) {
+
 }
