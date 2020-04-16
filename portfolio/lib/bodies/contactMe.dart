@@ -26,8 +26,10 @@ class ContactMeBody extends StatelessWidget {
             children: <Widget>[
               IconTextButton(
                 onPressed: ()async{
-                  bool worked = await copyWithClippy("clippy one");
-                  showSnackBar(context,text: "clip worked? " + worked.toString());
+                  var worked = await copyWithClippy("clippy one");
+                  String type = worked.runtimeType.toString();
+                  String str = worked.toString();
+                  showSnackBar(context,text: "clip worked? " + type + " & " + str);
                   //openLinkHere(context, "https://www.google.com");
                   /*
                   String number = "(956) 777-2692";
@@ -49,7 +51,9 @@ class ContactMeBody extends StatelessWidget {
                 onPressed: () async{
                   
                   bool worked = await copyWithClipboardManager("CM one");
-                  showSnackBar(context,text: "clip worked? " + worked.toString());
+                  String type = worked.runtimeType.toString();
+                  String str = worked.toString();
+                  showSnackBar(context,text: "clip worked? " + type + " & " + str);
                   //openLinkHere(context, "https://www.google.com");
                   /*
                   String email = "bryan.o.cancel@gmail.com";
@@ -70,7 +74,9 @@ class ContactMeBody extends StatelessWidget {
               IconTextButton(
                 onPressed: () async{
                   bool worked = await copyWithFlutterClipboardManager("FCM one");
-                  showSnackBar(context,text: "clip worked? " + worked.toString());
+                  String type = worked.runtimeType.toString();
+                  String str = worked.toString();
+                  showSnackBar(context,text: "clip worked? " + type + " & " + str);
                   //openLinkHere(context, "https://www.google.com");
                 },
                 icon: FontAwesome.github,

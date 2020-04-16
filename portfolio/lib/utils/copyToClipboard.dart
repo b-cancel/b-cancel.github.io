@@ -17,6 +17,7 @@ Future<bool> copyToClipboard(String string)async{
 
 //should only work for desktop 
 //confirmed not working on Android, presumed not working on iOS
+//worked on windows (but returned null with type NULL instead of true)
 Future<bool> copyWithClippy(String string)async{
   //return await copyWithClipboardManager(string);
   //TODO: uncomment when ready to release (leave commented for quick debuggin on Android)
@@ -25,12 +26,14 @@ Future<bool> copyWithClippy(String string)async{
 
 //should only work for mobile
 //confirmed working on Android, presumed workin on iOS
+//did not work on windows, presume only mobile as indicated
 copyWithClipboardManager(String string)async{
   return await FlutterClipboardManager.copyToClipBoard(string);
 }
 
 //MIGHT work with both (unknwon untested)
 //confirmed working on Android, presumed workin on iOS
+//did not work on windows, presume only mobile
 copyWithFlutterClipboardManager(String string)async{
   return await ClipboardManager.copyToClipBoard(string);
 }
