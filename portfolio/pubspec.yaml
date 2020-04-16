@@ -34,7 +34,10 @@ dependencies:
   flutter_icons: ^1.0.0+1
   google_fonts: ^0.4.3
   url_launcher: ^5.4.2
+
+  #toast like
   bot_toast: ^2.4.0
+  toast: ^0.1.5
 
   # clipboard
   #TODO: uncomment when ready to release (leave commented for quick debuggin on Android)

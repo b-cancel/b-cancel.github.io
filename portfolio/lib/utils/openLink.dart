@@ -1,6 +1,6 @@
 //dart
 //TODO: uncomment when ready to release (leave commented for quick debuggin on Android)
-//import 'dart:html' as html; //web only
+import 'dart:html' as html; //web only
 
 //flutter
 import 'package:flutter/material.dart';
@@ -23,12 +23,12 @@ openWithHtml(BuildContext context, String url, {bool openHere}) {
       try {
         //try to use function first
         //TODO: uncomment when ready to release (leave commented for quick debuggin on Android)
-        //html.window.location.assign(url);
+        html.window.location.assign(url);
       } catch (e) {
         try {
           //flat out just set the variable
           //TODO: uncomment when ready to release (leave commented for quick debuggin on Android)
-          //html.window.location.href = url;
+          html.window.location.href = url;
         } catch (e) {
           //try other methods
           openWithUrlLauncher(context, url, openHere: openHere);
@@ -38,7 +38,7 @@ openWithHtml(BuildContext context, String url, {bool openHere}) {
       //NOTE: anything using HTML only work on web
       try {
         //TODO: uncomment when ready to release (leave commented for quick debuggin on Android)
-        //html.window.open(url, '');
+        html.window.open(url, '');
       } catch (e) {
         //try other methods
         openWithUrlLauncher(context, url, openHere: openHere);
@@ -64,13 +64,11 @@ openWithUrlLauncher(BuildContext context, String url, {bool openHere}) async {
 //launch it with url launcher in try catch
 _launchLink(BuildContext context, String url, {bool openHere}) async {
   if (isWeb()) {
-    print("Web");
     _launchRawLink(context, url);
   }
   else{
     if(isAndroid()){
       try{
-        print("android");
         await launch(
           url,
           forceWebView: openHere,
@@ -85,7 +83,6 @@ _launchLink(BuildContext context, String url, {bool openHere}) async {
     }
     else if(isiOS()){
       try{
-        print("ios");
         await launch(
           url,
           forceSafariVC: openHere,
@@ -104,7 +101,6 @@ _launchLink(BuildContext context, String url, {bool openHere}) async {
 }
 
 _launchRawLink(BuildContext context, String url) async {
-  print("web or first one failed");
   try {
     await launch(
       url,

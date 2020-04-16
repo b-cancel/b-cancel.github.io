@@ -55,7 +55,9 @@ class ContactMeBody extends StatelessWidget {
             children: <Widget>[
               IconTextButton(
                 onPressed: () async {
+                  print("Clicked phone");
                   if(await copyToClipboard(number)){
+                    print("copied to clipboard");
                     showSnackBar(
                       context,
                       text: number + " Copied To Clipboard",
@@ -63,6 +65,7 @@ class ContactMeBody extends StatelessWidget {
                     );
                   }
                   else{
+                    print("could copy");
                     showSnackBar(
                       context,
                       text: "Use " + number + " to Call or Text Me",
@@ -113,7 +116,7 @@ class ContactMeBody extends StatelessWidget {
               ),
               IconTextButton(
                 onPressed: (){
-                  openWithUrlLauncher(
+                  openWithHtml(
                     context, 
                     "https://www.google.com", 
                     openHere: true,
@@ -121,7 +124,7 @@ class ContactMeBody extends StatelessWidget {
                 },
                 longPressMessage: "open in another tab",
                 onLongPress: (){
-                  openWithUrlLauncher(
+                  openWithHtml(
                     context, 
                     "https://www.google.com", 
                     openHere: false,
@@ -132,7 +135,7 @@ class ContactMeBody extends StatelessWidget {
               ),
               IconTextButton(
                 onPressed: (){
-                  openWithUrlLauncher(
+                  openWithHtml(
                     context, 
                     "https://www.google.com", 
                     openHere: true,
@@ -140,7 +143,7 @@ class ContactMeBody extends StatelessWidget {
                 },
                 longPressMessage: "open in another tab",
                 onLongPress: (){
-                  openWithUrlLauncher(
+                  openWithHtml(
                     context, 
                     "https://www.google.com", 
                     openHere: false,
@@ -151,7 +154,7 @@ class ContactMeBody extends StatelessWidget {
               ),
               IconTextButton(
                 onPressed: (){
-                  openWithUrlLauncher(
+                  openWithHtml(
                     context, 
                     "https://www.google.com", 
                     openHere: true,
@@ -159,7 +162,7 @@ class ContactMeBody extends StatelessWidget {
                 },
                 longPressMessage: "open in another tab",
                 onLongPress: (){
-                  openWithUrlLauncher(
+                  openWithHtml(
                     context, 
                     "https://www.google.com", 
                     openHere: false,
@@ -170,7 +173,7 @@ class ContactMeBody extends StatelessWidget {
               ),
               IconTextButton(
                 onPressed: (){
-                  openWithUrlLauncher(
+                  openWithHtml(
                     context, 
                     "https://www.google.com", 
                     openHere: true,
@@ -178,7 +181,7 @@ class ContactMeBody extends StatelessWidget {
                 },
                 longPressMessage: "open in another tab",
                 onLongPress: (){
-                  openWithUrlLauncher(
+                  openWithHtml(
                     context, 
                     "https://www.google.com", 
                     openHere: false,
@@ -291,37 +294,36 @@ class IconTextButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //basic button
-    Widget button = IconButton(
-      onPressed: (){
-        //do whatever action was going to be done
-        onPressed();
-
-        //inform the user of the other action
-        if(onLongPress != null){
-          showOnLongPressAction(context, longPressMessage);
-        }
-      },
-      icon: Icon(
-        icon,
-        size: 36,
-      ),
-    );
-
-    //build
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         Text(text),
-        Ternary(
-          condition: onLongPress == null,
-          isTrue: button,
-          isFalse: GestureDetector(
-            behavior: HitTestBehavior.translucent,
-            onLongPress: () => onLongPress(),
-            child: button,
+        ClipOval(
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              onTap: (){
+                onPressed();
+              },
+              onHover: (h){
+                if(onLongPress != null){
+                  showOnLongPressAction(
+                    context, 
+                    longPressMessage,
+                  );
+                }
+              },
+              onLongPress: onLongPress,
+              child: Padding(
+                padding: EdgeInsets.all(12.0),
+                child: Icon(
+                  icon,
+                  size: 36,
+                ),
+              ),
+            ),
           ),
-        )
+        ),
       ],
     );
   }
@@ -331,6 +333,7 @@ showOnLongPressAction(BuildContext context, String action) {
   BotToast.showAttachedWidget(
     targetContext: context,
     duration: Duration(seconds: 5),
+    onlyOne: true,
     attachedBuilder: (_) => Card(
       child: Padding(
         padding: const EdgeInsets.all(8.0),

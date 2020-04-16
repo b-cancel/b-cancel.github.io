@@ -6,6 +6,8 @@ showSnackBar(BuildContext context, {
   IconData icon,
   Duration duration: const Duration(seconds: 7),
 }) {
+  Scaffold.of(context).removeCurrentSnackBar();
+  
   Scaffold.of(context).showSnackBar(
     SnackBar(
       backgroundColor: MyApp.inactiveTabColor,
@@ -31,6 +33,10 @@ showSnackBar(BuildContext context, {
                   text,
                   style: TextStyle(
                     color: Colors.white,
+                  ),
+                  enableInteractiveSelection: true,
+                  toolbarOptions: ToolbarOptions(
+                    copy: true,
                   ),
                 ),
               ),
