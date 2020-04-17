@@ -41,7 +41,6 @@ dependencies:
   toast: ^0.1.5
 
   # clipboard
-  #TODO: uncomment when ready to release (leave commented for quick debuggin on Android)
   clippy: ^1.0.0
   flutter_clipboard_manager: ^0.0.2
   clipboard_manager: ^0.0.4

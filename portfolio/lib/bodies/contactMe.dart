@@ -5,35 +5,14 @@ import 'package:flutter/material.dart';
 //plugins
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:platform_detect/platform_detect.dart';
-import 'package:portfolio/utils/conditional.dart';
 import 'package:portfolio/utils/copyToClipboard.dart';
 import 'package:portfolio/utils/mySnackBar.dart';
 import 'package:portfolio/utils/nonWebLink.dart';
 import 'package:portfolio/utils/openLink.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../utils/copyToClipboard.dart';
 import '../utils/mySnackBar.dart';
-import '../utils/mySnackBar.dart';
 import '../utils/openLink.dart';
-import '../utils/openLink.dart';
-
-/*
-showSnackBar(
-          context,
-          text: item + " Copied To Clipboard",
-          duration: Duration(minutes: 1),
-          icon: Icons.content_copy,
-        );
-      } else {
-        print("no");
-        showSnackBar(
-          context,
-          text: message,
-          duration: Duration(minutes: 1),
-          icon: Icons.phone,
-        );
-*/
 
 //widget
 class ContactMeBody extends StatelessWidget {
@@ -45,151 +24,164 @@ class ContactMeBody extends StatelessWidget {
     //build
     return Padding(
       padding: EdgeInsets.only(
-        right: 34, //padding that fully centers items
+        //left bracket, line, right bracket, ???
+        right: 16.0 + 4 + 24 + 8, //padding that fully centers items
       ),
       child: Column(
         children: <Widget>[
-          Wrap(
-            alignment: WrapAlignment.center,
-            runSpacing: 8,
-            spacing: 16,
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              IconTextButton(
-                onTap: () async {
-                  print("Clicked phone");
-                  if(await copyToClipboard(number)){
-                    print("copied to clipboard");
-                    showSnackBar(
-                      context,
-                      text: number + " Copied To Clipboard",
-                      icon: Icons.content_copy,
-                    );
-                  }
-                  else{
-                    print("could copy");
-                    showSnackBar(
-                      context,
-                      text: "Use " + number + " to Call or Text Me",
-                      icon: Icons.phone,
-                    );
-                  }
-                },
-                secondaryActionMessage: "Message Me",
-                onSecondaryAction: () async{
-                  if (await messageNumber(number) == false) {
-                    showSnackBar(
-                      context,
-                      text: "Unable To Message Number",
-                    );
-                  }
-                },
-                icon: Icons.phone,
-                text: "Number",
-              ),
-              IconTextButton(
-                onTap: () async {
-                  if(await copyToClipboard(email)){
-                    showSnackBar(
-                      context,
-                      text: email + " Copied To Clipboard",
-                      icon: Icons.content_copy,
-                    );
-                  }
-                  else{
-                    showSnackBar(
-                      context,
-                      text: "Use " + email + " to Email Me",
-                      icon: Icons.email,
-                    );
-                  }
-                },
-                secondaryActionMessage: "Email Me",
-                onSecondaryAction: ()async{
-                  if (await sendEmail(email) == false) {
-                    showSnackBar(
-                      context,
-                      text: "Unable To Send Email",
-                    );
-                  }
-                },
-                icon: Icons.email,
-                text: "Email",
-              ),
-              IconTextButton(
-                onTap: (){
-                  openWithHtml(
-                    context, 
-                    "https://www.google.com", 
-                    openHere: true,
-                  );
-                },
-                secondaryActionMessage: "open in another tab",
-                onSecondaryAction: (){
-                  openWithHtml(
-                    context, 
-                    "https://www.google.com", 
-                    openHere: false,
-                  );
-                },
-                icon: FontAwesome.github,
-                text: "Github",
-              ),
-              IconTextButton(
-                onTap: (){
-                  openWithHtml(
-                    context, 
-                    "https://www.google.com", 
-                    openHere: true,
-                  );
-                },
-                secondaryActionMessage: "open in another tab",
-                onSecondaryAction: (){
-                  openWithHtml(
-                    context, 
-                    "https://www.google.com", 
-                    openHere: false,
-                  );
-                },
-                icon: FontAwesome.file_text,
-                text: "Resume",
-              ),
-              IconTextButton(
-                onTap: (){
-                  openWithHtml(
-                    context, 
-                    "https://www.google.com", 
-                    openHere: true,
-                  );
-                },
-                secondaryActionMessage: "open in another tab",
-                onSecondaryAction: (){
-                  openWithHtml(
-                    context, 
-                    "https://www.google.com", 
-                    openHere: false,
-                  );
-                },
-                icon: FontAwesome5Brands.hackerrank,
-                text: "Hacker Rank",
-              ),
-              IconTextButton(
-                onTap: (){
-                  openWithHtml(
-                    context, 
-                    "https://www.google.com", 
-                    openHere: true,
-                  );
-                },
-                secondaryActionMessage: "open in another tab",
-                onSecondaryAction: (){
-                  openWithHtml(
-                    context, 
-                    "https://www.google.com", 
-                    openHere: false,
-                  );
-                },
-                icon: FontAwesome5Brands.linkedin,
-                text: "Linked In",
+              Wrap(
+                alignment: WrapAlignment.center,
+                runSpacing: 8,
+                spacing: 16,
+                children: <Widget>[
+                  IconTextButton(
+                    email: email,
+                    onTap: () async {
+                      print("Clicked phone");
+                      if(await copyToClipboard(number)){
+                        print("copied to clipboard");
+                        showSnackBar(
+                          context,
+                          text: number + " Copied To Clipboard",
+                          icon: Icons.content_copy,
+                        );
+                      }
+                      else{
+                        print("could copy");
+                        showSnackBar(
+                          context,
+                          text: "Use " + number + " to Call or Text Me",
+                          icon: Icons.phone,
+                        );
+                      }
+                    },
+                    secondaryActionMessage: "Message Me",
+                    onSecondaryAction: () async{
+                      if (await messageNumber(number) == false) {
+                        showSnackBar(
+                          context,
+                          text: "Unable To Message Number",
+                        );
+                      }
+                    },
+                    icon: Icons.phone,
+                    text: number,
+                  ),
+                  IconTextButton(
+                    email: email,
+                    onTap: () async {
+                      if(await copyToClipboard(email)){
+                        showSnackBar(
+                          context,
+                          text: email + " Copied To Clipboard",
+                          icon: Icons.content_copy,
+                        );
+                      }
+                      else{
+                        showSnackBar(
+                          context,
+                          text: "Use " + email + " to Email Me",
+                          icon: Icons.email,
+                        );
+                      }
+                    },
+                    secondaryActionMessage: "Email Me",
+                    onSecondaryAction: ()async{
+                      if (await sendEmail(email) == false) {
+                        showSnackBar(
+                          context,
+                          text: "Unable To Send Email",
+                        );
+                      }
+                    },
+                    icon: Icons.email,
+                    text: email,
+                  ),
+                  IconTextButton(
+                    email: email,
+                    onTap: (){
+                      openWithHtml(
+                        context, 
+                        "https://www.google.com", 
+                        openHere: true,
+                      );
+                    },
+                    secondaryActionMessage: "open in another tab",
+                    onSecondaryAction: (){
+                      openWithHtml(
+                        context, 
+                        "https://www.google.com", 
+                        openHere: false,
+                      );
+                    },
+                    icon: FontAwesome.github,
+                    text: "Github",
+                  ),
+                  IconTextButton(
+                    email: email,
+                    onTap: (){
+                      openWithHtml(
+                        context, 
+                        "https://www.google.com", 
+                        openHere: true,
+                      );
+                    },
+                    secondaryActionMessage: "open in another tab",
+                    onSecondaryAction: (){
+                      openWithHtml(
+                        context, 
+                        "https://www.google.com", 
+                        openHere: false,
+                      );
+                    },
+                    icon: FontAwesome.file_text,
+                    text: "Resume",
+                  ),
+                  IconTextButton(
+                    email: email,
+                    onTap: (){
+                      openWithHtml(
+                        context, 
+                        "https://www.google.com", 
+                        openHere: true,
+                      );
+                    },
+                    secondaryActionMessage: "open in another tab",
+                    onSecondaryAction: (){
+                      openWithHtml(
+                        context, 
+                        "https://www.google.com", 
+                        openHere: false,
+                      );
+                    },
+                    icon: FontAwesome5Brands.hackerrank,
+                    text: "Hacker Rank",
+                  ),
+                  IconTextButton(
+                    email: email,
+                    onTap: (){
+                      openWithHtml(
+                        context, 
+                        "https://www.google.com", 
+                        openHere: true,
+                      );
+                    },
+                    secondaryActionMessage: "open in another tab",
+                    onSecondaryAction: (){
+                      openWithHtml(
+                        context, 
+                        "https://www.google.com", 
+                        openHere: false,
+                      );
+                    },
+                    icon: FontAwesome5Brands.linkedin,
+                    text: "Linked In",
+                  ),
+                ],
               ),
             ],
           ),
@@ -285,6 +277,7 @@ class IconTextButton extends StatelessWidget {
     this.secondaryActionMessage,
     @required this.icon,
     @required this.text,
+    @required this.email,
   }) : super(key: key);
 
   final Function onTap;
@@ -292,55 +285,76 @@ class IconTextButton extends StatelessWidget {
   final String secondaryActionMessage;
   final IconData icon;
   final String text;
+  //has the most width out of all of them
+  //so to create equal spacing
+  final String email;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
+    return Stack(
+      alignment: Alignment.center,
       children: <Widget>[
-        Text(text),
-        ClipOval(
-          child: Material(
-            color: Colors.transparent,
-            child: InkWell(
-              onTap: (){
-                onTap();
-                //for mobile
-                if(onSecondaryAction != null){
-                  showOnSecondaryAction(
-                    context, 
-                    secondaryActionMessage,
-                  );
-                }
-              },
-              onHover: (h){
-                //for desktop
-                if(onSecondaryAction != null){
-                  showOnSecondaryAction(
-                    context, 
-                    secondaryActionMessage,
-                  );
-                }
-              },
-              //safari doesn't seems to allow holding
-              onDoubleTap: browser.isSafari ? onSecondaryAction : null,
-              onLongPress: browser.isSafari ? null : onSecondaryAction,
-              //widget
-              child: Padding(
-                padding: EdgeInsets.all(12.0),
-                child: Icon(
-                  icon,
-                  size: 36,
+        Opacity(
+          opacity: 0,
+          child: Text(email),
+        ),
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            SelectableText(
+              text,
+              enableInteractiveSelection: true,
+              toolbarOptions: ToolbarOptions(
+                //not cut or paste
+                selectAll: true,
+                copy: true,
+              ),
+            ),
+            ClipOval(
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  onTap: (){
+                    onTap();
+                    //for mobile
+                    if(onSecondaryAction != null){
+                      showOnSecondaryAction(
+                        context, 
+                        secondaryActionMessage,
+                      );
+                    }
+                  },
+                  onHover: (h){
+                    //for desktop
+                    if(onSecondaryAction != null){
+                      showOnSecondaryAction(
+                        context, 
+                        secondaryActionMessage,
+                      );
+                    }
+                  },
+                  //safari doesn't seems to allow holding
+                  onDoubleTap: browser.isSafari ? onSecondaryAction : null,
+                  onLongPress: browser.isSafari ? null : onSecondaryAction,
+                  //widget
+                  child: Padding(
+                    padding: EdgeInsets.all(12.0),
+                    child: Icon(
+                      icon,
+                      size: 36,
+                    ),
+                  ),
                 ),
               ),
             ),
-          ),
+          ],
         ),
       ],
     );
   }
 }
 
+//TODO: make it disapear immediately when scroll
 showOnSecondaryAction(BuildContext context, String action) {
   BotToast.showAttachedWidget(
     targetContext: context,

@@ -135,7 +135,7 @@ class _HomeState extends State<Home> {
         title: "About Me",
         body: AboutMeBody(),
         initiallyOpened: true,
-        horizontalSpacing: true,
+        leftSpacing: true,
       ),
       SliverSection(
         title: "Hard Skills",
@@ -144,7 +144,7 @@ class _HomeState extends State<Home> {
       SliverSection(
         title: "Soft Skills",
         body: SoftSkillsBody(),
-        horizontalSpacing: true,
+        leftSpacing: true,
       ),
       SliverSection(
         title: "Work Experience",
@@ -162,7 +162,7 @@ class _HomeState extends State<Home> {
         title: "Contact Me",
         body: ContactMeBody(),
         initiallyOpened: true,
-        horizontalSpacing: true,
+        leftSpacing: true,
       ),
       SliverToBoxAdapter(
         child: Padding(

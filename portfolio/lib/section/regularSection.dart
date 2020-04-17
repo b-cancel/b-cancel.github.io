@@ -50,7 +50,7 @@ class _RegularSectionState extends State<RegularSection> {
         SectionBody(
           sectionOpened: sectionOpened,
           child: widget.body,
-          horizontalSpacing: widget.horizontalSpacing,
+          leftSpacing: widget.horizontalSpacing,
         ),
       ],
     );

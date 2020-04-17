@@ -1,5 +1,4 @@
 //dart
-//TODO: uncomment when ready to release (leave commented for quick debuggin on Android)
 import 'dart:html' as html; //web only
 
 //flutter
@@ -22,12 +21,10 @@ openWithHtml(BuildContext context, String url, {bool openHere}) {
     if (openHere) {
       try {
         //try to use function first
-        //TODO: uncomment when ready to release (leave commented for quick debuggin on Android)
         html.window.location.assign(url);
       } catch (e) {
         try {
           //flat out just set the variable
-          //TODO: uncomment when ready to release (leave commented for quick debuggin on Android)
           html.window.location.href = url;
         } catch (e) {
           //try other methods
@@ -37,7 +34,6 @@ openWithHtml(BuildContext context, String url, {bool openHere}) {
     } else {
       //NOTE: anything using HTML only work on web
       try {
-        //TODO: uncomment when ready to release (leave commented for quick debuggin on Android)
         html.window.open(url, '');
       } catch (e) {
         //try other methods

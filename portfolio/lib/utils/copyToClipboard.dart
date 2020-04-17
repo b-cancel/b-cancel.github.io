@@ -1,5 +1,4 @@
 //plugins
-//TODO: uncomment when ready to release (leave commented for quick debuggin on Android)
 import 'package:clippy/browser.dart' as clippy;
 import 'package:flutter_clipboard_manager/flutter_clipboard_manager.dart';
 import 'package:clipboard_manager/clipboard_manager.dart';
@@ -36,8 +35,6 @@ Future<bool> copyToClipboard(String string)async{
 //worked on windows (but returned null with type NULL instead of true)
 Future<bool> copyWithClippy(String string)async{
   try{
-    //return await copyWithFlutterClipboardManager(string);
-    //TODO: uncomment when ready to release (leave commented for quick debuggin on Android)
     return await clippy.write(string);
   } catch (e) {
     return false;
