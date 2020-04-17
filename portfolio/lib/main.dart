@@ -79,6 +79,9 @@ class MyApp extends StatelessWidget {
         navigatorObservers: [BotToastNavigatorObserver()],
         title: 'Bryan\'s Portfolio',
         theme: ThemeData(
+          //text selection
+          textSelectionColor: Colors.blue,
+          textSelectionHandleColor: Colors.blue,
           //dark mode default
           brightness: Brightness.dark,
           //none of that ugly green
@@ -118,8 +121,12 @@ class _HomeState extends State<Home> {
     //Determine whether we are on the top of the scroll area
     if (curr <= position.minScrollExtent) {
       onTop.value = true;
-    } else
+    } else{
       onTop.value = false;
+    }
+    
+    //remove toast when pop up
+    BotToast.cleanAll();
   }
 
   //init
@@ -159,6 +166,7 @@ class _HomeState extends State<Home> {
         initiallyOpened: true,
         leftSpacing: true,
       ),
+      /*
       SliverRegion(
         title: "Hard Skills",
         body: HardSkillsBody(),
@@ -176,9 +184,11 @@ class _HomeState extends State<Home> {
         title: "Projects",
         body: ProjectsBody(),
       ),
+      */
       SliverRegion(
-        title: "Endorsements",
-        body: EndorsementsBody(),
+        title: "References",
+        body: ReferencesBody(),
+        initiallyOpened: true,
       ),
       SliverRegion(
         title: "Contact Me",
@@ -190,31 +200,35 @@ class _HomeState extends State<Home> {
         child: Padding(
           padding: EdgeInsets.only(
             top: 16.0,
+            //section sliver padding
+            left: 22 + 4.0 + 24,
           ),
-          child: DefaultTextStyle(
-            style: TextStyle(
-              fontSize: 12,
-              color: Colors.white,
-            ),
-            child: Column(
-              children: <Widget>[
-                Text("All Rights Reserved @ 2020\n"),
-                Text("Inspired By IDEs Everywhere"),
-                Text("Developed And Designed"),
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Text("by "),
-                    Text(
-                      "Bryan Cancel",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
+          child: Center(
+            child: DefaultTextStyle(
+              style: TextStyle(
+                fontSize: 12,
+                color: Colors.white,
+              ),
+              child: Column(
+                children: <Widget>[
+                  Text("All Rights Reserved @ 2020\n"),
+                  Text("Inspired By IDEs Everywhere"),
+                  Text("Developed And Designed"),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Text("by "),
+                      Text(
+                        "Bryan Cancel",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                Text("using Dart/Flutter"),
-              ],
+                    ],
+                  ),
+                  Text("using Dart/Flutter"),
+                ],
+              ),
             ),
           ),
         )
@@ -240,6 +254,8 @@ class _HomeState extends State<Home> {
       backgroundColor: MyApp.bodyColor,
       body: Stack(
         children: <Widget>[
+          //section sliver padding
+          //22 + 4 + 24
           SafeArea(
             child: CustomScrollView(
               controller: scrollController,
@@ -319,20 +335,6 @@ class NameTitle extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-class TestBody extends StatelessWidget {
-  const TestBody({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.red,
-      child: Text("body\n\n\n\n\n\n\n\n\n\n\n\n\n\nend"),
     );
   }
 }

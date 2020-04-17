@@ -53,7 +53,8 @@ class _ScrollToTopButtonState extends State<ScrollToTopButton> {
       visible: keyboardVisible == false,
       child: Positioned(
         bottom: widget.overScroll.value / 2,
-        left: 0,
+        //section sliver padding
+        left: 22 + 4.0 + 24,
         right: 0,
         child: Container(
           alignment: Alignment.bottomCenter,
