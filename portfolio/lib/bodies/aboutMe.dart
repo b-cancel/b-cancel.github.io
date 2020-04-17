@@ -3,78 +3,75 @@ import 'package:flutter/material.dart';
 class AboutMeBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return OrientationBuilder(
-      builder: (BuildContext context, Orientation orientation) {
-        //TODO: get oreintation to effect layout
-        if (true) { //orientation == Orientation.portrait
-          //print("-------------------------portrait");
-          return Column(
+    Size size = MediaQuery.of(context).size;
+    bool isPortrait = size.height > size.width;
+    if (isPortrait) {
+      //print("-------------------------portrait");
+      return Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.all(
-                      16.0,
-                    ),
-                    child: Image.asset(
-                      "assets/face/white.png",
-                      width: 250,
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(
-                      16.0,
-                    ),
-                    child: Image.asset(
-                      "assets/title/small.gif",
-                      width: 350,
-                    ),
-                  ),
-                ],
-              ),
-              Container(
-                child: Flexible(
-                  child: Introduction(),
+              Padding(
+                padding: EdgeInsets.all(
+                  16.0,
                 ),
-              )
-            ],
-          );
-        } else {
-          //print("-------------------------landscape");
-          return Column(
-            children: <Widget>[
-              Row(
-                children: [
-                  Expanded(
-                    child: Introduction(),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(
-                      16.0,
-                    ),
-                    child: Image.asset(
-                      "assets/face/white.png",
-                      width: 250,
-                    ),
-                  ),
-                ],
+                child: Image.asset(
+                  "assets/face/white.png",
+                  width: 250,
+                ),
               ),
               Padding(
                 padding: EdgeInsets.all(
                   16.0,
                 ),
                 child: Image.asset(
-                  "assets/title/large.gif",
+                  "assets/title/small.gif",
                   width: 350,
                 ),
               ),
             ],
-          );
-        }
-      },
-    );
+          ),
+          Container(
+            child: Flexible(
+              child: Introduction(),
+            ),
+          )
+        ],
+      );
+    } else {
+      //print("-------------------------landscape");
+      return Column(
+        children: <Widget>[
+          Row(
+            children: [
+              Padding(
+                padding: EdgeInsets.all(
+                  16.0,
+                ),
+                child: Image.asset(
+                  "assets/face/white.png",
+                  width: 250,
+                ),
+              ),
+              Expanded(
+                child: Introduction(),
+              ),
+            ],
+          ),
+          Padding(
+            padding: EdgeInsets.all(
+              16.0,
+            ),
+            child: Image.asset(
+              "assets/title/large.gif",
+              width: 350,
+            ),
+          ),
+        ],
+      );
+    }
   }
 }
 

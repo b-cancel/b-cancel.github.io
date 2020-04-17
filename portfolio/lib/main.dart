@@ -133,7 +133,12 @@ class _HomeState extends State<Home> {
       ),
       SliverSection(
         title: "About Me",
-        body: AboutMeBody(),
+        body: Padding(
+          padding: EdgeInsets.only(
+            right: 16,
+          ),
+          child: AboutMeBody(),
+        ),
         initiallyOpened: true,
         leftSpacing: true,
       ),
