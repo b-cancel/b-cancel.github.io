@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 //plugin
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:portfolio/section/section.dart';
 
 //internal
 import 'package:portfolio/utils/conditional.dart';
@@ -13,16 +14,16 @@ import 'package:portfolio/utils/toggler.dart';
 class SectionHeader extends StatefulWidget {
   const SectionHeader({
     Key key,
+    @required this.sectionType,
     @required this.sectionOpened,
     @required this.label,
     @required this.title,
-    @required this.titleColor,
   }) : super(key: key);
 
+  final SectionType sectionType;
   final ValueNotifier<bool> sectionOpened;
   final String label;
   final String title;
-  final Color titleColor;
 
   @override
   _SectionHeaderState createState() => _SectionHeaderState();
@@ -70,7 +71,7 @@ class _SectionHeaderState extends State<SectionHeader> {
                   widget.title + " ",
                   style: TextStyle(
                     fontSize: 24,
-                    color: widget.titleColor,
+                    color: sectionTypeToColor[widget.sectionType],
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -88,11 +89,14 @@ class _SectionHeaderState extends State<SectionHeader> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         Text(
-                          "= [",
+                          "= " + sectionTypeToLeft[widget.sectionType],
                         ),
                         Visibility(
                           visible: widget.sectionOpened.value == false,
-                          child: Text("...]")
+                          child: Text(
+                            "..." + 
+                            sectionTypeToRight[widget.sectionType]
+                          )
                         ),
                       ],
                     ),

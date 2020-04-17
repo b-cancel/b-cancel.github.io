@@ -1,30 +1,43 @@
 //flutter
 import 'package:flutter/material.dart';
+import 'package:portfolio/main.dart';
 
 //internal
 import 'package:portfolio/section/sectionBody.dart';
 import 'package:portfolio/section/sectionHeader.dart';
 
-//collection -> highlight pink & "[]"
-//class -> highlight green & "{}"
-//instance -> ??? blue "()"
+enum SectionType {Collection, Class, Function}
+Map<SectionType, String> sectionTypeToLeft = {
+  SectionType.Collection : "[",
+  SectionType.Class : "{",
+  SectionType.Function : "(", 
+};
+Map<SectionType, String> sectionTypeToRight = {
+  SectionType.Collection : "]",
+  SectionType.Class : "}",
+  SectionType.Function : ")", 
+};
+Map<SectionType, Color> sectionTypeToColor = {
+  SectionType.Collection : MyApp.highlightPink,
+  SectionType.Class : MyApp.highlightGreen,
+  SectionType.Function : MyApp.blueText, 
+};
 
 //widget
 class RegularSection extends StatefulWidget {
   RegularSection({
-    @required this.title,
+    @required this.sectionType,
     @required this.label,
-    @required this.titleColor,
-    this.icon,
+    @required this.title,
     @required this.body,
-    this.initiallyOpened: false,
+    this.initiallyOpened: true,
     this.leftSpacing: true,
+
   });
 
-  final String title;
+  final SectionType sectionType;
   final String label;
-  final Color titleColor;
-  final Icon icon;
+  final String title;
   final Widget body;
   final bool initiallyOpened;
   final bool leftSpacing;
@@ -49,12 +62,13 @@ class _RegularSectionState extends State<RegularSection> {
     return Column(
       children: <Widget>[
         SectionHeader(
+          sectionType: widget.sectionType,
           sectionOpened: sectionOpened,
           label: widget.label,
           title: widget.title,
-          titleColor: widget.titleColor
         ),
         SectionBody(
+          sectionType: widget.sectionType,
           sectionOpened: sectionOpened,
           child: widget.body,
           leftSpacing: widget.leftSpacing,

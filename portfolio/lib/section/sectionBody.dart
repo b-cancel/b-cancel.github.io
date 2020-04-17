@@ -3,16 +3,19 @@ import 'package:flutter/material.dart';
 
 //internal
 import 'package:portfolio/main.dart';
+import 'package:portfolio/section/section.dart';
 
 //widget
 class SectionBody extends StatefulWidget {
   const SectionBody({
     Key key,
+    @required this.sectionType,
     @required this.sectionOpened,
     @required this.child,
     @required this.leftSpacing,
   }) : super(key: key);
 
+  final SectionType sectionType;
   final ValueNotifier<bool> sectionOpened;
   final Widget child;
   final bool leftSpacing;
@@ -44,113 +47,93 @@ class _SectionBodyState extends State<SectionBody> {
   Widget build(BuildContext context) {
     return Visibility(
       visible: widget.sectionOpened.value,
-      child: Stack(
-        children: <Widget>[
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.only(
-                  left: 26.0 + (widget.leftSpacing ? 24 : 0),
-                ),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    vertical: 16,
-                  ),
-                  child: widget.child,
-                ),
-              ),
-              EndRegionCloseButton(
-                sectionOpened: widget.sectionOpened,
-              ),
-            ],
-          ),
-          Positioned(
-            left: 0,
-            top: 0,
-            bottom: 0,
-            child: Material(
-              color: MyApp.bodyColor,
-              child: InkWell(
-                onTap: (){
-                  widget.sectionOpened.value = !widget.sectionOpened.value;
-                },
-                child: Container(
-                  margin: EdgeInsets.only(
-                    left: 16.0 + 6,
-                    right: widget.leftSpacing ? 24 : 0,
-                  ),
-                  decoration: BoxDecoration(
-                    border: Border(
-                      left: BorderSide(
-                        width: 4,
-                        color: MyApp.oldGrey,
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            IntrinsicHeight(
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  Material(
+                    color: MyApp.bodyColor,
+                    child: InkWell(
+                      hoverColor: Colors.transparent,
+                      splashColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () {
+                        widget.sectionOpened.value =
+                            !widget.sectionOpened.value;
+                      },
+                      child: Container(
+                        color: sectionTypeToColor[widget.sectionType], 
+                        margin: EdgeInsets.only(
+                          right: widget.leftSpacing ? 22 : 0,
+                        ),
+                        width: 2,
                       ),
                     ),
                   ),
+                  Expanded(
+                    child: Container(
+                      color: Colors.blue,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                              vertical: 16,
+                            ),
+                            child: widget.child,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            EndSectionCloseButton(
+              sectionOpened: widget.sectionOpened,
+              end: Text(
+                sectionTypeToRight[widget.sectionType],
+                style: TextStyle(
+                  color: MyApp.oldGrey,
+                  fontSize: 18,
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 }
 
-class EndRegionCloseButton extends StatelessWidget {
-  const EndRegionCloseButton({
+class EndSectionCloseButton extends StatelessWidget {
+  const EndSectionCloseButton({
     @required this.sectionOpened,
+    @required this.end,
     Key key,
   }) : super(key: key);
 
   final ValueNotifier<bool> sectionOpened;
+  final Widget end;
 
   @override
   Widget build(BuildContext context) {
     return Material(
       color: MyApp.bodyColor,
-      child: GestureDetector(
+      child: InkWell(
+        hoverColor: Colors.transparent,
+        splashColor: Colors.transparent,
+        highlightColor: Colors.transparent,
         onTap: () {
           sectionOpened.value = !sectionOpened.value;
         },
-        child: Padding(
-          padding: EdgeInsets.only(
-            left: 16.0 + 6,
-          ),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: <Widget>[
-              Container(
-                height: 16,
-                width: 16,
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(
-                      color: MyApp.oldGrey,
-                      width: 4,
-                    ),
-                    left: BorderSide(
-                      color: MyApp.oldGrey,
-                      width: 4,
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(
-                  left: 8,
-                ),
-                child: Text(
-                  "#endregion",
-                  style: TextStyle(
-                    color: MyApp.oldGrey,
-                  ),
-                ),
-              )
-            ],
-          ),
-        ),
+        child: end,
       ),
     );
   }

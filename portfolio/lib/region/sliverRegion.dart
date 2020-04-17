@@ -15,14 +15,12 @@ import 'package:portfolio/main.dart';
 class SliverRegion extends StatefulWidget {
   SliverRegion({
     @required this.title,
-    this.icon,
     @required this.body,
     this.initiallyOpened: false,
     this.leftSpacing: true,
   });
 
   final String title;
-  final Icon icon;
   final Widget body;
   final bool initiallyOpened;
   final bool leftSpacing;

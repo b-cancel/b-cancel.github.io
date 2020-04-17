@@ -10,7 +10,6 @@ class RegularRegion extends StatefulWidget {
   RegularRegion({
     @required this.title,
     @required this.titleColor,
-    this.icon,
     @required this.body,
     this.initiallyOpened: false,
     this.leftSpacing: true,
@@ -18,7 +17,6 @@ class RegularRegion extends StatefulWidget {
 
   final String title;
   final Color titleColor;
-  final Icon icon;
   final Widget body;
   final bool initiallyOpened;
   final bool leftSpacing;

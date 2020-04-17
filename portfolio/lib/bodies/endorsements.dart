@@ -8,24 +8,24 @@ class EndorsementsBody extends StatelessWidget {
     return Column(
       children: <Widget>[
         RegularSection(
+          sectionType: SectionType.Collection,
           title: "References",
-          label: "Set",
-          titleColor: MyApp.highlightPink,
+          label: "List",
           body: Container(
             color: Colors.red,
             height: 250,
-            width: MediaQuery.of(context).size.width,
+            width: 500,
           ),
         ),
         RegularSection(
+          sectionType: SectionType.Collection,
           title: "Recommendations",
-          label: "Set",
+          label: "List",
           initiallyOpened: true,
-          titleColor: MyApp.highlightPink,
           body: Container(
             color: Colors.red,
             height: 250,
-            width: MediaQuery.of(context).size.width,
+            width: 500,
           ),
         ),
       ],
