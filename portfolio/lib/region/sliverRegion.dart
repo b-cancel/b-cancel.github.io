@@ -12,8 +12,8 @@ import 'package:portfolio/region/regionHeader.dart';
 import 'package:portfolio/main.dart';
 
 //widget
-class SliverSection extends StatefulWidget {
-  SliverSection({
+class SliverRegion extends StatefulWidget {
+  SliverRegion({
     @required this.title,
     this.icon,
     @required this.body,
@@ -28,10 +28,10 @@ class SliverSection extends StatefulWidget {
   final bool leftSpacing;
 
   @override
-  _SliverSectionState createState() => _SliverSectionState();
+  _SliverRegionState createState() => _SliverRegionState();
 }
 
-class _SliverSectionState extends State<SliverSection> {
+class _SliverRegionState extends State<SliverRegion> {
   ValueNotifier<bool> sectionOpened;
 
   @override
@@ -45,16 +45,16 @@ class _SliverSectionState extends State<SliverSection> {
   @override
   Widget build(BuildContext context) {
     return SliverStickyHeader(
-      header: SectionHeader(
-        sectionOpened: sectionOpened, 
+      header: RegionHeader(
+        regionOpened: sectionOpened, 
         title: widget.title,
         titleColor: MyApp.oldPurple,
       ),
       sliver: SliverList(
         delegate: SliverChildListDelegate(
           [
-            SectionBody(
-              sectionOpened: sectionOpened, 
+            RegionBody(
+              regionOpened: sectionOpened, 
               child: widget.body,
               leftSpacing: widget.leftSpacing,
             ),

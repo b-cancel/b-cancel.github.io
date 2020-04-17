@@ -1,31 +1,29 @@
 //flutter
 import 'package:flutter/material.dart';
 
-//plugin
-import 'package:flutter_icons/flutter_icons.dart';
-
 //internal
 import 'package:portfolio/utils/conditional.dart';
+import 'package:portfolio/utils/toggler.dart';
 import 'package:portfolio/main.dart';
 
 //widget
-class SectionHeader extends StatefulWidget {
-  const SectionHeader({
+class RegionHeader extends StatefulWidget {
+  const RegionHeader({
     Key key,
-    @required this.sectionOpened,
+    @required this.regionOpened,
     @required this.title,
     @required this.titleColor,
   }) : super(key: key);
 
-  final ValueNotifier<bool> sectionOpened;
+  final ValueNotifier<bool> regionOpened;
   final String title;
   final Color titleColor;
 
   @override
-  _SectionHeaderState createState() => _SectionHeaderState();
+  _RegionHeaderState createState() => _RegionHeaderState();
 }
 
-class _SectionHeaderState extends State<SectionHeader> {
+class _RegionHeaderState extends State<RegionHeader> {
   updateState() {
     if (mounted) {
       setState(() {});
@@ -35,12 +33,12 @@ class _SectionHeaderState extends State<SectionHeader> {
   @override
   void initState() {
     super.initState();
-    widget.sectionOpened.addListener(updateState);
+    widget.regionOpened.addListener(updateState);
   }
 
   @override
   void dispose() {
-    widget.sectionOpened.addListener(updateState);
+    widget.regionOpened.addListener(updateState);
     super.dispose();
   }
 
@@ -50,7 +48,7 @@ class _SectionHeaderState extends State<SectionHeader> {
       color: MyApp.bodyColor,
       child: InkWell(
         onTap: () {
-          widget.sectionOpened.value = !widget.sectionOpened.value;
+          widget.regionOpened.value = !widget.regionOpened.value;
         },
         child: Container(
           padding: EdgeInsets.only(
@@ -62,7 +60,7 @@ class _SectionHeaderState extends State<SectionHeader> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 ToggleButton(
-                  sectionOpened: widget.sectionOpened,
+                  sectionOpened: widget.regionOpened,
                 ),
                 Expanded(
                   child: Container(
@@ -70,7 +68,7 @@ class _SectionHeaderState extends State<SectionHeader> {
                       border: Border(
                         bottom: BorderSide(
                           width: 4,
-                          color: widget.sectionOpened.value
+                          color: widget.regionOpened.value
                               ? widget.titleColor
                               : Colors.transparent,
                         ),
@@ -84,7 +82,7 @@ class _SectionHeaderState extends State<SectionHeader> {
                         vertical: 8.0,
                       ),
                       child: Ternary(
-                        condition: widget.sectionOpened.value,
+                        condition: widget.regionOpened.value,
                         isTrue: TitlePortion(
                           title: widget.title,
                           titleColor: widget.titleColor,
@@ -219,50 +217,9 @@ class ToggleButton extends StatelessWidget {
                 ),
               ),
             ),
-            Positioned.fill(
-              child: Stack(
-                children: <Widget>[
-                  Container(
-                    padding: EdgeInsets.only(
-                      top: 12,
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 12.0,
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.only(
-                          bottom: 12.0,
-                        ),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: MyApp.bodyColor,
-                            border: Border.all(
-                              width: 2,
-                              color: MyApp.oldGrey,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            IconButton(
-              icon: sectionOpened.value == false
-                  ? Icon(
-                      Icons.add,
-                      color: MyApp.oldGrey,
-                    )
-                  : Icon(
-                      FontAwesome.minus,
-                      size: 14,
-                      color: MyApp.oldGrey,
-                    ),
-              onPressed: () {
-                sectionOpened.value = !sectionOpened.value;
-              },
+            Toggler(
+              sectionOpened: sectionOpened,
+              useIconButton: true,
             ),
           ],
         ),

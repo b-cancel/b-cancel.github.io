@@ -6,13 +6,13 @@ class HardSkillsBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
-      RegularSection(
+      RegularRegion(
         title: "Formal Education",
         titleColor: MyApp.yellowText,
         body: Column(
           children: <Widget>[
             Text("college stuff"),
-            RegularSection(
+            RegularRegion(
               title: "Coursework",
               titleColor: MyApp.orangeText,
               body: Column(
@@ -26,7 +26,7 @@ class HardSkillsBody extends StatelessWidget {
           ],
         ),
       ),
-      RegularSection(
+      RegularRegion(
         title: "Languages/Frameworks beep boop bap",
         titleColor: MyApp.greenText,
         body: Column(
@@ -35,7 +35,7 @@ class HardSkillsBody extends StatelessWidget {
           ],
         ),
       ),
-      RegularSection(
+      RegularRegion(
         title: "Tools",
         titleColor: MyApp.yellowText,
         body: Column(
@@ -44,7 +44,7 @@ class HardSkillsBody extends StatelessWidget {
           ],
         ),
       ),
-      RegularSection(
+      RegularRegion(
         title: "Certifications",
         titleColor: MyApp.blueText,
         body: Column(

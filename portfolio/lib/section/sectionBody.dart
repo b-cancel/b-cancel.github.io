@@ -5,23 +5,23 @@ import 'package:flutter/material.dart';
 import 'package:portfolio/main.dart';
 
 //widget
-class RegionBody extends StatefulWidget {
-  const RegionBody({
+class SectionBody extends StatefulWidget {
+  const SectionBody({
     Key key,
-    @required this.regionOpened,
+    @required this.sectionOpened,
     @required this.child,
     @required this.leftSpacing,
   }) : super(key: key);
 
-  final ValueNotifier<bool> regionOpened;
+  final ValueNotifier<bool> sectionOpened;
   final Widget child;
   final bool leftSpacing;
 
   @override
-  _RegionBodyState createState() => _RegionBodyState();
+  _SectionBodyState createState() => _SectionBodyState();
 }
 
-class _RegionBodyState extends State<RegionBody> {
+class _SectionBodyState extends State<SectionBody> {
   updateState() {
     if (mounted) {
       setState(() {});
@@ -31,21 +31,40 @@ class _RegionBodyState extends State<RegionBody> {
   @override
   void initState() {
     super.initState();
-    widget.regionOpened.addListener(updateState);
+    widget.sectionOpened.addListener(updateState);
   }
 
   @override
   void dispose() {
-    widget.regionOpened.addListener(updateState);
+    widget.sectionOpened.addListener(updateState);
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Visibility(
-      visible: widget.regionOpened.value,
+      visible: widget.sectionOpened.value,
       child: Stack(
         children: <Widget>[
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(
+                  left: 26.0 + (widget.leftSpacing ? 24 : 0),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                    vertical: 16,
+                  ),
+                  child: widget.child,
+                ),
+              ),
+              EndRegionCloseButton(
+                sectionOpened: widget.sectionOpened,
+              ),
+            ],
+          ),
           Positioned(
             left: 0,
             top: 0,
@@ -53,11 +72,8 @@ class _RegionBodyState extends State<RegionBody> {
             child: Material(
               color: MyApp.bodyColor,
               child: InkWell(
-                hoverColor: Colors.transparent,
-                splashColor: Colors.transparent,
-                highlightColor: Colors.transparent,
                 onTap: (){
-                  widget.regionOpened.value = !widget.regionOpened.value;
+                  widget.sectionOpened.value = !widget.sectionOpened.value;
                 },
                 child: Container(
                   margin: EdgeInsets.only(
@@ -75,25 +91,6 @@ class _RegionBodyState extends State<RegionBody> {
                 ),
               ),
             ),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.only(
-                  left: 26.0 + (widget.leftSpacing ? 24 : 0),
-                ),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    vertical: 16,
-                  ),
-                  child: widget.child,
-                ),
-              ),
-              EndRegionCloseButton(
-                sectionOpened: widget.regionOpened,
-              ),
-            ],
           ),
         ],
       ),
@@ -113,10 +110,7 @@ class EndRegionCloseButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       color: MyApp.bodyColor,
-      child: InkWell(
-        hoverColor: Colors.transparent,
-        splashColor: Colors.transparent,
-        highlightColor: Colors.transparent,
+      child: GestureDetector(
         onTap: () {
           sectionOpened.value = !sectionOpened.value;
         },

@@ -2,13 +2,18 @@
 import 'package:flutter/material.dart';
 
 //internal
-import 'package:portfolio/region/regionBody.dart';
-import 'package:portfolio/region/regionHeader.dart';
+import 'package:portfolio/section/sectionBody.dart';
+import 'package:portfolio/section/sectionHeader.dart';
+
+//collection -> highlight pink & "[]"
+//class -> highlight green & "{}"
+//instance -> ??? blue "()"
 
 //widget
-class RegularRegion extends StatefulWidget {
-  RegularRegion({
+class RegularSection extends StatefulWidget {
+  RegularSection({
     @required this.title,
+    @required this.label,
     @required this.titleColor,
     this.icon,
     @required this.body,
@@ -17,6 +22,7 @@ class RegularRegion extends StatefulWidget {
   });
 
   final String title;
+  final String label;
   final Color titleColor;
   final Icon icon;
   final Widget body;
@@ -24,10 +30,10 @@ class RegularRegion extends StatefulWidget {
   final bool leftSpacing;
 
   @override
-  _RegularRegionState createState() => _RegularRegionState();
+  _RegularSectionState createState() => _RegularSectionState();
 }
 
-class _RegularRegionState extends State<RegularRegion> {
+class _RegularSectionState extends State<RegularSection> {
   ValueNotifier<bool> sectionOpened;
 
   @override
@@ -42,13 +48,14 @@ class _RegularRegionState extends State<RegularRegion> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        RegionHeader(
-          regionOpened: sectionOpened,
+        SectionHeader(
+          sectionOpened: sectionOpened,
+          label: widget.label,
           title: widget.title,
           titleColor: widget.titleColor
         ),
-        RegionBody(
-          regionOpened: sectionOpened,
+        SectionBody(
+          sectionOpened: sectionOpened,
           child: widget.body,
           leftSpacing: widget.leftSpacing,
         ),

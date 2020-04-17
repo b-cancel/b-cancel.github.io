@@ -148,7 +148,7 @@ class _HomeState extends State<Home> {
       SliverToBoxAdapter(
         child: NameTitle(),
       ),
-      SliverSection(
+      SliverRegion(
         title: "About Me",
         body: Padding(
           padding: EdgeInsets.only(
@@ -159,28 +159,28 @@ class _HomeState extends State<Home> {
         initiallyOpened: true,
         leftSpacing: true,
       ),
-      SliverSection(
+      SliverRegion(
         title: "Hard Skills",
         body: HardSkillsBody(),
       ),
-      SliverSection(
+      SliverRegion(
         title: "Soft Skills",
         body: SoftSkillsBody(),
         leftSpacing: true,
       ),
-      SliverSection(
+      SliverRegion(
         title: "Work Experience",
         body: WorkExperienceBody(),
       ),
-      SliverSection(
+      SliverRegion(
         title: "Projects",
         body: ProjectsBody(),
       ),
-      SliverSection(
+      SliverRegion(
         title: "Endorsements",
         body: EndorsementsBody(),
       ),
-      SliverSection(
+      SliverRegion(
         title: "Contact Me",
         body: ContactMeBody(),
         initiallyOpened: true,
