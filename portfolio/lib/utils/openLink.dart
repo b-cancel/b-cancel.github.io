@@ -1,5 +1,5 @@
 //dart
-import 'dart:html' as html; //web only
+import 'package:universal_html/html.dart' as html;
 
 //flutter
 import 'package:flutter/material.dart';

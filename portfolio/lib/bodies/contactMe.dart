@@ -359,7 +359,7 @@ showOnSecondaryAction(BuildContext context, String action) {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Text(
-          (browser.isSafari ? "Double Tap To" : "Long Hold To")
+          (browser.isSafari ? "Double Tap To" : "Long Press To")
           + "\n" + action,
           textAlign: TextAlign.center,
         ),

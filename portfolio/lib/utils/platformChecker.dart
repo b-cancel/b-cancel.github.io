@@ -2,7 +2,7 @@
 import 'package:flutter/foundation.dart' show kIsWeb;
 
 //for platform check
-import 'dart:io';
+import 'package:universal_platform/universal_platform.dart';
 
 //NOTE: platform checking breaks in web so we work with that
 
@@ -17,8 +17,8 @@ bool isMobile(){
     return false;
   }
   else{
-    return Platform.isAndroid 
-    || Platform.isIOS;
+    return UniversalPlatform.isAndroid 
+    || UniversalPlatform.isIOS;
   }
 }
 
@@ -27,9 +27,9 @@ bool isDesktop(){
     return false;
   }
   else {
-    return Platform.isWindows 
-    || Platform.isLinux 
-    || Platform.isMacOS;
+    return UniversalPlatform.isWindows 
+    || UniversalPlatform.isLinux 
+    || UniversalPlatform.isMacOS;
   }
 }
 
@@ -40,7 +40,7 @@ bool isAndroid(){
     return false;
   }
   else {
-    return Platform.isAndroid;
+    return UniversalPlatform.isAndroid;
   }
 }
 
@@ -49,7 +49,7 @@ bool isiOS(){
     return false;
   }
   else {
-    return Platform.isIOS;
+    return UniversalPlatform.isIOS;
   }
 }
 
@@ -60,7 +60,7 @@ bool isWindows(){
     return false;
   }
   else {
-    return Platform.isWindows;
+    return UniversalPlatform.isWindows;
   }
 }
 
@@ -69,7 +69,7 @@ bool isLinux(){
     return false;
   }
   else {
-    return Platform.isLinux;
+    return UniversalPlatform.isLinux;
   }
 }
 
@@ -78,6 +78,6 @@ bool isMac(){
     return false;
   }
   else {
-    return Platform.isMacOS;
+    return UniversalPlatform.isMacOS;
   }
 }
