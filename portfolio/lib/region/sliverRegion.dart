@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_sticky_header/flutter_sticky_header.dart';
 
 //internal
-import 'package:portfolio/section/sectionBody.dart';
-import 'package:portfolio/section/sectionHeader.dart';
+import 'package:portfolio/region/regionBody.dart';
+import 'package:portfolio/region/regionHeader.dart';
 
 //internal
 import 'package:portfolio/main.dart';
@@ -18,7 +18,7 @@ class SliverSection extends StatefulWidget {
     this.icon,
     @required this.body,
     this.initiallyOpened: false,
-    this.leftSpacing: false,
+    this.leftSpacing: true,
   });
 
   final String title;

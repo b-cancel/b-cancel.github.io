@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 //plugins
-import 'package:portfolio/section/sliverSection.dart';
+import 'package:portfolio/region/sliverRegion.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:bot_toast/bot_toast.dart';
 
@@ -53,6 +53,23 @@ class MyApp extends StatelessWidget {
   static Color highlightPink = Color(0xFFB0167A);
   static Color oldPurple = const Color(0xFFAB7FFA);
   static Color oldGrey = Color(0xFF808080);
+  
+  /*region app dev*/
+  int something = 0;
+
+
+
+
+
+  int somethingelse = 1;
+  /*endregion*/
+
+  List idk = [
+    1,2,3,4,
+    5,
+    6,
+    7
+  ];
 
   // This widget is the root of your application.
   @override

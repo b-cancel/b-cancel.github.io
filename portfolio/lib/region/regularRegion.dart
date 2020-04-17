@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 
 //internal
-import 'package:portfolio/section/sectionBody.dart';
-import 'package:portfolio/section/sectionHeader.dart';
+import 'package:portfolio/region/regionBody.dart';
+import 'package:portfolio/region/regionHeader.dart';
 
 //widget
 class RegularSection extends StatefulWidget {
@@ -13,7 +13,7 @@ class RegularSection extends StatefulWidget {
     this.icon,
     @required this.body,
     this.initiallyOpened: false,
-    this.horizontalSpacing: false,
+    this.leftSpacing: true,
   });
 
   final String title;
@@ -21,7 +21,7 @@ class RegularSection extends StatefulWidget {
   final Icon icon;
   final Widget body;
   final bool initiallyOpened;
-  final bool horizontalSpacing;
+  final bool leftSpacing;
 
   @override
   _RegularSectionState createState() => _RegularSectionState();
@@ -50,7 +50,7 @@ class _RegularSectionState extends State<RegularSection> {
         SectionBody(
           sectionOpened: sectionOpened,
           child: widget.body,
-          leftSpacing: widget.horizontalSpacing,
+          leftSpacing: widget.leftSpacing,
         ),
       ],
     );
