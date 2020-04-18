@@ -28,6 +28,16 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  static double h1 = 32;
+  static double h2 = 28;
+  static double h3 = 24;
+  //6 units of differenc between stuff that
+  //should be as header and stuff that shouldn't
+  static double h4 = 18;
+  static double h5 = 14;
+  //tiny shoudn't be any tinier that 12 pt
+  static double h6 = 12;
+
   //link color
   static Color lightLinkColor = highlightGreen;
   static Color darkLinkColor = Color(0xFF1A0DAB);
@@ -108,6 +118,7 @@ class _HomeState extends State<Home> {
     double curr = position.pixels;
     double max = position.maxScrollExtent;
     overScroll.value = (curr < max) ? 0 : curr - max;
+    print("max: " + max.toString());
 
     //Determine whether we are on the top of the scroll area
     if (curr <= position.minScrollExtent) {
@@ -144,10 +155,93 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     List<Widget> sliverSections = [
       SliverToBoxAdapter(
-        child: NameTitle(),
+        child: Container(
+          color: MyApp.inactiveTabColor,
+          child: Transform.translate(
+            offset: Offset(0, 16),
+            child: DefaultTextStyle(
+              style: GoogleFonts.robotoMono(
+                color: Colors.white,
+              ),
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 24,
+                ),
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    top: 0,
+                  ),
+                  child: Wrap(
+                    children: wrappableText(
+                      "O:\\User\\I_AM_",
+                      "\\",
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+      SliverAppBar(
+        pinned: true,
+        backgroundColor: MyApp.inactiveTabColor,
+        title: DefaultTextStyle(
+          style: GoogleFonts.robotoMono(
+            color: Colors.white,
+            fontSize: MyApp.h1,
+          ),
+          child: Transform.translate(
+            offset: Offset(-12, 0),
+            child: Stack(
+              children: <Widget>[
+                Transform.translate(
+                  offset: Offset(3, 0),
+                  child: Text(
+                    " Bryan_Cancel ",
+                    style: TextStyle(
+                      color: MyApp.highlightPink,
+                    ),
+                  ),
+                ),
+                Text(
+                  " Bryan_Cancel ",
+                  style: TextStyle(
+                    color: MyApp.highlightGreen,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+      SliverToBoxAdapter(
+        child: Container(
+          color: MyApp.inactiveTabColor,
+          padding: EdgeInsets.only(
+            bottom: 16,
+          ),
+          child: DefaultTextStyle(
+              style: GoogleFonts.robotoMono(
+                color: Colors.white,
+                height: 1,
+              ),
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 24,
+                ),
+                child: Wrap(
+                  children: wrappableText(
+                    "> echo \"yes... like cancel my order of fries :P\"",
+                    " ",
+                  ),
+                ),
+              ),
+            ),
+        ),
       ),
       SliverRegion(
-        title: "About Me",
+        title: "About Me", //profile icon
         body: Padding(
           padding: EdgeInsets.only(
             right: 16,
@@ -159,70 +253,67 @@ class _HomeState extends State<Home> {
       ),
       /*
       SliverRegion(
-        title: "Hard Skills",
-        body: HardSkillsBody(),
-      ),
-      SliverRegion(
-        title: "Soft Skills",
+        title: "Skills", //tools icon
         body: SoftSkillsBody(),
         leftSpacing: true,
       ),
       SliverRegion(
-        title: "Work Experience",
+        title: "Work Experience", //suit case 
         body: WorkExperienceBody(),
       ),
       SliverRegion(
-        title: "Projects",
+        title: "Projects", //light bulb
         body: ProjectsBody(),
       ),
       */
       SliverRegion(
-        title: "References",
+        title: "References", //thumbs up
         body: ReferencesBody(),
         initiallyOpened: true,
       ),
       SliverRegion(
-        title: "Contact Me",
+        title: "Contact Me", //contact card icon
         body: ContactMeBody(),
         initiallyOpened: true,
         leftSpacing: true,
       ),
       SliverToBoxAdapter(
-          child: Padding(
-        padding: EdgeInsets.only(
-          top: 16.0,
-          //section sliver padding
-          left: 22 + 4.0 + 24,
-        ),
-        child: Center(
-          child: DefaultTextStyle(
-            style: TextStyle(
-              fontSize: 12,
-              color: Colors.white,
-            ),
-            child: Column(
-              children: <Widget>[
-                Text("All Rights Reserved @ 2020\n"),
-                Text("Inspired By IDEs Everywhere"),
-                Text("Developed And Designed"),
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Text("by "),
-                    Text(
-                      "Bryan Cancel",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
+        child: Padding(
+          padding: EdgeInsets.only(
+            top: 16.0,
+            //section sliver padding
+            left: 22 + 4.0 + 24,
+          ),
+          child: Center(
+            child: DefaultTextStyle(
+              style: TextStyle(
+                fontSize: 12,
+                color: Colors.white,
+              ),
+              child: Column(
+                children: <Widget>[
+                  Text("All Rights Reserved @ 2020\n"),
+                  Text("Inspired By IDEs Everywhere"),
+                  Text("Developed And Designed"),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Text("by "),
+                      Text(
+                        "Bryan Cancel",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                Text("using Dart/Flutter"),
-              ],
+                    ],
+                  ),
+                  Text("using Dart/Flutter"),
+                ],
+              ),
             ),
           ),
         ),
-      )),
+      ),
       SliverFillRemaining(
         hasScrollBody: false, //it should be as small as possible
         fillOverscroll: true, //only if above is false
@@ -287,16 +378,13 @@ class _HomeState extends State<Home> {
 }
 
 class NameTitle extends StatelessWidget {
-  const NameTitle({
-    Key key,
-  }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     List<Widget> theText = wrappableText(
       "O:\\User\\I_AM_",
       "\\",
     );
+
     theText.add(
       DefaultTextStyle(
         style: TextStyle(
@@ -324,6 +412,7 @@ class NameTitle extends StatelessWidget {
         ),
       ),
     );
+
     theText.addAll(
       wrappableText(
         "> echo \"yes... like cancel my order of fries :P\"",
@@ -332,27 +421,29 @@ class NameTitle extends StatelessWidget {
     );
 
     //build
-    return Material(
-      color: MyApp.inactiveTabColor,
-      elevation: 4,
-      child: Container(
-        width: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.symmetric(
-          horizontal: 16,
-        ),
-        child: Padding(
-          padding: EdgeInsets.only(
-            top: 8.0,
-            bottom: 16,
+    return Container(
+      child: Material(
+        color: MyApp.inactiveTabColor,
+        elevation: 4,
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          padding: EdgeInsets.symmetric(
+            horizontal: 16,
           ),
-          child: DefaultTextStyle(
-            style: GoogleFonts.robotoMono(
-              fontSize: 12,
-              color: Colors.white,
+          child: Padding(
+            padding: EdgeInsets.only(
+              top: 8.0,
+              bottom: 16,
             ),
-            child: Wrap(
-              crossAxisAlignment: WrapCrossAlignment.end,
-              children: theText,
+            child: DefaultTextStyle(
+              style: GoogleFonts.robotoMono(
+                fontSize: 12,
+                color: Colors.white,
+              ),
+              child: Wrap(
+                crossAxisAlignment: WrapCrossAlignment.end,
+                children: theText,
+              ),
             ),
           ),
         ),

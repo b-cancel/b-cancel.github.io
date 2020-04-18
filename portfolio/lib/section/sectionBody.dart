@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 //internal
 import 'package:portfolio/main.dart';
 import 'package:portfolio/section/section.dart';
-import 'package:portfolio/utils/invisibleInkWell.dart';
 
 //widget
 class SectionBody extends StatefulWidget {
@@ -58,21 +57,12 @@ class _SectionBodyState extends State<SectionBody> {
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  Material(
-                    color: MyApp.bodyColor,
-                    child: InvisibleInkWell(
-                      onTap: () {
-                        widget.sectionOpened.value =
-                            !widget.sectionOpened.value;
-                      },
-                      child: Container(
-                        color: sectionTypeToColor[widget.sectionType], 
-                        margin: EdgeInsets.only(
-                          right: widget.leftSpacing ? 22 : 0,
-                        ),
-                        width: 2,
-                      ),
+                  Container(
+                    color: sectionTypeToColor[widget.sectionType], 
+                    margin: EdgeInsets.only(
+                      right: widget.leftSpacing ? 22 : 0,
                     ),
+                    width: 2,
                   ),
                   Expanded(
                     child: Container(
@@ -93,42 +83,15 @@ class _SectionBodyState extends State<SectionBody> {
                 ],
               ),
             ),
-            EndSectionCloseButton(
-              sectionOpened: widget.sectionOpened,
-              end: Text(
-                sectionTypeToRight[widget.sectionType],
-                style: TextStyle(
-                  color: MyApp.oldGrey,
-                  fontSize: 18,
-                ),
+            Text(
+              sectionTypeToRight[widget.sectionType],
+              style: TextStyle(
+                color: MyApp.oldGrey,
+                fontSize: 18,
               ),
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class EndSectionCloseButton extends StatelessWidget {
-  const EndSectionCloseButton({
-    @required this.sectionOpened,
-    @required this.end,
-    Key key,
-  }) : super(key: key);
-
-  final ValueNotifier<bool> sectionOpened;
-  final Widget end;
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: MyApp.bodyColor,
-      child: InvisibleInkWell(
-        onTap: () {
-          sectionOpened.value = !sectionOpened.value;
-        },
-        child: end,
       ),
     );
   }

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 //internal
 import 'package:portfolio/main.dart';
-import 'package:portfolio/utils/invisibleInkWell.dart';
 
 //widget
 class RegionBody extends StatefulWidget {
@@ -51,24 +50,16 @@ class _RegionBodyState extends State<RegionBody> {
             left: 0,
             top: 0,
             bottom: 0,
-            child: Material(
-              color: MyApp.bodyColor,
-              child: InvisibleInkWell(
-                onTap: (){
-                  widget.regionOpened.value = !widget.regionOpened.value;
-                },
-                child: Container(
-                  margin: EdgeInsets.only(
-                    left: 16.0 + 6,
-                    right: widget.leftSpacing ? 24 : 0,
-                  ),
-                  decoration: BoxDecoration(
-                    border: Border(
-                      left: BorderSide(
-                        width: 4,
-                        color: MyApp.oldGrey,
-                      ),
-                    ),
+            child: Container(
+              margin: EdgeInsets.only(
+                left: 16.0 + 6,
+                right: widget.leftSpacing ? 24 : 0,
+              ),
+              decoration: BoxDecoration(
+                border: Border(
+                  left: BorderSide(
+                    width: 4,
+                    color: MyApp.oldGrey,
                   ),
                 ),
               ),
@@ -88,9 +79,7 @@ class _RegionBodyState extends State<RegionBody> {
                   child: widget.child,
                 ),
               ),
-              EndRegionCloseButton(
-                sectionOpened: widget.regionOpened,
-              ),
+              EndRegionCloseButton(),
             ],
           ),
         ],
@@ -100,58 +89,43 @@ class _RegionBodyState extends State<RegionBody> {
 }
 
 class EndRegionCloseButton extends StatelessWidget {
-  const EndRegionCloseButton({
-    @required this.sectionOpened,
-    Key key,
-  }) : super(key: key);
-
-  final ValueNotifier<bool> sectionOpened;
-
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: MyApp.bodyColor,
-      child: InvisibleInkWell(
-        onTap: () {
-          sectionOpened.value = !sectionOpened.value;
-        },
-        child: Padding(
-          padding: EdgeInsets.only(
-            left: 16.0 + 6,
-          ),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: <Widget>[
-              Container(
-                height: 16,
-                width: 16,
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(
-                      color: MyApp.oldGrey,
-                      width: 4,
-                    ),
-                    left: BorderSide(
-                      color: MyApp.oldGrey,
-                      width: 4,
-                    ),
-                  ),
+    return Padding(
+      padding: EdgeInsets.only(
+        left: 16.0 + 6,
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: <Widget>[
+          Container(
+            height: 16,
+            width: 16,
+            decoration: BoxDecoration(
+              border: Border(
+                bottom: BorderSide(
+                  color: MyApp.oldGrey,
+                  width: 4,
+                ),
+                left: BorderSide(
+                  color: MyApp.oldGrey,
+                  width: 4,
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(
-                  left: 8,
-                ),
-                child: Text(
-                  "#endregion",
-                  style: TextStyle(
-                    color: MyApp.oldGrey,
-                  ),
-                ),
-              )
-            ],
+            ),
           ),
-        ),
+          Padding(
+            padding: EdgeInsets.only(
+              left: 8,
+            ),
+            child: Text(
+              "#endregion",
+              style: TextStyle(
+                color: MyApp.oldGrey,
+              ),
+            ),
+          )
+        ],
       ),
     );
   }
