@@ -6,13 +6,11 @@ import 'package:flutter_icons/flutter_icons.dart';
 
 //internal
 import 'package:portfolio/utils/copyToClipboard.dart';
-import 'package:portfolio/utils/iconLink.dart';
+import 'package:portfolio/utils/link/iconLink.dart';
 import 'package:portfolio/utils/mySnackBar.dart';
 import 'package:portfolio/utils/nonWebLink.dart';
-import 'package:portfolio/utils/openLink.dart';
 import '../utils/copyToClipboard.dart';
 import '../utils/mySnackBar.dart';
-import '../utils/openLink.dart';
 
 //widget
 class ContactMeBody extends StatelessWidget {

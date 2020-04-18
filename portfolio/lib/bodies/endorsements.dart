@@ -1,8 +1,12 @@
+//flutter
 import 'package:flutter/material.dart';
+
+//plugin
 import 'package:flutter_icons/flutter_icons.dart';
+
+//internal
+import 'package:portfolio/utils/link/iconLink.dart';
 import 'package:portfolio/main.dart';
-import 'package:portfolio/section/section.dart';
-import 'package:portfolio/utils/iconLink.dart';
 
 class Reference {
   String name;
@@ -132,6 +136,9 @@ class ReferencesBody extends StatelessWidget {
                         visible: ref.email != null,
                         child: Text(
                           ref.email,
+                          style: TextStyle(
+                            color: MyApp.highlightGreen,
+                          ),
                         ),
                       ),
                     ],

@@ -1,8 +1,14 @@
-import 'package:bot_toast/bot_toast.dart';
+//flutter
 import 'package:flutter/material.dart';
+
+//plugin
 import 'package:platform_detect/platform_detect.dart';
+import 'package:bot_toast/bot_toast.dart';
+
+//internal
 import 'package:portfolio/utils/openLink.dart';
 
+//widget
 class IconWebLink extends StatelessWidget {
   IconWebLink({
     this.longString,
@@ -78,14 +84,9 @@ class IconLink extends StatelessWidget {
           children: <Widget>[
             Visibility(
               visible: text != null && text.length > 0,
-              child: SelectableText(
+              //NOTE: using selectable text is misleading since it isnt selectble on the web browser
+              child: Text(
                 text,
-                enableInteractiveSelection: true,
-                toolbarOptions: ToolbarOptions(
-                  //not cut or paste
-                  selectAll: true,
-                  copy: true,
-                ),
               ),
             ),
             ClipOval(

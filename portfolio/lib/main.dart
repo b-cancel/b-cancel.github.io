@@ -24,6 +24,10 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  //link color
+  static Color lightLinkColor = highlightGreen;
+  static Color darkLinkColor = Color(0xFF1A0DAB);
+
   //main
   static Color headerColor = Color(0xFF3C3C3C);
   static Color activeTabColor = Color(0xFF1E1E1E);

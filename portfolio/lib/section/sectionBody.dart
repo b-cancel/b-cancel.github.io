@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 //internal
 import 'package:portfolio/main.dart';
 import 'package:portfolio/section/section.dart';
+import 'package:portfolio/utils/invisibleInkWell.dart';
 
 //widget
 class SectionBody extends StatefulWidget {
@@ -59,10 +60,7 @@ class _SectionBodyState extends State<SectionBody> {
                 children: <Widget>[
                   Material(
                     color: MyApp.bodyColor,
-                    child: InkWell(
-                      hoverColor: Colors.transparent,
-                      splashColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
+                    child: InvisibleInkWell(
                       onTap: () {
                         widget.sectionOpened.value =
                             !widget.sectionOpened.value;
@@ -126,10 +124,7 @@ class EndSectionCloseButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       color: MyApp.bodyColor,
-      child: InkWell(
-        hoverColor: Colors.transparent,
-        splashColor: Colors.transparent,
-        highlightColor: Colors.transparent,
+      child: InvisibleInkWell(
         onTap: () {
           sectionOpened.value = !sectionOpened.value;
         },

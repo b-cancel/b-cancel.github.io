@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 //internal
 import 'package:portfolio/main.dart';
+import 'package:portfolio/utils/invisibleInkWell.dart';
 
 //widget
 class RegionBody extends StatefulWidget {
@@ -52,10 +53,7 @@ class _RegionBodyState extends State<RegionBody> {
             bottom: 0,
             child: Material(
               color: MyApp.bodyColor,
-              child: InkWell(
-                hoverColor: Colors.transparent,
-                splashColor: Colors.transparent,
-                highlightColor: Colors.transparent,
+              child: InvisibleInkWell(
                 onTap: (){
                   widget.regionOpened.value = !widget.regionOpened.value;
                 },
@@ -113,10 +111,7 @@ class EndRegionCloseButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       color: MyApp.bodyColor,
-      child: InkWell(
-        hoverColor: Colors.transparent,
-        splashColor: Colors.transparent,
-        highlightColor: Colors.transparent,
+      child: InvisibleInkWell(
         onTap: () {
           sectionOpened.value = !sectionOpened.value;
         },
