@@ -1,7 +1,10 @@
 //flutter
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 //plugins
+import 'package:draggable_scrollbar_sliver/draggable_scrollbar_sliver.dart';
+import 'package:draggable_scrollbar/draggable_scrollbar.dart' as drag;
 import 'package:portfolio/region/sliverRegion.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:bot_toast/bot_toast.dart';
@@ -14,6 +17,7 @@ import 'package:portfolio/bodies/hardSkills.dart';
 import 'package:portfolio/bodies/projects.dart';
 import 'package:portfolio/bodies/softSkills.dart';
 import 'package:portfolio/bodies/work.dart';
+import 'package:portfolio/utils/platformChecker.dart';
 
 //internal: other
 import 'package:portfolio/utils/scrollToTop.dart';
@@ -57,23 +61,6 @@ class MyApp extends StatelessWidget {
   static Color highlightPink = Color(0xFFB0167A);
   static Color oldPurple = const Color(0xFFAB7FFA);
   static Color oldGrey = Color(0xFF808080);
-  
-  /*region app dev*/
-  int something = 0;
-
-
-
-
-
-  int somethingelse = 1;
-  /*endregion*/
-
-  List idk = [
-    1,2,3,4,
-    5,
-    6,
-    7
-  ];
 
   // This widget is the root of your application.
   @override
@@ -125,10 +112,10 @@ class _HomeState extends State<Home> {
     //Determine whether we are on the top of the scroll area
     if (curr <= position.minScrollExtent) {
       onTop.value = true;
-    } else{
+    } else {
       onTop.value = false;
     }
-    
+
     //remove toast when pop up
     BotToast.cleanAll();
   }
@@ -201,47 +188,46 @@ class _HomeState extends State<Home> {
         leftSpacing: true,
       ),
       SliverToBoxAdapter(
-        child: Padding(
-          padding: EdgeInsets.only(
-            top: 16.0,
-            //section sliver padding
-            left: 22 + 4.0 + 24,
-          ),
-          child: Center(
-            child: DefaultTextStyle(
-              style: TextStyle(
-                fontSize: 12,
-                color: Colors.white,
-              ),
-              child: Column(
-                children: <Widget>[
-                  Text("All Rights Reserved @ 2020\n"),
-                  Text("Inspired By IDEs Everywhere"),
-                  Text("Developed And Designed"),
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Text("by "),
-                      Text(
-                        "Bryan Cancel",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
+          child: Padding(
+        padding: EdgeInsets.only(
+          top: 16.0,
+          //section sliver padding
+          left: 22 + 4.0 + 24,
+        ),
+        child: Center(
+          child: DefaultTextStyle(
+            style: TextStyle(
+              fontSize: 12,
+              color: Colors.white,
+            ),
+            child: Column(
+              children: <Widget>[
+                Text("All Rights Reserved @ 2020\n"),
+                Text("Inspired By IDEs Everywhere"),
+                Text("Developed And Designed"),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Text("by "),
+                    Text(
+                      "Bryan Cancel",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
                       ),
-                    ],
-                  ),
-                  Text("using Dart/Flutter"),
-                ],
-              ),
+                    ),
+                  ],
+                ),
+                Text("using Dart/Flutter"),
+              ],
             ),
           ),
-        )
-      ),
+        ),
+      )),
       SliverFillRemaining(
         hasScrollBody: false, //it should be as small as possible
         fillOverscroll: true, //only if above is false
         child: Opacity(
-          opacity: 0.0, 
+          opacity: 0.0,
           child: Padding(
             padding: EdgeInsets.all(28.0 + 4),
             child: Icon(
@@ -261,9 +247,32 @@ class _HomeState extends State<Home> {
           //section sliver padding
           //22 + 4 + 24
           SafeArea(
-            child: CustomScrollView(
+            //NOTE: Flutter has 2 options
+            //1. ScrollBar (but you cant drag it)
+            //2. CupertinoScrollBar (but you cant click to travel)
+            child: DraggableScrollbar(
+              alwaysVisibleScrollThumb: true,
+              backgroundColor: Colors.red,
+              heightScrollThumb: 48,
+              scrollThumbBuilder: (
+                Color backgroundColor,
+                Animation<double> thumbAnimation,
+                Animation<double> labelAnimation,
+                double height, {
+                BoxConstraints labelConstraints,
+                Text labelText,
+              }) {
+                return Container(
+                  height: height,
+                  width: 20.0,
+                  color: backgroundColor,
+                );
+              },
               controller: scrollController,
-              slivers: sliverSections,
+              child: CustomScrollView(
+                controller: scrollController,
+                slivers: sliverSections,
+              ),
             ),
           ),
           ScrollToTopButton(
@@ -284,6 +293,45 @@ class NameTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> theText = wrappableText(
+      "O:\\User\\I_AM_",
+      "\\",
+    );
+    theText.add(
+      DefaultTextStyle(
+        style: TextStyle(
+          fontSize: 36,
+          fontWeight: FontWeight.bold,
+        ),
+        child: Stack(
+          children: [
+            Transform.translate(
+              offset: Offset(4, 0),
+              child: Text(
+                " Bryan_Cancel ",
+                style: TextStyle(
+                  color: MyApp.highlightPink,
+                ),
+              ),
+            ),
+            Text(
+              " Bryan_Cancel ",
+              style: TextStyle(
+                color: MyApp.highlightGreen,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+    theText.addAll(
+      wrappableText(
+        "> echo \"yes... like cancel my order of fries :P\"",
+        " ",
+      ).toList(),
+    );
+
+    //build
     return Material(
       color: MyApp.inactiveTabColor,
       elevation: 4,
@@ -304,41 +352,25 @@ class NameTitle extends StatelessWidget {
             ),
             child: Wrap(
               crossAxisAlignment: WrapCrossAlignment.end,
-              children: [
-                Text(
-                  "O:\\User\\I_AM_",
-                ),
-                DefaultTextStyle(
-                  style: TextStyle(
-                    fontSize: 36,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  child: Stack(children: [
-                    Transform.translate(
-                      offset: Offset(4, 0),
-                      child: Text(
-                        "Bryan_Cancel",
-                        style: TextStyle(
-                          color: MyApp.highlightPink,
-                        ),
-                      ),
-                    ),
-                    Text(
-                      "Bryan_Cancel",
-                      style: TextStyle(
-                        color: MyApp.highlightGreen,
-                      ),
-                    ),
-                  ],),
-                ),
-                Text(
-                  " > echo \"yes... like cancel my order of fries :P\"",
-                ),
-              ],
+              children: theText,
             ),
           ),
         ),
       ),
     );
   }
+}
+
+List<Widget> wrappableText(String text, String splitChar) {
+  List<String> bits = text.split(splitChar);
+  List<Widget> widgets = new List<Widget>();
+  for (int i = 0; i < bits.length; i++) {
+    bool isLast = (i == bits.length - 1);
+    widgets.add(
+      Text(
+        bits[i] + (isLast ? "" : splitChar),
+      ),
+    );
+  }
+  return widgets;
 }

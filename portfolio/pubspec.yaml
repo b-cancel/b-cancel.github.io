@@ -36,6 +36,10 @@ dependencies:
   url_launcher: ^5.4.2
   platform_detect: ^1.4.0
 
+  #scrollbars
+  draggable_scrollbar_sliver: ^0.0.3
+  draggable_scrollbar: ^0.0.4
+
   # toast like
   bot_toast: ^2.4.0
   toast: ^0.1.5
