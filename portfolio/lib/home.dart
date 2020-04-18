@@ -174,12 +174,7 @@ class _HomeState extends State<Home> {
             Spacer(),
             Container(
               key: menuKey,
-              color: Colors.red,
               child: Column(
-                /*
-                      shrinkWrap: true,
-                      padding: EdgeInsets.zero,
-                      */
                 children: List.generate(
                   regions.length,
                   (index) {
@@ -212,67 +207,67 @@ class _HomeState extends State<Home> {
       SliverAppBar(
         pinned: true,
         backgroundColor: MyApp.inactiveTabColor,
-        title: Row(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: <Widget>[
-            DefaultTextStyle(
-              style: GoogleFonts.robotoMono(
-                color: Colors.white,
-                fontSize: MyApp.h1,
-              ),
-              child: Transform.translate(
-                offset: Offset(5,0),
-                child: Stack(
+        title: LayoutBuilder(
+          builder: (context, constraints) {
+            if (constraints.maxWidth >= 480) {
+              return Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: <Widget>[
+                  Name(),
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                        left: 12,
+                        bottom: 6.0,
+                      ),
+                      child: Joke(),
+                    ),
+                  ),
+                ],
+              );
+            }
+            else if(constraints.maxWidth <= 320){
+              return FittedBox(
+                fit: BoxFit.contain,
+                child: Name(),
+              );
+            } else {
+              return Container(
+                height: 56,
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Transform.translate(
-                      offset: Offset(3, 2),
-                      child: Text(
-                        "Bryan_Cancel",
-                        style: TextStyle(
-                          color: MyApp.highlightPink,
-                        ),
+                    Expanded(
+                      child: FittedBox(
+                        fit: BoxFit.contain,
+                        child: Name(),
                       ),
                     ),
-                    Text(
-                      "Bryan_Cancel",
-                      style: TextStyle(
-                        color: MyApp.highlightGreen,
+                    Padding(
+                      padding: EdgeInsets.only(
+                        left: 8,
                       ),
+                      child: Joke(),
                     ),
                   ],
                 ),
-              ),
-            ),
-            Expanded(
-              child: Padding(
-                padding: EdgeInsets.only(
-                  bottom: 6.0,
-                ),
-                child: Text(
-                  " > echo \"yes... like cancel my order of fries :P\"",
-                  style: GoogleFonts.robotoMono(
-                    color: Colors.white,
-                    fontSize: MyApp.h5,
-                    height: 1,
-                  ),
-                  maxLines: 2,
-                ),
-              ),
-            ),
-          ],
+              );
+            }
+          },
         ),
         actions: <Widget>[
           AnimatedBuilder(
-            animation: isMenuOpen, 
+            animation: isMenuOpen,
             child: IconButton(
               icon: Icon(
                 Icons.menu,
               ),
-              onPressed: (){
+              onPressed: () {
                 isMenuOpen.value = true;
               },
             ),
-            builder: (context, child){
+            builder: (context, child) {
               return Visibility(
                 visible: isMenuOpen.value == false,
                 child: child,
@@ -365,6 +360,15 @@ class _HomeState extends State<Home> {
                 body: Stack(
                   children: <Widget>[
                     theStack,
+                    Positioned(
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      child: Container(
+                        color: Colors.red,
+                        height: 8.0 + 16,
+                      ),
+                    ),
                     Visibility(
                       visible: isMenuOpen.value,
                       child: Positioned.fill(
@@ -376,7 +380,7 @@ class _HomeState extends State<Home> {
                             },
                             child: Center(
                               child: Icon(
-                                Icons.arrow_forward_ios,
+                                Icons.close,
                                 color: Colors.white,
                               ),
                             ),
@@ -391,6 +395,67 @@ class _HomeState extends State<Home> {
           );
         }
       },
+    );
+  }
+}
+
+class Joke extends StatelessWidget {
+  const Joke({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTextStyle(
+      style: GoogleFonts.robotoMono(
+        color: Colors.white,
+        fontSize: MyApp.h5,
+        height: 1,
+      ),
+      child: WrappedText(
+        "> echo \"yes... like cancel my order of fries :P\"",
+      ),
+    );
+  }
+}
+
+class Name extends StatelessWidget {
+  const Name({
+    Key key,
+    this.isTiny: false,
+  }) : super(key: key);
+
+  final bool isTiny;
+
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTextStyle(
+      style: GoogleFonts.robotoMono(
+        color: Colors.white,
+        fontSize: isTiny ? MyApp.h3 : MyApp.h1,
+      ),
+      child: Transform.translate(
+        offset: Offset(5, 0),
+        child: Stack(
+          children: <Widget>[
+            Transform.translate(
+              offset: Offset(3, 2),
+              child: Text(
+                "Bryan_Cancel",
+                style: TextStyle(
+                  color: MyApp.highlightPink,
+                ),
+              ),
+            ),
+            Text(
+              "Bryan_Cancel",
+              style: TextStyle(
+                color: MyApp.highlightGreen,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

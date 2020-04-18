@@ -88,6 +88,9 @@ class MyApp extends StatelessWidget {
   }
 }
 
+//used to place where the scroll bar starts
+//and to determine if we should hide the joke
+double topIntroHeight = 8.0 + 16;
 class TopIntro extends StatelessWidget {
   const TopIntro({
     Key key,
@@ -97,26 +100,23 @@ class TopIntro extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: Container(
-        color: MyApp.inactiveTabColor,
-        child: Transform.translate(
-          offset: Offset(0, 16),
-          child: DefaultTextStyle(
-            style: GoogleFonts.robotoMono(
-              color: Colors.white,
-              fontSize: MyApp.h6,
+        color: Colors.green, //MyApp.inactiveTabColor,
+        child: DefaultTextStyle(
+          style: GoogleFonts.robotoMono(
+            color: Colors.white,
+            fontSize: MyApp.h6,
+          ),
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: 24,
             ),
             child: Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: 24,
+              padding: EdgeInsets.only(
+                top: 8,
               ),
-              child: Padding(
-                padding: EdgeInsets.only(
-                  top: 0,
-                ),
-                child: WrappedText(
-                  "O:\\User\\I_AM_",
-                  pattern: "\\",
-                ),
+              child: WrappedText(
+                "O:\\User\\I_AM_",
+                pattern: "\\",
               ),
             ),
           ),
