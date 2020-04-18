@@ -66,6 +66,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BotToastInit(
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         navigatorObservers: [BotToastNavigatorObserver()],
         title: 'Bryan\'s Portfolio',
         theme: ThemeData(
