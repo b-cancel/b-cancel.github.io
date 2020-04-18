@@ -100,7 +100,7 @@ class TopIntro extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: Container(
-        color: Colors.green, //MyApp.inactiveTabColor,
+        color: MyApp.inactiveTabColor,
         child: DefaultTextStyle(
           style: GoogleFonts.robotoMono(
             color: Colors.white,

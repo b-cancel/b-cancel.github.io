@@ -20,6 +20,7 @@ import 'package:portfolio/region/regions.dart';
 
 //internal: other
 import 'package:portfolio/region/sliverRegion.dart';
+import 'package:portfolio/utils/invisibleInkWell.dart';
 import 'package:portfolio/utils/wrappedText.dart';
 import 'package:portfolio/utils/scrollToTop.dart';
 import 'package:portfolio/main.dart';
@@ -99,8 +100,15 @@ class _HomeState extends State<Home> {
 
   //scroll to top function
   final ScrollController scrollController = new ScrollController();
+  //we start off on top
   final ValueNotifier<bool> onTop = new ValueNotifier(true);
+  //with no overscroll
   final ValueNotifier<double> overScroll = new ValueNotifier<double>(0);
+  //with all the extra top padding
+  final ValueNotifier<double> extraTopPadding =
+      new ValueNotifier<double>(topIntroHeight);
+  //and without the top bit scrolled away
+  final ValueNotifier<bool> topScrolledAway = new ValueNotifier<bool>(false);
 
   //If we scroll down have the scroll up button come up
   updateOnTopValue() {
@@ -111,7 +119,6 @@ class _HomeState extends State<Home> {
     double curr = position.pixels;
     double max = position.maxScrollExtent;
     overScroll.value = (curr < max) ? 0 : curr - max;
-    print("max: " + max.toString());
 
     //Determine whether we are on the top of the scroll area
     if (curr <= position.minScrollExtent) {
@@ -119,6 +126,12 @@ class _HomeState extends State<Home> {
     } else {
       onTop.value = false;
     }
+
+    //Determine whether how much the top peice is scrolled away
+    extraTopPadding.value = (topIntroHeight - curr).clamp(0, topIntroHeight);
+
+    //ease of use variable
+    topScrolledAway.value = (extraTopPadding.value.round() == 0);
 
     //remove toast when pop up
     BotToast.cleanAll();
@@ -207,52 +220,64 @@ class _HomeState extends State<Home> {
       SliverAppBar(
         pinned: true,
         backgroundColor: MyApp.inactiveTabColor,
-        title: LayoutBuilder(
-          builder: (context, constraints) {
-            if (constraints.maxWidth >= 480) {
-              return Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: <Widget>[
-                  Name(),
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                        left: 12,
-                        bottom: 6.0,
+        title: AnimatedBuilder(
+          animation: topScrolledAway,
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              if (constraints.maxWidth >= 480) {
+                return Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: <Widget>[
+                    Name(),
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                          left: 12,
+                          bottom: 6.0,
+                        ),
+                        child: Joke(),
                       ),
-                      child: Joke(),
                     ),
+                  ],
+                );
+              } else if (constraints.maxWidth <= 320) {
+                return FittedBox(
+                  fit: BoxFit.contain,
+                  child: Name(),
+                );
+              } else {
+                return Container(
+                  height: 56,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Expanded(
+                        child: FittedBox(
+                          fit: BoxFit.contain,
+                          child: Name(),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          left: 8,
+                        ),
+                        child: Joke(),
+                      ),
+                    ],
                   ),
-                ],
-              );
-            }
-            else if(constraints.maxWidth <= 320){
+                );
+              }
+            },
+          ),
+          builder: (context, child) {
+            if (topScrolledAway.value) {
               return FittedBox(
                 fit: BoxFit.contain,
                 child: Name(),
               );
             } else {
-              return Container(
-                height: 56,
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Expanded(
-                      child: FittedBox(
-                        fit: BoxFit.contain,
-                        child: Name(),
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                        left: 8,
-                      ),
-                      child: Joke(),
-                    ),
-                  ],
-                ),
-              );
+              return child;
             }
           },
         ),
@@ -306,29 +331,21 @@ class _HomeState extends State<Home> {
           //NOTE: Flutter has 2 options
           //1. ScrollBar (but you cant drag it)
           //2. CupertinoScrollBar (but you cant click to travel)
-          child: DraggableScrollbar(
-            alwaysVisibleScrollThumb: true,
-            backgroundColor: Colors.red,
-            heightScrollThumb: 48,
-            scrollThumbBuilder: (
-              Color backgroundColor,
-              Animation<double> thumbAnimation,
-              Animation<double> labelAnimation,
-              double height, {
-              BoxConstraints labelConstraints,
-              Text labelText,
-            }) {
-              return Container(
-                height: height,
-                width: 20.0,
-                color: backgroundColor,
-              );
-            },
-            controller: scrollController,
-            child: CustomScrollView(
-              controller: scrollController,
-              slivers: sliverSections,
-            ),
+          child: Stack(
+            children: <Widget>[
+              CustomScrollView(
+                controller: scrollController,
+                slivers: sliverSections,
+              ),
+              Positioned(
+                right: 0,
+                top: 0,
+                bottom: 0,
+                child: ScrollBar(
+                  extraTopPadding: extraTopPadding,
+                ),
+              ),
+            ],
           ),
         ),
         ScrollToTopButton(
@@ -360,15 +377,6 @@ class _HomeState extends State<Home> {
                 body: Stack(
                   children: <Widget>[
                     theStack,
-                    Positioned(
-                      top: 0,
-                      left: 0,
-                      right: 0,
-                      child: Container(
-                        color: Colors.red,
-                        height: 8.0 + 16,
-                      ),
-                    ),
                     Visibility(
                       visible: isMenuOpen.value,
                       child: Positioned.fill(
@@ -395,6 +403,88 @@ class _HomeState extends State<Home> {
           );
         }
       },
+    );
+  }
+}
+
+class ScrollBar extends StatefulWidget {
+  const ScrollBar({
+    Key key,
+    @required this.extraTopPadding,
+  }) : super(key: key);
+
+  final ValueNotifier<double> extraTopPadding;
+
+  @override
+  _ScrollBarState createState() => _ScrollBarState();
+}
+
+class _ScrollBarState extends State<ScrollBar> {
+  updateState(){
+    if(mounted){
+      setState((){});
+    }
+  }
+
+  @override
+  void initState() {
+    widget.extraTopPadding.addListener(updateState);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    widget.extraTopPadding.removeListener(updateState);
+    super.dispose();
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+    //orientation
+    Size size = MediaQuery.of(context).size;
+    bool isPortrait = size.height > size.width;
+    double totalScrollBarWidth = isPortrait ? 36 : 48;
+
+    //maths
+    double totalHeight = MediaQuery.of(context).size.height;
+    double topBitHeight = widget.extraTopPadding.value;
+    double appBarHeight = 56;
+    double usableHeight = totalHeight - topBitHeight + appBarHeight;
+
+    //build
+    return Container(
+      width: totalScrollBarWidth,
+      height: totalHeight,
+      padding: EdgeInsets.only(
+        top: topBitHeight + appBarHeight,
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InvisibleInkWell(
+          onTap: (){},
+          //material is 48 by 48 atleast
+          //we can fake it and make it 
+          //24 and 24 of space that actually also scrolls
+          //but for now
+          child: Container(
+            width: totalScrollBarWidth/2,
+            height: usableHeight,
+            margin: EdgeInsets.only(
+              left: totalScrollBarWidth/2,
+            ),
+            decoration: BoxDecoration(
+              color: MyApp.bodyColor,
+              border: Border(
+                left: BorderSide(
+                  color: MyApp.oldGrey,
+                  width: 2,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
