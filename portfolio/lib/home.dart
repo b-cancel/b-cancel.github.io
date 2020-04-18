@@ -23,27 +23,75 @@ import 'package:portfolio/utils/wrappedText.dart';
 import 'package:portfolio/utils/scrollToTop.dart';
 import 'package:portfolio/main.dart';
 
+/*
+class DrawerScaffold extends StatefulWidget{
+  @override
+  _DrawerScaffoldState createState() => _DrawerScaffoldState();
+}
+
+class _DrawerScaffoldState extends State<DrawerScaffold> with SingleTickerProviderStateMixin {
+  final ValueNotifier<bool> menuIsExpanded = new ValueNotifier(false);
+  AnimationController buttonController;
+
+  //init
+  @override
+  void initState() {
+    //super init
+    super.initState();
+    
+    //Scaffold.of(context).openDrawer();
+
+    //animated icon
+    buttonController = AnimationController(
+      vsync: this,
+      duration: kTabScrollDuration,
+      reverseDuration: kTabScrollDuration,
+    );
+  }
+
+  //dipose
+  @override
+  void dispose() {
+    //animated icon
+    buttonController.dispose();
+
+    //super dispose
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      
+    );
+
+    IconButton(
+            icon: AnimatedIcon(
+              icon: AnimatedIcons.menu_arrow,
+              progress: buttonController,
+              semanticLabel: 'show menu',
+            ),
+            onPressed: () {
+              Scaffold.of(context).openDrawer();
+
+              //toggleMenu();
+              setState(() {
+                menuIsExpanded ? buttonController.forward() : buttonController.reverse();
+                menuIsExpanded = !menuIsExpanded;
+              });
+            },
+          ),
+  }
+}
+*/
+
 //widgets
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
-  bool menuIsExpanded = true;
-  AnimationController buttonController;
-  final GlobalKey<InnerDrawerState> innerDrawerKey =
-      GlobalKey<InnerDrawerState>();
-
-  void toggleMenu() {
-    innerDrawerKey.currentState.toggle(
-      // direction is optional
-      // if not set, the last direction will be used
-      //InnerDrawerDirection.start OR InnerDrawerDirection.end
-      direction: InnerDrawerDirection.end,
-    );
-  }
-
+class _HomeState extends State<Home>{
   //scroll to top function
   final ScrollController scrollController = new ScrollController();
   final ValueNotifier<bool> onTop = new ValueNotifier(true);
@@ -77,13 +125,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     //super init
     super.initState();
 
-    //animated icon
-    buttonController = AnimationController(
-      vsync: this,
-      duration: kTabScrollDuration,
-      reverseDuration: kTabScrollDuration,
-    );
-
     //show or hide the to top button
     scrollController.addListener(updateOnTopValue);
   }
@@ -91,9 +132,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   //dipose
   @override
   void dispose() {
-    //animated icon
-    buttonController.dispose();
-
     //remove listener
     scrollController.removeListener(updateOnTopValue);
 
@@ -133,22 +171,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             ],
           ),
         ),
-        actions: <Widget>[
-          IconButton(
-            icon: AnimatedIcon(
-              icon: AnimatedIcons.menu_arrow,
-              progress: buttonController,
-              semanticLabel: 'show menu',
-            ),
-            onPressed: () {
-              toggleMenu();
-              setState(() {
-                menuIsExpanded ? buttonController.forward() : buttonController.reverse();
-                menuIsExpanded = !menuIsExpanded;
-              });
-            },
-          ),
-        ],
       ),
       BottomIntro(),
     ];
@@ -174,14 +196,56 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       FillRemaining(),
     ].toList());
 
-    //build
-    return InnerDrawer(
-      key: innerDrawerKey,
+    //create the stack
+    Stack theStack = Stack(
+      children: <Widget>[
+        //section sliver padding
+        //22 + 4 + 24
+        SafeArea(
+          //NOTE: Flutter has 2 options
+          //1. ScrollBar (but you cant drag it)
+          //2. CupertinoScrollBar (but you cant click to travel)
+          child: DraggableScrollbar(
+            alwaysVisibleScrollThumb: true,
+            backgroundColor: Colors.red,
+            heightScrollThumb: 48,
+            scrollThumbBuilder: (
+              Color backgroundColor,
+              Animation<double> thumbAnimation,
+              Animation<double> labelAnimation,
+              double height, {
+              BoxConstraints labelConstraints,
+              Text labelText,
+            }) {
+              return Container(
+                height: height,
+                width: 20.0,
+                color: backgroundColor,
+              );
+            },
+            controller: scrollController,
+            child: CustomScrollView(
+              controller: scrollController,
+              slivers: sliverSections,
+            ),
+          ),
+        ),
+        ScrollToTopButton(
+          onTop: onTop,
+          overScroll: overScroll,
+          scrollController: scrollController,
+        ),
+      ],
+    );
 
-      //drawer itself
-      rightChild: Material(
-        color: Colors.transparent,
-        child: ListView(
+    //build
+    return Scaffold(
+        backgroundColor: MyApp.bodyColor,
+        //dont let the drawer open with sliding
+        //it will mess with the beutiful animated icons
+        drawerEdgeDragWidth: 0,
+        //drawer on the right
+        endDrawer: ListView(
           shrinkWrap: true,
           padding: EdgeInsets.zero,
           children: List.generate(
@@ -189,11 +253,13 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             (index){
               Region thisRegion = regions[index];
               return ListTile(
-                
-                dense: true,
+                onTap: (){
+                  //close
+                  Navigator.of(context).pop();
+                },
                 title: Text(
-                      thisRegion.title,
-                    ),
+                  thisRegion.title,
+                ),
                 trailing: Icon(
                   thisRegion.icon,
                 ),
@@ -201,92 +267,33 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             }
           ),
         ),
-      ),
+        body: theStack,
+      );
 
-      //same duration as icon button
-      duration: kTabScrollDuration,
-
-      //we will have horizontal swiping stuff 
-      //avoid confusion and complication
-      swipe: false,
-
-      //TODO: what does this do?
-      onTapClose: true,
-
-      //NOTE: keep the flat look of IDEs
-      //boxShadow: new List<BoxShadow>(),
-
-      //adjust to the size of the passed menu
-      proportionalChildArea: true,
-      
-      colorTransition: Colors.black.withOpacity(0.5), // default Color.black54
-      //When setting the vertical offset, be sure to use only top or bottom
-      offset: IDOffset.horizontal(.1),
-
-      //set the offset in both directions
-      //scale: IDOffset.horizontal(1),
-
-      //other
-       // default true
-      borderRadius: 0, // default 0
-      
-      backgroundColor: MyApp.headerColor, // default  Theme.of(context).backgroundColor
-      //right drawer setting
-      rightAnimationType: InnerDrawerAnimation.quadratic,
-      
-      //when a pointer that is in contact with the screen and moves to the right or left
-      onDragUpdate: (double val, InnerDrawerDirection direction) {
-        // return values between 1 and 0
-        print(val);
-        // check if the swipe is to the right or to the left
-        print(direction == InnerDrawerDirection.start);
-      },
-      //TODO: match switch location with animated icon
-      innerDrawerCallback: (a) => print(a), 
-      //-------------------------*-------------------------
-      scaffold: Scaffold(
-        backgroundColor: MyApp.bodyColor,
-        body: Stack(
-          children: <Widget>[
-            //section sliver padding
-            //22 + 4 + 24
-            SafeArea(
-              //NOTE: Flutter has 2 options
-              //1. ScrollBar (but you cant drag it)
-              //2. CupertinoScrollBar (but you cant click to travel)
-              child: DraggableScrollbar(
-                alwaysVisibleScrollThumb: true,
-                backgroundColor: Colors.red,
-                heightScrollThumb: 48,
-                scrollThumbBuilder: (
-                  Color backgroundColor,
-                  Animation<double> thumbAnimation,
-                  Animation<double> labelAnimation,
-                  double height, {
-                  BoxConstraints labelConstraints,
-                  Text labelText,
-                }) {
-                  return Container(
-                    height: height,
-                    width: 20.0,
-                    color: backgroundColor,
-                  );
-                },
-                controller: scrollController,
-                child: CustomScrollView(
-                  controller: scrollController,
-                  slivers: sliverSections,
+    /*
+    Material(
+                color: Colors.transparent,
+                child: ListView(
+                  shrinkWrap: true,
+                  padding: EdgeInsets.zero,
+                  children: List.generate(
+                    regions.length, 
+                    (index){
+                      Region thisRegion = regions[index];
+                      return ListTile(
+                        title: Text(
+                              thisRegion.title,
+                            ),
+                        trailing: Icon(
+                          thisRegion.icon,
+                        ),
+                      );
+                    }
+                  ),
                 ),
               ),
-            ),
-            ScrollToTopButton(
-              onTop: onTop,
-              overScroll: overScroll,
-              scrollController: scrollController,
-            ),
-          ],
-        ),
-      ),
-    );
+    */
+
+    
   }
 }
