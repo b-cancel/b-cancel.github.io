@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 //plugin
 import 'package:draggable_scrollbar_sliver/draggable_scrollbar_sliver.dart';
 import 'package:bot_toast/bot_toast.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_inner_drawer/inner_drawer.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -91,7 +92,11 @@ class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }
 
-class _HomeState extends State<Home>{
+class _HomeState extends State<Home> {
+  final ValueNotifier<bool> isMenuOpen = new ValueNotifier<bool>(false);
+  OverlayEntry appOverlayEntry;
+  GlobalKey menuKey = GlobalKey();
+
   //scroll to top function
   final ScrollController scrollController = new ScrollController();
   final ValueNotifier<bool> onTop = new ValueNotifier(true);
@@ -125,6 +130,20 @@ class _HomeState extends State<Home>{
     //super init
     super.initState();
 
+    //handle menu
+    if (appOverlayEntry != null) {
+      appOverlayEntry.remove();
+    }
+    appOverlayEntry = OverlayEntry(
+      builder: (context) {
+        return appBuilder(context);
+      },
+    );
+
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      Overlay.of(context).insert(appOverlayEntry);
+    });
+
     //show or hide the to top button
     scrollController.addListener(updateOnTopValue);
   }
@@ -132,6 +151,9 @@ class _HomeState extends State<Home>{
   //dipose
   @override
   void dispose() {
+    //handle menu
+    appOverlayEntry.remove();
+
     //remove listener
     scrollController.removeListener(updateOnTopValue);
 
@@ -141,53 +163,137 @@ class _HomeState extends State<Home>{
 
   @override
   Widget build(BuildContext context) {
+    //build
+    return Scaffold(
+      backgroundColor: MyApp.bodyColor,
+      body: Container(
+        width: MediaQuery.of(context).size.width,
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          children: <Widget>[
+            Spacer(),
+            Container(
+              key: menuKey,
+              color: Colors.red,
+              child: Column(
+                /*
+                      shrinkWrap: true,
+                      padding: EdgeInsets.zero,
+                      */
+                children: List.generate(
+                  regions.length,
+                  (index) {
+                    Region thisRegion = regions[index];
+                    return Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text(
+                          thisRegion.title,
+                        ),
+                        Icon(
+                          thisRegion.icon,
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget appBuilder(BuildContext context) {
     List<Widget> sliverSections = [
       TopIntro(),
       SliverAppBar(
         pinned: true,
         backgroundColor: MyApp.inactiveTabColor,
-        title: DefaultTextStyle(
-          style: GoogleFonts.robotoMono(
-            color: Colors.white,
-            fontSize: MyApp.h1,
-          ),
-          child: Stack(
-            children: <Widget>[
-              Transform.translate(
-                offset: Offset(3, 0),
+        title: Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: <Widget>[
+            DefaultTextStyle(
+              style: GoogleFonts.robotoMono(
+                color: Colors.white,
+                fontSize: MyApp.h1,
+              ),
+              child: Transform.translate(
+                offset: Offset(5,0),
+                child: Stack(
+                  children: <Widget>[
+                    Transform.translate(
+                      offset: Offset(3, 2),
+                      child: Text(
+                        "Bryan_Cancel",
+                        style: TextStyle(
+                          color: MyApp.highlightPink,
+                        ),
+                      ),
+                    ),
+                    Text(
+                      "Bryan_Cancel",
+                      style: TextStyle(
+                        color: MyApp.highlightGreen,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.only(
+                  bottom: 6.0,
+                ),
                 child: Text(
-                  "Bryan_Cancel",
-                  style: TextStyle(
-                    color: MyApp.highlightPink,
+                  " > echo \"yes... like cancel my order of fries :P\"",
+                  style: GoogleFonts.robotoMono(
+                    color: Colors.white,
+                    fontSize: MyApp.h5,
+                    height: 1,
                   ),
+                  maxLines: 2,
                 ),
               ),
-              Text(
-                "Bryan_Cancel",
-                style: TextStyle(
-                  color: MyApp.highlightGreen,
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
+        actions: <Widget>[
+          AnimatedBuilder(
+            animation: isMenuOpen, 
+            child: IconButton(
+              icon: Icon(
+                Icons.menu,
+              ),
+              onPressed: (){
+                isMenuOpen.value = true;
+              },
+            ),
+            builder: (context, child){
+              return Visibility(
+                visible: isMenuOpen.value == false,
+                child: child,
+              );
+            },
+          )
+        ],
       ),
-      BottomIntro(),
+      //BottomIntro(),
     ];
 
     //add all the regions
     sliverSections.addAll(
-      List.generate(
-        regions.length, 
-        (index){
-          Region thisRegion = regions[index];
-          return SliverRegion(
-            title: thisRegion.title, 
-            body: thisRegion.body,
-            initiallyOpened: thisRegion.initiallyOpened,
-          );
-        }
-      ),
+      List.generate(regions.length, (index) {
+        Region thisRegion = regions[index];
+        return SliverRegion(
+          title: thisRegion.title,
+          body: thisRegion.body,
+          initiallyOpened: thisRegion.initiallyOpened,
+        );
+      }),
     );
 
     //add last 2 bottom bits
@@ -238,62 +344,53 @@ class _HomeState extends State<Home>{
       ],
     );
 
-    //build
-    return Scaffold(
-        backgroundColor: MyApp.bodyColor,
-        //dont let the drawer open with sliding
-        //it will mess with the beutiful animated icons
-        drawerEdgeDragWidth: 0,
-        //drawer on the right
-        endDrawer: ListView(
-          shrinkWrap: true,
-          padding: EdgeInsets.zero,
-          children: List.generate(
-            regions.length, 
-            (index){
-              Region thisRegion = regions[index];
-              return ListTile(
-                onTap: (){
-                  //close
-                  Navigator.of(context).pop();
-                },
-                title: Text(
-                  thisRegion.title,
-                ),
-                trailing: Icon(
-                  thisRegion.icon,
-                ),
-              );
-            }
-          ),
-        ),
-        body: theStack,
-      );
-
-    /*
-    Material(
-                color: Colors.transparent,
-                child: ListView(
-                  shrinkWrap: true,
-                  padding: EdgeInsets.zero,
-                  children: List.generate(
-                    regions.length, 
-                    (index){
-                      Region thisRegion = regions[index];
-                      return ListTile(
-                        title: Text(
-                              thisRegion.title,
+    //things that change
+    return AnimatedBuilder(
+      animation: isMenuOpen,
+      builder: (_, Widget child) {
+        final keyContext = menuKey.currentContext;
+        if (keyContext == null) {
+          return Container();
+        } else {
+          // widget is visible
+          final box = keyContext.findRenderObject() as RenderBox;
+          return Positioned.fill(
+            child: Transform.translate(
+              offset: Offset(
+                (isMenuOpen.value) ? -box.size.width : 0,
+                0,
+              ),
+              child: Scaffold(
+                backgroundColor: MyApp.bodyColor,
+                body: Stack(
+                  children: <Widget>[
+                    theStack,
+                    Visibility(
+                      visible: isMenuOpen.value,
+                      child: Positioned.fill(
+                        child: Material(
+                          color: Colors.black.withOpacity(.75),
+                          child: InkWell(
+                            onTap: () {
+                              isMenuOpen.value = false;
+                            },
+                            child: Center(
+                              child: Icon(
+                                Icons.arrow_forward_ios,
+                                color: Colors.white,
+                              ),
                             ),
-                        trailing: Icon(
-                          thisRegion.icon,
+                          ),
                         ),
-                      );
-                    }
-                  ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-    */
-
-    
+            ),
+          );
+        }
+      },
+    );
   }
 }

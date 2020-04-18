@@ -103,6 +103,7 @@ class TopIntro extends StatelessWidget {
           child: DefaultTextStyle(
             style: GoogleFonts.robotoMono(
               color: Colors.white,
+              fontSize: MyApp.h6,
             ),
             child: Padding(
               padding: EdgeInsets.symmetric(
