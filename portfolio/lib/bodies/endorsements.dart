@@ -98,50 +98,104 @@ class ReferencesBody extends StatelessWidget {
               children: <Widget>[
                 Visibility(
                   visible: ref.letterUrl != null,
-                  child: IconWebLink(
-                    url: ref.letterUrl,
-                    icon: FontAwesome5Solid.file_pdf,
+                  child: ClipOval(
+                    child: Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        onTap: (){},
+                        child: Padding(
+                          padding: EdgeInsets.all(12.0),
+                          child: Stack(
+                            alignment: Alignment.center,
+                            children: <Widget>[
+                              //give red border
+                              Icon(
+                                FontAwesome5Solid.file_pdf,
+                                color: Colors.red,
+                                size: 36,
+                              ),
+                              //make center bit red
+                              Padding(
+                                //36 total
+                                padding: EdgeInsets.only(
+                                  top: 14.0,
+                                  bottom: 4.0,
+                                ),
+                                child: Container(
+                                  color: Colors.red,
+                                  height: 18,
+                                  width: 24,
+                                ),
+                              ),
+                              Icon(
+                                FontAwesome5Solid.file_pdf,
+                                color: Colors.white,
+                                size: 32,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(
-                    top: 12.0,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Visibility(
-                        visible: ref.name != null,
-                        child: Text(
-                          ref.name,
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
+                Flexible(
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                      top: 12.0,
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Visibility(
+                          visible: ref.name != null,
+                          child: DefaultTextStyle(
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                            child: Text(
+                              ref.name,
+                            ),
                           ),
                         ),
-                      ),
-                      Visibility(
-                        visible: ref.title != null,
-                        child: Text(
-                          ref.title,
-                        ),
-                      ),
-                      Visibility(
-                        visible: ref.location != null,
-                        child: Text(
-                          ref.location,
-                        ),
-                      ),
-                      Visibility(
-                        visible: ref.email != null,
-                        child: Text(
-                          ref.email,
-                          style: TextStyle(
-                            color: MyApp.highlightGreen,
+                        Visibility(
+                          visible: ref.title != null,
+                          child: Text(
+                            ref.title,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                        Visibility(
+                          visible: ref.location != null,
+                          child: Text(
+                            ref.location, 
+                          ),
+                        ),
+                        Visibility(
+                          visible: ref.email != null,
+                          child: Text(
+                            ref.email,
+                            style: TextStyle(
+                              color: MyApp.highlightGreen,
+                            ),
+                          ),
+                        ),
+                        Visibility(
+                          visible: ref.phone != null,
+                          child: Text(
+                            ref.phone ?? "",
+                            style: TextStyle(
+                              color: MyApp.oldOrange,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -161,6 +215,7 @@ class ReferencesBody extends StatelessWidget {
         runSpacing: 16,
         alignment: WrapAlignment.start,
         runAlignment: WrapAlignment.spaceBetween,
+        crossAxisAlignment: WrapCrossAlignment.start,
         children: List.generate(
           references.length,
           (index) {

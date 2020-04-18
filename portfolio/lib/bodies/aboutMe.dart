@@ -1,7 +1,13 @@
+//flutter
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:portfolio/main.dart';
 
+//plugin
+import 'package:google_fonts/google_fonts.dart';
+
+//internal
+import 'package:portfolio/utils/wrappedText.dart';
+
+//widget
 class AboutMeBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -38,10 +44,7 @@ class AboutMeBody extends StatelessWidget {
                 children: <Widget>[
                   Hello(),
                   Logo(),
-                  Container(
-                    color: Colors.green,
-                    child: Introduction(),
-                  ),
+                  Introduction(),
                 ],
               ),
             ),
@@ -117,21 +120,15 @@ class Introduction extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Wrap(
-          children: wrappableText(
-            "I recently graduated with my Bachelors in Computer Science." +
-                " After graduation I traveled Europe, came back and a disaster struck!" +
-                " So I had the privaledge to help in Disaster Releif efforts full time for 3 to 4 months; " +
-                " repairing drywall, roofs, and anything else that needed fixing.",
-                " ",
-          ),
+        WrappedText(
+          "I recently graduated with my Bachelors in Computer Science." +
+              " After graduation I traveled Europe, came back and a disaster struck!" +
+              " So I had the privaledge to help in Disaster Releif efforts full time for 3 to 4 months; " +
+              " repairing drywall, roofs, and anything else that needed fixing.",
         ),
         Text("\n"),
-        Wrap(
-          children: wrappableText(
-            "I just finished publishing my first app \"Swol\", and I'm excited for my next Adventure!",
-            " ",
-          ),
+        WrappedText(
+          "I just finished publishing my first app \"Swol\", and I'm excited for my next Adventure!",
         ),
       ],
     );
