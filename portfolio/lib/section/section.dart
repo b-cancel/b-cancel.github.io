@@ -1,6 +1,7 @@
 //flutter
 import 'package:flutter/material.dart';
 import 'package:portfolio/main.dart';
+import 'package:portfolio/region/regions.dart';
 
 //internal
 import 'package:portfolio/section/sectionBody.dart';
@@ -53,8 +54,16 @@ class _RegularSectionState extends State<RegularSection> {
   void initState() {
     //super init
     super.initState();
-
+    //initialization
     sectionOpened = new ValueNotifier<bool>(widget.initiallyOpened);
+    //notifier
+    sectionOpened.addListener(tellSystem);
+  }
+
+  @override
+  void dispose() { 
+    sectionOpened.removeListener(tellSystem);
+    super.dispose();
   }
 
   @override

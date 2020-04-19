@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 //internal
 import 'package:portfolio/region/regionBody.dart';
 import 'package:portfolio/region/regionHeader.dart';
+import 'package:portfolio/region/regions.dart';
 
 //widget
 class RegularRegion extends StatefulWidget {
@@ -32,8 +33,16 @@ class _RegularRegionState extends State<RegularRegion> {
   void initState() {
     //super init
     super.initState();
-
+    //initialization
     sectionOpened = new ValueNotifier<bool>(widget.initiallyOpened);
+    //notifier
+    sectionOpened.addListener(tellSystem);
+  }
+
+  @override
+  void dispose() { 
+    sectionOpened.removeListener(tellSystem);
+    super.dispose();
   }
 
   @override

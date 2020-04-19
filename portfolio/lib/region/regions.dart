@@ -33,6 +33,12 @@ class Region{
   );
 }
 
+final ValueNotifier<bool> aSectionToggled = new ValueNotifier<bool>(false);
+
+tellSystem(){
+  aSectionToggled.value = true;
+}
+
 List<Region> regions = [
   Region(
     FontAwesome.user_circle,

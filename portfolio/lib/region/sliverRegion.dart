@@ -10,6 +10,7 @@ import 'package:portfolio/region/regionHeader.dart';
 
 //internal
 import 'package:portfolio/main.dart';
+import 'package:portfolio/region/regions.dart';
 
 //widget
 class SliverRegion extends StatefulWidget {
@@ -40,8 +41,16 @@ class _SliverRegionState extends State<SliverRegion> {
   void initState() {
     //super init
     super.initState();
-
+    //initialization
     sectionOpened = new ValueNotifier<bool>(widget.initiallyOpened);
+    //notifier
+    sectionOpened.addListener(tellSystem);
+  }
+
+  @override
+  void dispose() { 
+    sectionOpened.removeListener(tellSystem);
+    super.dispose();
   }
 
   @override

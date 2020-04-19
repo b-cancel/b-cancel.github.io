@@ -1,6 +1,7 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/main.dart';
+import 'package:portfolio/region/regions.dart';
 import 'package:portfolio/utils/invisibleInkWell.dart';
 
 //automatically rebuilds when scaling the screen
@@ -99,6 +100,20 @@ class _ScrollBarState extends State<ScrollBar> {
       });
     }
   }
+
+  handleSectionToggled(){
+    if(aSectionToggled.value){
+      //handle it
+      WidgetsBinding.instance.addPostFrameCallback((_){
+        updateAfterScroll(
+          triggeredByScrolling: false,
+        );
+      });
+
+      //indicate process complete
+      aSectionToggled.value = false;
+    }
+  }
   
   @override
   void initState() {
@@ -111,11 +126,13 @@ class _ScrollBarState extends State<ScrollBar> {
 
     //add listeners
     widget.scrollController.addListener(updateAfterScroll);
+    aSectionToggled.addListener(handleSectionToggled);
   }
 
   @override
   void dispose() {
     //remove listeners
+    aSectionToggled.removeListener(handleSectionToggled);
     widget.scrollController.removeListener(updateAfterScroll);
 
     //super dispose
