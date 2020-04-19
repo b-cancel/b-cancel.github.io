@@ -2,11 +2,9 @@
 import 'package:flutter/material.dart';
 
 //plugin
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:portfolio/section/section.dart';
 
 //internal
-import 'package:portfolio/utils/conditional.dart';
 import 'package:portfolio/main.dart';
 import 'package:portfolio/utils/toggler.dart';
 

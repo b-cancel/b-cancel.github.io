@@ -74,10 +74,6 @@ showOptions(
     bool email: false,
     bool download: false,
   }){
-  //add all tool bar option
-  List<Option> option = new List<Option>();
-  
-
   //show tool bar
   BotToast.showAttachedWidget(
     targetContext: context,
@@ -85,7 +81,7 @@ showOptions(
     onlyOne: true,
     attachedBuilder: (_) => Stack(
       children: <Widget>[
-        //TODO
+        //TODO finish this obvi
         Card(
           color: MyApp.headerColor,
           child: Container(),
