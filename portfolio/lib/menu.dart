@@ -1,17 +1,48 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/main.dart';
 import 'package:portfolio/region/regions.dart';
 import 'package:portfolio/utils/hover.dart';
 
 class SideMenu extends StatelessWidget {
   const SideMenu({
     Key key,
+    @required this.scrollController,
     @required this.menuKey,
     @required this.isMenuOpen,
   }) : super(key: key);
 
+  final ScrollController scrollController;
   final GlobalKey<State<StatefulWidget>> menuKey;
   final ValueNotifier<bool> isMenuOpen;
 
+  getHeightFromKey(GlobalKey key){
+    RenderBox renderBox = key.currentContext.findRenderObject();
+    return renderBox.size.height;
+  }
+
+  //since we know all the height of every single region
+  //we can calculate how much we need to scroll
+  scrollToRegion(int index){
+    double jumpPosition = topIntroHeight; //dont forget top bit
+    for(int i = 0 ; i < index; i++){
+      Region thisRegion = regions[i];
+      jumpPosition += getHeightFromKey(thisRegion.headerKey);
+      jumpPosition += getHeightFromKey(thisRegion.bodyKey);
+    }
+
+    //don't over scroll cuz overscrolling is gross
+    ScrollPosition position = scrollController.position;
+    double max = position.maxScrollExtent ?? 0;
+    jumpPosition.clamp(0, max);
+
+    //jump to the position
+    //cuz animations are meh when ur trying to be functional
+    scrollController.jumpTo(
+      jumpPosition,
+    );
+  }
+
+  //build
   @override
   Widget build(BuildContext context) {
     //for the sake of making everything equal
@@ -52,7 +83,10 @@ class SideMenu extends StatelessWidget {
                   (index) {
                     Region thisRegion = regions[index];
                     return MenuTileButton(
-                      isMenuOpen: isMenuOpen,
+                      onTap: (){
+                        scrollToRegion(index);
+                        isMenuOpen.value = false;
+                      },
                       title: thisRegion.title,
                       icon: thisRegion.icon,
                     );
@@ -72,21 +106,19 @@ class MenuTileButton extends StatelessWidget {
     Key key,
     @required this.title,
     @required this.icon,
-    @required this.isMenuOpen,
+    @required this.onTap,
   }) : super(key: key);
 
   final String title;
   final IconData icon;
-  final ValueNotifier<bool> isMenuOpen;
+  final Function onTap;
 
   @override
   Widget build(BuildContext context) {
     return Material(
       color: Colors.transparent,
       child: InkWell(
-        onTap: (){
-          isMenuOpen.value = false;
-        },
+        onTap: () => onTap(),
         child: OpaqueOnHover(
           child: MenuTile(
             title: title, 

@@ -71,6 +71,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
       backgroundColor: MyApp.bodyColor,
       body: SideMenu(
+        scrollController: scrollController,
         menuKey: menuKey,
         isMenuOpen: isMenuOpen,
       ),
