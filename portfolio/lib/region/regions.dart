@@ -37,7 +37,7 @@ List<Region> regions = [
       ),
       child: AboutMeBody(),
     ),
-    initiallyOpened: true,
+    //initiallyOpened: true,
   ),
   Region(
     FontAwesome5Solid.tools,
@@ -58,12 +58,12 @@ List<Region> regions = [
     Icons.thumb_up,
     "References",
     ReferencesBody(),
-    initiallyOpened: true, //TODO: remove after testin
+    //initiallyOpened: true, //TODO: remove after testin
   ),
   Region(
     FontAwesome5.comment_alt,
     "Contact Me",
     ContactMeBody(),
-    initiallyOpened: true,
+    //initiallyOpened: true,
   ),
 ];

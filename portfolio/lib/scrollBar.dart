@@ -37,7 +37,11 @@ class _ScrollBarState extends State<ScrollBar> {
   final ValueNotifier<double> extraTopPadding = new ValueNotifier<double>(topIntroHeight);
 
   //If we scroll down have the scroll up button come up
-  updateAfterScroll() {
+  updateAfterScroll({bool triggeredByScrolling: true}) {
+    if(triggeredByScrolling){
+      stopUpdateLoop = true;
+    }
+
     //remove toast when pop up
     //user are scrolling away they aren't interested
     BotToast.cleanAll();
@@ -46,13 +50,14 @@ class _ScrollBarState extends State<ScrollBar> {
     ScrollPosition position = widget.scrollController.position;
 
     //update overscroll to have nice animation with the scroll top top button on ios
-    double curr = position.pixels;
-    double max = position.maxScrollExtent;
+    double curr = position.pixels ?? 0;
+    double min = position.minScrollExtent ?? 0;
+    double max = position.maxScrollExtent ?? 0;
     print("?max: " + max.toString());
     widget.overScroll.value = (curr < max) ? 0 : curr - max;
 
     //Determine whether we are on the top of the scroll area
-    if (curr <= position.minScrollExtent) {
+    if (curr <= min) {
       widget.onTop.value = true;
     } else {
       widget.onTop.value = false;
@@ -68,13 +73,25 @@ class _ScrollBarState extends State<ScrollBar> {
     totalScrollArea.value = max + widget.overScroll.value;
   }
 
+  //Note: we need to wait until the scroll controller is attached to something
+  //but even after that the value will change until finally it stablizes
+  //I have no idea how to reliable determine this stablization
+  //so we will instead simply set state UNTIL the user scrolls
+  //no noticible lag (atleast not any that I can avoid given the above)
+  //and after they scroll ONCE any potential lag from this loop will go away
+  bool stopUpdateLoop = false; //set to true above
   initAfterAttachment(){
+    //if the value is usable, use it
+    //even if its just until we get the actual value
     if(widget.scrollController.hasClients){
       if(mounted){
         setState(() {});
       }
     }
-    else{
+
+    //MAYBE the value is usable
+    //but we keep looping until the user scrolls
+    if(stopUpdateLoop == false){
       WidgetsBinding.instance.addPostFrameCallback((_){
         initAfterAttachment();
       });
@@ -93,6 +110,7 @@ class _ScrollBarState extends State<ScrollBar> {
     //add listeners
     widget.scrollController.addListener(updateAfterScroll);
   }
+
   @override
   void dispose() {
     //remove listeners
@@ -108,30 +126,34 @@ class _ScrollBarState extends State<ScrollBar> {
     double max = 0;
     if(widget.scrollController != null){
       if(widget.scrollController.hasClients){
-        ScrollPosition position = widget.scrollController.position;
-        max = position.maxScrollExtent ?? 0;
-        print("seemed gg");
+        print("usable but maybe still not right");
+        updateAfterScroll(
+          triggeredByScrolling: false,
+        );
       }
     }
-    print("max: " + max.toString());
+    print("max: " + totalScrollArea.value.toString());
 
     //build
     return Visibility(
       //if max is 0
       //the scroll view detected that scrolling isnt needed
       //so don't show the scroll bar
-      visible: true, //max > 0.0,
+      visible: totalScrollArea.value > 0.0,
       child: RaisedButton(
         onPressed: (){
-          ScrollPosition position = widget.scrollController.position;
-          double scrollPos = position.maxScrollExtent ?? 0;
-          print(scrollPos.toString());
+          
         },
-        child: Text("Test"),
+        child: Text("scroll bar here"),
       )
     );
   }
 }
+
+/*  
+totalScrollArea.removeListener(updateState);
+extraTopPadding.removeListener(updateState);
+*/
 
 /*
     double totalHeight = MediaQuery.of(context).size.height;
@@ -162,12 +184,6 @@ class _ScrollBarState extends State<ScrollBar> {
     ScrollPosition position = scrollController?.position;
     double max = (position == null) ? 0 : position.maxScrollExtent;
     
-    */
-
-    /*
-    
-    totalScrollArea.removeListener(updateState);
-    extraTopPadding.removeListener(updateState);
     */
 class ScrollBarBackground extends StatelessWidget {
   //build
