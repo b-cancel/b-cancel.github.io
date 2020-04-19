@@ -18,12 +18,18 @@ class Region{
   String title;
   Widget body;
   bool initiallyOpened;
+  ValueKey headerKey;
+  ValueKey bodyKey;
 
   Region(
     this.icon,
     this.title,
     this.body,
-    {this.initiallyOpened: false}
+    this.headerKey,
+    this.bodyKey,
+    {
+      this.initiallyOpened: false,
+    }
   );
 }
 
@@ -37,33 +43,51 @@ List<Region> regions = [
       ),
       child: AboutMeBody(),
     ),
-    //initiallyOpened: true,
+    //these are updated by their respective layout builders
+    ValueKey("h0"),
+    ValueKey("b0"),
+    initiallyOpened: true,
   ),
   Region(
     FontAwesome5Solid.tools,
     "Skills",
     SoftSkillsBody(),
+    //these are updated by their respective layout builders
+    ValueKey("h1"),
+    ValueKey("b1"),
   ),
   Region(
     FontAwesome.suitcase, 
     "Experience", 
     WorkExperienceBody(),
+    //these are updated by their respective layout builders
+    ValueKey("h2"),
+    ValueKey("b2"),
   ),
   Region(
     FontAwesome.flask,
     "Projects",
     ProjectsBody(),
+    //these are updated by their respective layout builders
+    ValueKey("h3"),
+    ValueKey("b3"),
   ),
   Region(
     Icons.thumb_up,
     "References",
     ReferencesBody(),
-    //initiallyOpened: true, //TODO: remove after testin
+    //these are updated by their respective layout builders
+    ValueKey("h4"),
+    ValueKey("b4"),
+    initiallyOpened: true, //TODO: remove after testin
   ),
   Region(
     FontAwesome5.comment_alt,
     "Contact Me",
     ContactMeBody(),
-    //initiallyOpened: true,
+    //these are updated by their respective layout builders
+    ValueKey("h5"),
+    ValueKey("b5"),
+    initiallyOpened: true,
   ),
 ];

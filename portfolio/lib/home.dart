@@ -198,6 +198,8 @@ class _HomeState extends State<Home> {
       List.generate(regions.length, (index) {
         Region thisRegion = regions[index];
         return SliverRegion(
+          headerKey: thisRegion.headerKey,
+          bodyKey: thisRegion.bodyKey,
           title: thisRegion.title,
           body: thisRegion.body,
           initiallyOpened: thisRegion.initiallyOpened,

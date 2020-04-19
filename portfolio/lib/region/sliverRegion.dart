@@ -14,12 +14,16 @@ import 'package:portfolio/main.dart';
 //widget
 class SliverRegion extends StatefulWidget {
   SliverRegion({
+    @required this.headerKey,
+    @required this.bodyKey,
     @required this.title,
     @required this.body,
     this.initiallyOpened: false,
     this.leftSpacing: true,
   });
 
+  final ValueKey headerKey;
+  final ValueKey bodyKey;
   final String title;
   final Widget body;
   final bool initiallyOpened;
@@ -43,18 +47,24 @@ class _SliverRegionState extends State<SliverRegion> {
   @override
   Widget build(BuildContext context) {
     return SliverStickyHeader(
-      header: RegionHeader(
-        regionOpened: sectionOpened, 
-        title: widget.title,
-        titleColor: MyApp.oldPurple,
+      header: Container(
+        key: widget.headerKey,
+        child: RegionHeader(
+          regionOpened: sectionOpened, 
+          title: widget.title,
+          titleColor: MyApp.oldPurple,
+        ),
       ),
       sliver: SliverList(
         delegate: SliverChildListDelegate(
           [
-            RegionBody(
-              regionOpened: sectionOpened, 
-              child: widget.body,
-              leftSpacing: widget.leftSpacing,
+            Container(
+              key: widget.bodyKey,
+              child: RegionBody(
+                regionOpened: sectionOpened, 
+                child: widget.body,
+                leftSpacing: widget.leftSpacing,
+              ),
             ),
           ],
         ),
