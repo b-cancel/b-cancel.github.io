@@ -1,21 +1,30 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/main.dart';
 import 'package:portfolio/utils/invisibleInkWell.dart';
 
+//automatically rebuilds when scaling the screen
+//which is all I really need it to do
 class ScrollBar extends StatefulWidget {
   const ScrollBar({
     Key key,
     @required this.scrollController,
-    @required this.topScrolledAway,
+    //updated to handle the position of the scroll to top button on ios
     @required this.overScroll,
+    //updated to show and hide the joke
+    @required this.topScrolledAway,
+    //updated to show or hide the scroll to top button
     @required this.onTop,
   }) : super(key: key);
 
   final ScrollController scrollController;
-  final ValueNotifier<bool> topScrolledAway;
+  //but the time you change the screen size the overscroll has been solved
+  //and even if it isn't this is so rare it not worth the time to repair it
   final ValueNotifier<double> overScroll;
+  //none of these are affected by changing screen size
+  //since in all cases if the screen size changes it does so from the top
+  final ValueNotifier<bool> topScrolledAway;
   final ValueNotifier<bool> onTop;
-  
 
   @override
   _ScrollBarState createState() => _ScrollBarState();
@@ -26,118 +35,104 @@ class _ScrollBarState extends State<ScrollBar> {
   final ValueNotifier<double> totalScrollArea = new ValueNotifier<double>(0);
   //with all the extra top padding
   final ValueNotifier<double> extraTopPadding = new ValueNotifier<double>(topIntroHeight);
-  
 
-  /*
   //If we scroll down have the scroll up button come up
   updateAfterScroll() {
-    haveScrolled = true;
-    ScrollPosition position = scrollController.position;
+    //remove toast when pop up
+    //user are scrolling away they aren't interested
+    BotToast.cleanAll();
 
-    //update overscroll to cover pill bottle if possible
+    //grab scroll data
+    ScrollPosition position = widget.scrollController.position;
+
+    //update overscroll to have nice animation with the scroll top top button on ios
     double curr = position.pixels;
     double max = position.maxScrollExtent;
-    overScroll.value = (curr < max) ? 0 : curr - max;
+    print("?max: " + max.toString());
+    widget.overScroll.value = (curr < max) ? 0 : curr - max;
 
     //Determine whether we are on the top of the scroll area
     if (curr <= position.minScrollExtent) {
-      onTop.value = true;
+      widget.onTop.value = true;
     } else {
-      onTop.value = false;
+      widget.onTop.value = false;
     }
 
     //Determine whether how much the top peice is scrolled away
     extraTopPadding.value = (topIntroHeight - curr).clamp(0, topIntroHeight);
 
     //ease of use variable
-    topScrolledAway.value = (extraTopPadding.value.round() == 0);
+    widget.topScrolledAway.value = (extraTopPadding.value.round() == 0);
 
     //update this (that includes overscroll to set the height scrollbar)
-    totalScrollArea.value = max + overScroll.value;
-
-    //remove toast when pop up
-    BotToast.cleanAll();
+    totalScrollArea.value = max + widget.overScroll.value;
   }
 
-  updateWithoutScroll(){
-    ScrollPosition position = scrollController.position;
-    double max = position.maxScrollExtent;
-    totalScrollArea.value = max;
-  }
-  */
-
-  /*
-  //wait till the scroll controller is attached to make the first update of the scroll bar
-  initScrollAfterAttach(){
-    if(scrollController.hasClients){
-      updateScrollUntilStablize();
+  initAfterAttachment(){
+    if(widget.scrollController.hasClients){
+      if(mounted){
+        setState(() {});
+      }
     }
     else{
       WidgetsBinding.instance.addPostFrameCallback((_){
-        initScrollAfterAttach();
+        initAfterAttachment();
       });
     }
   }
-
-  //set to true once the user scroll the first time
-  bool haveScrolled = false;
-
-  //because of sticky headers not everything rebuilds immediately
-  //I need to continue updating the variables until the user scrolls
-  updateScrollUntilStablize(){
-    WidgetsBinding.instance.addPostFrameCallback((_){
-      updateWithoutScroll();
-      if(haveScrolled == false){
-        print("repeat");
-        updateScrollUntilStablize();
-      }
-      else{
-        print("no repeat");
-      }
-    });
-  }
-  */
-
-  /*
-  //set initial size of scroll bar
-    initScrollAfterAttach();
-  */
-
-  updateState(){
-    if(mounted){
-      setState((){});
-    }
-  }
-
-  /*
+  
   @override
   void initState() {
     //super init
     super.initState();
-    //add listeners
-    scrollController.addListener(updateAfterScroll);
-    widget.totalScrollArea.addListener(updateState);
-    widget.extraTopPadding.addListener(updateState);
-  }
 
+    //init show or hide the scrollbar
+    //NOTHING ELSE... we don't care about how big it should be
+    initAfterAttachment();
+
+    //add listeners
+    widget.scrollController.addListener(updateAfterScroll);
+  }
   @override
   void dispose() {
     //remove listeners
-    scrollController.removeListener(updateAfterScroll);
-    widget.totalScrollArea.removeListener(updateState);
-    widget.extraTopPadding.removeListener(updateState);
+    widget.scrollController.removeListener(updateAfterScroll);
+
     //super dispose
     super.dispose();
   }
-  */
 
   @override
   Widget build(BuildContext context) {
-    //orientation
-    double totalScrollBarWidth = 48;
+    //assume you don't need the scroll bar initially
+    double max = 0;
+    if(widget.scrollController != null){
+      if(widget.scrollController.hasClients){
+        ScrollPosition position = widget.scrollController.position;
+        max = position.maxScrollExtent ?? 0;
+        print("seemed gg");
+      }
+    }
+    print("max: " + max.toString());
 
-    //maths
+    //build
+    return Visibility(
+      //if max is 0
+      //the scroll view detected that scrolling isnt needed
+      //so don't show the scroll bar
+      visible: max > 0.0,
+      child: Container(
+        height: 56,
+        width: 56,
+        color: Colors.yellow,
+      )
+    );
+  }
+}
+
+/*
     double totalHeight = MediaQuery.of(context).size.height;
+    
     double topBitHeight = 0; //widget.extraTopPadding.value;
     double appBarHeight = 56;
     double usableHeight = totalHeight - topBitHeight - appBarHeight;
@@ -158,11 +153,33 @@ class _ScrollBarState extends State<ScrollBar> {
     print("Scroll area needed: " + totalScrollArea.toString());
     //print("??? / " + usableHeight.toString());
     //scrollBarHeight = scrollBarHeight * usableHeight;
+    */
 
-    //build
-    return Visibility(
-      visible: totalHeight < totalScrollArea,
-      child: Container(
+    /*
+    ScrollPosition position = scrollController?.position;
+    double max = (position == null) ? 0 : position.maxScrollExtent;
+    
+    */
+
+    /*
+    
+    totalScrollArea.removeListener(updateState);
+    extraTopPadding.removeListener(updateState);
+    */
+class ScrollBarBackground extends StatelessWidget {
+  //build
+  @override
+  Widget build(BuildContext context) {
+    /*
+    //orientation
+    double totalScrollBarWidth = 48;
+    */
+    return Container(
+      
+    );
+
+    /*
+    Container(
         width: totalScrollBarWidth,
         height: totalHeight,
         padding: EdgeInsets.only(
@@ -201,6 +218,6 @@ class _ScrollBarState extends State<ScrollBar> {
           ),
         ),
       ),
-    );
+    */
   }
 }
