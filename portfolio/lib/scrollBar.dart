@@ -171,6 +171,7 @@ class _ScrollBarState extends State<ScrollBar> {
       //so don't show the scroll bar
       visible: heightToScroll.value > 0.0,
       child: ActualScrollBar(
+        scrollController: widget.scrollController,
         currentScrollPosition: currentScrollPosition,
         extraTopPadding: extraTopPadding, 
         heightToScroll: heightToScroll,
@@ -181,11 +182,13 @@ class _ScrollBarState extends State<ScrollBar> {
 
 class ActualScrollBar extends StatefulWidget {
   const ActualScrollBar({
+    @required this.scrollController,
     @required this.currentScrollPosition,
     @required this.extraTopPadding,
     @required this.heightToScroll,
   });
 
+  final ScrollController scrollController;
   final ValueNotifier<double> currentScrollPosition;
   final ValueNotifier<double> extraTopPadding;
   final ValueNotifier<double> heightToScroll;
@@ -238,6 +241,8 @@ class _ActualScrollBarState extends State<ActualScrollBar> {
       width: isHeader ? 24 : 0,
     );
   }
+
+  final ValueNotifier<double> sliderValue = new ValueNotifier<double>(0);
 
   @override
   Widget build(BuildContext context) {
@@ -364,6 +369,25 @@ class _ActualScrollBarState extends State<ActualScrollBar> {
                   height: scrollBarHeight,
                   width: totalScrollBarWidth/2,
                   color: Colors.white.withOpacity(0.25),
+                ),
+                RotatedBox(
+                  quarterTurns: 1,
+                  child: Container(
+                    width: usableVisualHeight,
+                    height: totalScrollBarWidth,
+                    child: Opacity(
+                      opacity: 0,
+                      child: Slider(
+                        onChanged: (newValue) {
+                          sliderValue.value = newValue;
+                          widget.scrollController.jumpTo(newValue);
+                        },
+                        value: sliderValue.value,
+                        min: 0,
+                        max: heightToScroll,
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),
