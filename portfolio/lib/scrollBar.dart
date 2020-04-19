@@ -32,7 +32,7 @@ class ScrollBar extends StatefulWidget {
 
 class _ScrollBarState extends State<ScrollBar> {
   //must be updated after the run of build
-  final ValueNotifier<double> totalScrollArea = new ValueNotifier<double>(0);
+  final ValueNotifier<double> heightToScroll = new ValueNotifier<double>(0);
   //with all the extra top padding
   final ValueNotifier<double> extraTopPadding = new ValueNotifier<double>(topIntroHeight);
 
@@ -49,11 +49,12 @@ class _ScrollBarState extends State<ScrollBar> {
     //grab scroll data
     ScrollPosition position = widget.scrollController.position;
 
-    //update overscroll to have nice animation with the scroll top top button on ios
+    //cover null cases (which do happen at the start)
     double curr = position.pixels ?? 0;
     double min = position.minScrollExtent ?? 0;
     double max = position.maxScrollExtent ?? 0;
-    print("?max: " + max.toString());
+
+    //calculate overscroll
     widget.overScroll.value = (curr < max) ? 0 : curr - max;
 
     //Determine whether we are on the top of the scroll area
@@ -70,9 +71,10 @@ class _ScrollBarState extends State<ScrollBar> {
     widget.topScrolledAway.value = (extraTopPadding.value.round() == 0);
 
     //update this (that includes overscroll to set the height scrollbar)
-    totalScrollArea.value = max + widget.overScroll.value;
+    heightToScroll.value = max + widget.overScroll.value;
   }
 
+  //TODO: fix the super rare hard to fix problem... scrolling isnt needed but the user is still using the page
   //Note: we need to wait until the scroll controller is attached to something
   //but even after that the value will change until finally it stablizes
   //I have no idea how to reliable determine this stablization
@@ -126,42 +128,78 @@ class _ScrollBarState extends State<ScrollBar> {
     double max = 0;
     if(widget.scrollController != null){
       if(widget.scrollController.hasClients){
-        print("usable but maybe still not right");
+        //NOTE: BOTH of the variables used by
+        //the atual scroll bar widet below
+        //are updated here
         updateAfterScroll(
           triggeredByScrolling: false,
         );
       }
     }
-    print("max: " + totalScrollArea.value.toString());
 
     //build
     return Visibility(
       //if max is 0
       //the scroll view detected that scrolling isnt needed
       //so don't show the scroll bar
-      visible: totalScrollArea.value > 0.0,
-      child: RaisedButton(
-        onPressed: (){
-          
-        },
-        child: Text("scroll bar here"),
-      )
+      visible: heightToScroll.value > 0.0,
+      child: ActualScrollBar(
+        extraTopPadding: extraTopPadding, 
+        heightToScroll: heightToScroll,
+      ),
     );
   }
 }
 
-/*  
-totalScrollArea.removeListener(updateState);
-extraTopPadding.removeListener(updateState);
-*/
+class ActualScrollBar extends StatefulWidget {
+  const ActualScrollBar({
+    @required this.extraTopPadding,
+    @required this.heightToScroll,
+  });
 
-/*
+  final ValueNotifier<double> extraTopPadding;
+  final ValueNotifier<double> heightToScroll;
+
+  @override
+  _ActualScrollBarState createState() => _ActualScrollBarState();
+}
+
+class _ActualScrollBarState extends State<ActualScrollBar> {
+  //might want to change value given orientation
+  double totalScrollBarWidth = 48;
+
+  updateState(){
+    if(mounted){
+      setState(() {});
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    widget.heightToScroll.addListener(updateState);
+    widget.extraTopPadding.addListener(updateState);
+  }
+
+  @override
+  void dispose() {
+    widget.extraTopPadding.removeListener(updateState);
+    widget.heightToScroll.removeListener(updateState);
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     double totalHeight = MediaQuery.of(context).size.height;
-    
-    double topBitHeight = 0; //widget.extraTopPadding.value;
-    double appBarHeight = 56;
-    double usableHeight = totalHeight - topBitHeight - appBarHeight;
-    double totalScrollArea = 0; //widget.totalScrollArea.value;
+
+    //heights to calculate visual scroll bar
+    double topBitVisualHeight = widget.extraTopPadding.value;
+    double appBarVisualHeight = 56;
+    double usableVisualHeight = totalHeight - topBitVisualHeight - appBarVisualHeight;
+
+    //height to calculate programatic scroll bar
+    double heightToScroll = widget.heightToScroll.value;
+    double totalScrollHeight = heightToScroll + totalHeight;
 
     //NOTE: inside of [usableHeight] should be shown all the scroll area
     //the scroll area is as large as [totalScrollArea]
@@ -171,38 +209,17 @@ extraTopPadding.removeListener(updateState);
     //ratio
     //totalHeight             ???
     //-----------       =     ------------
-    //totalScrollArea         usableHeight
+    //totalScrollHeight       usableHeight
 
-    double scrollBarHeight = totalHeight/totalScrollArea;
-    print("Screen height: " + totalHeight.toString());
-    print("Scroll area needed: " + totalScrollArea.toString());
-    //print("??? / " + usableHeight.toString());
-    //scrollBarHeight = scrollBarHeight * usableHeight;
-    */
+    double scrollBarHeight = totalHeight / totalScrollHeight;
+    scrollBarHeight = scrollBarHeight * usableVisualHeight;
 
-    /*
-    ScrollPosition position = scrollController?.position;
-    double max = (position == null) ? 0 : position.maxScrollExtent;
-    
-    */
-class ScrollBarBackground extends StatelessWidget {
-  //build
-  @override
-  Widget build(BuildContext context) {
-    /*
-    //orientation
-    double totalScrollBarWidth = 48;
-    */
+    //return
     return Container(
-      
-    );
-
-    /*
-    Container(
         width: totalScrollBarWidth,
         height: totalHeight,
         padding: EdgeInsets.only(
-          top: topBitHeight + appBarHeight,
+          top: topBitVisualHeight + appBarVisualHeight,
         ),
         child: Material(
           color: Colors.transparent,
@@ -214,7 +231,7 @@ class ScrollBarBackground extends StatelessWidget {
             //but for now
             child: Container(
               width: totalScrollBarWidth/2,
-              height: usableHeight,
+              height: usableVisualHeight,
               margin: EdgeInsets.only(
                 left: totalScrollBarWidth/2,
               ),
@@ -236,7 +253,6 @@ class ScrollBarBackground extends StatelessWidget {
             ),
           ),
         ),
-      ),
-    */
+      );
   }
 }
