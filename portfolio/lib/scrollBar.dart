@@ -112,6 +112,13 @@ class _ScrollBarState extends State<ScrollBar> {
         updateAfterScroll(
           triggeredByScrolling: false,
         );
+
+        //required since closing the region may make the scroll bar no longer needed
+        WidgetsBinding.instance.addPostFrameCallback((_){
+          if(mounted){
+            setState(() {});
+          }
+        });
       });
 
       //indicate process complete
@@ -255,7 +262,13 @@ class _ActualScrollBarState extends State<ActualScrollBar> {
     //-----------       =     ------------
     //totalScrollHeight       usableHeight
 
-    double ratio = totalHeight / totalScrollHeight;
+    double ratio;
+    if(totalScrollHeight <= 0){
+      ratio = 0;
+    }
+    else{
+      ratio = totalHeight / totalScrollHeight;;
+    }
     double scrollBarHeight = ratio * usableVisualHeight;
 
     //now based on the above calc scroll padding
@@ -266,11 +279,14 @@ class _ActualScrollBarState extends State<ActualScrollBar> {
 
     //current / heightToScroll = padding / maxPadding
     double currentHeightScrolled = widget.currentScrollPosition.value;
-    double scrollBarPadding = currentHeightScrolled / heightToScroll;
-    scrollBarPadding *= maxPadding;
-    if(scrollBarPadding.isNegative){
+    double scrollBarPadding;
+    if(heightToScroll <= 0){
       scrollBarPadding = 0;
     }
+    else{
+      scrollBarPadding = currentHeightScrolled / heightToScroll;
+    }
+    scrollBarPadding *= maxPadding;
 
     //create section bars
     List<Widget> regionBars = new List<Widget>();
