@@ -20,6 +20,7 @@ import 'package:portfolio/region/regions.dart';
 
 //internal: other
 import 'package:portfolio/region/sliverRegion.dart';
+import 'package:portfolio/scrollBar.dart';
 import 'package:portfolio/utils/invisibleInkWell.dart';
 import 'package:portfolio/utils/wrappedText.dart';
 import 'package:portfolio/utils/scrollToTop.dart';
@@ -98,8 +99,10 @@ class _HomeState extends State<Home> {
   OverlayEntry appOverlayEntry;
   GlobalKey menuKey = GlobalKey();
 
-  //scroll to top function
+  //scroll to top function=
   final ScrollController scrollController = new ScrollController();
+  //must be updated after the run of build
+  final ValueNotifier<double> totalScrollArea = new ValueNotifier<double>(0);
   //we start off on top
   final ValueNotifier<bool> onTop = new ValueNotifier(true);
   //with no overscroll
@@ -111,7 +114,8 @@ class _HomeState extends State<Home> {
   final ValueNotifier<bool> topScrolledAway = new ValueNotifier<bool>(false);
 
   //If we scroll down have the scroll up button come up
-  updateOnTopValue() {
+  updateAfterScroll() {
+    haveScrolled = true;
     ScrollPosition position = scrollController.position;
     //double currentOffset = scrollController.offset;
 
@@ -133,8 +137,17 @@ class _HomeState extends State<Home> {
     //ease of use variable
     topScrolledAway.value = (extraTopPadding.value.round() == 0);
 
+    //update this (that includes overscroll to set the height scrollbar)
+    totalScrollArea.value = max + overScroll.value;
+
     //remove toast when pop up
     BotToast.cleanAll();
+  }
+
+  updateWithoutScroll(){
+    ScrollPosition position = scrollController.position;
+    double max = position.maxScrollExtent;
+    totalScrollArea.value = max;
   }
 
   //init
@@ -152,13 +165,45 @@ class _HomeState extends State<Home> {
         return appBuilder(context);
       },
     );
-
     SchedulerBinding.instance.addPostFrameCallback((_) {
       Overlay.of(context).insert(appOverlayEntry);
     });
 
+    //set initial size of scroll bar
+    initScrollAfterAttach();
+
     //show or hide the to top button
-    scrollController.addListener(updateOnTopValue);
+    scrollController.addListener(updateAfterScroll);
+  }
+
+  //wait till the scroll controller is attached to make the first update of the scroll bar
+  initScrollAfterAttach(){
+    if(scrollController.hasClients){
+      updateScrollUntilStablize();
+    }
+    else{
+      WidgetsBinding.instance.addPostFrameCallback((_){
+        initScrollAfterAttach();
+      });
+    }
+  }
+
+  //set to true once the user scroll the first time
+  bool haveScrolled = false;
+
+  //because of sticky headers not everything rebuilds immediately
+  //I need to continue updating the variables until the user scrolls
+  updateScrollUntilStablize(){
+    WidgetsBinding.instance.addPostFrameCallback((_){
+      updateWithoutScroll();
+      if(haveScrolled == false){
+        print("repeat");
+        updateScrollUntilStablize();
+      }
+      else{
+        print("no repeat");
+      }
+    });
   }
 
   //dipose
@@ -168,7 +213,7 @@ class _HomeState extends State<Home> {
     appOverlayEntry.remove();
 
     //remove listener
-    scrollController.removeListener(updateOnTopValue);
+    scrollController.removeListener(updateAfterScroll);
 
     //super dispose
     super.dispose();
@@ -301,7 +346,6 @@ class _HomeState extends State<Home> {
           )
         ],
       ),
-      //BottomIntro(),
     ];
 
     //add all the regions
@@ -342,6 +386,8 @@ class _HomeState extends State<Home> {
                 top: 0,
                 bottom: 0,
                 child: ScrollBar(
+                  totalScrollArea: totalScrollArea,
+                  scrollController: scrollController,
                   extraTopPadding: extraTopPadding,
                 ),
               ),
@@ -403,149 +449,6 @@ class _HomeState extends State<Home> {
           );
         }
       },
-    );
-  }
-}
-
-class ScrollBar extends StatefulWidget {
-  const ScrollBar({
-    Key key,
-    @required this.extraTopPadding,
-  }) : super(key: key);
-
-  final ValueNotifier<double> extraTopPadding;
-
-  @override
-  _ScrollBarState createState() => _ScrollBarState();
-}
-
-class _ScrollBarState extends State<ScrollBar> {
-  updateState(){
-    if(mounted){
-      setState((){});
-    }
-  }
-
-  @override
-  void initState() {
-    widget.extraTopPadding.addListener(updateState);
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    widget.extraTopPadding.removeListener(updateState);
-    super.dispose();
-  }
-
-
-  @override
-  Widget build(BuildContext context) {
-    //orientation
-    Size size = MediaQuery.of(context).size;
-    bool isPortrait = size.height > size.width;
-    double totalScrollBarWidth = isPortrait ? 36 : 48;
-
-    //maths
-    double totalHeight = MediaQuery.of(context).size.height;
-    double topBitHeight = widget.extraTopPadding.value;
-    double appBarHeight = 56;
-    double usableHeight = totalHeight - topBitHeight + appBarHeight;
-
-    //build
-    return Container(
-      width: totalScrollBarWidth,
-      height: totalHeight,
-      padding: EdgeInsets.only(
-        top: topBitHeight + appBarHeight,
-      ),
-      child: Material(
-        color: Colors.transparent,
-        child: InvisibleInkWell(
-          onTap: (){},
-          //material is 48 by 48 atleast
-          //we can fake it and make it 
-          //24 and 24 of space that actually also scrolls
-          //but for now
-          child: Container(
-            width: totalScrollBarWidth/2,
-            height: usableHeight,
-            margin: EdgeInsets.only(
-              left: totalScrollBarWidth/2,
-            ),
-            decoration: BoxDecoration(
-              color: MyApp.bodyColor,
-              border: Border(
-                left: BorderSide(
-                  color: MyApp.oldGrey,
-                  width: 2,
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class Joke extends StatelessWidget {
-  const Joke({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return DefaultTextStyle(
-      style: GoogleFonts.robotoMono(
-        color: Colors.white,
-        fontSize: MyApp.h5,
-        height: 1,
-      ),
-      child: WrappedText(
-        "> echo \"yes... like cancel my order of fries :P\"",
-      ),
-    );
-  }
-}
-
-class Name extends StatelessWidget {
-  const Name({
-    Key key,
-    this.isTiny: false,
-  }) : super(key: key);
-
-  final bool isTiny;
-
-  @override
-  Widget build(BuildContext context) {
-    return DefaultTextStyle(
-      style: GoogleFonts.robotoMono(
-        color: Colors.white,
-        fontSize: isTiny ? MyApp.h3 : MyApp.h1,
-      ),
-      child: Transform.translate(
-        offset: Offset(5, 0),
-        child: Stack(
-          children: <Widget>[
-            Transform.translate(
-              offset: Offset(3, 2),
-              child: Text(
-                "Bryan_Cancel",
-                style: TextStyle(
-                  color: MyApp.highlightPink,
-                ),
-              ),
-            ),
-            Text(
-              "Bryan_Cancel",
-              style: TextStyle(
-                color: MyApp.highlightGreen,
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

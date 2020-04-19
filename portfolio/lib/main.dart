@@ -36,6 +36,7 @@ class MyApp extends StatelessWidget {
   static Color inactiveTabColor = Color(0xFF2D2D2D);
   static Color besideTabColor = Color(0xFF252526);
   static Color bodyColor = activeTabColor;
+  static Color scrollBarColor = Color(0xFF424242);
 
   //menu
   static Color sideMenuBackground = Color(0xFF333333);
@@ -126,33 +127,62 @@ class TopIntro extends StatelessWidget {
   }
 }
 
-class BottomIntro extends StatelessWidget {
-  const BottomIntro({
+class Name extends StatelessWidget {
+  const Name({
+    Key key,
+    this.isTiny: false,
+  }) : super(key: key);
+
+  final bool isTiny;
+
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTextStyle(
+      style: GoogleFonts.robotoMono(
+        color: Colors.white,
+        fontSize: isTiny ? MyApp.h3 : MyApp.h1,
+      ),
+      child: Transform.translate(
+        offset: Offset(5, 0),
+        child: Stack(
+          children: <Widget>[
+            Transform.translate(
+              offset: Offset(3, 2),
+              child: Text(
+                "Bryan_Cancel",
+                style: TextStyle(
+                  color: MyApp.highlightPink,
+                ),
+              ),
+            ),
+            Text(
+              "Bryan_Cancel",
+              style: TextStyle(
+                color: MyApp.highlightGreen,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class Joke extends StatelessWidget {
+  const Joke({
     Key key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SliverToBoxAdapter(
-      child: Container(
-        color: MyApp.inactiveTabColor,
-        padding: EdgeInsets.only(
-          bottom: 16,
-        ),
-        child: DefaultTextStyle(
-          style: GoogleFonts.robotoMono(
-            color: Colors.white,
-            height: 1,
-          ),
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: 24,
-            ),
-            child: WrappedText(
-              "> echo \"yes... like cancel my order of fries :P\"",
-            ),
-          ),
-        ),
+    return DefaultTextStyle(
+      style: GoogleFonts.robotoMono(
+        color: Colors.white,
+        fontSize: MyApp.h5,
+        height: 1,
+      ),
+      child: WrappedText(
+        "> echo \"yes... like cancel my order of fries :P\"",
       ),
     );
   }
