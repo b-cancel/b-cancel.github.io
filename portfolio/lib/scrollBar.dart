@@ -120,11 +120,14 @@ class _ScrollBarState extends State<ScrollBar> {
       //if max is 0
       //the scroll view detected that scrolling isnt needed
       //so don't show the scroll bar
-      visible: max > 0.0,
-      child: Container(
-        height: 56,
-        width: 56,
-        color: Colors.yellow,
+      visible: true, //max > 0.0,
+      child: RaisedButton(
+        onPressed: (){
+          ScrollPosition position = widget.scrollController.position;
+          double scrollPos = position.maxScrollExtent ?? 0;
+          print(scrollPos.toString());
+        },
+        child: Text("Test"),
       )
     );
   }

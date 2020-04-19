@@ -220,32 +220,26 @@ class _HomeState extends State<Home> {
           //NOTE: Flutter has 2 options
           //1. ScrollBar (but you cant drag it)
           //2. CupertinoScrollBar (but you cant click to travel)
-          child: LayoutBuilder(
-            builder: (BuildContext context, BoxConstraints constraints){
-              print("min height: " + constraints.minHeight.toString());
-              print("max height: " + constraints.maxHeight.toString());
-              return Stack(
-                children: <Widget>[
-                  CustomScrollView(
-                    controller: scrollController,
-                    slivers: sliverSections,
-                  ),
-                  Positioned(
-                    right: 0,
-                    top: 0,
-                    bottom: 0,
-                    child: ScrollBar(
-                      scrollController: scrollController,
-                      //here they are updated
-                      topScrolledAway: topScrolledAway,
-                      overScroll: overScroll,
-                      onTop: onTop,
-                      
-                    ),
-                  ),
-                ],
-              );
-            },
+          child: Stack(
+            children: <Widget>[
+              CustomScrollView(
+                controller: scrollController,
+                slivers: sliverSections,
+              ),
+              Positioned(
+                right: 0,
+                top: 0,
+                bottom: 0,
+                child: ScrollBar(
+                  scrollController: scrollController,
+                  //here they are updated
+                  topScrolledAway: topScrolledAway,
+                  overScroll: overScroll,
+                  onTop: onTop,
+                  
+                ),
+              ),
+            ],
           ),
         ),
         ScrollToTopButton(
