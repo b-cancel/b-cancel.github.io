@@ -2,91 +2,16 @@
 import 'package:flutter/material.dart';
 
 //plugin
-import 'package:draggable_scrollbar_sliver/draggable_scrollbar_sliver.dart';
-import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_inner_drawer/inner_drawer.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 //internal: sections
-import 'package:portfolio/bodies/aboutMe.dart';
-import 'package:portfolio/bodies/contactMe.dart';
-import 'package:portfolio/bodies/endorsements.dart';
-import 'package:portfolio/bodies/hardSkills.dart';
-import 'package:portfolio/bodies/projects.dart';
-import 'package:portfolio/bodies/softSkills.dart';
-import 'package:portfolio/bodies/work.dart';
+import 'package:portfolio/region/sliverRegion.dart';
 import 'package:portfolio/region/regions.dart';
 
 //internal: other
-import 'package:portfolio/region/sliverRegion.dart';
-import 'package:portfolio/scrollBar.dart';
-import 'package:portfolio/utils/invisibleInkWell.dart';
-import 'package:portfolio/utils/wrappedText.dart';
 import 'package:portfolio/utils/scrollToTop.dart';
+import 'package:portfolio/scrollBar.dart';
 import 'package:portfolio/main.dart';
-
-/*
-class DrawerScaffold extends StatefulWidget{
-  @override
-  _DrawerScaffoldState createState() => _DrawerScaffoldState();
-}
-
-class _DrawerScaffoldState extends State<DrawerScaffold> with SingleTickerProviderStateMixin {
-  final ValueNotifier<bool> menuIsExpanded = new ValueNotifier(false);
-  AnimationController buttonController;
-
-  //init
-  @override
-  void initState() {
-    //super init
-    super.initState();
-    
-    //Scaffold.of(context).openDrawer();
-
-    //animated icon
-    buttonController = AnimationController(
-      vsync: this,
-      duration: kTabScrollDuration,
-      reverseDuration: kTabScrollDuration,
-    );
-  }
-
-  //dipose
-  @override
-  void dispose() {
-    //animated icon
-    buttonController.dispose();
-
-    //super dispose
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      
-    );
-
-    IconButton(
-            icon: AnimatedIcon(
-              icon: AnimatedIcons.menu_arrow,
-              progress: buttonController,
-              semanticLabel: 'show menu',
-            ),
-            onPressed: () {
-              Scaffold.of(context).openDrawer();
-
-              //toggleMenu();
-              setState(() {
-                menuIsExpanded ? buttonController.forward() : buttonController.reverse();
-                menuIsExpanded = !menuIsExpanded;
-              });
-            },
-          ),
-  }
-}
-*/
 
 //widgets
 class Home extends StatefulWidget {
@@ -95,60 +20,19 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  //handles the menu
   final ValueNotifier<bool> isMenuOpen = new ValueNotifier<bool>(false);
   OverlayEntry appOverlayEntry;
   GlobalKey menuKey = GlobalKey();
 
-  //scroll to top function=
+  //handle the scrolling
   final ScrollController scrollController = new ScrollController();
-  //must be updated after the run of build
-  final ValueNotifier<double> totalScrollArea = new ValueNotifier<double>(0);
   //we start off on top
   final ValueNotifier<bool> onTop = new ValueNotifier(true);
   //with no overscroll
   final ValueNotifier<double> overScroll = new ValueNotifier<double>(0);
-  //with all the extra top padding
-  final ValueNotifier<double> extraTopPadding =
-      new ValueNotifier<double>(topIntroHeight);
   //and without the top bit scrolled away
   final ValueNotifier<bool> topScrolledAway = new ValueNotifier<bool>(false);
-
-  //If we scroll down have the scroll up button come up
-  updateAfterScroll() {
-    haveScrolled = true;
-    ScrollPosition position = scrollController.position;
-    //double currentOffset = scrollController.offset;
-
-    //update overscroll to cover pill bottle if possible
-    double curr = position.pixels;
-    double max = position.maxScrollExtent;
-    overScroll.value = (curr < max) ? 0 : curr - max;
-
-    //Determine whether we are on the top of the scroll area
-    if (curr <= position.minScrollExtent) {
-      onTop.value = true;
-    } else {
-      onTop.value = false;
-    }
-
-    //Determine whether how much the top peice is scrolled away
-    extraTopPadding.value = (topIntroHeight - curr).clamp(0, topIntroHeight);
-
-    //ease of use variable
-    topScrolledAway.value = (extraTopPadding.value.round() == 0);
-
-    //update this (that includes overscroll to set the height scrollbar)
-    totalScrollArea.value = max + overScroll.value;
-
-    //remove toast when pop up
-    BotToast.cleanAll();
-  }
-
-  updateWithoutScroll(){
-    ScrollPosition position = scrollController.position;
-    double max = position.maxScrollExtent;
-    totalScrollArea.value = max;
-  }
 
   //init
   @override
@@ -168,42 +52,6 @@ class _HomeState extends State<Home> {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       Overlay.of(context).insert(appOverlayEntry);
     });
-
-    //set initial size of scroll bar
-    initScrollAfterAttach();
-
-    //show or hide the to top button
-    scrollController.addListener(updateAfterScroll);
-  }
-
-  //wait till the scroll controller is attached to make the first update of the scroll bar
-  initScrollAfterAttach(){
-    if(scrollController.hasClients){
-      updateScrollUntilStablize();
-    }
-    else{
-      WidgetsBinding.instance.addPostFrameCallback((_){
-        initScrollAfterAttach();
-      });
-    }
-  }
-
-  //set to true once the user scroll the first time
-  bool haveScrolled = false;
-
-  //because of sticky headers not everything rebuilds immediately
-  //I need to continue updating the variables until the user scrolls
-  updateScrollUntilStablize(){
-    WidgetsBinding.instance.addPostFrameCallback((_){
-      updateWithoutScroll();
-      if(haveScrolled == false){
-        print("repeat");
-        updateScrollUntilStablize();
-      }
-      else{
-        print("no repeat");
-      }
-    });
   }
 
   //dipose
@@ -211,9 +59,6 @@ class _HomeState extends State<Home> {
   void dispose() {
     //handle menu
     appOverlayEntry.remove();
-
-    //remove listener
-    scrollController.removeListener(updateAfterScroll);
 
     //super dispose
     super.dispose();
@@ -386,18 +231,22 @@ class _HomeState extends State<Home> {
                 top: 0,
                 bottom: 0,
                 child: ScrollBar(
-                  totalScrollArea: totalScrollArea,
                   scrollController: scrollController,
-                  extraTopPadding: extraTopPadding,
+                  //here they are updated
+                  topScrolledAway: topScrolledAway,
+                  overScroll: overScroll,
+                  onTop: onTop,
+                  
                 ),
               ),
             ],
           ),
         ),
         ScrollToTopButton(
-          onTop: onTop,
-          overScroll: overScroll,
           scrollController: scrollController,
+          //here they are used
+          overScroll: overScroll,
+          onTop: onTop,
         ),
       ],
     );
