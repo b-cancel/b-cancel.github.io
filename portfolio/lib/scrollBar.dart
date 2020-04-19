@@ -227,6 +227,9 @@ class _ActualScrollBarState extends State<ActualScrollBar> {
     final RenderBox renderBox = key.currentContext.findRenderObject();
     double boxHeight = renderBox.size.height * ratio;
     return Container(
+      margin: EdgeInsets.only(
+        left: 2,
+      ),
       decoration: BoxDecoration(
         color: MyApp.oldPurple,
         border: Border(
@@ -238,7 +241,7 @@ class _ActualScrollBarState extends State<ActualScrollBar> {
         ),
       ),
       height: boxHeight,
-      width: isHeader ? 24 : 0,
+      width: isHeader ? 22 : 0,
     );
   }
 

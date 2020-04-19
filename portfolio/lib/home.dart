@@ -72,6 +72,7 @@ class _HomeState extends State<Home> {
       backgroundColor: MyApp.bodyColor,
       body: SideMenu(
         menuKey: menuKey,
+        isMenuOpen: isMenuOpen,
       ),
     );
   }

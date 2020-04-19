@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/main.dart';
 import 'package:portfolio/region/regions.dart';
+import 'package:portfolio/utils/hover.dart';
 
 class SideMenu extends StatelessWidget {
   const SideMenu({
     Key key,
     @required this.menuKey,
+    @required this.isMenuOpen,
   }) : super(key: key);
 
   final GlobalKey<State<StatefulWidget>> menuKey;
+  final ValueNotifier<bool> isMenuOpen;
 
   @override
   Widget build(BuildContext context) {
@@ -44,12 +46,13 @@ class SideMenu extends StatelessWidget {
               ),
             ),
             Positioned.fill(
-              child: Column(
+              child: ListView(
                 children: List.generate(
                   regions.length,
                   (index) {
                     Region thisRegion = regions[index];
                     return MenuTileButton(
+                      isMenuOpen: isMenuOpen,
                       title: thisRegion.title,
                       icon: thisRegion.icon,
                     );
@@ -69,12 +72,12 @@ class MenuTileButton extends StatelessWidget {
     Key key,
     @required this.title,
     @required this.icon,
+    @required this.isMenuOpen,
   }) : super(key: key);
 
   final String title;
   final IconData icon;
-
-  //final ValueNotifier<bool> hovering
+  final ValueNotifier<bool> isMenuOpen;
 
   @override
   Widget build(BuildContext context) {
@@ -82,12 +85,14 @@ class MenuTileButton extends StatelessWidget {
       color: Colors.transparent,
       child: InkWell(
         onTap: (){
-
+          isMenuOpen.value = false;
         },
-        child: MenuTile(
-          title: title, 
-          icon: icon,
-        ),
+        child: OpaqueOnHover(
+          child: MenuTile(
+            title: title, 
+            icon: icon,
+          ),
+        )
       ),
     );
   }
@@ -135,9 +140,12 @@ class MenuTile extends StatelessWidget {
                     size: 24,
                   ),
                 ),
-                Icon(
-                  icon,
-                  size: 24,
+                FittedBox(
+                  fit: BoxFit.contain,
+                  child: Icon(
+                    icon,
+                    size: 24,
+                  ),
                 ),
               ],
             ),

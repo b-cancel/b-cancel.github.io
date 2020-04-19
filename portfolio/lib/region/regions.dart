@@ -88,7 +88,7 @@ List<Region> regions = [
     initiallyOpened: true, //TODO: remove after testin
   ),
   Region(
-    FontAwesome5.comment_alt,
+    FontAwesome5Solid.comment_alt,
     "Contact Me",
     ContactMeBody(),
     //these are updated by their respective layout builders
