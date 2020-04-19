@@ -142,7 +142,6 @@ class _ScrollBarState extends State<ScrollBar> {
   @override
   Widget build(BuildContext context) {
     //assume you don't need the scroll bar initially
-    double max = 0;
     if(widget.scrollController != null){
       if(widget.scrollController.hasClients){
         //NOTE: BOTH of the variables used by
@@ -205,6 +204,24 @@ class _ActualScrollBarState extends State<ActualScrollBar> {
     super.dispose();
   }
 
+  regionBox(GlobalKey key, double ratio, {isHeader: false}){
+    final RenderBox renderBox = key.currentContext.findRenderObject();
+    double boxHeight = renderBox.size.height * ratio;
+    return Container(
+      decoration: BoxDecoration(
+        color: MyApp.oldPurple,
+        border: Border(
+          bottom: BorderSide(
+            color: MyApp.bodyColor,
+            width: 4,
+          ),
+        ),
+      ),
+      height: boxHeight,
+      width: isHeader ? 24 : 0,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     double totalHeight = MediaQuery.of(context).size.height;
@@ -228,8 +245,29 @@ class _ActualScrollBarState extends State<ActualScrollBar> {
     //-----------       =     ------------
     //totalScrollHeight       usableHeight
 
-    double scrollBarHeight = totalHeight / totalScrollHeight;
-    scrollBarHeight = scrollBarHeight * usableVisualHeight;
+    double ratio = totalHeight / totalScrollHeight;
+    double scrollBarHeight = ratio * usableVisualHeight;
+
+    //create section bars
+    List<Widget> regionBars = new List<Widget>();
+    for(int i = 0; i < regions.length; i++){
+      Region thisRegion = regions[i];
+      //header
+      regionBars.add(
+        regionBox(
+          thisRegion.headerKey, 
+          ratio,
+          isHeader: true,
+        ),
+      );
+      //body
+      regionBars.add(
+        regionBox(
+          thisRegion.bodyKey,
+          ratio,
+        ),
+      );
+    }
 
     //return
     return Container(
@@ -246,27 +284,43 @@ class _ActualScrollBarState extends State<ActualScrollBar> {
             //we can fake it and make it 
             //24 and 24 of space that actually also scrolls
             //but for now
-            child: Container(
-              width: totalScrollBarWidth/2,
-              height: usableVisualHeight,
-              margin: EdgeInsets.only(
-                left: totalScrollBarWidth/2,
-              ),
-              decoration: BoxDecoration(
-                color: MyApp.bodyColor,
-                border: Border(
-                  left: BorderSide(
-                    color: MyApp.oldGrey,
-                    width: 2,
+            child: Stack(
+              alignment: Alignment.topRight,
+              children: <Widget>[
+                Container(
+                  width: totalScrollBarWidth/2,
+                  height: usableVisualHeight,
+                  margin: EdgeInsets.only(
+                    left: totalScrollBarWidth/2,
+                  ),
+                  decoration: BoxDecoration(
+                    color: MyApp.bodyColor,
+                    border: Border(
+                      left: BorderSide(
+                        color: MyApp.oldGrey,
+                        width: 2,
+                      ),
+                    ),
                   ),
                 ),
-              ),
-              alignment: Alignment.topCenter,
-              child: Container(
-                height: scrollBarHeight,
-                width: totalScrollBarWidth/2,
-                color: Colors.red, //MyApp.scrollBarColor,
-              ),
+                Container(
+                  width: totalScrollBarWidth/2,
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                      top: (topIntroHeight + appBarVisualHeight) * ratio,
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: regionBars,
+                    ),
+                  ),
+                ),
+                Container(
+                  height: scrollBarHeight,
+                  width: totalScrollBarWidth/2,
+                  color: Colors.white.withOpacity(0.25), //MyApp.scrollBarColor,
+                ),
+              ],
             ),
           ),
         ),

@@ -18,8 +18,8 @@ class Region{
   String title;
   Widget body;
   bool initiallyOpened;
-  ValueKey headerKey;
-  ValueKey bodyKey;
+  GlobalKey headerKey;
+  GlobalKey bodyKey;
 
   Region(
     this.icon,
@@ -50,8 +50,8 @@ List<Region> regions = [
       child: AboutMeBody(),
     ),
     //these are updated by their respective layout builders
-    ValueKey("h0"),
-    ValueKey("b0"),
+    GlobalKey(),
+    GlobalKey(),
     initiallyOpened: true,
   ),
   Region(
@@ -59,32 +59,32 @@ List<Region> regions = [
     "Skills",
     SoftSkillsBody(),
     //these are updated by their respective layout builders
-    ValueKey("h1"),
-    ValueKey("b1"),
+    GlobalKey(),
+    GlobalKey(),
   ),
   Region(
     FontAwesome.suitcase, 
     "Experience", 
     WorkExperienceBody(),
     //these are updated by their respective layout builders
-    ValueKey("h2"),
-    ValueKey("b2"),
+    GlobalKey(),
+    GlobalKey(),
   ),
   Region(
     FontAwesome.flask,
     "Projects",
     ProjectsBody(),
     //these are updated by their respective layout builders
-    ValueKey("h3"),
-    ValueKey("b3"),
+    GlobalKey(),
+    GlobalKey(),
   ),
   Region(
     Icons.thumb_up,
     "References",
     ReferencesBody(),
     //these are updated by their respective layout builders
-    ValueKey("h4"),
-    ValueKey("b4"),
+    GlobalKey(),
+    GlobalKey(),
     initiallyOpened: true, //TODO: remove after testin
   ),
   Region(
@@ -92,8 +92,8 @@ List<Region> regions = [
     "Contact Me",
     ContactMeBody(),
     //these are updated by their respective layout builders
-    ValueKey("h5"),
-    ValueKey("b5"),
+    GlobalKey(),
+    GlobalKey(),
     initiallyOpened: true,
   ),
 ];

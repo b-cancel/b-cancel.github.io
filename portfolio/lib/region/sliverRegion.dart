@@ -23,8 +23,8 @@ class SliverRegion extends StatefulWidget {
     this.leftSpacing: true,
   });
 
-  final ValueKey headerKey;
-  final ValueKey bodyKey;
+  final GlobalKey headerKey;
+  final GlobalKey bodyKey;
   final String title;
   final Widget body;
   final bool initiallyOpened;
