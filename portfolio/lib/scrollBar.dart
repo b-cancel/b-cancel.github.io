@@ -32,6 +32,7 @@ class ScrollBar extends StatefulWidget {
 }
 
 class _ScrollBarState extends State<ScrollBar> {
+  final ValueNotifier<double> currentScrollPosition = new ValueNotifier<double>(0);
   //must be updated after the run of build
   final ValueNotifier<double> heightToScroll = new ValueNotifier<double>(0);
   //with all the extra top padding
@@ -54,6 +55,9 @@ class _ScrollBarState extends State<ScrollBar> {
     double curr = position.pixels ?? 0;
     double min = position.minScrollExtent ?? 0;
     double max = position.maxScrollExtent ?? 0;
+
+    //for the scroll basr
+    currentScrollPosition.value = curr;
 
     //calculate overscroll
     widget.overScroll.value = (curr < max) ? 0 : curr - max;
@@ -160,6 +164,7 @@ class _ScrollBarState extends State<ScrollBar> {
       //so don't show the scroll bar
       visible: heightToScroll.value > 0.0,
       child: ActualScrollBar(
+        currentScrollPosition: currentScrollPosition,
         extraTopPadding: extraTopPadding, 
         heightToScroll: heightToScroll,
       ),
@@ -169,10 +174,12 @@ class _ScrollBarState extends State<ScrollBar> {
 
 class ActualScrollBar extends StatefulWidget {
   const ActualScrollBar({
+    @required this.currentScrollPosition,
     @required this.extraTopPadding,
     @required this.heightToScroll,
   });
 
+  final ValueNotifier<double> currentScrollPosition;
   final ValueNotifier<double> extraTopPadding;
   final ValueNotifier<double> heightToScroll;
 
@@ -193,6 +200,7 @@ class _ActualScrollBarState extends State<ActualScrollBar> {
   @override
   void initState() {
     super.initState();
+    widget.currentScrollPosition.addListener(updateState);
     widget.heightToScroll.addListener(updateState);
     widget.extraTopPadding.addListener(updateState);
   }
@@ -201,6 +209,7 @@ class _ActualScrollBarState extends State<ActualScrollBar> {
   void dispose() {
     widget.extraTopPadding.removeListener(updateState);
     widget.heightToScroll.removeListener(updateState);
+    widget.currentScrollPosition.removeListener(updateState);
     super.dispose();
   }
 
@@ -211,7 +220,8 @@ class _ActualScrollBarState extends State<ActualScrollBar> {
       decoration: BoxDecoration(
         color: MyApp.oldPurple,
         border: Border(
-          bottom: BorderSide(
+          //more accurate pretty much the same look
+          top: BorderSide(
             color: MyApp.bodyColor,
             width: 4,
           ),
@@ -247,6 +257,20 @@ class _ActualScrollBarState extends State<ActualScrollBar> {
 
     double ratio = totalHeight / totalScrollHeight;
     double scrollBarHeight = ratio * usableVisualHeight;
+
+    //now based on the above calc scroll padding
+    //our widget.currentScrollPosition.value
+    //can go between 0 AND heightToScroll
+    //that maps between 0 AND maxPadding so...
+    double maxPadding = usableVisualHeight - scrollBarHeight;
+
+    //current / heightToScroll = padding / maxPadding
+    double currentHeightScrolled = widget.currentScrollPosition.value;
+    double scrollBarPadding = currentHeightScrolled / heightToScroll;
+    scrollBarPadding *= maxPadding;
+    if(scrollBarPadding.isNegative){
+      scrollBarPadding = 0;
+    }
 
     //create section bars
     List<Widget> regionBars = new List<Widget>();
@@ -307,7 +331,9 @@ class _ActualScrollBarState extends State<ActualScrollBar> {
                   width: totalScrollBarWidth/2,
                   child: Padding(
                     padding: EdgeInsets.only(
-                      top: (topIntroHeight + appBarVisualHeight) * ratio,
+                      //NOTE: we don't use the appBar height 
+                      //since its never scrolled away
+                      top: topIntroHeight * ratio,
                     ),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
@@ -316,9 +342,12 @@ class _ActualScrollBarState extends State<ActualScrollBar> {
                   ),
                 ),
                 Container(
+                  margin: EdgeInsets.only(
+                    top: scrollBarPadding ?? 0,
+                  ),
                   height: scrollBarHeight,
                   width: totalScrollBarWidth/2,
-                  color: Colors.white.withOpacity(0.25), //MyApp.scrollBarColor,
+                  color: Colors.white.withOpacity(0.25),
                 ),
               ],
             ),
