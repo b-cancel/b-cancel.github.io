@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 //plugin
 import 'package:flutter/scheduler.dart';
+import 'package:portfolio/menu.dart';
 
 //internal: sections
 import 'package:portfolio/region/sliverRegion.dart';
@@ -69,37 +70,8 @@ class _HomeState extends State<Home> {
     //build
     return Scaffold(
       backgroundColor: MyApp.bodyColor,
-      body: Container(
-        width: MediaQuery.of(context).size.width,
-        child: Row(
-          mainAxisSize: MainAxisSize.max,
-          children: <Widget>[
-            Spacer(),
-            Container(
-              key: menuKey,
-              child: Column(
-                children: List.generate(
-                  regions.length,
-                  (index) {
-                    Region thisRegion = regions[index];
-                    return Row(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(
-                          thisRegion.title,
-                        ),
-                        Icon(
-                          thisRegion.icon,
-                        ),
-                      ],
-                    );
-                  },
-                ),
-              ),
-            ),
-          ],
-        ),
+      body: SideMenu(
+        menuKey: menuKey,
       ),
     );
   }
