@@ -1,4 +1,3 @@
-import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/main.dart';
 import 'package:portfolio/region/regions.dart';
@@ -16,16 +15,16 @@ class SideMenu extends StatelessWidget {
   final GlobalKey<State<StatefulWidget>> menuKey;
   final ValueNotifier<bool> isMenuOpen;
 
-  getHeightFromKey(GlobalKey key) {
+  getHeightFromKey(GlobalKey key){
     RenderBox renderBox = key.currentContext.findRenderObject();
     return renderBox.size.height;
   }
 
   //since we know all the height of every single region
   //we can calculate how much we need to scroll
-  scrollToRegion(int index) {
+  scrollToRegion(int index){
     double jumpPosition = topIntroHeight; //dont forget top bit
-    for (int i = 0; i < index; i++) {
+    for(int i = 0 ; i < index; i++){
       Region thisRegion = regions[i];
       jumpPosition += getHeightFromKey(thisRegion.headerKey);
       jumpPosition += getHeightFromKey(thisRegion.bodyKey);
@@ -49,9 +48,9 @@ class SideMenu extends StatelessWidget {
     //for the sake of making everything equal
     //and not using instrincWidth
     String longestMenuString = "";
-    for (int i = 0; i < regions.length; i++) {
+    for(int i = 0; i < regions.length; i++){
       String title = regions[i].title;
-      if (longestMenuString.length < title.length) {
+      if(longestMenuString.length < title.length){
         longestMenuString = title;
       }
     }
@@ -71,8 +70,8 @@ class SideMenu extends StatelessWidget {
               child: Container(
                 height: MediaQuery.of(context).size.height,
                 child: MenuTile(
-                  useMax: false,
-                  title: longestMenuString + "\t",
+                  useMax: false, 
+                  title: longestMenuString + "\t", 
                   icon: Icons.high_quality,
                 ),
               ),
@@ -84,7 +83,7 @@ class SideMenu extends StatelessWidget {
                   (index) {
                     Region thisRegion = regions[index];
                     return MenuTileButton(
-                      onTap: () {
+                      onTap: (){
                         scrollToRegion(index);
                         isMenuOpen.value = false;
                       },
@@ -120,23 +119,12 @@ class MenuTileButton extends StatelessWidget {
       color: Colors.transparent,
       child: InkWell(
         onTap: () => onTap(),
-        onLongPress: () {
-          BotToast.showAttachedWidget(
-            targetContext: context,
-            preferDirection: PreferDirection.topCenter,
-            duration: Duration(seconds: 5),
-            onlyOne: true,
-            attachedBuilder: (_) {
-              return Text("1213");
-            },
-          );
-        },
         child: OpaqueOnHover(
           child: MenuTile(
-            title: title,
+            title: title, 
             icon: icon,
           ),
-        ),
+        )
       ),
     );
   }

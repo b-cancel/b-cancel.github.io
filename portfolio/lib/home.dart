@@ -1,4 +1,5 @@
 //flutter
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 
 //plugin
@@ -42,9 +43,10 @@ class _HomeState extends State<Home> {
     super.initState();
 
     //handle menu
-    if (appOverlayEntry != null) {
+    
+    /*if (appOverlayEntry != null) {
       appOverlayEntry.remove();
-    }
+    }*/
     appOverlayEntry = OverlayEntry(
       builder: (context) {
         return appBuilder(context);
@@ -53,6 +55,7 @@ class _HomeState extends State<Home> {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       Overlay.of(context).insert(appOverlayEntry);
     });
+    
   }
 
   //dipose
@@ -68,9 +71,9 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     //build
-    return Scaffold(
-      backgroundColor: MyApp.bodyColor,
-      body: SideMenu(
+    return Material(
+      color: MyApp.bodyColor,
+      child: SideMenu(
         scrollController: scrollController,
         menuKey: menuKey,
         isMenuOpen: isMenuOpen,
@@ -237,37 +240,41 @@ class _HomeState extends State<Home> {
         } else {
           // widget is visible
           final box = keyContext.findRenderObject() as RenderBox;
+          double shiftValue = box.size.width;
           return Positioned.fill(
             child: Transform.translate(
               offset: Offset(
-                (isMenuOpen.value) ? -box.size.width : 0,
+                (isMenuOpen.value) ? -shiftValue : 0,
                 0,
               ),
-              child: Scaffold(
-                backgroundColor: MyApp.bodyColor,
-                body: Stack(
-                  children: <Widget>[
-                    theStack,
-                    Visibility(
-                      visible: isMenuOpen.value,
-                      child: Positioned.fill(
-                        child: Material(
-                          color: Colors.black.withOpacity(.75),
-                          child: InkWell(
-                            onTap: () {
-                              isMenuOpen.value = false;
-                            },
-                            child: Center(
-                              child: Icon(
-                                Icons.close,
-                                color: Colors.white,
+              child: Opacity(
+                opacity: 0.25,
+                child: Scaffold(
+                  backgroundColor: MyApp.bodyColor,
+                  body: Stack(
+                    children: <Widget>[
+                      theStack,
+                      Visibility(
+                        visible: isMenuOpen.value,
+                        child: Positioned.fill(
+                          child: Material(
+                            color: Colors.black.withOpacity(.75),
+                            child: InkWell(
+                              onTap: () {
+                                isMenuOpen.value = false;
+                              },
+                              child: Center(
+                                child: Icon(
+                                  Icons.close,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
