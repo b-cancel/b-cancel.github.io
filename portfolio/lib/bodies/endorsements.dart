@@ -1,4 +1,5 @@
 //flutter
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 
 //plugin
@@ -6,6 +7,9 @@ import 'package:flutter_icons/flutter_icons.dart';
 
 //internal
 import 'package:portfolio/main.dart';
+import 'package:portfolio/utils/hover.dart';
+import 'package:portfolio/utils/invisibleInkWell.dart';
+import 'package:portfolio/utils/link/linkOptions.dart';
 
 class Reference {
   String name;
@@ -186,10 +190,40 @@ class ReferencesBody extends StatelessWidget {
                         ),
                         Visibility(
                           visible: ref.phone != null,
-                          child: Text(
-                            ref.phone ?? "",
-                            style: TextStyle(
-                              color: MyApp.oldOrange,
+                          child: InvisibleInkWell(
+                            /*
+                            onHover: (){
+                              showOptions(
+                                context, 
+                                ref.phone,
+                                text: "phone",
+                              );
+                            },
+                            */
+                            onDoubleTap: (){
+                              showOptions(
+                                context, 
+                                ref.phone,
+                                text: "phone",
+                              );
+                            },
+                            onLongPress: (){
+                              print("long press");
+                              showOptions(
+                                context, 
+                                ref.phone,
+                                text: "phone",
+                              );
+                            },
+                            onTap: (){
+                              print("tap");
+                              BotToast.showSimpleNotification(title: "hi");
+                            },
+                            child: Text(
+                              ref.phone ?? "",
+                              style: TextStyle(
+                                color: MyApp.oldOrange,
+                              ),
                             ),
                           ),
                         ),

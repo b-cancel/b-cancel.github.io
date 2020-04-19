@@ -28,7 +28,11 @@ class InvisibleInkWell extends StatelessWidget {
       onTap: onTap,
       onDoubleTap: onDoubleTap,
       onLongPress: onLongPress,
-      onHover: onHover,
+      onHover: (details){
+        if(onHover != null){
+          onHover();
+        }
+      },
       //widget
       child: child,
     );

@@ -359,9 +359,11 @@ class _ActualScrollBarState extends State<ActualScrollBar> {
                       //since its never scrolled away
                       top: topIntroHeight * ratio,
                     ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: regionBars,
+                    child: ClipRRect(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: regionBars,
+                      ),
                     ),
                   ),
                 ),

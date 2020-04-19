@@ -1,6 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:universal_html/html.dart' as html;
 
+class UnderlineOnHover extends StatefulWidget {
+  UnderlineOnHover({
+    @required this.child,
+  });
+
+  final Widget child;
+
+  @override
+  _UnderlineOnHoverState createState() => _UnderlineOnHoverState();
+}
+
+class _UnderlineOnHoverState extends State<UnderlineOnHover> {
+  final ValueNotifier<bool> isHovered = new ValueNotifier<bool>(false);
+
+  @override
+  Widget build(BuildContext context) {
+    return OnHover(
+      isHovering: isHovered,
+      child: AnimatedBuilder(
+        animation: isHovered, 
+        child: widget.child,
+        builder: (context, resuable){
+          return DefaultTextStyle(
+            style: TextStyle(
+              decoration: isHovered.value ? TextDecoration.underline : TextDecoration.none,
+            ),
+            child: resuable,
+          );
+        },
+      ),
+    );
+  }
+}
+
 class OpaqueOnHover extends StatefulWidget {
   OpaqueOnHover({
     @required this.child,

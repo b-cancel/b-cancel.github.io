@@ -68,33 +68,51 @@ showOptions(
   String url,
   {
     String text,
-    bool copy: true,
+    //bool copy: true,
     bool call: false,
     bool message: false,
-    bool email: false,
-    bool download: false,
+    //bool email: false,
+    //bool download: false,
   }){
+  List<Option> options = new List<Option>();
+
+  //add all the stuff we want
+  if(call){
+
+  }
+
   //show tool bar
   BotToast.showAttachedWidget(
     targetContext: context,
+    preferDirection: PreferDirection.topCenter,
     duration: Duration(seconds: 5),
     onlyOne: true,
-    attachedBuilder: (_) => Stack(
-      children: <Widget>[
-        //TODO finish this obvi
-        Card(
-          color: MyApp.headerColor,
-          child: Container(),
-          
-          
-          /*Row(
-            children: List.generate(
-              return Container(); //widget for option
+    attachedBuilder: (_){
+      return Card(
+        color: MyApp.headerColor,
+        child: Text("hi"), /*Row(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Visibility(
+              visible: text != null,
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border(
+                    right: BorderSide(
+                      color: Colors.white,
+                      width: 2,
+                    ),
+                  ),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(text ?? ""),
+                ),
+              ),
             ),
-          ),
-          */
-        ),
-      ],
-    ),
+          ],
+        ),*/
+      );
+    },
   );
 }
