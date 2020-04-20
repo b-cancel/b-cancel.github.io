@@ -52,7 +52,8 @@ List<Region> regions = [
     //these are updated by their respective layout builders
     GlobalKey(),
     GlobalKey(),
-    initiallyOpened: true,
+    //TODO: remove after debuging
+    //initiallyOpened: true, 
   ),
   Region(
     FontAwesome5Solid.tools,
