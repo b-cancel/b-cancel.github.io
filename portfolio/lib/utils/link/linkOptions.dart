@@ -2,12 +2,13 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/main.dart';
 import 'package:portfolio/utils/copyToClipboard.dart';
+import 'package:portfolio/utils/hover.dart';
 import 'package:portfolio/utils/mySnackBar.dart';
 import 'package:portfolio/utils/nonWebLink.dart';
 
 //this works on the pricible that
 //if it works, they wont see this
-justInCaseShowQuickWarning(BuildContext context){
+justInCaseShowQuickWarning(BuildContext context) {
   showSnackBar(
     context,
     text: "Something Went Wrong :(",
@@ -16,7 +17,7 @@ justInCaseShowQuickWarning(BuildContext context){
 }
 
 //basic struct
-class Option{
+class Option {
   String name;
   Function function;
   Option(
@@ -26,17 +27,15 @@ class Option{
 }
 
 //handle both number cases
-Option numberOption({bool callNumber}){
+Option numberOption({bool callNumber}) {
   //grab different stuff
   String action = callNumber ? "Call" : "Message";
   Function function = callNumber ? dialNumber : messageNumber;
 
   //return same stuff with proper params
-  return Option(
-    action,
-    (BuildContext context, String number)async{
-      justInCaseShowQuickWarning(context);
-      /*
+  return Option(action, (BuildContext context, String number) async {
+    justInCaseShowQuickWarning(context);
+    /*
       if (await function(number) == false) {
         if(await copyToClipboard(number)){
           showSnackBar(
@@ -55,8 +54,7 @@ Option numberOption({bool callNumber}){
         justInCaseShowQuickWarning(context);
       }
       */
-    }
-  );
+  });
 }
 
 //pass it context AND number
@@ -66,9 +64,9 @@ Option message = numberOption(callNumber: false);
 //options tool bar for links
 //should be used for text link and icons links
 showOptions(
-  BuildContext context,
-  {List<Widget> children,
-  }){
+  BuildContext context, {
+  List<Widget> children,
+}) {
   BotToast.showAttachedWidget(
     targetContext: context,
     preferDirection: PreferDirection.topCenter,
@@ -77,7 +75,7 @@ showOptions(
     //virtually forever
     duration: Duration(days: 1),
     onlyOne: true,
-    attachedBuilder: (_){
+    attachedBuilder: (_) {
       return Card(
         color: MyApp.headerColor,
         child: Row(
@@ -104,35 +102,59 @@ class OptionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        onTap: onTap, //might be null
-        child: Container(
-          decoration: BoxDecoration(
-            border: Border(
-              right: BorderSide(
-                color: Colors.white,
-                width: addBorder ? 2 : 0,
-              ),
-            ),
-          ),
-          child: Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Icon(
+    Widget button = Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Visibility(
+                visible: icon != null,
+                child: Icon(
                   icon,
                 ),
-                Text(
-                  label ?? "",
+              ),
+              Visibility(
+                visible: icon != null && label != null,
+                child: Container(
+                  width: 8,
+                  height: 2,
                 ),
-              ],
-            ),
+              ),
+              Visibility(
+                visible: label != null,
+                child: Text(
+                  label ?? "",
+                  style: TextStyle(
+                    fontWeight: addBorder ? FontWeight.bold : FontWeight.normal,
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
-      ),
+        Container(
+          color: addBorder ? MyApp.oldGrey : MyApp.inactiveTabColor,
+          width: 2,
+          height: 8 + (addBorder ? 18.0 : 8) + 8,
+        ),
+      ],
     );
+
+    //make it actionable if we have on top
+    if (onTap != null) {
+      return OpaqueOnHover(
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+              onTap: onTap, //might be null
+              child: button),
+        ),
+      );
+    } else {
+      return button;
+    }
   }
 }

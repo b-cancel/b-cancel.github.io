@@ -1,9 +1,8 @@
 //flutter
 import 'package:flutter/material.dart';
+import 'package:portfolio/utils/copyToClipboard.dart';
 
 //plugin
-import 'package:platform_detect/platform_detect.dart';
-import 'package:bot_toast/bot_toast.dart';
 import 'package:portfolio/utils/link/linkOptions.dart';
 
 //internal
@@ -17,7 +16,7 @@ class IconWebLink extends StatelessWidget {
     @required this.icon,
     this.label,
   });
-  
+
   final String url;
   final IconData icon;
   final String label;
@@ -26,42 +25,43 @@ class IconWebLink extends StatelessWidget {
   Widget build(BuildContext context) {
     return OpaqueOnHover(
       child: IconLink(
-        onTap: (){
+        onTap: () {
           openWithHtml(
-            context, 
-            url, 
+            context,
+            url,
             openHere: true,
           );
         },
-        onShowOptions: (){
+        onShowOptions: () {
           showOptions(
-            context, 
+            context,
             children: [
               OptionButton(
                 label: label,
-                onTap: (){
-                  
-                },
+                addBorder: true,
               ),
               OptionButton(
-                label: "new tab",
                 icon: Icons.open_in_new,
-                onTap: (){
+                label: "new tab",
+                onTap: () {
                   openWithHtml(
-                    context, 
-                    url, 
+                    context,
+                    url,
                     openHere: false,
                   );
                 },
               ),
               OptionButton(
-                label: "copy",
                 icon: Icons.content_copy,
-                onTap: (){
-
+                label: "copy",
+                onTap: () {
+                  copyToClipboard(
+                    context,
+                    url,
+                  );
                 },
-              )
-            ]
+              ),
+            ],
           );
         },
         icon: icon,
@@ -91,16 +91,16 @@ class IconLink extends StatelessWidget {
       child: Material(
         color: Colors.transparent,
         child: InkWell(
-          onTap: (){
+          onTap: () {
             onTap();
           },
-          onHover: (h){
+          onHover: (h) {
             onShowOptions();
           },
-          onDoubleTap: (){
+          onDoubleTap: () {
             onShowOptions();
           },
-          onLongPress: (){
+          onLongPress: () {
             onShowOptions();
           },
           child: Padding(
@@ -114,22 +114,4 @@ class IconLink extends StatelessWidget {
       ),
     );
   }
-}
-
-showOnSecondaryAction(BuildContext context, String action) {
-  BotToast.showAttachedWidget(
-    targetContext: context,
-    duration: Duration(seconds: 5),
-    onlyOne: true,
-    attachedBuilder: (_) => Card(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          (browser.isSafari ? "Double Tap To" : "Long Press To")
-          + "\n" + action,
-          textAlign: TextAlign.center,
-        ),
-      ),
-    ),
-  );
 }
