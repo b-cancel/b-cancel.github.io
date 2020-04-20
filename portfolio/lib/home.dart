@@ -1,9 +1,7 @@
 //flutter
-import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 
 //plugin
-import 'package:flutter/scheduler.dart';
 import 'package:portfolio/bodies/aboutMe.dart';
 import 'package:portfolio/menu.dart';
 

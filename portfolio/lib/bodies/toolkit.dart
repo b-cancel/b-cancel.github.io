@@ -1,4 +1,18 @@
 import 'package:flutter/material.dart';
+
+class ToolKitBody extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text("languages, leadership, project planing, problem solving, etc"),
+      ],
+    );
+  }
+}
+
+/*
+import 'package:flutter/material.dart';
 import 'package:portfolio/main.dart';
 import 'package:portfolio/region/regularRegion.dart';
 
@@ -56,3 +70,5 @@ class HardSkillsBody extends StatelessWidget {
     ]);
   }
 }
+
+*/

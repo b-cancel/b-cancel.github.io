@@ -5,11 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
 //internal
-import 'package:portfolio/bodies/aboutMe.dart';
 import 'package:portfolio/bodies/contactMe.dart';
 import 'package:portfolio/bodies/endorsements.dart';
 import 'package:portfolio/bodies/projects.dart';
-import 'package:portfolio/bodies/softSkills.dart';
+import 'package:portfolio/bodies/toolkit.dart';
 import 'package:portfolio/bodies/work.dart';
 
 //struct
@@ -51,8 +50,8 @@ List<Region> regions = [
   ),
   Region(
     FontAwesome5Solid.tools,
-    "Skills",
-    SoftSkillsBody(),
+    "Toolkit",
+    ToolKitBody(),
     //these are updated by their respective layout builders
     GlobalKey(),
     GlobalKey(),

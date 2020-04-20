@@ -1,7 +1,6 @@
 //plugin
 import 'package:flutter/cupertino.dart';
 import 'package:portfolio/utils/link/copyToClipboard.dart';
-import 'package:portfolio/utils/mySnackBar.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 //internal
@@ -131,7 +130,7 @@ _callTextOrEmail(BuildContext context, String url, IntentType intentType)async{
 
       //NOTE: but it doesn't because the duration 
       //doesn't play when the app is in the background
-      
+
       /*showSnackBar(
         context,
         text: "Something Went Wrong :(",

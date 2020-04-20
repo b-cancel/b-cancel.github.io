@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
 //internal
-import 'package:portfolio/utils/link/copyToClipboard.dart';
 import 'package:portfolio/utils/link/ui/iconLink.dart';
 import 'package:portfolio/utils/link/nonWebLink.dart';
 import 'package:portfolio/utils/mySnackBar.dart';

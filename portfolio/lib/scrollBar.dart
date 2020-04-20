@@ -275,7 +275,7 @@ class _ActualScrollBarState extends State<ActualScrollBar> {
       ratio = 0;
     }
     else{
-      ratio = totalHeight / totalScrollHeight;;
+      ratio = totalHeight / totalScrollHeight;
     }
     double scrollBarHeight = ratio * usableVisualHeight;
 
