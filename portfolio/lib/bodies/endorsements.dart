@@ -9,6 +9,8 @@ import 'package:flutter_icons/flutter_icons.dart';
 //internal
 import 'package:portfolio/main.dart';
 import 'package:portfolio/utils/invisibleInkWell.dart';
+import 'package:portfolio/utils/link/ui/iconLink.dart';
+import 'package:portfolio/utils/link/ui/textLink.dart';
 
 class Reference {
   String name;
@@ -86,7 +88,8 @@ class ReferencesBody extends StatefulWidget {
 //all I want to do is to get the items fliped vertically and under the actually clickable elements
 //but using flipvertial had a side effect and this fixed it
 //it does the job for now
-class _ReferencesBodyState extends State<ReferencesBody> with SingleTickerProviderStateMixin {
+class _ReferencesBodyState extends State<ReferencesBody>
+    with SingleTickerProviderStateMixin {
   Animation<Offset> animation;
   AnimationController animationController;
 
@@ -309,31 +312,31 @@ class AReference extends StatelessWidget {
                             Visibility(
                               visible: ref.email != null,
                               child: Padding(
-                                padding: EdgeInsets.only(
-                                  top: 4,
-                                  bottom: 4,
+                                padding: EdgeInsets.symmetric(
+                                  vertical: 4,
                                 ),
-                                child: Text(
-                                  (ref.email ?? "") + ",",
-                                  style: TextStyle(
-                                    color: MyApp.highlightGreen,
+                                child: TextEmailLink(
+                                  url: ref.email,
+                                  preferDirection: PreferDirection.rightCenter,
+                                  text: Text(
+                                    (ref.email ?? "") + ",",
+                                    style: TextStyle(
+                                      color: MyApp.highlightGreen,
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
                             Visibility(
                               visible: ref.phone != null,
-                              child: InvisibleInkWell(
-                                onTap: () {
-                                  print("tap");
-                                  BotToast.showSimpleNotification(title: "hi");
-                                },
-                                child: Padding(
-                                  padding: EdgeInsets.only(
-                                    top: 4,
-                                    bottom: 4,
-                                  ),
-                                  child: Text(
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(
+                                  vertical: 4,
+                                ),
+                                child: TextPhoneLink(
+                                  url: ref.phone,
+                                  preferDirection: PreferDirection.rightCenter,
+                                  text: Text(
                                     (ref.phone ?? "") + ",",
                                     style: TextStyle(
                                       color: MyApp.oldOrange,
@@ -357,43 +360,39 @@ class AReference extends StatelessWidget {
               ),
               Visibility(
                 visible: ref.letterUrl != null,
-                child: ClipOval(
-                  child: Material(
-                    color: Colors.transparent,
-                    child: InkWell(
-                      onTap: () {},
-                      child: Padding(
-                        padding: EdgeInsets.all(12.0),
-                        child: Stack(
-                          alignment: Alignment.center,
-                          children: <Widget>[
-                            //give red border
-                            Icon(
-                              FontAwesome5Solid.file_pdf,
-                              color: Colors.red,
-                              size: 36,
-                            ),
-                            //make center bit red
-                            Padding(
-                              //36 total
-                              padding: EdgeInsets.only(
-                                top: 14.0,
-                                bottom: 4.0,
-                              ),
-                              child: Container(
-                                color: Colors.red,
-                                height: 18,
-                                width: 24,
-                              ),
-                            ),
-                            Icon(
-                              FontAwesome5Solid.file_pdf,
-                              color: Colors.white,
-                              size: 32,
-                            ),
-                          ],
+                child: IconWebLink(
+                  url: "https://google.com",
+                  label: "Recommendation Letter",
+                  icon: Padding(
+                    padding: EdgeInsets.all(12.0),
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: <Widget>[
+                        //give red border
+                        Icon(
+                          FontAwesome5Solid.file_pdf,
+                          color: Colors.red,
+                          size: 36,
                         ),
-                      ),
+                        //make center bit red
+                        Padding(
+                          //36 total
+                          padding: EdgeInsets.only(
+                            top: 14.0,
+                            bottom: 4.0,
+                          ),
+                          child: Container(
+                            color: Colors.red,
+                            height: 18,
+                            width: 24,
+                          ),
+                        ),
+                        Icon(
+                          FontAwesome5Solid.file_pdf,
+                          color: Colors.white,
+                          size: 32,
+                        ),
+                      ],
                     ),
                   ),
                 ),
