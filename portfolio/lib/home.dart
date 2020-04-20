@@ -16,16 +16,10 @@ import 'package:portfolio/scrollBar.dart';
 import 'package:portfolio/main.dart';
 
 //widgets
-class Home extends StatefulWidget {
-  @override
-  _HomeState createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
+class Home extends StatelessWidget {
   //handles the menu
   final ValueNotifier<bool> isMenuOpen = new ValueNotifier<bool>(false);
-  OverlayEntry appOverlayEntry;
-  GlobalKey menuKey = GlobalKey();
+  final GlobalKey menuKey = GlobalKey();
 
   //handle the scrolling
   final ScrollController scrollController = new ScrollController();
@@ -36,52 +30,9 @@ class _HomeState extends State<Home> {
   //and without the top bit scrolled away
   final ValueNotifier<bool> topScrolledAway = new ValueNotifier<bool>(false);
 
-  //init
-  @override
-  void initState() {
-    //super init
-    super.initState();
-
-    //handle menu
-    
-    /*if (appOverlayEntry != null) {
-      appOverlayEntry.remove();
-    }*/
-    appOverlayEntry = OverlayEntry(
-      builder: (context) {
-        return appBuilder(context);
-      },
-    );
-    SchedulerBinding.instance.addPostFrameCallback((_) {
-      Overlay.of(context).insert(appOverlayEntry);
-    });
-    
-  }
-
-  //dipose
-  @override
-  void dispose() {
-    //handle menu
-    appOverlayEntry.remove();
-
-    //super dispose
-    super.dispose();
-  }
-
+  //most things here don't reload
   @override
   Widget build(BuildContext context) {
-    //build
-    return Material(
-      color: MyApp.bodyColor,
-      child: SideMenu(
-        scrollController: scrollController,
-        menuKey: menuKey,
-        isMenuOpen: isMenuOpen,
-      ),
-    );
-  }
-
-  Widget appBuilder(BuildContext context) {
     List<Widget> sliverSections = [
       TopIntro(),
       SliverAppBar(
@@ -215,7 +166,6 @@ class _HomeState extends State<Home> {
                   topScrolledAway: topScrolledAway,
                   overScroll: overScroll,
                   onTop: onTop,
-                  
                 ),
               ),
             ],
@@ -230,56 +180,50 @@ class _HomeState extends State<Home> {
       ],
     );
 
-    //things that change
+    //build
     return AnimatedBuilder(
       animation: isMenuOpen,
-      builder: (_, Widget child) {
+      child: theStack,
+      builder: (_, Widget reusableChild) {
         final keyContext = menuKey.currentContext;
-        if (keyContext == null) {
-          return Container();
-        } else {
-          // widget is visible
+
+        //grab the shift value from the menu size
+        double shiftValue = 0;
+        if (keyContext != null) {
           final box = keyContext.findRenderObject() as RenderBox;
-          double shiftValue = box.size.width;
-          return Positioned.fill(
-            child: Transform.translate(
-              offset: Offset(
-                (isMenuOpen.value) ? -shiftValue : 0,
-                0,
+          shiftValue = box.size.width;
+        }
+
+        //shift if needed
+        return Scaffold(
+          backgroundColor: MyApp.bodyColor,
+          body: Stack(
+            children: <Widget>[
+              Positioned.fill(
+                child: Transform.translate(
+                  offset: Offset(
+                    (isMenuOpen.value) ? -shiftValue : 0,
+                    0,
+                  ),
+                  child: reusableChild,
+                ),
               ),
-              child: Opacity(
-                opacity: 0.25,
-                child: Scaffold(
-                  backgroundColor: MyApp.bodyColor,
-                  body: Stack(
-                    children: <Widget>[
-                      theStack,
-                      Visibility(
-                        visible: isMenuOpen.value,
-                        child: Positioned.fill(
-                          child: Material(
-                            color: Colors.black.withOpacity(.75),
-                            child: InkWell(
-                              onTap: () {
-                                isMenuOpen.value = false;
-                              },
-                              child: Center(
-                                child: Icon(
-                                  Icons.close,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
+              Positioned.fill(
+                child: Visibility(
+                  visible: isMenuOpen.value,
+                  maintainState: true,
+                  maintainSize: true,
+                  maintainAnimation: true,
+                  child: SideMenu(
+                    scrollController: scrollController,
+                    menuKey: menuKey,
+                    isMenuOpen: isMenuOpen,
                   ),
                 ),
               ),
-            ),
-          );
-        }
+            ],
+          ),
+        );
       },
     );
   }

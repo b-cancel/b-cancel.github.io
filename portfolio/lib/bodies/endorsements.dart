@@ -200,11 +200,12 @@ class ReferencesBody extends StatelessWidget {
                               );
                             },
                             */
+                            /*
                             onDoubleTap: (){
                               showOptions(
                                 context, 
                                 ref.phone,
-                                text: "phone",
+                                label: "phone",
                               );
                             },
                             onLongPress: (){
@@ -212,9 +213,10 @@ class ReferencesBody extends StatelessWidget {
                               showOptions(
                                 context, 
                                 ref.phone,
-                                text: "phone",
+                                label: "phone",
                               );
                             },
+                            */
                             onTap: (){
                               print("tap");
                               BotToast.showSimpleNotification(title: "hi");

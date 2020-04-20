@@ -4,45 +4,69 @@ import 'package:flutter/material.dart';
 //plugin
 import 'package:platform_detect/platform_detect.dart';
 import 'package:bot_toast/bot_toast.dart';
+import 'package:portfolio/utils/link/linkOptions.dart';
 
 //internal
 import 'package:portfolio/utils/openLink.dart';
+import 'package:portfolio/utils/hover.dart';
 
 //widget
 class IconWebLink extends StatelessWidget {
   IconWebLink({
-    this.longString,
-    this.text,
     @required this.url,
     @required this.icon,
+    this.label,
   });
-
-  final String longString;
-  final String text;
+  
   final String url;
   final IconData icon;
+  final String label;
 
   @override
   Widget build(BuildContext context) {
-    return IconLink(
-      longString: longString ?? "",
-      onTap: (){
-        openWithHtml(
-          context, 
-          url, 
-          openHere: true,
-        );
-      },
-      secondaryActionMessage: "open in another tab",
-      onSecondaryAction: (){
-        openWithHtml(
-          context, 
-          url, 
-          openHere: false,
-        );
-      },
-      icon: icon,
-      text: text ?? "",
+    return OpaqueOnHover(
+      child: IconLink(
+        onTap: (){
+          openWithHtml(
+            context, 
+            url, 
+            openHere: true,
+          );
+        },
+        onShowOptions: (){
+          showOptions(
+            context, 
+            children: [
+              OptionButton(
+                label: label,
+                onTap: (){
+                  
+                },
+              ),
+              OptionButton(
+                label: "new tab",
+                icon: Icons.open_in_new,
+                onTap: (){
+                  openWithHtml(
+                    context, 
+                    url, 
+                    openHere: false,
+                  );
+                },
+              ),
+              OptionButton(
+                label: "copy",
+                icon: Icons.content_copy,
+                onTap: (){
+
+                },
+              )
+            ]
+          );
+        },
+        icon: icon,
+        optionsText: label ?? "",
+      ),
     );
   }
 }
@@ -51,84 +75,43 @@ class IconLink extends StatelessWidget {
   const IconLink({
     Key key,
     @required this.onTap,
-    this.onSecondaryAction,
-    this.secondaryActionMessage,
+    this.onShowOptions,
     @required this.icon,
-    this.text,
-    this.longString,
+    this.optionsText,
   }) : super(key: key);
 
   final Function onTap;
-  final Function onSecondaryAction;
-  final String secondaryActionMessage;
+  final Function onShowOptions;
   final IconData icon;
-  final String text;
-  //has the most width out of all of them
-  //so to create equal spacing
-  final String longString;
+  final String optionsText;
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.center,
-      children: <Widget>[
-        Visibility(
-          visible: longString != null && longString.length > 0,
-          child: Opacity(
-            opacity: 0,
-            child: Text(longString),
+    return ClipOval(
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: (){
+            onTap();
+          },
+          onHover: (h){
+            onShowOptions();
+          },
+          onDoubleTap: (){
+            onShowOptions();
+          },
+          onLongPress: (){
+            onShowOptions();
+          },
+          child: Padding(
+            padding: EdgeInsets.all(12.0),
+            child: Icon(
+              icon,
+              size: 36,
+            ),
           ),
         ),
-        Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Visibility(
-              visible: text != null && text.length > 0,
-              //NOTE: using selectable text is misleading since it isnt selectble on the web browser
-              child: Text(
-                text,
-              ),
-            ),
-            ClipOval(
-              child: Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  onTap: (){
-                    onTap();
-                    //for mobile
-                    if(onSecondaryAction != null){
-                      showOnSecondaryAction(
-                        context, 
-                        secondaryActionMessage,
-                      );
-                    }
-                  },
-                  onHover: (h){
-                    //for desktop
-                    if(onSecondaryAction != null){
-                      showOnSecondaryAction(
-                        context, 
-                        secondaryActionMessage,
-                      );
-                    }
-                  },
-                  //safari doesn't seems to allow holding
-                  onDoubleTap: browser.isSafari ? onSecondaryAction : null,
-                  onLongPress: browser.isSafari ? null : onSecondaryAction,
-                  //widget
-                  child: Padding(
-                    padding: EdgeInsets.all(12.0),
-                    child: Icon(
-                      icon,
-                      size: 36,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ],
+      ),
     );
   }
 }

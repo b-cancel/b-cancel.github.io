@@ -25,7 +25,6 @@ class Option{
   );
 }
 
-
 //handle both number cases
 Option numberOption({bool callNumber}){
   //grab different stuff
@@ -36,6 +35,8 @@ Option numberOption({bool callNumber}){
   return Option(
     action,
     (BuildContext context, String number)async{
+      justInCaseShowQuickWarning(context);
+      /*
       if (await function(number) == false) {
         if(await copyToClipboard(number)){
           showSnackBar(
@@ -53,6 +54,7 @@ Option numberOption({bool callNumber}){
       } else { //if they are taken to the dialer they wont notice this
         justInCaseShowQuickWarning(context);
       }
+      */
     }
   );
 }
@@ -65,54 +67,72 @@ Option message = numberOption(callNumber: false);
 //should be used for text link and icons links
 showOptions(
   BuildContext context,
-  String url,
-  {
-    String text,
-    //bool copy: true,
-    bool call: false,
-    bool message: false,
-    //bool email: false,
-    //bool download: false,
+  {List<Widget> children,
   }){
-  List<Option> options = new List<Option>();
-
-  //add all the stuff we want
-  if(call){
-
-  }
-
-  //show tool bar
   BotToast.showAttachedWidget(
     targetContext: context,
     preferDirection: PreferDirection.topCenter,
-    duration: Duration(seconds: 5),
+    enableSafeArea: true,
+    allowClick: true,
+    //virtually forever
+    duration: Duration(days: 1),
     onlyOne: true,
     attachedBuilder: (_){
       return Card(
         color: MyApp.headerColor,
-        child: Text("hi"), /*Row(
+        child: Row(
           mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Visibility(
-              visible: text != null,
-              child: Container(
-                decoration: BoxDecoration(
-                  border: Border(
-                    right: BorderSide(
-                      color: Colors.white,
-                      width: 2,
-                    ),
-                  ),
-                ),
-                child: Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text(text ?? ""),
-                ),
-              ),
-            ),
-          ],
-        ),*/
+          children: children,
+        ),
       );
     },
   );
+}
+
+class OptionButton extends StatelessWidget {
+  OptionButton({
+    this.icon,
+    this.label,
+    this.onTap,
+    this.addBorder: false,
+  });
+
+  final IconData icon;
+  final String label;
+  final Function onTap;
+  final bool addBorder;
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onTap, //might be null
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border(
+              right: BorderSide(
+                color: Colors.white,
+                width: addBorder ? 2 : 0,
+              ),
+            ),
+          ),
+          child: Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Icon(
+                  icon,
+                ),
+                Text(
+                  label ?? "",
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 }

@@ -60,42 +60,63 @@ class SideMenu extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
       alignment: Alignment.topRight,
-      child: Container(
-        key: menuKey,
-        child: Stack(
-          children: <Widget>[
-            //sets up the size of all the others
-            Opacity(
-              opacity: 0,
-              child: Container(
-                height: MediaQuery.of(context).size.height,
-                child: MenuTile(
-                  useMax: false, 
-                  title: longestMenuString + "\t", 
-                  icon: Icons.high_quality,
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            child: Material(
+              color: Colors.black.withOpacity(.75),
+              child: InkWell(
+                onTap: () {
+                  isMenuOpen.value = false;
+                },
+                child: Center(
+                  child: Icon(
+                    Icons.close,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),
-            Positioned.fill(
-              child: ListView(
-                children: List.generate(
-                  regions.length,
-                  (index) {
-                    Region thisRegion = regions[index];
-                    return MenuTileButton(
-                      onTap: (){
-                        scrollToRegion(index);
-                        isMenuOpen.value = false;
+          ),
+          Container(
+            color: MyApp.activeTabColor,
+            key: menuKey,
+            child: Stack(
+              children: <Widget>[
+                //sets up the size of all the others
+                Opacity(
+                  opacity: 0,
+                  child: Container(
+                    height: MediaQuery.of(context).size.height,
+                    child: MenuTile(
+                      useMax: false, 
+                      title: longestMenuString + "\t", 
+                      icon: Icons.high_quality,
+                    ),
+                  ),
+                ),
+                Positioned.fill(
+                  child: ListView(
+                    children: List.generate(
+                      regions.length,
+                      (index) {
+                        Region thisRegion = regions[index];
+                        return MenuTileButton(
+                          onTap: (){
+                            scrollToRegion(index);
+                            isMenuOpen.value = false;
+                          },
+                          title: thisRegion.title,
+                          icon: thisRegion.icon,
+                        );
                       },
-                      title: thisRegion.title,
-                      icon: thisRegion.icon,
-                    );
-                  },
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

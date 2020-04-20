@@ -102,29 +102,10 @@ _launchRawLink(BuildContext context, String url) async {
       url,
     );
   } catch (e) {
-    print("Error so coppying to clipboard");
-    copyLinkToClipboard(context, url);
-  }
-}
-
-//if all the launching methods failed
-//atleast try to copy the link to the clipboard
-//and notify the user
-copyLinkToClipboard(BuildContext context, String url) async {
-  //try to copy the link to the clipboard
-  //depending on whether or not it fails show a pop up
-  String basicMessage = "Unable To Open \"" + url + "\"";
-  if (await copyToClipboard(url)) {
-    showSnackBar(
-      context,
-      text: basicMessage + "\nBut it was copied to your clipboard",
-      duration: Duration(seconds: 7),
-    );
-  } else {
-    showSnackBar(
-      context,
-      text: basicMessage + "\nBut you can copy it from here",
-      duration: Duration(minutes: 1),
+    copyToClipboard(
+      context, 
+      url,
+      initialIntent: IntentType.Open,
     );
   }
 }
