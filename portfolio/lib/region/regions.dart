@@ -43,17 +43,11 @@ List<Region> regions = [
   Region(
     FontAwesome.user_circle,
     "About Me",
-    Padding(
-      padding: EdgeInsets.only(
-        right: 16,
-      ),
-      child: AboutMeBody(),
-    ),
+    Container(), //needs scroll controller so we set it elsewhere
     //these are updated by their respective layout builders
     GlobalKey(),
     GlobalKey(),
-    //TODO: remove after debuging
-    //initiallyOpened: true, 
+    initiallyOpened: true, 
   ),
   Region(
     FontAwesome5Solid.tools,

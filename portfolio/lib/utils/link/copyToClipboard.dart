@@ -9,21 +9,21 @@ import 'package:portfolio/utils/mySnackBar.dart';
 import 'package:portfolio/utils/platformChecker.dart';
 
 //enum handling
-enum IntentType {Open, Call, Message, Email, Download} //NOT Copy
+enum IntentType {Open, Call, Text, Email, Download} //NOT Copy
 intentTypeToString(IntentType intentType){
   if(intentType == IntentType.Open){
     return "Open";
   }
-  if(intentType == IntentType.Open){
+  if(intentType == IntentType.Call){
     return "Call";
   }
-  if(intentType == IntentType.Open){
-    return "Message";
+  if(intentType == IntentType.Text){
+    return "Text";
   }
-  if(intentType == IntentType.Open){
+  if(intentType == IntentType.Email){
     return "Email";
   }
-  if(intentType == IntentType.Open){
+  if(intentType == IntentType.Download){
     return "Download";
   }
   else{

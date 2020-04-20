@@ -3,17 +3,26 @@ import 'package:flutter/material.dart';
 
 //plugin
 import 'package:google_fonts/google_fonts.dart';
+import 'package:portfolio/main.dart';
+import 'package:portfolio/menu.dart';
+import 'package:portfolio/region/regions.dart';
+import 'package:portfolio/utils/link/ui/hover.dart';
 
 //internal
 import 'package:portfolio/utils/wrappedText.dart';
 
 //widget
 class AboutMeBody extends StatelessWidget {
+  AboutMeBody({
+    @required this.scrollController,
+  });
+
+  final ScrollController scrollController;
+
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    bool isPortrait = size.height > size.width;
-    if (isPortrait) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    if (screenWidth < 750) {
       return Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
@@ -27,7 +36,9 @@ class AboutMeBody extends StatelessWidget {
           ),
           Container(
             child: Flexible(
-              child: Introduction(),
+              child: Introduction(
+                scrollController: scrollController,
+              ),
             ),
           )
         ],
@@ -44,7 +55,9 @@ class AboutMeBody extends StatelessWidget {
                 children: <Widget>[
                   Hello(),
                   Logo(),
-                  Introduction(),
+                  Introduction(
+                    scrollController: scrollController,
+                  ),
                 ],
               ),
             ),
@@ -113,7 +126,10 @@ class Hello extends StatelessWidget {
 class Introduction extends StatelessWidget {
   const Introduction({
     Key key,
+    @required this.scrollController,
   }) : super(key: key);
+
+  final ScrollController scrollController;
 
   @override
   Widget build(BuildContext context) {
@@ -129,6 +145,63 @@ class Introduction extends StatelessWidget {
         Text("\n"),
         WrappedText(
           "I just finished publishing my first app \"Swol\", and I'm excited for my next Adventure!",
+        ),
+        Row(
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(
+                top: 24.0,
+              ),
+              child: OpaqueOnHover(
+                child: Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: MyApp.oldGrey,
+                          width: 2,
+                        ),
+                      ),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 4,
+                      ),
+                      child: Row(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(
+                              right: 8,
+                            ),
+                            child: Text(
+                              "Quick Links",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          RotatedBox(
+                            quarterTurns: 3,
+                            child: Icon(
+                              Icons.subdirectory_arrow_left,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    onTap: (){
+                      int contactID = regions.length - 1;
+                      scrollToRegion(
+                        contactID,
+                        scrollController,
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ),
+            Spacer(),
+          ],
         ),
       ],
     );

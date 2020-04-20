@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 //plugin
 import 'package:flutter/scheduler.dart';
+import 'package:portfolio/bodies/aboutMe.dart';
 import 'package:portfolio/menu.dart';
 
 //internal: sections
@@ -129,7 +130,14 @@ class Home extends StatelessWidget {
           headerKey: thisRegion.headerKey,
           bodyKey: thisRegion.bodyKey,
           title: thisRegion.title,
-          body: thisRegion.body,
+          body: index == 0 ? Padding(
+            padding: EdgeInsets.only(
+              right: 48,
+            ),
+            child: AboutMeBody(
+              scrollController: scrollController,
+            ),
+          ) : thisRegion.body,
           initiallyOpened: thisRegion.initiallyOpened,
         );
       }),

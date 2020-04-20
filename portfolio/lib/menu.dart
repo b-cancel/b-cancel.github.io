@@ -6,6 +6,31 @@ import 'package:portfolio/utils/link/ui/hover.dart';
 import 'package:portfolio/region/regions.dart';
 import 'package:portfolio/main.dart';
 
+//helper functions
+getHeightFromKey(GlobalKey key){
+  RenderBox renderBox = key.currentContext.findRenderObject();
+  return renderBox.size.height;
+}
+
+scrollToRegion(int index, ScrollController scrollController){
+  double jumpPosition = topIntroHeight; //dont forget top bit
+  for(int i = 0 ; i < index; i++){
+    Region thisRegion = regions[i];
+    jumpPosition += getHeightFromKey(thisRegion.headerKey);
+    jumpPosition += getHeightFromKey(thisRegion.bodyKey);
+  }
+
+  //don't over scroll cuz overscrolling is gross
+  ScrollPosition position = scrollController.position;
+  double max = position.maxScrollExtent ?? 0;
+  jumpPosition.clamp(0, max);
+
+  //scroll there
+  scrollController.jumpTo(
+    jumpPosition,
+  );
+}
+
 //widget
 class SideMenu extends StatelessWidget {
   const SideMenu({
@@ -18,33 +43,6 @@ class SideMenu extends StatelessWidget {
   final ScrollController scrollController;
   final GlobalKey<State<StatefulWidget>> menuKey;
   final ValueNotifier<bool> isMenuOpen;
-
-  getHeightFromKey(GlobalKey key){
-    RenderBox renderBox = key.currentContext.findRenderObject();
-    return renderBox.size.height;
-  }
-
-  //since we know all the height of every single region
-  //we can calculate how much we need to scroll
-  scrollToRegion(int index){
-    double jumpPosition = topIntroHeight; //dont forget top bit
-    for(int i = 0 ; i < index; i++){
-      Region thisRegion = regions[i];
-      jumpPosition += getHeightFromKey(thisRegion.headerKey);
-      jumpPosition += getHeightFromKey(thisRegion.bodyKey);
-    }
-
-    //don't over scroll cuz overscrolling is gross
-    ScrollPosition position = scrollController.position;
-    double max = position.maxScrollExtent ?? 0;
-    jumpPosition.clamp(0, max);
-
-    //jump to the position
-    //cuz animations are meh when ur trying to be functional
-    scrollController.jumpTo(
-      jumpPosition,
-    );
-  }
 
   //build
   @override
@@ -107,7 +105,10 @@ class SideMenu extends StatelessWidget {
                         Region thisRegion = regions[index];
                         return MenuTileButton(
                           onTap: (){
-                            scrollToRegion(index);
+                            scrollToRegion(
+                              index,
+                              scrollController,
+                            );
                             isMenuOpen.value = false;
                           },
                           title: thisRegion.title,

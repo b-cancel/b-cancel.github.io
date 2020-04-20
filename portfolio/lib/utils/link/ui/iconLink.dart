@@ -41,14 +41,14 @@ class IconPhoneLink extends StatelessWidget {
             ),
             OptionButton(
               icon: Icons.phone,
-              label: "call",
+              label: "Call",
               onTap: () {
                 callNumber(url);
               },
             ),
             OptionButton(
               icon: Icons.message,
-              label: "text",
+              label: "Text",
               onTap: () {
                 textNumber(url);
               },
@@ -91,7 +91,7 @@ class IconEmailLink extends StatelessWidget {
             ),
             OptionButton(
               icon: Icons.email,
-              label: "email",
+              label: "Email",
               onTap: () {
                 sendEmail(url);
               },
@@ -135,7 +135,7 @@ class IconWebLink extends StatelessWidget {
             ),
             OptionButton(
               icon: Icons.open_in_new,
-              label: "new tab",
+              label: "New Tab",
               onTap: () {
                 openWithHtml(
                   context,
@@ -146,7 +146,7 @@ class IconWebLink extends StatelessWidget {
             ),
             OptionButton(
               icon: Icons.content_copy,
-              label: "copy",
+              label: "Copy",
               onTap: () {
                 copyToClipboard(
                   context,

@@ -1,11 +1,13 @@
 //plugin
+import 'package:portfolio/utils/link/copyToClipboard.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 //internal
 import 'package:portfolio/utils/platformChecker.dart';
 
 //functions
-Future<bool> _openNonWebUrl(url)async{
+Future<bool> _openNonWebUrl(url, IntentType intent)async{
+  //TODO: intent to alternative action
   //try to properly check if we can launch first
   if (await canLaunch(url)) {
     return await _actualOpenNonWebUrl(url);
@@ -52,17 +54,17 @@ Future<bool> downloadFile(String file)async{
   }
 
   //launch it to download it
-  return await _openNonWebUrl(file);
+  return await _openNonWebUrl(file, IntentType.Download);
 }
 
 Future<bool> callNumber(String number)async{
   number = "tel:" + number;
-  return await _openNonWebUrl(number); 
+  return await _openNonWebUrl(number, IntentType.Call); 
 }
 
 Future<bool> textNumber(String number)async{
   number = "sms:" + number;
-  return await _openNonWebUrl(number);
+  return await _openNonWebUrl(number, IntentType.Text);
 }
 
 Future<bool> sendEmail(
@@ -76,5 +78,5 @@ Future<bool> sendEmail(
   url += Uri.encodeFull(subject);
   url += "&body=";
   url += Uri.encodeFull(body);
-  return await _openNonWebUrl(url);
+  return await _openNonWebUrl(url, IntentType.Email);
 }
