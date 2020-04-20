@@ -85,74 +85,119 @@ class ReferencesBody extends StatelessWidget {
       references.length,
       (index) {
         Reference ref = references[index];
-        return Container(
-          color: index%2==0 ? Colors.red : Colors.blue,
-          height: 100,
-          width: 250,
+        return AReference(
+          ref: ref,
+          collapse: true,
         );
+      },
+    );
 
-        /*
-        return Card(
-          margin: EdgeInsets.all(0),
-          color: MyApp.headerColor,
-          child: Padding(
-            padding: EdgeInsets.only(
-              right: 16,
-              bottom: 12,
-              left: ref.letterUrl == null ? 16 : 0,
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Visibility(
-                  visible: ref.letterUrl != null,
-                  child: ClipOval(
-                    child: Material(
-                      color: Colors.transparent,
-                      child: InkWell(
-                        onTap: (){},
-                        child: Padding(
-                          padding: EdgeInsets.all(12.0),
-                          child: Stack(
-                            alignment: Alignment.center,
-                            children: <Widget>[
-                              //give red border
-                              Icon(
-                                FontAwesome5Solid.file_pdf,
-                                color: Colors.red,
-                                size: 36,
-                              ),
-                              //make center bit red
-                              Padding(
-                                //36 total
-                                padding: EdgeInsets.only(
-                                  top: 14.0,
-                                  bottom: 4.0,
-                                ),
-                                child: Container(
-                                  color: Colors.red,
-                                  height: 18,
-                                  width: 24,
-                                ),
-                              ),
-                              Icon(
-                                FontAwesome5Solid.file_pdf,
-                                color: Colors.white,
-                                size: 32,
-                              ),
-                            ],
-                          ),
+    //build
+    return Padding(
+      padding: EdgeInsets.only(
+        right: 48,
+      ),
+      child: Stack(
+        children: <Widget>[
+          Wrap(
+            spacing: 16,
+            alignment: WrapAlignment.start,
+            runAlignment: WrapAlignment.spaceBetween,
+            crossAxisAlignment: WrapCrossAlignment.start,
+            children: List.generate(
+              references.length,
+              (index) {
+                Reference ref = references[index];
+                return Stack(
+                  alignment: Alignment.topLeft,
+                  children: <Widget>[
+                    Visibility(
+                      maintainSize: true,
+                      maintainState: true,
+                      maintainAnimation: true,
+                      visible: false,
+                      child: Stack(
+                        children: items,
+                      ),
+                    ),
+                    Positioned.fill(
+                      child: Container(
+                        alignment: Alignment.topLeft,
+                        child: AReference(
+                          ref: ref,
                         ),
                       ),
                     ),
+                    Positioned(
+                      top: 0,
+                      bottom: 0,
+                      right: 0,
+                      child: Container(
+                        color: MyApp.oldGrey,
+                        width: 2,
+                      ),
+                    ),
+                  ],
+                );
+              },
+            ),
+          ),
+          Positioned(
+            top: 0,
+            bottom: 0,
+            right: 0,
+            child: Container(
+              color: MyApp.bodyColor,
+              width: 2,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class AReference extends StatelessWidget {
+  const AReference({
+    Key key,
+    @required this.ref,
+    this.collapse: false,
+  }) : super(key: key);
+
+  final Reference ref;
+  final bool collapse;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(
+        left: 16,
+        bottom: 12,
+        right: ref.letterUrl == null ? 24 : 8,
+      ),
+      child: Row(
+        mainAxisSize: collapse ? MainAxisSize.min : MainAxisSize.max,
+        mainAxisAlignment:
+            collapse ? MainAxisAlignment.start : MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Flexible(
+            child: Padding(
+              padding: EdgeInsets.only(
+                top: 12.0,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    "Ref (",
+                    style: TextStyle(
+                      color: MyApp.oldGrey,
+                    ),
                   ),
-                ),
-                Flexible(
-                  child: Padding(
+                  Padding(
                     padding: EdgeInsets.only(
-                      top: 12.0,
+                      left: 24.0,
                     ),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
@@ -167,14 +212,14 @@ class ReferencesBody extends StatelessWidget {
                               color: Colors.white,
                             ),
                             child: Text(
-                              ref.name,
+                              (ref.name ?? "") + ",",
                             ),
                           ),
                         ),
                         Visibility(
                           visible: ref.title != null,
                           child: Text(
-                            ref.title,
+                            (ref.title ?? "") + ",",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                             ),
@@ -183,15 +228,21 @@ class ReferencesBody extends StatelessWidget {
                         Visibility(
                           visible: ref.location != null,
                           child: Text(
-                            ref.location, 
+                            (ref.location ?? "") + ",",
                           ),
                         ),
                         Visibility(
                           visible: ref.email != null,
-                          child: Text(
-                            ref.email,
-                            style: TextStyle(
-                              color: MyApp.highlightGreen,
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                              top: 4,
+                              bottom: 4,
+                            ),
+                            child: Text(
+                              (ref.email ?? "") + ",",
+                              style: TextStyle(
+                                color: MyApp.highlightGreen,
+                              ),
                             ),
                           ),
                         ),
@@ -224,14 +275,20 @@ class ReferencesBody extends StatelessWidget {
                               );
                             },
                             */
-                            onTap: (){
+                            onTap: () {
                               print("tap");
                               BotToast.showSimpleNotification(title: "hi");
                             },
-                            child: Text(
-                              ref.phone ?? "",
-                              style: TextStyle(
-                                color: MyApp.oldOrange,
+                            child: Padding(
+                              padding: EdgeInsets.only(
+                                top: 4,
+                                bottom: 4,
+                              ),
+                              child: Text(
+                                (ref.phone ?? "") + ",",
+                                style: TextStyle(
+                                  color: MyApp.oldOrange,
+                                ),
                               ),
                             ),
                           ),
@@ -239,65 +296,61 @@ class ReferencesBody extends StatelessWidget {
                       ],
                     ),
                   ),
-                ),
-              ],
-            ),
-          ),
-        );
-        */
-      },
-    );
-
-    //build
-    return Padding(
-      padding: EdgeInsets.only(
-        right: 48,
-      ), //1935
-      child: SplitScreenLayout(
-        items: items,
-      ),
-      
-      
-      
-      /*LayoutBuilder(
-        builder: (context, constraints){
-          print("const: " + constraints.maxWidth.toString());
-          if(constraints.maxWidth > 1835){
-            return IntrinsicHeight(
-              child: Row(
-                children: [
-                  items[0],
-                  LineBetween(),
-                  items[1],
-                  LineBetween(),
-                  items[2],
-                  LineBetween(),
-                  items[3],
-                  LineBetween(),
-                  items[4],
-                  LineBetween(),
-                  items[5],
+                  Text(
+                    "),",
+                    style: TextStyle(
+                      color: MyApp.oldGrey,
+                    ),
+                  ),
                 ],
               ),
-            );
-          }
-          else{
-            return Wrap(
-              spacing: 16,
-              runSpacing: 16,
-              alignment: WrapAlignment.start,
-              runAlignment: WrapAlignment.spaceBetween,
-              crossAxisAlignment: WrapCrossAlignment.start,
-              children: List.generate(
-                references.length,
-                (index) {
-                  return items[index];
-                },
+            ),
+          ),
+          Visibility(
+            visible: ref.letterUrl != null,
+            child: ClipOval(
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  onTap: () {},
+                  child: Padding(
+                    padding: EdgeInsets.all(12.0),
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: <Widget>[
+                        //give red border
+                        Icon(
+                          FontAwesome5Solid.file_pdf,
+                          color: Colors.red,
+                          size: 36,
+                        ),
+                        //make center bit red
+                        Padding(
+                          //36 total
+                          padding: EdgeInsets.only(
+                            top: 14.0,
+                            bottom: 4.0,
+                          ),
+                          child: Container(
+                            color: Colors.red,
+                            height: 18,
+                            width: 24,
+                          ),
+                        ),
+                        Icon(
+                          FontAwesome5Solid.file_pdf,
+                          color: Colors.white,
+                          size: 32,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ),
-            );
-          }
-        },
-      ),*/
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -340,7 +393,6 @@ IntrinsicHeight(
             )
 */
 
-
 //formatting per column is
 //item -> expanded -> spacer stick
 //item -> expanded -> spacer stick
@@ -373,16 +425,14 @@ class SplitScreenLayout extends StatelessWidget {
         TableRow(
           children: [
             Container(
-              
               decoration: BoxDecoration(
-                color: Colors.red,
-            border: Border(
-              right: BorderSide(
-                width: 2,
-                color: Colors.green, // MyApp.oldGrey,
-              ),
-            )
-          ),
+                  color: Colors.red,
+                  border: Border(
+                    right: BorderSide(
+                      width: 2,
+                      color: Colors.green, // MyApp.oldGrey,
+                    ),
+                  )),
               height: 150,
               width: 200,
             ),
@@ -397,14 +447,13 @@ class SplitScreenLayout extends StatelessWidget {
           children: [
             Container(
               decoration: BoxDecoration(
-                color: Colors.blue,
-            border: Border(
-              right: BorderSide(
-                width: 2,
-                color: Colors.green, // MyApp.oldGrey,
-              ),
-            )
-          ),
+                  color: Colors.blue,
+                  border: Border(
+                    right: BorderSide(
+                      width: 2,
+                      color: Colors.green, // MyApp.oldGrey,
+                    ),
+                  )),
               height: 75,
               width: 250,
             ),
