@@ -2,59 +2,6 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/main.dart';
 import 'package:portfolio/utils/link/ui/hover.dart';
-import 'package:portfolio/utils/mySnackBar.dart';
-
-//this works on the pricible that
-//if it works, they wont see this
-justInCaseShowQuickWarning(BuildContext context) {
-  showSnackBar(
-    context,
-    text: "Something Went Wrong :(",
-    duration: Duration(seconds: 2),
-  );
-}
-
-/*
-//basic struct
-class Option {
-  String name;
-  Function function;
-  Option(
-    this.name,
-    this.function,
-  );
-}
-
-//handle both number cases
-Option numberOption({bool callNumber}) {
-  //grab different stuff
-  String action = callNumber ? "Call" : "Message";
-  Function function = callNumber ? dialNumber : messageNumber;
-
-  //return same stuff with proper params
-  return Option(action, (BuildContext context, String number) async {
-    justInCaseShowQuickWarning(context);
-    
-      if (await function(number) == false) {
-        if(await copyToClipboard(number)){
-          showSnackBar(
-            context,
-            text: "Unable to " + action + " Number\n"
-            + number + " was copied instead",
-          );
-        }
-        else{
-          showSnackBar(
-            context,
-            text: "Unable to " + action + " Number",
-          );
-        }
-      } else { //if they are taken to the dialer they wont notice this
-        justInCaseShowQuickWarning(context);
-      }
-  });
-}
-*/
 
 //options tool bar for links
 //should be used for text link and icons links

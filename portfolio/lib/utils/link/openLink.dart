@@ -62,7 +62,7 @@ _launchLink(BuildContext context, String url, {bool openHere}) async {
   else{
     if(isAndroid()){
       try{
-        await launch(
+        bool launchSuccessfull = await launch(
           url,
           forceWebView: openHere,
           //set to true, cuz why not
@@ -70,19 +70,29 @@ _launchLink(BuildContext context, String url, {bool openHere}) async {
           enableDomStorage: true,
           //headers: new Map<String,String>(),
         );
+
+        //try the alternative
+        if(launchSuccessfull == false){
+          _launchRawLink(context, url);
+        }
       } catch (e) {
         _launchRawLink(context, url);
       }
     }
     else if(isiOS()){
       try{
-        await launch(
+        bool launchSuccessfull = await launch(
           url,
           forceSafariVC: openHere,
           //if we don't want it to openHere
           //then we can mess with universalLinksOnly
           universalLinksOnly: false, //no open the link even if not universal
         );
+
+        //try the alternative
+        if(launchSuccessfull == false){
+          _launchRawLink(context, url);
+        }
       } catch (e) {
         _launchRawLink(context, url);
       }
@@ -95,9 +105,14 @@ _launchLink(BuildContext context, String url, {bool openHere}) async {
 
 _launchRawLink(BuildContext context, String url) async {
   try {
-    await launch(
+    bool launchSuccessfull = await launch(
       url,
     );
+
+    //try the alternative
+    if(launchSuccessfull == false){
+      _launchRawLink(context, url);
+    }
   } catch (e) {
     copyToClipboard(
       context, 

@@ -43,14 +43,14 @@ class IconPhoneLink extends StatelessWidget {
               icon: Icons.phone,
               label: "Call",
               onTap: () {
-                callNumber(url);
+                callNumber(context, url);
               },
             ),
             OptionButton(
               icon: Icons.message,
               label: "Text",
               onTap: () {
-                textNumber(url);
+                textNumber(context, url);
               },
             ),
           ],
@@ -93,7 +93,7 @@ class IconEmailLink extends StatelessWidget {
               icon: Icons.email,
               label: "Email",
               onTap: () {
-                sendEmail(url);
+                sendEmail(context, url);
               },
             ),
           ],
