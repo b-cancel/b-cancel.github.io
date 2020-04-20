@@ -1,8 +1,12 @@
+//flutter
 import 'package:flutter/material.dart';
-import 'package:portfolio/main.dart';
-import 'package:portfolio/region/regions.dart';
-import 'package:portfolio/utils/hover.dart';
 
+//internal
+import 'package:portfolio/utils/link/ui/hover.dart';
+import 'package:portfolio/region/regions.dart';
+import 'package:portfolio/main.dart';
+
+//widget
 class SideMenu extends StatelessWidget {
   const SideMenu({
     Key key,

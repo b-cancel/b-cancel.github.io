@@ -8,11 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 //internal
+import 'package:portfolio/utils/link/copyToClipboard.dart';
 import 'package:portfolio/utils/platformChecker.dart';
-import 'package:portfolio/utils/copyToClipboard.dart';
-import 'package:portfolio/utils/mySnackBar.dart';
-
-import 'platformChecker.dart';
 
 //falls back with url launcher
 openWithHtml(BuildContext context, String url, {bool openHere}) {

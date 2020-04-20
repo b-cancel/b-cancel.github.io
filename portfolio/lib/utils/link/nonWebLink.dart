@@ -2,20 +2,20 @@
 import 'package:url_launcher/url_launcher.dart';
 
 //internal
-import 'platformChecker.dart';
+import 'package:portfolio/utils/platformChecker.dart';
 
 //functions
-Future<bool> openNonWebUrl(url)async{
+Future<bool> _openNonWebUrl(url)async{
   //try to properly check if we can launch first
   if (await canLaunch(url)) {
-    return await actualOpenNonWebUrl(url);
+    return await _actualOpenNonWebUrl(url);
   } else {
     //don't check if it can launch just do it
-    return await actualOpenNonWebUrl(url);
+    return await _actualOpenNonWebUrl(url);
   }
 }
 
-Future<bool> actualOpenNonWebUrl(url)async{
+Future<bool> _actualOpenNonWebUrl(url)async{
   try{
     return await launch(
       url,
@@ -32,7 +32,13 @@ Future<bool> actualOpenNonWebUrl(url)async{
       //statusBarBrightness: Brightness.dark,
     );
   } catch (e) {
-    return false;
+    try {
+      return await launch(
+        url,
+      );
+    } catch (e) {
+      return false;
+    }
   }
 }
 
@@ -46,17 +52,17 @@ Future<bool> downloadFile(String file)async{
   }
 
   //launch it to download it
-  return await openNonWebUrl(file);
+  return await _openNonWebUrl(file);
 }
 
-Future<bool> dialNumber(String number)async{
+Future<bool> callNumber(String number)async{
   number = "tel:" + number;
-  return await openNonWebUrl(number); 
+  return await _openNonWebUrl(number); 
 }
 
-Future<bool> messageNumber(String number)async{
+Future<bool> textNumber(String number)async{
   number = "sms:" + number;
-  return await openNonWebUrl(number);
+  return await _openNonWebUrl(number);
 }
 
 Future<bool> sendEmail(
@@ -70,5 +76,5 @@ Future<bool> sendEmail(
   url += Uri.encodeFull(subject);
   url += "&body=";
   url += Uri.encodeFull(body);
-  return await openNonWebUrl(url);
+  return await _openNonWebUrl(url);
 }

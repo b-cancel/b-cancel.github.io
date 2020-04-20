@@ -1,17 +1,14 @@
 //fluter
-import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 
 //plugins
 import 'package:flutter_icons/flutter_icons.dart';
 
 //internal
-import 'package:portfolio/utils/copyToClipboard.dart';
-import 'package:portfolio/utils/link/iconLink.dart';
+import 'package:portfolio/utils/link/copyToClipboard.dart';
+import 'package:portfolio/utils/link/ui/iconLink.dart';
+import 'package:portfolio/utils/link/nonWebLink.dart';
 import 'package:portfolio/utils/mySnackBar.dart';
-import 'package:portfolio/utils/nonWebLink.dart';
-import '../utils/copyToClipboard.dart';
-import '../utils/mySnackBar.dart';
 
 //widget
 class ContactMeBody extends StatelessWidget {
@@ -39,64 +36,47 @@ class QuickLinks extends StatelessWidget {
       runSpacing: 8,
       spacing: 16,
       children: <Widget>[
-        IconLink(
-          onTap: () async {
-            copyToClipboard(
-              context, 
-              number,
-              alternativeMessage: "Use " + number + " to Call or Text Me",
-            );
-          },
-          //TODO: finish updating this
-          onShowOptions: () async{
-            if (await messageNumber(number) == false) {
-              showSnackBar(
-                context,
-                text: "Unable To Message Number",
-              );
-            }
-          },
-          icon: Icons.phone,
-          optionsText: number,
+        IconPhoneLink(
+          icon: IconLinkIcon(
+            icon: Icons.phone,
+          ),
+          url: number,
+          label: number,
         ),
-        IconLink(
-          onTap: () async {
-            copyToClipboard(
-              context, 
-              email,
-              alternativeMessage: "Use " + email + " to Email Me",
-            );
-          },
-          //TODO: finish updating this
-          onShowOptions: ()async{
-            if (await sendEmail(email) == false) {
-              showSnackBar(
-                context,
-                text: "Unable To Send Email",
-              );
-            }
-          },
-          icon: Icons.email,
-          optionsText: email,
+        IconEmailLink(
+          icon: IconLinkIcon(
+            icon: Icons.email,
+          ),
+          url: email, 
+          label: email,
         ),
         IconWebLink(
           url: "https://www.google.com",
-          icon: FontAwesome.github,
+          icon: IconLinkIcon(
+            icon: FontAwesome.github,
+          ),
           label: "Github",
         ),
         IconWebLink(
           url: "https://www.google.com",
-          icon: FontAwesome.file_text,
+          icon: IconLinkIcon(
+            icon: FontAwesome.file_text,
+          ),
           label: "Resume",
         ),
         IconWebLink(
           url: "https://www.google.com",
-          icon: FontAwesome5Brands.hackerrank,
+          icon: IconLinkIcon(
+            icon: FontAwesome5Brands.hackerrank,
+          ),
           label: "Hacker Rank",
         ),
         IconWebLink(
           url: "https://www.google.com",
-          icon: FontAwesome5Brands.linkedin,
+          icon: 
+          IconLinkIcon(
+            icon: FontAwesome5Brands.linkedin,
+          ),
           label: "Linked In",
         ),
       ],
