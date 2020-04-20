@@ -85,6 +85,13 @@ class ReferencesBody extends StatelessWidget {
       references.length,
       (index) {
         Reference ref = references[index];
+        return Container(
+          color: index%2==0 ? Colors.red : Colors.blue,
+          height: 100,
+          width: 250,
+        );
+
+        /*
         return Card(
           margin: EdgeInsets.all(0),
           color: MyApp.headerColor,
@@ -237,27 +244,178 @@ class ReferencesBody extends StatelessWidget {
             ),
           ),
         );
+        */
       },
     );
 
     //build
     return Padding(
       padding: EdgeInsets.only(
-        right: 24,
+        right: 48,
+      ), //1935
+      child: SplitScreenLayout(
+        items: items,
       ),
-      child: Wrap(
-        spacing: 16,
-        runSpacing: 16,
-        alignment: WrapAlignment.start,
-        runAlignment: WrapAlignment.spaceBetween,
-        crossAxisAlignment: WrapCrossAlignment.start,
-        children: List.generate(
-          references.length,
-          (index) {
-            return items[index];
-          },
+      
+      
+      
+      /*LayoutBuilder(
+        builder: (context, constraints){
+          print("const: " + constraints.maxWidth.toString());
+          if(constraints.maxWidth > 1835){
+            return IntrinsicHeight(
+              child: Row(
+                children: [
+                  items[0],
+                  LineBetween(),
+                  items[1],
+                  LineBetween(),
+                  items[2],
+                  LineBetween(),
+                  items[3],
+                  LineBetween(),
+                  items[4],
+                  LineBetween(),
+                  items[5],
+                ],
+              ),
+            );
+          }
+          else{
+            return Wrap(
+              spacing: 16,
+              runSpacing: 16,
+              alignment: WrapAlignment.start,
+              runAlignment: WrapAlignment.spaceBetween,
+              crossAxisAlignment: WrapCrossAlignment.start,
+              children: List.generate(
+                references.length,
+                (index) {
+                  return items[index];
+                },
+              ),
+            );
+          }
+        },
+      ),*/
+    );
+  }
+}
+
+class LineBetween extends StatelessWidget {
+  const LineBetween({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Center(
+        child: Container(
+          width: 2,
+          color: MyApp.oldGrey,
         ),
       ),
+    );
+  }
+}
+
+/*
+IntrinsicHeight(
+              child: Row(
+                children: [
+                  items[0],
+                  LineBetween(),
+                  items[1],
+                  LineBetween(),
+                  items[2],
+                  LineBetween(),
+                  items[3],
+                  LineBetween(),
+                  items[4],
+                  LineBetween(),
+                  items[5],
+                ],
+              ),
+            )
+*/
+
+
+//formatting per column is
+//item -> expanded -> spacer stick
+//item -> expanded -> spacer stick
+//etc
+//and all those spacer sticks become one
+//so you dont have any weird breakages
+class SplitScreenLayout extends StatelessWidget {
+  SplitScreenLayout({
+    @required this.items,
+    @required this.columns,
+  });
+
+  final List<Widget> items;
+  final int columns;
+
+  //for 6 items
+  //for full screen we have [1,1,1,1,1,1] -1 column           1 row
+  //for after we have       [2,1,1,1,1] -1 column             2 rows (4 columns with fillers)
+  //for after we have       [2,2,1,1] -1 column               2 rows (2 columns with fillers)
+  //for after we have       [2,2,2] -1 column                 2 rows
+  //for after we have       [3,3] -1 column                   3 rows
+  //for after we have       [6] - 1 column (no separator bars)6 rows
+  @override
+  Widget build(BuildContext context) {
+    //NOTE: all the items in every row have right borders except the last one
+
+    return Table(
+      defaultVerticalAlignment: TableCellVerticalAlignment.top,
+      children: [
+        TableRow(
+          children: [
+            Container(
+              
+              decoration: BoxDecoration(
+                color: Colors.red,
+            border: Border(
+              right: BorderSide(
+                width: 2,
+                color: Colors.green, // MyApp.oldGrey,
+              ),
+            )
+          ),
+              height: 150,
+              width: 200,
+            ),
+            Container(
+              color: Colors.yellow,
+              height: 100,
+              width: 200,
+            ),
+          ],
+        ),
+        TableRow(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+            border: Border(
+              right: BorderSide(
+                width: 2,
+                color: Colors.green, // MyApp.oldGrey,
+              ),
+            )
+          ),
+              height: 75,
+              width: 250,
+            ),
+            Container(
+              color: Colors.orange,
+              height: 50,
+              width: 250,
+            ),
+          ],
+        )
+      ],
     );
   }
 }
