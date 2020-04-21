@@ -14,11 +14,16 @@ import 'package:portfolio/utils/mySnackBar.dart';
 class ContactMeBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        QuickLinks(),
-        QRSection(),
-      ],
+    return Container(
+      margin: EdgeInsets.only(
+        right: 48,
+      ),
+      child: Column(
+        children: <Widget>[
+          QuickLinks(),
+          QRSection(),
+        ],
+      ),
     );
   }
 }

@@ -56,8 +56,9 @@ class _SplitScreenViewState extends State<SplitScreenView>
   @override
   Widget build(BuildContext context) {
     return Padding(
+      //since the other bit of right spacing is applied to the item individually
       padding: EdgeInsets.only(
-        right: 48,
+        right: 24,
       ),
       child: Stack(
         children: <Widget>[

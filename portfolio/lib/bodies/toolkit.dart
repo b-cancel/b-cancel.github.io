@@ -1,12 +1,52 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:portfolio/main.dart';
+import 'package:portfolio/section/section.dart';
+import 'package:portfolio/section/uncollapsible.dart';
+import 'package:portfolio/utils/wrappedText.dart';
 
 class ToolKitBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text("languages, leadership, project planing, problem solving, etc"),
-      ],
+    return DefaultTextStyle(
+      style: GoogleFonts.robotoMono(
+        color: MyApp.oldGrey,
+        fontSize: MyApp.h4,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          WrappedText(
+            "last Updated: " + DateTime.now().toString(),
+          ),
+          Container(height: 4),
+          UnCollapsibleSection(
+            label: "education", 
+            sectionType: SectionType.CurlyBraces, 
+            child: Container(
+              height: 100,
+              color: Colors.red,
+            ),
+          ),
+          Container(height: 4),
+          Text(
+            "//experience comes from coursework, projects, and work",
+            style: TextStyle(
+              color: Colors.green,
+            ),
+          ),
+          Container(height: 4),
+          UnCollapsibleSection(
+            label: "experience To Tools", 
+            separator: "",
+            sectionType: SectionType.Parenthesis, 
+            child: Container(
+              height: 100,
+              color: Colors.blue,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

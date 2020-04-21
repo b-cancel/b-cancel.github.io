@@ -7,21 +7,21 @@ import 'package:portfolio/region/regions.dart';
 import 'package:portfolio/section/sectionBody.dart';
 import 'package:portfolio/section/sectionHeader.dart';
 
-enum SectionType {Collection, Class, Function}
+enum SectionType {CurlyBraces, Brackets, Parenthesis}
 Map<SectionType, String> sectionTypeToLeft = {
-  SectionType.Collection : "[",
-  SectionType.Class : "{",
-  SectionType.Function : "(", 
+  SectionType.CurlyBraces : "[",
+  SectionType.Brackets : "{",
+  SectionType.Parenthesis : "(", 
 };
 Map<SectionType, String> sectionTypeToRight = {
-  SectionType.Collection : "]",
-  SectionType.Class : "}",
-  SectionType.Function : ")", 
+  SectionType.CurlyBraces : "]",
+  SectionType.Brackets : "}",
+  SectionType.Parenthesis : ")", 
 };
 Map<SectionType, Color> sectionTypeToColor = {
-  SectionType.Collection : MyApp.highlightPink,
-  SectionType.Class : MyApp.highlightGreen,
-  SectionType.Function : MyApp.blueText, 
+  SectionType.CurlyBraces : MyApp.highlightPink,
+  SectionType.Brackets : MyApp.highlightGreen,
+  SectionType.Parenthesis : MyApp.blueText, 
 };
 
 //widget
@@ -33,7 +33,7 @@ class RegularSection extends StatefulWidget {
     @required this.body,
     this.initiallyOpened: true,
     this.leftSpacing: true,
-
+    this.collapsible: true,
   });
 
   final SectionType sectionType;
@@ -42,6 +42,7 @@ class RegularSection extends StatefulWidget {
   final Widget body;
   final bool initiallyOpened;
   final bool leftSpacing;
+  final bool collapsible;
 
   @override
   _RegularSectionState createState() => _RegularSectionState();
@@ -73,6 +74,7 @@ class _RegularSectionState extends State<RegularSection> {
         SectionHeader(
           sectionType: widget.sectionType,
           sectionOpened: sectionOpened,
+          collapsible: widget.collapsible,
           label: widget.label,
           title: widget.title,
         ),

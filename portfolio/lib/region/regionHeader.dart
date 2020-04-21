@@ -14,11 +14,13 @@ class RegionHeader extends StatefulWidget {
     @required this.regionOpened,
     @required this.title,
     @required this.titleColor,
+    this.fontSize: MyApp.h1
   }) : super(key: key);
 
   final ValueNotifier<bool> regionOpened;
   final String title;
   final Color titleColor;
+  final double fontSize;
 
   @override
   _RegionHeaderState createState() => _RegionHeaderState();
@@ -87,6 +89,7 @@ class _RegionHeaderState extends State<RegionHeader> {
                         isTrue: TitlePortion(
                           title: widget.title,
                           titleColor: widget.titleColor,
+                          fontSize: widget.fontSize,
                         ),
                         isFalse: Row(
                           mainAxisSize: MainAxisSize.min,
@@ -107,7 +110,7 @@ class _RegionHeaderState extends State<RegionHeader> {
                                   widget.title,
                                   style: GoogleFonts.robotoMono(
                                     color: Colors.white,
-                                    fontSize: 24,
+                                    fontSize: widget.fontSize,
                                   ),
                                 ),
                               ),
@@ -132,10 +135,12 @@ class TitlePortion extends StatelessWidget {
     Key key,
     @required this.title,
     @required this.titleColor,
+    @required this.fontSize,
   }) : super(key: key);
 
   final String title;
   final Color titleColor;
+  final double fontSize;
 
   @override
   Widget build(BuildContext context) {
@@ -158,7 +163,7 @@ class TitlePortion extends StatelessWidget {
           "\"" + title + "\"",
           style: GoogleFonts.robotoMono(
             color: titleColor,
-            fontSize: MyApp.h1,
+            fontSize: fontSize,
           ),
         ),
       ),

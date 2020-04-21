@@ -16,15 +16,15 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  static double h1 = 32;
-  static double h2 = 28;
-  static double h3 = 24;
+  static const double h1 = 32;
+  static const double h2 = 28;
+  static const double h3 = 24;
   //6 units of differenc between stuff that
   //should be as header and stuff that shouldn't
-  static double h4 = 18;
-  static double h5 = 14;
+  static const double h4 = 18;
+  static const double h5 = 14;
   //tiny shoudn't be any tinier that 12 pt
-  static double h6 = 12;
+  static const double h6 = 12;
 
   //link color
   static Color lightLinkColor = highlightGreen;

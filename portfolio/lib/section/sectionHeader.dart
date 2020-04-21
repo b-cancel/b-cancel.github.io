@@ -15,12 +15,14 @@ class SectionHeader extends StatefulWidget {
     Key key,
     @required this.sectionType,
     @required this.sectionOpened,
+    @required this.collapsible,
     @required this.label,
     @required this.title,
   }) : super(key: key);
 
   final SectionType sectionType;
   final ValueNotifier<bool> sectionOpened;
+  final bool collapsible;
   final String label;
   final String title;
 
@@ -49,67 +51,74 @@ class _SectionHeaderState extends State<SectionHeader> {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: MyApp.bodyColor,
-      child: InkWell(
-        onTap: () {
-          widget.sectionOpened.value = !widget.sectionOpened.value;
-        },
-        child: Container(
-          alignment: Alignment.bottomLeft,
-          padding: EdgeInsets.only(
-            top: 8.0,
-          ),
-          child: TitlePortion(
-            sectionOpened: widget.sectionOpened,
-            label: widget.label, 
-            title: DefaultTextStyle(
-              style: GoogleFonts.robotoMono(),
-              child: Wrap(
-                crossAxisAlignment: WrapCrossAlignment.end,
-                children: <Widget>[
-                  Text(
-                    widget.title + " ",
-                    style: TextStyle(
-                      fontSize: 24,
-                      color: sectionTypeToColor[widget.sectionType],
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                      bottom: 4,
-                    ),
-                    child: DefaultTextStyle(
-                      style: TextStyle(
-                        color: MyApp.oldGrey,
-                        fontSize: 18,
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                            "= " + sectionTypeToLeft[widget.sectionType],
-                          ),
-                          Visibility(
-                            visible: widget.sectionOpened.value == false,
-                            child: Text(
-                              "..." + 
-                              sectionTypeToRight[widget.sectionType]
-                            )
-                          ),
-                        ],
-                      ),
-                    ),
-                  )
-                ],
+    Widget header = Container(
+      alignment: Alignment.bottomLeft,
+      padding: EdgeInsets.only(
+        top: 8.0,
+      ),
+      child: TitlePortion(
+        collapsible: widget.collapsible,
+        sectionOpened: widget.sectionOpened,
+        label: widget.label,
+        title: DefaultTextStyle(
+          style: GoogleFonts.robotoMono(),
+          child: Wrap(
+            crossAxisAlignment: WrapCrossAlignment.end,
+            children: <Widget>[
+              Text(
+                widget.title + " ",
+                style: TextStyle(
+                  fontSize: 24,
+                  color: sectionTypeToColor[widget.sectionType],
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
+              Padding(
+                padding: EdgeInsets.only(
+                  bottom: 4,
+                ),
+                child: DefaultTextStyle(
+                  style: TextStyle(
+                    color: MyApp.oldGrey,
+                    fontSize: 18,
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        "= " + sectionTypeToLeft[widget.sectionType],
+                      ),
+                      Visibility(
+                        visible: widget.sectionOpened.value == false,
+                        child: Text(
+                          "..." + sectionTypeToRight[widget.sectionType],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            ],
           ),
         ),
       ),
     );
+
+    //make a button or not
+    if (widget.collapsible) {
+      return Material(
+        color: MyApp.bodyColor,
+        child: InkWell(
+          onTap: () {
+            widget.sectionOpened.value = !widget.sectionOpened.value;
+          },
+          child: header,
+        ),
+      );
+    } else {
+      return header;
+    }
   }
 }
 
@@ -119,11 +128,13 @@ class TitlePortion extends StatelessWidget {
     @required this.label,
     @required this.title,
     @required this.sectionOpened,
+    @required this.collapsible,
   }) : super(key: key);
 
   final String label;
   final Widget title;
   final ValueNotifier<bool> sectionOpened;
+  final bool collapsible;
 
   @override
   Widget build(BuildContext context) {
@@ -136,11 +147,14 @@ class TitlePortion extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
-            Container(
-              width: 24,
-              height: 24,
-              child: Toggler(
-                sectionOpened: sectionOpened,
+            Visibility(
+              visible: collapsible,
+              child: Container(
+                width: 24,
+                height: 24,
+                child: Toggler(
+                  sectionOpened: sectionOpened,
+                ),
               ),
             ),
             Padding(

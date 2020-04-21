@@ -55,6 +55,7 @@ List<Region> regions = [
     //these are updated by their respective layout builders
     GlobalKey(),
     GlobalKey(),
+    initiallyOpened: true, //TODO: remove after testin
   ),
   Region(
     FontAwesome.suitcase, 
@@ -75,11 +76,10 @@ List<Region> regions = [
   Region(
     Icons.thumb_up,
     "References",
-    ReferencesBody(),
+    ReferencesBody(), 
     //these are updated by their respective layout builders
     GlobalKey(),
     GlobalKey(),
-    initiallyOpened: true, //TODO: remove after testin
   ),
   Region(
     FontAwesome5Solid.comment_alt,

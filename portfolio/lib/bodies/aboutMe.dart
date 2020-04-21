@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/main.dart';
 import 'package:portfolio/menu.dart';
 import 'package:portfolio/region/regions.dart';
+import 'package:portfolio/region/regularRegion.dart';
 import 'package:portfolio/utils/link/ui/hover.dart';
 
 //internal
@@ -44,25 +45,23 @@ class AboutMeBody extends StatelessWidget {
         ],
       );
     } else {
-      return IntrinsicHeight(
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Face(),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Hello(),
-                  Logo(),
-                  Introduction(
-                    scrollController: scrollController,
-                  ),
-                ],
-              ),
+      return Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Face(),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Hello(),
+                Logo(),
+                Introduction(
+                  scrollController: scrollController,
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       );
     }
   }
@@ -92,16 +91,117 @@ class Logo extends StatelessWidget {
     Key key,
   }) : super(key: key);
 
+  getLongestString(List<String> strings) {
+    String longestFirst = "";
+    for (int i = 0; i < strings.length; i++) {
+      if (strings[i].length > longestFirst.length) {
+        longestFirst = strings[i];
+      }
+    }
+    return longestFirst;
+  }
+
   @override
   Widget build(BuildContext context) {
+    List<String> first = ["Software", "App", "Web", "Game", "UX"];
+    String longestFirst = getLongestString(first);
+    List<String> second = ["Engineer", "Developer", "Designer"];
+    String longestSecond = getLongestString(second);
+
+    //return
     return Padding(
       padding: EdgeInsets.symmetric(
         vertical: 16.0,
       ),
-      child: Image.asset(
+      child: DefaultTextStyle(
+        style: GoogleFonts.robotoMono(
+          fontWeight: FontWeight.bold,
+          color: Colors.black,
+          fontSize: MyApp.h3,
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Text(
+              "I'm a ",
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+            //Software, App, Web, Game, UX
+            Container(
+              color: MyApp.highlightGreen,
+              padding: EdgeInsets.symmetric(
+                horizontal: 8,
+                vertical: 4,
+              ),
+              child: Stack(
+                children: <Widget>[
+                  Opacity(opacity: 0, child: Text(longestFirst)),
+                  Stack(
+                    children: List.generate(
+                      first.length,
+                      (index) {
+                        return AnimatedBuilder(
+                          animation: null, //TODO: 1 or 0 or -1
+                          builder: (context, child) {
+                            return AnimatedSwitcher(
+                              duration: kTabScrollDuration,
+                              transitionBuilder: (widget, animation) {
+                                return SlideTransition(
+                                  child: widget,
+                                  position: Tween<Offset>(
+                                    begin: Offset(0, 0),
+                                    end: Offset(0, 1),
+                                  ).animate(animation),
+                                );
+                              },
+                              child: Text(first[index]),
+                            );
+                          },
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            //Engineer, Developer, Designer
+            Container(
+              color: MyApp.highlightPink,
+              padding: EdgeInsets.symmetric(
+                horizontal: 8,
+                vertical: 4,
+              ),
+              child: Stack(
+                children: <Widget>[
+                  Text(longestSecond),
+                  /*
+                  OverflowBox(
+                    child: ListView(
+                      children: List.generate(
+                        second.length,
+                        (index) {
+                          return Text(
+                            second[index],
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                  */
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+
+      /*
+      Image.asset(
         "assets/title/small.gif",
         width: 350,
-      ),
+      ),*/
     );
   }
 }
@@ -146,6 +246,18 @@ class Introduction extends StatelessWidget {
         WrappedText(
           "I just finished publishing my first app \"Swol\", and I'm excited for my next Adventure!",
         ),
+        /*
+        RegularRegion(
+          title: "My Story", 
+          titleColor: MyApp.oldPurple,
+          fontSize: MyApp.h4,
+          body: Column(
+            children: <Widget>[
+              Text("my story will be here or something")
+            ],
+          ),
+        ),
+        */
         Row(
           children: <Widget>[
             Padding(
@@ -189,7 +301,7 @@ class Introduction extends StatelessWidget {
                         ],
                       ),
                     ),
-                    onTap: (){
+                    onTap: () {
                       int contactID = regions.length - 1;
                       scrollToRegion(
                         contactID,

@@ -1,5 +1,6 @@
 //flutter
 import 'package:flutter/material.dart';
+import 'package:portfolio/main.dart';
 
 //internal
 import 'package:portfolio/region/regionBody.dart';
@@ -14,6 +15,7 @@ class RegularRegion extends StatefulWidget {
     @required this.body,
     this.initiallyOpened: false,
     this.leftSpacing: true,
+    this.fontSize: MyApp.h1,
   });
 
   final String title;
@@ -21,6 +23,7 @@ class RegularRegion extends StatefulWidget {
   final Widget body;
   final bool initiallyOpened;
   final bool leftSpacing;
+  final double fontSize;
 
   @override
   _RegularRegionState createState() => _RegularRegionState();
@@ -52,7 +55,8 @@ class _RegularRegionState extends State<RegularRegion> {
         RegionHeader(
           regionOpened: sectionOpened,
           title: widget.title,
-          titleColor: widget.titleColor
+          titleColor: widget.titleColor,
+          fontSize: widget.fontSize,
         ),
         RegionBody(
           regionOpened: sectionOpened,
