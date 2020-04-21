@@ -65,56 +65,17 @@ class _SplitScreenViewState extends State<SplitScreenView>
             position: animation,
             child: Transform(
               transform: Matrix4Transform().flipVertically().matrix4,
-              child: Wrap(
-                alignment: WrapAlignment.start,
-                children: List.generate(
-                  widget.items.length,
-                  (index) {
-                    SplitScreenItem theItem = widget.items[index];
-                    return Stack(
-                      alignment: Alignment.topLeft,
-                      children: <Widget>[
-                        widget.largestItem,
-                        Positioned.fill(
-                          child: Container(
-                            alignment: Alignment.topLeft,
-                            child: ASplitScreenItem(
-                              splitScreenItem: theItem,
-                              makeInvisible: true,
-                            ),
-                          ),
-                        ),
-                      ],
-                    );
-                  },
-                ),
+              child: SplitScreenItems(
+                items: widget.items,
+                largestItem: widget.largestItem,
+                makeInvisible: true,
               ),
             ),
           ),
-          Wrap(
-            alignment: WrapAlignment.start,
-            children: List.generate(
-              widget.items.length,
-              (index) {
-                SplitScreenItem theItem = widget.items[index];
-                return Stack(
-                  alignment: Alignment.topLeft,
-                  children: <Widget>[
-                    widget.largestItem,
-                    Positioned.fill(
-                      child: Container(
-                        alignment: Alignment.topLeft,
-                        child: ASplitScreenItem(
-                          splitScreenItem: theItem,
-                        ),
-                      ),
-                    ),
-                  ],
-                );
-              },
-            ),
+          SplitScreenItems(
+            items: widget.items,
+            largestItem: widget.largestItem,
           ),
-          //cover up that last split that we don't want to see
           Positioned(
             top: 0,
             bottom: 0,
@@ -130,143 +91,52 @@ class _SplitScreenViewState extends State<SplitScreenView>
   }
 }
 
-//right icon
-/*
-IconWebLink(
-                  url: "https://google.com",
-                  label: "Recommendation Letter",
-                  icon: Padding(
-                    padding: EdgeInsets.all(12.0),
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: <Widget>[
-                        //give red border
-                        Icon(
-                          FontAwesome5Solid.file_pdf,
-                          color: Colors.red,
-                          size: 36,
-                        ),
-                        //make center bit red
-                        Padding(
-                          //36 total
-                          padding: EdgeInsets.only(
-                            top: 14.0,
-                            bottom: 4.0,
-                          ),
-                          child: Container(
-                            color: Colors.red,
-                            height: 18,
-                            width: 24,
-                          ),
-                        ),
-                        Icon(
-                          FontAwesome5Solid.file_pdf,
-                          color: Colors.white,
-                          size: 32,
-                        ),
-                      ],
-                    ),
+class SplitScreenItems extends StatelessWidget {
+  SplitScreenItems({
+    @required this.items,
+    @required this.largestItem,
+    this.makeInvisible: false,
+  });
+
+  final List<SplitScreenItem> items;
+  final Widget largestItem;
+  final bool makeInvisible;
+
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      alignment: WrapAlignment.start,
+      children: List.generate(
+        items.length,
+        (index) {
+          SplitScreenItem theItem = items[index];
+          return Stack(
+            alignment: Alignment.topLeft,
+            children: <Widget>[
+              largestItem,
+              Positioned.fill(
+                child: Container(
+                  alignment: Alignment.topLeft,
+                  child: ASplitScreenItem(
+                    splitScreenItem: theItem,
+                    makeInvisible: makeInvisible,
                   ),
                 ),
-*/
-/*
-[
-                        Text(
-                          "Ref (",
-                          style: TextStyle(
-                            color: MyApp.oldGrey,
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                            left: 24.0,
-                          ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Visibility(
-                                visible: ref.name != null,
-                                child: DefaultTextStyle(
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                  child: Text(
-                                    (ref.name ?? "") + ",",
-                                  ),
-                                ),
-                              ),
-                              Visibility(
-                                visible: ref.title != null,
-                                child: Text(
-                                  (ref.title ?? "") + ",",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                              Visibility(
-                                visible: ref.location != null,
-                                child: Text(
-                                  (ref.location ?? "") + ",",
-                                ),
-                              ),
-                              Visibility(
-                                visible: ref.email != null,
-                                child: Padding(
-                                  padding: EdgeInsets.symmetric(
-                                    vertical: 4,
-                                  ),
-                                  child: TextEmailLink(
-                                    url: ref.email,
-                                    preferDirection: PreferDirection.rightCenter,
-                                    text: Text(
-                                      (ref.email ?? "") + ",",
-                                      style: TextStyle(
-                                        color: MyApp.highlightGreen,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Visibility(
-                                visible: ref.phone != null,
-                                child: Padding(
-                                  padding: EdgeInsets.symmetric(
-                                    vertical: 4,
-                                  ),
-                                  child: TextPhoneLink(
-                                    url: ref.phone,
-                                    preferDirection: PreferDirection.rightCenter,
-                                    text: Text(
-                                      (ref.phone ?? "") + ",",
-                                      style: TextStyle(
-                                        color: MyApp.oldOrange,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Text(
-                          "),",
-                          style: TextStyle(
-                            color: MyApp.oldGrey,
-                          ),
-                        ),
-                      ],
-*/
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+}
 
 class SplitScreenItem{
-  final List<Widget> widgetsToExpand;
+  final Widget expandingWidget;
   final Widget widgetOnRight;
 
   SplitScreenItem(
-    this.widgetsToExpand,
+    this.expandingWidget,
     {this.widgetOnRight}
   );
 }
@@ -318,10 +188,7 @@ class ASplitScreenItem extends StatelessWidget {
                     style: GoogleFonts.robotoMono(
                       color: Colors.white,
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: splitScreenItem.widgetsToExpand,
-                    ),
+                    child: splitScreenItem.expandingWidget,
                   ),
                 ),
               ),
