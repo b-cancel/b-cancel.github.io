@@ -45,6 +45,8 @@ class _RegionBodyState extends State<RegionBody> {
   Widget build(BuildContext context) {
     return Visibility(
       visible: widget.regionOpened.value,
+      //build it once is expensive enough
+      maintainState: true,
       child: Stack(
         children: <Widget>[
           Positioned(

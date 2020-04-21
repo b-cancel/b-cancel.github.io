@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:matrix4_transform/matrix4_transform.dart';
 import 'package:portfolio/main.dart';
 
-class SplitScreenView extends StatelessWidget {
+class SplitScreenView extends StatefulWidget {
   SplitScreenView({
     @required this.items,
     @required this.largestItem,
@@ -11,6 +11,47 @@ class SplitScreenView extends StatelessWidget {
 
   final List<SplitScreenItem> items;
   final Widget largestItem;
+
+  @override
+  _SplitScreenViewState createState() => _SplitScreenViewState();
+}
+
+//NOTE: this is a very disgusting way of acheiving the desire effect
+//all I want to do is to get the items fliped vertically and under the actually clickable elements
+//but using flipvertial had a side effect and this fixed it
+//it does the job for now
+class _SplitScreenViewState extends State<SplitScreenView>
+    with SingleTickerProviderStateMixin {
+  Animation<Offset> animation;
+  AnimationController animationController;
+
+  @override
+  void initState() {
+    super.initState();  
+
+    animationController = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 2),
+    );
+    animation = Tween<Offset>(
+      begin: Offset(0.0, 1.0),
+      end: Offset(0.0, 1.0),
+    ).animate(CurvedAnimation(
+      parent: animationController,
+      curve: Curves.fastLinearToSlowEaseIn,
+    ));
+
+    Future<void>.delayed(Duration(seconds: 1), () {
+      animationController.forward();
+    });
+  }
+
+  @override
+  void dispose() {
+    // Don't forget to dispose the animation controller on class destruction
+    animationController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,19 +62,20 @@ class SplitScreenView extends StatelessWidget {
       ),
       child: Stack(
         children: <Widget>[
-          /*
-          Transform(
-            transform: Matrix4Transform().flipVertically().matrix4,
-            child: SplitScreenItems(
-              items: items,
-              largestItem: largestItem,
-              makeInvisible: true,
+          SlideTransition(
+            position: animation,
+            child: Transform(
+              transform: Matrix4Transform().flipVertically().matrix4,
+              child: SplitScreenItems(
+                items: widget.items,
+                largestItem: widget.largestItem,
+                makeInvisible: true,
+              ),
             ),
           ),
-          */
           SplitScreenItems(
-            items: items,
-            largestItem: largestItem,
+            items: widget.items,
+            largestItem: widget.largestItem,
           ),
           Positioned(
             top: 0,
@@ -63,37 +105,41 @@ class SplitScreenItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> widgets = new List<Widget>(items.length);
-    for (int i = 0; i < items.length; i++) {
-      widgets[i] = Stack(
-        alignment: Alignment.topLeft,
-        children: <Widget>[
-          largestItem,
-          Positioned.fill(
-            child: Container(
-              alignment: Alignment.topLeft,
-              child: ASplitScreenItem(
-                splitScreenItem: items[i],
-                makeInvisible: makeInvisible,
-              ),
-            ),
-          ),
-        ],
-      );
-    }
-
     return Wrap(
       alignment: WrapAlignment.start,
-      children: widgets,
+      children: List.generate(
+        items.length,
+        (index) {
+          SplitScreenItem theItem = items[index];
+          return Stack(
+            alignment: Alignment.topLeft,
+            children: <Widget>[
+              largestItem,
+              Positioned.fill(
+                child: Container(
+                  alignment: Alignment.topLeft,
+                  child: ASplitScreenItem(
+                    splitScreenItem: theItem,
+                    makeInvisible: makeInvisible,
+                  ),
+                ),
+              ),
+            ],
+          );
+        },
+      ),
     );
   }
 }
 
-class SplitScreenItem {
+class SplitScreenItem{
   final Widget expandingWidget;
   final Widget widgetOnRight;
 
-  SplitScreenItem(this.expandingWidget, {this.widgetOnRight});
+  SplitScreenItem(
+    this.expandingWidget,
+    {this.widgetOnRight}
+  );
 }
 
 class ASplitScreenItem extends StatelessWidget {
