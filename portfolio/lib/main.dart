@@ -204,8 +204,8 @@ class RightBottom extends StatelessWidget {
         ),
         child: Center(
           child: DefaultTextStyle(
-            style: TextStyle(
-              fontSize: 12,
+            style: GoogleFonts.robotoMono(
+              fontSize: MyApp.h6,
               color: Colors.white,
             ),
             child: Column(

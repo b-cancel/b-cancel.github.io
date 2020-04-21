@@ -384,10 +384,10 @@ class _ActualScrollBarState extends State<ActualScrollBar> {
                       opacity: 0,
                       child: Slider(
                         onChanged: (newValue) {
-                          sliderValue.value = newValue;
+                          sliderValue.value = newValue.clamp(0, heightToScroll);
                           widget.scrollController.jumpTo(newValue);
                         },
-                        value: sliderValue.value,
+                        value: (sliderValue.value).clamp(0, heightToScroll),
                         min: 0,
                         max: heightToScroll,
                       ),

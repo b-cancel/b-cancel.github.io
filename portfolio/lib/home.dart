@@ -1,5 +1,6 @@
 //flutter
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 //plugin
 import 'package:portfolio/bodies/aboutMe.dart';
@@ -156,25 +157,30 @@ class Home extends StatelessWidget {
           //NOTE: Flutter has 2 options
           //1. ScrollBar (but you cant drag it)
           //2. CupertinoScrollBar (but you cant click to travel)
-          child: Stack(
-            children: <Widget>[
-              CustomScrollView(
-                controller: scrollController,
-                slivers: sliverSections,
-              ),
-              Positioned(
-                right: 0,
-                top: 0,
-                bottom: 0,
-                child: ScrollBar(
-                  scrollController: scrollController,
-                  //here they are updated
-                  topScrolledAway: topScrolledAway,
-                  overScroll: overScroll,
-                  onTop: onTop,
+          child: DefaultTextStyle(
+            style: GoogleFonts.robotoMono(
+              color: Colors.white,
+            ),
+            child: Stack(
+              children: <Widget>[
+                CustomScrollView(
+                  controller: scrollController,
+                  slivers: sliverSections,
                 ),
-              ),
-            ],
+                Positioned(
+                  right: 0,
+                  top: 0,
+                  bottom: 0,
+                  child: ScrollBar(
+                    scrollController: scrollController,
+                    //here they are updated
+                    topScrolledAway: topScrolledAway,
+                    overScroll: overScroll,
+                    onTop: onTop,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
         ScrollToTopButton(

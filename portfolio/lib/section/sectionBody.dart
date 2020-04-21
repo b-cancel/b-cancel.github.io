@@ -1,5 +1,6 @@
 //flutter
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 //internal
 import 'package:portfolio/main.dart';
@@ -85,7 +86,7 @@ class _SectionBodyState extends State<SectionBody> {
             ),
             Text(
               sectionTypeToRight[widget.sectionType],
-              style: TextStyle(
+              style: GoogleFonts.robotoMono(
                 color: MyApp.oldGrey,
                 fontSize: 18,
               ),

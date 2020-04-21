@@ -29,14 +29,10 @@ showSnackBar(BuildContext context, {
                 ),
               ),
               Expanded(
-                child: SelectableText(
+                child: Text(
                   text,
                   style: TextStyle(
                     color: Colors.white,
-                  ),
-                  enableInteractiveSelection: true,
-                  toolbarOptions: ToolbarOptions(
-                    copy: true,
                   ),
                 ),
               ),

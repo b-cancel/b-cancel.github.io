@@ -1,5 +1,6 @@
 //flutter
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 //internal
 import 'package:portfolio/main.dart';
@@ -120,7 +121,7 @@ class EndRegionCloseButton extends StatelessWidget {
             ),
             child: Text(
               "#endregion",
-              style: TextStyle(
+              style: GoogleFonts.robotoMono(
                 color: MyApp.oldGrey,
               ),
             ),

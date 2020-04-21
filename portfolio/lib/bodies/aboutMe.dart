@@ -138,7 +138,7 @@ class Introduction extends StatelessWidget {
       children: <Widget>[
         WrappedText(
           "I recently graduated with my Bachelors in Computer Science." +
-              " After graduation I traveled Europe, came back and a disaster struck!" +
+              " After graduation I traveled Europe, came back, and a disaster struck!" +
               " So I had the privaledge to help in Disaster Releif efforts full time for 3 to 4 months; " +
               " repairing drywall, roofs, and anything else that needed fixing.",
         ),
@@ -175,7 +175,7 @@ class Introduction extends StatelessWidget {
                             ),
                             child: Text(
                               "Quick Links",
-                              style: TextStyle(
+                              style: GoogleFonts.robotoMono(
                                 fontWeight: FontWeight.bold,
                               ),
                             ),

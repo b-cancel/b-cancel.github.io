@@ -1,5 +1,6 @@
 //flutter
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 //plugin
 import 'package:portfolio/section/section.dart';
@@ -62,45 +63,48 @@ class _SectionHeaderState extends State<SectionHeader> {
           child: TitlePortion(
             sectionOpened: widget.sectionOpened,
             label: widget.label, 
-            title: Wrap(
-              crossAxisAlignment: WrapCrossAlignment.end,
-              children: <Widget>[
-                Text(
-                  widget.title + " ",
-                  style: TextStyle(
-                    fontSize: 24,
-                    color: sectionTypeToColor[widget.sectionType],
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(
-                    bottom: 4,
-                  ),
-                  child: DefaultTextStyle(
+            title: DefaultTextStyle(
+              style: GoogleFonts.robotoMono(),
+              child: Wrap(
+                crossAxisAlignment: WrapCrossAlignment.end,
+                children: <Widget>[
+                  Text(
+                    widget.title + " ",
                     style: TextStyle(
-                      color: MyApp.oldGrey,
-                      fontSize: 18,
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          "= " + sectionTypeToLeft[widget.sectionType],
-                        ),
-                        Visibility(
-                          visible: widget.sectionOpened.value == false,
-                          child: Text(
-                            "..." + 
-                            sectionTypeToRight[widget.sectionType]
-                          )
-                        ),
-                      ],
+                      fontSize: 24,
+                      color: sectionTypeToColor[widget.sectionType],
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                )
-              ],
+                  Padding(
+                    padding: EdgeInsets.only(
+                      bottom: 4,
+                    ),
+                    child: DefaultTextStyle(
+                      style: TextStyle(
+                        color: MyApp.oldGrey,
+                        fontSize: 18,
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            "= " + sectionTypeToLeft[widget.sectionType],
+                          ),
+                          Visibility(
+                            visible: widget.sectionOpened.value == false,
+                            child: Text(
+                              "..." + 
+                              sectionTypeToRight[widget.sectionType]
+                            )
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ),

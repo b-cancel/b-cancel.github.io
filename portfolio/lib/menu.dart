@@ -1,5 +1,6 @@
 //flutter
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 //internal
 import 'package:portfolio/utils/link/ui/hover.dart';
@@ -178,7 +179,7 @@ class MenuTile extends StatelessWidget {
         children: <Widget>[
           Text(
             title,
-            style: TextStyle(
+            style: GoogleFonts.robotoMono(
               //size of text in list tile
               fontSize: 16,
             ),
