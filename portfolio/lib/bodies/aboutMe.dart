@@ -102,38 +102,31 @@ class Logo extends StatelessWidget {
     return longestFirst;
   }
   
-  final ValueNotifier<int> testVN = new ValueNotifier<int>(0);
+  final ValueNotifier<int> firstVN = new ValueNotifier<int>(0);
+  final ValueNotifier<int> secondVN = new ValueNotifier<int>(0);
 
-  final ValueNotifier<int> firstBeginVN = new ValueNotifier<int>(0);
-  final ValueNotifier<int> firstEndVN = new ValueNotifier<int>(0);
-  final ValueNotifier<int> secondBeginVN = new ValueNotifier<int>(0);
-  final ValueNotifier<int> secondEndVN = new ValueNotifier<int>(0);
-
-  startShuffle(){
-    Future.delayed(
-      Duration(seconds: 3),
-      (){
-        //set whatever end was to begin
-        //set new end
-        //so trigger animation on end
-        //firstBeginVN.value = firstEndVN.value;
-        testVN.value = testVN.value + 1;
-
-        Future.delayed(
-        Duration(seconds: 3),
-        (){
-          //set whatever end was to begin
-          //set new end
-          //so trigger animation on end
-          //firstBeginVN.value = firstEndVN.value;
-          testVN.value = testVN.value - 1;
-
-          //repeat
-          startShuffle();
-        }
-      );
-      }
-    );
+  Duration delay = Duration(milliseconds: 1700);
+  Duration animation = Duration(milliseconds: 300);
+  startShuffle()async{
+    await Future.delayed(delay);
+    secondVN.value ++;
+    await Future.delayed(delay);
+    firstVN.value ++;
+    await Future.delayed(delay);
+    firstVN.value ++;
+    await Future.delayed(delay);
+    secondVN.value ++;
+    await Future.delayed(delay);
+    firstVN.value ++;
+    secondVN.value --;
+    await Future.delayed(delay);
+    secondVN.value ++;
+    await Future.delayed(delay);
+    firstVN.value ++;
+    await Future.delayed(delay);
+    firstVN.value = 0;
+    secondVN.value = 0;
+    startShuffle();
   }
 
   @override
@@ -186,7 +179,7 @@ class Logo extends StatelessWidget {
                         first.length,
                         (index) {
                           return AnimatedTitle(
-                            vn: testVN, 
+                            vn: firstVN, 
                             text: first[index], 
                             index: index,
                             fontSize: MyApp.h3,
@@ -206,21 +199,24 @@ class Logo extends StatelessWidget {
                 ),
                 child: Stack(
                   children: <Widget>[
-                    Text(longestSecond),
-                    /*
-                    OverflowBox(
-                      child: ListView(
-                        children: List.generate(
-                          second.length,
-                          (index) {
-                            return Text(
-                              second[index],
-                            );
-                          },
-                        ),
+                    Opacity(
+                      opacity: 0, 
+                      child: Text(longestSecond),
+                    ),
+                    Stack(
+                      alignment: Alignment.centerRight,
+                      children: List.generate(
+                        second.length,
+                        (index) {
+                          return AnimatedTitle(
+                            vn: secondVN, 
+                            text: second[index], 
+                            index: index,
+                            fontSize: MyApp.h3,
+                          );
+                        },
                       ),
                     ),
-                    */
                   ],
                 ),
               )
@@ -257,10 +253,10 @@ class AnimatedTitle extends StatelessWidget {
     }
     else{
       if(vn.value > index){
-        return 1;
+        return -1;
       }
       else{
-        return -1;
+        return 1;
       }
     }
   }
