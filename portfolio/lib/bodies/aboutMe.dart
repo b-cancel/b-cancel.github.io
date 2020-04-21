@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 //plugin
 import 'package:google_fonts/google_fonts.dart';
+import 'package:matrix4_transform/matrix4_transform.dart';
 import 'package:portfolio/main.dart';
 import 'package:portfolio/menu.dart';
 import 'package:portfolio/region/regions.dart';
@@ -87,7 +88,7 @@ class Face extends StatelessWidget {
 }
 
 class Logo extends StatelessWidget {
-  const Logo({
+  Logo({
     Key key,
   }) : super(key: key);
 
@@ -100,9 +101,46 @@ class Logo extends StatelessWidget {
     }
     return longestFirst;
   }
+  
+  final ValueNotifier<int> testVN = new ValueNotifier<int>(0);
+
+  final ValueNotifier<int> firstBeginVN = new ValueNotifier<int>(0);
+  final ValueNotifier<int> firstEndVN = new ValueNotifier<int>(0);
+  final ValueNotifier<int> secondBeginVN = new ValueNotifier<int>(0);
+  final ValueNotifier<int> secondEndVN = new ValueNotifier<int>(0);
+
+  startShuffle(){
+    Future.delayed(
+      Duration(seconds: 3),
+      (){
+        //set whatever end was to begin
+        //set new end
+        //so trigger animation on end
+        //firstBeginVN.value = firstEndVN.value;
+        testVN.value = testVN.value + 1;
+
+        Future.delayed(
+        Duration(seconds: 3),
+        (){
+          //set whatever end was to begin
+          //set new end
+          //so trigger animation on end
+          //firstBeginVN.value = firstEndVN.value;
+          testVN.value = testVN.value - 1;
+
+          //repeat
+          startShuffle();
+        }
+      );
+      }
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
+    startShuffle();
+
+    //items to shuffle through
     List<String> first = ["Software", "App", "Web", "Game", "UX"];
     String longestFirst = getLongestString(first);
     List<String> second = ["Engineer", "Developer", "Designer"];
@@ -119,81 +157,75 @@ class Logo extends StatelessWidget {
           color: Colors.black,
           fontSize: MyApp.h3,
         ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Text(
-              "I'm a ",
-              style: TextStyle(
-                color: Colors.white,
+        child: ClipRRect(
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Text(
+                "I'm a ",
+                style: TextStyle(
+                  color: Colors.white,
+                ),
               ),
-            ),
-            //Software, App, Web, Game, UX
-            Container(
-              color: MyApp.highlightGreen,
-              padding: EdgeInsets.symmetric(
-                horizontal: 8,
-                vertical: 4,
-              ),
-              child: Stack(
-                children: <Widget>[
-                  Opacity(opacity: 0, child: Text(longestFirst)),
-                  Stack(
-                    children: List.generate(
-                      first.length,
-                      (index) {
-                        return AnimatedBuilder(
-                          animation: null, //TODO: 1 or 0 or -1
-                          builder: (context, child) {
-                            return AnimatedSwitcher(
-                              duration: kTabScrollDuration,
-                              transitionBuilder: (widget, animation) {
-                                return SlideTransition(
-                                  child: widget,
-                                  position: Tween<Offset>(
-                                    begin: Offset(0, 0),
-                                    end: Offset(0, 1),
-                                  ).animate(animation),
-                                );
-                              },
-                              child: Text(first[index]),
-                            );
-                          },
-                        );
-                      },
+              //Software, App, Web, Game, UX
+              Container(
+                color: MyApp.highlightGreen,
+                padding: EdgeInsets.symmetric(
+                  horizontal: 8,
+                  vertical: 4,
+                ),
+                child: Stack(
+                  children: <Widget>[
+                    Opacity(
+                      opacity: 0, 
+                      child: Text(longestFirst),
                     ),
-                  ),
-                ],
-              ),
-            ),
-            //Engineer, Developer, Designer
-            Container(
-              color: MyApp.highlightPink,
-              padding: EdgeInsets.symmetric(
-                horizontal: 8,
-                vertical: 4,
-              ),
-              child: Stack(
-                children: <Widget>[
-                  Text(longestSecond),
-                  /*
-                  OverflowBox(
-                    child: ListView(
+                    Stack(
+                      alignment: Alignment.centerRight,
                       children: List.generate(
-                        second.length,
+                        first.length,
                         (index) {
-                          return Text(
-                            second[index],
+                          return AnimatedTitle(
+                            vn: testVN, 
+                            text: first[index], 
+                            index: index,
+                            fontSize: MyApp.h3,
                           );
                         },
                       ),
                     ),
-                  ),
-                  */
-                ],
+                  ],
+                ),
               ),
-            )
-          ],
+              //Engineer, Developer, Designer
+              Container(
+                color: MyApp.highlightPink,
+                padding: EdgeInsets.symmetric(
+                  horizontal: 8,
+                  vertical: 4,
+                ),
+                child: Stack(
+                  children: <Widget>[
+                    Text(longestSecond),
+                    /*
+                    OverflowBox(
+                      child: ListView(
+                        children: List.generate(
+                          second.length,
+                          (index) {
+                            return Text(
+                              second[index],
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                    */
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
 
@@ -202,6 +234,58 @@ class Logo extends StatelessWidget {
         "assets/title/small.gif",
         width: 350,
       ),*/
+    );
+  }
+}
+
+class AnimatedTitle extends StatelessWidget {
+  AnimatedTitle({
+    @required this.vn,
+    @required this.text,
+    @required this.index,
+    @required this.fontSize,
+  });
+
+  final ValueNotifier<int> vn;
+  final String text;
+  final int index;
+  final double fontSize;
+
+  double valueToPosition(ValueNotifier<int> vn){
+    if(vn.value == index){
+      return 0;
+    }
+    else{
+      if(vn.value > index){
+        return 1;
+      }
+      else{
+        return -1;
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      //set whatever end was to begin
+      //set new end
+      //so trigger animation on end
+      animation: vn, 
+      builder: (context, child) {
+        return AnimatedContainer(
+          duration: kTabScrollDuration,
+          transform: Matrix4Transform().translate(
+            y: valueToPosition(vn) * (fontSize * 2),
+          ).matrix4,
+          child: Text(
+            text,
+            style: TextStyle(
+              fontSize: fontSize,
+            ),
+          ),
+        );
+      },
     );
   }
 }
