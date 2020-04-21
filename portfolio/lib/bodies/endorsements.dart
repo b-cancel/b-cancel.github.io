@@ -82,26 +82,34 @@ class ReferencesBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //bits that expand reusable multiple times
-    List<Widget> getExpandingReferences = List.generate(
-      references.length, 
-      (index){
-        Reference ref = references[index];
-        return ExpandingReference(
-          ref: ref,
-        );
-      },
-    );
+    List<Widget> getExpandingReferences = new List<Widget>(references.length);
+    for (int i = 0; i < references.length; i++) {
+      Reference ref = references[i];
+      getExpandingReferences[i] = ExpandingReference(
+        ref: ref,
+      );
+    }
 
     //right bits reusable multiple times
-    List<Widget> getReferenceIcons = List.generate(
-      references.length, 
-      (index){
-        Reference ref = references[index];
-        return ReferenceIcon(
-          ref: ref,
-        );
-      },
-    );
+    List<Widget> getReferenceIcons = new List<Widget>(references.length);
+    for (int i = 0; i < references.length; i++) {
+      Reference ref = references[i];
+      getReferenceIcons[i] = ReferenceIcon(
+        ref: ref,
+      );
+    }
+
+    //all the collapsed references
+    List<Widget> stackedRefs = new List<Widget>(references.length);
+    for (int i = 0; i < references.length; i++) {
+      stackedRefs[i] = ASplitScreenItem(
+        splitScreenItem: SplitScreenItem(
+          getExpandingReferences[i],
+          widgetOnRight: getReferenceIcons[i],
+        ),
+        collapse: true,
+      );
+    }
 
     //largest item
     //use for alignment all over
@@ -111,31 +119,21 @@ class ReferencesBody extends StatelessWidget {
       maintainAnimation: true,
       visible: false,
       child: Stack(
-        children: List.generate(
-      references.length,
-      (index) {
-        return ASplitScreenItem(
-          splitScreenItem: SplitScreenItem(
-            getExpandingReferences[index],
-            widgetOnRight: getReferenceIcons[index],
-          ),
-          collapse: true,
-        );
-      },
-    ),
+        children: stackedRefs,
       ),
     );
 
+    List<SplitScreenItem> splitScreenItems =
+        new List<SplitScreenItem>(references.length);
+    for (int i = 0; i < references.length; i++) {
+      splitScreenItems[i] = SplitScreenItem(
+        getExpandingReferences[i],
+        widgetOnRight: getReferenceIcons[i],
+      );
+    }
+
     return SplitScreenView(
-      items: List.generate(
-        references.length,
-        (index) {
-          return SplitScreenItem(
-            getExpandingReferences[index],
-            widgetOnRight: getReferenceIcons[index],
-          );
-        },
-      ), 
+      items: splitScreenItems,
       largestItem: largestItem,
     );
   }
@@ -254,45 +252,44 @@ class ReferenceIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if(ref.letterUrl != null){
+    if (ref.letterUrl != null) {
       return IconWebLink(
-                  url: ref.letterUrl,
-                  label: "Recommendation Letter",
-                  icon: Padding(
-                    padding: EdgeInsets.all(12.0),
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: <Widget>[
-                        //give red border
-                        Icon(
-                          FontAwesome5Solid.file_pdf,
-                          color: Colors.red,
-                          size: 36,
-                        ),
-                        //make center bit red
-                        Padding(
-                          //36 total
-                          padding: EdgeInsets.only(
-                            top: 14.0,
-                            bottom: 4.0,
-                          ),
-                          child: Container(
-                            color: Colors.red,
-                            height: 18,
-                            width: 24,
-                          ),
-                        ),
-                        Icon(
-                          FontAwesome5Solid.file_pdf,
-                          color: Colors.white,
-                          size: 32,
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-    }
-    else{
+        url: ref.letterUrl,
+        label: "Recommendation Letter",
+        icon: Padding(
+          padding: EdgeInsets.all(12.0),
+          child: Stack(
+            alignment: Alignment.center,
+            children: <Widget>[
+              //give red border
+              Icon(
+                FontAwesome5Solid.file_pdf,
+                color: Colors.red,
+                size: 36,
+              ),
+              //make center bit red
+              Padding(
+                //36 total
+                padding: EdgeInsets.only(
+                  top: 14.0,
+                  bottom: 4.0,
+                ),
+                child: Container(
+                  color: Colors.red,
+                  height: 18,
+                  width: 24,
+                ),
+              ),
+              Icon(
+                FontAwesome5Solid.file_pdf,
+                color: Colors.white,
+                size: 32,
+              ),
+            ],
+          ),
+        ),
+      );
+    } else {
       return Container();
     }
   }

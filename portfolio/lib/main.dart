@@ -199,8 +199,6 @@ class RightBottom extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.only(
           top: 16.0,
-          //section sliver padding
-          left: 22 + 4.0 + 24,
         ),
         child: Center(
           child: DefaultTextStyle(

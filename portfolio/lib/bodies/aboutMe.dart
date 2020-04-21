@@ -224,12 +224,6 @@ class Logo extends StatelessWidget {
           ),
         ),
       ),
-
-      /*
-      Image.asset(
-        "assets/title/small.gif",
-        width: 350,
-      ),*/
     );
   }
 }
