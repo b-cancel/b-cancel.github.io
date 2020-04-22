@@ -51,6 +51,11 @@ dependencies:
   flutter_clipboard_manager: ^0.0.2
   clipboard_manager: ^0.0.4
 
+  # carousel
+  flutter_mobile_carousel: ^1.0.3 #not dynamic (must give row count)
+  flutter_swiper: ^1.1.6 #only 1 slide at a time
+  carousel_slider: ^2.0.0
+
   # html (none of these provide what you could call standard links)
   #flutter_html: ^0.11.1 #99
   #flutter_widget_from_html: ^0.3.3 #98

@@ -46,7 +46,7 @@ List<Region> regions = [
     //these are updated by their respective layout builders
     GlobalKey(),
     GlobalKey(),
-    initiallyOpened: true, 
+    //initiallyOpened: true, 
   ),
   Region(
     FontAwesome5Solid.tools,
@@ -55,7 +55,7 @@ List<Region> regions = [
     //these are updated by their respective layout builders
     GlobalKey(),
     GlobalKey(),
-    initiallyOpened: true, //TODO: remove after testin
+    //initiallyOpened: true, //TODO: remove after testin
   ),
   Region(
     FontAwesome.suitcase, 
@@ -72,6 +72,7 @@ List<Region> regions = [
     //these are updated by their respective layout builders
     GlobalKey(),
     GlobalKey(),
+    initiallyOpened: true,
   ),
   Region(
     Icons.thumb_up,
