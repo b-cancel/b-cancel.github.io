@@ -7,6 +7,8 @@ import 'package:flutter_icons/flutter_icons.dart';
 
 //internal
 import 'package:portfolio/main.dart';
+import 'package:portfolio/section/section.dart';
+import 'package:portfolio/section/uncollapsible.dart';
 import 'package:portfolio/utils/link/ui/iconLink.dart';
 import 'package:portfolio/utils/link/ui/textLink.dart';
 import 'package:portfolio/utils/splitScreenView.dart';
@@ -148,97 +150,84 @@ class ExpandingReference extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    Widget referenceBody = Column(
+      mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          "Ref (",
-          style: TextStyle(
-            color: MyApp.oldGrey,
+        Visibility(
+          visible: ref.name != null,
+          child: DefaultTextStyle(
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+            child: Text(
+              (ref.name ?? "") + ",",
+            ),
           ),
         ),
-        Padding(
-          padding: EdgeInsets.only(
-            left: 24.0,
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Visibility(
-                visible: ref.name != null,
-                child: DefaultTextStyle(
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                  child: Text(
-                    (ref.name ?? "") + ",",
-                  ),
-                ),
-              ),
-              Visibility(
-                visible: ref.title != null,
-                child: Text(
-                  (ref.title ?? "") + ",",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              Visibility(
-                visible: ref.location != null,
-                child: Text(
-                  (ref.location ?? "") + ",",
-                ),
-              ),
-              Visibility(
-                visible: ref.email != null,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    vertical: 4,
-                  ),
-                  child: TextEmailLink(
-                    url: ref.email,
-                    preferDirection: PreferDirection.rightCenter,
-                    text: Text(
-                      (ref.email ?? "") + ",",
-                      style: TextStyle(
-                        color: MyApp.highlightGreen,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Visibility(
-                visible: ref.phone != null,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    vertical: 4,
-                  ),
-                  child: TextPhoneLink(
-                    url: ref.phone,
-                    preferDirection: PreferDirection.rightCenter,
-                    text: Text(
-                      (ref.phone ?? "") + ",",
-                      style: TextStyle(
-                        color: MyApp.oldOrange,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ],
+        Visibility(
+          visible: ref.title != null,
+          child: Text(
+            (ref.title ?? "") + ",",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
-        Text(
-          "),",
-          style: TextStyle(
-            color: MyApp.oldGrey,
+        Visibility(
+          visible: ref.location != null,
+          child: Text(
+            (ref.location ?? "") + ",",
+          ),
+        ),
+        Visibility(
+          visible: ref.email != null,
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              vertical: 4,
+            ),
+            child: TextEmailLink(
+              url: ref.email,
+              preferDirection: PreferDirection.rightCenter,
+              text: Text(
+                (ref.email ?? "") + ",",
+                style: TextStyle(
+                  color: MyApp.highlightGreen,
+                ),
+              ),
+            ),
+          ),
+        ),
+        Visibility(
+          visible: ref.phone != null,
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              vertical: 4,
+            ),
+            child: TextPhoneLink(
+              url: ref.phone,
+              preferDirection: PreferDirection.rightCenter,
+              text: Text(
+                (ref.phone ?? "") + ",",
+                style: TextStyle(
+                  color: MyApp.oldOrange,
+                ),
+              ),
+            ),
           ),
         ),
       ],
+    );
+
+    //build
+    return CollapsibleSection(
+      label: "Ref",
+      separator: "",
+      sectionType: SectionType.Parenthesis,
+      allowCollapsing: false,
+      child: referenceBody,
     );
   }
 }

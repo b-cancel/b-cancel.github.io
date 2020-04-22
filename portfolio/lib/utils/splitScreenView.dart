@@ -169,17 +169,15 @@ class ASplitScreenItem extends StatelessWidget {
                 : MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Expanded(
-                child: Padding(
-                  padding: EdgeInsets.only(
-                    top: 12.0,
+              Padding(
+                padding: EdgeInsets.only(
+                  top: 12.0,
+                ),
+                child: DefaultTextStyle(
+                  style: GoogleFonts.robotoMono(
+                    color: Colors.white,
                   ),
-                  child: DefaultTextStyle(
-                    style: GoogleFonts.robotoMono(
-                      color: Colors.white,
-                    ),
-                    child: splitScreenItem.expandingWidget,
-                  ),
+                  child: splitScreenItem.expandingWidget,
                 ),
               ),
               Visibility(

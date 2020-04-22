@@ -14,7 +14,7 @@ class RegionHeader extends StatefulWidget {
     @required this.regionOpened,
     @required this.title,
     @required this.titleColor,
-    this.fontSize: MyApp.h1
+    this.fontSize: MyApp.h2,
   }) : super(key: key);
 
   final ValueNotifier<bool> regionOpened;
