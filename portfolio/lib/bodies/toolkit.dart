@@ -5,6 +5,8 @@ import 'package:portfolio/section/section.dart';
 import 'package:portfolio/section/uncollapsible.dart';
 import 'package:portfolio/utils/wrappedText.dart';
 
+//C#, Java, Dart, Ruby, HTML, CSS, Javascript, Python, C++, C | Flutter, Slim | Github, Bitbucket | VS Code
+
 /*
 Currently Using: C# (for game development), Java (for competitive programming)
  2-3 years Experience: C#, Java, HTML, CSS
@@ -12,7 +14,9 @@ Currently Using: C# (for game development), Java (for competitive programming)
 */
 
 /*
-Languages: Fluent in English and Spanish; (read, write and speak)
+Awards
+● Vex Robotics (1 st Regionals, 7 th State) | Web Design (3 rd State, 4 th Nationals) August 2013 – June 2014
+● Member of the Year | Technology Problem Solving (2 nd Regionals) August 2012 – June 2013
 */
 
 class ToolKitBody extends StatelessWidget {

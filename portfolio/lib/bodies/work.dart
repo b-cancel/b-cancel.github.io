@@ -10,36 +10,53 @@ class WorkExperienceBody extends StatelessWidget {
 }
 
 /*
-Ambit Energy – Edinburg, TX, Freelance Web Developer &amp; Designer August 2016 – August 2017
-LebronGroup – Winter Park, FL, Freelance Web Developer &amp; Designer July 2017 – October 2017
-Sped up Job Request Delivery Speed from ~45minutes to ~15seconds. ReDesign/Dev Website for mobile.
-University Transportation Center for Railway Safety – Edinburg, TX September 2014 – May 2015
-Game Developer, Graphic Designer, and Marketing
-Created a small Educational Game to teach students (6 th -9 th ) about the Railway System
-IT Marketing Division – Edinburg, TX, Video Editor, Graphic Designer September 2013 – May 2014
-Business Education Technology Academy– Edinburg, TX, Robotics Coach September 2013 – May 2014
-Taught 30+ highschool students how to build and program with VEX and LEGO Mindstorm Kits.
-*/
+Barista
+  Starbucks - Pharr, TX,
+High Speed and High Qualtiy coffee making and customer service
+  October 2019 -> Now
 
-/*
-Competitive Programming at HackerRank and TopCoder
-Developer Tools For Unity 3D (soon to be on the 2017 Unity 3D Asset Store) [some are public on github]
-● Outline Kit (with Game Objects) - Create outlines around 2D Sprites
-Created because current open source solutions where to slow, looked gimmicky, and lacked features
-● Color Kit - Experiment with different color mixing and color linear interpolation algorithms
-Created because color mixing is subjective and no tool existed that allowed you to experiment with
-current open source solutions. The library also allows you to easily test out your own mixing algorithms.
- Linear Interpolation Kit – Functions to aid in completing linear interpolations in an ammount of time
-● Tap Sequence Detector - Detect Taps, and Holds to trigger commands in your games
-Game Development Projects (using Unity3D Game Engine in C#)
-● Squishables - Innovative Physics Based Cooperative 2D platformer where you control your character’s
-velocity, acceleration, and impulse/jerk vector to keep you and your friends alive (senior project)
-● Prototypes - All About The Chase | Super Retriever | Delta Pong
-Hackathon Projects at (HackTexas, HackRice, CodeRed)
-● Real Air Guitar - the Myo armband to detected fretting and the Oculus to put you on stage
-● Fruit Ninja with Full Body Tracking - using the Kinect
-Technology Student Association, TSA, Member (2012 – 2014) | Treasurer (2013 – 2014)
-● Served as captain for all the events August 2012 – June 2014
-● Vex Robotics (1 st Regionals, 7 th State) | Web Design (3 rd State, 4 th Nationals) August 2013 – June 2014
-● Member of the Year | Technology Problem Solving (2 nd Regionals) August 2012 – June 2013
+
+Freelance Web Developer
+  Lebron Group - Remote
+-Upgraded Job Request System. 
+-Every client now has a job request form that is specific to their needs
+-both the client and their clients receive confirmation emails
+-then the information from all the forms is digested and place into a singular table,
+-one that employees can access and update
+-and as employees complete the request the client can view the progress in their own table
+  March 2020 -> April 2020
+
+TODO: add cleversolve internship
+App Developer		 
+  CleverSolve Internship – Edinburg, TX,                                     
+-Created multiple widgets that would aid in the creation of a fitness app designed to help people 
+-get the most of their workouts. Timer/Stopwatch | Feature Filled Text Forms | Material Sheets
+  May 2018 - August 2018
+
+Freelance Web Developer/Designer 
+  Ambit Energy – Edinburg, TX, 
+Created basic website
+  August 2017 – September 2017
+
+Freelance Web Developer Designer 
+  LebronGroup – Winter Park, FL, 
+-Sped up Job Request Delivery Speed from ~45minutes to ~15seconds, 
+-and Re Designed and Developed their Website for mobile.
+  July 2017 – October 2017
+
+Graphic Designer and Marketing
+  University Transportation Center for Railway Safety – Edinburg, TX
+-Created a small Educational Game to teach students (6 th -9 th ) about the Railway System
+-along with a variety of promotional videos and posters for the program
+  September 2014 – May 2015
+
+Video Editor and Graphic Designer (Intern)
+  IT Marketing Division of UTPA – Edinburg, TX,
+-Created a variety of videos and posters to promote services being offered at the university
+  September 2013 – May 2014
+
+Robotics Coach September (volunteer)
+  Business Education Technology Academy– Edinburg, TX,  
+-Taught 30+ highschool students how to build and program with VEX and LEGO Mindstorm Kits.
+  May 2013 – May 2014
 */
