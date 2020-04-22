@@ -80,6 +80,7 @@ List<Region> regions = [
     //these are updated by their respective layout builders
     GlobalKey(),
     GlobalKey(),
+    //initiallyOpened: true, //TODO: remove after debug
   ),
   Region(
     FontAwesome5Solid.comment_alt,

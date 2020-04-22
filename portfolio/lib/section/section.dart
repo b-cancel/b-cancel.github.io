@@ -7,20 +7,20 @@ import 'package:portfolio/region/regions.dart';
 import 'package:portfolio/section/sectionBody.dart';
 import 'package:portfolio/section/sectionHeader.dart';
 
-enum SectionType {CurlyBraces, Brackets, Parenthesis}
+enum SectionType {Brackets, CurlyBraces, Parenthesis}
 Map<SectionType, String> sectionTypeToLeft = {
-  SectionType.CurlyBraces : "[",
-  SectionType.Brackets : "{",
+  SectionType.Brackets : "[",
+  SectionType.CurlyBraces : "{",
   SectionType.Parenthesis : "(", 
 };
 Map<SectionType, String> sectionTypeToRight = {
-  SectionType.CurlyBraces : "]",
-  SectionType.Brackets : "}",
+  SectionType.Brackets : "]",
+  SectionType.CurlyBraces : "}",
   SectionType.Parenthesis : ")", 
 };
 Map<SectionType, Color> sectionTypeToColor = {
-  SectionType.CurlyBraces : MyApp.highlightPink,
-  SectionType.Brackets : MyApp.highlightGreen,
+  SectionType.Brackets : MyApp.highlightPink,
+  SectionType.CurlyBraces : MyApp.highlightGreen,
   SectionType.Parenthesis : MyApp.blueText, 
 };
 
@@ -49,14 +49,14 @@ class RegularSection extends StatefulWidget {
 }
 
 class _RegularSectionState extends State<RegularSection> {
-  ValueNotifier<bool> sectionOpened;
+  final ValueNotifier<bool> sectionOpened = new ValueNotifier<bool>(true);
 
   @override
   void initState() {
     //super init
     super.initState();
     //initialization
-    sectionOpened = new ValueNotifier<bool>(widget.initiallyOpened);
+    sectionOpened.value = widget.initiallyOpened;
     //notifier
     sectionOpened.addListener(tellSystem);
   }
@@ -71,7 +71,7 @@ class _RegularSectionState extends State<RegularSection> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        SectionHeader(
+        SectionHeader( 
           sectionType: widget.sectionType,
           sectionOpened: sectionOpened,
           collapsible: widget.collapsible,

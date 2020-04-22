@@ -84,18 +84,21 @@ class _RegionHeaderState extends State<RegionHeader> {
                       padding: EdgeInsets.symmetric(
                         vertical: 8.0,
                       ),
-                      child: Ternary(
-                        condition: widget.regionOpened.value,
-                        isTrue: TitlePortion(
-                          title: widget.title,
-                          titleColor: widget.titleColor,
-                          fontSize: widget.fontSize,
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                          right: 28.0,
                         ),
-                        isFalse: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            Flexible(
-                              child: Container(
+                        child: Ternary(
+                          condition: widget.regionOpened.value,
+                          isTrue: TitlePortion(
+                            title: widget.title,
+                            titleColor: widget.titleColor,
+                            fontSize: widget.fontSize,
+                          ),
+                          isFalse: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                              Container(
                                 decoration: BoxDecoration(
                                   border: Border.all(
                                     width: 2,
@@ -114,8 +117,8 @@ class _RegionHeaderState extends State<RegionHeader> {
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -158,34 +161,20 @@ class TitlePortion extends StatelessWidget {
           ),
         ),
       ),
-      Flexible(
-        child: Text(
-          "\"" + title + "\"",
-          style: GoogleFonts.robotoMono(
-            color: titleColor,
-            fontSize: fontSize,
-          ),
+      Text(
+        "\"" + title + "\"",
+        style: GoogleFonts.robotoMono(
+          color: titleColor,
+          fontSize: fontSize,
         ),
       ),
     ];
 
     //change slightly depending on mode
-    Size size = MediaQuery.of(context).size;
-    bool isPortrait = size.height > size.width;
-    if (isPortrait) {
-      return Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: regionAndTitle,
-      );
-    } else {
-      return Row(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: regionAndTitle,
-      );
-    }
+    return Wrap(
+      crossAxisAlignment: WrapCrossAlignment.end,
+      children: regionAndTitle,
+    );
   }
 }
 

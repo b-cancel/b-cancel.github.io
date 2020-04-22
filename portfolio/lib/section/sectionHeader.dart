@@ -65,12 +65,15 @@ class _SectionHeaderState extends State<SectionHeader> {
           child: Wrap(
             crossAxisAlignment: WrapCrossAlignment.end,
             children: <Widget>[
-              Text(
-                widget.title + " ",
-                style: TextStyle(
-                  fontSize: 24,
-                  color: sectionTypeToColor[widget.sectionType],
-                  fontWeight: FontWeight.bold,
+              Visibility(
+                visible: widget.title != null && widget.title != "",
+                child: Text(
+                  widget.title + " ",
+                  style: TextStyle(
+                    fontSize: 24,
+                    color: sectionTypeToColor[widget.sectionType],
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               Padding(
@@ -111,6 +114,7 @@ class _SectionHeaderState extends State<SectionHeader> {
         color: MyApp.bodyColor,
         child: InkWell(
           onTap: () {
+            print("printed");
             widget.sectionOpened.value = !widget.sectionOpened.value;
           },
           child: header,
@@ -171,27 +175,13 @@ class TitlePortion extends StatelessWidget {
           ],
         ),
       ),
-      Flexible(
-        child: title,
-      ),
+      title,
     ];
 
     //change slightly depending on mode
-    Size size = MediaQuery.of(context).size;
-    bool isPortrait = size.height > size.width;
-    if (isPortrait) {
-      return Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: regionAndTitle,
-      );
-    } else {
-      return Row(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: regionAndTitle,
-      );
-    }
+    return Wrap(
+      crossAxisAlignment: WrapCrossAlignment.end,
+      children: regionAndTitle,
+    );
   }
 }

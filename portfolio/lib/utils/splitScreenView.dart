@@ -22,33 +22,19 @@ class SplitScreenView extends StatefulWidget {
 //it does the job for now
 class _SplitScreenViewState extends State<SplitScreenView>
     with SingleTickerProviderStateMixin {
-  Animation<Offset> animation;
   AnimationController animationController;
 
   @override
   void initState() {
-    super.initState();  
-
+    super.initState();
     animationController = AnimationController(
       vsync: this,
       duration: Duration(seconds: 2),
     );
-    animation = Tween<Offset>(
-      begin: Offset(0.0, 1.0),
-      end: Offset(0.0, 1.0),
-    ).animate(CurvedAnimation(
-      parent: animationController,
-      curve: Curves.fastLinearToSlowEaseIn,
-    ));
-
-    Future<void>.delayed(Duration(seconds: 1), () {
-      animationController.forward();
-    });
   }
 
   @override
   void dispose() {
-    // Don't forget to dispose the animation controller on class destruction
     animationController.dispose();
     super.dispose();
   }
@@ -63,7 +49,13 @@ class _SplitScreenViewState extends State<SplitScreenView>
       child: Stack(
         children: <Widget>[
           SlideTransition(
-            position: animation,
+            position: Tween<Offset>(
+              begin: Offset(0.0, 1.0),
+              end: Offset(0.0, 1.0),
+            ).animate(CurvedAnimation(
+              parent: animationController,
+              curve: Curves.fastLinearToSlowEaseIn,
+            )),
             child: Transform(
               transform: Matrix4Transform().flipVertically().matrix4,
               child: SplitScreenItems(
@@ -132,14 +124,11 @@ class SplitScreenItems extends StatelessWidget {
   }
 }
 
-class SplitScreenItem{
+class SplitScreenItem {
   final Widget expandingWidget;
   final Widget widgetOnRight;
 
-  SplitScreenItem(
-    this.expandingWidget,
-    {this.widgetOnRight}
-  );
+  SplitScreenItem(this.expandingWidget, {this.widgetOnRight});
 }
 
 class ASplitScreenItem extends StatelessWidget {
@@ -180,7 +169,7 @@ class ASplitScreenItem extends StatelessWidget {
                 : MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Flexible(
+              Expanded(
                 child: Padding(
                   padding: EdgeInsets.only(
                     top: 12.0,

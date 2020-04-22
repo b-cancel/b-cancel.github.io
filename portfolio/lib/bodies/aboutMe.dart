@@ -36,12 +36,8 @@ class AboutMeBody extends StatelessWidget {
               Center(child: Logo()),
             ],
           ),
-          Container(
-            child: Flexible(
-              child: Introduction(
-                scrollController: scrollController,
-              ),
-            ),
+          Introduction(
+            scrollController: scrollController,
           )
         ],
       );

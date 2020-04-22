@@ -27,40 +27,40 @@ class MyApp extends StatelessWidget {
   static const double h6 = 12;
 
   //link color
-  static Color lightLinkColor = highlightGreen;
-  static Color darkLinkColor = Color(0xFF1A0DAB);
+  static const Color lightLinkColor = highlightGreen;
+  static const Color darkLinkColor = Color(0xFF1A0DAB);
 
   //main
-  static Color headerColor = Color(0xFF3C3C3C);
-  static Color activeTabColor = Color(0xFF1E1E1E);
-  static Color inactiveTabColor = Color(0xFF2D2D2D);
-  static Color besideTabColor = Color(0xFF252526);
-  static Color bodyColor = activeTabColor;
-  static Color scrollBarColor = Color(0xFF424242);
+  static const Color headerColor = Color(0xFF3C3C3C);
+  static const Color activeTabColor = Color(0xFF1E1E1E);
+  static const Color inactiveTabColor = Color(0xFF2D2D2D);
+  static const Color besideTabColor = Color(0xFF252526);
+  static const Color bodyColor = activeTabColor;
+  static const Color scrollBarColor = Color(0xFF424242);
 
   //menu
-  static Color sideMenuBackground = Color(0xFF333333);
-  static Color menuIconInActive = Color(0xFF7E7E7E);
-  static Color menuSectionClosed = Color(0xFF383838);
-  static Color menuSectionOpen = Color(0xFF252526);
+  static const Color sideMenuBackground = Color(0xFF333333);
+  static const Color menuIconInActive = Color(0xFF7E7E7E);
+  static const Color menuSectionClosed = Color(0xFF383838);
+  static const Color menuSectionOpen = Color(0xFF252526);
 
   //color
-  static Color lightBlueText = Color(0xFF6FB5C6);
-  static Color blueText = Color(0xFF2A53AB);
-  static Color orangeText = Color(0xFFBA7955);
-  static Color yellowText = Color(0xFFACBB8E);
-  static Color lightGreenText = Color(0xFF3AAA8A);
-  static Color greenText = Color(0xFF5C7231);
-  static Color pinkText = Color(0xFF9D5660);
-  static Color redText = Color(0xFFCD3D33);
-  static Color greyText = Color(0xFF646465);
+  static const Color lightBlueText = Color(0xFF6FB5C6);
+  static const Color blueText = Color(0xFF2A53AB);
+  static const Color orangeText = Color(0xFFBA7955);
+  static const Color yellowText = Color(0xFFACBB8E);
+  static const Color lightGreenText = Color(0xFF3AAA8A);
+  static const Color greenText = Color(0xFF5C7231);
+  static const Color pinkText = Color(0xFF9D5660);
+  static const Color redText = Color(0xFFCD3D33);
+  static const Color greyText = Color(0xFF646465);
 
   //from before
-  static Color highlightGreen = Color(0xFF00FBB1);
-  static Color highlightPink = Color(0xFFB0167A);
-  static Color oldPurple = const Color(0xFFAB7FFA);
-  static Color oldGrey = Color(0xFF808080);
-  static Color oldOrange = Color(0xFFFA951F);
+  static const Color highlightGreen = Color(0xFF00FBB1);
+  static const Color highlightPink = Color(0xFFB0167A);
+  static const Color oldPurple = const Color(0xFFAB7FFA);
+  static const Color oldGrey = Color(0xFF808080);
+  static const Color oldOrange = Color(0xFFFA951F);
 
   // This widget is the root of your application.
   @override
