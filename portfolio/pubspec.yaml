@@ -88,6 +88,7 @@ flutter:
     - assets/title/large.gif
     - assets/qrCode.png
     - assets/vcards/Bryan_Cancel_Contact_V2P1.vcf
+    - assets/javascript.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

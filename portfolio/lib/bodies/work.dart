@@ -1,5 +1,47 @@
 import 'package:flutter/material.dart';
 
+class Work{
+  final String title;
+  final String company;
+  final String location;
+  final String description;
+  final String startDate;
+  final String endDate;
+
+  Work(
+    this.title,
+    this.company,
+    this.location,
+    this.description,
+    this.startDate,
+    this.endDate,
+  );
+}
+
+List<Work> allTheWork = [
+  Work(
+    "Barista",
+    "Starbucks",
+    "Pharr, TX",
+    "High Speed and High Qualtiy coffee making and customer service",
+    "October 2019",
+    "Now",
+  ),
+  Work(
+    "Freelance Web Developer",
+    "Lebron Group",
+    "Remote",
+    "-Upgraded Job Request System"
+      + "Every client now has a job request form that is specific to their needs"
+      + "both the client and their clients receive confirmation emails"
+      + "then the information from all the forms is digested and place into a singular table,"
+      + "one that employees can access and update"
+      + "and as employees complete the request the client can view the progress in their own table",
+    "March 2020",
+    "April 2020",
+  ),
+];
+
 class WorkExperienceBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -10,23 +52,6 @@ class WorkExperienceBody extends StatelessWidget {
 }
 
 /*
-Barista
-  Starbucks - Pharr, TX,
-High Speed and High Qualtiy coffee making and customer service
-  October 2019 -> Now
-
-
-Freelance Web Developer
-  Lebron Group - Remote
--Upgraded Job Request System. 
--Every client now has a job request form that is specific to their needs
--both the client and their clients receive confirmation emails
--then the information from all the forms is digested and place into a singular table,
--one that employees can access and update
--and as employees complete the request the client can view the progress in their own table
-  March 2020 -> April 2020
-
-TODO: add cleversolve internship
 App Developer		 
   CleverSolve Internship – Edinburg, TX,                                     
 -Created multiple widgets that would aid in the creation of a fitness app designed to help people 
