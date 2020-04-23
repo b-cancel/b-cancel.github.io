@@ -64,49 +64,58 @@ Map<String, List<Tool>> experienceToTools = {
         ),
       ],
     ),
-    Tool("Java",
-        usedFor: "Competitive Programming and Dificult Coursework",
-        imageUrl:
-            "https://icons.iconarchive.com/icons/icons8/ios7/512/Logos-Java-Coffee-Cup-Logo-Copyrighted-icon.png"),
+    Tool(
+      "Java",
+      usedFor: "Competitive Programming and Dificult Coursework",
+      imageUrl:
+          "https://icons.iconarchive.com/icons/icons8/ios7/512/Logos-Java-Coffee-Cup-Logo-Copyrighted-icon.png",
+    ),
   ],
   "competent": [
-    Tool("Ruby",
-        usedFor: "Full Stack Development",
-        imageUrl:
-            "https://images.vexels.com/media/users/3/166485/isolated/preview/d4061b653e6ba02ad0afdc79e0315a25-ruby-programming-language-icon-by-vexels.png",
-        usedWith: [
-          Tool(
-            "Ruby on Rails",
-            imageUrl:
-                "https://cdn3.iconfinder.com/data/icons/popular-services-brands-vol-2/512/ruby-on-rails-512.png",
-          ),
-        ]),
     Tool(
-      "Version Control",
+      "Ruby",
+      usedFor: "Full Stack Development",
+      imageUrl:
+          "https://images.vexels.com/media/users/3/166485/isolated/preview/d4061b653e6ba02ad0afdc79e0315a25-ruby-programming-language-icon-by-vexels.png",
       usedWith: [
         Tool(
-          "Github",
+          "Ruby on Rails",
           imageUrl:
-              "https://cdn3.iconfinder.com/data/icons/popular-services-brands/512/github-512.png",
-        ),
-        Tool(
-          "Bitbucket",
-          imageUrl:
-              "https://cdn.iconscout.com/icon/free/png-512/bitbucket-226075.png",
+              "https://cdn3.iconfinder.com/data/icons/popular-services-brands-vol-2/512/ruby-on-rails-512.png",
         ),
       ],
+    ),
+    Tool(
+      "Github",
+      imageUrl:
+          "https://cdn3.iconfinder.com/data/icons/popular-services-brands/512/github-512.png",
+    ),
+    Tool(
+      "VS Code",
+      imageUrl:
+          "https://chaosboltwow.co/wp-content/uploads/2019/09/1200px-Visual_Studio_Code_1.35_icon.svg_.png",
     ),
   ],
   "a little": [
     Tool(
-      "Python",
+      "Visual Studios",
       imageUrl:
-          "https://camo.githubusercontent.com/bb5d3406f92cffc8a57c363da9c13ccaae2fe854/687474703a2f2f75706c6f61642e77696b696d656469612e6f72672f77696b6970656469612f636f6d6d6f6e732f7468756d622f632f63332f507974686f6e2d6c6f676f2d6e6f746578742e7376672f3230303070782d507974686f6e2d6c6f676f2d6e6f746578742e7376672e706e67",
+          "https://lh3.googleusercontent.com/proxy/ILSJw-mpFnHNRwQTACpFk4lXjYzoApd-PgBBS5Znm3Ndr_mHgZngWqf2FUZ-mC-D5qozrhsYBNG9Hj35kKfiyWyvizSXhUrXCnQe9cKpJFbLncTQL9w8cW7fd6X_JCV7QBv07AqdvM7ZnsXIDFb5WKW_Yg_yb2A",
     ),
     Tool(
       "C++",
       imageUrl:
           "https://user-images.githubusercontent.com/42747200/46140125-da084900-c26d-11e8-8ea7-c45ae6306309.png",
+    ),
+    Tool(
+      "Bitbucket",
+      imageUrl:
+          "https://cdn.iconscout.com/icon/free/png-512/bitbucket-226075.png",
+    ),
+    Tool(
+      "Python",
+      imageUrl:
+          "https://camo.githubusercontent.com/bb5d3406f92cffc8a57c363da9c13ccaae2fe854/687474703a2f2f75706c6f61642e77696b696d656469612e6f72672f77696b6970656469612f636f6d6d6f6e732f7468756d622f632f63332f507974686f6e2d6c6f676f2d6e6f746578742e7376672f3230303070782d507974686f6e2d6c6f676f2d6e6f746578742e7376672e706e67",
     ),
     Tool(
       "C",
