@@ -169,7 +169,7 @@ class ToolsSection extends StatelessWidget {
             labelColor: Colors.white,
             separator: " =>",
             initiallyOpened: label != "a little",
-            sectionType: SectionType.CurlyBraces,
+            sectionType: SectionType.Brackets,
             child: toolListToWidget(
               experienceToTools[label],
             ),

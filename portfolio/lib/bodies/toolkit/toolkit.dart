@@ -54,7 +54,7 @@ class ToolKitBody extends StatelessWidget {
           CollapsibleSection(
             label: "experience To Tools",
             separator: "",
-            sectionType: SectionType.Parenthesis,
+            sectionType: SectionType.CurlyBraces,
             child: Container(
               margin: EdgeInsets.only(
                 right: 48,
@@ -66,7 +66,7 @@ class ToolKitBody extends StatelessWidget {
           CollapsibleSection(
             label: "suite To Certifications",
             separator: "",
-            sectionType: SectionType.Parenthesis,
+            sectionType: SectionType.CurlyBraces,
             child: Container(
               margin: EdgeInsets.only(
                 right: 48,
