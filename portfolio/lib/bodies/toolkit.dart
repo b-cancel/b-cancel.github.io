@@ -5,19 +5,115 @@ import 'package:portfolio/section/section.dart';
 import 'package:portfolio/section/uncollapsible.dart';
 import 'package:portfolio/utils/wrappedText.dart';
 
-//C#, Java, Dart, Ruby, HTML, CSS, Javascript, Python, C++, C | Flutter, Slim | Github, Bitbucket | VS Code
+class Tool{
+  String language;
+  String usedFor;
+  String imageUrl;
+  List<Tool> usedWith;
 
-/*
-Currently Using: C# (for game development), Java (for competitive programming)
- 2-3 years Experience: C#, Java, HTML, CSS
- 6 months Experience: Javascript (Vanilla), Python, C, Assembly
-*/
+  Tool(
+    this.language,
+    {
+      this.usedFor,
+      this.imageUrl,
+      this.usedWith,
+    }
+  );
+}
 
 /*
 Awards
-● Vex Robotics (1 st Regionals, 7 th State) | Web Design (3 rd State, 4 th Nationals) August 2013 – June 2014
+- Vex Robotics (1 st Regionals, 7 th State) 
+- Web Design (3 rd State, 4 th Nationals) August 2013 – June 2014
 ● Member of the Year | Technology Problem Solving (2 nd Regionals) August 2012 – June 2013
 */
+
+Map<String, List<Tool>> experienceToTools = {
+  "a lot" : [
+    Tool(
+      "Dart",
+      usedFor: "App and Web Development/Design",
+      imageUrl: "https://avatars1.githubusercontent.com/u/1609975?s=200&v=4",
+      usedWith: [
+        Tool(
+          "Flutter",
+          imageUrl: "https://i1.wp.com/agostini.tech/wp-content/uploads/2019/04/flutter.png?fit=400%2C400&ssl=1",
+        ),
+      ],
+    ),
+    Tool(
+      "C#",
+      usedFor: "Game Development/Design",
+      imageUrl: "https://i7.pngguru.com/preview/328/221/130/c-programming-language-logo-microsoft-visual-studio-net-framework-javascript-icon.jpg",
+      usedWith: [
+        Tool(
+          "Unity 3D",
+          imageUrl: "https://icons.iconarchive.com/icons/papirus-team/papirus-apps/512/unity-editor-icon-icon.png",
+        )
+      ],
+    ),
+    Tool(
+      "Javascript",
+      usedFor: "Web Development/Design and Google App Scripts",
+      imageUrl: "https://f1.pngfuel.com/png/951/574/485/react-logo-javascript-redux-vuejs-angular-angularjs-expressjs-front-and-back-ends-png-clip-art-thumbnail.png",
+      usedWith: [
+        Tool(
+          "HTML",
+          imageUrl: "https://d2eip9sf3oo6c2.cloudfront.net/tags/images/000/000/184/full/html5.png",
+        ),
+        Tool(
+          "CSS",
+          imageUrl: "https://cdn1.iconfinder.com/data/icons/logotypes/32/badge-css-3-512.png",
+        ),
+      ],
+    ),
+    Tool(
+      "Java",
+      usedFor: "Competitive Programming and Dificult Coursework",
+      imageUrl: "https://icons.iconarchive.com/icons/icons8/ios7/512/Logos-Java-Coffee-Cup-Logo-Copyrighted-icon.png"
+    ),
+  ],
+  "competent" : [
+    Tool(
+      "Ruby",
+      usedFor: "Full Stack Development",
+      imageUrl: "https://images.vexels.com/media/users/3/166485/isolated/preview/d4061b653e6ba02ad0afdc79e0315a25-ruby-programming-language-icon-by-vexels.png",
+      usedWith: [
+        Tool(
+          "Ruby on Rails",
+          imageUrl: "https://cdn3.iconfinder.com/data/icons/popular-services-brands-vol-2/512/ruby-on-rails-512.png",
+        ),
+      ]
+    ),
+    Tool(
+      "Version Control",
+      usedWith: [
+        Tool(
+          "Github",
+          imageUrl: "https://cdn3.iconfinder.com/data/icons/popular-services-brands/512/github-512.png",
+        ),
+        Tool(
+          "Bitbucket",
+          imageUrl: "https://cdn.iconscout.com/icon/free/png-512/bitbucket-226075.png",
+        ),
+      ],
+    ),
+  ],
+  "a little" : [
+    Tool(
+      "Python",
+      imageUrl: "https://camo.githubusercontent.com/bb5d3406f92cffc8a57c363da9c13ccaae2fe854/687474703a2f2f75706c6f61642e77696b696d656469612e6f72672f77696b6970656469612f636f6d6d6f6e732f7468756d622f632f63332f507974686f6e2d6c6f676f2d6e6f746578742e7376672f3230303070782d507974686f6e2d6c6f676f2d6e6f746578742e7376672e706e67",
+    ),
+    Tool(
+      "C++",
+      imageUrl: "https://user-images.githubusercontent.com/42747200/46140125-da084900-c26d-11e8-8ea7-c45ae6306309.png",
+    ),
+    Tool(
+      "C",
+      imageUrl: "https://f0.pngfuel.com/png/465/779/blue-and-white-c-logo-png-clip-art.png",
+    ),
+  ],
+};
 
 class ToolKitBody extends StatelessWidget {
   @override
@@ -133,8 +229,15 @@ class ToolKitBody extends StatelessWidget {
               ),
             ),
           ),
+          Text(
+            "//fluent (Speak, Read, and Write)",
+            style: TextStyle(
+              color: Colors.green,
+              fontSize: MyApp.h4,
+            ),
+          ),
           CollapsibleSection(
-            label: "spoken languages",
+            label: "non Programming Languages",
             sectionType: SectionType.Brackets,
             child: Padding(
               padding: EdgeInsets.only(
@@ -143,13 +246,6 @@ class ToolKitBody extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(
-                    "//fluent in both (Speak, Read, and Write)",
-                    style: TextStyle(
-                      color: Colors.green,
-                      fontSize: MyApp.h5,
-                    ),
-                  ),
                   DefaultTextStyle(
                     style: GoogleFonts.robotoMono(
                       color: Colors.white,
