@@ -22,50 +22,44 @@ Map<String, List<Tool>> experienceToTools = {
   "a lot": [
     Tool(
       "Dart",
-      usedFor: "App and Web Development/Design",
+      //usedFor: "App and Web Development/Design",
       imageUrl:
           "https://user-images.githubusercontent.com/26507463/53453892-49908900-3a04-11e9-9dce-77ed3d694326.png",
-      usedWith: [
-        Tool(
-          "Flutter",
-          imageUrl:
-              "https://i1.wp.com/agostini.tech/wp-content/uploads/2019/04/flutter.png?fit=400%2C400&ssl=1",
-        ),
-      ],
+    ),
+    Tool(
+      "Flutter",
+      imageUrl:
+          "https://i1.wp.com/agostini.tech/wp-content/uploads/2019/04/flutter.png?fit=400%2C400&ssl=1",
     ),
     Tool(
       "C#",
-      usedFor: "Game Development/Design",
+      //usedFor: "Game Development/Design",
       imageUrl:
           "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/C_Sharp_logo.svg/150px-C_Sharp_logo.svg.png",
-      usedWith: [
-        Tool(
-          "Unity 3D",
-          imageUrl:
-              "https://icons.iconarchive.com/icons/papirus-team/papirus-apps/512/unity-editor-icon-icon.png",
-        )
-      ],
+    ),
+    Tool(
+      "Unity 3D",
+      imageUrl:
+          "https://icons.iconarchive.com/icons/papirus-team/papirus-apps/512/unity-editor-icon-icon.png",
     ),
     Tool(
       "Javascript",
-      usedFor: "Web Development/Design and Google App Scripts",
+      //usedFor: "Web Development/Design and Google App Scripts",
       imageUrl: "assets/javascript.png",
-      usedWith: [
-        Tool(
-          "HTML",
-          imageUrl:
-              "https://d2eip9sf3oo6c2.cloudfront.net/tags/images/000/000/184/full/html5.png",
-        ),
-        Tool(
-          "CSS",
-          imageUrl:
-              "https://cdn1.iconfinder.com/data/icons/logotypes/32/badge-css-3-512.png",
-        ),
-      ],
+    ),
+    Tool(
+      "HTML",
+      imageUrl:
+          "https://d2eip9sf3oo6c2.cloudfront.net/tags/images/000/000/184/full/html5.png",
+    ),
+    Tool(
+      "CSS",
+      imageUrl:
+          "https://cdn1.iconfinder.com/data/icons/logotypes/32/badge-css-3-512.png",
     ),
     Tool(
       "Java",
-      usedFor: "Competitive Programming and Dificult Coursework",
+      //usedFor: "Competitive Programming and Dificult Coursework",
       imageUrl:
           "https://cdn.iconscout.com/icon/free/png-512/java-43-569305.png",
     ),
@@ -73,16 +67,14 @@ Map<String, List<Tool>> experienceToTools = {
   "competent": [
     Tool(
       "Ruby",
-      usedFor: "Full Stack Development",
+      //usedFor: "Full Stack Development",
       imageUrl:
           "https://images.vexels.com/media/users/3/166485/isolated/preview/d4061b653e6ba02ad0afdc79e0315a25-ruby-programming-language-icon-by-vexels.png",
-      usedWith: [
-        Tool(
-          "Ruby on Rails",
-          imageUrl:
-              "https://cdn3.iconfinder.com/data/icons/popular-services-brands-vol-2/512/ruby-on-rails-512.png",
-        ),
-      ],
+    ),
+    Tool(
+      "Ruby on Rails",
+      imageUrl:
+          "https://cdn3.iconfinder.com/data/icons/popular-services-brands-vol-2/512/ruby-on-rails-512.png",
     ),
     Tool(
       "Github",
@@ -112,7 +104,8 @@ Map<String, List<Tool>> experienceToTools = {
     ),
     Tool(
       "Python",
-      imageUrl: "https://icons.iconarchive.com/icons/cornmanthe3rd/plex/512/Other-python-icon.png",
+      imageUrl:
+          "https://icons.iconarchive.com/icons/cornmanthe3rd/plex/512/Other-python-icon.png",
     ),
     Tool(
       "C",
@@ -128,7 +121,7 @@ class ToolsSection extends StatelessWidget {
       Tool thisTool = tools[i];
       widgets.add(
         AToolWidget(
-          thisTool: thisTool, 
+          thisTool: thisTool,
         ),
       );
     }
@@ -211,7 +204,7 @@ class AToolWidget extends StatelessWidget {
     List<Widget> items = new List<Widget>();
 
     //handle description (basically)
-    if(thisTool.usedFor!= null){
+    if (thisTool.usedFor != null) {
       items.add(
         Wrap(
           children: [
@@ -230,25 +223,23 @@ class AToolWidget extends StatelessWidget {
     List<Tool> helperTools = thisTool.usedWith;
     if (helperTools != null) {
       List<Widget> helperToolWidgets = new List<Widget>();
-      for(int index = 0; index < helperTools.length; index++){
+      for (int index = 0; index < helperTools.length; index++) {
         helperToolWidgets.add(
           AToolWidget(
             thisTool: helperTools[index],
           ),
         );
       }
-      items.add(
-        CollapsibleSection(
-          allowCollapsing: false,
-          label: "with", 
-          separator: ":",
-          sectionType: SectionType.Brackets, 
-          child: Wrap(
-            crossAxisAlignment: WrapCrossAlignment.start,
-            children: helperToolWidgets,
-          ),
-        )
-      );
+      items.add(CollapsibleSection(
+        allowCollapsing: false,
+        label: "with",
+        separator: ":",
+        sectionType: SectionType.Brackets,
+        child: Wrap(
+          crossAxisAlignment: WrapCrossAlignment.start,
+          children: helperToolWidgets,
+        ),
+      ));
     }
 
     //return it all
@@ -289,7 +280,7 @@ class AToolWidget extends StatelessWidget {
             ),
           ),
           isFalse: Text(
-            thisTool.language,
+            thisTool.language + ",",
             style: GoogleFonts.robotoMono(
               color: Colors.white,
             ),

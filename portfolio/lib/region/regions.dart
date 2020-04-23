@@ -8,7 +8,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:portfolio/bodies/toolkit/toolkit.dart';
 import 'package:portfolio/bodies/contactMe.dart';
 import 'package:portfolio/bodies/endorsements.dart';
-import 'package:portfolio/bodies/projects.dart';
+import 'package:portfolio/bodies/projects/projects.dart';
 import 'package:portfolio/bodies/work.dart';
 
 //struct
