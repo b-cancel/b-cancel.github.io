@@ -125,89 +125,10 @@ class ToolsSection extends StatelessWidget {
   toolListToWidget(List<Tool> tools) {
     List<Widget> widgets = new List<Widget>();
     for (int i = 0; i < tools.length; i++) {
-      //tool that we are building the widget for
       Tool thisTool = tools[i];
-
-      //handle options items of tool
-      List<Widget> items = new List<Widget>();
-
-      //handle image
-
-      //handle description (basically)
-      if (thisTool.usedFor != null) {
-        items.add(
-          Wrap(
-            children: [
-              Text(
-                "used For: ",
-              ),
-              Text(
-                thisTool.usedFor,
-              ),
-            ],
-          ),
-        );
-      }
-
-      Widget image;
-      if (thisTool.imageUrl != null) {
-        if (thisTool.imageUrl.contains("assets")) {
-          image = Image.asset(
-            thisTool.imageUrl,
-          );
-        } else {
-          image = Image.network(
-            thisTool.imageUrl,
-          );
-        }
-      }
-
-      //build it
       widgets.add(
-        Wrap(
-          crossAxisAlignment: WrapCrossAlignment.start,
-          children: <Widget>[
-            Visibility(
-              visible: thisTool.imageUrl != null,
-              child: Padding(
-                padding: EdgeInsets.only(
-                  top: 4,
-                  right: 4,
-                ),
-                child: Container(
-                  height: 56,
-                  width: 56,
-                  padding: EdgeInsets.all(
-                    8,
-                  ),
-                  child: FittedBox(
-                    fit: BoxFit.contain,
-                    child: image,
-                  ),
-                ),
-              ),
-            ),
-            Ternary(
-              condition: items.length != 0,
-              isTrue: CollapsibleSection(
-                labelColor: Colors.white,
-                label: thisTool.language,
-                separator: "",
-                allowCollapsing: false,
-                sectionType: SectionType.Parenthesis,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: items,
-                ),
-              ),
-              isFalse: Text(
-                thisTool.language,
-                style: GoogleFonts.robotoMono(
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ],
+        AToolWidget(
+          thisTool: thisTool, 
         ),
       );
     }
@@ -255,6 +176,126 @@ class ToolsSection extends StatelessWidget {
           );
         },
       ).toList(),
+    );
+  }
+}
+
+class AToolWidget extends StatelessWidget {
+  const AToolWidget({
+    Key key,
+    @required this.thisTool,
+    this.items,
+  }) : super(key: key);
+
+  final Tool thisTool;
+  final List<Widget> items;
+
+  @override
+  Widget build(BuildContext context) {
+    //handle image
+    Widget image;
+    if (thisTool.imageUrl != null) {
+      if (thisTool.imageUrl.contains("assets")) {
+        image = Image.asset(
+          thisTool.imageUrl,
+        );
+      } else {
+        image = Image.network(
+          thisTool.imageUrl,
+        );
+      }
+    }
+
+    //handle description
+    //handle options items of tool
+    List<Widget> items = new List<Widget>();
+
+    //handle description (basically)
+    if(thisTool.usedFor!= null){
+      items.add(
+        Wrap(
+          children: [
+            Text(
+              "used For: ",
+            ),
+            Text(
+              thisTool.usedFor,
+            ),
+          ],
+        ),
+      );
+    }
+
+    //handlee helper tools
+    List<Tool> helperTools = thisTool.usedWith;
+    if (helperTools != null) {
+      List<Widget> helperToolWidgets = new List<Widget>();
+      for(int index = 0; index < helperTools.length; index++){
+        helperToolWidgets.add(
+          AToolWidget(
+            thisTool: helperTools[index],
+          ),
+        );
+      }
+      items.add(
+        CollapsibleSection(
+          allowCollapsing: false,
+          label: "with", 
+          separator: ":",
+          sectionType: SectionType.Brackets, 
+          child: Wrap(
+            crossAxisAlignment: WrapCrossAlignment.start,
+            children: helperToolWidgets,
+          ),
+        )
+      );
+    }
+
+    //return it all
+    return Wrap(
+      crossAxisAlignment: WrapCrossAlignment.start,
+      children: <Widget>[
+        Visibility(
+          visible: thisTool.imageUrl != null,
+          child: Padding(
+            padding: EdgeInsets.only(
+              top: 4,
+              right: 4,
+            ),
+            child: Container(
+              height: 56,
+              width: 56,
+              padding: EdgeInsets.all(
+                8,
+              ),
+              child: FittedBox(
+                fit: BoxFit.contain,
+                child: image,
+              ),
+            ),
+          ),
+        ),
+        Ternary(
+          condition: items.length != 0,
+          isTrue: CollapsibleSection(
+            labelColor: Colors.white,
+            label: thisTool.language,
+            separator: "",
+            allowCollapsing: false,
+            sectionType: SectionType.Parenthesis,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: items,
+            ),
+          ),
+          isFalse: Text(
+            thisTool.language,
+            style: GoogleFonts.robotoMono(
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
