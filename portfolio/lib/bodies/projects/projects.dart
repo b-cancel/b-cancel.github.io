@@ -188,27 +188,6 @@ class ProjectsBody extends StatelessWidget {
 }
 */
 
-/*
-Competitive Programming at HackerRank and TopCoder
-Developer Tools For Unity 3D (soon to be on the 2017 Unity 3D Asset Store) [some are public on github]
-● Outline Kit (with Game Objects) - Create outlines around 2D Sprites
-Created because current open source solutions where to slow, looked gimmicky, and lacked features
-● Color Kit - Experiment with different color mixing and color linear interpolation algorithms
-Created because color mixing is subjective and no tool existed that allowed you to experiment with
-current open source solutions. The library also allows you to easily test out your own mixing algorithms.
- Linear Interpolation Kit – Functions to aid in completing linear interpolations in an ammount of time
-● Tap Sequence Detector - Detect Taps, and Holds to trigger commands in your games
-Game Development Projects (using Unity3D Game Engine in C#)
-● Squishables - Innovative Physics Based Cooperative 2D platformer where you control your character’s
-velocity, acceleration, and impulse/jerk vector to keep you and your friends alive (senior project)
-● Prototypes - All About The Chase | Super Retriever | Delta Pong
-Hackathon Projects at (HackTexas, HackRice, CodeRed)
-● Real Air Guitar - the Myo armband to detected fretting and the Oculus to put you on stage
-● Fruit Ninja with Full Body Tracking - using the Kinect
-Technology Student Association, TSA, Member (2012 – 2014) | Treasurer (2013 – 2014)
-● Served as captain for all the events August 2012 – June 2014
-*/
-
 class ProjectsBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -267,11 +246,21 @@ class SubSection extends StatelessWidget {
 class ProjectSection extends StatelessWidget {
   ProjectSection({
     @required this.label,
-    this.child,
+    @required this.description,
+    @required this.github,
+    this.livePage,
+    this.googlePlayLink,
+    this.appStoreLink,
+    this.imageUrls,
   });
 
   final String label;
-  final Widget child;
+  final String description;
+  final String github;
+  final String livePage;
+  final String googlePlayLink;
+  final String appStoreLink;
+  final List<String> imageUrls;
 
   @override
   Widget build(BuildContext context) {
@@ -279,7 +268,7 @@ class ProjectSection extends StatelessWidget {
       label: label,
       labelColor: Colors.white,
       sectionType: SectionType.Parenthesis,
-      child: child ?? Text("Fill Me"),
+      child: Text("Fill Me"),
     );
   }
 }

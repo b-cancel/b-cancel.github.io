@@ -33,7 +33,12 @@ class QuickLinks extends StatelessWidget {
   Widget build(BuildContext context) {
     String number = "(956) 777-2692";
     String email = "bryan.o.cancel@gmail.com";
+    String github = "https://github.com/b-cancel";
+    String resume = "https://docs.google.com/document/d/1UBKxKsYBhC5d6IxjRxmYIItFoTFb9Fs_AgX5b64sjlA";
+    String hackerRank = "https://www.hackerrank.com/bryan_o_cancel?hr_r=1";
+    String linkedIn = "https://www.linkedin.com/in/bryan-cancel-069a197a/";
 
+    //build
     return Wrap(
       alignment: WrapAlignment.center,
       crossAxisAlignment: WrapCrossAlignment.center,
@@ -56,28 +61,28 @@ class QuickLinks extends StatelessWidget {
           label: email,
         ),
         IconWebLink(
-          url: "https://www.google.com",
+          url: github,
           icon: IconLinkIcon(
             icon: FontAwesome.github,
           ),
           label: "Github",
         ),
         IconWebLink(
-          url: "https://www.google.com",
+          url: resume,
           icon: IconLinkIcon(
             icon: FontAwesome.file_text,
           ),
           label: "Resume",
         ),
         IconWebLink(
-          url: "https://www.google.com",
+          url: hackerRank,
           icon: IconLinkIcon(
             icon: FontAwesome5Brands.hackerrank,
           ),
           label: "Hacker Rank",
         ),
         IconWebLink(
-          url: "https://www.google.com",
+          url: linkedIn,
           icon: 
           IconLinkIcon(
             icon: FontAwesome5Brands.linkedin,
