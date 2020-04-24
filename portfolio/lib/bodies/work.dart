@@ -121,83 +121,152 @@ class WorkExperienceBody extends StatelessWidget {
           allTheWork.length,
           (index) {
             Work thisWork = allTheWork[index];
-            return CollapsibleSection(
-              label: thisWork.title,
-              separator: "",
-              labelColor: Colors.white,
-              sectionType: SectionType.Parenthesis,
-              initiallyOpened: thisWork.initallyOpened,
-              child: IntrinsicHeight(
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Visibility(
-                            visible: thisWork.company != null,
-                            child: Wrap(
+            double width = MediaQuery.of(context).size.width;
+            if (width >= 560) {
+              return CollapsibleSection(
+                label: thisWork.title,
+                separator: "",
+                labelColor: Colors.white,
+                sectionType: SectionType.Parenthesis,
+                initiallyOpened: thisWork.initallyOpened,
+                child: IntrinsicHeight(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Visibility(
+                              visible: thisWork.company != null,
+                              child: Wrap(
+                                children: <Widget>[
+                                  Text(
+                                    "comp: ",
+                                    style: GoogleFonts.robotoMono(
+                                      color: MyApp.oldGrey,
+                                    ),
+                                  ),
+                                  Text((thisWork.company ?? "") + ", "),
+                                ],
+                              ),
+                            ),
+                            Flexible(
+                              child: Text(thisWork.description + ", "),
+                            ),
+                            Wrap(
                               children: <Widget>[
                                 Text(
-                                  "comp: ",
+                                  "loc: ",
                                   style: GoogleFonts.robotoMono(
                                     color: MyApp.oldGrey,
                                   ),
                                 ),
-                                Text((thisWork.company ?? "") + ", "),
+                                Text(thisWork.location + ", "),
                               ],
                             ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(
+                          left: 16,
+                        ),
+                        padding: EdgeInsets.only(
+                          left: 16,
+                        ),
+                        decoration: BoxDecoration(
+                          border: Border(
+                            left: BorderSide(
+                              color: MyApp.oldGrey,
+                              width: 2,
+                            ),
                           ),
-                          Flexible(
-                            child: Text(thisWork.description + ", "),
+                        ),
+                        child: Wrap(
+                          direction: Axis.vertical,
+                          children: [
+                            ADate(
+                              date: thisWork.endDate,
+                            ),
+                            ADate(
+                              date: thisWork.startDate,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            } else {
+              return CollapsibleSection(
+                label: thisWork.title,
+                separator: "",
+                labelColor: Colors.white,
+                sectionType: SectionType.Parenthesis,
+                initiallyOpened: thisWork.initallyOpened,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Visibility(
+                      visible: thisWork.company != null,
+                      child: Wrap(
+                        children: <Widget>[
+                          Text(
+                            "comp: ",
+                            style: GoogleFonts.robotoMono(
+                              color: MyApp.oldGrey,
+                            ),
                           ),
-                          Wrap(
-                            children: <Widget>[
-                              Text(
-                                "loc: ",
-                                style: GoogleFonts.robotoMono(
-                                  color: MyApp.oldGrey,
-                                ),
-                              ),
-                              Text(thisWork.location + ", "),
-                            ],
-                          ),
+                          Text((thisWork.company ?? "") + ", "),
                         ],
                       ),
                     ),
-                    Container(
-                      margin: EdgeInsets.only(
-                        left: 16,
-                      ),
-                      padding: EdgeInsets.only(
-                        left: 16,
-                      ),
-                      decoration: BoxDecoration(
-                        border: Border(
-                          left: BorderSide(
+                    Wrap(
+                      children: <Widget>[
+                        Text(
+                          "start: ",
+                          style: GoogleFonts.robotoMono(
                             color: MyApp.oldGrey,
-                            width: 2,
                           ),
                         ),
-                      ),
-                      child: Wrap(
-                        direction: Axis.vertical,
-                        children: [
-                          ADate(
-                            date: thisWork.endDate,
+                        Text(thisWork.startDate + ", "),
+                        Text(
+                          "end: ",
+                          style: GoogleFonts.robotoMono(
+                            color: MyApp.oldGrey,
                           ),
-                          ADate(
-                            date: thisWork.startDate,
-                          ),
-                        ],
+                        ),
+                        Text(thisWork.endDate + ", "),
+                      ],
+                    ),
+                    Text(
+                      "description: ",
+                      style: GoogleFonts.robotoMono(
+                        color: MyApp.oldGrey,
                       ),
+                    ),
+                    Flexible(
+                      child: Text(thisWork.description + ", "),
+                    ),
+                    Wrap(
+                      children: <Widget>[
+                        Text(
+                          "loc: ",
+                          style: GoogleFonts.robotoMono(
+                            color: MyApp.oldGrey,
+                          ),
+                        ),
+                        Text(thisWork.location + ", "),
+                      ],
                     ),
                   ],
                 ),
-              ),
-            );
+              );
+            }
           },
         ),
       ),

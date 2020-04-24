@@ -62,6 +62,11 @@ class MyApp extends StatelessWidget {
   static const Color oldGrey = Color(0xFF808080);
   static const Color oldOrange = Color(0xFFFA951F);
 
+  //gallery
+  static const Color galleryBackground = Color(0xFF001F33);
+  static const Color galleryBorder = Color(0xFF007ACC);
+  static const Color galleryTopRibbon =  Color(0xFF1E1E1E);
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {

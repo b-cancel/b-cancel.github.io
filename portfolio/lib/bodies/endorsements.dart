@@ -11,7 +11,6 @@ import 'package:portfolio/section/section.dart';
 import 'package:portfolio/section/uncollapsible.dart';
 import 'package:portfolio/utils/link/ui/iconLink.dart';
 import 'package:portfolio/utils/link/ui/textLink.dart';
-import 'package:portfolio/utils/splitScreenView.dart';
 
 class Reference {
   String name;
@@ -83,203 +82,137 @@ List<Reference> references = [
 class ReferencesBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    //bits that expand reusable multiple times
-    List<Widget> getExpandingReferences = new List<Widget>(references.length);
-    for (int i = 0; i < references.length; i++) {
-      Reference ref = references[i];
-      getExpandingReferences[i] = ExpandingReference(
-        ref: ref,
-      );
-    }
-
-    //right bits reusable multiple times
-    List<Widget> getReferenceIcons = new List<Widget>(references.length);
-    for (int i = 0; i < references.length; i++) {
-      Reference ref = references[i];
-      getReferenceIcons[i] = ReferenceIcon(
-        ref: ref,
-      );
-    }
-
-    //all the collapsed references
-    List<Widget> stackedRefs = new List<Widget>(references.length);
-    for (int i = 0; i < references.length; i++) {
-      stackedRefs[i] = ASplitScreenItem(
-        splitScreenItem: SplitScreenItem(
-          getExpandingReferences[i],
-          widgetOnRight: getReferenceIcons[i],
-        ),
-        collapse: true,
-      );
-    }
-
-    //largest item
-    //use for alignment all over
-    Widget largestItem = Visibility(
-      maintainSize: true,
-      maintainState: true,
-      maintainAnimation: true,
-      visible: false,
-      child: Stack(
-        children: stackedRefs,
+    return Wrap(
+      children: List.generate(
+        references.length,
+        (index) {
+          Reference ref = references[index];
+          return Padding(
+            padding: EdgeInsets.only(
+              right: 48.0,
+            ),
+            child: CollapsibleSection(
+              label: "Ref",
+              separator: "",
+              sectionType: SectionType.Parenthesis,
+              leftPadding: ref.letterUrl == null,
+              child: Wrap(
+                children: <Widget>[
+                  Visibility(
+                    visible: ref.letterUrl != null,
+                    child: IconWebLink(
+                      url: ref.letterUrl,
+                      label: "Recommendation Letter",
+                      icon: Padding(
+                        padding: EdgeInsets.all(12.0),
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: <Widget>[
+                            //give red border
+                            Icon(
+                              FontAwesome5Solid.file_pdf,
+                              color: Colors.red,
+                              size: 36,
+                            ),
+                            //make center bit red
+                            Padding(
+                              //36 total
+                              padding: EdgeInsets.only(
+                                top: 14.0,
+                                bottom: 4.0,
+                              ),
+                              child: Container(
+                                color: Colors.red,
+                                height: 18,
+                                width: 24,
+                              ),
+                            ),
+                            Icon(
+                              FontAwesome5Solid.file_pdf,
+                              color: Colors.white,
+                              size: 32,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Visibility(
+                        visible: ref.name != null,
+                        child: DefaultTextStyle(
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                          child: Text(
+                            (ref.name ?? "") + ",",
+                          ),
+                        ),
+                      ),
+                      Visibility(
+                        visible: ref.title != null,
+                        child: Text(
+                          (ref.title ?? "") + ",",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      Visibility(
+                        visible: ref.location != null,
+                        child: Text(
+                          (ref.location ?? "") + ",",
+                        ),
+                      ),
+                      Visibility(
+                        visible: ref.email != null,
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                            vertical: 4,
+                          ),
+                          child: TextEmailLink(
+                            url: ref.email,
+                            preferDirection: PreferDirection.rightCenter,
+                            text: Text(
+                              (ref.email ?? "") + ",",
+                              style: TextStyle(
+                                color: MyApp.highlightGreen,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Visibility(
+                        visible: ref.phone != null,
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                            vertical: 4,
+                          ),
+                          child: TextPhoneLink(
+                            url: ref.phone,
+                            preferDirection: PreferDirection.rightCenter,
+                            text: Text(
+                              (ref.phone ?? "") + ",",
+                              style: TextStyle(
+                                color: MyApp.oldOrange,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
       ),
     );
-
-    List<SplitScreenItem> splitScreenItems =
-        new List<SplitScreenItem>(references.length);
-    for (int i = 0; i < references.length; i++) {
-      splitScreenItems[i] = SplitScreenItem(
-        getExpandingReferences[i],
-        widgetOnRight: getReferenceIcons[i],
-      );
-    }
-
-    return SplitScreenView(
-      items: splitScreenItems,
-      largestItem: largestItem,
-    );
-  }
-}
-
-class ExpandingReference extends StatelessWidget {
-  ExpandingReference({
-    @required this.ref,
-  });
-
-  final Reference ref;
-
-  @override
-  Widget build(BuildContext context) {
-    Widget referenceBody = Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Visibility(
-          visible: ref.name != null,
-          child: DefaultTextStyle(
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
-            child: Text(
-              (ref.name ?? "") + ",",
-            ),
-          ),
-        ),
-        Visibility(
-          visible: ref.title != null,
-          child: Text(
-            (ref.title ?? "") + ",",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        Visibility(
-          visible: ref.location != null,
-          child: Text(
-            (ref.location ?? "") + ",",
-          ),
-        ),
-        Visibility(
-          visible: ref.email != null,
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              vertical: 4,
-            ),
-            child: TextEmailLink(
-              url: ref.email,
-              preferDirection: PreferDirection.rightCenter,
-              text: Text(
-                (ref.email ?? "") + ",",
-                style: TextStyle(
-                  color: MyApp.highlightGreen,
-                ),
-              ),
-            ),
-          ),
-        ),
-        Visibility(
-          visible: ref.phone != null,
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              vertical: 4,
-            ),
-            child: TextPhoneLink(
-              url: ref.phone,
-              preferDirection: PreferDirection.rightCenter,
-              text: Text(
-                (ref.phone ?? "") + ",",
-                style: TextStyle(
-                  color: MyApp.oldOrange,
-                ),
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-
-    //build
-    return CollapsibleSection(
-      label: "Ref",
-      separator: "",
-      sectionType: SectionType.Parenthesis,
-      allowCollapsing: false,
-      child: referenceBody,
-    );
-  }
-}
-
-class ReferenceIcon extends StatelessWidget {
-  ReferenceIcon({
-    @required this.ref,
-  });
-
-  final Reference ref;
-
-  @override
-  Widget build(BuildContext context) {
-    if (ref.letterUrl != null) {
-      return IconWebLink(
-        url: ref.letterUrl,
-        label: "Recommendation Letter",
-        icon: Padding(
-          padding: EdgeInsets.all(12.0),
-          child: Stack(
-            alignment: Alignment.center,
-            children: <Widget>[
-              //give red border
-              Icon(
-                FontAwesome5Solid.file_pdf,
-                color: Colors.red,
-                size: 36,
-              ),
-              //make center bit red
-              Padding(
-                //36 total
-                padding: EdgeInsets.only(
-                  top: 14.0,
-                  bottom: 4.0,
-                ),
-                child: Container(
-                  color: Colors.red,
-                  height: 18,
-                  width: 24,
-                ),
-              ),
-              Icon(
-                FontAwesome5Solid.file_pdf,
-                color: Colors.white,
-                size: 32,
-              ),
-            ],
-          ),
-        ),
-      );
-    } else {
-      return Container();
-    }
   }
 }

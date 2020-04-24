@@ -91,19 +91,47 @@ class University extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
+                      Text(
+                        "Loc: ",
+                        style: GoogleFonts.robotoMono(
+                          color: MyApp.oldGrey,
+                        ),
+                      ),
                       Text("Edinburg TX,"),
                     ],
                   ),
-                  Text(
-                    "Bachelor of Science in Computer Science,",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
+                  Wrap(
+                    children: <Widget>[
+                      Text(
+                        "Deg: ",
+                        style: GoogleFonts.robotoMono(
+                          color: MyApp.oldGrey,
+                        ),
+                      ),
+                      Text(
+                        "Bachelor of Science in Computer Science,",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
                   ),
                   Wrap(
                     children: <Widget>[
-                      Text("Graduated May 2019, "),
-                      Text("with a 3.6 GPA,")
+                      Text(
+                        "Graduated: ",
+                        style: GoogleFonts.robotoMono(
+                          color: MyApp.oldGrey,
+                        ),
+                      ),
+                      Text("May 2019, "),
+                      Text(
+                        "GPA: ",
+                        style: GoogleFonts.robotoMono(
+                          color: MyApp.oldGrey,
+                        ),
+                      ),
+                      Text("3.6,")
                     ],
                   ),
                 ],
