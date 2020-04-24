@@ -15,6 +15,7 @@ class CollapsibleSection extends StatefulWidget {
     @required this.child,
     this.initiallyOpened: true,
     this.allowCollapsing: true,
+    this.leftPadding: true,
   });
 
   final String label;
@@ -25,6 +26,7 @@ class CollapsibleSection extends StatefulWidget {
   final Widget child;
   final bool initiallyOpened;
   final bool allowCollapsing;
+  final bool leftPadding;
 
   @override
   _CollapsibleSectionState createState() => _CollapsibleSectionState();
@@ -118,7 +120,7 @@ class _CollapsibleSectionState extends State<CollapsibleSection> {
             children: <Widget>[
               Padding(
                 padding: EdgeInsets.only(
-                  left: 24,
+                  left: widget.leftPadding ? 24 : 0,
                 ),
                 child: widget.child,
               ),

@@ -1,5 +1,8 @@
 //flutter
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:portfolio/main.dart';
 
 //internal
 import 'package:portfolio/section/uncollapsible.dart';
@@ -9,195 +12,33 @@ import 'package:portfolio/section/section.dart';
 import 'package:portfolio/bodies/projects/appDev.dart';
 import 'package:portfolio/bodies/projects/gameDev.dart';
 import 'package:portfolio/bodies/projects/webDev.dart';
+import 'package:portfolio/utils/link/ui/iconLink.dart';
 
-//Image.network("https://fuss10.elemecdn.com/c/db/d20d49e5029281b9b73db1c5ec6f9jpeg.jpeg%3FimageMogr/format/webp/thumbnail/!90x90r/gravity/Center/crop/90x90"),
-//https://source.unsplash.com/random/NUMBER
-/*
 class ProjectsBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    List<Widget> items = [
-      Center(
-        child: SizedBox(
-          height: 500,
-          width: 250,
-          child: Container(
-            color: Colors.red,
-            height: 500,
-            width: 250,
-          ),
-        ),
-      ),
-      Center(
-        child: SizedBox(
-          height: 250,
-          width: 400,
-          child: Container(
-            color: Colors.green,
-            height: 250,
-            width: 400,
-          ),
-        ),
-      ),
-      Center(
-        child: SizedBox(
-          height: 350,
-          width: 350,
-          child: Container(
-            color: Colors.blue,
-            height: 350,
-            width: 350,
-          ),
-        ),
-      ),
-      Center(
-        child: SizedBox(
-          height: 900,
-          width: 100,
-          child: Container(
-            color: Colors.grey,
-            height: 900,
-            width: 100,
-          ),
-        ),
-      ),
-      Center(
-        child: SizedBox(
-          height: 250,
-          width: 400,
-          child: Container(
-            color: Colors.green,
-            height: 250,
-            width: 400,
-          ),
-        ),
-      ),
-      Center(
-        child: SizedBox(
-          height: 350,
-          width: 350,
-          child: Container(
-            color: Colors.blue,
-            height: 350,
-            width: 350,
-          ),
-        ),
-      ),
-      Center(
-        child: SizedBox(
-          height: 250,
-          width: 400,
-          child: Container(
-            color: Colors.green,
-            height: 250,
-            width: 400,
-          ),
-        ),
-      ),
-      Center(
-        child: SizedBox(
-          height: 350,
-          width: 350,
-          child: Container(
-            color: Colors.blue,
-            height: 350,
-            width: 350,
-          ),
-        ),
-      ),
-      Center(
-        child: SizedBox(
-          height: 900,
-          width: 100,
-          child: Container(
-            color: Colors.grey,
-            height: 900,
-            width: 100,
-          ),
-        ),
-      ),
-      Center(
-        child: SizedBox(
-          height: 350,
-          width: 350,
-          child: Container(
-            color: Colors.blue,
-            height: 350,
-            width: 350,
-          ),
-        ),
-      ),
-      Center(
-        child: SizedBox(
-          height: 900,
-          width: 100,
-          child: Container(
-            color: Colors.grey,
-            height: 900,
-            width: 100,
-          ),
-        ),
-      ),
-    ];
-    return Container(
-      width: MediaQuery.of(context).size.width,
+    return Padding(
       padding: EdgeInsets.only(
-        right: 24,
+        right: 48.0,
       ),
-      height: 320,
-      color: Colors.yellow,
       child: Column(
-        children: <Widget>[
-          /*
-          ListView.separated(
-            scrollDirection: Axis.horizontal,
-            primary: false,
-            shrinkWrap: false,
-            padding: EdgeInsets.all(0),
-            itemCount: items.length,
-            itemBuilder: (context, index){
-              return items[index];
-            },
-            separatorBuilder: (context, int){
-              return Container(
-                margin: EdgeInsets.symmetric(
-                  horizontal: 8,
-                ),
-                height: 320,
-                width: 2,
-                color: MyApp.oldGrey,
-              );
-            }
-          ),
-          */
-          //buttons that let you pick the picture directly
-          /*
-          Container(
-            height: 48,
-            child: Row(
-              children: <Widget>[
-
-              ],
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "/*\n" 
+            + "I'm updating this section little by little since there is alot of content to edit and display\n"
+            + "When I'm finished I'll take down this message\n"
+            + "But until then feel free to ask for more information on any individual project\n"
+            + "*/",
+            style: TextStyle(
+              color: Colors.green,
             ),
           ),
-          */
+          AppDevelopment(),
+          GameDevelopment(),
+          WebDevelopment(),
         ],
       ),
-    );
-  }
-}
-*/
-
-class ProjectsBody extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        AppDevelopment(),
-        GameDevelopment(),
-        WebDevelopment(),
-      ],
     );
   }
 }
@@ -267,8 +108,74 @@ class ProjectSection extends StatelessWidget {
     return CollapsibleSection(
       label: label,
       labelColor: Colors.white,
+      separator: "",
       sectionType: SectionType.Parenthesis,
-      child: Text("Fill Me"),
+      leftPadding: false,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                "descrip: ",
+                style: GoogleFonts.robotoMono(
+                  color: MyApp.oldGrey,
+                ),
+              ),
+              Expanded(
+                child: Text(description + ", "),
+              ),
+            ],
+          ),
+          Wrap(
+            children: <Widget>[
+              Visibility(
+                visible: livePage != null,
+                child: IconWebLink(
+                  url: livePage, 
+                  label: "Live Page",
+                  icon: IconLinkIcon(
+                    icon: FontAwesome5.window_maximize,
+                  ),
+                ),
+              ),
+              Visibility(
+                visible: googlePlayLink != null,
+                child: IconWebLink(
+                  url: googlePlayLink, 
+                  label: "Google Play",
+                  icon: IconLinkIcon(
+                    icon: FontAwesome5Brands.google_play,
+                  ),
+                ),
+              ),
+              Visibility(
+                visible: appStoreLink != null,
+                child: IconWebLink(
+                  url: appStoreLink, 
+                  label: "App Store",
+                  icon: IconLinkIcon(
+                    icon: FontAwesome5Brands.app_store_ios,
+                  ),
+                ),
+              ),
+              Visibility(
+                visible: github != null && imageUrls == null,
+                child: IconWebLink(
+                  url: github,
+                  label: "Repository",
+                  icon: IconLinkIcon(
+                    icon: FontAwesome5Brands.github,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          //TODO: add github gallery link combo
+        ],
+      ),
     );
   }
 }

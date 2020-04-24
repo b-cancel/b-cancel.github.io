@@ -63,8 +63,8 @@ List<Work> allTheWork = [
   Work(
     "Freelance Web Developer/Designer",
     "Edinburg, TX",
-    "Created a basic promotional website that helped those not familiar with technology"
-    + " to be able to understand the advantages of being a client of Ambit Energy and a partner of Ambit Energy.",
+    "Created a basic promotional website that helped those not familiar with technology" +
+        " to be able to understand the advantages of being a client of Ambit Energy and a partner of Ambit Energy.",
     "August 2017",
     "September 2017",
     company: "Ambit Energy Consultant",
@@ -150,20 +150,8 @@ class WorkExperienceBody extends StatelessWidget {
                               ],
                             ),
                           ),
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text(
-                                "descrip: ",
-                                style: GoogleFonts.robotoMono(
-                                  color: MyApp.oldGrey,
-                                ),
-                              ),
-                              Expanded(
-                                child: Text(thisWork.description + ", "),
-                              ),
-                            ],
+                          Flexible(
+                            child: Text(thisWork.description + ", "),
                           ),
                           Wrap(
                             children: <Widget>[

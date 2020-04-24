@@ -223,24 +223,18 @@ class _ActualScrollBarState extends State<ActualScrollBar> {
     super.dispose();
   }
 
-  regionBox(GlobalKey key, double ratio, {isHeader: false}){
-    final RenderBox renderBox = key.currentContext.findRenderObject();
-    double boxHeight = renderBox.size.height * ratio;
+  keyToHeight(GlobalKey key){
+    RenderBox renderBox = key.currentContext.findRenderObject();
+    return renderBox.size.height;
+  }
+
+  regionBox(double height, double ratio, {isHeader: false}){
     return Container(
       margin: EdgeInsets.only(
         left: 2,
       ),
-      decoration: BoxDecoration(
-        color: MyApp.oldPurple,
-        border: Border(
-          //more accurate pretty much the same look
-          top: BorderSide(
-            color: MyApp.bodyColor,
-            width: 4,
-          ),
-        ),
-      ),
-      height: boxHeight,
+      color: MyApp.oldPurple,
+      height: height * ratio,
       width: isHeader ? 22 : 0,
     );
   }
@@ -254,7 +248,7 @@ class _ActualScrollBarState extends State<ActualScrollBar> {
     //heights to calculate visual scroll bar
     double topBitVisualHeight = widget.extraTopPadding.value;
     double appBarVisualHeight = 56;
-    double usableVisualHeight = totalHeight - topBitVisualHeight - appBarVisualHeight;
+    double usableVisualHeight = totalHeight - (topBitVisualHeight + appBarVisualHeight);
 
     //height to calculate programatic scroll bar
     double heightToScroll = widget.heightToScroll.value;
@@ -297,25 +291,57 @@ class _ActualScrollBarState extends State<ActualScrollBar> {
     scrollBarPadding *= maxPadding;
 
     //create section bars
-    List<Widget> regionBars = new List<Widget>();
+    List<double> heights = new List<double>();
+    heights.add(topIntroHeight);
+    heights.add(appBarVisualHeight);
     for(int i = 0; i < regions.length; i++){
       Region thisRegion = regions[i];
-      //header
+      heights.add(
+        keyToHeight(thisRegion.headerKey),
+      );
+      heights.add(
+        keyToHeight(thisRegion.bodyKey),
+      );
+    }
+    double fillerHeight = totalScrollHeight;
+    for(int i = 0; i < heights.length; i++){
+      fillerHeight -= heights[i];
+    }
+    heights.add(fillerHeight);
+
+    //create regions
+    List<Widget> regionBars = new List<Widget>();
+    regionBars.add(
+      regionBox(
+        topIntroHeight + appBarVisualHeight, 
+        ratio,
+        isHeader: false,
+      ),
+    );
+    for(int i = 0; i < regions.length; i++){
+      Region thisRegion = regions[i];
       regionBars.add(
         regionBox(
-          thisRegion.headerKey, 
+          keyToHeight(thisRegion.headerKey),
           ratio,
           isHeader: true,
         ),
       );
-      //body
       regionBars.add(
         regionBox(
-          thisRegion.bodyKey,
+          keyToHeight(thisRegion.bodyKey),
           ratio,
+          isHeader: false,
         ),
       );
     }
+    regionBars.add(
+      regionBox(
+        fillerHeight,
+        ratio,
+        isHeader: false,
+      ),
+    );
 
     //return
     return Container(
@@ -353,17 +379,12 @@ class _ActualScrollBarState extends State<ActualScrollBar> {
                 ),
                 Container(
                   width: totalScrollBarWidth/2,
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                      //NOTE: we don't use the appBar height 
-                      //since its never scrolled away
-                      top: topIntroHeight * ratio,
-                    ),
-                    child: ClipRRect(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: regionBars,
-                      ),
+                  height: usableVisualHeight,
+                  child: FittedBox(
+                    fit: BoxFit.fitHeight,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: regionBars,
                     ),
                   ),
                 ),

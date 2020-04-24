@@ -31,11 +31,13 @@ class GameDevelopment extends StatelessWidget {
                 ProjectSection(
                   label: "Itzo",
                   description: "Designed to have incredibly immersive UI using primarily sound",
+                  livePage: "https://b-cancel.github.io/Itzo_Prototype",
                   github: "https://github.com/b-cancel/Itzo_Prototype",
                 ),
                 ProjectSection(
                   label: "Super Retriever",
                   description: "A game designed to give a tug of war effect between both players",
+                  livePage: "https://b-cancel.github.io/Super_Retriever_Prototype/",
                   github: "https://github.com/b-cancel/Super_Retriever_Prototype",
                 ),
               ],

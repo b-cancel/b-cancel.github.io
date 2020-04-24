@@ -21,56 +21,41 @@ class ToolKitBody extends StatelessWidget {
         color: MyApp.oldGrey,
         fontSize: MyApp.h4,
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.only(
-              right: 48.0,
-            ),
-            child: WrappedText(
+      child: Padding(
+        padding: EdgeInsets.only(
+          right: 48.0,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            WrappedText(
               "last Updated: " + DateTime.now().toString() + ", ",
             ),
-          ),
-          Container(height: 4),
-          CollapsibleSection(
-            label: "education",
-            sectionType: SectionType.Brackets,
-            child: EducationSection(),
-          ),
-          Container(height: 4),
-          Padding(
-            padding: EdgeInsets.only(
-              right: 48,
+            Container(height: 4),
+            CollapsibleSection(
+              label: "education",
+              sectionType: SectionType.Brackets,
+              child: EducationSection(),
             ),
-            child: Text(
+            Container(height: 4),
+            Text(
               "//experience comes from coursework, projects, and work",
               style: TextStyle(
                 color: Colors.green,
               ),
             ),
-          ),
-          Container(height: 4),
-          CollapsibleSection(
-            label: "experience To Tools",
-            separator: "",
-            sectionType: SectionType.CurlyBraces,
-            child: Container(
-              margin: EdgeInsets.only(
-                right: 48,
-              ),
+            Container(height: 4),
+            CollapsibleSection(
+              label: "experience To Tools",
+              separator: "",
+              sectionType: SectionType.CurlyBraces,
               child: ToolsSection(),
             ),
-          ),
-          Container(height: 4),
-          CollapsibleSection(
-            label: "suite To Certifications",
-            separator: "",
-            sectionType: SectionType.CurlyBraces,
-            child: Container(
-              margin: EdgeInsets.only(
-                right: 48,
-              ),
+            Container(height: 4),
+            CollapsibleSection(
+              label: "suite To Certifications",
+              separator: "",
+              sectionType: SectionType.CurlyBraces,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -125,28 +110,23 @@ class ToolKitBody extends StatelessWidget {
                 ],
               ),
             ),
-          ),
-          CollapsibleSection(
-            label: "Awards",
-            sectionType: SectionType.Brackets,
-            initiallyOpened: false,
-            child: Chips(
-              chips: [
-                "2014 High School Legendary Student Award",
-                "2014 TSA Vex Robotics (7th State)",
-                "2014 TSA Web Design (4th Nationals)",
-                "2013 Member Of The Year",
-                "2013 Technology Problem Solving (2nd Regionals)",
-              ],
-            ),
-          ),
-          CollapsibleSection(
-            label: "human Languages",
-            sectionType: SectionType.Brackets,
-            child: Padding(
-              padding: EdgeInsets.only(
-                right: 48,
+            CollapsibleSection(
+              label: "Awards",
+              sectionType: SectionType.Brackets,
+              initiallyOpened: false,
+              child: Chips(
+                chips: [
+                  "2014 High School Legendary Student Award",
+                  "2014 TSA Vex Robotics (7th State)",
+                  "2014 TSA Web Design (4th Nationals)",
+                  "2013 Member Of The Year",
+                  "2013 Technology Problem Solving (2nd Regionals)",
+                ],
               ),
+            ),
+            CollapsibleSection(
+              label: "human Languages",
+              sectionType: SectionType.Brackets,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -161,8 +141,7 @@ class ToolKitBody extends StatelessWidget {
                       ),
                       child: Wrap(
                         children: <Widget>[
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
+                          Wrap(
                             children: <Widget>[
                               Text("English"),
                               Text(
@@ -173,8 +152,7 @@ class ToolKitBody extends StatelessWidget {
                               ),
                             ],
                           ),
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
+                          Wrap(
                             children: <Widget>[
                               Text("Spanish"),
                               Text(
@@ -192,8 +170,8 @@ class ToolKitBody extends StatelessWidget {
                 ],
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

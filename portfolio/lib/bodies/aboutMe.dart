@@ -147,76 +147,84 @@ class Logo extends StatelessWidget {
           fontSize: MyApp.h3,
         ),
         child: ClipRRect(
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Text(
-                "I'm a ",
-                style: TextStyle(
-                  color: Colors.white,
-                ),
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              maxWidth: 320,
+            ),
+            child: FittedBox(
+              fit: BoxFit.contain,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Text(
+                    "I'm a ",
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  //Software, App, Web, Game, UX
+                  Container(
+                    color: MyApp.highlightGreen,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 4,
+                    ),
+                    child: Stack(
+                      children: <Widget>[
+                        Opacity(
+                          opacity: 0, 
+                          child: Text(longestFirst),
+                        ),
+                        Stack(
+                          alignment: Alignment.centerRight,
+                          children: List.generate(
+                            first.length,
+                            (index) {
+                              return AnimatedTitle(
+                                vn: firstVN, 
+                                text: first[index], 
+                                index: index,
+                                fontSize: MyApp.h3,
+                              );
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  //Engineer, Developer, Designer
+                  Container(
+                    color: MyApp.highlightPink,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 4,
+                    ),
+                    child: Stack(
+                      children: <Widget>[
+                        Opacity(
+                          opacity: 0, 
+                          child: Text(longestSecond),
+                        ),
+                        Stack(
+                          alignment: Alignment.centerRight,
+                          children: List.generate(
+                            second.length,
+                            (index) {
+                              return AnimatedTitle(
+                                vn: secondVN, 
+                                text: second[index], 
+                                index: index,
+                                fontSize: MyApp.h3,
+                              );
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
               ),
-              //Software, App, Web, Game, UX
-              Container(
-                color: MyApp.highlightGreen,
-                padding: EdgeInsets.symmetric(
-                  horizontal: 8,
-                  vertical: 4,
-                ),
-                child: Stack(
-                  children: <Widget>[
-                    Opacity(
-                      opacity: 0, 
-                      child: Text(longestFirst),
-                    ),
-                    Stack(
-                      alignment: Alignment.centerRight,
-                      children: List.generate(
-                        first.length,
-                        (index) {
-                          return AnimatedTitle(
-                            vn: firstVN, 
-                            text: first[index], 
-                            index: index,
-                            fontSize: MyApp.h3,
-                          );
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              //Engineer, Developer, Designer
-              Container(
-                color: MyApp.highlightPink,
-                padding: EdgeInsets.symmetric(
-                  horizontal: 8,
-                  vertical: 4,
-                ),
-                child: Stack(
-                  children: <Widget>[
-                    Opacity(
-                      opacity: 0, 
-                      child: Text(longestSecond),
-                    ),
-                    Stack(
-                      alignment: Alignment.centerRight,
-                      children: List.generate(
-                        second.length,
-                        (index) {
-                          return AnimatedTitle(
-                            vn: secondVN, 
-                            text: second[index], 
-                            index: index,
-                            fontSize: MyApp.h3,
-                          );
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-              )
-            ],
+            ),
           ),
         ),
       ),

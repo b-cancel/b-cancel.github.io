@@ -20,8 +20,8 @@ showOptions(
     attachedBuilder: (_) {
       return Card(
         color: MyApp.headerColor,
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
+        child: Wrap(
+          crossAxisAlignment: WrapCrossAlignment.center,
           children: children,
         ),
       );
@@ -50,13 +50,13 @@ class OptionButton extends StatelessWidget {
         width: 0,
       );
     } else {
-      Widget button = Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
+      Widget button = Wrap(
+        crossAxisAlignment: WrapCrossAlignment.center,
         children: <Widget>[
           Padding(
             padding: EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
+            child: Wrap(
+              crossAxisAlignment: WrapCrossAlignment.center,
               children: <Widget>[
                 Visibility(
                   visible: icon != null,

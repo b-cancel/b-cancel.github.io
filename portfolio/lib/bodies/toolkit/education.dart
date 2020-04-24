@@ -68,16 +68,8 @@ class University extends StatelessWidget {
       margin: EdgeInsets.only(
         right: 24,
       ),
-      decoration: BoxDecoration(
-        border: Border(
-          right: BorderSide(
-            color: MyApp.oldGrey,
-            width: 2,
-          ),
-        ),
-      ),
       child: CollapsibleSection(
-        label: "University",
+        label: "UTRGV",
         separator: "",
         sectionType: SectionType.Parenthesis,
         child: DefaultTextStyle(
@@ -172,16 +164,8 @@ class HighSchool extends StatelessWidget {
       margin: EdgeInsets.only(
         right: 24,
       ),
-      decoration: BoxDecoration(
-        border: Border(
-          right: BorderSide(
-            color: MyApp.oldGrey,
-            width: 2,
-          ),
-        ),
-      ),
       child: CollapsibleSection(
-        label: "High School",
+        label: "BETA",
         separator: "",
         initiallyOpened: false,
         sectionType: SectionType.Parenthesis,
@@ -196,7 +180,7 @@ class HighSchool extends StatelessWidget {
               Wrap(
                 children: <Widget>[
                   Text(
-                    "Business Education Technology Academy (BETA), ",
+                    "Business Education Technology Academy, ",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
