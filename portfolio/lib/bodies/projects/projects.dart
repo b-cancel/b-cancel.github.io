@@ -1,4 +1,6 @@
 //flutter
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -120,90 +122,87 @@ class ProjectSection extends StatelessWidget {
       separator: "",
       sectionType: SectionType.Parenthesis,
       leftPadding: false,
-      child: Padding(
-        padding: const EdgeInsets.only(
-          left: 16,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Slideshow(
-              galleryBorder: galleryBorder, 
-              github: github,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Slideshow(
+            galleryBorder: galleryBorder, 
+            github: github,
+            imageUrls: imageUrls,
+          ),
+          Padding(
+            padding: EdgeInsets.only(
+              left: 16,
+              right: 24,
             ),
-            Padding(
-              padding: EdgeInsets.only(
-                right: 24,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "descrip: ",
-                        style: GoogleFonts.robotoMono(
-                          color: MyApp.oldGrey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "descrip: ",
+                      style: GoogleFonts.robotoMono(
+                        color: MyApp.oldGrey,
+                      ),
+                    ),
+                    Flexible(
+                      child: Text(
+                        description + ", ",
+                      ),
+                    ),
+                  ],
+                ),
+                Wrap(
+                  children: <Widget>[
+                    Visibility(
+                      visible: livePage != null,
+                      child: IconWebLink(
+                        url: livePage,
+                        label: "Live Page",
+                        icon: IconLinkIcon(
+                          icon: FontAwesome5.window_maximize,
                         ),
                       ),
-                      Flexible(
-                        child: Text(
-                          description + ", ",
+                    ),
+                    Visibility(
+                      visible: googlePlayLink != null,
+                      child: IconWebLink(
+                        url: googlePlayLink,
+                        label: "Google Play",
+                        icon: IconLinkIcon(
+                          icon: FontAwesome5Brands.google_play,
                         ),
                       ),
-                    ],
-                  ),
-                  Wrap(
-                    children: <Widget>[
-                      Visibility(
-                        visible: livePage != null,
-                        child: IconWebLink(
-                          url: livePage,
-                          label: "Live Page",
-                          icon: IconLinkIcon(
-                            icon: FontAwesome5.window_maximize,
-                          ),
+                    ),
+                    Visibility(
+                      visible: appStoreLink != null,
+                      child: IconWebLink(
+                        url: appStoreLink,
+                        label: "App Store",
+                        icon: IconLinkIcon(
+                          icon: FontAwesome5Brands.app_store_ios,
                         ),
                       ),
-                      Visibility(
-                        visible: googlePlayLink != null,
-                        child: IconWebLink(
-                          url: googlePlayLink,
-                          label: "Google Play",
-                          icon: IconLinkIcon(
-                            icon: FontAwesome5Brands.google_play,
-                          ),
+                    ),
+                    Visibility(
+                      visible: github != null && imageUrls == null,
+                      child: IconWebLink(
+                        url: github,
+                        label: "Repository",
+                        icon: IconLinkIcon(
+                          icon: FontAwesome5Brands.github,
                         ),
                       ),
-                      Visibility(
-                        visible: appStoreLink != null,
-                        child: IconWebLink(
-                          url: appStoreLink,
-                          label: "App Store",
-                          icon: IconLinkIcon(
-                            icon: FontAwesome5Brands.app_store_ios,
-                          ),
-                        ),
-                      ),
-                      Visibility(
-                        visible: github != null && imageUrls == null,
-                        child: IconWebLink(
-                          url: github,
-                          label: "Repository",
-                          icon: IconLinkIcon(
-                            icon: FontAwesome5Brands.github,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+                    ),
+                  ],
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -213,15 +212,19 @@ class Slideshow extends StatelessWidget {
   const Slideshow({
     Key key,
     @required this.galleryBorder,
+    @required this.imageUrls,
     @required this.github,
   }) : super(key: key);
 
   final BorderSide galleryBorder;
+  final List<String> imageUrls;
   final String github;
 
   @override
   Widget build(BuildContext context) {
+    Random rnd = new Random();
     double galleryHeight = 320;
+    print("images: " + imageUrls.length.toString());
     return Stack(
       children: <Widget>[
         Positioned(
@@ -274,18 +277,76 @@ class Slideshow extends StatelessWidget {
             ),
             color: MyApp.galleryBackground,
           ),
-          child: IntrinsicWidth(
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                GalleryHeader(
-                  galleryBorder: galleryBorder, 
-                  github: github,
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              GalleryHeader(
+                galleryBorder: galleryBorder, 
+                github: github,
+              ),
+              Expanded(
+                child: ListView(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  primary: false,
+                  padding: EdgeInsets.all(0),
+                  children: List.generate(
+                    imageUrls.length,
+                    (index){
+                      int random = (rnd).nextInt(2147483645);
+                      print("random: " + random.toString());
+                      return Padding(
+                        padding: EdgeInsets.only(
+                          left: (index == 0) ? 0 : 16,
+                          right: (index == imageUrls.length - 1) ? 0 : 16,
+                        ),
+                        child: Stack(
+                          children: <Widget>[
+                            Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Center(
+                                child: Theme(
+                                  data: Theme.of(context).copyWith(
+                                    accentColor: MyApp.bodyColor,
+                                  ),
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 4,
+                                    backgroundColor: MyApp.galleryBorder,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Image.network(
+                              "https://source.unsplash.com/random/"
+                               + random.toString(),
+                               fit: BoxFit.contain,
+                               /*
+                               loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent loadingProgress) {
+                                  return Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Center(
+                                      child: Theme(
+                                        data: Theme.of(context).copyWith(
+                                          accentColor: MyApp.bodyColor,
+                                        ),
+                                        child: CircularProgressIndicator(
+                                          strokeWidth: 4,
+                                          backgroundColor: MyApp.galleryBorder,
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },*/
+                            ),
+                          ],
+                        ),
+                      );
+                    }
+                  ),
                 ),
-                Spacer(),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ],

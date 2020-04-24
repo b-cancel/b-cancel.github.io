@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:portfolio/bodies/projects/projects.dart';
 
 List<String> emptyList(int count){
-  return List.generate(10, (index) => "");
+  return List.generate(count, (index) => "");
 }
 
 //widget
