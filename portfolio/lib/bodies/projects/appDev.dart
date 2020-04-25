@@ -36,6 +36,7 @@ class AppDevelopment extends StatelessWidget {
                   github: "https://github.com/b-cancel/swol",
                   googlePlayLink: "https://play.google.com/store/apps/details?id=the.swol.app",
                   initiallyOpened: true,
+                  //imageUrls: emptyList(13),
                 ),
               ],
             ),

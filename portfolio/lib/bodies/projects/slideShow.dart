@@ -294,18 +294,19 @@ class _PageScrollButtonState extends State<PageScrollButton> {
     double curr = position.pixels ?? 0;
     double min = position.minScrollExtent ?? 0;
     double max = position.maxScrollExtent ?? 0;
+    double overScroll = (curr < max) ? 0 : curr - max;
 
     //Determine whether we are on the top of the scroll area
-    if(widget.isLeft){
-      buttonShown.value = (curr > min);
+    if((max + overScroll) == 0){
+      buttonShown.value = false;
     }
     else{
-      buttonShown.value = (curr < max);
-    }
-
-    //check
-    if(curr == 0){
-      buttonShown.value = false;
+      if(widget.isLeft){
+        buttonShown.value = (curr > min);
+      }
+      else{
+        buttonShown.value = (curr < max);
+      }
     }
   }
 
@@ -328,7 +329,7 @@ class _PageScrollButtonState extends State<PageScrollButton> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double halfScreenWidth = (screenWidth / 2);
-    double leftPadding = 22.0 + 4 + 24 + 16 + 16;
+    double leftPadding = 22.0 + 4; // + 24 + 16 + 16;
     double rightPadding = 24;
     double slideShowSize = screenWidth - leftPadding - rightPadding;
 
