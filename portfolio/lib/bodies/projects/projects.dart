@@ -32,6 +32,7 @@ class ProjectsBody extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(
               left: 24,
+              right: 24,
             ),
             child: Text(
               "/*\n" +
