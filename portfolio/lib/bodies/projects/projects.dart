@@ -259,17 +259,21 @@ class GalleryHeader extends StatelessWidget {
                         color: Colors.white,
                       ),
                       overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
                     ),
                   ),
                   Text(" - "),
-                  TextWebLink(
-                    url: github,
-                    text: Text(
-                      github,
-                      style: GoogleFonts.robotoMono(
-                        color: MyApp.oldGrey,
+                  Flexible(
+                    child: TextWebLink(
+                      url: github,
+                      text: Text(
+                        github,
+                        style: GoogleFonts.robotoMono(
+                          color: MyApp.oldGrey,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
                       ),
-                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
                 ],
