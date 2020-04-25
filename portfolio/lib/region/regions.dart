@@ -19,6 +19,7 @@ class Region{
   bool initiallyOpened;
   GlobalKey headerKey;
   GlobalKey bodyKey;
+  bool addLeftPadding;
 
   Region(
     this.icon,
@@ -28,6 +29,7 @@ class Region{
     this.bodyKey,
     {
       this.initiallyOpened: false,
+      this.addLeftPadding: true,
     }
   );
 }
@@ -74,6 +76,7 @@ List<Region> regions = [
     GlobalKey(),
     GlobalKey(),
     initiallyOpened: true,
+    addLeftPadding: false,
   ),
   Region(
     Icons.thumb_up,

@@ -177,6 +177,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  gesture_zoom_box:
+    dependency: "direct main"
+    description:
+      name: gesture_zoom_box
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.2"
   google_fonts:
     dependency: "direct main"
     description:
@@ -275,13 +282,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.4.0"
-  photo_view:
-    dependency: "direct main"
-    description:
-      name: photo_view
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.9.2"
   platform:
     dependency: transitive
     description:

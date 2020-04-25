@@ -289,6 +289,9 @@ class _ActualScrollBarState extends State<ActualScrollBar> {
       scrollBarPadding = currentHeightScrolled / heightToScroll;
     }
     scrollBarPadding *= maxPadding;
+    if(scrollBarPadding < 0){
+      scrollBarPadding = 0;
+    }
 
     //create section bars
     List<double> heights = new List<double>();

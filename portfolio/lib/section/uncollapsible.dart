@@ -16,6 +16,7 @@ class CollapsibleSection extends StatefulWidget {
     this.initiallyOpened: true,
     this.allowCollapsing: true,
     this.leftPadding: true,
+    this.otherLeftPadding: 0,
   });
 
   final String label;
@@ -27,6 +28,7 @@ class CollapsibleSection extends StatefulWidget {
   final bool initiallyOpened;
   final bool allowCollapsing;
   final bool leftPadding;
+  final double otherLeftPadding;
 
   @override
   _CollapsibleSectionState createState() => _CollapsibleSectionState();
@@ -66,34 +68,39 @@ class _CollapsibleSectionState extends State<CollapsibleSection> {
         padding: EdgeInsets.only(
           right: 8,
         ),
-        child: Wrap(
-        children: <Widget>[
-          Text(
-            widget.label,
-            style: GoogleFonts.robotoMono(
-              color: widget.labelColor,
-              fontSize: widget.fontSize,
-            ),
+        child: Padding(
+          padding: EdgeInsets.only(
+            left: widget.otherLeftPadding,
           ),
-          Text(
-            widget.separator + " " + sectionTypeToLeft[widget.sectionType],
-            style: GoogleFonts.robotoMono(
-              color: MyApp.oldGrey,
-              fontSize: widget.fontSize,
+          child: Wrap(
+          children: <Widget>[
+            Text(
+              widget.label,
+              style: GoogleFonts.robotoMono(
+                color: widget.labelColor,
+                fontSize: widget.fontSize,
+              ),
             ),
-          ),
-          Visibility(
-            visible: isOpened.value == false,
-            child: Text(
-              "+" + sectionTypeToRight[widget.sectionType] + ",",
+            Text(
+              widget.separator + " " + sectionTypeToLeft[widget.sectionType],
               style: GoogleFonts.robotoMono(
                 color: MyApp.oldGrey,
                 fontSize: widget.fontSize,
               ),
             ),
-          ),
-        ],
+            Visibility(
+              visible: isOpened.value == false,
+              child: Text(
+                "+" + sectionTypeToRight[widget.sectionType] + ",",
+                style: GoogleFonts.robotoMono(
+                  color: MyApp.oldGrey,
+                  fontSize: widget.fontSize,
+                ),
+              ),
+            ),
+          ],
     ),
+        ),
       ),
     );
 
@@ -124,11 +131,16 @@ class _CollapsibleSectionState extends State<CollapsibleSection> {
                 ),
                 child: widget.child,
               ),
-              Text(
-                sectionTypeToRight[widget.sectionType] + ", ",
-                style: GoogleFonts.robotoMono(
-                  color: MyApp.oldGrey,
-                  fontSize: widget.fontSize,
+              Padding(
+                padding: EdgeInsets.only(
+                  left: widget.otherLeftPadding,
+                ),
+                child: Text(
+                  sectionTypeToRight[widget.sectionType] + ", ",
+                  style: GoogleFonts.robotoMono(
+                    color: MyApp.oldGrey,
+                    fontSize: widget.fontSize,
+                  ),
                 ),
               ),
             ],

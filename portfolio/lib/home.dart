@@ -1,5 +1,5 @@
 //flutter
-import 'dart:html';
+import 'package:universal_html/html.dart' as html;
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -28,23 +28,23 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final ValueNotifier<bool> isMenuOpen = new ValueNotifier<bool>(false);
-
   final GlobalKey menuKey = GlobalKey();
-
   final ScrollController scrollController = new ScrollController();
-
   final ValueNotifier<bool> onTop = new ValueNotifier(true);
-
   final ValueNotifier<double> overScroll = new ValueNotifier<double>(0);
-
   final ValueNotifier<bool> topScrolledAway = new ValueNotifier<bool>(false);
 
-  /*
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
 
   void _onRefresh() async {
-    window.location.reload();
+    html.window.location.reload();
+    //html.window.location.assign();
+    /*
+    html.window.location.replace(
+      "http://b-cancel.github.io/",
+    );
+    */
     await Future.delayed(Duration(milliseconds: 1000));
     _refreshController.refreshCompleted();
   }
@@ -53,7 +53,6 @@ class _HomeState extends State<Home> {
     await Future.delayed(Duration(milliseconds: 1000));
     _refreshController.loadComplete();
   }
-  */
 
   @override
   Widget build(BuildContext context) {
@@ -153,6 +152,7 @@ class _HomeState extends State<Home> {
           headerKey: thisRegion.headerKey,
           bodyKey: thisRegion.bodyKey,
           title: thisRegion.title,
+          leftSpacing: thisRegion.addLeftPadding,
           body: index == 0
               ? Padding(
                   padding: EdgeInsets.only(
@@ -189,7 +189,7 @@ class _HomeState extends State<Home> {
             ),
             child: Stack(
               children: <Widget>[
-                /*SmartRefresher(
+                SmartRefresher(
                   enablePullDown: true,
                   enablePullUp: false,
                   controller: _refreshController,
@@ -199,11 +199,11 @@ class _HomeState extends State<Home> {
                     controller: scrollController,
                     slivers: sliverSections,
                   ),
-                ),*/
-                CustomScrollView(
+                ),
+                /*CustomScrollView(
                   controller: scrollController,
                   slivers: sliverSections,
-                ),
+                ),*/
                 Positioned(
                   right: 0,
                   top: 0,
@@ -216,7 +216,6 @@ class _HomeState extends State<Home> {
                     onTop: onTop,
                   ),
                 ),
-                
               ],
             ),
           ),

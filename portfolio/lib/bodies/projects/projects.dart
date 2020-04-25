@@ -29,14 +29,19 @@ class ProjectsBody extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            "/*\n" +
-                "I'm updating this section little by little since there is alot of content to edit and display\n" +
-                "When I'm finished I'll take down this message\n" +
-                "But until then feel free to ask for more information on any individual project\n" +
-                "*/",
-            style: TextStyle(
-              color: Colors.green,
+          Padding(
+            padding: EdgeInsets.only(
+              left: 24,
+            ),
+            child: Text(
+              "/*\n" +
+                  "I'm updating this section little by little since there is alot of content to edit and display\n" +
+                  "When I'm finished I'll take down this message\n" +
+                  "But until then feel free to ask for more information on any individual project\n" +
+                  "*/",
+              style: TextStyle(
+                color: Colors.green,
+              ),
             ),
           ),
           AppDevelopment(),
@@ -67,6 +72,8 @@ class DevelopmentSection extends StatelessWidget {
       separator: "",
       sectionType: SectionType.Parenthesis,
       initiallyOpened: initiallyOpened,
+      leftPadding: false,
+      otherLeftPadding: 24,
       child: child,
     );
   }
@@ -90,6 +97,8 @@ class SubSection extends StatelessWidget {
       labelColor: Colors.white,
       sectionType: SectionType.Brackets,
       initiallyOpened: initiallyOpened,
+      otherLeftPadding: 24.0 + 16,
+      leftPadding: false,
       child: child,
     );
   }
@@ -131,6 +140,7 @@ class ProjectSection extends StatelessWidget {
       separator: "",
       sectionType: SectionType.Parenthesis,
       leftPadding: false,
+      otherLeftPadding: 24.0 + 16 + 16,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -144,7 +154,7 @@ class ProjectSection extends StatelessWidget {
           ),
           Padding(
             padding: EdgeInsets.only(
-              left: 16,
+              left: 24.0 + 16 + 16 + 16,
               right: 24,
             ),
             child: Column(
@@ -244,7 +254,7 @@ class GalleryHeader extends StatelessWidget {
         children: <Widget>[
           Padding(
             padding: EdgeInsets.only(
-              left: 16,
+              left: 24.0 + 16 + 16 + 16,
             ),
             child: ClipRect(
               child: Row(

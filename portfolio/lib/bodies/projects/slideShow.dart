@@ -5,8 +5,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 //plugin
-import 'package:photo_view/photo_view.dart';
-
+//import 'package:photo_view/photo_view.dart';
+import 'package:gesture_zoom_box/gesture_zoom_box.dart';
 
 //internal
 import 'package:portfolio/bodies/projects/projects.dart';
@@ -197,9 +197,14 @@ class PhotoGallery extends StatelessWidget {
                                         child: Stack(
                                           alignment: Alignment.center,
                                           children: <Widget>[
-                                            PhotoView(
-                                              imageProvider: NetworkImage(
+                                            GestureZoomBox(
+                                              maxScale: 3.0,
+                                              doubleTapScale: 1.5,
+                                              duration: kTabScrollDuration,
+                                              child: Image.network(
                                                 imageURL,
+                                                fit: BoxFit.contain,
+                                                gaplessPlayback: true,
                                               ),
                                             ),
                                             Positioned.fill(
@@ -247,6 +252,7 @@ class PhotoGallery extends StatelessWidget {
           top: 0,
           bottom: 0,
           child: PageScrollButton(
+            initiallyShown: false,
             scrollController: scrollController,
             isLeft: false,
           ),
@@ -296,6 +302,11 @@ class _PageScrollButtonState extends State<PageScrollButton> {
     else{
       buttonShown.value = (curr < max);
     }
+
+    //check
+    if(curr == 0){
+      buttonShown.value = false;
+    }
   }
 
   @override
@@ -330,6 +341,7 @@ class _PageScrollButtonState extends State<PageScrollButton> {
       child: Center(
         child: Padding(
           padding: EdgeInsets.only(
+            left: (widget.isLeft) ? 24 : 0,
             right: (widget.isLeft == false) ? 24 : 0,
           ),
           child: Container(
