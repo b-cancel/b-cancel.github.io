@@ -1,10 +1,12 @@
 //flutter
+import 'dart:html';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 //plugin
-import 'package:portfolio/bodies/aboutMe.dart';
-import 'package:portfolio/menu.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 //internal: sections
 import 'package:portfolio/region/sliverRegion.dart';
@@ -12,25 +14,47 @@ import 'package:portfolio/region/regions.dart';
 
 //internal: other
 import 'package:portfolio/utils/scrollToTop.dart';
+import 'package:portfolio/bodies/aboutMe.dart';
 import 'package:portfolio/scrollBar.dart';
 import 'package:portfolio/main.dart';
+import 'package:portfolio/menu.dart';
 
 //widgets
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   //handles the menu
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
   final ValueNotifier<bool> isMenuOpen = new ValueNotifier<bool>(false);
+
   final GlobalKey menuKey = GlobalKey();
 
-  //handle the scrolling
   final ScrollController scrollController = new ScrollController();
-  //we start off on top
+
   final ValueNotifier<bool> onTop = new ValueNotifier(true);
-  //with no overscroll
+
   final ValueNotifier<double> overScroll = new ValueNotifier<double>(0);
-  //and without the top bit scrolled away
+
   final ValueNotifier<bool> topScrolledAway = new ValueNotifier<bool>(false);
 
-  //most things here don't reload
+  /*
+  final RefreshController _refreshController =
+      RefreshController(initialRefresh: false);
+
+  void _onRefresh() async {
+    window.location.reload();
+    await Future.delayed(Duration(milliseconds: 1000));
+    _refreshController.refreshCompleted();
+  }
+
+  void _onLoading() async {
+    await Future.delayed(Duration(milliseconds: 1000));
+    _refreshController.loadComplete();
+  }
+  */
+
   @override
   Widget build(BuildContext context) {
     List<Widget> sliverSections = [
@@ -129,14 +153,16 @@ class Home extends StatelessWidget {
           headerKey: thisRegion.headerKey,
           bodyKey: thisRegion.bodyKey,
           title: thisRegion.title,
-          body: index == 0 ? Padding(
-            padding: EdgeInsets.only(
-              right: 48,
-            ),
-            child: AboutMeBody(
-              scrollController: scrollController,
-            ),
-          ) : thisRegion.body,
+          body: index == 0
+              ? Padding(
+                  padding: EdgeInsets.only(
+                    right: 48,
+                  ),
+                  child: AboutMeBody(
+                    scrollController: scrollController,
+                  ),
+                )
+              : thisRegion.body,
           initiallyOpened: thisRegion.initiallyOpened,
         );
       }),
@@ -163,6 +189,17 @@ class Home extends StatelessWidget {
             ),
             child: Stack(
               children: <Widget>[
+                /*SmartRefresher(
+                  enablePullDown: true,
+                  enablePullUp: false,
+                  controller: _refreshController,
+                  onRefresh: _onRefresh,
+                  onLoading: _onLoading,
+                  child: CustomScrollView(
+                    controller: scrollController,
+                    slivers: sliverSections,
+                  ),
+                ),*/
                 CustomScrollView(
                   controller: scrollController,
                   slivers: sliverSections,
@@ -179,6 +216,7 @@ class Home extends StatelessWidget {
                     onTop: onTop,
                   ),
                 ),
+                
               ],
             ),
           ),

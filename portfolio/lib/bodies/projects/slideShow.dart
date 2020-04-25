@@ -5,7 +5,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 //plugin
-import 'package:gesture_zoom_box/gesture_zoom_box.dart';
+import 'package:photo_view/photo_view.dart';
+
 
 //internal
 import 'package:portfolio/bodies/projects/projects.dart';
@@ -136,9 +137,12 @@ class PhotoGallery extends StatelessWidget {
             imageUrls.length,
             (index) {
               //instead of the max of ...47 to avoid any overflow issues
+              
               int random = (rnd).nextInt(2147483646);
               String imageURL =
                   "https://source.unsplash.com/random/" + random.toString();
+                  
+              //String imageURL = imageUrls[index];
               return Padding(
                 padding: EdgeInsets.only(
                   left: index == 0 ? 0 : 12.0,
@@ -193,13 +197,8 @@ class PhotoGallery extends StatelessWidget {
                                         child: Stack(
                                           alignment: Alignment.center,
                                           children: <Widget>[
-                                            GestureZoomBox(
-                                              maxScale: 5.0,
-                                              doubleTapScale: 2.0,
-                                              duration: Duration(
-                                                milliseconds: 300,
-                                              ),
-                                              child: Image.network(
+                                            PhotoView(
+                                              imageProvider: NetworkImage(
                                                 imageURL,
                                               ),
                                             ),

@@ -13,12 +13,14 @@ class WebDevelopment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DevelopmentSection(
+      initiallyOpened: true,
       label: "Web Development",
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           SubSection(
             label: "Completed", 
+            initiallyOpened: true,
             child: Wrap(
               crossAxisAlignment: WrapCrossAlignment.start,
               children: <Widget>[
@@ -31,6 +33,7 @@ class WebDevelopment extends StatelessWidget {
                   + "but in exchange I was able to highly customize the size in a very short period of time.",
                   github: "https://github.com/b-cancel/b-cancel.github.io",
                   livePage: "https://b-cancel.github.io/",
+                  initiallyOpened: false,
                 ),
                 ProjectSection(
                   label: "Attend",
@@ -38,6 +41,7 @@ class WebDevelopment extends StatelessWidget {
                   + " It guarantees that students are present in the classroom and not loging in remotely by having a quick shuffling code"
                   + ", and it guarantees that students aren't logging in for their friends by identifying each individual device.",
                   github: "https://github.com/b-cancel/Attend_Public",
+                  initiallyOpened: true,
                 ),
                 ProjectSection(
                   label: "Ambit Energy",
@@ -45,12 +49,14 @@ class WebDevelopment extends StatelessWidget {
                   + " to be able to understand the advantages of being a client of Ambit Energy and a partner of Ambit Energy",
                   github: "https://github.com/b-cancel/Ambit_Energy_Consultant_Website",
                   livePage: "https://b-cancel.github.io/Ambit_Energy_Consultant_Website",
+                  initiallyOpened: false,
                 ),
               ],
             ),
           ),
           SubSection(
             label: "Assignments/Competitions",
+            initiallyOpened: true,
             child: Wrap(
               crossAxisAlignment: WrapCrossAlignment.start,
               children: <Widget>[
@@ -58,11 +64,13 @@ class WebDevelopment extends StatelessWidget {
                   label: "Shazam Clone",
                   description: "Visualize the music,  identify it, locate it on youtube, display the lyrics, and then download it",
                   github: "https://github.com/b-cancel/Ruby_Shazam_Clone",
+                  initiallyOpened: true,
                 ),
                 ProjectSection(
                   label: "Rental Property Searcher",
                   description: "Search for properties with all the filters you never knew you wanted",
                   github: "https://github.com/b-cancel/Rental_Property_Searcher",
+                  initiallyOpened: true,
                 ),
                 ProjectSection(
                   label: "HS Technology Student Association Website",
@@ -70,12 +78,14 @@ class WebDevelopment extends StatelessWidget {
                   + ", and teach students how to write their own Vanilla HTML and CSS websites.",
                   github: "https://github.com/b-cancel/Technology_Student_Association_Website",
                   livePage: "https://b-cancel.github.io/Technology_Student_Association_Website/index.html",
+                  initiallyOpened: false,
                 ),
                 ProjectSection(
                   label: "HS Web Dev Final",
                   description: "Website Designed to show off Orlando and its Attractions as part of a Web Design Final",
                   github: "https://github.com/b-cancel/Web_Development_Final",
                   livePage: "https://b-cancel.github.io/Web_Development_Final",
+                  initiallyOpened: false,
                 ),
               ],
             ),

@@ -52,10 +52,12 @@ class DevelopmentSection extends StatelessWidget {
   DevelopmentSection({
     @required this.label,
     @required this.child,
+    @required this.initiallyOpened,
   });
 
   final String label;
   final Widget child;
+  final bool initiallyOpened;
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +66,7 @@ class DevelopmentSection extends StatelessWidget {
       labelColor: Colors.white,
       separator: "",
       sectionType: SectionType.Parenthesis,
-      initiallyOpened: false,
+      initiallyOpened: initiallyOpened,
       child: child,
     );
   }
@@ -74,10 +76,12 @@ class SubSection extends StatelessWidget {
   SubSection({
     @required this.label,
     @required this.child,
+    @required this.initiallyOpened,
   });
 
   final String label;
   final Widget child;
+  final bool initiallyOpened;
 
   @override
   Widget build(BuildContext context) {
@@ -85,6 +89,7 @@ class SubSection extends StatelessWidget {
       label: label,
       labelColor: Colors.white,
       sectionType: SectionType.Brackets,
+      initiallyOpened: initiallyOpened,
       child: child,
     );
   }
@@ -99,6 +104,7 @@ class ProjectSection extends StatelessWidget {
     this.googlePlayLink,
     this.appStoreLink,
     this.imageUrls,
+    @required this.initiallyOpened,
   });
 
   final String label;
@@ -108,6 +114,7 @@ class ProjectSection extends StatelessWidget {
   final String googlePlayLink;
   final String appStoreLink;
   final List<String> imageUrls;
+  final bool initiallyOpened;
 
   @override
   Widget build(BuildContext context) {
@@ -118,6 +125,7 @@ class ProjectSection extends StatelessWidget {
 
     //build
     return CollapsibleSection(
+      initiallyOpened: initiallyOpened,
       label: label,
       labelColor: MyApp.highlightGreen, //MyApp.lightBlueText,
       separator: "",
@@ -126,10 +134,13 @@ class ProjectSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Slideshow(
-            galleryBorder: galleryBorder,
-            github: github,
-            imageUrls: imageUrls,
+          Visibility(
+            visible: imageUrls != null && imageUrls.length > 0,
+            child: Slideshow(
+              galleryBorder: galleryBorder,
+              github: github,
+              imageUrls: imageUrls,
+            ),
           ),
           Padding(
             padding: EdgeInsets.only(
