@@ -31,7 +31,7 @@ class Slideshow extends StatelessWidget {
     double galleryHeight = 320.0 - 56 - 56;
     return Stack(
       children: <Widget>[
-        Transform.translate(
+        /*Transform.translate(
           offset: Offset(
             -16.0 - 16 - 16 - 24,
             0,
@@ -58,7 +58,7 @@ class Slideshow extends StatelessWidget {
               ],
             ),
           ),
-        ),
+        ),*/
         Container(
           height: galleryHeight,
           width: MediaQuery.of(context).size.width,
@@ -91,6 +91,7 @@ class Slideshow extends StatelessWidget {
                   ),
                 ],
               ),
+              /*
               Positioned(
                 top: 0,
                 left: 0,
@@ -100,6 +101,7 @@ class Slideshow extends StatelessWidget {
                   github: github,
                 ),
               ),
+              */
             ],
           ),
         ),
@@ -108,8 +110,8 @@ class Slideshow extends StatelessWidget {
   }
 }
 
-class PhotoGallery extends StatefulWidget {
-  const PhotoGallery({
+class PhotoGallery extends StatelessWidget {
+  PhotoGallery({
     Key key,
     @required this.imageUrls,
     @required this.rnd,
@@ -118,11 +120,7 @@ class PhotoGallery extends StatefulWidget {
   final List<String> imageUrls;
   final Random rnd;
 
-  @override
-  _PhotoGalleryState createState() => _PhotoGalleryState();
-}
-
-class _PhotoGalleryState extends State<PhotoGallery> {
+  //scroll controller used throughout
   final ScrollController scrollController = new ScrollController();
 
   @override
@@ -135,10 +133,10 @@ class _PhotoGalleryState extends State<PhotoGallery> {
           scrollDirection: Axis.horizontal,
           padding: EdgeInsets.all(0),
           children: List.generate(
-            widget.imageUrls.length,
+            imageUrls.length,
             (index) {
               //instead of the max of ...47 to avoid any overflow issues
-              int random = (widget.rnd).nextInt(2147483646);
+              int random = (rnd).nextInt(2147483646);
               String imageURL =
                   "https://source.unsplash.com/random/" + random.toString();
               return Padding(
@@ -240,6 +238,7 @@ class _PhotoGalleryState extends State<PhotoGallery> {
           top: 0,
           bottom: 0,
           child: PageScrollButton(
+            initiallyShown: false,
             scrollController: scrollController,
             isLeft: true,
           ),
@@ -258,14 +257,62 @@ class _PhotoGalleryState extends State<PhotoGallery> {
   }
 }
 
-class PageScrollButton extends StatelessWidget {
+class PageScrollButton extends StatefulWidget {
   PageScrollButton({
     @required this.scrollController,
     @required this.isLeft,
+    this.initiallyShown: true,
   });
 
   final ScrollController scrollController;
   final bool isLeft;
+  final bool initiallyShown;
+
+  @override
+  _PageScrollButtonState createState() => _PageScrollButtonState();
+}
+
+class _PageScrollButtonState extends State<PageScrollButton> {
+  final ValueNotifier<bool> buttonShown = new ValueNotifier(false);
+
+  updateState(){
+    if(mounted){
+      setState(() {});
+    }
+  }
+
+  updateButtonShown(){
+    //grab scroll data
+    ScrollPosition position = widget.scrollController.position;
+
+    //cover null cases (which do happen at the start)
+    double curr = position.pixels ?? 0;
+    double min = position.minScrollExtent ?? 0;
+    double max = position.maxScrollExtent ?? 0;
+
+    //Determine whether we are on the top of the scroll area
+    if(widget.isLeft){
+      buttonShown.value = (curr > min);
+    }
+    else{
+      buttonShown.value = (curr < max);
+    }
+  }
+
+  @override
+  void initState() { 
+    super.initState();
+    buttonShown.value = widget.initiallyShown;
+    widget.scrollController.addListener(updateButtonShown);
+    buttonShown.addListener(updateState);
+  }
+
+  @override
+  void dispose() { 
+    buttonShown.removeListener(updateState);
+    widget.scrollController.removeListener(updateButtonShown);
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -275,30 +322,37 @@ class PageScrollButton extends StatelessWidget {
     double rightPadding = 24;
     double slideShowSize = screenWidth - leftPadding - rightPadding;
 
-    return Center(
-      child: Padding(
-        padding: EdgeInsets.only(
-          right: (isLeft == false) ? 24 : 0,
-        ),
-        child: Container(
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: Colors.black.withOpacity(
-              0.25,
-            ),
+    return Visibility(
+      visible: buttonShown.value,
+      maintainAnimation: true,
+      maintainState: true,
+      maintainSize: true,
+      maintainInteractivity: false,
+      child: Center(
+        child: Padding(
+          padding: EdgeInsets.only(
+            right: (widget.isLeft == false) ? 24 : 0,
           ),
-          child: IconButton(
-            onPressed: () {
-              scrollController.animateTo(
-                scrollController.offset +
-                    (slideShowSize * ((isLeft) ? -1 : 1)),
-                duration: kTabScrollDuration,
-                curve: Curves.easeInOut,
-              );
-            },
-            icon: Icon(
-              isLeft ? Icons.arrow_left : Icons.arrow_right,
-              color: MyApp.highlightGreen,
+          child: Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.black.withOpacity(
+                0.25,
+              ),
+            ),
+            child: IconButton(
+              onPressed: () {
+                widget.scrollController.animateTo(
+                  widget.scrollController.offset +
+                      (slideShowSize * ((widget.isLeft) ? -1 : 1)),
+                  duration: kTabScrollDuration,
+                  curve: Curves.easeInOut,
+                );
+              },
+              icon: Icon(
+                widget.isLeft ? Icons.arrow_left : Icons.arrow_right,
+                color: MyApp.highlightGreen,
+              ),
             ),
           ),
         ),
