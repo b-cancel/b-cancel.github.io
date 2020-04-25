@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:portfolio/bodies/projects/slideShow.dart';
 import 'package:portfolio/main.dart';
 
 //internal
@@ -126,7 +127,7 @@ class ProjectSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Slideshow(
-            galleryBorder: galleryBorder, 
+            galleryBorder: galleryBorder,
             github: github,
             imageUrls: imageUrls,
           ),
@@ -204,152 +205,6 @@ class ProjectSection extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-class Slideshow extends StatelessWidget {
-  const Slideshow({
-    Key key,
-    @required this.galleryBorder,
-    @required this.imageUrls,
-    @required this.github,
-  }) : super(key: key);
-
-  final BorderSide galleryBorder;
-  final List<String> imageUrls;
-  final String github;
-
-  @override
-  Widget build(BuildContext context) {
-    Random rnd = new Random();
-    double galleryHeight = 320;
-    print("images: " + imageUrls.length.toString());
-    return Stack(
-      children: <Widget>[
-        Positioned(
-          top: 0,
-          left: 0,
-          child: Container(
-            height: 0,
-            width: 0,
-            child: OverflowBox(
-              alignment: Alignment.topLeft,
-              minWidth: MediaQuery.of(context).size.width,
-              maxWidth: MediaQuery.of(context).size.width,
-              maxHeight: galleryHeight,
-              minHeight: galleryHeight,
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                height: galleryHeight,
-                decoration: BoxDecoration(
-                  border: Border(
-                    top: galleryBorder,
-                    left: galleryBorder,
-                    bottom: galleryBorder,
-                  ),
-                  color: MyApp.galleryBackground,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    GalleryHeader(
-                      galleryBorder: galleryBorder, 
-                      github: github,
-                    ),
-                    Spacer(),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
-        Container(
-          height: galleryHeight,
-          constraints: BoxConstraints(
-            maxWidth: MediaQuery.of(context).size.width,
-          ),
-          decoration: BoxDecoration(
-            border: Border(
-              top: galleryBorder,
-              left: galleryBorder,
-              bottom: galleryBorder,
-            ),
-            color: MyApp.galleryBackground,
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              GalleryHeader(
-                galleryBorder: galleryBorder, 
-                github: github,
-              ),
-              Expanded(
-                child: ListView(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  primary: false,
-                  padding: EdgeInsets.all(0),
-                  children: List.generate(
-                    imageUrls.length,
-                    (index){
-                      int random = (rnd).nextInt(2147483645);
-                      print("random: " + random.toString());
-                      return Padding(
-                        padding: EdgeInsets.only(
-                          left: (index == 0) ? 0 : 16,
-                          right: (index == imageUrls.length - 1) ? 0 : 16,
-                        ),
-                        child: Stack(
-                          children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Center(
-                                child: Theme(
-                                  data: Theme.of(context).copyWith(
-                                    accentColor: MyApp.bodyColor,
-                                  ),
-                                  child: CircularProgressIndicator(
-                                    strokeWidth: 4,
-                                    backgroundColor: MyApp.galleryBorder,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Image.network(
-                              "https://source.unsplash.com/random/"
-                               + random.toString(),
-                               fit: BoxFit.contain,
-                               /*
-                               loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent loadingProgress) {
-                                  return Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Center(
-                                      child: Theme(
-                                        data: Theme.of(context).copyWith(
-                                          accentColor: MyApp.bodyColor,
-                                        ),
-                                        child: CircularProgressIndicator(
-                                          strokeWidth: 4,
-                                          backgroundColor: MyApp.galleryBorder,
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                },*/
-                            ),
-                          ],
-                        ),
-                      );
-                    }
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
     );
   }
 }
