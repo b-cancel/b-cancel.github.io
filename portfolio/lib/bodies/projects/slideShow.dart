@@ -27,60 +27,50 @@ class Slideshow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Random rnd = new Random();
-    double galleryHeight = 320;
+    //minus app bar and the sticky header
+    double galleryHeight = 320.0 - 56 - 56;
+    double galleryWidth = MediaQuery.of(context).size.width; // + 16 + 16;
     print("images: " + imageUrls.length.toString());
     return Stack(
       children: <Widget>[
-        Positioned(
-          top: 0,
-          left: 0,
+        Transform.translate(
+          offset: Offset(
+            -16.0 - 16 - 16 - 24,
+            0,
+          ),
           child: Container(
-            height: 0,
-            width: 0,
-            child: OverflowBox(
-              alignment: Alignment.topLeft,
-              minWidth: MediaQuery.of(context).size.width,
-              maxWidth: MediaQuery.of(context).size.width,
-              maxHeight: galleryHeight,
-              minHeight: galleryHeight,
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                height: galleryHeight,
-                decoration: BoxDecoration(
-                  border: Border(
-                    top: galleryBorder,
-                    left: galleryBorder,
-                    bottom: galleryBorder,
-                  ),
-                  color: MyApp.galleryBackground,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    GalleryHeader(
-                      galleryBorder: galleryBorder,
-                      github: github,
-                    ),
-                    Spacer(),
-                  ],
-                ),
+            height: galleryHeight,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              border: Border(
+                top: galleryBorder,
+                //left: galleryBorder,
+                bottom: galleryBorder,
               ),
+              //color: MyApp.galleryBackground,
+            ),
+            child: Column(
+              children: <Widget>[
+                GalleryHeader(
+                  galleryBorder: galleryBorder,
+                  github: github,
+                  invisible: true,
+                ),
+                Spacer(),
+              ],
             ),
           ),
         ),
         Container(
           height: galleryHeight,
-          constraints: BoxConstraints(
-            maxWidth: MediaQuery.of(context).size.width,
-            minWidth: 0,
-          ),
+          width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
             border: Border(
               top: galleryBorder,
-              left: galleryBorder,
+              //left: galleryBorder,
               bottom: galleryBorder,
             ),
-            color: MyApp.galleryBackground,
+            //color: MyApp.galleryBackground,
           ),
           child: Stack(
             children: <Widget>[
@@ -97,7 +87,7 @@ class Slideshow extends StatelessWidget {
                   //to give the list view a proper height
                   Expanded(
                     child: ListView(
-                      shrinkWrap: true,
+                      //shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
                       padding: EdgeInsets.all(0),
                       children: List.generate(imageUrls.length, (index) {
@@ -108,8 +98,7 @@ class Slideshow extends StatelessWidget {
                                 random.toString();
                         return Padding(
                           padding: EdgeInsets.only(
-                            left: (index == 0) ? 12 : 0,
-                            right: (index == imageUrls.length - 1) ? 0 : 12,
+                            left: index == 0 ? 0 : 12.0,
                           ),
                           child: Padding(
                             padding: EdgeInsets.symmetric(
@@ -122,11 +111,11 @@ class Slideshow extends StatelessWidget {
                                     padding: EdgeInsets.all(16.0),
                                     child: Theme(
                                       data: Theme.of(context).copyWith(
-                                        accentColor: MyApp.bodyColor,
+                                        accentColor: MyApp.highlightGreen,
                                       ),
                                       child: CircularProgressIndicator(
                                         strokeWidth: 4,
-                                        backgroundColor: MyApp.galleryBorder,
+                                        backgroundColor: Colors.black,
                                       ),
                                     ),
                                   ),

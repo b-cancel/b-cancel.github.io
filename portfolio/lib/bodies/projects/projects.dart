@@ -112,14 +112,14 @@ class ProjectSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     BorderSide galleryBorder = BorderSide(
-      color: MyApp.galleryBorder,
+      color: MyApp.highlightGreen, //MyApp.lightBlueText, //MyApp.galleryBorder,
       width: 2,
     );
 
     //build
     return CollapsibleSection(
       label: label,
-      labelColor: Colors.white,
+      labelColor: MyApp.highlightGreen, //MyApp.lightBlueText,
       separator: "",
       sectionType: SectionType.Parenthesis,
       leftPadding: false,
@@ -139,9 +139,7 @@ class ProjectSection extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Wrap(
                   children: [
                     Text(
                       "descrip: ",
@@ -149,10 +147,8 @@ class ProjectSection extends StatelessWidget {
                         color: MyApp.oldGrey,
                       ),
                     ),
-                    Flexible(
-                      child: Text(
-                        description + ", ",
-                      ),
+                    Text(
+                      description + ", ",
                     ),
                   ],
                 ),
@@ -214,10 +210,12 @@ class GalleryHeader extends StatelessWidget {
     Key key,
     @required this.galleryBorder,
     @required this.github,
+    this.invisible: false,
   }) : super(key: key);
 
   final BorderSide galleryBorder;
   final String github;
+  final bool invisible;
 
   @override
   Widget build(BuildContext context) {
@@ -231,46 +229,62 @@ class GalleryHeader extends StatelessWidget {
       padding: EdgeInsets.symmetric(
         horizontal: 4,
       ),
-      child: Padding(
-        padding: EdgeInsets.only(
-          left: 16,
-          right: 24,
-        ),
-        child: Wrap(
-          crossAxisAlignment: WrapCrossAlignment.center,
-          children: [
-            IconWebLink(
-              url: github,
-              icon: Padding(
-                padding: EdgeInsets.only(
-                  right: 8,
-                ),
-                child: Icon(
-                  FontAwesome.github,
-                ),
+      child: Stack(
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.only(
+              left: 16,
+            ),
+            child: ClipRect(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  IconWebLink(
+                    url: github,
+                    icon: Padding(
+                      padding: EdgeInsets.only(
+                        right: 8,
+                      ),
+                      child: Icon(
+                        FontAwesome.github,
+                      ),
+                    ),
+                  ),
+                  TextWebLink(
+                    url: github,
+                    text: Text(
+                      "See More",
+                      style: GoogleFonts.robotoMono(
+                        color: Colors.white,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  Text(" - "),
+                  TextWebLink(
+                    url: github,
+                    text: Text(
+                      github,
+                      style: GoogleFonts.robotoMono(
+                        color: MyApp.oldGrey,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ],
               ),
             ),
-            TextWebLink(
-              url: github,
-              text: Text(
-                github,
-                style: GoogleFonts.robotoMono(
-                  color: MyApp.oldGrey,
-                ),
+          ),
+          Positioned.fill(
+            child: Visibility(
+              visible: invisible,
+              child: Container(
+                color: MyApp.bodyColor,
               ),
             ),
-            Text(" - "),
-            TextWebLink(
-              url: github,
-              text: Text(
-                "See More",
-                style: GoogleFonts.robotoMono(
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
