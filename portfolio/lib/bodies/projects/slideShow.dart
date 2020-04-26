@@ -11,6 +11,7 @@ import 'package:gesture_zoom_box/gesture_zoom_box.dart';
 //internal
 import 'package:portfolio/bodies/projects/projects.dart';
 import 'package:portfolio/main.dart';
+import 'package:portfolio/utils/invisibleInkWell.dart';
 
 //widget
 class Slideshow extends StatelessWidget {
@@ -29,7 +30,7 @@ class Slideshow extends StatelessWidget {
   Widget build(BuildContext context) {
     Random rnd = new Random();
     //minus app bar and the sticky header
-    double galleryHeight = 320.0 - 56 - 56;
+    double galleryHeight = 320.0; // - 56 - 56;
     return Stack(
       children: <Widget>[
         /*Transform.translate(
@@ -137,12 +138,12 @@ class PhotoGallery extends StatelessWidget {
             imageUrls.length,
             (index) {
               //instead of the max of ...47 to avoid any overflow issues
-              
+              /*
               int random = (rnd).nextInt(2147483646);
               String imageURL =
                   "https://source.unsplash.com/random/" + random.toString();
-                  
-              //String imageURL = imageUrls[index];
+                */
+              String imageURL = imageUrls[index];
               return Padding(
                 padding: EdgeInsets.only(
                   left: index == 0 ? 0 : 12.0,
@@ -178,47 +179,94 @@ class PhotoGallery extends StatelessWidget {
                             onTap: () {
                               showDialog(
                                 context: context,
+                                barrierDismissible: true,
                                 builder: (BuildContext context) {
                                   return Dialog(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(24),
-                                      ),
-                                    ),
-                                    child: Container(
-                                      color: Colors.black,
-                                      padding: EdgeInsets.all(
-                                        12,
-                                      ),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(24),
-                                        ),
-                                        child: Stack(
-                                          alignment: Alignment.center,
-                                          children: <Widget>[
-                                            GestureZoomBox(
-                                              maxScale: 3.0,
-                                              doubleTapScale: 1.5,
-                                              duration: kTabScrollDuration,
-                                              child: Image.network(
-                                                imageURL,
-                                                fit: BoxFit.contain,
-                                                gaplessPlayback: true,
-                                              ),
-                                            ),
-                                            Positioned.fill(
-                                              child: Container(
-                                                alignment: Alignment.topRight,
-                                                child: IconButton(
-                                                  onPressed: () {
-                                                    Navigator.of(context).pop();
-                                                  },
-                                                  icon: Icon(Icons.close),
+                                    backgroundColor: Colors.transparent,
+                                    insetPadding: EdgeInsets.all(24),
+                                    child: Material(
+                                      color: Colors.transparent,
+                                      child: InvisibleInkWell(
+                                        onTap: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: Container(
+                                          height: MediaQuery.of(context)
+                                              .size
+                                              .height,
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          child: FittedBox(
+                                            fit: BoxFit.contain,
+                                            child: Stack(
+                                              alignment: Alignment.center,
+                                              children: <Widget>[
+                                                Positioned.fill(
+                                                  child: Material(
+                                                    color: Colors.transparent,
+                                                    child: InvisibleInkWell(
+                                                      onTap: () {
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                      },
+                                                      child: Container(
+                                                        height: MediaQuery.of(
+                                                                context)
+                                                            .size
+                                                            .height,
+                                                        width: MediaQuery.of(
+                                                                context)
+                                                            .size
+                                                            .width,
+                                                      ),
+                                                    ),
+                                                  ),
                                                 ),
-                                              ),
+                                                ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(16),
+                                                  child: GestureZoomBox(
+                                                    maxScale: 3.0,
+                                                    doubleTapScale: 1.5,
+                                                    duration:
+                                                        kTabScrollDuration,
+                                                    child: Image.network(
+                                                      imageURL,
+                                                      fit: BoxFit.contain,
+                                                      gaplessPlayback: true,
+                                                    ),
+                                                  ),
+                                                ),
+                                                /*
+                                                Positioned.fill(
+                                                  child: Container(
+                                                    alignment:
+                                                        Alignment.topRight,
+                                                    child: Container(
+                                                      height: 0,
+                                                      width: 0,
+                                                      child: OverflowBox(
+                                                        maxHeight: 56,
+                                                        maxWidth: 56,
+                                                        minHeight: 56,
+                                                        minWidth: 56,
+                                                        child: FittedBox(
+                                                          fit: BoxFit.contain,
+                                                          child: IconButton(
+                                                            onPressed: () {
+                                                              Navigator.of(context)
+                                                                  .pop();
+                                                            },
+                                                            icon: Icon(Icons.close),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),*/
+                                              ],
                                             ),
-                                          ],
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -280,13 +328,13 @@ class PageScrollButton extends StatefulWidget {
 class _PageScrollButtonState extends State<PageScrollButton> {
   final ValueNotifier<bool> buttonShown = new ValueNotifier(false);
 
-  updateState(){
-    if(mounted){
+  updateState() {
+    if (mounted) {
       setState(() {});
     }
   }
 
-  updateButtonShown(){
+  updateButtonShown() {
     //grab scroll data
     ScrollPosition position = widget.scrollController.position;
 
@@ -297,21 +345,19 @@ class _PageScrollButtonState extends State<PageScrollButton> {
     double overScroll = (curr < max) ? 0 : curr - max;
 
     //Determine whether we are on the top of the scroll area
-    if((max + overScroll) == 0){
+    if ((max + overScroll) == 0) {
       buttonShown.value = false;
-    }
-    else{
-      if(widget.isLeft){
+    } else {
+      if (widget.isLeft) {
         buttonShown.value = (curr > min);
-      }
-      else{
+      } else {
         buttonShown.value = (curr < max);
       }
     }
   }
 
   @override
-  void initState() { 
+  void initState() {
     super.initState();
     buttonShown.value = widget.initiallyShown;
     widget.scrollController.addListener(updateButtonShown);
@@ -319,7 +365,7 @@ class _PageScrollButtonState extends State<PageScrollButton> {
   }
 
   @override
-  void dispose() { 
+  void dispose() {
     buttonShown.removeListener(updateState);
     widget.scrollController.removeListener(updateButtonShown);
     super.dispose();
