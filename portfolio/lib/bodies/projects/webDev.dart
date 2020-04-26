@@ -33,7 +33,7 @@ class WebDevelopment extends StatelessWidget {
                   + "but in exchange I was able to highly customize the size in a very short period of time.",
                   github: "https://github.com/b-cancel/b-cancel.github.io",
                   livePage: "https://b-cancel.github.io/",
-                  initiallyOpened: false,
+                  initiallyOpened: true,
                 ),
                 ProjectSection(
                   label: "Attend",
@@ -41,6 +41,7 @@ class WebDevelopment extends StatelessWidget {
                   + " It guarantees that students are present in the classroom and not loging in remotely by having a quick shuffling code"
                   + ", and it guarantees that students aren't logging in for their friends by identifying each individual device.",
                   github: "https://github.com/b-cancel/Attend_Public",
+                  //TODO: add images and gif links
                   initiallyOpened: true,
                 ),
                 ProjectSection(
@@ -49,7 +50,7 @@ class WebDevelopment extends StatelessWidget {
                   + " to be able to understand the advantages of being a client of Ambit Energy and a partner of Ambit Energy",
                   github: "https://github.com/b-cancel/Ambit_Energy_Consultant_Website",
                   livePage: "https://b-cancel.github.io/Ambit_Energy_Consultant_Website",
-                  initiallyOpened: false,
+                  initiallyOpened: true,
                 ),
               ],
             ),
@@ -64,12 +65,14 @@ class WebDevelopment extends StatelessWidget {
                   label: "Shazam Clone",
                   description: "Visualize the music,  identify it, locate it on youtube, display the lyrics, and then download it",
                   github: "https://github.com/b-cancel/Ruby_Shazam_Clone",
+                  //https://media.giphy.com/media/hWGMQxaRodKOHaU5u5/giphy.gif
                   initiallyOpened: true,
                 ),
                 ProjectSection(
                   label: "Rental Property Searcher",
                   description: "Search for properties with all the filters you never knew you wanted",
                   github: "https://github.com/b-cancel/Rental_Property_Searcher",
+                  //TODO: add images and gif links
                   initiallyOpened: true,
                 ),
                 ProjectSection(
@@ -78,14 +81,14 @@ class WebDevelopment extends StatelessWidget {
                   + ", and teach students how to write their own Vanilla HTML and CSS websites.",
                   github: "https://github.com/b-cancel/Technology_Student_Association_Website",
                   livePage: "https://b-cancel.github.io/Technology_Student_Association_Website/index.html",
-                  initiallyOpened: false,
+                  initiallyOpened: true,
                 ),
                 ProjectSection(
                   label: "HS Web Dev Final",
                   description: "Website Designed to show off Orlando and its Attractions as part of a Web Design Final",
                   github: "https://github.com/b-cancel/Web_Development_Final",
                   livePage: "https://b-cancel.github.io/Web_Development_Final",
-                  initiallyOpened: false,
+                  initiallyOpened: true,
                 ),
               ],
             ),
