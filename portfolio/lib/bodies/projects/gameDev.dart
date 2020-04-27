@@ -29,14 +29,28 @@ class GameDevelopment extends StatelessWidget {
                   description: "Innovative Physics Based Cooperative 2D platformer where you control your character’s"
                   + " velocity, acceleration, and impulse/jerk vector to keep you and your friends alive",
                   github: "https://github.com/b-cancel/Squishables_Public",
+                  //TODO: add video
                   initiallyOpened: true,
+                  imageUrls: [
+                    //cover photo
+                    "https://i.imgur.com/xLWgktz.png",
+                    //gifs
+                  ],
                 ),
                 ProjectSection(
                   label: "Itzo",
                   description: "Designed to have incredibly immersive UI using primarily sound",
                   livePage: "https://b-cancel.github.io/Itzo_Prototype",
                   github: "https://github.com/b-cancel/Itzo_Prototype",
+                  //TODO: add video
                   initiallyOpened: true,
+                  imageUrls: [
+                    "https://media.giphy.com/media/VzkY3j2e229YwnZbNa/giphy.gif",
+                    //jpgs
+                    "https://imgur.com/TTk5zcH.jpg",
+                    "https://imgur.com/NCIp2z1.jpg",
+                    "https://imgur.com/Xus8ekS.jpg",
+                  ],
                 ),
                 ProjectSection(
                   label: "Super Retriever",
@@ -44,6 +58,12 @@ class GameDevelopment extends StatelessWidget {
                   livePage: "https://b-cancel.github.io/Super_Retriever_Prototype/",
                   github: "https://github.com/b-cancel/Super_Retriever_Prototype",
                   initiallyOpened: true,
+                  imageUrls: [
+                    "https://imgur.com/LERHKNn.jpg",
+                    "https://imgur.com/NJTHUYZ.jpg",
+                    "https://imgur.com/VqnUNif.jpg",
+                    "https://imgur.com/7lZaFI8.jpg",
+                  ],
                 ),
               ],
             ),

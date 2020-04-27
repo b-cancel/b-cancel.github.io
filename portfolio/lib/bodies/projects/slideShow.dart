@@ -183,6 +183,7 @@ class PhotoGallery extends StatelessWidget {
                                 builder: (BuildContext context) {
                                   return Dialog(
                                     backgroundColor: Colors.transparent,
+                                    insetPadding: EdgeInsets.all(0),
                                     child: Material(
                                       color: Colors.transparent,
                                       child: InvisibleInkWell(
