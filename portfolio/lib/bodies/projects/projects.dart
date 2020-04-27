@@ -113,6 +113,8 @@ class ProjectSection extends StatelessWidget {
     this.livePage,
     this.googlePlayLink,
     this.appStoreLink,
+    this.videoUrls,
+    this.videoLabels,
     this.imageUrls,
     @required this.initiallyOpened,
   });
@@ -123,6 +125,8 @@ class ProjectSection extends StatelessWidget {
   final String livePage;
   final String googlePlayLink;
   final String appStoreLink;
+  final List<String> videoUrls;
+  final List<String> videoLabels;
   final List<String> imageUrls;
   final bool initiallyOpened;
 
@@ -173,6 +177,23 @@ class ProjectSection extends StatelessWidget {
                       description + ", ",
                     ),
                   ],
+                ),
+                Visibility(
+                  visible: videoUrls != null,
+                  child: Wrap(
+                    children: List.generate(
+                      videoUrls?.length ?? 0, 
+                      (index){
+                        return IconWebLink(
+                          url: videoUrls[index], 
+                          icon: IconLinkIcon(
+                            icon: FontAwesome5Solid.video,
+                            text: videoLabels[index],
+                          ),
+                        );
+                      },
+                    ),
+                  ),
                 ),
                 Wrap(
                   children: <Widget>[

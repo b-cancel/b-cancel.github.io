@@ -204,17 +204,28 @@ class IconLink extends StatelessWidget {
 class IconLinkIcon extends StatelessWidget {
   IconLinkIcon({
     @required this.icon,
+    this.text,
   });
 
   final IconData icon;
+  final String text;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(12.0),
-      child: Icon(
-        icon,
-        size: 36,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Icon(
+            icon,
+            size: 36,
+          ),
+          Visibility(
+            visible: text != null && text.length > 0,
+            child: Text(text ?? ""),
+          ),
+        ],
       ),
     );
   }

@@ -18,7 +18,7 @@ class AppDevelopment extends StatelessWidget {
   Widget build(BuildContext context) {
     return DevelopmentSection(
       label: "App Development",
-      initiallyOpened: true,
+      initiallyOpened: false,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -69,9 +69,9 @@ class AppDevelopment extends StatelessWidget {
               children: <Widget>[
                 ProjectSection(
                   label: "Half Life",
-                  description: "Keep track of the active dosage of medications\n" +
-                      "given their half life, so you can adjust your dosage\n" +
-                      "until the side effects are worth the desired effects.",
+                  description: "Keep track of the active dosage of medications" +
+                      " given their half life, so you can adjust your dosage" +
+                      " until the side effects are worth the desired effects.",
                   github: "https://github.com/b-cancel/halfLife",
                   initiallyOpened: true,
                   imageUrls: [

@@ -13,7 +13,7 @@ class WebDevelopment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DevelopmentSection(
-      initiallyOpened: true,
+      initiallyOpened: false,
       label: "Web Development",
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -38,7 +38,7 @@ class WebDevelopment extends StatelessWidget {
                 ProjectSection(
                   label: "Attend",
                   description: "A simple and secure way to take attendance."
-                  + " It guarantees that students are present in the classroom and not loging in remotely by having a quick shuffling code"
+                  + " It guarantees that students are present in the classroom and not logging in remotely by having a quick shuffling code"
                   + ", and it guarantees that students aren't logging in for their friends by identifying each individual device.",
                   github: "https://github.com/b-cancel/Attend_Public",
                   initiallyOpened: true,

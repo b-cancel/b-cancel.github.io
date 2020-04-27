@@ -51,7 +51,7 @@ const RESOURCES = {
 "faviconit/faviconit-instructions.txt": "53f9f214c478b425a7fb737b9f02eb1e",
 "index.html": "60fc9600f935ec2bc4eb7baa5d4f7098",
 "/": "60fc9600f935ec2bc4eb7baa5d4f7098",
-"main.dart.js": "29b959321de3c6df1630a82e1c5c5042",
+"main.dart.js": "7c9893ab5bf998917b359814d6d31e59",
 "manifest.json": "14e919b7b1dde549ab334b7ee3ce8412"
 };
 
