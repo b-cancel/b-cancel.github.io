@@ -183,7 +183,6 @@ class PhotoGallery extends StatelessWidget {
                                 builder: (BuildContext context) {
                                   return Dialog(
                                     backgroundColor: Colors.transparent,
-                                    insetPadding: EdgeInsets.all(24),
                                     child: Material(
                                       color: Colors.transparent,
                                       child: InvisibleInkWell(
@@ -198,73 +197,10 @@ class PhotoGallery extends StatelessWidget {
                                               MediaQuery.of(context).size.width,
                                           child: FittedBox(
                                             fit: BoxFit.contain,
-                                            child: Stack(
-                                              alignment: Alignment.center,
-                                              children: <Widget>[
-                                                Positioned.fill(
-                                                  child: Material(
-                                                    color: Colors.transparent,
-                                                    child: InvisibleInkWell(
-                                                      onTap: () {
-                                                        Navigator.of(context)
-                                                            .pop();
-                                                      },
-                                                      child: Container(
-                                                        height: MediaQuery.of(
-                                                                context)
-                                                            .size
-                                                            .height,
-                                                        width: MediaQuery.of(
-                                                                context)
-                                                            .size
-                                                            .width,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                                ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(16),
-                                                  child: GestureZoomBox(
-                                                    maxScale: 3.0,
-                                                    doubleTapScale: 1.5,
-                                                    duration:
-                                                        kTabScrollDuration,
-                                                    child: Image.network(
-                                                      imageURL,
-                                                      fit: BoxFit.contain,
-                                                      gaplessPlayback: true,
-                                                    ),
-                                                  ),
-                                                ),
-                                                /*
-                                                Positioned.fill(
-                                                  child: Container(
-                                                    alignment:
-                                                        Alignment.topRight,
-                                                    child: Container(
-                                                      height: 0,
-                                                      width: 0,
-                                                      child: OverflowBox(
-                                                        maxHeight: 56,
-                                                        maxWidth: 56,
-                                                        minHeight: 56,
-                                                        minWidth: 56,
-                                                        child: FittedBox(
-                                                          fit: BoxFit.contain,
-                                                          child: IconButton(
-                                                            onPressed: () {
-                                                              Navigator.of(context)
-                                                                  .pop();
-                                                            },
-                                                            icon: Icon(Icons.close),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),*/
-                                              ],
+                                            child: Image.network(
+                                              imageURL,
+                                              fit: BoxFit.contain,
+                                              gaplessPlayback: true,
                                             ),
                                           ),
                                         ),

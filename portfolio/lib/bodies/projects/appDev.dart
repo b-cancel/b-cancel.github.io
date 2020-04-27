@@ -114,7 +114,22 @@ class AppDevelopment extends StatelessWidget {
                           " And allows you to quickly jump to a section of contacts with an adaptive scroll bar.",
                   github: "https://github.com/b-cancel/Flutter_ContactPicker",
                   initiallyOpened: true,
-                  //TODO: add stuffs
+                  imageUrls: [
+                    //videos
+                    "https://media.giphy.com/media/Uqk7fPBnsNydSn2GZW/giphy.gif",
+                    "https://media.giphy.com/media/W0QwfdozN3AFnw1sWn/giphy.gif",
+                    "https://media.giphy.com/media/LM9EpmeAiYlIpSAcgH/giphy.gif",
+                    "https://media.giphy.com/media/Xbh1CLWME0plFA8g2G/giphy.gif",
+                    "https://media.giphy.com/media/UT4byKMOmrYWk8dTmb/giphy.gif",
+                    //jpgs
+                    /*
+                    "https://imgur.com/YWYmyOt.jpg",
+                    "https://imgur.com/9XWVhy3.jpg",
+                    "https://imgur.com/jdxaWT0.jpg",
+                    "https://imgur.com/yASI0vn.jpg",
+                    "https://imgur.com/TDzYvgI.jpg",
+                    */
+                  ],
                 ),
                 ProjectSection(
                   label: "Timer & Stopwatch",
@@ -158,7 +173,13 @@ class AppDevelopment extends StatelessWidget {
                   description: "A clone of instagram with flutter",
                   github: "https://github.com/b-cancel/Flutter_Instagram",
                   initiallyOpened: true,
-                  //TODO: add clone gifs
+                  imageUrls: [
+                    "https://media.giphy.com/media/UsT0dPQlVrVrJ4BC1z/giphy.gif",
+                    "https://media.giphy.com/media/KezTdVWA3JIOS3fwX5/giphy.gif",
+                    "https://media.giphy.com/media/S8BPNPf8i1CCYgv3LQ/giphy.gif",
+                    "https://media.giphy.com/media/LSc6Y83JW98nX47nYe/giphy.gif",
+                    "https://media.giphy.com/media/jUKJlmNzhbLRhetFtW/giphy.gif",
+                  ],
                 ),
                 ProjectSection(
                   label: "Tip Calculator",

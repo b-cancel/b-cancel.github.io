@@ -41,8 +41,22 @@ class WebDevelopment extends StatelessWidget {
                   + " It guarantees that students are present in the classroom and not loging in remotely by having a quick shuffling code"
                   + ", and it guarantees that students aren't logging in for their friends by identifying each individual device.",
                   github: "https://github.com/b-cancel/Attend_Public",
-                  //TODO: add images and gif links
                   initiallyOpened: true,
+                  imageUrls: [
+                    "https://imgur.com/RC8XpUP.jpg",
+                    "https://imgur.com/RYPOlzG.jpg",
+                    "https://imgur.com/ptcQTII.jpg",
+                    "https://imgur.com/0qlOAWd.jpg",
+                    "https://imgur.com/bGpIQSd.jpg",
+                    "https://imgur.com/P36SrPo.jpg",
+                    "https://imgur.com/blI3yI0.jpg",
+                    "https://imgur.com/eAP5w5P.jpg",
+                    "https://imgur.com/vvpwpdx.jpg",
+                    "https://imgur.com/3n0sXee.jpg",
+                    "https://imgur.com/S05j9z2.jpg",
+                    "https://imgur.com/IlBWrEr.jpg",
+                    "https://imgur.com/JEHgH2R.jpg",
+                  ],
                 ),
                 ProjectSection(
                   label: "Ambit Energy",
@@ -65,15 +79,23 @@ class WebDevelopment extends StatelessWidget {
                   label: "Shazam Clone",
                   description: "Visualize the music,  identify it, locate it on youtube, display the lyrics, and then download it",
                   github: "https://github.com/b-cancel/Ruby_Shazam_Clone",
-                  //https://media.giphy.com/media/hWGMQxaRodKOHaU5u5/giphy.gif
                   initiallyOpened: true,
+                  imageUrls: [
+                    "https://media.giphy.com/media/hWGMQxaRodKOHaU5u5/giphy.gif",
+                  ],
                 ),
                 ProjectSection(
                   label: "Rental Property Searcher",
                   description: "Search for properties with all the filters you never knew you wanted",
                   github: "https://github.com/b-cancel/Rental_Property_Searcher",
-                  //TODO: add images and gif links
                   initiallyOpened: true,
+                  imageUrls: [
+                    "https://imgur.com/s6r0lE5.jpg",
+                    "https://imgur.com/lxIozzq.jpg",
+                    "https://imgur.com/O3xUiho.jpg",
+                    "https://imgur.com/RLhARvI.jpg",
+                    "https://imgur.com/mtDvR8K.jpg",
+                  ],
                 ),
                 ProjectSection(
                   label: "HS Technology Student Association Website",
