@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 //plugins
-import 'package:flutter_icons/flutter_icons.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 //internal
 import 'package:portfolio/main.dart';
@@ -25,7 +25,7 @@ class Toggler extends StatelessWidget {
     if(useIconButton){
       if (sectionOpened.value) {
         icon = Icon(
-          FontAwesome.minus,
+          FontAwesomeIcons.minus,
           size: 14,
           color: MyApp.oldGrey,
         );

@@ -2,7 +2,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/bodies/projects/slideShow.dart';
 import 'package:portfolio/main.dart';
@@ -187,7 +187,7 @@ class ProjectSection extends StatelessWidget {
                         return IconWebLink(
                           url: videoUrls[index], 
                           icon: IconLinkIcon(
-                            icon: FontAwesome5Solid.video,
+                            icon: FontAwesomeIcons.video,
                             text: videoLabels[index],
                           ),
                         );
@@ -203,7 +203,7 @@ class ProjectSection extends StatelessWidget {
                         url: livePage,
                         label: "Live Page",
                         icon: IconLinkIcon(
-                          icon: FontAwesome5.window_maximize,
+                          icon: FontAwesomeIcons.windowMaximize,
                         ),
                       ),
                     ),
@@ -213,7 +213,7 @@ class ProjectSection extends StatelessWidget {
                         url: googlePlayLink,
                         label: "Google Play",
                         icon: IconLinkIcon(
-                          icon: FontAwesome5Brands.google_play,
+                          icon: FontAwesomeIcons.googlePlay,
                         ),
                       ),
                     ),
@@ -223,7 +223,7 @@ class ProjectSection extends StatelessWidget {
                         url: appStoreLink,
                         label: "App Store",
                         icon: IconLinkIcon(
-                          icon: FontAwesome5Brands.app_store_ios,
+                          icon: FontAwesomeIcons.appStoreIos,
                         ),
                       ),
                     ),
@@ -233,7 +233,7 @@ class ProjectSection extends StatelessWidget {
                         url: github,
                         label: "Repository",
                         icon: IconLinkIcon(
-                          icon: FontAwesome5Brands.github,
+                          icon: FontAwesomeIcons.github,
                         ),
                       ),
                     ),
@@ -290,7 +290,7 @@ class GalleryHeader extends StatelessWidget {
                         right: 8,
                       ),
                       child: Icon(
-                        FontAwesome.github,
+                        FontAwesomeIcons.github,
                       ),
                     ),
                   ),

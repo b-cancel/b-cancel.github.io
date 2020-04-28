@@ -26,7 +26,7 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^0.1.3
+  #cupertino_icons: ^0.1.3
 
   pull_to_refresh: ^1.5.8
   
@@ -36,20 +36,22 @@ dependencies:
 
   # external
   flutter_sticky_header: "^0.4.2"
-  flutter_icons: ^1.0.0+1
+  #flutter_icons: ^1.0.0+1
+  font_awesome_flutter: ^8.8.1
   google_fonts: ^0.4.3
   url_launcher: ^5.4.2
   platform_detect: ^1.4.0
-  flutter_inner_drawer: ^0.5.5
+
+  # for title shuffle
   matrix4_transform: ^1.1.3
 
   #scrollbars
-  draggable_scrollbar_sliver: ^0.0.3
-  draggable_scrollbar: ^0.0.4
+  #draggable_scrollbar_sliver: ^0.0.3
+  #draggable_scrollbar: ^0.0.4
 
   # toast like
   bot_toast: ^2.4.0
-  toast: ^0.1.5
+  #toast: ^0.1.5
 
   # clipboard
   clippy: ^1.0.0
@@ -57,9 +59,9 @@ dependencies:
   clipboard_manager: ^0.0.4
 
   # carousel
-  flutter_mobile_carousel: ^1.0.3 #not dynamic (must give row count)
-  flutter_swiper: ^1.1.6 #only 1 slide at a time
-  carousel_slider: ^2.0.0
+  #flutter_mobile_carousel: ^1.0.3 #not dynamic (must give row count)
+  #flutter_swiper: ^1.1.6 #only 1 slide at a time
+  #carousel_slider: ^2.0.0
 
   # html (none of these provide what you could call standard links)
   #flutter_html: ^0.11.1 #99
@@ -68,8 +70,8 @@ dependencies:
 
   #universal basics
   universal_platform: ^0.1.3
-  universal_html: ^1.2.2
-  universal_io: ^1.0.1
+  #universal_html: ^1.2.2
+  #universal_io: ^1.0.1
 
 dev_dependencies:
   flutter_test:
@@ -89,8 +91,6 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/face/white.png
-    - assets/title/small.gif
-    - assets/title/large.gif
     - assets/qrCode.png
     - assets/vcards/Bryan_Cancel_Contact_V2P1.vcf
     - assets/javascript.png

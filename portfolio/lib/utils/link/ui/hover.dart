@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:universal_html/html.dart' as html;
+import 'dart:html' as html;
 
 class UnderlineOnHover extends StatefulWidget {
   UnderlineOnHover({

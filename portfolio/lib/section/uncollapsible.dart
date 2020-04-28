@@ -122,6 +122,7 @@ class _CollapsibleSectionState extends State<CollapsibleSection> {
         ),
         Visibility(
           visible: isOpened.value,
+          replacement: Container(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[

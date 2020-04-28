@@ -1,8 +1,8 @@
 //section
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 //plugins
-import 'package:flutter_icons/flutter_icons.dart';
 
 //internal
 import 'package:portfolio/bodies/toolkit/toolkit.dart';
@@ -42,7 +42,7 @@ tellSystem(){
 
 List<Region> regions = [
   Region(
-    FontAwesome.user_circle,
+    FontAwesomeIcons.userAlt,
     "About Me",
     Container(), //needs scroll controller so we set it elsewhere
     //these are updated by their respective layout builders
@@ -51,7 +51,7 @@ List<Region> regions = [
     initiallyOpened: true, 
   ),
   Region(
-    FontAwesome5Solid.tools,
+    FontAwesomeIcons.tools,
     "Toolkit",
     ToolKitBody(),
     //these are updated by their respective layout builders
@@ -60,7 +60,7 @@ List<Region> regions = [
     //initiallyOpened: true,
   ),
   Region(
-    FontAwesome.suitcase, 
+    FontAwesomeIcons.suitcase, 
     "Experience", 
     WorkExperienceBody(),
     //these are updated by their respective layout builders
@@ -69,7 +69,7 @@ List<Region> regions = [
     //initiallyOpened: true,
   ),
   Region(
-    FontAwesome.flask,
+    FontAwesomeIcons.flask,
     "Projects",
     ProjectsBody(),
     //these are updated by their respective layout builders
@@ -88,7 +88,7 @@ List<Region> regions = [
     //initiallyOpened: true, //TODO: remove after debug
   ),
   Region(
-    FontAwesome5Solid.comment_alt,
+    FontAwesomeIcons.solidCommentAlt,
     "Contact Me",
     ContactMeBody(),
     //these are updated by their respective layout builders
