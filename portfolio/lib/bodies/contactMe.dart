@@ -1,6 +1,6 @@
 //fluter
 import 'package:flutter/material.dart';
-//import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 //plugins
 import 'package:google_fonts/google_fonts.dart';
@@ -63,24 +63,21 @@ class QuickLinks extends StatelessWidget {
         IconWebLink(
           url: github,
           icon: IconLinkIcon(
-            //TODO
-            icon: Icons.link,// FontAwesomeIcons.github,
+            icon: FontAwesomeIcons.github,
           ),
           label: "Github",
         ),
         IconWebLink(
           url: resume,
           icon: IconLinkIcon(
-            //TODO
-            icon: Icons.info, //FontAwesomeIcons.solidFileAlt,
+            icon: FontAwesomeIcons.solidFileAlt,
           ),
           label: "Resume",
         ),
         IconWebLink(
           url: hackerRank,
           icon: IconLinkIcon(
-            //TODO
-            icon: Icons.info,// FontAwesomeIcons.hackerrank,
+            icon: FontAwesomeIcons.hackerrank,
           ),
           label: "Hacker Rank",
         ),
@@ -88,8 +85,7 @@ class QuickLinks extends StatelessWidget {
           url: linkedIn,
           icon: 
           IconLinkIcon(
-            //TODO
-            icon: Icons.info,// FontAwesomeIcons.linkedin,
+            icon: FontAwesomeIcons.linkedin,
           ),
           label: "Linked In",
         ),

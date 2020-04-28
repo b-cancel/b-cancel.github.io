@@ -2,7 +2,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-//import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/bodies/projects/slideShow.dart';
 import 'package:portfolio/main.dart';
@@ -187,7 +187,7 @@ class ProjectSection extends StatelessWidget {
                         return IconWebLink(
                           url: videoUrls[index], 
                           icon: IconLinkIcon(
-                            icon: Icons.video_library, // FontAwesomeIcons.video,
+                            icon: FontAwesomeIcons.video,
                             text: videoLabels[index],
                           ),
                         );
@@ -203,7 +203,7 @@ class ProjectSection extends StatelessWidget {
                         url: livePage,
                         label: "Live Page",
                         icon: IconLinkIcon(
-                          icon: Icons.web_asset, // FontAwesomeIcons.windowMaximize,
+                          icon: FontAwesomeIcons.windowMaximize
                         ),
                       ),
                     ),
@@ -213,8 +213,7 @@ class ProjectSection extends StatelessWidget {
                         url: googlePlayLink,
                         label: "Google Play",
                         icon: IconLinkIcon(
-                          //TODO: use google play icon
-                          icon: Icons.play_arrow, // FontAwesomeIcons.googlePlay,
+                          icon: FontAwesomeIcons.googlePlay,
                         ),
                       ),
                     ),
@@ -224,8 +223,7 @@ class ProjectSection extends StatelessWidget {
                         url: appStoreLink,
                         label: "App Store",
                         icon: IconLinkIcon(
-                          //TODO: use apple store icon
-                          icon: Icons.store, // FontAwesomeIcons.appStoreIos,
+                          icon: FontAwesomeIcons.appStoreIos,
                         ),
                       ),
                     ),
@@ -235,8 +233,7 @@ class ProjectSection extends StatelessWidget {
                         url: github,
                         label: "Repository",
                         icon: IconLinkIcon(
-                          //TODO
-                          icon: Icons.link, // FontAwesomeIcons.github,
+                          icon: FontAwesomeIcons.github,
                         ),
                       ),
                     ),
@@ -293,8 +290,7 @@ class GalleryHeader extends StatelessWidget {
                         right: 8,
                       ),
                       child: Icon(
-                        //TODO
-                        Icons.link, // FontAwesomeIcons.github,
+                        FontAwesomeIcons.github,
                       ),
                     ),
                   ),

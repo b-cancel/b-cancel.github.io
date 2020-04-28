@@ -1,7 +1,7 @@
 //flutter
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
-//import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 //plugin
 
@@ -21,7 +21,7 @@ class Reference {
   String letterUrl;
   Reference({
     this.name,
-    this.title, 
+    this.title,
     this.location,
     this.email,
     this.phone,
@@ -110,7 +110,7 @@ class ReferencesBody extends StatelessWidget {
                           children: <Widget>[
                             //give red border
                             Icon(
-                              Icons.insert_drive_file, //FontAwesomeIcons.solidFilePdf,
+                              FontAwesomeIcons.solidFilePdf,
                               color: Colors.red,
                               size: 36,
                             ),
@@ -128,7 +128,7 @@ class ReferencesBody extends StatelessWidget {
                               ),
                             ),
                             Icon(
-                              Icons.insert_drive_file,// FontAwesomeIcons.solidFilePdf,
+                              FontAwesomeIcons.solidFilePdf,
                               color: Colors.white,
                               size: 32,
                             ),
