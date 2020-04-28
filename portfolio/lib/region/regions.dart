@@ -1,6 +1,6 @@
 //section
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+//import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 //plugins
 
@@ -42,7 +42,7 @@ tellSystem(){
 
 List<Region> regions = [
   Region(
-    FontAwesomeIcons.userAlt,
+    Icons.portrait, // FontAwesomeIcons.userAlt,
     "About Me",
     Container(), //needs scroll controller so we set it elsewhere
     //these are updated by their respective layout builders
@@ -51,7 +51,8 @@ List<Region> regions = [
     initiallyOpened: true, 
   ),
   Region(
-    FontAwesomeIcons.tools,
+    //TODO
+    Icons.shopping_basket,// FontAwesomeIcons.tools,
     "Toolkit",
     ToolKitBody(),
     //these are updated by their respective layout builders
@@ -60,7 +61,8 @@ List<Region> regions = [
     //initiallyOpened: true,
   ),
   Region(
-    FontAwesomeIcons.suitcase, 
+    //TODO
+    Icons.content_paste,// FontAwesomeIcons.suitcase, 
     "Experience", 
     WorkExperienceBody(),
     //these are updated by their respective layout builders
@@ -69,7 +71,8 @@ List<Region> regions = [
     //initiallyOpened: true,
   ),
   Region(
-    FontAwesomeIcons.flask,
+    //TODO
+    Icons.ac_unit,// FontAwesomeIcons.flask,
     "Projects",
     ProjectsBody(),
     //these are updated by their respective layout builders
@@ -79,7 +82,8 @@ List<Region> regions = [
     addLeftPadding: false,
   ),
   Region(
-    Icons.thumb_up,
+    //TODO
+    Icons.check_box,// Icons.thumb_up,
     "References",
     ReferencesBody(), 
     //these are updated by their respective layout builders
@@ -88,7 +92,7 @@ List<Region> regions = [
     //initiallyOpened: true, //TODO: remove after debug
   ),
   Region(
-    FontAwesomeIcons.solidCommentAlt,
+    Icons.comment,// FontAwesomeIcons.solidCommentAlt,
     "Contact Me",
     ContactMeBody(),
     //these are updated by their respective layout builders
