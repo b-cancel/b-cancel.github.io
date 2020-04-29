@@ -228,7 +228,7 @@ class ProjectSection extends StatelessWidget {
                       ),
                     ),
                     Visibility(
-                      visible: github != null && imageUrls == null,
+                      visible: github != null && (imageUrls == null || imageUrls.length == 0),
                       child: IconWebLink(
                         url: github,
                         label: "Repository",
