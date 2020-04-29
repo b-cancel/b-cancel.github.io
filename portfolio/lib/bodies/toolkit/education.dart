@@ -213,19 +213,47 @@ class HighSchool extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Text("Edinburg, TX,"),
+                  Text(
+                    "Loc: ",
+                    style: GoogleFonts.robotoMono(
+                      color: MyApp.oldGrey,
+                    ),
+                  ),
+                  Text("Edinburg TX,"),
                 ],
-              ),
-              Text(
-                "High School Diploma,",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
               ),
               Wrap(
                 children: <Widget>[
-                  Text("Graduated May 2014, "),
-                  Text("with a 3.9 GPA,")
+                  Text(
+                    "Deg: ",
+                    style: GoogleFonts.robotoMono(
+                      color: MyApp.oldGrey,
+                    ),
+                  ),
+                  Text(
+                    "High School Diploma,",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+              Wrap(
+                children: <Widget>[
+                  Text(
+                    "Graduated: ",
+                    style: GoogleFonts.robotoMono(
+                      color: MyApp.oldGrey,
+                    ),
+                  ),
+                  Text("May 2014, "),
+                  Text(
+                    "GPA: ",
+                    style: GoogleFonts.robotoMono(
+                      color: MyApp.oldGrey,
+                    ),
+                  ),
+                  Text("3.9,")
                 ],
               ),
             ],
