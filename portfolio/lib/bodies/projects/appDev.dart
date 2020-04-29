@@ -48,6 +48,7 @@ class AppDevelopment extends StatelessWidget {
                     "https://media.giphy.com/media/j1gKlO4uAZM10dYXya/giphy.gif",
                     //search
                     "https://media.giphy.com/media/kfjRaDaE7xzVNJdGfr/giphy.gif",
+                    /*
                     //calibration
                     "https://media.giphy.com/media/dC4FWH4NDOq76CUz68/giphy.gif",
                     //error checking
@@ -56,6 +57,7 @@ class AppDevelopment extends StatelessWidget {
                     "https://media.giphy.com/media/Rgz7qmqwOImQxM8ygX/giphy.gif",
                     //learn section
                     "https://media.giphy.com/media/RLOvYGkKt6jvsIyovu/giphy.gif",
+                    */
                   ],
                 ),
               ],
@@ -92,10 +94,12 @@ class AppDevelopment extends StatelessWidget {
                     "https://media.giphy.com/media/S8lbi2cusC5gVC0xOS/giphy.gif",
                     //main list
                     "https://media.giphy.com/media/RKMMj20eRHONfImd0L/giphy.gif",
+                    /*
                     //sos settings
                     "https://media.giphy.com/media/S6Zdj4EiS99DlVZuDS/giphy.gif",
                     //add new
                     "https://media.giphy.com/media/d5qOvltp866jRzktDZ/giphy.gif",
+                    */
                   ],
                 ),
               ],
@@ -117,10 +121,10 @@ class AppDevelopment extends StatelessWidget {
                   imageUrls: [
                     //videos
                     "https://media.giphy.com/media/Uqk7fPBnsNydSn2GZW/giphy.gif",
-                    "https://media.giphy.com/media/W0QwfdozN3AFnw1sWn/giphy.gif",
+                    //"https://media.giphy.com/media/W0QwfdozN3AFnw1sWn/giphy.gif",
                     "https://media.giphy.com/media/LM9EpmeAiYlIpSAcgH/giphy.gif",
-                    "https://media.giphy.com/media/Xbh1CLWME0plFA8g2G/giphy.gif",
-                    "https://media.giphy.com/media/UT4byKMOmrYWk8dTmb/giphy.gif",
+                    //"https://media.giphy.com/media/Xbh1CLWME0plFA8g2G/giphy.gif",
+                    //"https://media.giphy.com/media/UT4byKMOmrYWk8dTmb/giphy.gif",
                     //jpgs
                     /*
                     "https://imgur.com/YWYmyOt.jpg",
@@ -140,8 +144,8 @@ class AppDevelopment extends StatelessWidget {
                       
                   initiallyOpened: false,
                   imageUrls: [
-                  "https://media.giphy.com/media/DQdmcrEwAFqneM6tiL/giphy.gif",
-                  "https://media.giphy.com/media/5qFCRiENukaLzB7Yoy/giphy.gif",
+                  //"https://media.giphy.com/media/DQdmcrEwAFqneM6tiL/giphy.gif",
+                  //"https://media.giphy.com/media/5qFCRiENukaLzB7Yoy/giphy.gif",
                   ],
                 ),
                 ProjectSection(
@@ -153,10 +157,10 @@ class AppDevelopment extends StatelessWidget {
                       "https://github.com/b-cancel/Flutter_MaterialSheetAndNavigationDrawer",
                   initiallyOpened: false,
                   imageUrls: [
-                    "https://media.giphy.com/media/35KhYdJ9CQAN6hzYbQ/giphy.gif",
-                    "https://media.giphy.com/media/dkXLQACALhF6puhk3I/giphy.gif",
-                    "https://media.giphy.com/media/dYng1K8blxvnsLhP81/giphy.gif",
-                    "https://media.giphy.com/media/9rsWxrJaYOhCQbRDXD/giphy.gif",
+                    //"https://media.giphy.com/media/35KhYdJ9CQAN6hzYbQ/giphy.gif",
+                    //"https://media.giphy.com/media/dkXLQACALhF6puhk3I/giphy.gif",
+                    //"https://media.giphy.com/media/dYng1K8blxvnsLhP81/giphy.gif",
+                    //"https://media.giphy.com/media/9rsWxrJaYOhCQbRDXD/giphy.gif",
                   ],
                 ),
               ],
@@ -175,10 +179,10 @@ class AppDevelopment extends StatelessWidget {
                   initiallyOpened: true,
                   imageUrls: [
                     "https://media.giphy.com/media/UsT0dPQlVrVrJ4BC1z/giphy.gif",
-                    "https://media.giphy.com/media/KezTdVWA3JIOS3fwX5/giphy.gif",
-                    "https://media.giphy.com/media/S8BPNPf8i1CCYgv3LQ/giphy.gif",
-                    "https://media.giphy.com/media/LSc6Y83JW98nX47nYe/giphy.gif",
-                    "https://media.giphy.com/media/jUKJlmNzhbLRhetFtW/giphy.gif",
+                    //"https://media.giphy.com/media/KezTdVWA3JIOS3fwX5/giphy.gif",
+                    //"https://media.giphy.com/media/S8BPNPf8i1CCYgv3LQ/giphy.gif",
+                    //"https://media.giphy.com/media/LSc6Y83JW98nX47nYe/giphy.gif",
+                    //"https://media.giphy.com/media/jUKJlmNzhbLRhetFtW/giphy.gif",
                   ],
                 ),
                 ProjectSection(
@@ -189,7 +193,7 @@ class AppDevelopment extends StatelessWidget {
                       "https://github.com/b-cancel/Flutter_CurrencyTextInputFormatter",
                   initiallyOpened: false,
                   imageUrls: [
-                    "https://media.giphy.com/media/kBNoowA21gf9gsg69j/giphy.gif",
+                    //"https://media.giphy.com/media/kBNoowA21gf9gsg69j/giphy.gif",
                   ],
                 ),
                 ProjectSection(
@@ -200,7 +204,7 @@ class AppDevelopment extends StatelessWidget {
                       "https://github.com/b-cancel/Flutter_Cute_Score_Keeper",
                   initiallyOpened: false,
                   imageUrls: [
-                    "https://media.giphy.com/media/j6prIja63xwUJmMLM5/giphy.gif",
+                    //"https://media.giphy.com/media/j6prIja63xwUJmMLM5/giphy.gif",
                   ],
                 ),
                 ProjectSection(
@@ -210,7 +214,7 @@ class AppDevelopment extends StatelessWidget {
                       "https://github.com/b-cancel/Flutter_AeroPress_Timer_Partial_Clone",
                   initiallyOpened: false,
                   imageUrls: [
-                    "https://media.giphy.com/media/H1RmERiJD4D3pL8wKG/giphy.gif",
+                    //"https://media.giphy.com/media/H1RmERiJD4D3pL8wKG/giphy.gif",
                   ],
                 ),
               ],

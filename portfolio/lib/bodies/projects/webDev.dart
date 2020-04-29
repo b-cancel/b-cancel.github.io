@@ -43,19 +43,25 @@ class WebDevelopment extends StatelessWidget {
                   github: "https://github.com/b-cancel/Attend_Public",
                   initiallyOpened: true,
                   imageUrls: [
+                    /*
                     "https://imgur.com/RC8XpUP.jpg",
                     "https://imgur.com/RYPOlzG.jpg",
+                    */
                     "https://imgur.com/ptcQTII.jpg",
+                    /*
                     "https://imgur.com/0qlOAWd.jpg",
                     "https://imgur.com/bGpIQSd.jpg",
                     "https://imgur.com/P36SrPo.jpg",
-                    "https://imgur.com/blI3yI0.jpg",
+                    */
+                    "https://imgur.com/blI3yI0.jpg",//
                     "https://imgur.com/eAP5w5P.jpg",
+                    /*
                     "https://imgur.com/vvpwpdx.jpg",
                     "https://imgur.com/3n0sXee.jpg",
                     "https://imgur.com/S05j9z2.jpg",
                     "https://imgur.com/IlBWrEr.jpg",
                     "https://imgur.com/JEHgH2R.jpg",
+                    */
                   ],
                 ),
                 ProjectSection(
@@ -91,10 +97,12 @@ class WebDevelopment extends StatelessWidget {
                   initiallyOpened: true,
                   imageUrls: [
                     "https://imgur.com/s6r0lE5.jpg",
+                    /*
                     "https://imgur.com/lxIozzq.jpg",
                     "https://imgur.com/O3xUiho.jpg",
+                    */
                     "https://imgur.com/RLhARvI.jpg",
-                    "https://imgur.com/mtDvR8K.jpg",
+                    //"https://imgur.com/mtDvR8K.jpg",
                   ],
                 ),
                 ProjectSection(

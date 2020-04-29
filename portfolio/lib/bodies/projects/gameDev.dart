@@ -70,8 +70,8 @@ class GameDevelopment extends StatelessWidget {
                   ],
                   imageUrls: [
                     "https://imgur.com/TTk5zcH.jpg",
-                    "https://imgur.com/NCIp2z1.jpg",
-                    "https://imgur.com/Xus8ekS.jpg",
+                    //"https://imgur.com/NCIp2z1.jpg",
+                    //"https://imgur.com/Xus8ekS.jpg",
                   ],
                 ),
                 ProjectSection(
@@ -82,9 +82,9 @@ class GameDevelopment extends StatelessWidget {
                   initiallyOpened: true,
                   imageUrls: [
                     "https://imgur.com/LERHKNn.jpg",
-                    "https://imgur.com/NJTHUYZ.jpg",
-                    "https://imgur.com/VqnUNif.jpg",
-                    "https://imgur.com/7lZaFI8.jpg",
+                    //"https://imgur.com/NJTHUYZ.jpg",
+                    //"https://imgur.com/VqnUNif.jpg",
+                    //"https://imgur.com/7lZaFI8.jpg",
                   ],
                 ),
               ],
