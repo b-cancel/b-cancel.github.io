@@ -33,6 +33,7 @@ dependencies:
   #image stuff
   gesture_zoom_box: ^0.0.2
   #photo_view: ^0.9.2
+  carousel_slider: ^2.1.0
 
   # external
   flutter_sticky_header: "^0.4.2"
