@@ -190,7 +190,9 @@ class PhotoGallery extends StatelessWidget {
             //add addAutomaticKeepAlives should wrap this in an keep alive
             //like the UnDyingListItem
             return DyingListItem(
-              imageUrl: imageUrls[index],
+              index: index,
+              imageUrls: imageUrls,
+              controller: scrollController,
             );
           },
           //TODO: set if needed

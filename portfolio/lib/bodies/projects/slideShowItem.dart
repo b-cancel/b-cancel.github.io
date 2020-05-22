@@ -6,16 +6,21 @@ import 'package:portfolio/utils/invisibleInkWell.dart';
 class UndyingListItem extends StatefulWidget {
   const UndyingListItem({
     Key key,
-    @required this.imageUrl,
+    @required this.index,
+    @required this.imageUrls,
+    @required this.controller,
   }) : super(key: key);
 
-  final String imageUrl;
+  final int index;
+  final List<String> imageUrls;
+  final ScrollController controller;
 
   @override
   _UndyingListItemState createState() => _UndyingListItemState();
 }
 
-class _UndyingListItemState extends State<UndyingListItem> with AutomaticKeepAliveClientMixin {
+class _UndyingListItemState extends State<UndyingListItem>
+    with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     //fixing must call super problem
@@ -24,7 +29,9 @@ class _UndyingListItemState extends State<UndyingListItem> with AutomaticKeepAli
 
     //actual build
     return DyingListItem(
-      imageUrl: widget.imageUrl,
+      index: widget.index,
+      imageUrls: widget.imageUrls,
+      controller: widget.controller,
     );
   }
 
@@ -35,10 +42,14 @@ class _UndyingListItemState extends State<UndyingListItem> with AutomaticKeepAli
 class DyingListItem extends StatelessWidget {
   const DyingListItem({
     Key key,
-    @required this.imageUrl,
+    @required this.index,
+    @required this.imageUrls,
+    @required this.controller,
   }) : super(key: key);
 
-  final String imageUrl;
+  final int index;
+  final List<String> imageUrls;
+  final ScrollController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +71,7 @@ class DyingListItem extends StatelessWidget {
           ),
         ),
         Image.network(
-          imageUrl,
+          imageUrls[index],
           fit: BoxFit.contain,
           /*
           filterQuality: FilterQuality.low,
@@ -73,7 +84,45 @@ class DyingListItem extends StatelessWidget {
             color: Colors.transparent,
             child: InkWell(
               onTap: () {
-                showDialog(
+                showGeneralDialog(
+                  context: context,
+                  barrierLabel: "Image Swiper",
+                  barrierColor: Colors.black12.withOpacity(0.6),
+                  barrierDismissible: true,
+                  /*
+                  Animation<double>, Animation<double>, Widget) transitionBuilder, 
+                  bool useRootNavigator, 
+                  RouteSettings routeSettings
+                  */
+                  transitionDuration: kTabScrollDuration,
+                  pageBuilder: (
+                    BuildContext context,
+                    Animation<double> primaryAnimation,
+                    Animation<double> secondaryAnimation,
+                  ) {
+                    // your widget implementation
+                    return FadeTransition(
+                      opacity: primaryAnimation,
+                      child: ScaleTransition(
+                        scale: primaryAnimation,
+                        child: Material(
+                          color: Colors.transparent,
+                          child: InkWell(
+                            onTap: (){
+                              Navigator.of(context).pop();
+                            },
+                            child: SizedBox.expand(
+                              child: Center(
+                                child: Text("in center"),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                );
+                /*showDialog(
                   context: context,
                   barrierDismissible: true,
                   builder: (BuildContext context) {
@@ -102,7 +151,7 @@ class DyingListItem extends StatelessWidget {
                       ),
                     );
                   },
-                );
+                );*/
               },
               child: Container(),
             ),
