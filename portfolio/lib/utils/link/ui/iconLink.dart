@@ -109,15 +109,18 @@ class IconWebLink extends StatelessWidget {
     @required this.url,
     @required this.icon,
     this.label,
+    this.addOvalClipper: true,
   });
 
   final String url;
   final Widget icon;
   final String label;
+  final bool addOvalClipper;
 
   @override
   Widget build(BuildContext context) {
     return IconLink(
+      addOvalClipper: addOvalClipper,
       onTap: () {
         openWithHtml(
           context,
@@ -168,35 +171,43 @@ class IconLink extends StatelessWidget {
     @required this.onTap,
     this.onShowOptions,
     @required this.icon,
+    this.addOvalClipper: true,
   }) : super(key: key);
 
   final Function onTap;
   final Function onShowOptions;
   final Widget icon;
+  final bool addOvalClipper;
 
   @override
   Widget build(BuildContext context) {
-    return OpaqueOnHover(
-      child: ClipOval(
-        child: Material(
-          color: Colors.transparent,
-          child: InkWell(
-            onTap: () {
-              onTap();
-            },
-            onHover: (h) {
-              onShowOptions();
-            },
-            onDoubleTap: () {
-              onShowOptions();
-            },
-            onLongPress: () {
-              onShowOptions();
-            },
-            child: icon,
-          ),
-        ),
+    Widget inkWell = Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: () {
+          onTap();
+        },
+        onHover: (h) {
+          onShowOptions();
+        },
+        onDoubleTap: () {
+          onShowOptions();
+        },
+        onLongPress: () {
+          onShowOptions();
+        },
+        child: icon,
       ),
+    );
+
+    if (addOvalClipper) {
+      inkWell = ClipOval(
+        child: inkWell,
+      );
+    }
+
+    return OpaqueOnHover(
+      child: inkWell,
     );
   }
 }

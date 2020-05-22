@@ -29,7 +29,7 @@ class AppDevelopment extends StatelessWidget {
               crossAxisAlignment: WrapCrossAlignment.start,
               children: <Widget>[
                 ProjectSection(
-                  label: "Swol",
+                  label: "Swol", 
                   description:
                       "Swol helps you use One Rep Max Equations to reach your Weightlifting Goals Faster."
                               "Know exactly how much weight you should be lifting given your training type and your previous set," +
@@ -48,7 +48,9 @@ class AppDevelopment extends StatelessWidget {
                     "https://media.giphy.com/media/j1gKlO4uAZM10dYXya/giphy.gif",
                     //search
                     "https://media.giphy.com/media/kfjRaDaE7xzVNJdGfr/giphy.gif",
-                    /*
+
+                    //-----
+
                     //calibration
                     "https://media.giphy.com/media/dC4FWH4NDOq76CUz68/giphy.gif",
                     //error checking
@@ -57,7 +59,6 @@ class AppDevelopment extends StatelessWidget {
                     "https://media.giphy.com/media/Rgz7qmqwOImQxM8ygX/giphy.gif",
                     //learn section
                     "https://media.giphy.com/media/RLOvYGkKt6jvsIyovu/giphy.gif",
-                    */
                   ],
                 ),
               ],
@@ -69,7 +70,7 @@ class AppDevelopment extends StatelessWidget {
             child: Wrap(
               crossAxisAlignment: WrapCrossAlignment.start,
               children: <Widget>[
-                ProjectSection(
+                ProjectSection( 
                   label: "Half Life",
                   description: "Keep track of the active dosage of medications" +
                       " given their half life, so you can adjust your dosage" +
@@ -81,6 +82,23 @@ class AppDevelopment extends StatelessWidget {
                     "https://media.giphy.com/media/PiQF5YD82meF4uitmz/giphy.gif",
                     //add dose
                     "https://media.giphy.com/media/Rk2zzd9k9l6MBBLTBY/giphy.gif",
+                  ],
+                ),
+                ProjectSection(
+                  label: "Interview Project",
+                  description: "Allow to Lawn Care Companies to create a Job Order or Proposal to send to their client."
+                  + "\nClient Name is on Top and tha map lets you pick between all of their addresses.",
+                  github: "https://github.com/b-cancel/JobProposalPrototype",
+                  initiallyOpened: true,
+                  imageUrls: [
+                    //Address Picker
+                    "https://media.giphy.com/media/dyvj1gBn4HYBfVDrpr/giphy.gif",
+                    //Due Date Picker
+                    "https://media.giphy.com/media/VJYrbNGSMxUZ38RuU9/giphy.gif",
+                    //Line Item Manipulation
+                    "https://media.giphy.com/media/UvK4kZ48BSmlVhiFQp/giphy.gif",
+                    //Image Manipulation
+                    "https://media.giphy.com/media/fsaqYZsD0P0x600rE1/giphy.gif",
                   ],
                 ),
                 ProjectSection(

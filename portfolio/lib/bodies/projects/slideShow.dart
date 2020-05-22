@@ -4,27 +4,25 @@ import 'dart:math';
 //flutter
 import 'package:flutter/material.dart';
 
-//plugin
-//import 'package:photo_view/photo_view.dart';
-import 'package:gesture_zoom_box/gesture_zoom_box.dart';
-
 //internal
 import 'package:portfolio/bodies/projects/projects.dart';
+import 'package:portfolio/bodies/projects/slideShowItem.dart';
 import 'package:portfolio/main.dart';
-import 'package:portfolio/utils/invisibleInkWell.dart';
 
 //widget
 class Slideshow extends StatelessWidget {
   const Slideshow({
     Key key,
     @required this.galleryBorder,
+    @required this.isGithub,
     @required this.imageUrls,
-    @required this.github,
+    @required this.topLink,
   }) : super(key: key);
 
   final BorderSide galleryBorder;
+  final bool isGithub;
   final List<String> imageUrls;
-  final String github;
+  final String topLink;
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +60,6 @@ class Slideshow extends StatelessWidget {
           ),
         ),*/
         Container(
-          height: galleryHeight,
           width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
             border: Border(
@@ -75,18 +72,23 @@ class Slideshow extends StatelessWidget {
           child: Stack(
             children: <Widget>[
               Column(
-                mainAxisSize: MainAxisSize.max,
-                //must not stretch
+                mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  GalleryHeader(
-                    galleryBorder: galleryBorder,
-                    github: github,
+                  Visibility(
+                    visible: topLink != null,
+                    child: GalleryHeader(
+                      galleryBorder: galleryBorder,
+                      isGithub: isGithub,
+                      topLink: topLink ?? "",
+                    ),
                   ),
                   //MUST be wrapped in an expanded
                   //to give the list view a proper height
-                  Expanded(
+                  Container(
+                    height: galleryHeight,
                     child: PhotoGallery(
+                      galleryHeight: galleryHeight,
                       imageUrls: imageUrls,
                       rnd: rnd,
                     ),
@@ -117,110 +119,82 @@ class PhotoGallery extends StatelessWidget {
     Key key,
     @required this.imageUrls,
     @required this.rnd,
+    @required this.galleryHeight,
   }) : super(key: key);
 
   final List<String> imageUrls;
   final Random rnd;
+  final double galleryHeight;
 
   //scroll controller used throughout
   final ScrollController scrollController = new ScrollController();
 
   @override
   Widget build(BuildContext context) {
+    Color oldAccentColor = Theme.of(context).accentColor;
+
+    //build
     return Stack(
       children: <Widget>[
-        ListView(
+        ListView.separated(
+          //used to show buttons
           controller: scrollController,
-          //shrinkWrap: true,
+          //you see the best of each project even when you resume is viewable
           scrollDirection: Axis.horizontal,
-          padding: EdgeInsets.all(0),
-          children: List.generate(
-            imageUrls.length,
-            (index) {
-              //instead of the max of ...47 to avoid any overflow issues
-              /*
-              int random = (rnd).nextInt(2147483646);
-              String imageURL =
-                  "https://source.unsplash.com/random/" + random.toString();
-                */
-              String imageURL = imageUrls[index];
-              return Padding(
-                padding: EdgeInsets.only(
-                  left: index == 0 ? 0 : 12.0,
-                ),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    vertical: 8.0,
-                  ),
-                  child: Stack(
-                    children: <Widget>[
-                      Center(
-                        child: Padding(
-                          padding: EdgeInsets.all(16.0),
-                          child: Theme(
-                            data: Theme.of(context).copyWith(
-                              accentColor: MyApp.highlightGreen,
-                            ),
-                            child: CircularProgressIndicator(
-                              strokeWidth: 4,
-                              backgroundColor: Colors.black,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Image.network(
-                        imageURL,
-                        fit: BoxFit.contain,
-                      ),
-                      Positioned.fill(
-                        child: Material(
-                          color: Colors.transparent,
-                          child: InkWell(
-                            onTap: () {
-                              showDialog(
-                                context: context,
-                                barrierDismissible: true,
-                                builder: (BuildContext context) {
-                                  return Dialog(
-                                    backgroundColor: Colors.transparent,
-                                    insetPadding: EdgeInsets.all(0),
-                                    child: Material(
-                                      color: Colors.transparent,
-                                      child: InvisibleInkWell(
-                                        onTap: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: Container(
-                                          height: MediaQuery.of(context)
-                                              .size
-                                              .height,
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          child: FittedBox(
-                                            fit: BoxFit.contain,
-                                            child: Image.network(
-                                              imageURL,
-                                              fit: BoxFit.contain,
-                                              gaplessPlayback: true,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                },
-                              );
-                            },
-                            child: Container(),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              );
-            },
+          //most important items on the left
+          reverse: false,
+          //the mobile looking scrim shouldn't viewable
+          //it should work like a website
+          //different scroll physics to choose from
+          //-----*-----*-----*-----*-----
+          //has visible scrim
+          //ClampingScrollPhysics() ANDROID
+          //bounce physics like IOS
+          //BouncingScrollPhysics() IOS
+          //obvi not what we want
+          //NeverScrollableScrollPhysics()
+          //basically the same as above
+          //FixedExtentScrollPhysics()
+          //same as android
+          //PageScrollPhysics()
+          physics: BouncingScrollPhysics(),
+          //When this is true, the scroll view is scrollable
+          //even if it does not have sufficient content to actually scroll
+          primary: false,
+          //shrink wrapping is more expensive and provides no benefit in this use case
+          shrinkWrap: false,
+          //wrap values in keep alives
+          addAutomaticKeepAlives: true,
+          //If the children are easy to repaint 
+          //it might be more efficient to not add a repaint boundary 
+          //and simply repaint the children during scrolling
+          //BUT our children are most gifs and not simple
+          addRepaintBoundaries: true,
+          //Typically, children in a scrolling container 
+          //must be annotated with a semantic index in order to generate 
+          //the correct accessibility announcements
+          addSemanticIndexes: true,
+          //automatic dismisskeyboard on drag
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+          //only on the outside
+          padding: EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 12,
           ),
+          //create all image links in one hit
+          itemCount: imageUrls.length,
+          separatorBuilder: (BuildContext context, int index) {
+            return Container(width: 8);
+          },
+          itemBuilder: (context, index) {
+            //add addAutomaticKeepAlives should wrap this in an keep alive
+            //like the UnDyingListItem
+            return DyingListItem(
+              imageUrl: imageUrls[index],
+            );
+          },
+          //TODO: set if needed
+          //double cacheExtent,
         ),
         Positioned(
           left: 0,

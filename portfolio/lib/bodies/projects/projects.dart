@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:portfolio/bodies/projects/graphicDesign.dart';
 import 'package:portfolio/bodies/projects/slideShow.dart';
 import 'package:portfolio/main.dart';
 
@@ -29,6 +30,7 @@ class ProjectsBody extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          /*
           Padding(
             padding: EdgeInsets.only(
               left: 24,
@@ -45,9 +47,11 @@ class ProjectsBody extends StatelessWidget {
               ),
             ),
           ),
+          */
           AppDevelopment(),
           GameDevelopment(),
           WebDevelopment(),
+          GraphicDesign(),
         ],
       ),
     );
@@ -109,7 +113,7 @@ class ProjectSection extends StatelessWidget {
   ProjectSection({
     @required this.label,
     @required this.description,
-    @required this.github,
+    this.github,
     this.livePage,
     this.googlePlayLink,
     this.appStoreLink,
@@ -153,7 +157,8 @@ class ProjectSection extends StatelessWidget {
             visible: imageUrls != null && imageUrls.length > 0,
             child: Slideshow(
               galleryBorder: galleryBorder,
-              github: github,
+              topLink: github ?? livePage,
+              isGithub: github != null,
               imageUrls: imageUrls,
             ),
           ),
@@ -198,12 +203,12 @@ class ProjectSection extends StatelessWidget {
                 Wrap(
                   children: <Widget>[
                     Visibility(
-                      visible: livePage != null,
+                      visible: livePage != null && github != null,
                       child: IconWebLink(
                         url: livePage,
                         label: "Live Page",
                         icon: IconLinkIcon(
-                          icon: FontAwesomeIcons.windowMaximize
+                          icon: FontAwesomeIcons.windowMaximize,
                         ),
                       ),
                     ),
@@ -252,12 +257,14 @@ class GalleryHeader extends StatelessWidget {
   const GalleryHeader({
     Key key,
     @required this.galleryBorder,
-    @required this.github,
+    @required this.isGithub,
+    @required this.topLink,
     this.invisible: false,
   }) : super(key: key);
 
   final BorderSide galleryBorder;
-  final String github;
+  final bool isGithub;
+  final String topLink;
   final bool invisible;
 
   @override
@@ -274,52 +281,56 @@ class GalleryHeader extends StatelessWidget {
       ),
       child: Stack(
         children: <Widget>[
-          Padding(
-            padding: EdgeInsets.only(
-              left: 24.0 + 16 + 16 + 16,
-            ),
-            child: ClipRect(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  IconWebLink(
-                    url: github,
-                    icon: Padding(
-                      padding: EdgeInsets.only(
-                        right: 8,
-                      ),
-                      child: Icon(
-                        FontAwesomeIcons.github,
+          Visibility(
+            visible: topLink != null,
+            child: Padding(
+              padding: EdgeInsets.only(
+                left: 24.0 + 16 + 16 + 16,
+              ),
+              child: ClipRect(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    IconWebLink(
+                      url: topLink,
+                      addOvalClipper: false,
+                      icon: Padding(
+                        padding: EdgeInsets.only(
+                          right: 8,
+                        ),
+                        child: Icon(
+                          isGithub ? FontAwesomeIcons.github : FontAwesomeIcons.windowMaximize,
+                        ),
                       ),
                     ),
-                  ),
-                  TextWebLink(
-                    url: github,
-                    text: Text(
-                      "See More",
-                      style: GoogleFonts.robotoMono(
-                        color: Colors.white,
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1,
-                    ),
-                  ),
-                  Text(" - "),
-                  Flexible(
-                    child: TextWebLink(
-                      url: github,
+                    TextWebLink(
+                      url: topLink,
                       text: Text(
-                        github,
+                        "See More",
                         style: GoogleFonts.robotoMono(
-                          color: MyApp.oldGrey,
+                          color: Colors.white,
                         ),
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
                       ),
                     ),
-                  ),
-                ],
+                    Text(" - "),
+                    Flexible(
+                      child: TextWebLink(
+                        url: topLink,
+                        text: Text(
+                          topLink,
+                          style: GoogleFonts.robotoMono(
+                            color: MyApp.oldGrey,
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
