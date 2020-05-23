@@ -4,6 +4,7 @@ import 'package:portfolio/main.dart';
 
 //plugin
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:image_size_getter/image_size_getter.dart';
 
 //widget
 class UndyingListItem extends StatefulWidget {
@@ -140,6 +141,11 @@ class DyingListItem extends StatelessWidget {
   }
 }
 
+//Highest Rated
+//https://pub.dev/packages/carousel_slider
+//Alternatives
+//https://pub.dev/packages/flutter_swiper
+//https://pub.dev/packages/flutter_multi_carousel
 class MyImageSlider extends StatefulWidget {
   const MyImageSlider({
     @required this.maxImageWidth,

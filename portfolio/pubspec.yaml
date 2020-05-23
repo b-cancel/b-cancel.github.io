@@ -34,6 +34,10 @@ dependencies:
   gesture_zoom_box: ^0.0.2
   #photo_view: ^0.9.2
   carousel_slider: ^2.1.0
+  #https://pub.flutter-io.cn/packages/image_size_getter
+  #https://pub.flutter-io.cn/packages/optimized_cached_image
+  #https://pub.flutter-io.cn/packages/progressive_image
+  #https://pub.flutter-io.cn/packages/flutter_advanced_networkimage
 
   # external
   flutter_sticky_header: "^0.4.2"
