@@ -4,7 +4,7 @@ import 'package:portfolio/main.dart';
 
 //plugin
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:image_size_getter/image_size_getter.dart';
+//import 'package:image_size_getter/image_size_getter.dart';
 
 //widget
 class UndyingListItem extends StatefulWidget {
