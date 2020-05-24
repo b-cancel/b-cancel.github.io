@@ -35,6 +35,8 @@ dependencies:
   #used to reload the page
   pull_to_refresh: ^1.5.8
 
+  #TODO we can't stop materials icons from loading 
+  #     but we can exclude them from our custom icon pack
   #TODO compress into my own custom icon pack on deployment 
   #extra icon packs (to be used for development only)
   #flutter_brand_icons: ^1.1.0
