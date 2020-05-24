@@ -37,8 +37,8 @@ dependencies:
 
   #TODO compress into my own custom icon pack on deployment 
   #extra icon packs (to be used for development only)
-  flutter_brand_icons: ^1.1.0
-  font_awesome_flutter: ^8.8.1
+  #flutter_brand_icons: ^1.1.0
+  #font_awesome_flutter: ^8.8.1
   
   #Image Plugins
   carousel_slider: ^2.1.0

@@ -1,11 +1,17 @@
+//flutter
 import 'package:flutter/material.dart';
-import 'package:portfolio/bodies/toolkit/icons.dart';
+
+//plugin
 import 'package:portfolio/icons/portfolio_icons_icons.dart';
+
+//internal
+import 'package:portfolio/bodies/toolkit/icons.dart';
 import 'package:portfolio/section/section.dart';
 import 'package:portfolio/section/uncollapsible.dart';
 import 'package:portfolio/utils/link/ui/hover.dart';
 import 'package:portfolio/utils/link/ui/iconLink.dart';
 
+//other
 String highXP = "experienced";
 String normalXP = "competent";
 String lowXP = "familiar";

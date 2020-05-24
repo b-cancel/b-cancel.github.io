@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 
 //plugins
+import 'package:portfolio/icons/portfolio_icons_icons.dart';
 
 //internal
 import 'package:portfolio/bodies/toolkit/toolkit.dart';
@@ -9,7 +10,6 @@ import 'package:portfolio/bodies/contactMe.dart';
 import 'package:portfolio/bodies/endorsements.dart';
 import 'package:portfolio/bodies/projects/projects.dart';
 import 'package:portfolio/bodies/work.dart';
-import 'package:portfolio/icons/portfolio_icons_icons.dart';
 
 //struct
 class Region{

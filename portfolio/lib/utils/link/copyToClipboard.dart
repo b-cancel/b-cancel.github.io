@@ -1,13 +1,15 @@
+//flutter
+import 'package:flutter/material.dart';
+
 //plugins
 import 'package:clippy/browser.dart' as clippy;
-import 'package:flutter/material.dart';
 import 'package:flutter_clipboard_manager/flutter_clipboard_manager.dart';
 import 'package:clipboard_manager/clipboard_manager.dart';
-import 'package:portfolio/icons/portfolio_icons_icons.dart';
-import 'package:portfolio/utils/mySnackBar.dart';
 
 //internal
 import 'package:portfolio/utils/platformChecker.dart';
+import 'package:portfolio/icons/portfolio_icons_icons.dart';
+import 'package:portfolio/utils/mySnackBar.dart';
 
 //enum handling
 enum IntentType {Open, Call, Text, Email, Download} //NOT Copy

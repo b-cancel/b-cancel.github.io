@@ -1,7 +1,11 @@
+//flutter
 import 'package:flutter/material.dart';
+
+//internal
 import 'package:portfolio/bodies/toolkit/tools.dart';
 import 'package:portfolio/icons/portfolio_icons_icons.dart';
 
+//other
 class Tool {
   Color color;
   IconData icon;

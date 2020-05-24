@@ -1,21 +1,24 @@
 //flutter
 import 'package:flutter/material.dart';
-import 'package:portfolio/bodies/projects/graphicDesign.dart';
-import 'package:portfolio/bodies/projects/slideShow.dart';
-import 'package:portfolio/icons/portfolio_icons_icons.dart';
-import 'package:portfolio/main.dart';
 
-//internal
+//internal: section
 import 'package:portfolio/section/uncollapsible.dart';
 import 'package:portfolio/section/section.dart';
 
-//internal: subsection
+//internal: bodies
 import 'package:portfolio/bodies/projects/appDev.dart';
 import 'package:portfolio/bodies/projects/gameDev.dart';
 import 'package:portfolio/bodies/projects/webDev.dart';
+import 'package:portfolio/bodies/projects/graphicDesign.dart';
+import 'package:portfolio/bodies/projects/slideShow.dart';
+
+//internal other
 import 'package:portfolio/utils/link/ui/iconLink.dart';
 import 'package:portfolio/utils/link/ui/textLink.dart';
+import 'package:portfolio/icons/portfolio_icons_icons.dart';
+import 'package:portfolio/main.dart';
 
+//widget
 class ProjectsBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

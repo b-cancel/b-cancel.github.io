@@ -1,12 +1,10 @@
 //flutter
-import 'package:portfolio/icons/portfolio_icons_icons.dart';
-import 'package:universal_html/html.dart';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 //plugin
+import 'package:portfolio/icons/portfolio_icons_icons.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:universal_html/html.dart';
 
 //internal: sections
 import 'package:portfolio/region/sliverRegion.dart';

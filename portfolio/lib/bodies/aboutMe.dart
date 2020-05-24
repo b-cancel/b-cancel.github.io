@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 
 //plugin
 import 'package:matrix4_transform/matrix4_transform.dart';
-import 'package:portfolio/icons/portfolio_icons_icons.dart';
-import 'package:portfolio/main.dart';
-import 'package:portfolio/menu.dart';
-import 'package:portfolio/region/regions.dart';
-import 'package:portfolio/utils/link/ui/hover.dart';
 
 //internal
+import 'package:portfolio/icons/portfolio_icons_icons.dart';
+import 'package:portfolio/utils/link/ui/hover.dart';
 import 'package:portfolio/utils/wrappedText.dart';
+import 'package:portfolio/region/regions.dart';
+import 'package:portfolio/main.dart';
+import 'package:portfolio/menu.dart';
 
 //widget
 class AboutMeBody extends StatelessWidget {

@@ -1,7 +1,11 @@
+//flutter
 import 'package:flutter/material.dart';
+
+//internal
 import 'package:portfolio/icons/portfolio_icons_icons.dart';
 import 'package:portfolio/main.dart';
 
+//function
 showSnackBar(BuildContext context, {
   String text, 
   IconData icon,

@@ -1,15 +1,15 @@
 //flutter
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 //plugins
-import 'package:bot_toast/bot_toast.dart';
 import 'package:portfolio/icons/portfolio_icons_icons.dart';
+import 'package:bot_toast/bot_toast.dart';
 
 //internal
 import 'package:portfolio/utils/wrappedText.dart';
 import 'package:portfolio/home.dart';
 
+//other
 List<IconData> iconsToUseLater = [
   //company and school
   PortfolioIcons.building_filled, //company name

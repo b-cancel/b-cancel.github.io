@@ -1,8 +1,8 @@
 //flutter
 import 'package:flutter/material.dart';
-import 'package:portfolio/icons/portfolio_icons_icons.dart';
 
 //internal
+import 'package:portfolio/icons/portfolio_icons_icons.dart';
 import 'package:portfolio/utils/link/ui/hover.dart';
 import 'package:portfolio/region/regions.dart';
 import 'package:portfolio/main.dart';
