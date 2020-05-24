@@ -1,6 +1,5 @@
 //section
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 //plugins
 
@@ -10,6 +9,7 @@ import 'package:portfolio/bodies/contactMe.dart';
 import 'package:portfolio/bodies/endorsements.dart';
 import 'package:portfolio/bodies/projects/projects.dart';
 import 'package:portfolio/bodies/work.dart';
+import 'package:portfolio/icons/portfolio_icons_icons.dart';
 
 //struct
 class Region{
@@ -42,7 +42,7 @@ tellSystem(){
 
 List<Region> regions = [
   Region(
-    FontAwesomeIcons.userAlt,
+    PortfolioIcons.user,
     "About Me",
     Container(), //needs scroll controller so we set it elsewhere
     //these are updated by their respective layout builders
@@ -51,7 +51,7 @@ List<Region> regions = [
     initiallyOpened: true, 
   ),
   Region(
-    FontAwesomeIcons.tools,
+    PortfolioIcons.tools,
     "Toolkit",
     ToolKitBody(),
     //these are updated by their respective layout builders
@@ -60,7 +60,7 @@ List<Region> regions = [
     //initiallyOpened: true,
   ),
   Region(
-    FontAwesomeIcons.suitcase, 
+    PortfolioIcons.suitcase, 
     "Experience", 
     WorkExperienceBody(),
     //these are updated by their respective layout builders
@@ -69,7 +69,7 @@ List<Region> regions = [
     //initiallyOpened: true,
   ),
   Region(
-    FontAwesomeIcons.flask,
+    PortfolioIcons.flask,
     "Projects",
     ProjectsBody(),
     //these are updated by their respective layout builders
@@ -79,7 +79,7 @@ List<Region> regions = [
     addLeftPadding: false,
   ),
   Region(
-    Icons.thumb_up,
+    PortfolioIcons.thumbs_up,
     "References",
     ReferencesBody(), 
     //these are updated by their respective layout builders
@@ -88,7 +88,7 @@ List<Region> regions = [
     //initiallyOpened: true, //TODO: remove after debug
   ),
   Region(
-    FontAwesomeIcons.solidCommentAlt,
+    PortfolioIcons.comment_alt,
     "Contact Me",
     ContactMeBody(),
     //these are updated by their respective layout builders

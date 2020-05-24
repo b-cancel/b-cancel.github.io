@@ -1,6 +1,6 @@
 //fluter
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:portfolio/icons/portfolio_icons_icons.dart';
 
 //plugins
 import 'package:portfolio/main.dart';
@@ -48,14 +48,14 @@ class QuickLinks extends StatelessWidget {
       children: <Widget>[
         IconPhoneLink(
           icon: IconLinkIcon(
-            icon: Icons.phone,
+            icon: PortfolioIcons.phone,
           ),
           url: number,
           label: number,
         ),
         IconEmailLink(
           icon: IconLinkIcon(
-            icon: Icons.email,
+            icon: PortfolioIcons.email,
           ),
           url: email, 
           label: email,
@@ -63,21 +63,21 @@ class QuickLinks extends StatelessWidget {
         IconWebLink(
           url: github,
           icon: IconLinkIcon(
-            icon: FontAwesomeIcons.github,
+            icon: PortfolioIcons.github,
           ),
           label: "Github",
         ),
         IconWebLink(
           url: resume,
           icon: IconLinkIcon(
-            icon: FontAwesomeIcons.solidFileAlt,
+            icon: PortfolioIcons.file_alt,
           ),
           label: "Resume",
         ),
         IconWebLink(
           url: hackerRank,
           icon: IconLinkIcon(
-            icon: FontAwesomeIcons.hackerrank,
+            icon: PortfolioIcons.hackerrank,
           ),
           label: "Hacker Rank",
         ),
@@ -85,7 +85,7 @@ class QuickLinks extends StatelessWidget {
           url: linkedIn,
           icon: 
           IconLinkIcon(
-            icon: FontAwesomeIcons.linkedin,
+            icon: PortfolioIcons.linkedin,
           ),
           label: "Linked In",
         ),
@@ -173,7 +173,7 @@ class QRCode extends StatelessWidget {
                     showSnackBar(
                       context,
                       text: "Contact Card Downloaded",
-                      icon: Icons.check,
+                      icon: PortfolioIcons.check,
                     );
                   }
                   else{

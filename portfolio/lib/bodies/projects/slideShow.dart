@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 //internal
 import 'package:portfolio/bodies/projects/projects.dart';
 import 'package:portfolio/bodies/projects/slideShowItem.dart';
+import 'package:portfolio/icons/portfolio_icons_icons.dart';
 import 'package:portfolio/main.dart';
 
 //widget
@@ -317,7 +318,7 @@ class _PageScrollButtonState extends State<PageScrollButton> {
                 );
               },
               icon: Icon(
-                widget.isLeft ? Icons.arrow_left : Icons.arrow_right,
+                widget.isLeft ? PortfolioIcons.left_dir : PortfolioIcons.right_dir,
                 color: MyApp.highlightGreen,
               ),
             ),

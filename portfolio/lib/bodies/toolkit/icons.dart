@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_brand_icons/flutter_brand_icons.dart';
 import 'package:portfolio/bodies/toolkit/tools.dart';
-import 'package:portfolio/icons/extra_brand_icons_icons.dart';
+import 'package:portfolio/icons/portfolio_icons_icons.dart';
 
 class Tool {
   Color color;
@@ -32,12 +31,12 @@ Map<String, List<Tool>> experienceToTools = {
   highXP : [
     Tool( //dart
       color: dartFlutterBlues[0],
-      icon: ExtraBrandIcons.dart,
+      icon: PortfolioIcons.dart,
       label: "Dart",
     ),
     Tool(
       color: dartFlutterBlues[1],
-      icon: BrandIcons.flutter,
+      icon: PortfolioIcons.flutter,
       label: "Flutter"
     ),
     Tool( //C#
@@ -46,12 +45,12 @@ Map<String, List<Tool>> experienceToTools = {
         Color(0xFF822C98), //mid
         Color(0xFF953DAC), //light
       ][0],
-      icon: BrandIcons.cplusplus,
+      icon: PortfolioIcons.cplusplus,
       iconSymbol: "#",
       label: "C#",
     ),
     Tool(
-      icon: BrandIcons.unity,
+      icon: PortfolioIcons.unity,
       color: [
         Colors.black,
         Color(0xFF4A5766),
@@ -68,7 +67,7 @@ Map<String, List<Tool>> experienceToTools = {
         Color(0xFF63A814),
         Color(0xFF8ACF17),
       ][2],
-      icon: BrandIcons.javascript,
+      icon: PortfolioIcons.js_square,
       label: "Javascript",
     ),
     Tool(
@@ -76,7 +75,7 @@ Map<String, List<Tool>> experienceToTools = {
         Color(0xFFE44D26),
         Color(0xFFF16529),
       ][0],
-      icon: BrandIcons.html5,
+      icon: PortfolioIcons.html5,
       label: "HTML",
     ),
     Tool(
@@ -84,7 +83,7 @@ Map<String, List<Tool>> experienceToTools = {
         Color(0xFF0070BA),
         Color(0xFF29A8E0),
       ][0],
-      icon: BrandIcons.css3,
+      icon: PortfolioIcons.css3_alt,
       label: "CSS",
     ),
     Tool(
@@ -92,7 +91,7 @@ Map<String, List<Tool>> experienceToTools = {
         Color(0xFFE11C1F),
         Color(0xFF096EB6),
       ][0],
-      icon: BrandIcons.java,
+      icon: PortfolioIcons.java,
       label: "Java",
     ),
     Tool(
@@ -100,7 +99,7 @@ Map<String, List<Tool>> experienceToTools = {
         Color(0xFF002732),
         Color(0xFF00D4FD),
       ][1],
-      icon: ExtraBrandIcons.adobephotoshop,
+      icon: PortfolioIcons.adobephotoshop,
       label: "Adobe\nPhotoshop",
     ),
     Tool(
@@ -108,28 +107,28 @@ Map<String, List<Tool>> experienceToTools = {
         Color(0xFF380842),
         Color(0xFFE788FE),
       ][1],
-      icon: ExtraBrandIcons.adobepremiere,
+      icon: PortfolioIcons.adobepremiere,
       label: "Adobe\nPremiere",
     ),
   ],
   normalXP : [
     Tool(
       color: Colors.red,
-      icon: BrandIcons.ruby,
+      icon: PortfolioIcons.ruby,
       label: "Ruby",
     ),
     Tool(
       color: Colors.red,
-      icon: BrandIcons.rails,
+      icon: PortfolioIcons.rails,
       label: "Ruby On Rails",
     ),
     Tool(
       color: Colors.black,
-      icon: BrandIcons.github,
+      icon: PortfolioIcons.github,
       label: "Github",
     ),
     Tool(
-      icon: BrandIcons.visualstudiocode,
+      icon: PortfolioIcons.visualstudiocode,
       color: [
         Color(0xFF1476B3),
         Color(0xFF1489D2),
@@ -140,7 +139,7 @@ Map<String, List<Tool>> experienceToTools = {
   ],
   lowXP : [
     Tool( 
-      icon: ExtraBrandIcons.visualstudio, 
+      icon: PortfolioIcons.visualstudio, 
       color: [
         Color(0xFF5E259B),
         Color(0xFF803DBD),
@@ -155,28 +154,28 @@ Map<String, List<Tool>> experienceToTools = {
         Color(0xFF8B9ACB),
         Color(0xFF4563C6),
       ][2],
-      icon: BrandIcons.php,
+      icon: PortfolioIcons.php,
       label: "PHP",
     ),
     Tool(
       color: cBlues[0],
-      icon: BrandIcons.cplusplus,
+      icon: PortfolioIcons.cplusplus,
       label: "C++",
     ),
     Tool( //actually C
       color: cBlues[2],
-      icon: BrandIcons.cplusplus,
+      icon: PortfolioIcons.cplusplus,
       iconSymbol: "",
       label: "C",
     ),
     Tool(
       color: Colors.grey,
-      icon: BrandIcons.python,
+      icon: PortfolioIcons.python,
       label: "Python",
     ),
     Tool(
       color: Color(0xFF2580F8),
-      icon: BrandIcons.bitbucket,
+      icon: PortfolioIcons.bitbucket,
       label: "Bitbucket"
     ),
   ],

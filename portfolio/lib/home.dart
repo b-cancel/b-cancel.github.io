@@ -1,4 +1,5 @@
 //flutter
+import 'package:portfolio/icons/portfolio_icons_icons.dart';
 import 'package:universal_html/html.dart';
 
 import 'package:flutter/cupertino.dart';
@@ -126,7 +127,7 @@ class _HomeState extends State<Home> {
             animation: isMenuOpen,
             child: IconButton(
               icon: Icon(
-                Icons.menu,
+                PortfolioIcons.menu,
               ),
               onPressed: () {
                 isMenuOpen.value = true;

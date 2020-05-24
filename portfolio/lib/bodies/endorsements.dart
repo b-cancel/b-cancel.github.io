@@ -1,7 +1,7 @@
 //flutter
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:portfolio/icons/portfolio_icons_icons.dart';
 
 //plugin
 
@@ -110,7 +110,7 @@ class ReferencesBody extends StatelessWidget {
                           children: <Widget>[
                             //give red border
                             Icon(
-                              FontAwesomeIcons.solidFilePdf,
+                              PortfolioIcons.file_pdf,
                               color: Colors.red,
                               size: 36,
                             ),
@@ -128,7 +128,7 @@ class ReferencesBody extends StatelessWidget {
                               ),
                             ),
                             Icon(
-                              FontAwesomeIcons.solidFilePdf,
+                              PortfolioIcons.file_pdf,
                               color: Colors.white,
                               size: 32,
                             ),

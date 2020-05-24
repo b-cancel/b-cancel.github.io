@@ -1,5 +1,6 @@
 //flutter
 import 'package:flutter/material.dart';
+import 'package:portfolio/icons/portfolio_icons_icons.dart';
 
 //internal
 import 'package:portfolio/utils/link/ui/hover.dart';
@@ -73,7 +74,7 @@ class SideMenu extends StatelessWidget {
                 },
                 child: Center(
                   child: Icon(
-                    Icons.close,
+                    PortfolioIcons.close,
                     color: Colors.white,
                   ),
                 ),
@@ -93,7 +94,7 @@ class SideMenu extends StatelessWidget {
                     child: MenuTile(
                       useMax: false, 
                       title: longestMenuString + "\t", 
-                      icon: Icons.high_quality,
+                      icon: PortfolioIcons.keyboard_arrow_up,
                     ),
                   ),
                 ),
@@ -193,7 +194,7 @@ class MenuTile extends StatelessWidget {
                 Opacity(
                   opacity: 0,
                   child: Icon(
-                    Icons.menu,
+                    PortfolioIcons.menu,
                     //size of icon button
                     size: 24,
                   ),

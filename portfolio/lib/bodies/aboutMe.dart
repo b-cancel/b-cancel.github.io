@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 //plugin
 import 'package:matrix4_transform/matrix4_transform.dart';
+import 'package:portfolio/icons/portfolio_icons_icons.dart';
 import 'package:portfolio/main.dart';
 import 'package:portfolio/menu.dart';
 import 'package:portfolio/region/regions.dart';
@@ -371,7 +372,7 @@ class Introduction extends StatelessWidget {
                           RotatedBox(
                             quarterTurns: 3,
                             child: Icon(
-                              Icons.subdirectory_arrow_left,
+                              PortfolioIcons.subdirectory_arrow_left,
                             ),
                           )
                         ],

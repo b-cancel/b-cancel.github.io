@@ -4,7 +4,11 @@ import 'package:vector_math/vector_math_64.dart' as vect;
 //flutter
 import 'package:flutter/material.dart';
 
-import '../main.dart';
+//plugin
+import 'package:portfolio/icons/portfolio_icons_icons.dart';
+
+//internal
+import 'package:portfolio/main.dart';
 
 //widget
 class ScrollToTopButton extends StatefulWidget {
@@ -85,14 +89,14 @@ class _ScrollToTopButtonState extends State<ScrollToTopButton> {
                       Container(
                         height: 12,
                         child: Icon(
-                          Icons.minimize,
+                          PortfolioIcons.minus,
                           color: ThemeData.dark().scaffoldBackgroundColor,
                         ),
                       ),
                       Container(
                         height: 12,
                         child: Icon(
-                          Icons.keyboard_arrow_up,
+                          PortfolioIcons.keyboard_arrow_up,
                           color: ThemeData.dark().scaffoldBackgroundColor,
                           size: 28,
                         ),

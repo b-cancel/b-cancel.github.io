@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 //plugins
 import 'package:bot_toast/bot_toast.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:portfolio/icons/portfolio_icons_icons.dart';
 
 //internal
 import 'package:portfolio/utils/wrappedText.dart';
@@ -12,25 +12,25 @@ import 'package:portfolio/home.dart';
 
 List<IconData> iconsToUseLater = [
   //company and school
-  FontAwesomeIcons.building, //company name
-  FontAwesomeIcons.school, //school name
-  FontAwesomeIcons.infoCircle, //description
+  PortfolioIcons.building_filled, //company name
+  PortfolioIcons.school, //school name
+  PortfolioIcons.info_circle, //description
   //contact
-  FontAwesomeIcons.addressCard, //v-card
+  PortfolioIcons.address_card, //v-card
   //project types
-  FontAwesomeIcons.mapMarker, //location
-  FontAwesomeIcons.mobile, //apps
-  FontAwesomeIcons.desktop, //websites
-  FontAwesomeIcons.gamepad, //games
+  PortfolioIcons.location_on, //location
+  PortfolioIcons.mobile, //apps
+  PortfolioIcons.desktop, //websites
+  PortfolioIcons.gamepad, //games
   //language
-  FontAwesomeIcons.volumeUp, //speak
-  FontAwesomeIcons.bookReader, //read
-  FontAwesomeIcons.penAlt, //write
+  PortfolioIcons.volume_up, //speak
+  PortfolioIcons.book_reader, //read
+  PortfolioIcons.pen_alt, //write
   //sections closed
-  FontAwesomeIcons.user,
-  FontAwesomeIcons.award,
-  FontAwesomeIcons.solidThumbsUp,
-  FontAwesomeIcons.film,
+  PortfolioIcons.user,
+  PortfolioIcons.award,
+  PortfolioIcons.thumbs_up,
+  PortfolioIcons.video_1, //filmn
 ];
 
 //other
@@ -283,7 +283,7 @@ class FillRemaining extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.all(28.0 + 4),
           child: Icon(
-            Icons.adb,
+            PortfolioIcons.mobile,
             color: Colors.white,
           ),
         ),

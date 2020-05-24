@@ -1,9 +1,8 @@
 //flutter
-
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:portfolio/bodies/projects/graphicDesign.dart';
 import 'package:portfolio/bodies/projects/slideShow.dart';
+import 'package:portfolio/icons/portfolio_icons_icons.dart';
 import 'package:portfolio/main.dart';
 
 //internal
@@ -189,7 +188,7 @@ class ProjectSection extends StatelessWidget {
                         return IconWebLink(
                           url: videoUrls[index], 
                           icon: IconLinkIcon(
-                            icon: FontAwesomeIcons.video,
+                            icon: PortfolioIcons.video,
                             text: videoLabels[index],
                           ),
                         );
@@ -205,7 +204,7 @@ class ProjectSection extends StatelessWidget {
                         url: livePage,
                         label: "Live Page",
                         icon: IconLinkIcon(
-                          icon: FontAwesomeIcons.windowMaximize,
+                          icon: PortfolioIcons.window_maximize,
                         ),
                       ),
                     ),
@@ -215,7 +214,7 @@ class ProjectSection extends StatelessWidget {
                         url: googlePlayLink,
                         label: "Google Play",
                         icon: IconLinkIcon(
-                          icon: FontAwesomeIcons.googlePlay,
+                          icon: PortfolioIcons.google_play,
                         ),
                       ),
                     ),
@@ -225,7 +224,7 @@ class ProjectSection extends StatelessWidget {
                         url: appStoreLink,
                         label: "App Store",
                         icon: IconLinkIcon(
-                          icon: FontAwesomeIcons.appStoreIos,
+                          icon: PortfolioIcons.app_store_ios,
                         ),
                       ),
                     ),
@@ -235,7 +234,7 @@ class ProjectSection extends StatelessWidget {
                         url: github,
                         label: "Repository",
                         icon: IconLinkIcon(
-                          icon: FontAwesomeIcons.github,
+                          icon: PortfolioIcons.github,
                         ),
                       ),
                     ),
@@ -297,7 +296,7 @@ class GalleryHeader extends StatelessWidget {
                           right: 8,
                         ),
                         child: Icon(
-                          isGithub ? FontAwesomeIcons.github : FontAwesomeIcons.windowMaximize,
+                          isGithub ? PortfolioIcons.github : PortfolioIcons.window_maximize,
                         ),
                       ),
                     ),

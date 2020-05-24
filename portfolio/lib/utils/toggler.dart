@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 //plugins
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:portfolio/icons/portfolio_icons_icons.dart';
 
 //internal
 import 'package:portfolio/main.dart';
@@ -25,20 +25,20 @@ class Toggler extends StatelessWidget {
     if(useIconButton){
       if (sectionOpened.value) {
         icon = Icon(
-          FontAwesomeIcons.minus,
+          PortfolioIcons.minus,
           size: 14,
           color: MyApp.oldGrey,
         );
       } else {
         icon = Icon(
-          Icons.add,
+          PortfolioIcons.add,
           color: MyApp.oldGrey,
         );
       }
     }
     else{
       icon = Icon(
-        (sectionOpened.value) ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
+        (sectionOpened.value) ? PortfolioIcons.keyboard_arrow_up : PortfolioIcons.keyboard_arrow_down,
         color: MyApp.oldGrey,
       );
     }

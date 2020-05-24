@@ -3,6 +3,7 @@ import 'package:clippy/browser.dart' as clippy;
 import 'package:flutter/material.dart';
 import 'package:flutter_clipboard_manager/flutter_clipboard_manager.dart';
 import 'package:clipboard_manager/clipboard_manager.dart';
+import 'package:portfolio/icons/portfolio_icons_icons.dart';
 import 'package:portfolio/utils/mySnackBar.dart';
 
 //internal
@@ -50,14 +51,14 @@ copyToClipboard(BuildContext context, String url, {
       showSnackBar(
         context,
         text: "\"" + url + "\" Copied To Clipboard",
-        icon: Icons.content_copy,
+        icon: PortfolioIcons.content_copy,
       );
     }
     else{ //copying is something else
       showSnackBar(
         context,
         text: intent + "\n" + "But it was copied to your clipboard",
-        icon: Icons.content_copy,
+        icon: PortfolioIcons.content_copy,
       );
     }
   }

@@ -1,7 +1,9 @@
 //flutter
-import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
-import 'package:portfolio/utils/link/nonWebLink.dart';
+
+//plugin
+import 'package:bot_toast/bot_toast.dart';
+import 'package:portfolio/icons/portfolio_icons_icons.dart';
 
 //internal: ui
 import 'package:portfolio/utils/link/ui/linkOptions.dart';
@@ -10,6 +12,7 @@ import 'package:portfolio/utils/link/ui/hover.dart';
 //internal: function
 import 'package:portfolio/utils/link/copyToClipboard.dart';
 import 'package:portfolio/utils/link/openLink.dart';
+import 'package:portfolio/utils/link/nonWebLink.dart';
 
 //widget
 class TextPhoneLink extends StatelessWidget {
@@ -44,14 +47,14 @@ class TextPhoneLink extends StatelessWidget {
               addBorder: true,
             ),
             OptionButton(
-              icon: Icons.phone,
+              icon: PortfolioIcons.phone,
               label: "Call",
               onTap: () {
                 callNumber(context, url);
               },
             ),
             OptionButton(
-              icon: Icons.message,
+              icon: PortfolioIcons.message,
               label: "Text",
               onTap: () {
                 textNumber(context, url);
@@ -97,7 +100,7 @@ class TextEmailLink extends StatelessWidget {
               addBorder: true,
             ),
             OptionButton(
-              icon: Icons.send,
+              icon: PortfolioIcons.send,
               label: "Email",
               onTap: () {
                 sendEmail(context, url);
@@ -141,7 +144,7 @@ class TextWebLink extends StatelessWidget {
               addBorder: true,
             ),
             OptionButton(
-              icon: Icons.open_in_new,
+              icon: PortfolioIcons.open_in_new,
               label: "New Tab",
               onTap: () {
                 openWithHtml(

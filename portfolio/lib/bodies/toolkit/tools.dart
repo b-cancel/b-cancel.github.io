@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_brand_icons/flutter_brand_icons.dart';
 import 'package:portfolio/bodies/toolkit/icons.dart';
+import 'package:portfolio/icons/portfolio_icons_icons.dart';
 import 'package:portfolio/section/section.dart';
 import 'package:portfolio/section/uncollapsible.dart';
 import 'package:portfolio/utils/link/ui/hover.dart';
@@ -44,7 +44,7 @@ class ToolsSection extends StatelessWidget {
                       icon: thisTool.icon,
                       color: thisTool.color,
                       symbol: thisTool.iconSymbol,
-                      padding: thisTool.icon == BrandIcons.unity ? EdgeInsets.only(
+                      padding: thisTool.icon == PortfolioIcons.unity ? EdgeInsets.only(
                         left: 10,
                         right: 14,
                         //vertical

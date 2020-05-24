@@ -1,7 +1,8 @@
 //flutter
 import 'package:flutter/material.dart';
-import 'package:portfolio/main.dart';
-import 'package:portfolio/utils/link/nonWebLink.dart';
+
+//plugin
+import 'package:portfolio/icons/portfolio_icons_icons.dart';
 
 //internal: ui
 import 'package:portfolio/utils/link/ui/linkOptions.dart';
@@ -10,6 +11,10 @@ import 'package:portfolio/utils/link/ui/hover.dart';
 //internal: function
 import 'package:portfolio/utils/link/copyToClipboard.dart';
 import 'package:portfolio/utils/link/openLink.dart';
+import 'package:portfolio/utils/link/nonWebLink.dart';
+
+//internal
+import 'package:portfolio/main.dart';
 
 //widget
 class IconPhoneLink extends StatelessWidget {
@@ -41,14 +46,14 @@ class IconPhoneLink extends StatelessWidget {
               addBorder: true,
             ),
             OptionButton(
-              icon: Icons.phone,
+              icon: PortfolioIcons.phone,
               label: "Call",
               onTap: () {
                 callNumber(context, url);
               },
             ),
             OptionButton(
-              icon: Icons.message,
+              icon: PortfolioIcons.message,
               label: "Text",
               onTap: () {
                 textNumber(context, url);
@@ -91,7 +96,7 @@ class IconEmailLink extends StatelessWidget {
               addBorder: true,
             ),
             OptionButton(
-              icon: Icons.email,
+              icon: PortfolioIcons.email,
               label: "Email",
               onTap: () {
                 sendEmail(context, url);
@@ -138,7 +143,7 @@ class IconWebLink extends StatelessWidget {
               addBorder: true,
             ),
             OptionButton(
-              icon: Icons.open_in_new,
+              icon: PortfolioIcons.open_in_new,
               label: "New Tab",
               onTap: () {
                 openWithHtml(
@@ -149,7 +154,7 @@ class IconWebLink extends StatelessWidget {
               },
             ),
             OptionButton(
-              icon: Icons.content_copy,
+              icon: PortfolioIcons.content_copy,
               label: "Copy",
               onTap: () {
                 copyToClipboard(

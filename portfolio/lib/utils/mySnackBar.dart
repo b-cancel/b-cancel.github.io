@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/icons/portfolio_icons_icons.dart';
 import 'package:portfolio/main.dart';
 
 showSnackBar(BuildContext context, {
@@ -24,7 +25,7 @@ showSnackBar(BuildContext context, {
                   right: 8.0,
                 ),
                 child: Icon(
-                  icon ?? Icons.warning,
+                  icon ?? PortfolioIcons.warning,
                   color : icon != null ? Colors.white : Colors.yellow,
                 ),
               ),
