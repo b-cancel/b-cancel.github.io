@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_brand_icons/flutter_brand_icons.dart';
+import 'package:portfolio/bodies/toolkit/tools.dart';
 import 'package:portfolio/icons/extra_brand_icons_icons.dart';
 
 class Tool {
   Color color;
   IconData icon;
+  String label;
   String iconSymbol;
-  List<Tool> usedWith;
 
   Tool({
     @required this.color,
     @required this.icon,
+    @required this.label,
     this.iconSymbol,
-    this.usedWith,
   });
 }
 
@@ -28,14 +29,16 @@ List<Color> cBlues = [
 ];
 
 Map<String, List<Tool>> experienceToTools = {
-  "a lot": [
+  highXP : [
     Tool( //dart
       color: dartFlutterBlues[0],
       icon: ExtraBrandIcons.dart,
+      label: "Dart",
     ),
     Tool(
       color: dartFlutterBlues[1],
       icon: BrandIcons.flutter,
+      label: "Flutter"
     ),
     Tool( //C#
       color: [
@@ -45,6 +48,7 @@ Map<String, List<Tool>> experienceToTools = {
       ][0],
       icon: BrandIcons.cplusplus,
       iconSymbol: "#",
+      label: "C#",
     ),
     Tool(
       icon: BrandIcons.unity,
@@ -52,6 +56,7 @@ Map<String, List<Tool>> experienceToTools = {
         Colors.black,
         Color(0xFF4A5766),
       ][1],
+      label: "Unity 3D",
     ),
     Tool(
       color: [
@@ -64,6 +69,7 @@ Map<String, List<Tool>> experienceToTools = {
         Color(0xFF8ACF17),
       ][2],
       icon: BrandIcons.javascript,
+      label: "Javascript",
     ),
     Tool(
       color: [
@@ -71,6 +77,7 @@ Map<String, List<Tool>> experienceToTools = {
         Color(0xFFF16529),
       ][0],
       icon: BrandIcons.html5,
+      label: "HTML",
     ),
     Tool(
       color: [
@@ -78,6 +85,7 @@ Map<String, List<Tool>> experienceToTools = {
         Color(0xFF29A8E0),
       ][0],
       icon: BrandIcons.css3,
+      label: "CSS",
     ),
     Tool(
       color: [
@@ -85,6 +93,7 @@ Map<String, List<Tool>> experienceToTools = {
         Color(0xFF096EB6),
       ][0],
       icon: BrandIcons.java,
+      label: "Java",
     ),
     Tool(
       color: [
@@ -92,6 +101,7 @@ Map<String, List<Tool>> experienceToTools = {
         Color(0xFF00D4FD),
       ][1],
       icon: ExtraBrandIcons.adobephotoshop,
+      label: "Adobe\nPhotoshop",
     ),
     Tool(
       color: [
@@ -99,20 +109,24 @@ Map<String, List<Tool>> experienceToTools = {
         Color(0xFFE788FE),
       ][1],
       icon: ExtraBrandIcons.adobepremiere,
+      label: "Adobe\nPremiere",
     ),
   ],
-  "competent": [
+  normalXP : [
     Tool(
       color: Colors.red,
       icon: BrandIcons.ruby,
+      label: "Ruby",
     ),
     Tool(
       color: Colors.red,
       icon: BrandIcons.rails,
+      label: "Ruby On Rails",
     ),
     Tool(
       color: Colors.black,
       icon: BrandIcons.github,
+      label: "Github",
     ),
     Tool(
       icon: BrandIcons.visualstudiocode,
@@ -121,9 +135,10 @@ Map<String, List<Tool>> experienceToTools = {
         Color(0xFF1489D2),
         Color(0xFF45B0F3),
       ][1],
+      label: "VS Code",
     ),
   ],
-  "familiar": [
+  lowXP : [
     Tool( 
       icon: ExtraBrandIcons.visualstudio, 
       color: [
@@ -132,6 +147,7 @@ Map<String, List<Tool>> experienceToTools = {
         Color(0xFF9556CE),
         Color(0xFFBA89F2),
       ][1],
+      label: "Visual Studios",
     ),
     Tool(
       color: [
@@ -140,23 +156,28 @@ Map<String, List<Tool>> experienceToTools = {
         Color(0xFF4563C6),
       ][2],
       icon: BrandIcons.php,
+      label: "PHP",
     ),
     Tool(
       color: cBlues[0],
       icon: BrandIcons.cplusplus,
+      label: "C++",
     ),
     Tool( //actually C
       color: cBlues[2],
       icon: BrandIcons.cplusplus,
       iconSymbol: "",
+      label: "C",
     ),
     Tool(
       color: Colors.grey,
       icon: BrandIcons.python,
+      label: "Python",
     ),
     Tool(
       color: Color(0xFF2580F8),
       icon: BrandIcons.bitbucket,
+      label: "Bitbucket"
     ),
   ],
 };

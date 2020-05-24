@@ -20,14 +20,90 @@ class _UnderlineOnHoverState extends State<UnderlineOnHover> {
     return OnHover(
       isHovering: isHovered,
       child: AnimatedBuilder(
-        animation: isHovered, 
+        animation: isHovered,
         child: widget.child,
-        builder: (context, resuable){
+        builder: (context, resuable) {
           return DefaultTextStyle(
             style: TextStyle(
-              decoration: isHovered.value ? TextDecoration.underline : TextDecoration.none,
+              decoration: isHovered.value
+                  ? TextDecoration.underline
+                  : TextDecoration.none,
             ),
             child: resuable,
+          );
+        },
+      ),
+    );
+  }
+}
+
+class ColorizeLinkOnHover extends StatefulWidget {
+  ColorizeLinkOnHover({
+    @required this.icon,
+    this.color,
+    this.symbol,
+    this.padding: const EdgeInsets.all(12),
+  });
+
+  final IconData icon;
+  final Color color;
+  final String symbol;
+  final EdgeInsets padding;
+
+  @override
+  _ColorizeLinkOnHoverState createState() => _ColorizeLinkOnHoverState();
+}
+
+class _ColorizeLinkOnHoverState extends State<ColorizeLinkOnHover> {
+  final ValueNotifier<bool> isHovered = new ValueNotifier<bool>(false);
+
+  @override
+  Widget build(BuildContext context) {
+    Color defaultColor = Theme.of(context).iconTheme.color;
+    return OnHover(
+      isHovering: isHovered,
+      child: AnimatedBuilder(
+        animation: isHovered,
+        builder: (context, resuable) {
+          return Padding(
+            padding: widget.padding,
+            child: Stack(
+              children: <Widget>[
+                Icon(
+                  widget.icon,
+                  color: isHovered.value ? widget.color : defaultColor,
+                  size: 36,
+                ),
+                Visibility(
+                  visible: widget.symbol != null,
+                  child: Positioned(
+                    right: 2,
+                    top: 0,
+                    bottom: 0,
+                    child: Center(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: isHovered.value ? widget.color : defaultColor,
+                          shape: BoxShape.circle,
+                        ),
+                        height: 11,
+                        width: 11,
+                        child: FittedBox(
+                          fit: BoxFit.contain,
+                          child: Text(
+                            widget.symbol ?? "",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: ThemeData.dark().primaryColor,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           );
         },
       ),
@@ -54,9 +130,9 @@ class _OpaqueOnHoverState extends State<OpaqueOnHover> {
     return OnHover(
       isHovering: isHovered,
       child: AnimatedBuilder(
-        animation: isHovered, 
+        animation: isHovered,
         child: widget.child,
-        builder: (context, resuable){
+        builder: (context, resuable) {
           return Opacity(
             opacity: isHovered.value ? 1 : .50,
             child: resuable,
@@ -69,7 +145,7 @@ class _OpaqueOnHoverState extends State<OpaqueOnHover> {
 
 class OnHover extends StatelessWidget {
   OnHover({
-    Key key, 
+    Key key,
     this.child,
     this.isHovering,
   }) : super(key: key);
@@ -85,15 +161,15 @@ class OnHover extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
-      onEnter: (e){
+      onEnter: (e) {
         appContainer.style.cursor = 'pointer';
-        if(isHovering != null){
+        if (isHovering != null) {
           isHovering.value = true;
         }
       },
-      onExit: (e){
+      onExit: (e) {
         appContainer.style.cursor = 'default';
-        if(isHovering != null){
+        if (isHovering != null) {
           isHovering.value = false;
         }
       },

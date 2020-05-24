@@ -1,5 +1,6 @@
 //flutter
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/utils/link/nonWebLink.dart';
 
 //internal: ui
@@ -165,6 +166,50 @@ class IconWebLink extends StatelessWidget {
   }
 }
 
+class IconLabelLink extends StatelessWidget {
+  IconLabelLink({
+    @required this.icon,
+    this.label,
+  });
+
+  final Widget icon;
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    Function onShowLabel = () {
+      showOptions(
+        context,
+        children: [
+          Padding(
+            padding: EdgeInsets.all(8),
+            child: Text(
+              label ?? "",
+              textAlign: TextAlign.center,
+              style: GoogleFonts.robotoMono(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ],
+      );
+    };
+
+    //build
+    return IconLink(
+      onTap: () {
+        onShowLabel();
+      },
+      onShowOptions: () {
+        onShowLabel();
+      },
+      addOpaqueOnHover: false,
+      addColorizeOnHover: true,
+      icon: icon,
+    );
+  }
+}
+
 class IconLink extends StatelessWidget {
   const IconLink({
     Key key,
@@ -172,12 +217,16 @@ class IconLink extends StatelessWidget {
     this.onShowOptions,
     @required this.icon,
     this.addOvalClipper: true,
+    this.addOpaqueOnHover: true,
+    this.addColorizeOnHover: false,
   }) : super(key: key);
 
   final Function onTap;
   final Function onShowOptions;
   final Widget icon;
   final bool addOvalClipper;
+  final bool addOpaqueOnHover;
+  final bool addColorizeOnHover;
 
   @override
   Widget build(BuildContext context) {
@@ -206,19 +255,25 @@ class IconLink extends StatelessWidget {
       );
     }
 
-    return OpaqueOnHover(
-      child: inkWell,
-    );
+    if (addOpaqueOnHover) {
+      return OpaqueOnHover(
+        child: inkWell,
+      );
+    } else {
+      return inkWell;
+    }
   }
 }
 
 class IconLinkIcon extends StatelessWidget {
   IconLinkIcon({
     @required this.icon,
+    this.color,
     this.text,
   });
 
   final IconData icon;
+  final Color color;
   final String text;
 
   @override
@@ -230,6 +285,7 @@ class IconLinkIcon extends StatelessWidget {
         children: <Widget>[
           Icon(
             icon,
+            color: color,
             size: 36,
           ),
           Visibility(

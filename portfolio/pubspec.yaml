@@ -96,6 +96,11 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
+  fonts:
+   - family: ExtraBrandIcons
+     fonts:
+      - asset: assets/fonts/ExtraBrandIcons.ttf
+
   # To add assets to your application, add an assets section, like this:
   assets:
     # large images that really should be cached and compressed and loaded in slowly

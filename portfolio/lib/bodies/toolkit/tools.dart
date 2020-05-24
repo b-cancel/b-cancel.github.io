@@ -1,183 +1,67 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_brand_icons/flutter_brand_icons.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/bodies/toolkit/icons.dart';
 import 'package:portfolio/section/section.dart';
 import 'package:portfolio/section/uncollapsible.dart';
 import 'package:portfolio/utils/conditional.dart';
+import 'package:portfolio/utils/link/ui/hover.dart';
+import 'package:portfolio/utils/link/ui/iconLink.dart';
+
+String highXP = "experienced";
+String normalXP = "competent";
+String lowXP = "familiar";
+List<String> experiences = [
+  highXP,
+  normalXP,
+  lowXP,
+];
 
 class ToolsSection extends StatelessWidget {
-  toolListToWidget(List<Tool> tools) {
-    List<Widget> widgets = new List<Widget>();
-    for (int i = 0; i < tools.length; i++) {
-      Tool thisTool = tools[i];
-      widgets.add(
-        AToolWidget(
-          thisTool: thisTool,
-        ),
-      );
-    }
-
-    //return within wrap
-    return Wrap(
-      crossAxisAlignment: WrapCrossAlignment.start,
-      spacing: 16,
-      runSpacing: 8,
-      children: widgets,
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: List.generate(
         experienceToTools.length,
-        (index) {
-          //get label
-          String label;
-          switch (index) {
-            case 0:
-              label = "a lot";
-              break;
-            case 1:
-              label = "competent";
-              break;
-            default:
-              label = "a little";
-              break;
-          }
-
-          //make section
+        (int experienceIndex) {
+          String label = experiences[experienceIndex];
+          List<Tool> tools = experienceToTools[label];
           return CollapsibleSection(
             label: "\"" + label + "\"",
             labelColor: Colors.white,
             separator: " =>",
-            initiallyOpened: label != "a little",
+            initiallyOpened: label != lowXP,
             sectionType: SectionType.Brackets,
-            child: toolListToWidget(
-              experienceToTools[label],
+            child: Wrap(
+              crossAxisAlignment: WrapCrossAlignment.start,
+              spacing: 16,
+              runSpacing: 8,
+              children: List.generate(
+                tools.length,
+                (int toolIndex) {
+                  Tool thisTool = tools[toolIndex];
+                  return IconLabelLink(
+                    icon: ColorizeLinkOnHover(
+                      icon: thisTool.icon,
+                      color: thisTool.color,
+                      symbol: thisTool.iconSymbol,
+                      padding: thisTool.icon == BrandIcons.unity ? EdgeInsets.only(
+                        left: 10,
+                        right: 14,
+                        //vertical
+                        top: 12,
+                        bottom: 12,
+                      ) : EdgeInsets.all(12),
+                    ),
+                    label: thisTool.label,
+                  );
+                },
+              ),
             ),
           );
         },
-      ).toList(),
-    );
-  }
-}
-
-class AToolWidget extends StatelessWidget {
-  const AToolWidget({
-    Key key,
-    @required this.thisTool,
-    this.items,
-  }) : super(key: key);
-
-  final Tool thisTool;
-  final List<Widget> items;
-
-  @override
-  Widget build(BuildContext context) {
-    //handle image
-    Widget image;
-    if (thisTool.altSvgIcon != null) {
-      if (thisTool.altSvgIcon.contains("assets")) {
-        image = Image.asset(
-          thisTool.altSvgIcon,
-        );
-      } else {
-        image = Image.network(
-          thisTool.altSvgIcon,
-        );
-      }
-    }
-
-    //handle description
-    //handle options items of tool
-    List<Widget> items = new List<Widget>();
-
-    //handle description (basically)
-    if (thisTool.usedFor != null) {
-      items.add(
-        Wrap(
-          children: [
-            Text(
-              "used For: ",
-            ),
-            Text(
-              thisTool.usedFor,
-            ),
-          ],
-        ),
-      );
-    }
-
-    //handlee helper tools
-    List<Tool> helperTools = thisTool.usedWith;
-    if (helperTools != null) {
-      List<Widget> helperToolWidgets = new List<Widget>();
-      for (int index = 0; index < helperTools.length; index++) {
-        helperToolWidgets.add(
-          AToolWidget(
-            thisTool: helperTools[index],
-          ),
-        );
-      }
-      items.add(CollapsibleSection(
-        allowCollapsing: false,
-        label: "with",
-        separator: ":",
-        sectionType: SectionType.Brackets,
-        child: Wrap(
-          crossAxisAlignment: WrapCrossAlignment.start,
-          children: helperToolWidgets,
-        ),
-      ));
-    }
-
-    //return it all
-    return Wrap(
-      crossAxisAlignment: WrapCrossAlignment.start,
-      children: <Widget>[
-        Visibility(
-          visible: thisTool.altSvgIcon != null,
-          child: Padding(
-            padding: EdgeInsets.only(
-              top: 4,
-              right: 4,
-            ),
-            child: Container(
-              height: 56,
-              width: 56,
-              padding: EdgeInsets.all(
-                8,
-              ),
-              child: FittedBox(
-                fit: BoxFit.contain,
-                child: Icon(thisTool.icon),
-              ),
-            ),
-          ),
-        ),
-        Ternary(
-          condition: items.length != 0,
-          isTrue: CollapsibleSection(
-            labelColor: Colors.white,
-            label: thisTool.language,
-            separator: "",
-            allowCollapsing: false,
-            sectionType: SectionType.Parenthesis,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: items,
-            ),
-          ),
-          isFalse: Text(
-            thisTool.language + ",",
-            style: GoogleFonts.robotoMono(
-              color: Colors.white,
-            ),
-          ),
-        ),
-      ],
+      ),
     );
   }
 }
