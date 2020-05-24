@@ -17,14 +17,16 @@ void main() {
 
 class MyApp extends StatelessWidget {
   //used everywhere
-  static TextStyle robotoMonoAlt = GoogleFonts.robotoMono(
+  static TextStyle robotoMono = GoogleFonts.robotoMono(
     color: Colors.white,
   );
 
-  static TextStyle robotoMono = TextStyle(
+  /*
+  static TextStyle robotoMonoAlt = TextStyle(
     fontFamily: 'RobotoMono',
     color: Colors.white,
   );
+  */
 
   //headers
   static const double h1 = 32;
