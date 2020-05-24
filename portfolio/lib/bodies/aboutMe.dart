@@ -73,7 +73,7 @@ class Face extends StatelessWidget {
       padding: EdgeInsets.all(
         16.0,
       ),
-      child: Image.asset(
+      child: Image.asset( 
         "assets/face/white.png",
         width: 250,
       ),
@@ -99,8 +99,8 @@ class Logo extends StatelessWidget {
   final ValueNotifier<int> firstVN = new ValueNotifier<int>(0);
   final ValueNotifier<int> secondVN = new ValueNotifier<int>(0);
 
-  Duration delay = Duration(milliseconds: 1700);
-  Duration animation = Duration(milliseconds: 300);
+  final Duration delay = Duration(milliseconds: 1700);
+  final Duration animation = Duration(milliseconds: 300);
   startShuffle()async{
     await Future.delayed(delay);
     secondVN.value ++;

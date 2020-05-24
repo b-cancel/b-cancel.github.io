@@ -131,9 +131,6 @@ class PhotoGallery extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color oldAccentColor = Theme.of(context).accentColor;
-
-    //build
     return Stack(
       children: <Widget>[
         ListView.separated(
@@ -287,7 +284,6 @@ class _PageScrollButtonState extends State<PageScrollButton> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double halfScreenWidth = (screenWidth / 2);
     double leftPadding = 22.0 + 4; // + 24 + 16 + 16;
     double rightPadding = 24;
     double slideShowSize = screenWidth - leftPadding - rightPadding;

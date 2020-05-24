@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 //plugins
-import 'package:google_fonts/google_fonts.dart';
 import 'package:bot_toast/bot_toast.dart';
 
 //internal
@@ -17,16 +16,10 @@ void main() {
 
 class MyApp extends StatelessWidget {
   //used everywhere
-  static TextStyle robotoMono = GoogleFonts.robotoMono(
-    color: Colors.white,
-  );
-
-  /*
-  static TextStyle robotoMonoAlt = TextStyle(
+  static TextStyle robotoMono = TextStyle(
     fontFamily: 'RobotoMono',
     color: Colors.white,
   );
-  */
 
   //headers
   static const double h1 = 32;

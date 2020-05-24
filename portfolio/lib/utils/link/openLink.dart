@@ -1,5 +1,5 @@
 //dart
-import 'dart:html' as html;
+import 'package:universal_html/html.dart';
 
 //flutter
 import 'package:flutter/material.dart';
@@ -18,11 +18,11 @@ openWithHtml(BuildContext context, String url, {bool openHere}) {
     if (openHere) {
       try {
         //try to use function first
-        html.window.location.assign(url);
+        window.location.assign(url);
       } catch (e) {
         try {
           //flat out just set the variable
-          html.window.location.href = url;
+          window.location.href = url;
         } catch (e) {
           //try other methods
           openWithUrlLauncher(context, url, openHere: openHere);
@@ -31,7 +31,7 @@ openWithHtml(BuildContext context, String url, {bool openHere}) {
     } else {
       //NOTE: anything using HTML only work on web
       try {
-        html.window.open(url, '');
+        window.open(url, '');
       } catch (e) {
         //try other methods
         openWithUrlLauncher(context, url, openHere: openHere);

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'dart:html' as html;
+import 'package:universal_html/html.dart';
 
 class UnderlineOnHover extends StatefulWidget {
   UnderlineOnHover({
@@ -154,7 +154,7 @@ class OnHover extends StatelessWidget {
   final ValueNotifier<bool> isHovering;
 
   // Get a regerence to the body of the view
-  static final appContainer = html.window.document.getElementById(
+  static final appContainer = window.document.getElementById(
     'app-container',
   );
 

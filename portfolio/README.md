@@ -1,6 +1,6 @@
 # portfolio
 
-A new Flutter project.
+Bryan Cancel's Portfolio
 
 ## Getting Started
 

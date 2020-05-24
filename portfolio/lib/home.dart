@@ -1,5 +1,5 @@
 //flutter
-import 'dart:html' as html;
+import 'package:universal_html/html.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +37,7 @@ class _HomeState extends State<Home> {
       RefreshController(initialRefresh: false);
 
   void _onRefresh() async {
-    html.window.location.reload();
+    window.location.reload();
     //html.window.location.assign();
     /*
     html.window.location.replace(
