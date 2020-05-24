@@ -43,9 +43,14 @@ dependencies:
   #Image Plugins
   carousel_slider: ^2.1.0
   transparent_image: ^1.0.0
-  #https://pub.flutter-io.cn/packages/image_size_getter
+  
+  #optimizes the image based on the space available
   #https://pub.flutter-io.cn/packages/optimized_cached_image
+  #a less OP version of the above
+  #https://pub.flutter-io.cn/packages/cached_network_image
+  #perhaps ready for flutter web
   #https://pub.flutter-io.cn/packages/flutter_advanced_networkimage
+  #https://pub.flutter-io.cn/packages/image_size_getter
 
   #Sticky Headers (titles and section names stay on top)
   flutter_sticky_header: "^0.4.2"
