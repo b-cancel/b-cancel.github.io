@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 //plugins
-import 'package:google_fonts/google_fonts.dart';
+import 'package:portfolio/main.dart';
 
 //internal
 import 'package:portfolio/utils/link/ui/iconLink.dart';
@@ -107,7 +107,7 @@ class QRSection extends StatelessWidget {
           top: 16.0,
         ),
         child: DefaultTextStyle(
-          style: GoogleFonts.robotoMono(
+          style: MyApp.robotoMono.copyWith(
             fontSize: 16,
             color: Colors.white,
           ),

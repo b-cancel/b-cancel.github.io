@@ -1,6 +1,6 @@
 //flutter
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:portfolio/main.dart';
 import 'package:portfolio/utils/link/nonWebLink.dart';
 
 //internal: ui
@@ -186,7 +186,7 @@ class IconLabelLink extends StatelessWidget {
             child: Text(
               label ?? "",
               textAlign: TextAlign.center,
-              style: GoogleFonts.robotoMono(
+              style: MyApp.robotoMono.copyWith(
                 fontWeight: FontWeight.bold,
               ),
             ),

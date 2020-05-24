@@ -16,6 +16,17 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  //used everywhere
+  static TextStyle robotoMonoAlt = GoogleFonts.robotoMono(
+    color: Colors.white,
+  );
+
+  static TextStyle robotoMono = TextStyle(
+    fontFamily: 'RobotoMono',
+    color: Colors.white,
+  );
+
+  //headers
   static const double h1 = 32;
   static const double h2 = 28;
   static const double h3 = 24;
@@ -108,7 +119,7 @@ class TopIntro extends StatelessWidget {
       child: Container(
         color: MyApp.inactiveTabColor,
         child: DefaultTextStyle(
-          style: GoogleFonts.robotoMono(
+          style: MyApp.robotoMono.copyWith(
             color: Colors.white,
             fontSize: MyApp.h6,
           ),
@@ -143,7 +154,7 @@ class Name extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTextStyle(
-      style: GoogleFonts.robotoMono(
+      style: MyApp.robotoMono.copyWith(
         color: Colors.white,
         fontSize: isTiny ? MyApp.h3 : MyApp.h1,
       ),
@@ -181,7 +192,7 @@ class Joke extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTextStyle(
-      style: GoogleFonts.robotoMono(
+      style: MyApp.robotoMono.copyWith(
         color: Colors.white,
         fontSize: MyApp.h5,
         height: 1,
@@ -207,7 +218,7 @@ class RightBottom extends StatelessWidget {
         ),
         child: Center(
           child: DefaultTextStyle(
-            style: GoogleFonts.robotoMono(
+            style: MyApp.robotoMono.copyWith(
               fontSize: MyApp.h6,
               color: Colors.white,
             ),

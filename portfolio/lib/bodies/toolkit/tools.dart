@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_brand_icons/flutter_brand_icons.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/bodies/toolkit/icons.dart';
 import 'package:portfolio/section/section.dart';
 import 'package:portfolio/section/uncollapsible.dart';
-import 'package:portfolio/utils/conditional.dart';
 import 'package:portfolio/utils/link/ui/hover.dart';
 import 'package:portfolio/utils/link/ui/iconLink.dart';
 

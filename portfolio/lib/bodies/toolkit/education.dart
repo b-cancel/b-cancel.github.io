@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 
 //plugins
-import 'package:google_fonts/google_fonts.dart';
 
 //internal
 import 'package:portfolio/bodies/toolkit/toolkit.dart';
@@ -73,7 +72,7 @@ class University extends StatelessWidget {
         separator: "",
         sectionType: SectionType.Parenthesis,
         child: DefaultTextStyle(
-          style: GoogleFonts.robotoMono(
+          style: MyApp.robotoMono.copyWith(
             color: Colors.white,
             fontSize: MyApp.h5,
           ),
@@ -93,7 +92,7 @@ class University extends StatelessWidget {
                       ),
                       Text(
                         "Loc: ",
-                        style: GoogleFonts.robotoMono(
+                        style: MyApp.robotoMono.copyWith(
                           color: MyApp.oldGrey,
                         ),
                       ),
@@ -104,7 +103,7 @@ class University extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         "Deg: ",
-                        style: GoogleFonts.robotoMono(
+                        style: MyApp.robotoMono.copyWith(
                           color: MyApp.oldGrey,
                         ),
                       ),
@@ -120,14 +119,14 @@ class University extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         "Graduated: ",
-                        style: GoogleFonts.robotoMono(
+                        style: MyApp.robotoMono.copyWith(
                           color: MyApp.oldGrey,
                         ),
                       ),
                       Text("May 2019, "),
                       Text(
                         "GPA: ",
-                        style: GoogleFonts.robotoMono(
+                        style: MyApp.robotoMono.copyWith(
                           color: MyApp.oldGrey,
                         ),
                       ),
@@ -198,7 +197,7 @@ class HighSchool extends StatelessWidget {
         initiallyOpened: false,
         sectionType: SectionType.Parenthesis,
         child: DefaultTextStyle(
-          style: GoogleFonts.robotoMono(
+          style: MyApp.robotoMono.copyWith(
             color: Colors.white,
             fontSize: MyApp.h5,
           ),
@@ -215,7 +214,7 @@ class HighSchool extends StatelessWidget {
                   ),
                   Text(
                     "Loc: ",
-                    style: GoogleFonts.robotoMono(
+                    style: MyApp.robotoMono.copyWith(
                       color: MyApp.oldGrey,
                     ),
                   ),
@@ -226,7 +225,7 @@ class HighSchool extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     "Deg: ",
-                    style: GoogleFonts.robotoMono(
+                    style: MyApp.robotoMono.copyWith(
                       color: MyApp.oldGrey,
                     ),
                   ),
@@ -242,14 +241,14 @@ class HighSchool extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     "Graduated: ",
-                    style: GoogleFonts.robotoMono(
+                    style: MyApp.robotoMono.copyWith(
                       color: MyApp.oldGrey,
                     ),
                   ),
                   Text("May 2014, "),
                   Text(
                     "GPA: ",
-                    style: GoogleFonts.robotoMono(
+                    style: MyApp.robotoMono.copyWith(
                       color: MyApp.oldGrey,
                     ),
                   ),

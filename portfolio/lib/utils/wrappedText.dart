@@ -1,6 +1,6 @@
 //flutter
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:portfolio/main.dart';
 
 //widget
 class WrappedText extends StatelessWidget {
@@ -32,7 +32,7 @@ List<Widget> toWrappableText(String text, {String pattern: " "}) {
     widgets.add(
       Text(
         bits[i] + (isLast ? "" : pattern),
-        style: GoogleFonts.robotoMono(),
+        style: MyApp.robotoMono,
       ),
     );
   }

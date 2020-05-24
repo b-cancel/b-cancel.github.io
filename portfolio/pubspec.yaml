@@ -97,12 +97,18 @@ flutter:
   uses-material-design: true
 
   fonts:
-   - family: ExtraBrandIcons
-     fonts:
+  - family: ExtraBrandIcons
+    fonts:
       - asset: assets/fonts/ExtraBrandIcons.ttf
+  - family: RobotoMono
+    fonts:
+      - asset: google_fonts/RobotoMono-Regular.ttf
+      - asset: google_fonts/RobotoMono-Bold.ttf
+        weight: 700
 
   # To add assets to your application, add an assets section, like this:
   assets:
+    - google_fonts/
     # large images that really should be cached and compressed and loaded in slowly
     - assets/face/white.png
     - assets/qrCode.png

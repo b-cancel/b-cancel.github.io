@@ -1,6 +1,5 @@
 //flutter
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 //plugin
 import 'package:portfolio/section/section.dart';
@@ -61,7 +60,7 @@ class _SectionHeaderState extends State<SectionHeader> {
         sectionOpened: widget.sectionOpened,
         label: widget.label,
         title: DefaultTextStyle(
-          style: GoogleFonts.robotoMono(),
+          style: MyApp.robotoMono,
           child: Wrap(
             crossAxisAlignment: WrapCrossAlignment.end,
             children: <Widget>[

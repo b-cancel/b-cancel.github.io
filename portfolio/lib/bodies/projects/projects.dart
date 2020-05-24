@@ -1,9 +1,7 @@
 //flutter
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/bodies/projects/graphicDesign.dart';
 import 'package:portfolio/bodies/projects/slideShow.dart';
 import 'package:portfolio/main.dart';
@@ -18,7 +16,6 @@ import 'package:portfolio/bodies/projects/gameDev.dart';
 import 'package:portfolio/bodies/projects/webDev.dart';
 import 'package:portfolio/utils/link/ui/iconLink.dart';
 import 'package:portfolio/utils/link/ui/textLink.dart';
-import 'package:portfolio/utils/wrappedText.dart';
 
 class ProjectsBody extends StatelessWidget {
   @override
@@ -174,7 +171,7 @@ class ProjectSection extends StatelessWidget {
                   children: [
                     Text(
                       "descrip: ",
-                      style: GoogleFonts.robotoMono(
+                      style: MyApp.robotoMono.copyWith(
                         color: MyApp.oldGrey,
                       ),
                     ),
@@ -308,7 +305,7 @@ class GalleryHeader extends StatelessWidget {
                       url: topLink,
                       text: Text(
                         "See More",
-                        style: GoogleFonts.robotoMono(
+                        style: MyApp.robotoMono.copyWith(
                           color: Colors.white,
                         ),
                         overflow: TextOverflow.ellipsis,
@@ -321,7 +318,7 @@ class GalleryHeader extends StatelessWidget {
                         url: topLink,
                         text: Text(
                           topLink,
-                          style: GoogleFonts.robotoMono(
+                          style: MyApp.robotoMono.copyWith(
                             color: MyApp.oldGrey,
                           ),
                           overflow: TextOverflow.ellipsis,

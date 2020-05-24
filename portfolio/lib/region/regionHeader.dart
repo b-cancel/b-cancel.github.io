@@ -1,6 +1,5 @@
 //flutter
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 //internal
 import 'package:portfolio/utils/conditional.dart';
@@ -111,7 +110,7 @@ class _RegionHeaderState extends State<RegionHeader> {
                                 ),
                                 child: Text(
                                   widget.title,
-                                  style: GoogleFonts.robotoMono(
+                                  style: MyApp.robotoMono.copyWith(
                                     color: Colors.white,
                                     fontSize: widget.fontSize,
                                   ),
@@ -156,14 +155,14 @@ class TitlePortion extends StatelessWidget {
         ),
         child: Text(
           "#region",
-          style: GoogleFonts.robotoMono(
+          style: MyApp.robotoMono.copyWith(
             color: MyApp.oldGrey,
           ),
         ),
       ),
       Text(
         "\"" + title + "\"",
-        style: GoogleFonts.robotoMono(
+        style: MyApp.robotoMono.copyWith(
           color: titleColor,
           fontSize: fontSize,
         ),

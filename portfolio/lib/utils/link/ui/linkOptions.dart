@@ -1,6 +1,5 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/main.dart';
 import 'package:portfolio/utils/link/ui/hover.dart';
 
@@ -75,7 +74,7 @@ class OptionButton extends StatelessWidget {
                   visible: label != null,
                   child: Text(
                     label ?? "",
-                    style: GoogleFonts.robotoMono(
+                    style: MyApp.robotoMono.copyWith(
                       fontWeight:
                           addBorder ? FontWeight.bold : FontWeight.normal,
                     ),

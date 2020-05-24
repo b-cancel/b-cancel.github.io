@@ -2,12 +2,10 @@
 import 'package:flutter/material.dart';
 
 //plugin
-import 'package:google_fonts/google_fonts.dart';
 import 'package:matrix4_transform/matrix4_transform.dart';
 import 'package:portfolio/main.dart';
 import 'package:portfolio/menu.dart';
 import 'package:portfolio/region/regions.dart';
-import 'package:portfolio/region/regularRegion.dart';
 import 'package:portfolio/utils/link/ui/hover.dart';
 
 //internal
@@ -141,7 +139,7 @@ class Logo extends StatelessWidget {
         vertical: 16.0,
       ),
       child: DefaultTextStyle(
-        style: GoogleFonts.robotoMono(
+        style: MyApp.robotoMono.copyWith(
           fontWeight: FontWeight.bold,
           color: Colors.black,
           fontSize: MyApp.h3,
@@ -293,7 +291,7 @@ class Hello extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       "Hi! I'm Bryan Cancel",
-      style: GoogleFonts.robotoMono(
+      style: MyApp.robotoMono.copyWith(
         fontSize: 14,
         fontWeight: FontWeight.bold,
       ),
@@ -365,7 +363,7 @@ class Introduction extends StatelessWidget {
                             ),
                             child: Text(
                               "Quick Links",
-                              style: GoogleFonts.robotoMono(
+                              style: MyApp.robotoMono.copyWith(
                                 fontWeight: FontWeight.bold,
                               ),
                             ),

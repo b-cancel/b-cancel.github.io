@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 
 //plugin
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 //internal: sections
 import 'package:portfolio/region/sliverRegion.dart';
@@ -184,9 +183,7 @@ class _HomeState extends State<Home> {
           //1. ScrollBar (but you cant drag it)
           //2. CupertinoScrollBar (but you cant click to travel)
           child: DefaultTextStyle(
-            style: GoogleFonts.robotoMono(
-              color: Colors.white,
-            ),
+            style: MyApp.robotoMono,
             child: Stack(
               children: <Widget>[
                 SmartRefresher(

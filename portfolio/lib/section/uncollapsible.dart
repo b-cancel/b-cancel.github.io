@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/main.dart';
 import 'package:portfolio/region/regions.dart';
 import 'package:portfolio/section/section.dart';
@@ -76,14 +75,14 @@ class _CollapsibleSectionState extends State<CollapsibleSection> {
           children: <Widget>[
             Text(
               widget.label,
-              style: GoogleFonts.robotoMono(
+              style: MyApp.robotoMono.copyWith(
                 color: widget.labelColor,
                 fontSize: widget.fontSize,
               ),
             ),
             Text(
               widget.separator + " " + sectionTypeToLeft[widget.sectionType],
-              style: GoogleFonts.robotoMono(
+              style: MyApp.robotoMono.copyWith(
                 color: MyApp.oldGrey,
                 fontSize: widget.fontSize,
               ),
@@ -92,7 +91,7 @@ class _CollapsibleSectionState extends State<CollapsibleSection> {
               visible: isOpened.value == false,
               child: Text(
                 "+" + sectionTypeToRight[widget.sectionType] + ",",
-                style: GoogleFonts.robotoMono(
+                style: MyApp.robotoMono.copyWith(
                   color: MyApp.oldGrey,
                   fontSize: widget.fontSize,
                 ),
@@ -138,7 +137,7 @@ class _CollapsibleSectionState extends State<CollapsibleSection> {
                 ),
                 child: Text(
                   sectionTypeToRight[widget.sectionType] + ", ",
-                  style: GoogleFonts.robotoMono(
+                  style: MyApp.robotoMono.copyWith(
                     color: MyApp.oldGrey,
                     fontSize: widget.fontSize,
                   ),

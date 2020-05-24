@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 
 //plugin
-import 'package:google_fonts/google_fonts.dart';
 
 //internal
 import 'package:portfolio/bodies/toolkit/education.dart';
@@ -17,7 +16,7 @@ class ToolKitBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTextStyle(
-      style: GoogleFonts.robotoMono(
+      style: MyApp.robotoMono.copyWith(
         color: MyApp.oldGrey,
         fontSize: MyApp.h4,
       ),
@@ -131,12 +130,12 @@ class ToolKitBody extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   DefaultTextStyle(
-                    style: GoogleFonts.robotoMono(
+                    style: MyApp.robotoMono.copyWith(
                       color: Colors.white,
                       fontSize: MyApp.h5,
                     ),
                     child: DefaultTextStyle(
-                      style: GoogleFonts.robotoMono(
+                      style: MyApp.robotoMono.copyWith(
                         color: Colors.white,
                       ),
                       child: Wrap(
@@ -146,7 +145,7 @@ class ToolKitBody extends StatelessWidget {
                               Text("English"),
                               Text(
                                 " (speak, read, write,), ",
-                                style: GoogleFonts.robotoMono(
+                                style: MyApp.robotoMono.copyWith(
                                   color: MyApp.oldGrey,
                                 ),
                               ),
@@ -157,7 +156,7 @@ class ToolKitBody extends StatelessWidget {
                               Text("Spanish"),
                               Text(
                                 " (speak, read, write,),",
-                                style: GoogleFonts.robotoMono(
+                                style: MyApp.robotoMono.copyWith(
                                   color: MyApp.oldGrey,
                                 ),
                               ),
@@ -193,7 +192,7 @@ class Chips extends StatelessWidget {
           return AChip(
             child: Text(
               chips[index],
-              style: GoogleFonts.robotoMono(
+              style: MyApp.robotoMono.copyWith(
                 color: Colors.white,
               ),
             ),

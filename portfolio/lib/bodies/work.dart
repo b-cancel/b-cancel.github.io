@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/main.dart';
 import 'package:portfolio/section/section.dart';
 import 'package:portfolio/section/uncollapsible.dart';
@@ -144,7 +143,7 @@ class WorkExperienceBody extends StatelessWidget {
                                 children: <Widget>[
                                   Text(
                                     "comp: ",
-                                    style: GoogleFonts.robotoMono(
+                                    style: MyApp.robotoMono.copyWith(
                                       color: MyApp.oldGrey,
                                     ),
                                   ),
@@ -159,7 +158,7 @@ class WorkExperienceBody extends StatelessWidget {
                               children: <Widget>[
                                 Text(
                                   "loc: ",
-                                  style: GoogleFonts.robotoMono(
+                                  style: MyApp.robotoMono.copyWith(
                                     color: MyApp.oldGrey,
                                   ),
                                 ),
@@ -217,7 +216,7 @@ class WorkExperienceBody extends StatelessWidget {
                         children: <Widget>[
                           Text(
                             "comp: ",
-                            style: GoogleFonts.robotoMono(
+                            style: MyApp.robotoMono.copyWith(
                               color: MyApp.oldGrey,
                             ),
                           ),
@@ -229,14 +228,14 @@ class WorkExperienceBody extends StatelessWidget {
                       children: <Widget>[
                         Text(
                           "start: ",
-                          style: GoogleFonts.robotoMono(
+                          style: MyApp.robotoMono.copyWith(
                             color: MyApp.oldGrey,
                           ),
                         ),
                         Text(thisWork.startDate + ", "),
                         Text(
                           "end: ",
-                          style: GoogleFonts.robotoMono(
+                          style: MyApp.robotoMono.copyWith(
                             color: MyApp.oldGrey,
                           ),
                         ),
@@ -245,7 +244,7 @@ class WorkExperienceBody extends StatelessWidget {
                     ),
                     Text(
                       "description: ",
-                      style: GoogleFonts.robotoMono(
+                      style: MyApp.robotoMono.copyWith(
                         color: MyApp.oldGrey,
                       ),
                     ),
@@ -256,7 +255,7 @@ class WorkExperienceBody extends StatelessWidget {
                       children: <Widget>[
                         Text(
                           "loc: ",
-                          style: GoogleFonts.robotoMono(
+                          style: MyApp.robotoMono.copyWith(
                             color: MyApp.oldGrey,
                           ),
                         ),
