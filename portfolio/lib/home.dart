@@ -196,7 +196,7 @@ class _HomeState extends State<Home> {
                   onLoading: _onLoading,
                   child: CustomScrollView( 
                     primary: false,
-                    //physics: BouncingScrollPhysics(),
+                    physics: BouncingScrollPhysics(),
                     //so scrolling up and down with a finger keeps things in view
                     //cacheExtent: MyApp.screenHeight,
                     controller: scrollController,

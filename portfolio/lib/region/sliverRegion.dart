@@ -69,7 +69,7 @@ class _SliverRegionState extends State<SliverRegion> {
         delegate: SliverChildListDelegate(
           [
             //KeepAliveMixin here is a severe performance hit
-            Container(
+            KeepAliveMixin(
               key: widget.bodyKey,
               child: RegionBody(
                 regionOpened: sectionOpened, 
@@ -79,13 +79,13 @@ class _SliverRegionState extends State<SliverRegion> {
             ),
           ],
           //wrap values in keep alives
-          //addAutomaticKeepAlives: true,
-          
+          addAutomaticKeepAlives: true,
+
           //If the children are easy to repaint 
           //it might be more efficient to not add a repaint boundary 
           //and simply repaint the children during scrolling
           //BUT our children are most gifs and not simple
-          //addRepaintBoundaries: true,
+          addRepaintBoundaries: false,
 
           //Typically, children in a scrolling container 
           //must be annotated with a semantic index in order to generate 

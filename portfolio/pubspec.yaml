@@ -96,9 +96,10 @@ flutter:
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
+  # NOTE: excluding material icons breaks things down the line
   # DONT show material icons
   # we are already including the ones we need in our custom font pack
-  uses-material-design: false
+  uses-material-design: true
 
   fonts:
   - family: PortfolioIcons

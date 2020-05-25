@@ -164,13 +164,13 @@ class PhotoGallery extends StatelessWidget {
           shrinkWrap: false,
 
           //wrap values in keep alives
-          //addAutomaticKeepAlives: true,
+          addAutomaticKeepAlives: true,
 
           //If the children are easy to repaint 
           //it might be more efficient to not add a repaint boundary 
           //and simply repaint the children during scrolling
           //BUT our children are most gifs and not simple
-          //addRepaintBoundaries: true,
+          addRepaintBoundaries: true,
 
           //Typically, children in a scrolling container 
           //must be annotated with a semantic index in order to generate 
@@ -192,10 +192,12 @@ class PhotoGallery extends StatelessWidget {
           itemBuilder: (context, index) {
             //add addAutomaticKeepAlives should wrap this in an keep alive
             //the mixing combines with the above
-            return SlideShowItem(
-              index: index,
-              imageUrls: imageUrls,
-              controller: scrollController,
+            return KeepAliveMixin(
+              child: SlideShowItem(
+                index: index,
+                imageUrls: imageUrls,
+                controller: scrollController,
+              ),
             );
           },
           //so scrolling left and right with a finger keeps things in view

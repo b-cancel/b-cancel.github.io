@@ -57,7 +57,7 @@ List<Region> regions = [
     //these are updated by their respective layout builders
     GlobalKey(),
     GlobalKey(),
-    //initiallyOpened: true,
+    initiallyOpened: true,
   ),
   Region(
     PortfolioIcons.suitcase, 
