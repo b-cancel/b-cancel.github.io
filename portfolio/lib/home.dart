@@ -148,26 +148,30 @@ class _HomeState extends State<Home> {
 
     //add all the regions
     sliverSections.addAll(
-      List.generate(regions.length, (index) {
-        Region thisRegion = regions[index];
-        return SliverRegion(
-          headerKey: thisRegion.headerKey,
-          bodyKey: thisRegion.bodyKey,
-          title: thisRegion.title,
-          leftSpacing: thisRegion.addLeftPadding,
-          body: index == 0
-              ? Padding(
-                  padding: EdgeInsets.only(
-                    right: 48,
-                  ),
-                  child: AboutMeBody(
-                    scrollController: scrollController,
-                  ),
-                )
-              : thisRegion.body,
-          initiallyOpened: thisRegion.initiallyOpened,
-        );
-      }),
+      List.generate(
+        regions.length,
+        (index) {
+          Region thisRegion = regions[index];
+          return SliverRegion(
+            returnAsSliver: true,
+            headerKey: thisRegion.headerKey,
+            bodyKey: thisRegion.bodyKey,
+            title: thisRegion.title,
+            leftSpacing: thisRegion.addLeftPadding,
+            body: index == 0
+                ? Padding(
+                    padding: EdgeInsets.only(
+                      right: 48,
+                    ),
+                    child: AboutMeBody(
+                      scrollController: scrollController,
+                    ),
+                  )
+                : thisRegion.body,
+            initiallyOpened: thisRegion.initiallyOpened,
+          );
+        },
+      ),
     );
 
     //add last 2 bottom bits
@@ -179,7 +183,9 @@ class _HomeState extends State<Home> {
     */
 
     sliverSections.add(
-      RightBottom(),
+      RightBottom(
+        addSliverAdapter: true,
+      ),
     );
 
     //create the stack
@@ -195,6 +201,7 @@ class _HomeState extends State<Home> {
             style: MyApp.robotoMono,
             child: Stack(
               children: <Widget>[
+                /*
                 ListView(
                   primary: false,
                   //physics: BouncingScrollPhysics(),
@@ -203,7 +210,8 @@ class _HomeState extends State<Home> {
                   controller: scrollController,
                   children: sliverSections,
                 ),
-                /*
+                */
+                
                 CustomScrollView( 
                   primary: false,
                   //physics: BouncingScrollPhysics(),
@@ -212,7 +220,7 @@ class _HomeState extends State<Home> {
                   controller: scrollController,
                   slivers: sliverSections,
                 ),
-                */
+                
                 /*
                 SmartRefresher(
                   enablePullDown: true,
