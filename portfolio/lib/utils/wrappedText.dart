@@ -1,7 +1,5 @@
 //flutter
 import 'package:flutter/material.dart';
-import 'package:portfolio/main.dart';
-
 //widget
 class WrappedText extends StatelessWidget {
   WrappedText(this.text, {

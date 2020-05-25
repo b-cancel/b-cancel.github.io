@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 //internal
 import 'package:portfolio/icons/portfolio_icons_icons.dart';
-import 'package:portfolio/main.dart';
 
 //function
 showSnackBar(BuildContext context, {
@@ -15,7 +14,6 @@ showSnackBar(BuildContext context, {
   
   Scaffold.of(context).showSnackBar(
     SnackBar(
-      backgroundColor: MyApp.inactiveTabColor,
       content: Material(
         color: Colors.transparent,
         child: InkWell(

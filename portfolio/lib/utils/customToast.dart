@@ -28,7 +28,7 @@ class CustomToast extends StatelessWidget {
             Radius.circular(6),
           ),
           child: Material(
-            color: MyApp.inactiveTabColor,
+            color: Colors.transparent,
             child: InkWell(
               onTap: () {
                 BotToast.cleanAll();

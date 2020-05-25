@@ -18,7 +18,6 @@ showOptions(
     onlyOne: true,
     attachedBuilder: (_) {
       return Card(
-        color: MyApp.headerColor,
         child: Wrap(
           crossAxisAlignment: WrapCrossAlignment.center,
           children: children,
@@ -84,7 +83,7 @@ class OptionButton extends StatelessWidget {
             ),
           ),
           Container(
-            color: addBorder ? MyApp.oldGrey : MyApp.inactiveTabColor,
+            color: addBorder ? Colors.black : Colors.transparent,
             width: 2,
             height: 8 + (addBorder ? 18.0 : 8) + 8,
           ),
