@@ -15,13 +15,14 @@ import 'package:portfolio/utils/keepAliveMixin.dart';
 
 //widget
 class SliverRegion extends StatefulWidget {
-  SliverRegion({ 
+  SliverRegion({
     @required this.headerKey,
     @required this.bodyKey,
     @required this.title,
     @required this.body,
     this.initiallyOpened: false,
     this.leftSpacing: true,
+    this.useStickyHeaders: false,
   });
 
   final GlobalKey headerKey;
@@ -30,6 +31,7 @@ class SliverRegion extends StatefulWidget {
   final Widget body;
   final bool initiallyOpened;
   final bool leftSpacing;
+  final bool useStickyHeaders;
 
   @override
   _SliverRegionState createState() => _SliverRegionState();
@@ -49,50 +51,66 @@ class _SliverRegionState extends State<SliverRegion> {
   }
 
   @override
-  void dispose() { 
+  void dispose() {
     sectionOpened.removeListener(tellSystem);
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return SliverStickyHeader(
-      header: Container(
-        key: widget.headerKey,
-        child: RegionHeader(
-          regionOpened: sectionOpened, 
-          title: widget.title,
-          titleColor: MyApp.oldPurple,
-        ),
-      ),
-      sliver: SliverList(
-        delegate: SliverChildListDelegate(
-          [
-            //KeepAliveMixin here is a severe performance hit
-            KeepAliveMixin(
-              key: widget.bodyKey,
-              child: RegionBody(
-                regionOpened: sectionOpened, 
-                child: widget.body,
-                leftSpacing: widget.leftSpacing,
-              ),
-            ),
-          ],
-          //wrap values in keep alives
-          addAutomaticKeepAlives: true,
-
-          //If the children are easy to repaint 
-          //it might be more efficient to not add a repaint boundary 
-          //and simply repaint the children during scrolling
-          //BUT our children are most gifs and not simple
-          addRepaintBoundaries: false,
-
-          //Typically, children in a scrolling container 
-          //must be annotated with a semantic index in order to generate 
-          //the correct accessibility announcements
-          //addSemanticIndexes: true,
-        ),
-      ),
+    Widget header = RegionHeader(
+      regionOpened: sectionOpened,
+      title: widget.title,
+      titleColor: MyApp.oldPurple,
     );
+
+    Widget body = RegionBody(
+      regionOpened: sectionOpened,
+      child: widget.body,
+      leftSpacing: widget.leftSpacing,
+    );
+
+    if (widget.useStickyHeaders) {
+      return SliverStickyHeader(
+        header: Container(
+          key: widget.headerKey,
+          child: header,
+        ),
+        sliver: SliverList(
+          delegate: SliverChildListDelegate(
+            [
+              //KeepAliveMixin here is a severe performance hit
+              KeepAliveMixin(
+                key: widget.bodyKey,
+                child: body,
+              ),
+            ],
+            //wrap values in keep alives
+            addAutomaticKeepAlives: true,
+
+            //If the children are easy to repaint
+            //it might be more efficient to not add a repaint boundary
+            //and simply repaint the children during scrolling
+            //BUT our children are most gifs and not simple
+            addRepaintBoundaries: false,
+
+            //Typically, children in a scrolling container
+            //must be annotated with a semantic index in order to generate
+            //the correct accessibility announcements
+            //addSemanticIndexes: true,
+          ),
+        ),
+      );
+    } else {
+      return SliverToBoxAdapter(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            header,
+            body,
+          ],
+        ),
+      );
+    }
   }
 }
