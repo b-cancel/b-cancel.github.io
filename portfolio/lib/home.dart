@@ -57,7 +57,8 @@ class _HomeState extends State<Home> {
     MyApp.screenHeight = MediaQuery.of(context).size.height;
     MyApp.screenWidth = MediaQuery.of(context).size.width;
 
-    List<Widget> sliverSections = [
+    List<Widget> sliverSections = new List<Widget>();
+    /*[
       TopIntro(),
       SliverAppBar(
         pinned: true,
@@ -143,7 +144,7 @@ class _HomeState extends State<Home> {
           )
         ],
       ),
-    ];
+    ];*/
 
     //add all the regions
     sliverSections.addAll(
@@ -190,7 +191,7 @@ class _HomeState extends State<Home> {
               children: <Widget>[
                 CustomScrollView( 
                   primary: false,
-                  physics: BouncingScrollPhysics(),
+                  //physics: BouncingScrollPhysics(),
                   //so scrolling up and down with a finger keeps things in view
                   //cacheExtent: MyApp.screenHeight,
                   controller: scrollController,

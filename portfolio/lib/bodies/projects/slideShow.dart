@@ -156,7 +156,7 @@ class PhotoGallery extends StatelessWidget {
           //FixedExtentScrollPhysics()
           //same as android
           //PageScrollPhysics()
-          physics: BouncingScrollPhysics(),
+          //physics: BouncingScrollPhysics(),
           //When this is true, the scroll view is scrollable
           //even if it does not have sufficient content to actually scroll
           primary: false,
