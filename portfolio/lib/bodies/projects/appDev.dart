@@ -19,7 +19,9 @@ class AppDevelopment extends StatelessWidget {
     return DevelopmentSection(
       label: "App Development",
       initiallyOpened: false,
-      child: Column(
+      child: Container(),
+      
+      /*Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SubSection(
@@ -239,7 +241,7 @@ class AppDevelopment extends StatelessWidget {
             ),
           ),
         ],
-      ),
+      ),*/
     );
   }
 }

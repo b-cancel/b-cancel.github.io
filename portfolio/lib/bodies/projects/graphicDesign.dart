@@ -15,7 +15,9 @@ class GraphicDesign extends StatelessWidget {
     return DevelopmentSection(
       initiallyOpened: false,
       label: "Graphic Design",
-      child: Column(
+      child: Container(),
+      
+      /*Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Padding(
@@ -73,7 +75,7 @@ class GraphicDesign extends StatelessWidget {
             ],
           ),
         ],
-      ),
+      ),*/
     );
   }
 }

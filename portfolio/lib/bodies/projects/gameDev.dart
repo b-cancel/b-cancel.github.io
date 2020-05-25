@@ -15,7 +15,9 @@ class GameDevelopment extends StatelessWidget {
     return DevelopmentSection(
       initiallyOpened: false,
       label: "Game Development",
-      child: Column(
+      child: Container(),
+      
+      /*Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           SubSection(
@@ -115,7 +117,7 @@ class GameDevelopment extends StatelessWidget {
             ),
           ),
         ],
-      ),
+      ),*/
     );
   }
 }

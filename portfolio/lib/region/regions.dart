@@ -81,7 +81,7 @@ List<Region> regions = [
   Region(
     PortfolioIcons.thumbs_up,
     "References",
-    ReferencesBody(), 
+    Container(), //ReferencesBody(), 
     //these are updated by their respective layout builders
     GlobalKey(),
     GlobalKey(),

@@ -47,7 +47,7 @@ class ProjectsBody extends StatelessWidget {
             ),
           ),
           */
-          AppDevelopment(),
+          AppDevelopment(), 
           GameDevelopment(),
           WebDevelopment(),
           GraphicDesign(),
