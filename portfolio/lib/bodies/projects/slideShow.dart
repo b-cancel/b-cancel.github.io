@@ -9,6 +9,7 @@ import 'package:portfolio/bodies/projects/projects.dart';
 import 'package:portfolio/bodies/projects/slideShowItem.dart';
 import 'package:portfolio/icons/portfolio_icons_icons.dart';
 import 'package:portfolio/main.dart';
+import 'package:portfolio/utils/keepAliveMixin.dart';
 
 //widget
 class Slideshow extends StatelessWidget {
@@ -161,17 +162,21 @@ class PhotoGallery extends StatelessWidget {
           primary: false,
           //shrink wrapping is more expensive and provides no benefit in this use case
           shrinkWrap: false,
+
           //wrap values in keep alives
-          addAutomaticKeepAlives: true,
+          //addAutomaticKeepAlives: true,
+
           //If the children are easy to repaint 
           //it might be more efficient to not add a repaint boundary 
           //and simply repaint the children during scrolling
           //BUT our children are most gifs and not simple
-          addRepaintBoundaries: true,
+          //addRepaintBoundaries: true,
+
           //Typically, children in a scrolling container 
           //must be annotated with a semantic index in order to generate 
           //the correct accessibility announcements
-          addSemanticIndexes: true,
+          //addSemanticIndexes: true,
+
           //automatic dismisskeyboard on drag
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           //only on the outside
@@ -186,15 +191,15 @@ class PhotoGallery extends StatelessWidget {
           },
           itemBuilder: (context, index) {
             //add addAutomaticKeepAlives should wrap this in an keep alive
-            //like the UnDyingListItem
-            return DyingListItem(
+            //the mixing combines with the above
+            return SlideShowItem(
               index: index,
               imageUrls: imageUrls,
               controller: scrollController,
             );
           },
-          //TODO: set if needed
-          //double cacheExtent,
+          //so scrolling left and right with a finger keeps things in view
+          //cacheExtent: MyApp.screenWidth,
         ),
         Positioned(
           left: 0,

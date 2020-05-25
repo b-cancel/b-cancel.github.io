@@ -1,14 +1,17 @@
 //fluter
 import 'package:flutter/material.dart';
+import 'package:portfolio/bodies/aboutMe.dart';
 
 //plugins
 import 'package:portfolio/icons/portfolio_icons_icons.dart';
+import 'package:portfolio/utils/link/ui/hover.dart';
 
 //internal
 import 'package:portfolio/utils/link/ui/iconLink.dart';
 import 'package:portfolio/utils/link/nonWebLink.dart';
 import 'package:portfolio/utils/mySnackBar.dart';
 import 'package:portfolio/main.dart';
+import 'package:portfolio/utils/superImg.dart';
 
 //widget
 class ContactMeBody extends StatelessWidget {
@@ -34,7 +37,8 @@ class QuickLinks extends StatelessWidget {
     String number = "(956) 777-2692";
     String email = "bryan.o.cancel@gmail.com";
     String github = "https://github.com/b-cancel";
-    String resume = "https://docs.google.com/document/d/1UBKxKsYBhC5d6IxjRxmYIItFoTFb9Fs_AgX5b64sjlA";
+    String resume =
+        "https://docs.google.com/document/d/1UBKxKsYBhC5d6IxjRxmYIItFoTFb9Fs_AgX5b64sjlA";
     String hackerRank = "https://www.hackerrank.com/bryan_o_cancel?hr_r=1";
     String linkedIn = "https://www.linkedin.com/in/bryan-cancel-069a197a/";
 
@@ -57,7 +61,7 @@ class QuickLinks extends StatelessWidget {
           icon: IconLinkIcon(
             icon: PortfolioIcons.email,
           ),
-          url: email, 
+          url: email,
           label: email,
         ),
         IconWebLink(
@@ -83,8 +87,7 @@ class QuickLinks extends StatelessWidget {
         ),
         IconWebLink(
           url: linkedIn,
-          icon: 
-          IconLinkIcon(
+          icon: IconLinkIcon(
             icon: PortfolioIcons.linkedin,
           ),
           label: "Linked In",
@@ -151,43 +154,48 @@ class QRCode extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(
-        top: 16,
+      padding: EdgeInsets.all(
+        16.0,
       ),
-      child: Stack(
-        children: <Widget>[
-          Image.asset(
-            "assets/qrCode.png",
-            width: 200,
-          ),
-          Positioned.fill(
-            child: Material(
-              color: Colors.transparent,
-              child: InkWell(
-                onTap: () async {
-                  //NOTE: this only works in the web but that's where I need it to work
-                  String fileName =
-                      "Bryan_Cancel_Contact_V2P1.vcf";
-                  String url = "assets/vcards/" + fileName;
-                  if (await downloadFile(url)) {
-                    showSnackBar(
-                      context,
-                      text: "Contact Card Downloaded",
-                      icon: PortfolioIcons.check,
-                    );
-                  }
-                  else{
-                    showSnackBar(
-                      context,
-                      text: 'Contact Card Download Not Supported',
-                    );
-                  }
-                },
-                child: Container(),
+      child: OpaqueOnHover(
+        invert: true,
+        child: Stack(
+          children: <Widget>[
+            SizeContainerForImage(
+              maxSize: 200,
+              precacheImage: PreCachedImage(
+                url: "assets/qrCode.png",
+                source: Source.Asset,
+                fit: BoxFit.contain,
               ),
             ),
-          )
-        ],
+            Positioned.fill(
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  onTap: () async {
+                    //NOTE: this only works in the web but that's where I need it to work
+                    String fileName = "Bryan_Cancel_Contact_V2P1.vcf";
+                    String url = "assets/vcards/" + fileName;
+                    if (await downloadFile(url)) {
+                      showSnackBar(
+                        context,
+                        text: "Contact Card Downloaded",
+                        icon: PortfolioIcons.check,
+                      );
+                    } else {
+                      showSnackBar(
+                        context,
+                        text: 'Contact Card Download Not Supported',
+                      );
+                    }
+                  },
+                  child: Container(),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -7,6 +7,7 @@ import 'package:matrix4_transform/matrix4_transform.dart';
 //internal
 import 'package:portfolio/icons/portfolio_icons_icons.dart';
 import 'package:portfolio/utils/link/ui/hover.dart';
+import 'package:portfolio/utils/superImg.dart';
 import 'package:portfolio/utils/wrappedText.dart';
 import 'package:portfolio/region/regions.dart';
 import 'package:portfolio/main.dart';
@@ -74,9 +75,37 @@ class Face extends StatelessWidget {
       padding: EdgeInsets.all(
         16.0,
       ),
-      child: Image.asset( 
-        "assets/face/white.png",
-        width: 250,
+      child: SizeContainerForImage(
+        maxSize: 250,
+        precacheImage: PreCachedImage(
+          url: "assets/face/white.png",
+          source: Source.Asset,
+          fit: BoxFit.contain,
+        ),
+      ),
+    );
+  }
+}
+
+class SizeContainerForImage extends StatelessWidget {
+  const SizeContainerForImage({
+    Key key,
+    @required this.maxSize,
+    @required this.precacheImage,
+  }) : super(key: key);
+
+  final double maxSize;
+  final Widget precacheImage;
+
+  @override
+  Widget build(BuildContext context) {
+    return ConstrainedBox(
+      constraints: BoxConstraints(
+        maxWidth: maxSize,
+        maxHeight: maxSize,
+      ),
+      child: SizedBox.expand(
+        child: precacheImage,
       ),
     );
   }
@@ -96,28 +125,28 @@ class Logo extends StatelessWidget {
     }
     return longestFirst;
   }
-  
+
   final ValueNotifier<int> firstVN = new ValueNotifier<int>(0);
   final ValueNotifier<int> secondVN = new ValueNotifier<int>(0);
 
   final Duration delay = Duration(milliseconds: 1700);
   final Duration animation = Duration(milliseconds: 300);
-  startShuffle()async{
+  startShuffle() async {
     await Future.delayed(delay);
-    secondVN.value ++;
+    secondVN.value++;
     await Future.delayed(delay);
-    firstVN.value ++;
+    firstVN.value++;
     await Future.delayed(delay);
-    firstVN.value ++;
+    firstVN.value++;
     await Future.delayed(delay);
-    secondVN.value ++;
+    secondVN.value++;
     await Future.delayed(delay);
-    firstVN.value ++;
-    secondVN.value --;
+    firstVN.value++;
+    secondVN.value--;
     await Future.delayed(delay);
-    secondVN.value ++;
+    secondVN.value++;
     await Future.delayed(delay);
-    firstVN.value ++;
+    firstVN.value++;
     await Future.delayed(delay);
     firstVN.value = 0;
     secondVN.value = 0;
@@ -171,7 +200,7 @@ class Logo extends StatelessWidget {
                     child: Stack(
                       children: <Widget>[
                         Opacity(
-                          opacity: 0, 
+                          opacity: 0,
                           child: Text(longestFirst),
                         ),
                         Stack(
@@ -180,8 +209,8 @@ class Logo extends StatelessWidget {
                             first.length,
                             (index) {
                               return AnimatedTitle(
-                                vn: firstVN, 
-                                text: first[index], 
+                                vn: firstVN,
+                                text: first[index],
                                 index: index,
                                 fontSize: MyApp.h3,
                               );
@@ -201,7 +230,7 @@ class Logo extends StatelessWidget {
                     child: Stack(
                       children: <Widget>[
                         Opacity(
-                          opacity: 0, 
+                          opacity: 0,
                           child: Text(longestSecond),
                         ),
                         Stack(
@@ -210,8 +239,8 @@ class Logo extends StatelessWidget {
                             second.length,
                             (index) {
                               return AnimatedTitle(
-                                vn: secondVN, 
-                                text: second[index], 
+                                vn: secondVN,
+                                text: second[index],
                                 index: index,
                                 fontSize: MyApp.h3,
                               );
@@ -244,15 +273,13 @@ class AnimatedTitle extends StatelessWidget {
   final int index;
   final double fontSize;
 
-  double valueToPosition(ValueNotifier<int> vn){
-    if(vn.value == index){
+  double valueToPosition(ValueNotifier<int> vn) {
+    if (vn.value == index) {
       return 0;
-    }
-    else{
-      if(vn.value > index){
+    } else {
+      if (vn.value > index) {
         return -1;
-      }
-      else{
+      } else {
         return 1;
       }
     }
@@ -264,13 +291,15 @@ class AnimatedTitle extends StatelessWidget {
       //set whatever end was to begin
       //set new end
       //so trigger animation on end
-      animation: vn, 
+      animation: vn,
       builder: (context, child) {
         return AnimatedContainer(
           duration: kTabScrollDuration,
-          transform: Matrix4Transform().translate(
-            y: valueToPosition(vn) * (fontSize * 2),
-          ).matrix4,
+          transform: Matrix4Transform()
+              .translate(
+                y: valueToPosition(vn) * (fontSize * 2),
+              )
+              .matrix4,
           child: Text(
             text,
             style: TextStyle(

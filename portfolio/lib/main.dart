@@ -39,6 +39,9 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  static double screenHeight;
+  static double screenWidth;
+  
   //used everywhere
   static TextStyle robotoMono = TextStyle(
     fontFamily: 'RobotoMono',

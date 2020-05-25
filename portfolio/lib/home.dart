@@ -54,6 +54,9 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    MyApp.screenHeight = MediaQuery.of(context).size.height;
+    MyApp.screenWidth = MediaQuery.of(context).size.width;
+
     List<Widget> sliverSections = [
       TopIntro(),
       SliverAppBar(
@@ -191,7 +194,11 @@ class _HomeState extends State<Home> {
                   controller: _refreshController,
                   onRefresh: _onRefresh,
                   onLoading: _onLoading,
-                  child: CustomScrollView(
+                  child: CustomScrollView( 
+                    primary: false,
+                    //physics: BouncingScrollPhysics(),
+                    //so scrolling up and down with a finger keeps things in view
+                    //cacheExtent: MyApp.screenHeight,
                     controller: scrollController,
                     slivers: sliverSections,
                   ),

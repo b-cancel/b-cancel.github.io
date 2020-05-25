@@ -114,9 +114,11 @@ class _ColorizeLinkOnHoverState extends State<ColorizeLinkOnHover> {
 class OpaqueOnHover extends StatefulWidget {
   OpaqueOnHover({
     @required this.child,
+    this.invert: false,
   });
 
   final Widget child;
+  final bool invert;
 
   @override
   _OpaqueOnHoverState createState() => _OpaqueOnHoverState();
@@ -134,7 +136,7 @@ class _OpaqueOnHoverState extends State<OpaqueOnHover> {
         child: widget.child,
         builder: (context, resuable) {
           return Opacity(
-            opacity: isHovered.value ? 1 : .50,
+            opacity: widget.invert ? (isHovered.value ? .5 : 1) : (isHovered.value ? 1 : .5),
             child: resuable,
           );
         },

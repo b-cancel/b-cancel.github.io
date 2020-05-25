@@ -4,47 +4,10 @@ import 'package:portfolio/main.dart';
 
 //plugin
 import 'package:carousel_slider/carousel_slider.dart';
-//import 'package:image_size_getter/image_size_getter.dart';
 
 //widget
-class UndyingListItem extends StatefulWidget {
-  const UndyingListItem({
-    Key key,
-    @required this.index,
-    @required this.imageUrls,
-    @required this.controller,
-  }) : super(key: key);
-
-  final int index;
-  final List<String> imageUrls;
-  final ScrollController controller;
-
-  @override
-  _UndyingListItemState createState() => _UndyingListItemState();
-}
-
-class _UndyingListItemState extends State<UndyingListItem>
-    with AutomaticKeepAliveClientMixin {
-  @override
-  Widget build(BuildContext context) {
-    //fixing must call super problem
-    //https://dart.dev/tools/diagnostic-messages#must_call_super
-    super.build(context);
-
-    //actual build
-    return DyingListItem(
-      index: widget.index,
-      imageUrls: widget.imageUrls,
-      controller: widget.controller,
-    );
-  }
-
-  @override
-  bool get wantKeepAlive => true;
-}
-
-class DyingListItem extends StatelessWidget {
-  const DyingListItem({
+class SlideShowItem extends StatelessWidget {
+  const SlideShowItem({
     Key key,
     @required this.index,
     @required this.imageUrls,

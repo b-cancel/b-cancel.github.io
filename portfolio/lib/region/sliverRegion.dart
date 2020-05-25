@@ -11,10 +11,11 @@ import 'package:portfolio/region/regionHeader.dart';
 //internal
 import 'package:portfolio/main.dart';
 import 'package:portfolio/region/regions.dart';
+import 'package:portfolio/utils/keepAliveMixin.dart';
 
 //widget
 class SliverRegion extends StatefulWidget {
-  SliverRegion({
+  SliverRegion({ 
     @required this.headerKey,
     @required this.bodyKey,
     @required this.title,
@@ -67,6 +68,7 @@ class _SliverRegionState extends State<SliverRegion> {
       sliver: SliverList(
         delegate: SliverChildListDelegate(
           [
+            //KeepAliveMixin here is a severe performance hit
             Container(
               key: widget.bodyKey,
               child: RegionBody(
@@ -76,6 +78,19 @@ class _SliverRegionState extends State<SliverRegion> {
               ),
             ),
           ],
+          //wrap values in keep alives
+          //addAutomaticKeepAlives: true,
+          
+          //If the children are easy to repaint 
+          //it might be more efficient to not add a repaint boundary 
+          //and simply repaint the children during scrolling
+          //BUT our children are most gifs and not simple
+          //addRepaintBoundaries: true,
+
+          //Typically, children in a scrolling container 
+          //must be annotated with a semantic index in order to generate 
+          //the correct accessibility announcements
+          //addSemanticIndexes: true,
         ),
       ),
     );
