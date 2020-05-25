@@ -153,7 +153,6 @@ class _HomeState extends State<Home> {
         (index) {
           Region thisRegion = regions[index];
           return SliverRegion(
-            returnAsSliver: true,
             headerKey: thisRegion.headerKey,
             bodyKey: thisRegion.bodyKey,
             title: thisRegion.title,
@@ -184,7 +183,7 @@ class _HomeState extends State<Home> {
 
     sliverSections.add(
       RightBottom(
-        addSliverAdapter: true,
+        addSliverAdapter: false,
       ),
     );
 
@@ -201,7 +200,7 @@ class _HomeState extends State<Home> {
             style: MyApp.robotoMono,
             child: Stack(
               children: <Widget>[
-                /*
+                
                 ListView(
                   primary: false,
                   //physics: BouncingScrollPhysics(),
@@ -210,8 +209,8 @@ class _HomeState extends State<Home> {
                   controller: scrollController,
                   children: sliverSections,
                 ),
-                */
                 
+                /*
                 CustomScrollView( 
                   primary: false,
                   //physics: BouncingScrollPhysics(),
@@ -220,6 +219,7 @@ class _HomeState extends State<Home> {
                   controller: scrollController,
                   slivers: sliverSections,
                 ),
+                */
                 
                 /*
                 SmartRefresher(

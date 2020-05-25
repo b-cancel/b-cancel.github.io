@@ -24,6 +24,9 @@ dependencies:
   flutter:
     sdk: flutter
   
+  #TESTING
+  sticky_headers: ^0.1.8+1
+  
   #Universal (to avoid warning on flutter web)
   universal_platform: ^0.1.3
   universal_html: ^1.2.2

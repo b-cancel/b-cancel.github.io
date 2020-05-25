@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 //plugin
 import 'package:flutter_sticky_header/flutter_sticky_header.dart';
+import 'package:sticky_headers/sticky_headers.dart';
 
 //internal
 import 'package:portfolio/region/regionBody.dart';
@@ -116,12 +117,9 @@ class _SliverRegionState extends State<SliverRegion> {
         );
       }
     } else {
-      return Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          header,
-          body,
-        ],
+      return StickyHeader(
+        header: header,
+        content: body,
       );
     }
   }
