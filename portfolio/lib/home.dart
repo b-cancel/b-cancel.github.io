@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 //plugin
 import 'package:portfolio/icons/portfolio_icons_icons.dart';
+import 'package:side_header_list_view/side_header_list_view.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:universal_html/html.dart';
 
@@ -200,7 +201,6 @@ class _HomeState extends State<Home> {
             style: MyApp.robotoMono,
             child: Stack(
               children: <Widget>[
-                
                 ListView(
                   primary: false,
                   //physics: BouncingScrollPhysics(),
@@ -209,7 +209,7 @@ class _HomeState extends State<Home> {
                   controller: scrollController,
                   children: sliverSections,
                 ),
-                
+
                 /*
                 CustomScrollView( 
                   primary: false,
@@ -220,7 +220,7 @@ class _HomeState extends State<Home> {
                   slivers: sliverSections,
                 ),
                 */
-                
+
                 /*
                 SmartRefresher(
                   enablePullDown: true,
@@ -285,6 +285,89 @@ class _HomeState extends State<Home> {
         //shift if needed
         return Scaffold(
           backgroundColor: MyApp.bodyColor,
+          appBar: AppBar(
+            backgroundColor: MyApp.inactiveTabColor,
+            title: AnimatedBuilder(
+              animation: topScrolledAway,
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  if (constraints.maxWidth >= 480) {
+                    return Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: <Widget>[
+                        Name(),
+                        Expanded(
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                              left: 12,
+                              bottom: 6.0,
+                            ),
+                            child: Joke(),
+                          ),
+                        ),
+                      ],
+                    );
+                  } else if (constraints.maxWidth <= 320) {
+                    return FittedBox(
+                      fit: BoxFit.contain,
+                      child: Name(),
+                    );
+                  } else {
+                    return Container(
+                      height: 56,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Expanded(
+                            child: FittedBox(
+                              fit: BoxFit.contain,
+                              child: Name(),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(
+                              left: 8,
+                            ),
+                            child: Joke(),
+                          ),
+                        ],
+                      ),
+                    );
+                  }
+                },
+              ),
+              builder: (context, child) {
+                if (topScrolledAway.value) {
+                  return FittedBox(
+                    fit: BoxFit.contain,
+                    child: Name(),
+                  );
+                } else {
+                  return child;
+                }
+              },
+            ),
+            actions: <Widget>[
+              AnimatedBuilder(
+                animation: isMenuOpen,
+                child: IconButton(
+                  icon: Icon(
+                    PortfolioIcons.menu,
+                  ),
+                  onPressed: () {
+                    isMenuOpen.value = true;
+                  },
+                ),
+                builder: (context, child) {
+                  return Visibility(
+                    visible: isMenuOpen.value == false,
+                    child: child,
+                  );
+                },
+              )
+            ],
+          ),
           body: Stack(
             children: <Widget>[
               Positioned.fill(
@@ -296,6 +379,7 @@ class _HomeState extends State<Home> {
                   child: reusableChild,
                 ),
               ),
+              /*
               Positioned.fill(
                 child: Visibility(
                   visible: isMenuOpen.value,
@@ -309,6 +393,7 @@ class _HomeState extends State<Home> {
                   ),
                 ),
               ),
+              */
             ],
           ),
         );
