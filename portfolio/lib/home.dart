@@ -188,6 +188,15 @@ class _HomeState extends State<Home> {
             style: MyApp.robotoMono,
             child: Stack(
               children: <Widget>[
+                CustomScrollView( 
+                  primary: false,
+                  physics: BouncingScrollPhysics(),
+                  //so scrolling up and down with a finger keeps things in view
+                  //cacheExtent: MyApp.screenHeight,
+                  controller: scrollController,
+                  slivers: sliverSections,
+                ),
+                /*
                 SmartRefresher(
                   enablePullDown: true,
                   enablePullUp: false,
@@ -202,11 +211,12 @@ class _HomeState extends State<Home> {
                     controller: scrollController,
                     slivers: sliverSections,
                   ),
-                ),
+                ),*/
                 /*CustomScrollView(
                   controller: scrollController,
                   slivers: sliverSections,
                 ),*/
+                /*
                 Positioned(
                   right: 0,
                   top: 0,
@@ -219,6 +229,7 @@ class _HomeState extends State<Home> {
                     onTop: onTop,
                   ),
                 ),
+                */
               ],
             ),
           ),
