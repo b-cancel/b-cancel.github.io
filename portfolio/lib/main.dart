@@ -41,7 +41,7 @@ void main() {
 class MyApp extends StatelessWidget {
   static double screenHeight;
   static double screenWidth;
-  
+
   //used everywhere
   static TextStyle robotoMono = TextStyle(
     fontFamily: 'RobotoMono',
@@ -98,7 +98,7 @@ class MyApp extends StatelessWidget {
   //gallery
   static const Color galleryBackground = Color(0xFF001F33);
   static const Color galleryBorder = Color(0xFF007ACC);
-  static const Color galleryTopRibbon =  Color(0xFF1E1E1E);
+  static const Color galleryTopRibbon = Color(0xFF1E1E1E);
 
   // This widget is the root of your application.
   @override
@@ -130,6 +130,7 @@ class MyApp extends StatelessWidget {
 //used to place where the scroll bar starts
 //and to determine if we should hide the joke
 double topIntroHeight = 8.0 + 16;
+
 class TopIntro extends StatelessWidget {
   const TopIntro({
     Key key,
@@ -228,46 +229,55 @@ class Joke extends StatelessWidget {
 
 class RightBottom extends StatelessWidget {
   const RightBottom({
+    this.addSliverAdapter: false,
     Key key,
   }) : super(key: key);
 
+  final bool addSliverAdapter;
+
   @override
   Widget build(BuildContext context) {
-    return SliverToBoxAdapter(
-      child: Padding(
-        padding: EdgeInsets.only(
-          top: 16.0,
-        ),
-        child: Center(
-          child: DefaultTextStyle(
-            style: MyApp.robotoMono.copyWith(
-              fontSize: MyApp.h6,
-              color: Colors.white,
-            ),
-            child: Column(
-              children: <Widget>[
-                Text("All Rights Reserved @ 2020\n"),
-                Text("Inspired By IDEs Everywhere"),
-                Text("Developed And Designed"),
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Text("by "),
-                    Text(
-                      "Bryan Cancel",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
+    Widget bottom = Padding(
+      padding: EdgeInsets.only(
+        top: 16.0,
+      ),
+      child: Center(
+        child: DefaultTextStyle(
+          style: MyApp.robotoMono.copyWith(
+            fontSize: MyApp.h6,
+            color: Colors.white,
+          ),
+          child: Column(
+            children: <Widget>[
+              Text("All Rights Reserved @ 2020\n"),
+              Text("Inspired By IDEs Everywhere"),
+              Text("Developed And Designed"),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Text("by "),
+                  Text(
+                    "Bryan Cancel",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
                     ),
-                  ],
-                ),
-                Text("using Dart/Flutter"),
-              ],
-            ),
+                  ),
+                ],
+              ),
+              Text("using Dart/Flutter"),
+            ],
           ),
         ),
       ),
     );
+
+    if (addSliverAdapter) {
+      return SliverToBoxAdapter(
+        child: bottom,
+      );
+    } else {
+      return bottom;
+    }
   }
 }
 

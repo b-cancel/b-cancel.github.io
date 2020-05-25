@@ -171,10 +171,16 @@ class _HomeState extends State<Home> {
     );
 
     //add last 2 bottom bits
+    /*
     sliverSections.addAll([
       RightBottom(),
       FillRemaining(),
     ].toList());
+    */
+
+    sliverSections.add(
+      RightBottom(),
+    );
 
     //create the stack
     Stack theStack = Stack(
@@ -189,6 +195,15 @@ class _HomeState extends State<Home> {
             style: MyApp.robotoMono,
             child: Stack(
               children: <Widget>[
+                ListView(
+                  primary: false,
+                  //physics: BouncingScrollPhysics(),
+                  //so scrolling up and down with a finger keeps things in view
+                  //cacheExtent: MyApp.screenHeight,
+                  controller: scrollController,
+                  children: sliverSections,
+                ),
+                /*
                 CustomScrollView( 
                   primary: false,
                   //physics: BouncingScrollPhysics(),
@@ -197,6 +212,7 @@ class _HomeState extends State<Home> {
                   controller: scrollController,
                   slivers: sliverSections,
                 ),
+                */
                 /*
                 SmartRefresher(
                   enablePullDown: true,
