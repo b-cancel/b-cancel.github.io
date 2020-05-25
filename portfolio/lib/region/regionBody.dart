@@ -122,7 +122,7 @@ class EndRegionCloseButton extends StatelessWidget {
             ),
             child: Text(
               "#endregion",
-              style: MyApp.robotoMono.copyWith(
+              style: TextStyle(
                 color: MyApp.oldGrey,
               ),
             ),

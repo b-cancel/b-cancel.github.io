@@ -59,50 +59,47 @@ class _SectionHeaderState extends State<SectionHeader> {
         collapsible: widget.collapsible,
         sectionOpened: widget.sectionOpened,
         label: widget.label,
-        title: DefaultTextStyle(
-          style: MyApp.robotoMono,
-          child: Wrap(
-            crossAxisAlignment: WrapCrossAlignment.end,
-            children: <Widget>[
-              Visibility(
-                visible: widget.title != null && widget.title != "",
-                child: Text(
-                  widget.title + " ",
-                  style: TextStyle(
-                    fontSize: 24,
-                    color: sectionTypeToColor[widget.sectionType],
-                    fontWeight: FontWeight.bold,
-                  ),
+        title: Wrap(
+          crossAxisAlignment: WrapCrossAlignment.end,
+          children: <Widget>[
+            Visibility(
+              visible: widget.title != null && widget.title != "",
+              child: Text(
+                widget.title + " ",
+                style: TextStyle(
+                  fontSize: 24,
+                  color: sectionTypeToColor[widget.sectionType],
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(
-                  bottom: 4,
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                bottom: 4,
+              ),
+              child: DefaultTextStyle(
+                style: TextStyle(
+                  color: MyApp.oldGrey,
+                  fontSize: 18,
                 ),
-                child: DefaultTextStyle(
-                  style: TextStyle(
-                    color: MyApp.oldGrey,
-                    fontSize: 18,
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        "= " + sectionTypeToLeft[widget.sectionType],
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      "= " + sectionTypeToLeft[widget.sectionType],
+                    ),
+                    Visibility(
+                      visible: widget.sectionOpened.value == false,
+                      child: Text(
+                        "..." + sectionTypeToRight[widget.sectionType],
                       ),
-                      Visibility(
-                        visible: widget.sectionOpened.value == false,
-                        child: Text(
-                          "..." + sectionTypeToRight[widget.sectionType],
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              )
-            ],
-          ),
+              ),
+            )
+          ],
         ),
       ),
     );

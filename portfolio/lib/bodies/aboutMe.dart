@@ -169,7 +169,7 @@ class Logo extends StatelessWidget {
         vertical: 16.0,
       ),
       child: DefaultTextStyle(
-        style: MyApp.robotoMono.copyWith(
+        style: TextStyle(
           fontWeight: FontWeight.bold,
           color: Colors.black,
           fontSize: MyApp.h3,
@@ -321,7 +321,7 @@ class Hello extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       "Hi! I'm Bryan Cancel",
-      style: MyApp.robotoMono.copyWith(
+      style: TextStyle(
         fontSize: 14,
         fontWeight: FontWeight.bold,
       ),
@@ -393,7 +393,7 @@ class Introduction extends StatelessWidget {
                             ),
                             child: Text(
                               "Quick Links",
-                              style: MyApp.robotoMono.copyWith(
+                              style: TextStyle(
                                 fontWeight: FontWeight.bold,
                               ),
                             ),

@@ -191,7 +191,7 @@ class IconLabelLink extends StatelessWidget {
             child: Text(
               label ?? "",
               textAlign: TextAlign.center,
-              style: MyApp.robotoMono.copyWith(
+              style: TextStyle(
                 fontWeight: FontWeight.bold,
               ),
             ),

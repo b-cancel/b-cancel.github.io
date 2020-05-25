@@ -32,7 +32,6 @@ List<Widget> toWrappableText(String text, {String pattern: " "}) {
     widgets.add(
       Text(
         bits[i] + (isLast ? "" : pattern),
-        style: MyApp.robotoMono,
       ),
     );
   }

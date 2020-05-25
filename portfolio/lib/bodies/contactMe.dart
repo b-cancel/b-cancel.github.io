@@ -110,7 +110,7 @@ class QRSection extends StatelessWidget {
           top: 16.0,
         ),
         child: DefaultTextStyle(
-          style: MyApp.robotoMono.copyWith(
+          style: TextStyle(
             fontSize: 16,
             color: Colors.white,
           ),

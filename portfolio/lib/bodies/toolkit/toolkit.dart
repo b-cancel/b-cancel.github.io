@@ -16,7 +16,7 @@ class ToolKitBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTextStyle(
-      style: MyApp.robotoMono.copyWith(
+      style: TextStyle(
         color: MyApp.oldGrey,
         fontSize: MyApp.h4,
       ),
@@ -130,12 +130,12 @@ class ToolKitBody extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   DefaultTextStyle(
-                    style: MyApp.robotoMono.copyWith(
+                    style: TextStyle(
                       color: Colors.white,
                       fontSize: MyApp.h5,
                     ),
                     child: DefaultTextStyle(
-                      style: MyApp.robotoMono.copyWith(
+                      style: TextStyle(
                         color: Colors.white,
                       ),
                       child: Wrap(
@@ -145,7 +145,7 @@ class ToolKitBody extends StatelessWidget {
                               Text("English"),
                               Text(
                                 " (speak, read, write,), ",
-                                style: MyApp.robotoMono.copyWith(
+                                style: TextStyle(
                                   color: MyApp.oldGrey,
                                 ),
                               ),
@@ -156,7 +156,7 @@ class ToolKitBody extends StatelessWidget {
                               Text("Spanish"),
                               Text(
                                 " (speak, read, write,),",
-                                style: MyApp.robotoMono.copyWith(
+                                style: TextStyle(
                                   color: MyApp.oldGrey,
                                 ),
                               ),
@@ -192,7 +192,7 @@ class Chips extends StatelessWidget {
           return AChip(
             child: Text(
               chips[index],
-              style: MyApp.robotoMono.copyWith(
+              style: TextStyle(
                 color: Colors.white,
               ),
             ),

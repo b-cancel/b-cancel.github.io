@@ -179,7 +179,7 @@ class MenuTile extends StatelessWidget {
         children: <Widget>[
           Text(
             title,
-            style: MyApp.robotoMono.copyWith(
+            style: TextStyle(
               //size of text in list tile
               fontSize: 16,
             ),

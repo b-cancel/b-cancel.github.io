@@ -74,7 +74,7 @@ class OptionButton extends StatelessWidget {
                   visible: label != null,
                   child: Text(
                     label ?? "",
-                    style: MyApp.robotoMono.copyWith(
+                    style: TextStyle(
                       fontWeight:
                           addBorder ? FontWeight.bold : FontWeight.normal,
                     ),

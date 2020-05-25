@@ -75,14 +75,14 @@ class _CollapsibleSectionState extends State<CollapsibleSection> {
           children: <Widget>[
             Text(
               widget.label,
-              style: MyApp.robotoMono.copyWith(
+              style: TextStyle(
                 color: widget.labelColor,
                 fontSize: widget.fontSize,
               ),
             ),
             Text(
               widget.separator + " " + sectionTypeToLeft[widget.sectionType],
-              style: MyApp.robotoMono.copyWith(
+              style: TextStyle(
                 color: MyApp.oldGrey,
                 fontSize: widget.fontSize,
               ),
@@ -91,7 +91,7 @@ class _CollapsibleSectionState extends State<CollapsibleSection> {
               visible: isOpened.value == false,
               child: Text(
                 "+" + sectionTypeToRight[widget.sectionType] + ",",
-                style: MyApp.robotoMono.copyWith(
+                style: TextStyle(
                   color: MyApp.oldGrey,
                   fontSize: widget.fontSize,
                 ),
@@ -137,7 +137,7 @@ class _CollapsibleSectionState extends State<CollapsibleSection> {
                 ),
                 child: Text(
                   sectionTypeToRight[widget.sectionType] + ", ",
-                  style: MyApp.robotoMono.copyWith(
+                  style: TextStyle(
                     color: MyApp.oldGrey,
                     fontSize: widget.fontSize,
                   ),

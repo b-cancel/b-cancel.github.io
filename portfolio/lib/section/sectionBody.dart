@@ -85,7 +85,7 @@ class _SectionBodyState extends State<SectionBody> {
             ),
             Text(
               sectionTypeToRight[widget.sectionType],
-              style: MyApp.robotoMono.copyWith(
+              style: TextStyle(
                 color: MyApp.oldGrey,
                 fontSize: 18,
               ),

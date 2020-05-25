@@ -143,7 +143,7 @@ class WorkExperienceBody extends StatelessWidget {
                                 children: <Widget>[
                                   Text(
                                     "comp: ",
-                                    style: MyApp.robotoMono.copyWith(
+                                    style: TextStyle(
                                       color: MyApp.oldGrey,
                                     ),
                                   ),
@@ -158,7 +158,7 @@ class WorkExperienceBody extends StatelessWidget {
                               children: <Widget>[
                                 Text(
                                   "loc: ",
-                                  style: MyApp.robotoMono.copyWith(
+                                  style: TextStyle(
                                     color: MyApp.oldGrey,
                                   ),
                                 ),
@@ -216,7 +216,7 @@ class WorkExperienceBody extends StatelessWidget {
                         children: <Widget>[
                           Text(
                             "comp: ",
-                            style: MyApp.robotoMono.copyWith(
+                            style: TextStyle(
                               color: MyApp.oldGrey,
                             ),
                           ),
@@ -228,14 +228,14 @@ class WorkExperienceBody extends StatelessWidget {
                       children: <Widget>[
                         Text(
                           "start: ",
-                          style: MyApp.robotoMono.copyWith(
+                          style: TextStyle(
                             color: MyApp.oldGrey,
                           ),
                         ),
                         Text(thisWork.startDate + ", "),
                         Text(
                           "end: ",
-                          style: MyApp.robotoMono.copyWith(
+                          style: TextStyle(
                             color: MyApp.oldGrey,
                           ),
                         ),
@@ -244,7 +244,7 @@ class WorkExperienceBody extends StatelessWidget {
                     ),
                     Text(
                       "description: ",
-                      style: MyApp.robotoMono.copyWith(
+                      style: TextStyle(
                         color: MyApp.oldGrey,
                       ),
                     ),
@@ -255,7 +255,7 @@ class WorkExperienceBody extends StatelessWidget {
                       children: <Widget>[
                         Text(
                           "loc: ",
-                          style: MyApp.robotoMono.copyWith(
+                          style: TextStyle(
                             color: MyApp.oldGrey,
                           ),
                         ),

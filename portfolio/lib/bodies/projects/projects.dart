@@ -173,7 +173,7 @@ class ProjectSection extends StatelessWidget {
                   children: [
                     Text(
                       "descrip: ",
-                      style: MyApp.robotoMono.copyWith(
+                      style: TextStyle(
                         color: MyApp.oldGrey,
                       ),
                     ),
@@ -307,7 +307,7 @@ class GalleryHeader extends StatelessWidget {
                       url: topLink,
                       text: Text(
                         "See More",
-                        style: MyApp.robotoMono.copyWith(
+                        style: TextStyle(
                           color: Colors.white,
                         ),
                         overflow: TextOverflow.ellipsis,
@@ -320,7 +320,7 @@ class GalleryHeader extends StatelessWidget {
                         url: topLink,
                         text: Text(
                           topLink,
-                          style: MyApp.robotoMono.copyWith(
+                          style: TextStyle(
                             color: MyApp.oldGrey,
                           ),
                           overflow: TextOverflow.ellipsis,

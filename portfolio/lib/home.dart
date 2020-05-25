@@ -55,9 +55,6 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    MyApp.screenHeight = MediaQuery.of(context).size.height;
-    MyApp.screenWidth = MediaQuery.of(context).size.width;
-
     List<Widget> sliverSections = new List<Widget>();
     /*[
       TopIntro(),
@@ -197,66 +194,63 @@ class _HomeState extends State<Home> {
           //NOTE: Flutter has 2 options
           //1. ScrollBar (but you cant drag it)
           //2. CupertinoScrollBar (but you cant click to travel)
-          child: DefaultTextStyle(
-            style: MyApp.robotoMono,
-            child: Stack(
-              children: <Widget>[
-                ListView(
-                  primary: false,
-                  //physics: BouncingScrollPhysics(),
-                  //so scrolling up and down with a finger keeps things in view
-                  //cacheExtent: MyApp.screenHeight,
-                  controller: scrollController,
-                  children: sliverSections,
-                ),
+          child: Stack(
+            children: <Widget>[
+              ListView(
+                primary: false,
+                //physics: BouncingScrollPhysics(),
+                //so scrolling up and down with a finger keeps things in view
+                //cacheExtent: MyApp.screenHeight,
+                controller: scrollController,
+                children: sliverSections,
+              ),
 
-                /*
-                CustomScrollView( 
+              /*
+              CustomScrollView( 
+                primary: false,
+                //physics: BouncingScrollPhysics(),
+                //so scrolling up and down with a finger keeps things in view
+                //cacheExtent: MyApp.screenHeight,
+                controller: scrollController,
+                slivers: sliverSections,
+              ),
+              */
+
+              /*
+              SmartRefresher(
+                enablePullDown: true,
+                enablePullUp: false,
+                controller: _refreshController,
+                onRefresh: _onRefresh,
+                onLoading: _onLoading,
+                child: CustomScrollView( 
                   primary: false,
-                  //physics: BouncingScrollPhysics(),
+                  physics: BouncingScrollPhysics(),
                   //so scrolling up and down with a finger keeps things in view
                   //cacheExtent: MyApp.screenHeight,
                   controller: scrollController,
                   slivers: sliverSections,
                 ),
-                */
-
-                /*
-                SmartRefresher(
-                  enablePullDown: true,
-                  enablePullUp: false,
-                  controller: _refreshController,
-                  onRefresh: _onRefresh,
-                  onLoading: _onLoading,
-                  child: CustomScrollView( 
-                    primary: false,
-                    physics: BouncingScrollPhysics(),
-                    //so scrolling up and down with a finger keeps things in view
-                    //cacheExtent: MyApp.screenHeight,
-                    controller: scrollController,
-                    slivers: sliverSections,
-                  ),
-                ),*/
-                /*CustomScrollView(
-                  controller: scrollController,
-                  slivers: sliverSections,
-                ),*/
-                /*
-                Positioned(
-                  right: 0,
-                  top: 0,
-                  bottom: 0,
-                  child: ScrollBar(
-                    scrollController: scrollController,
-                    //here they are updated
-                    topScrolledAway: topScrolledAway,
-                    overScroll: overScroll,
-                    onTop: onTop,
-                  ),
+              ),*/
+              /*CustomScrollView(
+                controller: scrollController,
+                slivers: sliverSections,
+              ),*/
+              /*
+              Positioned(
+                right: 0,
+                top: 0,
+                bottom: 0,
+                child: ScrollBar(
+                  scrollController: scrollController,
+                  //here they are updated
+                  topScrolledAway: topScrolledAway,
+                  overScroll: overScroll,
+                  onTop: onTop,
                 ),
-                */
-              ],
-            ),
+              ),
+              */
+            ],
           ),
         ),
         ScrollToTopButton(

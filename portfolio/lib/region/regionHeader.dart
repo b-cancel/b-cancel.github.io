@@ -110,7 +110,7 @@ class _RegionHeaderState extends State<RegionHeader> {
                                 ),
                                 child: Text(
                                   widget.title,
-                                  style: MyApp.robotoMono.copyWith(
+                                  style: TextStyle(
                                     color: Colors.white,
                                     fontSize: widget.fontSize,
                                   ),
@@ -155,14 +155,14 @@ class TitlePortion extends StatelessWidget {
         ),
         child: Text(
           "#region",
-          style: MyApp.robotoMono.copyWith(
+          style: TextStyle(
             color: MyApp.oldGrey,
           ),
         ),
       ),
       Text(
         "\"" + title + "\"",
-        style: MyApp.robotoMono.copyWith(
+        style: TextStyle(
           color: titleColor,
           fontSize: fontSize,
         ),

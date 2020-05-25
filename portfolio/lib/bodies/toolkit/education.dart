@@ -72,7 +72,7 @@ class University extends StatelessWidget {
         separator: "",
         sectionType: SectionType.Parenthesis,
         child: DefaultTextStyle(
-          style: MyApp.robotoMono.copyWith(
+          style: TextStyle(
             color: Colors.white,
             fontSize: MyApp.h5,
           ),
@@ -92,7 +92,7 @@ class University extends StatelessWidget {
                       ),
                       Text(
                         "Loc: ",
-                        style: MyApp.robotoMono.copyWith(
+                        style: TextStyle(
                           color: MyApp.oldGrey,
                         ),
                       ),
@@ -103,7 +103,7 @@ class University extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         "Deg: ",
-                        style: MyApp.robotoMono.copyWith(
+                        style: TextStyle(
                           color: MyApp.oldGrey,
                         ),
                       ),
@@ -119,14 +119,14 @@ class University extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         "Graduated: ",
-                        style: MyApp.robotoMono.copyWith(
+                        style: TextStyle(
                           color: MyApp.oldGrey,
                         ),
                       ),
                       Text("May 2019, "),
                       Text(
                         "GPA: ",
-                        style: MyApp.robotoMono.copyWith(
+                        style: TextStyle(
                           color: MyApp.oldGrey,
                         ),
                       ),
@@ -197,7 +197,7 @@ class HighSchool extends StatelessWidget {
         initiallyOpened: false,
         sectionType: SectionType.Parenthesis,
         child: DefaultTextStyle(
-          style: MyApp.robotoMono.copyWith(
+          style: TextStyle(
             color: Colors.white,
             fontSize: MyApp.h5,
           ),
@@ -214,7 +214,7 @@ class HighSchool extends StatelessWidget {
                   ),
                   Text(
                     "Loc: ",
-                    style: MyApp.robotoMono.copyWith(
+                    style: TextStyle(
                       color: MyApp.oldGrey,
                     ),
                   ),
@@ -225,7 +225,7 @@ class HighSchool extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     "Deg: ",
-                    style: MyApp.robotoMono.copyWith(
+                    style: TextStyle(
                       color: MyApp.oldGrey,
                     ),
                   ),
@@ -241,14 +241,14 @@ class HighSchool extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     "Graduated: ",
-                    style: MyApp.robotoMono.copyWith(
+                    style: TextStyle(
                       color: MyApp.oldGrey,
                     ),
                   ),
                   Text("May 2014, "),
                   Text(
                     "GPA: ",
-                    style: MyApp.robotoMono.copyWith(
+                    style: TextStyle(
                       color: MyApp.oldGrey,
                     ),
                   ),
