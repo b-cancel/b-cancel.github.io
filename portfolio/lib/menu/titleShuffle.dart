@@ -71,11 +71,6 @@ class Logo extends StatelessWidget {
       color: getTextColor(),
     );
 
-    BorderSide otherBorer = BorderSide(
-      width: 2,
-      color: getOtherColor(),
-    );
-
     //return
     return Padding(
       padding: EdgeInsets.symmetric(

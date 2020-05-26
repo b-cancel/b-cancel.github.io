@@ -97,8 +97,11 @@ class _MyWorkState extends State<MyWork> {
               onRefresh: _onRefresh,
               onLoading: _onLoading,
               child: ListView(
-                primary: false,
-                //physics: BouncingScrollPhysics(),
+                //When this is true, the scroll view is scrollable
+                //even if it does not have sufficient content to actually scroll
+                //primary: true, //TODO: be enable this
+                //iOS feel
+                physics: BouncingScrollPhysics(),
                 //so scrolling up and down with a finger keeps things in view
                 //cacheExtent: MyApp.screenHeight,
                 controller: scrollController,

@@ -8,6 +8,7 @@ import 'package:portfolio/utils/link/ui/hover.dart';
 showOptions(
   BuildContext context, {
   List<Widget> children,
+  bool lightMode: true,
   PreferDirection preferDirection: PreferDirection.topCenter,
 }) {
   BotToast.showAttachedWidget(
@@ -17,10 +18,13 @@ showOptions(
     enableSafeArea: true,
     onlyOne: true,
     attachedBuilder: (_) {
-      return Card(
-        child: Wrap(
-          crossAxisAlignment: WrapCrossAlignment.center,
-          children: children,
+      return Theme(
+        data: lightMode ? ThemeData.dark() : ThemeData.light(),
+        child: Card(
+          child: Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            children: children,
+          ),
         ),
       );
     },
@@ -96,8 +100,9 @@ class OptionButton extends StatelessWidget {
           child: Material(
             color: Colors.transparent,
             child: InkWell(
-                onTap: onTap, //might be null
-                child: button),
+              onTap: onTap, //might be null
+              child: button,
+            ),
           ),
         );
       } else {

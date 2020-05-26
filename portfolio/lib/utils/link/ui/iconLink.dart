@@ -22,15 +22,18 @@ class IconPhoneLink extends StatelessWidget {
     @required this.url,
     @required this.icon,
     this.label,
+    this.lightMode: true,
   });
 
   final String url;
   final Widget icon;
   final String label;
+  final bool lightMode;
 
   @override
   Widget build(BuildContext context) {
     return IconLink(
+      lightMode: lightMode,
       onTap: () {
         copyToClipboard(
           context,
@@ -40,6 +43,7 @@ class IconPhoneLink extends StatelessWidget {
       onShowOptions: () {
         showOptions(
           context,
+          lightMode: lightMode,
           children: [
             OptionButton(
               label: label,
@@ -72,15 +76,18 @@ class IconEmailLink extends StatelessWidget {
     @required this.url,
     @required this.icon,
     this.label,
+    this.lightMode: true,
   });
 
   final String url;
   final Widget icon;
   final String label;
+  final bool lightMode;
 
   @override
   Widget build(BuildContext context) {
     return IconLink(
+      lightMode: lightMode,
       onTap: () {
         copyToClipboard(
           context,
@@ -90,6 +97,7 @@ class IconEmailLink extends StatelessWidget {
       onShowOptions: () {
         showOptions(
           context,
+          lightMode: lightMode,
           children: [
             OptionButton(
               label: label,
@@ -116,16 +124,19 @@ class IconWebLink extends StatelessWidget {
     @required this.icon,
     this.label,
     this.addOvalClipper: true,
+    this.lightMode: true,
   });
 
   final String url;
   final Widget icon;
   final String label;
   final bool addOvalClipper;
+  final bool lightMode;
 
   @override
   Widget build(BuildContext context) {
     return IconLink(
+      lightMode: lightMode,
       addOvalClipper: addOvalClipper,
       onTap: () {
         openWithHtml(
@@ -137,6 +148,7 @@ class IconWebLink extends StatelessWidget {
       onShowOptions: () {
         showOptions(
           context,
+          lightMode: lightMode,
           children: [
             OptionButton(
               label: label,
@@ -175,16 +187,19 @@ class IconLabelLink extends StatelessWidget {
   IconLabelLink({
     @required this.icon,
     this.label,
+    this.lightMode: true,
   });
 
   final Widget icon;
   final String label;
+  final bool lightMode;
 
   @override
   Widget build(BuildContext context) {
     Function onShowLabel = () {
       showOptions(
         context,
+        lightMode: lightMode,
         children: [
           Padding(
             padding: EdgeInsets.all(8),
@@ -211,6 +226,7 @@ class IconLabelLink extends StatelessWidget {
       addOpaqueOnHover: false,
       addColorizeOnHover: true,
       icon: icon,
+      lightMode: lightMode,
     );
   }
 }
@@ -224,6 +240,7 @@ class IconLink extends StatelessWidget {
     this.addOvalClipper: true,
     this.addOpaqueOnHover: true,
     this.addColorizeOnHover: false,
+    @required this.lightMode,
   }) : super(key: key);
 
   final Function onTap;
@@ -232,6 +249,7 @@ class IconLink extends StatelessWidget {
   final bool addOvalClipper;
   final bool addOpaqueOnHover;
   final bool addColorizeOnHover;
+  final bool lightMode;
 
   @override
   Widget build(BuildContext context) {
@@ -254,6 +272,11 @@ class IconLink extends StatelessWidget {
       ),
     );
 
+    inkWell = Theme(
+      data: lightMode ? ThemeData.light() : ThemeData.dark(),
+      child: inkWell,
+    );
+
     if (addOvalClipper) {
       inkWell = ClipOval(
         child: inkWell,
@@ -262,6 +285,7 @@ class IconLink extends StatelessWidget {
 
     if (addOpaqueOnHover) {
       return OpaqueOnHover(
+        invert: lightMode,
         child: inkWell,
       );
     } else {

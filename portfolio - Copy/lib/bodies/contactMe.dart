@@ -37,8 +37,7 @@ class QuickLinks extends StatelessWidget {
     String number = "(956) 777-2692";
     String email = "bryan.o.cancel@gmail.com";
     String github = "https://github.com/b-cancel";
-    String resume =
-        "https://docs.google.com/document/d/1UBKxKsYBhC5d6IxjRxmYIItFoTFb9Fs_AgX5b64sjlA";
+    String resume = "https://docs.google.com/document/d/1UBKxKsYBhC5d6IxjRxmYIItFoTFb9Fs_AgX5b64sjlA";
     String hackerRank = "https://www.hackerrank.com/bryan_o_cancel?hr_r=1";
     String linkedIn = "https://www.linkedin.com/in/bryan-cancel-069a197a/";
 

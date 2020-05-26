@@ -2,13 +2,12 @@
 import 'package:flutter/material.dart';
 
 //plugin
-import 'package:portfolio/icons/portfolio_icons_icons.dart';
-import 'package:portfolio/menu.dart';
-import 'package:portfolio/myWork.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:universal_html/html.dart';
 
 //internal: other
+import 'package:portfolio/menu/menu.dart';
+import 'package:portfolio/menu/helper.dart';
+import 'package:portfolio/myWork.dart';
 import 'package:portfolio/main.dart';
 
 //function used for main page and menu shifting
@@ -33,37 +32,43 @@ class Home extends StatelessWidget {
   //build
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: <Widget>[
-        Theme(
-          data: ThemeData.dark(),
-          child: Scaffold(
-            appBar: AppBar(
-              title: MyName(),
-              actions: <Widget>[
-                MenuOpener(
-                  openMenu: openMenu,
-                ),
-              ],
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height,
+      child: Stack(
+        children: <Widget>[
+          Theme(
+            data: ThemeData.dark(),
+            child: Scaffold(
+              appBar: AppBar(
+                title: MyName(),
+                actions: <Widget>[
+                  MenuOpener(
+                    openMenu: openMenu,
+                  ),
+                ],
+              ),
+              //NOTE: transition handled internally
+              body: MyWork(
+                openMenu: openMenu,
+              ),
             ),
+          ),
+          Positioned.fill(
             //NOTE: transition handled internally
-            body: MyWork(
+            child: ResumeInMenu(
+              menuKey: menuKey,
               openMenu: openMenu,
             ),
           ),
-        ),
-        Positioned.fill(
-          //NOTE: transition handled internally
-          child: ResumeInMenu(
-            menuKey: menuKey,
-            openMenu: openMenu,
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
 
+//NOTE: must be the same for both appbar and the menu
+//so that you get the cool transition effect
 class MyName extends StatelessWidget {
   const MyName({
     Key key,
