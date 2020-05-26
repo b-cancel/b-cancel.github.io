@@ -4,8 +4,11 @@ import 'package:portfolio/main.dart';
 
 class Logo extends StatelessWidget {
   Logo({
+    @required this.lightMode,
     Key key,
   }) : super(key: key);
+
+  final bool lightMode;
 
   getLongestString(List<String> strings) {
     String longestFirst = "";
@@ -44,6 +47,14 @@ class Logo extends StatelessWidget {
     startShuffle();
   }
 
+  Color getTextColor() {
+    return lightMode ? Colors.black : Colors.white;
+  }
+
+  Color getOtherColor() {
+    return lightMode ? Colors.white : Colors.black;
+  }
+
   @override
   Widget build(BuildContext context) {
     startShuffle();
@@ -54,10 +65,21 @@ class Logo extends StatelessWidget {
     List<String> second = ["Engineer", "Developer", "Designer"];
     String longestSecond = getLongestString(second);
 
+    //borderside
+    BorderSide textBorder = BorderSide(
+      width: 2,
+      color: getTextColor(),
+    );
+
+    BorderSide otherBorer = BorderSide(
+      width: 2,
+      color: getOtherColor(),
+    );
+
     //return
     return Padding(
       padding: EdgeInsets.symmetric(
-        vertical: 16.0,
+        vertical: 8.0,
       ),
       child: DefaultTextStyle(
         style: TextStyle(
@@ -75,14 +97,26 @@ class Logo extends StatelessWidget {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  Text(
-                    "I'm a ",
-                    style: TextStyle(
-                      color: Colors.white,
+                  Visibility(
+                    //this number was grabbed from experimentation
+                    //its when the box starts resizing due to the space being too small
+                    visible: MediaQuery.of(context).size.width > 404,
+                    child: Text(
+                      "I'm a ",
+                      style: TextStyle(
+                        color: getTextColor(),
+                      ),
                     ),
                   ),
                   //Software, App, Web, Game, UX
                   Container(
+                    decoration: BoxDecoration(
+                      border: Border(
+                        left: textBorder,
+                        top: textBorder,
+                        bottom: textBorder,
+                      ),
+                    ),
                     padding: EdgeInsets.symmetric(
                       horizontal: 8,
                       vertical: 4,
@@ -103,6 +137,7 @@ class Logo extends StatelessWidget {
                                 text: first[index],
                                 index: index,
                                 fontSize: MyApp.h3,
+                                textColor: getTextColor(),
                               );
                             },
                           ),
@@ -112,6 +147,14 @@ class Logo extends StatelessWidget {
                   ),
                   //Engineer, Developer, Designer
                   Container(
+                    decoration: BoxDecoration(
+                      color: getTextColor(),
+                      border: Border(
+                        right: textBorder,
+                        top: textBorder,
+                        bottom: textBorder,
+                      ),
+                    ),
                     padding: EdgeInsets.symmetric(
                       horizontal: 8,
                       vertical: 4,
@@ -132,6 +175,7 @@ class Logo extends StatelessWidget {
                                 text: second[index],
                                 index: index,
                                 fontSize: MyApp.h3,
+                                textColor: getOtherColor(),
                               );
                             },
                           ),
@@ -155,12 +199,14 @@ class AnimatedTitle extends StatelessWidget {
     @required this.text,
     @required this.index,
     @required this.fontSize,
+    @required this.textColor,
   });
 
   final ValueNotifier<int> vn;
   final String text;
   final int index;
   final double fontSize;
+  final Color textColor;
 
   double valueToPosition(ValueNotifier<int> vn) {
     if (vn.value == index) {
@@ -193,6 +239,7 @@ class AnimatedTitle extends StatelessWidget {
             text,
             style: TextStyle(
               fontSize: fontSize,
+              color: textColor,
             ),
           ),
         );

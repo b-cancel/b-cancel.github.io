@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:portfolio/home.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -5,10 +7,10 @@ import 'package:universal_html/prefer_universal/html.dart' as uniHTML;
 
 class MyWork extends StatefulWidget {
   MyWork({
-    @required this.menuWantsToBeOpened,
+    @required this.openMenu,
   });
 
-  final ValueNotifier<bool> menuWantsToBeOpened;
+  final ValueNotifier<bool> openMenu;
 
   @override
   _MyWorkState createState() => _MyWorkState();
@@ -41,7 +43,7 @@ class _MyWorkState extends State<MyWork> {
     refreshController.loadComplete();
   }
 
-  //depending on isMenuOpened 
+  //depending on isMenuOpened
   //you might need to wait for the menu's width
   bool waitForMenuWidth;
   @override
@@ -53,11 +55,10 @@ class _MyWorkState extends State<MyWork> {
     //once the menu width is read in
     //you wait until you can shift
     //and after you shift you progressively fade in
-    if(widget.menuWantsToBeOpened.value){
+    if (widget.openMenu.value) {
       waitForMenuWidth = true;
       waitingForMenuWidth();
-    }
-    else{
+    } else {
       waitForMenuWidth = false;
     }
   }
@@ -85,7 +86,7 @@ class _MyWorkState extends State<MyWork> {
       duration: kTabScrollDuration * 9,
       //shift the main page in and out of view
       child: AnimatedBuilder(
-        animation: widget.menuWantsToBeOpened,
+        animation: widget.openMenu,
         //the main page doesn't need to be rebuilt to be shifted
         child: Stack(
           children: <Widget>[
@@ -102,13 +103,29 @@ class _MyWorkState extends State<MyWork> {
                 //cacheExtent: MyApp.screenHeight,
                 controller: scrollController,
                 children: [
-                  Center(
-                    child: RaisedButton(
-                      onPressed: () {
-                        print("Works");
-                      },
-                      child: Text("Under Construction"),
-                    ),
+                  Row(
+                    children: <Widget>[
+                      RaisedButton(
+                        onPressed: () {
+                          print("left");
+                        },
+                        child: Text("left"),
+                      ),
+                      Expanded(
+                        child: RaisedButton(
+                          onPressed: () {
+                            print("Works");
+                          },
+                          child: Text("Under Construction"),
+                        ),
+                      ),
+                      RaisedButton(
+                        onPressed: () {
+                          print("right");
+                        },
+                        child: Text("right"),
+                      ),
+                    ],
                   )
                 ],
               ),
@@ -134,12 +151,20 @@ class _MyWorkState extends State<MyWork> {
           return AnimatedContainer(
             duration: kTabScrollDuration,
             transform: Matrix4.translationValues(
-              (widget.menuWantsToBeOpened.value) ? shiftValue : 0,
+              (widget.openMenu.value) ? shiftValue : 0,
               0,
               0,
             ),
             child: nonChangingChild,
           );
+          /*
+          return BackdropFilter(
+            filter: ImageFilter.blur(
+              sigmaX: 10.0, 
+              sigmaY: 10.0,
+            ),
+            child: 
+          );*/
         },
       ),
     );

@@ -26,12 +26,7 @@ double getMenuWidth() {
 //widgets
 class Home extends StatelessWidget {
   //TODO: read the web parameter to determine whether we want it initally opened or initially closed
-  final ValueNotifier<bool> menuWantsToBeOpened = new ValueNotifier<bool>(
-    true,
-  );
-
-  //must match value above initially
-  final ValueNotifier<bool> menuIsOpened = new ValueNotifier<bool>(
+  final ValueNotifier<bool> openMenu = new ValueNotifier<bool>(
     true,
   );
 
@@ -40,32 +35,51 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        Scaffold(
-          appBar: AppBar(
-            leading: OpenMenuButton(
-              menuWantsToBeOpened: menuWantsToBeOpened,
-              menuIsOpened: menuIsOpened,
+        Theme(
+          data: ThemeData.dark(),
+          child: Scaffold(
+            appBar: AppBar(
+              title: MyName(),
+              actions: <Widget>[
+                MenuOpener(
+                  openMenu: openMenu,
+                ),
+              ],
             ),
-            title: Text(
-              "Bryan Cancel",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
+            //NOTE: transition handled internally
+            body: MyWork(
+              openMenu: openMenu,
             ),
-          ),
-          //NOTE: transition handled internally
-          body: MyWork(
-            isMenuOpened: menuWantsToBeOpened,
           ),
         ),
         Positioned.fill(
           //NOTE: transition handled internally
           child: ResumeInMenu(
             menuKey: menuKey,
-            isMenuOpened: menuWantsToBeOpened,
+            openMenu: openMenu,
           ),
         ),
       ],
+    );
+  }
+}
+
+class MyName extends StatelessWidget {
+  const MyName({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      "Bryan Cancel",
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: MyApp.h3,
+        letterSpacing: 4,
+      ),
     );
   }
 }
