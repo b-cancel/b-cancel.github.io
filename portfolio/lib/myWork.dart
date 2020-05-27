@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:portfolio/home.dart';
+import 'package:portfolio/main.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:universal_html/prefer_universal/html.dart' as uniHTML;
 
@@ -129,7 +130,16 @@ class _MyWorkState extends State<MyWork> {
                         child: Text("right"),
                       ),
                     ],
-                  )
+                  ),
+                  Center(
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(
+                        maxWidth: 320,
+                        maxHeight: 320,
+                      ),
+                      child: MyApp.qrCodeWhiteWillExpand,
+                    ),
+                  ),
                 ],
               ),
             ),

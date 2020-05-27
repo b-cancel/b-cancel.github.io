@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 //internal
 import 'package:portfolio/icons/portfolio_icons_icons.dart';
+import 'package:portfolio/main.dart';
 import 'package:portfolio/utils/link/ui/iconLink.dart';
 import 'package:portfolio/menu/titleShuffle.dart';
 import 'package:portfolio/data.dart';
@@ -139,6 +140,13 @@ class ShiftingMenu extends StatelessWidget {
                         Container(
                           color: Colors.red,
                           child: Text("hello"),
+                        ),
+                        ConstrainedBox(
+                          constraints: BoxConstraints(
+                            maxWidth: 240,
+                            maxHeight: 240,
+                          ),
+                          child: MyApp.qrCodeBlackWillExpand,
                         ),
                         IconButton(
                           icon: Icon(PortfolioIcons.close,), 

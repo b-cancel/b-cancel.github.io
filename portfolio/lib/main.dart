@@ -5,6 +5,7 @@ import 'package:portfolio/home.dart';
 //plugins
 import 'package:portfolio/icons/portfolio_icons_icons.dart';
 import 'package:bot_toast/bot_toast.dart';
+import 'package:portfolio/qrCode.dart';
 import 'package:portfolio/utils/wrappedText.dart';
 
 //internal
@@ -15,6 +16,15 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  //the QR Codes used throughout
+  //used like this to avoid regeneration
+  static Widget qrCodeWhiteWillExpand = AdjustableQrCode(
+    squaresColor: Colors.white,
+  );
+  static Widget qrCodeBlackWillExpand = AdjustableQrCode(
+    squaresColor: Colors.black,
+  );
+
   //headers
   static const double h1 = 32;
   static const double h2 = 28;
