@@ -2,10 +2,11 @@
 import 'package:flutter/material.dart';
 
 //internal
-import 'package:portfolio/menu/helper.dart';
-import 'package:portfolio/menu/shifting.dart';
+import 'package:portfolio/icons/portfolio_icons_icons.dart';
 import 'package:portfolio/utils/goldenRatio.dart';
+import 'package:portfolio/menu/shifting.dart';
 import 'package:portfolio/home.dart';
+import 'package:portfolio/main.dart';
 
 //widget
 class ResumeInMenu extends StatefulWidget {
@@ -101,103 +102,41 @@ class _ResumeInMenuState extends State<ResumeInMenu>
   }
 
   menuToggled() {
-    //we want to open the menu
-    //so we must first make thing visible
+    //1. start the implicit animations
+    updateState();
+
+    //2. animate the modal
+    animateModal();
+
+    //If the menu is being opened
+    //we match the users intent by
+    //making everything visible IMMEDIATELY
     if (widget.openMenu.value) {
-      print("*************************opening menu");
-
-      //the user wants the menu to be opened
-      //but it must be visible first
-      //NOTE: the listener to this variable 
-      //is the one that does alot of code gymnastics to work properly
       isFullyInvisible.value = false;
-    } else {
-      print("*************************closing menu");
-      //NOTES: its assumed that isFullyInvisible.value
-      //is equal to true here
-      //since first things will close
-      //and THEN become fully inivisible
-      //as explained by 2 below
-
-      //1. start the implicit animations
-      updateState();
-
-      //2. animate the modal that will eventually
-      //  make everything fully invisible
-      animateModal();
     }
+    //ELSE
+    //we first need to wait for the animation to finish
+    //and then when the animation finishes
+    //the invisibility will be applied
   }
 
-  isFullyInvisibleToggled(){
-    if(isFullyInvisible.value){
+  isFullyInvisibleToggled() {
+    //we only reload if we have become invisible
+    //otherwise the toggleMenu function will handle reloading for us
+    if (isFullyInvisible.value) {
       //the menu has finished animating
 
       //so just make thing invisible
       updateState();
     }
-    else{
-      //menuOpen = true
-      //AND isFullyInvisible = false
-
-      //1. start the implicit animations
-      updateState();
-
-      //2. animate the modal
-      animateModal();
-
-      /*
-      //this was triggered because the user want to open the menu
-      //and indicated that by setting openMenu to true
-
-      //BUT in order for the implicit animations to work properly
-      //when we make things visible 
-      //they must be out of the screen
-      //or in other words openMenu needs to be false
-      
-      //since setting it to false will start the process of 
-      //closing the menu due to the listener attached to it
-      //we must first remove the listener
-      print("removing listener");
-      widget.openMenu.removeListener(menuToggled);
-
-      //now because we removed the listener
-      //this won't close the menu when we are trying to open it
-      print("Setting openMenu to closed");
-      widget.openMenu.value = false;
-
-      //this first updateState will cause 
-      //everything to appear but outside of the screen
-      updateState();
-
-      //now we wait 1 frame so that we can begin the animations
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        print("a frame passed and we set openMenu to true");
-        //0. set the openMenu variable 
-        //so the things that are now visible also animate in
-        widget.openMenu.value = true;
-
-        //1. start the implicit animations
-        updateState();
-
-        //2. animate the modal
-        animateModal();
-
-        //3. add the listener so if the user closes the menu
-        //  the menu behaves as expected
-        widget.openMenu.addListener(menuToggled);
-      });*/
-    }
   }
 
   //modal scrim colors
-  Color modal = Colors.red; //Colors.black.withOpacity(0.5);
+  Color modal = Colors.black.withOpacity(0.5);
 
   @override
   void initState() {
     super.initState();
-    //NOTE: this listener is might be added and removed in within itself
-    //for reasons specified at the top of the file
-    widget.openMenu.addListener(menuToggled);
 
     //save how we started
     //so we know the initial setup of our modalAnimation
@@ -224,10 +163,18 @@ class _ResumeInMenuState extends State<ResumeInMenu>
       widget.openMenu.value == false,
     );
 
+    //NOTE: this listener is might be added and removed in within itself
+    //for reasons specified at the top of the file
+    widget.openMenu.addListener(
+      menuToggled,
+    );
+
     //when the modal controller below
-    //completes that will trigger a rebuild 
+    //completes that will trigger a rebuild
     //so we can taps items below the menu
-    isFullyInvisible.addListener(isFullyInvisibleToggled);
+    isFullyInvisible.addListener(
+      isFullyInvisibleToggled,
+    );
 
     //after the animation completes what to do?
     modalController.addListener(
@@ -237,7 +184,24 @@ class _ResumeInMenuState extends State<ResumeInMenu>
 
   @override
   void dispose() {
-    //TODO: close everything in init
+    //remove all the listeners
+    modalController.removeListener(
+      makeInvisibleOnComplete,
+    );
+
+    isFullyInvisible.removeListener(
+      isFullyInvisibleToggled,
+    );
+
+    widget.openMenu.removeListener(
+      menuToggled,
+    );
+
+    //dispose of all stuff
+    isFullyInvisible.dispose();
+    modalController.dispose();
+
+    //super dispose
     super.dispose();
   }
 
@@ -271,49 +235,105 @@ class _ResumeInMenuState extends State<ResumeInMenu>
               color: modalAnimation,
             ),
           ),
+          Positioned.fill(
+            child: SizedBox.expand(
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  onTap: () {
+                    if (widget.openMenu.value) {
+                      widget.openMenu.value = false;
+                    }
+                  },
+                ),
+              ),
+            ),
+          ),
           AnimatedPositioned(
-            height: MediaQuery.of(context).size.height,
+            height: screenHeight,
+            width: screenWidth,
             duration: kTabScrollDuration,
             top: 0,
             left: (widget.openMenu.value) ? 0 : -getMenuWidth(),
-            child: ShiftingMenu(
-              openMenu: widget.openMenu,
-              minWidth: minWidth,
-              maxWidth: maxWidth,
+            child: Row(
+              children: <Widget>[
+                ShiftingMenu(
+                  openMenu: widget.openMenu,
+                  minWidth: minWidth,
+                  maxWidth: maxWidth,
+                ),
+                Expanded(
+                  child: IgnorePointer(
+                    child: SizedBox.expand(
+                      child: Center(
+                        child: AnimatedContainer(
+                          duration: kTabScrollDuration,
+                          transform: Matrix4.translationValues(
+                            (widget.openMenu.value) ? 0 : getMenuWidth(),
+                            0,
+                            0,
+                          ),
+                          child: AnimatedOpacity(
+                            duration: kTabScrollDuration,
+                            opacity: widget.openMenu.value ? 1 : 0,
+                            child: Material(
+                              color: Colors.transparent,
+                              child: Text(
+                                "M\nY\n\nW\nO\nR\nK",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: MyApp.h4,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
-          /*
-          Positioned.fill(
-            child: null,
-          ),
-          */
         ],
       ),
     );
+  }
+}
 
-    //build
-    /*
-    return Container(
-      height: screenHeight,
-      width: screenWidth,
-      child: Row(
-        mainAxisSize: MainAxisSize.max,
-        children: <Widget>[
-          Stack(
-            children: <Widget>[
-              ScrimBehindMovingMenu(
-                openMenu: widget.openMenu,
-              ),
-              
-            ],
-          ),
-          Expanded(
-            child: MyWorkMenuCloseButton(
-              openMenu: widget.openMenu,
-            ),
-          ),
-        ],
+//this slides in at the last second of the menu hiding
+//and even if it didn't the menu will be stoppping it from being tappable
+class MenuOpener extends StatelessWidget {
+  const MenuOpener({
+    Key key,
+    @required this.openMenu,
+  }) : super(key: key);
+
+  final ValueNotifier<bool> openMenu;
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: openMenu,
+      child: IconButton(
+        icon: Icon(
+          PortfolioIcons.file_alt,
+        ),
+        onPressed: () {
+          if (openMenu.value == false) {
+            openMenu.value = true;
+          }
+        },
       ),
-    );*/
+      builder: (context, child) {
+        return AnimatedOpacity(
+          opacity: openMenu.value ? 0 : 1,
+          duration: kTabScrollDuration,
+          child: child,
+        );
+      },
+    );
   }
 }

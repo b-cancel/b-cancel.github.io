@@ -143,7 +143,9 @@ class ShiftingMenu extends StatelessWidget {
                         IconButton(
                           icon: Icon(PortfolioIcons.close,), 
                           onPressed: (){
-                            openMenu.value = false;
+                            if(openMenu.value){
+                              openMenu.value = false;
+                            }
                           },
                         ),
                       ],

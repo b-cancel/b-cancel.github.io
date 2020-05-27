@@ -6,7 +6,6 @@ import 'package:universal_html/html.dart';
 
 //internal: other
 import 'package:portfolio/menu/menu.dart';
-import 'package:portfolio/menu/helper.dart';
 import 'package:portfolio/myWork.dart';
 import 'package:portfolio/main.dart';
 
