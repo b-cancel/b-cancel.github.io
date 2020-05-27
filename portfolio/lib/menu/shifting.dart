@@ -140,6 +140,12 @@ class ShiftingMenu extends StatelessWidget {
                           color: Colors.red,
                           child: Text("hello"),
                         ),
+                        IconButton(
+                          icon: Icon(PortfolioIcons.close,), 
+                          onPressed: (){
+                            openMenu.value = false;
+                          },
+                        ),
                       ],
                     ),
                   ),
