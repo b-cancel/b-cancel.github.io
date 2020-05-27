@@ -161,7 +161,7 @@ class Logo extends StatelessWidget {
                           child: Text(longestSecond),
                         ),
                         Stack(
-                          alignment: Alignment.centerRight,
+                          alignment: Alignment.centerLeft,
                           children: List.generate(
                             second.length,
                             (index) {
