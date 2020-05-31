@@ -297,6 +297,7 @@ class IconLink extends StatelessWidget {
 class IconLinkIcon extends StatelessWidget {
   IconLinkIcon({
     @required this.icon,
+    this.mini: false,
     this.color,
     this.text,
   });
@@ -304,18 +305,24 @@ class IconLinkIcon extends StatelessWidget {
   final IconData icon;
   final Color color;
   final String text;
+  final bool mini;
 
   @override
   Widget build(BuildContext context) {
+    //48 normal size of button
+    //40 another size of button
+    //36 smallest size of button
     return Padding(
-      padding: EdgeInsets.all(12.0),
+      padding: EdgeInsets.all(
+        (mini == false) ? 12.0 : 8,
+      ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Icon(
             icon,
             color: color,
-            size: 36,
+            size: (mini == false) ? 36 : 22,
           ),
           Visibility(
             visible: text != null && text.length > 0,

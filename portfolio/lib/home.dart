@@ -79,10 +79,11 @@ class MyName extends StatelessWidget {
       "Bryan Cancel",
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
+      //bigger part, and smaller part of smaller part
       style: TextStyle(
         fontWeight: FontWeight.bold,
-        fontSize: MyApp.h3,
-        letterSpacing: 4,
+        fontSize: MyApp.h2,
+        letterSpacing: 2,
       ),
     );
   }
