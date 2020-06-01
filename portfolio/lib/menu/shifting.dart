@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 //internal
 import 'package:portfolio/icons/portfolio_icons_icons.dart';
 import 'package:portfolio/main.dart';
+import 'package:portfolio/menu/expandingText.dart';
 import 'package:portfolio/utils/goldenRatio.dart';
 import 'package:portfolio/utils/link/ui/iconLink.dart';
 import 'package:portfolio/menu/titleShuffle.dart';
@@ -51,6 +52,12 @@ class ShiftingMenu extends StatelessWidget {
 
     //build
     return Material(
+      //ugly border that wont blend into my gradient
+      shadowColor: Colors.transparent,
+      type: MaterialType.canvas,
+      borderOnForeground: false,
+      elevation: 0,
+      //build
       child: ConstrainedBox(
         constraints: BoxConstraints(
           minWidth: minWidth,
@@ -100,12 +107,6 @@ class ShiftingMenu extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          /*
-                          GoldenRatioGuide2(
-                            usableWidth: usableWidth,
-                            bigUsable: bigUsable,
-                            smallUsable: smallUsable,
-                          ),*/
                           Padding(
                             padding: EdgeInsets.symmetric(
                               horizontal: 16,
@@ -114,12 +115,6 @@ class ShiftingMenu extends StatelessWidget {
                               lightMode: true,
                             ),
                           ),
-                          /*
-                          GoldenRatioGuide(
-                            usableWidth: usableWidth,
-                            bigUsable: bigUsable,
-                            smallerPartOfSmallUsable: smallerPartOfSmallUsable,
-                          ),*/
                           Padding(
                             padding: EdgeInsets.symmetric(
                               horizontal: 8,
@@ -166,11 +161,14 @@ class ShiftingMenu extends StatelessWidget {
                               ],
                             ),
                           ),
-                          SectionTitle(
+                          //NOTE: we start spreaded when the section starts open
+                          ExpandingSection(
                             title: "Experience",
+                            startOpen: true,
                           ),
-                          SectionTitle(
+                          ExpandingSection(
                             title: "Education",
+                            startOpen: true,
                           ),
                           Container(
                             constraints: BoxConstraints(
@@ -210,56 +208,27 @@ class ShiftingMenu extends StatelessWidget {
                               ],
                             ),
                           ),
-                          SectionTitle(
+                          ExpandingSection(
                             title: "Software",
+                            startOpen: true,
                           ),
-                          SectionTitle(
+                          ExpandingSection(
                             title: "Languages",
+                            startOpen: true,
                           ),
                           LanguageBody(),
-                          SectionTitle(
+                          ExpandingSection(
                             title: "Awards",
+                            startOpen: false,
                           ),
-                          /*
-                          SectionTitle(
+                          ExpandingSection(
                             title: "References",
+                            startOpen: false,
                           ),
-                          */
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 16,
-                            ),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: <Widget>[
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                    right: 8.0,
-                                  ),
-                                  child: Icon(
-                                    PortfolioIcons.keyboard_arrow_down,
-                                  ),
-                                ),
-                                Text(
-                                  "References",
-                                  style: TextStyle(
-                                    fontSize: MyApp.h4,
-                                    fontWeight: FontWeight.w900,
-                                    letterSpacing: 8,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SectionTitle(
+                          ExpandingSection(
                             title: "Contact",
+                            startOpen: false,
                           ),
-                          /*
-                          GoldenRatioGuide2(
-                            usableWidth: usableWidth,
-                            bigUsable: bigUsable,
-                            smallUsable: smallUsable,
-                          ),*/
                           Padding(
                             padding: EdgeInsets.symmetric(
                               horizontal: 16,

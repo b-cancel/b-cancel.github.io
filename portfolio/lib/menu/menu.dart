@@ -218,6 +218,8 @@ class _ResumeInMenuState extends State<ResumeInMenu>
     //compromise golden ratio when small for cool transition effect
     double maxWidth = screenWidth - 56;
 
+    Color baseColor = Colors.black;
+
     print("menu open? " + widget.openMenu.value.toString());
     return Visibility(
       //lets us avoid to all the code gymnastics we did initially
@@ -263,35 +265,63 @@ class _ResumeInMenuState extends State<ResumeInMenu>
                   maxWidth: maxWidth,
                 ),
                 Expanded(
-                  child: IgnorePointer(
-                    child: SizedBox.expand(
-                      child: Center(
-                        child: AnimatedContainer(
+                  child: Stack(
+                    children: <Widget>[
+                      Positioned(
+                        top: 0,
+                        bottom: 0,
+                        left: 0,
+                        child: AnimatedOpacity(
                           duration: kTabScrollDuration,
-                          transform: Matrix4.translationValues(
-                            (widget.openMenu.value) ? 0 : getMenuWidth(),
-                            0,
-                            0,
+                          opacity: widget.openMenu.value ? 1 : 0,
+                          child: Container(
+                            //minimum size of close menu button
+                            width: 56 / 2,
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [baseColor, baseColor.withOpacity(0)],
+                                stops: [0.0, 1.0],
+                              ),
+                            ),
+                            child: SizedBox.expand(
+                              child: Container(),
+                            ),
                           ),
-                          child: AnimatedOpacity(
-                            duration: kTabScrollDuration,
-                            opacity: widget.openMenu.value ? 1 : 0,
-                            child: Material(
-                              color: Colors.transparent,
-                              child: Text(
-                                "M\nY\n\nW\nO\nR\nK",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: MyApp.h4,
+                        ),
+                      ),
+                      Positioned.fill(
+                        child: IgnorePointer(
+                          child: SizedBox.expand(
+                            child: Center(
+                              child: AnimatedContainer(
+                                duration: kTabScrollDuration,
+                                transform: Matrix4.translationValues(
+                                  (widget.openMenu.value) ? 0 : getMenuWidth(),
+                                  0,
+                                  0,
+                                ),
+                                child: AnimatedOpacity(
+                                  duration: kTabScrollDuration,
+                                  opacity: widget.openMenu.value ? 1 : 0,
+                                  child: Material(
+                                    color: Colors.transparent,
+                                    child: Text(
+                                      "M\nY\n\nW\nO\nR\nK",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: MyApp.h4,
+                                      ),
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
                           ),
                         ),
                       ),
-                    ),
+                    ],
                   ),
                 ),
               ],
