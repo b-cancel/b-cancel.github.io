@@ -1,5 +1,6 @@
 //flutter
 import 'package:flutter/material.dart';
+import 'package:giphy_client/giphy_client.dart';
 import 'package:portfolio/home.dart';
 
 //plugins
@@ -9,9 +10,14 @@ import 'package:portfolio/qrCode.dart';
 import 'package:portfolio/utils/wrappedText.dart';
 
 //internal
+GiphyClient client;
 
 //other
 void main() {
+  client = new GiphyClient(
+    apiKey: 'YMQVelhTCeQcE0ShiI1j9bz4q5fWzxKQ',
+  );
+
   runApp(MyApp());
 }
 

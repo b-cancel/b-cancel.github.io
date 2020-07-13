@@ -27,6 +27,10 @@ dependencies:
   qr: ^1.2.0
 
   animator: ^2.0.1
+
+  #GIFS EVERYWHERE
+  giphy_client: ^0.2.0
+  giphy_picker: ^1.0.4
   
   #Universal (to avoid warning on flutter web)
   universal_platform: ^0.1.3

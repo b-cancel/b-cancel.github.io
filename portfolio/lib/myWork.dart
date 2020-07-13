@@ -1,10 +1,13 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:portfolio/data.dart';
 import 'package:portfolio/home.dart';
 import 'package:portfolio/main.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:universal_html/prefer_universal/html.dart' as uniHTML;
+import 'package:giphy_picker/giphy_picker.dart';
+import 'package:giphy_client/giphy_client.dart';
 
 class MyWork extends StatefulWidget {
   MyWork({
@@ -80,6 +83,8 @@ class _MyWorkState extends State<MyWork> {
 
   @override
   Widget build(BuildContext context) {
+    List<String> gifs = new List<String>();
+
     return AnimatedOpacity(
       //visible if we can shift
       opacity: waitForMenuWidth ? 0 : 1,
@@ -106,7 +111,31 @@ class _MyWorkState extends State<MyWork> {
                 //so scrolling up and down with a finger keeps things in view
                 //cacheExtent: MyApp.screenHeight,
                 controller: scrollController,
-                children: [
+                children: List.generate(
+                  AppDev.swol.length,
+                  (index) {
+                    return FutureBuilder(
+                      future: client.byId(
+                        AppDev.swol[index],
+                      ),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<GiphyGif> snapShot) {
+                        if (snapShot.connectionState == ConnectionState.done) {
+                          return GiphyImage.original(
+                            gif: snapShot.data,
+                          );
+                        } else {
+                          return CircularProgressIndicator();
+                        }
+                      },
+                    );
+                  },
+                ),
+
+                /*
+                [
+                  
+                  
                   Row(
                     children: <Widget>[
                       RaisedButton(
@@ -131,6 +160,7 @@ class _MyWorkState extends State<MyWork> {
                       ),
                     ],
                   ),
+                  
                   Center(
                     child: ConstrainedBox(
                       constraints: BoxConstraints(
@@ -141,6 +171,7 @@ class _MyWorkState extends State<MyWork> {
                     ),
                   ),
                 ],
+                */
               ),
             ),
             /*
