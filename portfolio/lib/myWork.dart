@@ -4,10 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:portfolio/data.dart';
 import 'package:portfolio/home.dart';
 import 'package:portfolio/main.dart';
+import 'package:portfolio/utils/giphyImage.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:universal_html/prefer_universal/html.dart' as uniHTML;
-import 'package:giphy_picker/giphy_picker.dart';
 import 'package:giphy_client/giphy_client.dart';
+
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:waterfall_flow/waterfall_flow.dart';
+
+import 'package:video_player_web/video_player_web.dart';
 
 class MyWork extends StatefulWidget {
   MyWork({
@@ -83,8 +88,25 @@ class _MyWorkState extends State<MyWork> {
 
   @override
   Widget build(BuildContext context) {
-    List<String> gifs = new List<String>();
+    //vars used to determine grid scaling
+    double requiredPhonesOnScreen = 2;
+    double screenHeight = MediaQuery.of(context).size.height;
+    double deviceHeight = screenHeight / requiredPhonesOnScreen;
 
+    //most everything will be phone sized gifs
+    //but we don't want monitor sized gifs to look terrible either
+    double phoneAspectRatio = (9 / 16);
+    double monitorAspectRatio = (16 / 9);
+    double squareAspectRatio = 1;
+    double phonePrimary = (phoneAspectRatio + squareAspectRatio) / 2;
+    double monitorPrimary = (monitorAspectRatio + squareAspectRatio) / 2;
+
+    //grid column calcs
+    double deviceWidth = deviceHeight * phonePrimary;
+    double screenWidth = MediaQuery.of(context).size.width;
+    double phonesThatFit = screenWidth / deviceWidth;
+
+    //build
     return AnimatedOpacity(
       //visible if we can shift
       opacity: waitForMenuWidth ? 0 : 1,
@@ -102,7 +124,72 @@ class _MyWorkState extends State<MyWork> {
               controller: refreshController,
               onRefresh: _onRefresh,
               onLoading: _onLoading,
-              child: ListView(
+              child: WaterfallFlow.builder(
+                //cacheExtent: 0.0,
+                padding: EdgeInsets.all(5.0),
+                itemCount: 10,
+                itemBuilder: (BuildContext context, int index) {
+                  return FutureBuilder(
+                    future: client.random(),
+                    builder: (BuildContext context,
+                        AsyncSnapshot<GiphyGif> snapShot) {
+                      if (snapShot.connectionState == ConnectionState.done) {
+                        print(snapShot.data.images.preview.mp4);
+                        return GiphyImage.video(
+                          gif: snapShot.data,
+                        );
+                      } else {
+                        return CircularProgressIndicator();
+                      }
+                    },
+                  );
+                },
+                gridDelegate:
+                    SliverWaterfallFlowDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: phonesThatFit.ceil(),
+                  crossAxisSpacing: 8,
+                  mainAxisSpacing: 16,
+
+                  /// follow max child trailing layout offset and layout with full cross axis extend
+                  /// last child as loadmore item/no more item in [GridView] and [WaterfallFlow]
+                  /// with full cross axis extend
+                  //  LastChildLayoutType.fullCrossAxisExtend,
+
+                  /// as foot at trailing and layout with full cross axis extend
+                  /// show no more item at trailing when children are not full of viewport
+                  /// if children is full of viewport, it's the same as fullCrossAxisExtend
+                  //  LastChildLayoutType.foot,
+                  lastChildLayoutTypeBuilder: (index) => (index == 50)
+                      ? LastChildLayoutType.foot
+                      : LastChildLayoutType.none,
+                ),
+              ),
+
+              /*
+              StaggeredGridView.countBuilder(
+                crossAxisCount: phonesThatFit.ceil(),
+                itemCount: 8,
+                itemBuilder: (BuildContext context, int index) => FutureBuilder(
+                  future: client.random(),
+                  builder:
+                      (BuildContext context, AsyncSnapshot<GiphyGif> snapShot) {
+                    if (snapShot.connectionState == ConnectionState.done) {
+                      return GiphyImage.original(
+                        gif: snapShot.data,
+                      );
+                    } else {
+                      return CircularProgressIndicator();
+                    }
+                  },
+                ),
+                staggeredTileBuilder: (int index) => StaggeredTile.count(
+                    phonesThatFit.ceil(), index.isEven ? 2 : 1),
+                mainAxisSpacing: 4.0,
+                crossAxisSpacing: 4.0,
+              ),
+              */
+
+              /*ListView(
                 //When this is true, the scroll view is scrollable
                 //even if it does not have sufficient content to actually scroll
                 //primary: true, //TODO: be enable this
@@ -172,7 +259,7 @@ class _MyWorkState extends State<MyWork> {
                   ),
                 ],
                 */
-              ),
+              ),*/
             ),
             /*
             Positioned(
