@@ -50,6 +50,8 @@ class Home extends StatelessWidget {
                     openMenu: openMenu,
                   ),
                   actions: [
+                    //TODO: in all cases tapping the label should copy it
+                    //TODO: repair the pop up that isnt showing text for some odd reason
                     //TODO: if the width is larger than 430 -> use action sheet when pressing contact link
                     //TODO: the above is particularly important so the behavior is consitent when things start to wrap
                     OverFlowMenuItem(
@@ -175,27 +177,39 @@ class MyName extends StatelessWidget {
               ),
               Visibility(
                 visible: openMenu != null && largerThanIDK,
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      "'s Resume",
-                      style: TextStyle(
-                        fontWeight: FontWeight.w100,
-                        fontSize: MyApp.h4,
-                        letterSpacing: 2,
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                        left: 4.0,
-                      ),
-                      child: Icon(
-                        Icons.arrow_left,
-                      ),
-                    ),
-                  ],
-                ),
+                child: openMenu != null
+                    ? AnimatedBuilder(
+                        animation: openMenu,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              "'s Resume",
+                              style: TextStyle(
+                                fontWeight: FontWeight.w100,
+                                fontSize: MyApp.h4,
+                                letterSpacing: 2,
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(
+                                left: 4.0,
+                              ),
+                              child: Icon(
+                                Icons.arrow_left,
+                              ),
+                            ),
+                          ],
+                        ),
+                        builder: (BuildContext context, Widget child) {
+                          return AnimatedOpacity(
+                            duration: kTabScrollDuration,
+                            opacity: openMenu.value == false ? 1 : 0,
+                            child: child,
+                          );
+                        },
+                      )
+                    : Container(),
               ),
             ],
           ),

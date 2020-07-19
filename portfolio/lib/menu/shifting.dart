@@ -103,42 +103,53 @@ class ShiftingMenu extends StatelessWidget {
                         title: "Education",
                         startOpen: true,
                       ),
-                      Container(
-                        constraints: BoxConstraints(
-                          minWidth: minWidth,
-                        ),
+                      Material(
                         color: Colors.black,
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 16,
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            DefaultTextStyle(
-                              style: TextStyle(
-                                color: Colors.white,
-                              ),
-                              child: SectionTitle(
-                                title: "My Work",
-                                padded: false,
-                              ),
+                        child: InkWell(
+                          onTap: () {
+                            if (openMenu.value) {
+                              openMenu.value = false;
+                            }
+                          },
+                          child: Container(
+                            constraints: BoxConstraints(
+                              minWidth: minWidth,
+                              maxWidth: maxWidth,
                             ),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                top: 8,
-                              ),
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 8,
-                                ),
-                                child: Icon(
-                                  PortfolioIcons.keyboard_arrow_right,
-                                  color: Colors.white,
-                                  size: MyApp.h2,
-                                ),
-                              ),
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 16,
                             ),
-                          ],
+                            height: 56,
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                DefaultTextStyle(
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                  child: SectionTitle(
+                                    title: "My Work",
+                                    padded: false,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                    top: 8,
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 8,
+                                    ),
+                                    child: Icon(
+                                      Icons.arrow_right,
+                                      color: Colors.white,
+                                      size: MyApp.h2,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                       ),
                       ExpandingSection(
@@ -174,16 +185,6 @@ class ShiftingMenu extends StatelessWidget {
                                 maxHeight: 240,
                               ),
                               child: MyApp.qrCodeBlackWillExpand,
-                            ),
-                            IconButton(
-                              icon: Icon(
-                                PortfolioIcons.close,
-                              ),
-                              onPressed: () {
-                                if (openMenu.value) {
-                                  openMenu.value = false;
-                                }
-                              },
                             ),
                           ],
                         ),
