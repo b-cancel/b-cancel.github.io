@@ -1,6 +1,7 @@
 //flutter
 import 'package:flutter/material.dart';
 import 'package:giphy_client/giphy_client.dart';
+import 'package:portfolio/data.dart';
 import 'package:portfolio/home.dart';
 
 //plugins
@@ -14,10 +15,12 @@ GiphyClient client;
 
 //other
 void main() {
+  //giphy setup
   client = new GiphyClient(
     apiKey: 'YMQVelhTCeQcE0ShiI1j9bz4q5fWzxKQ',
   );
 
+  //start app
   runApp(MyApp());
 }
 
