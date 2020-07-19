@@ -65,203 +65,134 @@ class ShiftingMenu extends StatelessWidget {
         ),
         child: Container(
           key: menuKey,
-          child: Padding(
-            padding: EdgeInsets.only(
-              top: 12,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                AnimatedContainer(
-                  duration: kTabScrollDuration,
-                  transform: Matrix4.translationValues(
-                    (openMenu.value) ? 0 : getMenuWidth(),
-                    0,
-                    0,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              AnimatedContainer(
+                duration: kTabScrollDuration,
+                transform: Matrix4.translationValues(
+                  (openMenu.value) ? 0 : getMenuWidth(),
+                  0,
+                  0,
+                ),
+                child: MyName(),
+              ),
+              Expanded(
+                child: SingleChildScrollView(
+                  //When this is true, the scroll view is scrollable
+                  //even if it does not have sufficient content to actually scroll
+                  primary: true,
+                  //iOS feel
+                  physics: BouncingScrollPhysics(),
+                  //atleast spacing to match name
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 0,
                   ),
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 16,
-                    ),
-                    child: MyName(),
+                  //children
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      //NOTE: we start spreaded when the section starts open
+                      ExpandingSection(
+                        title: "Experience",
+                        startOpen: true,
+                      ),
+                      ExpandingSection(
+                        title: "Education",
+                        startOpen: true,
+                      ),
+                      Container(
+                        constraints: BoxConstraints(
+                          minWidth: minWidth,
+                        ),
+                        color: Colors.black,
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 16,
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            DefaultTextStyle(
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                              child: SectionTitle(
+                                title: "My Work",
+                                padded: false,
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(
+                                top: 8,
+                              ),
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 8,
+                                ),
+                                child: Icon(
+                                  PortfolioIcons.keyboard_arrow_right,
+                                  color: Colors.white,
+                                  size: MyApp.h2,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      ExpandingSection(
+                        title: "Software",
+                        startOpen: true,
+                      ),
+                      ExpandingSection(
+                        title: "Languages",
+                        startOpen: true,
+                      ),
+                      LanguageBody(),
+                      ExpandingSection(
+                        title: "Awards",
+                        startOpen: false,
+                      ),
+                      ExpandingSection(
+                        title: "References",
+                        startOpen: false,
+                      ),
+                      ExpandingSection(
+                        title: "Contact",
+                        startOpen: false,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 16,
+                        ),
+                        child: Column(
+                          children: [
+                            ConstrainedBox(
+                              constraints: BoxConstraints(
+                                maxWidth: 240,
+                                maxHeight: 240,
+                              ),
+                              child: MyApp.qrCodeBlackWillExpand,
+                            ),
+                            IconButton(
+                              icon: Icon(
+                                PortfolioIcons.close,
+                              ),
+                              onPressed: () {
+                                if (openMenu.value) {
+                                  openMenu.value = false;
+                                }
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                Expanded(
-                  child: SingleChildScrollView(
-                    //When this is true, the scroll view is scrollable
-                    //even if it does not have sufficient content to actually scroll
-                    primary: true,
-                    //iOS feel
-                    physics: BouncingScrollPhysics(),
-                    //atleast spacing to match name
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 0,
-                    ),
-                    //children
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                        top: 8,
-                      ),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 16,
-                            ),
-                            child: Logo(
-                              lightMode: true,
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 8,
-                            ),
-                            child: Wrap(
-                              alignment: WrapAlignment.start,
-                              crossAxisAlignment: WrapCrossAlignment.start,
-                              runAlignment: WrapAlignment.spaceBetween,
-                              runSpacing: 0,
-                              spacing: 5,
-                              children: <Widget>[
-                                IconWebLink(
-                                  url: myGithub,
-                                  icon: IconLinkIcon(
-                                    icon: PortfolioIcons.github,
-                                    mini: true,
-                                  ),
-                                  label: "Github",
-                                ),
-                                IconWebLink(
-                                  url: myLinkedIn,
-                                  icon: IconLinkIcon(
-                                    icon: PortfolioIcons.linkedin,
-                                    mini: true,
-                                  ),
-                                  label: "Linked In",
-                                ),
-                                IconPhoneLink(
-                                  icon: IconLinkIcon(
-                                    icon: PortfolioIcons.phone,
-                                    mini: true,
-                                  ),
-                                  url: myNumber,
-                                  label: myNumber,
-                                ),
-                                IconEmailLink(
-                                  icon: IconLinkIcon(
-                                    icon: PortfolioIcons.email,
-                                    mini: true,
-                                  ),
-                                  url: myEmail,
-                                  label: myEmail,
-                                ),
-                              ],
-                            ),
-                          ),
-                          //NOTE: we start spreaded when the section starts open
-                          ExpandingSection(
-                            title: "Experience",
-                            startOpen: true,
-                          ),
-                          ExpandingSection(
-                            title: "Education",
-                            startOpen: true,
-                          ),
-                          Container(
-                            constraints: BoxConstraints(
-                              minWidth: minWidth,
-                            ),
-                            color: Colors.black,
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 16,
-                            ),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: <Widget>[
-                                DefaultTextStyle(
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                  ),
-                                  child: SectionTitle(
-                                    title: "My Work",
-                                    padded: false,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                    top: 8,
-                                  ),
-                                  child: Padding(
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: 8,
-                                    ),
-                                    child: Icon(
-                                      PortfolioIcons.keyboard_arrow_right,
-                                      color: Colors.white,
-                                      size: MyApp.h2,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          ExpandingSection(
-                            title: "Software",
-                            startOpen: true,
-                          ),
-                          ExpandingSection(
-                            title: "Languages",
-                            startOpen: true,
-                          ),
-                          LanguageBody(),
-                          ExpandingSection(
-                            title: "Awards",
-                            startOpen: false,
-                          ),
-                          ExpandingSection(
-                            title: "References",
-                            startOpen: false,
-                          ),
-                          ExpandingSection(
-                            title: "Contact",
-                            startOpen: false,
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 16,
-                            ),
-                            child: Column(
-                              children: [
-                                ConstrainedBox(
-                                  constraints: BoxConstraints(
-                                    maxWidth: 240,
-                                    maxHeight: 240,
-                                  ),
-                                  child: MyApp.qrCodeBlackWillExpand,
-                                ),
-                                IconButton(
-                                  icon: Icon(
-                                    PortfolioIcons.close,
-                                  ),
-                                  onPressed: () {
-                                    if (openMenu.value) {
-                                      openMenu.value = false;
-                                    }
-                                  },
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

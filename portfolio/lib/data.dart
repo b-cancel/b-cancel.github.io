@@ -16,6 +16,12 @@ String githubPrefix = "https://github.com/b-cancel/";
 
 //tracking of all projects
 enum ProjectType { AppDev, GameDev, WebDev, Graphics }
+Map<ProjectType, StdAspectRatio> projectTypeToDefaultAspectRatio = {
+  ProjectType.AppDev: StdAspectRatio.Mobile,
+  ProjectType.GameDev: StdAspectRatio.Monitor,
+  ProjectType.WebDev: StdAspectRatio.Monitor,
+  ProjectType.Graphics: StdAspectRatio.Square,
+};
 Map<ProjectType, List<Project>> projectTypeToProjects = {
   ProjectType.AppDev: [
     Project(
@@ -461,4 +467,29 @@ class Project {
     this.web,
     this.content,
   });
+}
+
+enum StdAspectRatio { Mobile, Monitor, Square }
+Map<StdAspectRatio, double> stdAspectRatioToAspectRatio = {
+  StdAspectRatio.Mobile: (9 / 16),
+  StdAspectRatio.Monitor: (16 / 9),
+  StdAspectRatio.Square: 1,
+};
+
+class Content {
+  String url;
+  double aspectRatioOverride;
+  String description;
+
+  Content(
+    String url, {
+    double aspectRatio,
+    StdAspectRatio stdAspectRatio,
+    String description,
+  }) {
+    this.url = url;
+    this.aspectRatioOverride =
+        aspectRatio ?? stdAspectRatioToAspectRatio[stdAspectRatio];
+    this.description = description;
+  }
 }

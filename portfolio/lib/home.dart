@@ -1,7 +1,11 @@
 //flutter
 import 'package:flutter/material.dart';
+import 'package:portfolio/data.dart';
+import 'package:portfolio/icons/portfolio_icons_icons.dart';
 
 //plugin
+import 'package:dynamic_overflow_menu_bar/dynamic_overflow_menu_bar.dart';
+import 'package:portfolio/utils/link/ui/iconLink.dart';
 import 'package:universal_html/html.dart';
 
 //internal: other
@@ -40,12 +44,68 @@ class Home extends StatelessWidget {
             data: ThemeData.dark(),
             child: Scaffold(
               appBar: AppBar(
-                title: MyName(),
-                actions: <Widget>[
-                  MenuOpener(
+                titleSpacing: 0,
+                title: DynamicOverflowMenuBar(
+                  title: MyName(
                     openMenu: openMenu,
                   ),
-                ],
+                  actions: [
+                    //TODO: if the width is larger than 430 -> use action sheet when pressing contact link
+                    //TODO: the above is particularly important so the behavior is consitent when things start to wrap
+                    OverFlowMenuItem(
+                      onPressed: null,
+                      label: "Github",
+                      child: IconWebLink(
+                        url: myGithub,
+                        lightMode: false,
+                        icon: IconLinkIcon(
+                          icon: PortfolioIcons.github,
+                          mini: true,
+                        ),
+                        label: "Github",
+                      ),
+                    ),
+                    OverFlowMenuItem(
+                      onPressed: null,
+                      label: "Linked In",
+                      child: IconWebLink(
+                        url: myLinkedIn,
+                        lightMode: false,
+                        icon: IconLinkIcon(
+                          icon: PortfolioIcons.linkedin,
+                          mini: true,
+                        ),
+                        label: "Linked In",
+                      ),
+                    ),
+                    OverFlowMenuItem(
+                      onPressed: null,
+                      label: myNumber,
+                      child: IconPhoneLink(
+                        lightMode: false,
+                        icon: IconLinkIcon(
+                          icon: PortfolioIcons.phone,
+                          mini: true,
+                        ),
+                        url: myNumber,
+                        label: myNumber,
+                      ),
+                    ),
+                    OverFlowMenuItem(
+                      onPressed: null,
+                      label: myEmail,
+                      child: IconEmailLink(
+                        lightMode: false,
+                        icon: IconLinkIcon(
+                          icon: PortfolioIcons.email,
+                          mini: true,
+                        ),
+                        url: myEmail,
+                        label: myEmail,
+                      ),
+                    )
+                  ],
+                ),
               ),
               //NOTE: transition handled internally
               body: MyWork(
@@ -71,19 +131,75 @@ class Home extends StatelessWidget {
 class MyName extends StatelessWidget {
   const MyName({
     Key key,
+    this.openMenu,
   }) : super(key: key);
+
+  final ValueNotifier<bool> openMenu;
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      "Bryan Cancel",
-      maxLines: 1,
-      overflow: TextOverflow.ellipsis,
-      //bigger part, and smaller part of smaller part
-      style: TextStyle(
-        fontWeight: FontWeight.bold,
-        fontSize: MyApp.h2,
-        letterSpacing: 2,
+    TextStyle nameStyle = TextStyle(
+      fontWeight: FontWeight.bold,
+      fontSize: MyApp.h2,
+      letterSpacing: 2,
+    );
+
+    //415, 428, 560
+    bool largerThanIDK = MediaQuery.of(context).size.width > 560;
+
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: openMenu == null
+            ? null
+            : () {
+                if (openMenu.value == false) {
+                  openMenu.value = true;
+                }
+              },
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 12,
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(
+                "Bryan Cancel",
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                //bigger part, and smaller part of smaller part
+                style: nameStyle,
+              ),
+              Visibility(
+                visible: openMenu != null && largerThanIDK,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      "'s Resume",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w100,
+                        fontSize: MyApp.h4,
+                        letterSpacing: 2,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                        left: 4.0,
+                      ),
+                      child: Icon(
+                        Icons.arrow_left,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

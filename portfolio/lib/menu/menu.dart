@@ -332,38 +332,3 @@ class _ResumeInMenuState extends State<ResumeInMenu>
     );
   }
 }
-
-//this slides in at the last second of the menu hiding
-//and even if it didn't the menu will be stoppping it from being tappable
-class MenuOpener extends StatelessWidget {
-  const MenuOpener({
-    Key key,
-    @required this.openMenu,
-  }) : super(key: key);
-
-  final ValueNotifier<bool> openMenu;
-
-  @override
-  Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: openMenu,
-      child: IconButton(
-        icon: Icon(
-          PortfolioIcons.file_alt,
-        ),
-        onPressed: () {
-          if (openMenu.value == false) {
-            openMenu.value = true;
-          }
-        },
-      ),
-      builder: (context, child) {
-        return AnimatedOpacity(
-          opacity: openMenu.value ? 0 : 1,
-          duration: kTabScrollDuration,
-          child: child,
-        );
-      },
-    );
-  }
-}
