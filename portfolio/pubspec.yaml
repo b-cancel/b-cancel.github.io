@@ -28,7 +28,7 @@ dependencies:
   #vcard: ^0.1.1 #incorrect v3 and v4 phone number output
   #vcard_parser: ^0.1.6 #i dont need to parse
   pretty_qr_code: ^1.0.1 #pretty but not functional
-  #qr_flutter: ^3.2.0
+  qr_flutter: ^3.2.0
   qr: ^1.3.0
 
   animator: ^2.0.1

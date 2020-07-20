@@ -45,68 +45,73 @@ class Home extends StatelessWidget {
             child: Scaffold(
               appBar: AppBar(
                 titleSpacing: 0,
-                title: DynamicOverflowMenuBar(
-                  title: MyName(
-                    openMenu: openMenu,
+                title: Padding(
+                  padding: EdgeInsets.only(
+                    right: 8,
                   ),
-                  actions: [
-                    //TODO: in all cases tapping the label should copy it
-                    //TODO: repair the pop up that isnt showing text for some odd reason
-                    //TODO: if the width is larger than 430 -> use action sheet when pressing contact link
-                    //TODO: the above is particularly important so the behavior is consitent when things start to wrap
-                    OverFlowMenuItem(
-                      onPressed: null,
-                      label: "Github",
-                      child: IconWebLink(
-                        url: myGithub,
-                        lightMode: false,
-                        icon: IconLinkIcon(
-                          icon: PortfolioIcons.github,
-                          mini: true,
-                        ),
+                  child: DynamicOverflowMenuBar(
+                    title: MyName(
+                      openMenu: openMenu,
+                    ),
+                    actions: [
+                      //TODO: in all cases tapping the label should copy it
+                      //TODO: repair the pop up that isnt showing text for some odd reason
+                      //TODO: if the width is larger than 430 -> use action sheet when pressing contact link
+                      //TODO: the above is particularly important so the behavior is consitent when things start to wrap
+                      OverFlowMenuItem(
+                        onPressed: null,
                         label: "Github",
-                      ),
-                    ),
-                    OverFlowMenuItem(
-                      onPressed: null,
-                      label: "Linked In",
-                      child: IconWebLink(
-                        url: myLinkedIn,
-                        lightMode: false,
-                        icon: IconLinkIcon(
-                          icon: PortfolioIcons.linkedin,
-                          mini: true,
+                        child: IconWebLink(
+                          url: myGithub,
+                          lightMode: false,
+                          icon: IconLinkIcon(
+                            icon: PortfolioIcons.github,
+                            mini: true,
+                          ),
+                          label: "Github",
                         ),
+                      ),
+                      OverFlowMenuItem(
+                        onPressed: null,
                         label: "Linked In",
-                      ),
-                    ),
-                    OverFlowMenuItem(
-                      onPressed: null,
-                      label: myNumber,
-                      child: IconPhoneLink(
-                        lightMode: false,
-                        icon: IconLinkIcon(
-                          icon: PortfolioIcons.phone,
-                          mini: true,
+                        child: IconWebLink(
+                          url: myLinkedIn,
+                          lightMode: false,
+                          icon: IconLinkIcon(
+                            icon: PortfolioIcons.linkedin,
+                            mini: true,
+                          ),
+                          label: "Linked In",
                         ),
-                        url: myNumber,
+                      ),
+                      OverFlowMenuItem(
+                        onPressed: null,
                         label: myNumber,
-                      ),
-                    ),
-                    OverFlowMenuItem(
-                      onPressed: null,
-                      label: myEmail,
-                      child: IconEmailLink(
-                        lightMode: false,
-                        icon: IconLinkIcon(
-                          icon: PortfolioIcons.email,
-                          mini: true,
+                        child: IconPhoneLink(
+                          lightMode: false,
+                          icon: IconLinkIcon(
+                            icon: PortfolioIcons.phone,
+                            mini: true,
+                          ),
+                          url: myNumber,
+                          label: myNumber,
                         ),
-                        url: myEmail,
-                        label: myEmail,
                       ),
-                    )
-                  ],
+                      OverFlowMenuItem(
+                        onPressed: null,
+                        label: myEmail,
+                        child: IconEmailLink(
+                          lightMode: false,
+                          icon: IconLinkIcon(
+                            icon: PortfolioIcons.email,
+                            mini: true,
+                          ),
+                          url: myEmail,
+                          label: myEmail,
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
               //NOTE: transition handled internally

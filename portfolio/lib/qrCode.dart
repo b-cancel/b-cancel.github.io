@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'package:pretty_qr_code/pretty_qr_code.dart';
-import 'package:qr/qr.dart';
-import 'package:qr/src/rs_block.dart' as rsBlock;
-import 'package:qr/src/mode.dart' as qr_mode;
-import 'package:qr/src/byte.dart' as byte;
+import 'package:qr_flutter/qr_flutter.dart';
 
 //VCard suffer for compatibility issues
 //this is me trying my best to work with that
@@ -204,96 +199,21 @@ class AdjustableQrCode extends StatelessWidget {
     return SizedBox.expand(
       child: FittedBox(
         fit: BoxFit.contain,
-        child: PrettyQr(
-          elementColor:
-              squaresColor == Colors.black ? Colors.white : Colors.black,
-          errorCorrectLevel: QrErrorCorrectLevel.M,
-          typeNumber: calculateTypeNumberFromData(
-            QrErrorCorrectLevel.M,
-            [byte.QrByte(data)],
-          ),
+        child: QrImage(
           data: data,
-          //NOTE: rounding edges looks cool
-          //NOTE: adding a vcard icon in the middle looks cool
-          //but BOTH make it harder to read the QR Code
+          //colors
+          backgroundColor: Colors.transparent,
+          foregroundColor:
+              squaresColor == Colors.black ? Colors.white : Colors.black,
+          //more accurate
+          gapless: false,
+          //calculating this is annoying
+          version: QrVersions.auto,
+          //sizing
+          padding: EdgeInsets.all(0),
+          size: 500,
         ),
       ),
     );
-  }
-
-  //functions below taken from qr plugin
-  calculateTypeNumberFromData(
-    int errorCorrectLevel,
-    List<byte.QrByte> dataList,
-  ) {
-    int typeNumber;
-    for (typeNumber = 1; typeNumber < 40; typeNumber++) {
-      final rsBlocks =
-          rsBlock.QrRsBlock.getRSBlocks(typeNumber, errorCorrectLevel);
-
-      final buffer = QrBitBuffer();
-      var totalDataCount = 0;
-      for (var i = 0; i < rsBlocks.length; i++) {
-        totalDataCount += rsBlocks[i].dataCount;
-      }
-
-      for (var i = 0; i < dataList.length; i++) {
-        final data = dataList[i];
-        buffer
-          ..put(data.mode, 4)
-          ..put(data.length, lengthInBits(data.mode, typeNumber));
-        data.write(buffer);
-      }
-      if (buffer.length <= totalDataCount * 8) break;
-    }
-    return typeNumber;
-  }
-
-  int lengthInBits(int mode, int type) {
-    if (1 <= type && type < 10) {
-      // 1 - 9
-      switch (mode) {
-        case qr_mode.modeNumber:
-          return 10;
-        case qr_mode.modeAlphaNum:
-          return 9;
-        case qr_mode.mode8bitByte:
-          return 8;
-        case qr_mode.modeKanji:
-          return 8;
-        default:
-          throw ArgumentError('mode:$mode');
-      }
-    } else if (type < 27) {
-      // 10 - 26
-      switch (mode) {
-        case qr_mode.modeNumber:
-          return 12;
-        case qr_mode.modeAlphaNum:
-          return 11;
-        case qr_mode.mode8bitByte:
-          return 16;
-        case qr_mode.modeKanji:
-          return 10;
-        default:
-          throw ArgumentError('mode:$mode');
-      }
-    } else if (type < 41) {
-      // 27 - 40
-      switch (mode) {
-        case qr_mode.modeNumber:
-          return 14;
-        case qr_mode.modeAlphaNum:
-          return 13;
-        case qr_mode.mode8bitByte:
-          return 16;
-        case qr_mode.modeKanji:
-          return 12;
-        default:
-          throw ArgumentError('mode:$mode');
-      }
-    } else {
-      throw ArgumentError('type:$type');
-    }
   }
 }
