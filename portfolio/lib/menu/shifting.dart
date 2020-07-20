@@ -173,22 +173,6 @@ class ShiftingMenu extends StatelessWidget {
                         title: "Contact",
                         startOpen: false,
                       ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 16,
-                        ),
-                        child: Column(
-                          children: [
-                            ConstrainedBox(
-                              constraints: BoxConstraints(
-                                maxWidth: 240,
-                                maxHeight: 240,
-                              ),
-                              child: MyApp.qrCodeBlackWillExpand,
-                            ),
-                          ],
-                        ),
-                      ),
                     ],
                   ),
                 ),

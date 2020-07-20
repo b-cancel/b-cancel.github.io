@@ -51,8 +51,10 @@ class MyApp extends StatelessWidget {
     return BotToastInit(
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        navigatorObservers: [BotToastNavigatorObserver()],
-        title: 'Bryan\'s Portfolio',
+        navigatorObservers: [
+          BotToastNavigatorObserver(),
+        ],
+        title: 'Bryan Cancel\'s Portfolio',
         theme: ThemeData(
           //text selection
           textSelectionColor: Colors.blue,

@@ -106,6 +106,8 @@ class _MyWorkState extends State<MyWork> {
     double screenWidth = MediaQuery.of(context).size.width;
     double phonesThatFit = screenWidth / deviceWidth;
 
+    int itemCount = 11;
+
     //build
     return AnimatedOpacity(
       //visible if we can shift
@@ -127,22 +129,36 @@ class _MyWorkState extends State<MyWork> {
               child: WaterfallFlow.builder(
                 //cacheExtent: 0.0,
                 padding: EdgeInsets.all(5.0),
-                itemCount: 10,
+                itemCount: itemCount,
                 itemBuilder: (BuildContext context, int index) {
-                  return FutureBuilder(
-                    future: client.random(),
-                    builder: (BuildContext context,
-                        AsyncSnapshot<GiphyGif> snapShot) {
-                      if (snapShot.connectionState == ConnectionState.done) {
-                        print(snapShot.data.images.preview.mp4);
-                        return GiphyImage.video(
-                          gif: snapShot.data,
-                        );
-                      } else {
-                        return CircularProgressIndicator();
-                      }
-                    },
-                  );
+                  if (index != (itemCount - 1)) {
+                    return FutureBuilder(
+                      future: client.random(),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<GiphyGif> snapShot) {
+                        if (snapShot.connectionState == ConnectionState.done) {
+                          print(snapShot.data.images.preview.mp4);
+                          return GiphyImage.video(
+                            gif: snapShot.data,
+                          );
+                        } else {
+                          return CircularProgressIndicator();
+                        }
+                      },
+                    );
+                  } else {
+                    return SizedBox(
+                      width: screenWidth / phonesThatFit.ceil(),
+                      height: screenWidth / phonesThatFit.ceil(),
+                      child: Stack(
+                        children: [
+                          Positioned.fill(
+                            child: MyApp.qrCodeBlackWillExpand,
+                          ),
+                        ],
+                      ),
+                    );
+                  }
                 },
                 gridDelegate:
                     SliverWaterfallFlowDelegateWithFixedCrossAxisCount(
@@ -164,7 +180,6 @@ class _MyWorkState extends State<MyWork> {
                       : LastChildLayoutType.none,
                 ),
               ),
-
             ),
             /*
             Positioned(
