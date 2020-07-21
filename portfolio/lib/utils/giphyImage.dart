@@ -268,7 +268,9 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
         } else {
           // If the VideoPlayerController is still initializing, show a
           // loading spinner.
-          return Center(child: CircularProgressIndicator());
+          return Center(
+            child: CircularProgressIndicator(),
+          );
         }
       },
     );

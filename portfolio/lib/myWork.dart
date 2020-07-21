@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/data.dart';
 import 'package:portfolio/home.dart';
@@ -53,12 +54,20 @@ class _MyWorkState extends State<MyWork> {
     refreshController.loadComplete();
   }
 
+  hideToasts() {
+    print("hiding toast");
+    BotToast.cleanAll();
+  }
+
   //depending on isMenuOpened
   //you might need to wait for the menu's width
   bool waitForMenuWidth;
   @override
   void initState() {
     super.initState();
+
+    //dimiss attached bot toasts on scroll
+    scrollController.addListener(hideToasts);
 
     //when the menu is automatically opened
     //to avoid snapping into place
@@ -71,6 +80,12 @@ class _MyWorkState extends State<MyWork> {
     } else {
       waitForMenuWidth = false;
     }
+  }
+
+  @override
+  void dispose() {
+    scrollController.removeListener(hideToasts);
+    super.dispose();
   }
 
   double shiftValue;
@@ -107,7 +122,7 @@ class _MyWorkState extends State<MyWork> {
     double screenWidth = MediaQuery.of(context).size.width;
     double phonesThatFit = screenWidth / deviceWidth;
 
-    int itemCount = 11;
+    int itemCount = 30;
 
     //build
     return AnimatedOpacity(
@@ -124,10 +139,12 @@ class _MyWorkState extends State<MyWork> {
             SmartRefresher(
               enablePullDown: true,
               enablePullUp: false,
+              scrollController: scrollController,
               controller: refreshController,
               onRefresh: _onRefresh,
               onLoading: _onLoading,
               child: WaterfallFlow.builder(
+                controller: scrollController,
                 //cacheExtent: 0.0,
                 padding: EdgeInsets.all(5.0),
                 itemCount: itemCount,
