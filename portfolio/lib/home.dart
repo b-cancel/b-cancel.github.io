@@ -68,6 +68,10 @@ class Home extends StatelessWidget {
                       openMenu: openMenu,
                     ),
                     actions: [
+                      //NOTE: the item in the front will always be in the front... GITHUB
+                      //VCard should show up for downloading
+                      //a shortcut to the QR Code should also show up
+
                       //TODO: in all cases tapping the label should copy it
                       //TODO: repair the pop up that isnt showing text for some odd reason
                       //TODO: if the width is larger than 430 -> use action sheet when pressing contact link
