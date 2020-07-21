@@ -24,6 +24,9 @@ dependencies:
   flutter:
     sdk: flutter
 
+  #TODO: remove as optimzation later
+  font_awesome_flutter: ^8.8.1
+
   #contact info generation
   #vcard: ^0.1.1 #incorrect v3 and v4 phone number output
   #vcard_parser: ^0.1.6 #i dont need to parse
