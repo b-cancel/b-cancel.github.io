@@ -5,6 +5,7 @@ import 'package:portfolio/icons/portfolio_icons_icons.dart';
 
 //plugin
 import 'package:dynamic_overflow_menu_bar/dynamic_overflow_menu_bar.dart';
+import 'package:portfolio/utils/link/ui/hover.dart';
 import 'package:portfolio/utils/link/ui/iconLink.dart';
 import 'package:universal_html/html.dart';
 
@@ -31,6 +32,19 @@ class Home extends StatelessWidget {
   final ValueNotifier<bool> openMenu = new ValueNotifier<bool>(
     true,
   );
+
+  printString(BuildContext context, String s) {
+    showDialog<void>(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("point detect"),
+          content: Text(s),
+        );
+      },
+    );
+  }
 
   //build
   @override
@@ -59,9 +73,88 @@ class Home extends StatelessWidget {
                       //TODO: if the width is larger than 430 -> use action sheet when pressing contact link
                       //TODO: the above is particularly important so the behavior is consitent when things start to wrap
                       OverFlowMenuItem(
-                        onPressed: null,
-                        label: "Github",
-                        child: IconWebLink(
+                          onPressed: () {
+                            /*
+                          openWithHtml(
+          context,
+          url,
+          openHere: true,
+        );
+      },
+      onShowOptions: () {
+        showOptions(
+          context,
+          lightMode: lightMode,
+          children: [
+            OptionButton(
+              label: label,
+              addBorder: true,
+            ),
+            OptionButton(
+              icon: PortfolioIcons.open_in_new,
+              label: "New Tab",
+              onTap: () {
+                openWithHtml(
+                  context,
+                  url,
+                  openHere: false,
+                );
+              },
+            ),
+            OptionButton(
+              icon: PortfolioIcons.content_copy,
+              label: "Copy",
+              onTap: () {
+                copyToClipboard(
+                  context,
+                  url,
+                );
+              },
+            ),
+          ],
+        );
+                          */
+                          },
+                          label: "Github",
+                          child: OpaqueOnHover(
+                            invert: false,
+                            child: Material(
+                              borderRadius: BorderRadius.circular(56),
+                              color: Colors.transparent,
+                              child: InkWell(
+                                onTap: () {
+                                  var appContainer =
+                                      window.document.getElementById(
+                                    'app-container',
+                                  );
+
+                                  printString(
+                                    context,
+                                    "tap: " +
+                                        appContainer.style.cursor.toString(),
+                                  );
+                                },
+                                onLongPress: () {
+                                  var appContainer =
+                                      window.document.getElementById(
+                                    'app-container',
+                                  );
+
+                                  printString(
+                                    context,
+                                    "hold: " +
+                                        appContainer.style.cursor.toString(),
+                                  );
+                                },
+                                child: IconLinkIcon(
+                                  icon: PortfolioIcons.github,
+                                  mini: true,
+                                ),
+                              ),
+                            ),
+                          )
+                          /*
+                        IconWebLink(
                           url: myGithub,
                           lightMode: false,
                           icon: IconLinkIcon(
@@ -69,8 +162,9 @@ class Home extends StatelessWidget {
                             mini: true,
                           ),
                           label: "Github",
-                        ),
-                      ),
+                        ),*/
+                          ),
+                      /*
                       OverFlowMenuItem(
                         onPressed: null,
                         label: "Linked In",
@@ -110,6 +204,7 @@ class Home extends StatelessWidget {
                           label: myEmail,
                         ),
                       )
+                      */
                     ],
                   ),
                 ),
