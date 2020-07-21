@@ -204,11 +204,20 @@ class CustomAppBarTitle extends StatelessWidget {
             onTap: () => quickAction(),
             //on web
             //used to replace right clicking before they realize its not available
-            //TODO: wut
-            onHover: (boolean) => showContextMenu(),
+            onHover: (boolean) {
+              //NOTE: we don't allow hover if pointer doesn't exists... because this shouldn't be possible
+              if (PointerOnHover.isActive()) {
+                showContextMenu();
+              }
+            },
             //on mobile
             //used to replace the context menu
-            onLongPress: () => showPopUpMenu(),
+            onLongPress: () {
+              //NOTE: we don't allow long press if a pointer exists to avoid weird formatting issues
+              if (PointerOnHover.isActive() == false) {
+                showPopUpMenu();
+              }
+            },
             child: Container(
               margin: EdgeInsets.symmetric(
                 horizontal: 4,
@@ -478,6 +487,7 @@ class OptionButton extends StatelessWidget {
                     height: 30,
                     child: Icon(
                       icon,
+                      color: Colors.black,
                     ),
                   ),
                 ),
