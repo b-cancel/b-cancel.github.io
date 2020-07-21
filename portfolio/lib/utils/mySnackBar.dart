@@ -5,19 +5,20 @@ import 'package:flutter/material.dart';
 import 'package:portfolio/icons/portfolio_icons_icons.dart';
 
 //function
-showSnackBar(BuildContext context, {
-  String text, 
+showSnackBar(
+  BuildContext context, {
+  String text,
   IconData icon,
   Duration duration: const Duration(seconds: 7),
 }) {
   Scaffold.of(context).removeCurrentSnackBar();
-  
+
   Scaffold.of(context).showSnackBar(
     SnackBar(
       content: Material(
         color: Colors.transparent,
         child: InkWell(
-          onTap: (){
+          onTap: () {
             Scaffold.of(context).hideCurrentSnackBar();
           },
           child: Row(
@@ -28,14 +29,14 @@ showSnackBar(BuildContext context, {
                 ),
                 child: Icon(
                   icon ?? PortfolioIcons.warning,
-                  color : icon != null ? Colors.white : Colors.yellow,
+                  color: icon != null ? Colors.black : Colors.red,
                 ),
               ),
               Expanded(
                 child: Text(
                   text,
                   style: TextStyle(
-                    color: Colors.white,
+                    color: Colors.black,
                   ),
                 ),
               ),

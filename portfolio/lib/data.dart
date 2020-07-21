@@ -1,8 +1,10 @@
 //general
 String myNumber = "(956) 777-2692";
 String myEmail = "bryan.o.cancel@gmail.com";
-String myGithub = "https://github.com/b-cancel";
-String myLinkedIn = "https://www.linkedin.com/in/bryan-cancel-069a197a";
+String generalGithub = "https://github.com/";
+String myGithub = "b-cancel";
+String generalLinkedIn = "https://www.linkedin.com/in/";
+String myLinkedIn = "bryan-cancel-069a197a";
 
 //extras
 String resume =

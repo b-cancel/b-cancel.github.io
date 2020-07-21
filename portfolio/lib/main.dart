@@ -45,6 +45,10 @@ class MyApp extends StatelessWidget {
   //tiny shoudn't be any tinier that 12 pt
   static const double h6 = 12;
 
+  static double buttonSize = 56;
+  static double smallButtonSize = 48;
+  static double smallestButtonSize = 36;
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
