@@ -1,5 +1,6 @@
 //flutter
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 //plugins
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -340,40 +341,24 @@ class OptionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget button = Material(
-      color: Colors.transparent,
-      child: InkWell(
-        //dont show the title is hoverable
-        hoverColor: isTitle ? Colors.transparent : null,
-        onTap: () {
-          onTap();
-          BotToast.cleanAll();
-        }, //might be null
-        child: Container(
-          height: MyApp.smallestButtonSize,
-          alignment: Alignment.centerLeft,
-          padding: EdgeInsets.symmetric(
-            horizontal: 12,
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Visibility(
-                visible: icon != null,
-                child: Padding(
-                  padding: EdgeInsets.only(
-                    right: 6.0,
-                  ),
-                  child: Icon(
-                    icon,
-                    color: Colors.black,
-                  ),
-                ),
+    Widget button = PopupMenuItem(
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.only(
+              right: 6,
+            ),
+            child: Container(
+              width: 30,
+              height: 30,
+              child: Icon(
+                icon,
               ),
-              label,
-            ],
+            ),
           ),
-        ),
+          label,
+        ],
       ),
     );
 
