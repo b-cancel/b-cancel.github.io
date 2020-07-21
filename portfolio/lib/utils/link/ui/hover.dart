@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:universal_html/html.dart';
 
@@ -17,7 +18,7 @@ class _UnderlineOnHoverState extends State<UnderlineOnHover> {
 
   @override
   Widget build(BuildContext context) {
-    return OnHover(
+    return PointerOnHover(
       isHovering: isHovered,
       child: AnimatedBuilder(
         animation: isHovered,
@@ -60,7 +61,7 @@ class _ColorizeLinkOnHoverState extends State<ColorizeLinkOnHover> {
   @override
   Widget build(BuildContext context) {
     Color defaultColor = Theme.of(context).iconTheme.color;
-    return OnHover(
+    return PointerOnHover(
       isHovering: isHovered,
       child: AnimatedBuilder(
         animation: isHovered,
@@ -129,14 +130,16 @@ class _OpaqueOnHoverState extends State<OpaqueOnHover> {
 
   @override
   Widget build(BuildContext context) {
-    return OnHover(
+    return PointerOnHover(
       isHovering: isHovered,
       child: AnimatedBuilder(
         animation: isHovered,
         child: widget.child,
         builder: (context, resuable) {
           return Opacity(
-            opacity: widget.invert ? (isHovered.value ? .5 : 1) : (isHovered.value ? 1 : .5),
+            opacity: widget.invert
+                ? (isHovered.value ? .5 : 1)
+                : (isHovered.value ? 1 : .5),
             child: resuable,
           );
         },
@@ -145,8 +148,8 @@ class _OpaqueOnHoverState extends State<OpaqueOnHover> {
   }
 }
 
-class OnHover extends StatelessWidget {
-  OnHover({
+class PointerOnHover extends StatelessWidget {
+  PointerOnHover({
     Key key,
     this.child,
     this.isHovering,
@@ -160,16 +163,21 @@ class OnHover extends StatelessWidget {
     'app-container',
   );
 
+  static bool isActive() {
+    return appContainer.style.cursor == 'pointer';
+  }
+
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
-      onEnter: (e) {
+      onEnter: (PointerEnterEvent e) {
         appContainer.style.cursor = 'pointer';
         if (isHovering != null) {
           isHovering.value = true;
         }
       },
-      onExit: (e) {
+      onHover: (PointerHoverEvent e) {},
+      onExit: (PointerExitEvent e) {
         appContainer.style.cursor = 'default';
         if (isHovering != null) {
           isHovering.value = false;

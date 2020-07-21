@@ -36,6 +36,7 @@ class _MyWorkState extends State<MyWork> {
   final ValueNotifier<bool> topScrolledAway = new ValueNotifier<bool>(false);
 
   void _onRefresh() async {
+    //TODO: eventually pass a parameter that has the state of the menu, open or closed
     uniHTML.window.location.reload();
     //html.window.location.assign();
     /*

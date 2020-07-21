@@ -96,7 +96,7 @@ class _SpreadTitleOnHoverState extends State<SpreadTitleOnHover> {
 
   @override
   Widget build(BuildContext context) {
-    return OnHover(
+    return PointerOnHover(
       isHovering: isHovering,
       child: Material(
         color: Colors.transparent,

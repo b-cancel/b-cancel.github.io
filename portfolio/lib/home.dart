@@ -123,27 +123,17 @@ class Home extends StatelessWidget {
                               color: Colors.transparent,
                               child: InkWell(
                                 onTap: () {
-                                  var appContainer =
-                                      window.document.getElementById(
-                                    'app-container',
-                                  );
-
                                   printString(
                                     context,
                                     "tap: " +
-                                        appContainer.style.cursor.toString(),
+                                        PointerOnHover.isActive().toString(),
                                   );
                                 },
                                 onLongPress: () {
-                                  var appContainer =
-                                      window.document.getElementById(
-                                    'app-container',
-                                  );
-
                                   printString(
                                     context,
                                     "hold: " +
-                                        appContainer.style.cursor.toString(),
+                                        PointerOnHover.isActive().toString(),
                                   );
                                 },
                                 child: IconLinkIcon(
