@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 
 //plugins
-import 'package:dynamic_overflow_menu_bar/dynamic_overflow_menu_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:bot_toast/bot_toast.dart';
 
@@ -11,6 +10,7 @@ import 'package:portfolio/icons/portfolio_icons_icons.dart';
 import 'package:portfolio/data.dart';
 import 'package:portfolio/home.dart';
 import 'package:portfolio/main.dart';
+import 'package:portfolio/overflowMenuBar.dart';
 
 //utils
 import 'package:portfolio/utils/conditional.dart';
@@ -36,51 +36,60 @@ class CustomAppBarTitle extends StatelessWidget {
     BuildContext context, {
     @required String label,
     @required IconData icon,
-    bool isIrregular: false,
     Function quickAction,
     List<Widget> menuItems,
   }) {
-    Function showMenu = () {
-      print("showing menu now");
+    //what options come up when tapping things
 
-      BotToast.showAttachedWidget(
-        targetContext: context,
-        //for all the icons that use it on top
-        preferDirection: PreferDirection.bottomRight,
-        //show forever until another shows or you dismiss it
-        duration: Duration(days: 1),
-        enableSafeArea: true,
-        onlyOne: true,
-        //regular old builder
-        attachedBuilder: (_) {
-          return Padding(
-            padding: EdgeInsets.only(
-              right: 16,
-            ),
-            child: Material(
-              color: Colors.white,
-              elevation: 6,
-              child: IntrinsicWidth(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: List.generate(
-                    menuItems.length,
-                    (index) {
-                      return menuItems[index];
-                    },
+    //2 different ways the menu can show up
+    Function showContextMenu = () => BotToast.showAttachedWidget(
+          targetContext: context,
+          //for all the icons that use it on top
+          preferDirection: PreferDirection.bottomRight,
+          //show forever until another shows or you dismiss it
+          duration: Duration(days: 1),
+          enableSafeArea: true,
+          onlyOne: true,
+          //regular old builder
+          attachedBuilder: (_) {
+            return Padding(
+              //only right since we are pushing it towards the right
+              padding: EdgeInsets.only(
+                right: 16,
+              ),
+              child: Material(
+                color: Colors.white,
+                elevation: 6,
+                child: IntrinsicWidth(
+                  child: MenuOptions(
+                    menuItems: menuItems,
                   ),
                 ),
               ),
-            ),
-          );
-        },
-      );
-    };
+            );
+          },
+        );
+
+    Function showPopUpMenu = () => showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return Dialog(
+              backgroundColor: Colors.white,
+              child: MenuOptions(
+                menuItems: menuItems,
+              ),
+            );
+          },
+        );
 
     //the actual overflow item
     return OverFlowMenuItem(
-      onPressed: () => showMenu(),
+      //this should not happen on desktop
+      //since usually desktop is large enough to avoid overflow
+      //and IF it does -> we dont want two open context menus
+      //so in both cases
+      onPressed: () => showPopUpMenu(),
+      icon: icon,
       label: label,
       child: OpaqueOnHover(
         invert: false,
@@ -95,28 +104,18 @@ class CustomAppBarTitle extends StatelessWidget {
             //on web
             //used to replace right clicking before they realize its not available
             //TODO: wut
-            onHover: (boolean) => showMenu(),
+            onHover: (boolean) => showContextMenu(),
             //on mobile
             //used to replace the context menu
-            onLongPress: () => showMenu(),
-            child: Ternary(
-              condition: isIrregular,
-              isTrue: Container(
-                width: 22.0 + 8 * 2,
-                height: 22.0 + 8 * 2,
-                child: Padding(
-                  padding: EdgeInsets.only(
-                    top: 1,
-                  ),
-                  child: Icon(
-                    icon,
-                    size: 17,
-                  ),
-                ),
+            onLongPress: () => showPopUpMenu(),
+            child: Container(
+              margin: EdgeInsets.symmetric(
+                horizontal: 4,
               ),
-              isFalse: IconLinkIcon(
-                icon: icon,
-                mini: true,
+              height: 30,
+              width: 30,
+              child: Icon(
+                icon,
               ),
             ),
           ),
@@ -209,6 +208,7 @@ class CustomAppBarTitle extends StatelessWidget {
                   "Github Profile",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
+                    color: Colors.black,
                   ),
                 ),
                 //TODO: make sure this works
@@ -228,11 +228,17 @@ class CustomAppBarTitle extends StatelessWidget {
                 label: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(generalGithub),
+                    Text(
+                      generalGithub,
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
+                    ),
                     Text(
                       myGithub,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
+                        color: Colors.black,
                       ),
                     ),
                   ],
@@ -283,8 +289,6 @@ class CustomAppBarTitle extends StatelessWidget {
             context,
             label: "Contact Card",
             icon: PortfolioIcons.address_card,
-            //icon is irregularly big and improperly centered
-            isIrregular: true,
           ),
           //TODO: actually get this to do stuff
           overFlowMenuItem(
@@ -293,6 +297,29 @@ class CustomAppBarTitle extends StatelessWidget {
             icon: FontAwesomeIcons.qrcode, //TODO: optimize
           ),
         ],
+      ),
+    );
+  }
+}
+
+class MenuOptions extends StatelessWidget {
+  const MenuOptions({
+    @required this.menuItems,
+    Key key,
+  }) : super(key: key);
+
+  final List<Widget> menuItems;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: List.generate(
+        menuItems.length,
+        (index) {
+          return menuItems[index];
+        },
       ),
     );
   }
@@ -318,7 +345,10 @@ class OptionButton extends StatelessWidget {
       child: InkWell(
         //dont show the title is hoverable
         hoverColor: isTitle ? Colors.transparent : null,
-        onTap: onTap, //might be null
+        onTap: () {
+          onTap();
+          BotToast.cleanAll();
+        }, //might be null
         child: Container(
           height: MyApp.smallestButtonSize,
           alignment: Alignment.centerLeft,
@@ -336,6 +366,7 @@ class OptionButton extends StatelessWidget {
                   ),
                   child: Icon(
                     icon,
+                    color: Colors.black,
                   ),
                 ),
               ),
