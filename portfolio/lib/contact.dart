@@ -32,6 +32,106 @@ class CustomAppBarTitle extends StatelessWidget {
 
   final ValueNotifier<bool> openMenu;
 
+  //title = "Github Profile"
+  //icon = PortfolioIcons.github
+  //url = generalGithub + myGithub
+  OverFlowMenuItem webOverFlowMenuItem(
+    BuildContext context, {
+    @required String title,
+    @required IconData icon,
+    @required String generalUrl,
+    @required String specificUrl,
+  }) {
+    String url = generalUrl + specificUrl;
+    return overFlowMenuItem(
+      context,
+      icon: icon,
+      label: title,
+      quickAction: () => openWithHtml(
+        context,
+        url,
+        openHere: true,
+      ),
+      menuItems: [
+        //assumed copy
+        OptionButton(
+          isTitle: true,
+          icon: icon,
+          label: Text(
+            title,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
+          ),
+          onTap: () => copyToClipboard(
+            context,
+            url,
+          ),
+        ),
+
+        //open link
+        OptionButton(
+          icon: Icons.link,
+          label: Text(
+            "Open Link",
+            style: TextStyle(
+              color: Colors.black,
+            ),
+          ),
+          onTap: () => openWithHtml(
+            context,
+            url,
+            openHere: true,
+          ),
+        ),
+
+        //open in new tab
+        OptionButton(
+          icon: Icons.tab,
+          label: Text(
+            "Open Link In New Tab",
+            style: TextStyle(
+              color: Colors.black,
+            ),
+          ),
+          onTap: () => openWithHtml(
+            context,
+            url,
+            openHere: false,
+          ),
+        ),
+
+        //actual copy
+        OptionButton(
+          icon: Icons.content_copy,
+          label: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                generalUrl,
+                style: TextStyle(
+                  color: Colors.black,
+                ),
+              ),
+              Text(
+                specificUrl,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+            ],
+          ),
+          onTap: () => copyToClipboard(
+            context,
+            url,
+          ),
+        ),
+      ],
+    );
+  }
+
   //generate these items here to avoid clutter
   OverFlowMenuItem overFlowMenuItem(
     BuildContext context, {
@@ -186,81 +286,19 @@ class CustomAppBarTitle extends StatelessWidget {
           //TODO: if the width is larger than 430 -> use action sheet when pressing contact link
           //TODO: the above is particularly important so the behavior is consitent when things start to wrap
 
-          //github link (with specific part highlighted) [also copies link]
-          //---
-          //open link (?? icon)***on mobile on tap assume this
-          //open in new tab (tab icon)
-          //copy link (copy icon)
-          overFlowMenuItem(
+          webOverFlowMenuItem(
             context,
-            label: "Github Profile",
+            title: "Github Profile",
             icon: PortfolioIcons.github,
-            quickAction: () => openWithHtml(
-              context,
-              generalGithub + myGithub,
-              openHere: true,
-            ),
-            menuItems: [
-              //assumed copy
-              OptionButton(
-                isTitle: true,
-                icon: PortfolioIcons.github,
-                label: Text(
-                  "Github Profile",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
-                ),
-                //TODO: make sure this works
-                onTap: () => copyToClipboard(
-                  context,
-                  generalGithub + myGithub,
-                ),
-              ),
-
-              //TODO: open link
-
-              //TODO: open in new tab
-
-              //actual copy
-              OptionButton(
-                icon: Icons.content_copy,
-                label: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      generalGithub,
-                      style: TextStyle(
-                        color: Colors.black,
-                      ),
-                    ),
-                    Text(
-                      myGithub,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ],
-                ),
-                //TODO: make sure this works
-                onTap: () => copyToClipboard(
-                  context,
-                  generalGithub + myGithub,
-                ),
-              ),
-            ],
+            generalUrl: generalGithub,
+            specificUrl: myGithub,
           ),
-          //linked in link (with specific part highlighted) [also copies link]
-          //---
-          //open link (?? icon)***on mobile on tap assume this
-          //open in new tab (tab icon)
-          //copy link (copy icon)
-          overFlowMenuItem(
+          webOverFlowMenuItem(
             context,
-            label: "Linked In Profile",
+            title: "Linked In Profile",
             icon: PortfolioIcons.linkedin,
+            generalUrl: generalLinkedIn,
+            specificUrl: myLinkedIn,
           ),
           //phone number (with specifics highlighted) [also copies number]
           //---
@@ -273,6 +311,33 @@ class CustomAppBarTitle extends StatelessWidget {
             context,
             label: myNumber,
             icon: PortfolioIcons.phone,
+            //assume they want to copy the number
+            quickAction: () => copyToClipboard(
+              context,
+              myNumber,
+            ),
+            menuItems: [
+              //tapping the title copies always
+              OptionButton(
+                isTitle: true,
+                icon: Icons.contact_phone,
+                label: Text(
+                  "Phone Number",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+                onTap: () => copyToClipboard(
+                  context,
+                  myNumber,
+                ),
+              ),
+
+              //call number
+              //text number
+              //copy number ***on mobile on tap assume this
+            ],
           ),
           //email (with specifics higlighted) [also copies email]
           //---
@@ -326,6 +391,57 @@ class MenuOptions extends StatelessWidget {
   }
 }
 
+/*
+class VirtualCardDownload extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Divider(
+          thickness: 1,
+          height: 1,
+          color: Colors.black,
+        ),
+        PopupMenuItem(
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(
+                  right: 6,
+                ),
+                child: Container(
+                  width: 30,
+                  height: 30,
+                  child: Icon(
+                    icon,
+                  ),
+                ),
+              ),
+              label,
+            ],
+          ),
+        ),
+        OptionButton(
+          icon: PortfolioIcons.address_card,
+          label: Text("Download My Virutal Contact Card"),
+          onTap: () {
+            print("download contact card here");
+          },
+        ),
+        OptionButton(
+          icon: PortfolioIcons.address_card,
+          label: Text("Scan My Virutal Contact Card"),
+          onTap: () {
+            print("scannable QR Code used in multiple areas");
+          },
+        ),
+      ],
+    );
+  }
+}
+*/
+
 class OptionButton extends StatelessWidget {
   OptionButton({
     @required this.icon,
@@ -341,24 +457,35 @@ class OptionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget button = PopupMenuItem(
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.only(
-              right: 6,
-            ),
-            child: Container(
-              width: 30,
-              height: 30,
-              child: Icon(
-                icon,
-              ),
+    Widget button = Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: () {
+          onTap();
+          BotToast.cleanAll();
+        },
+        child: IgnorePointer(
+          child: PopupMenuItem(
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.only(
+                    right: 6,
+                  ),
+                  child: Container(
+                    width: 30,
+                    height: 30,
+                    child: Icon(
+                      icon,
+                    ),
+                  ),
+                ),
+                label,
+              ],
             ),
           ),
-          label,
-        ],
+        ),
       ),
     );
 
