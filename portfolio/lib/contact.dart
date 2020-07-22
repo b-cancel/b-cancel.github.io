@@ -206,7 +206,11 @@ class CustomAppBarTitle extends StatelessWidget {
             //tapping on mobile
             //clicking on web
             //both expect a quickAction
-            onTap: () => quickAction(),
+            onTap: () {
+              BotToast.cleanAll();
+              Navigator.maybePop(context);
+              quickAction();
+            },
             //on web
             //used to replace right clicking before they realize its not available
             onHover: (boolean) {
@@ -289,8 +293,14 @@ class CustomAppBarTitle extends StatelessWidget {
           },
         );
 
+    Function onTap = () {
+      BotToast.cleanAll();
+      Navigator.maybePop(context);
+      openVCardPopUp(context);
+    };
+
     return OverFlowMenuItem(
-      onPressed: () => openVCardPopUp(context),
+      onPressed: () => onTap(),
       icon: icon,
       label: label + generalLabel,
       child: OpaqueOnHover(
@@ -302,7 +312,7 @@ class CustomAppBarTitle extends StatelessWidget {
             //tapping on mobile
             //clicking on web
             //both expect a quickAction
-            onTap: () => openVCardPopUp(context),
+            onTap: () => onTap(),
             //on web
             //used to replace right clicking before they realize its not available
             onHover: (boolean) {
@@ -350,52 +360,7 @@ class CustomAppBarTitle extends StatelessWidget {
           //VCard should show up for downloading
           //a shortcut to the QR Code should also show up
 
-          /*
-                openWithHtml(
-          context,
-          url,
-          openHere: true,
-        );
-      },
-      onShowOptions: () {
-        showOptions(
-          context,
-          lightMode: lightMode,
-          children: [
-            OptionButton(
-    label: label,
-    addBorder: true,
-            ),
-            OptionButton(
-    icon: PortfolioIcons.open_in_new,
-    label: "New Tab",
-    onTap: () {
-      openWithHtml(
-        context,
-        url,
-        openHere: false,
-      );
-    },
-            ),
-            OptionButton(
-    icon: PortfolioIcons.content_copy,
-    label: "Copy",
-    onTap: () {
-      copyToClipboard(
-        context,
-        url,
-      );
-    },
-            ),
-          ],
-        );
-                */
-
-          //TODO: in all cases tapping the label should copy it
-          //TODO: repair the pop up that isnt showing text for some odd reason
-          //TODO: if the width is larger than 430 -> use action sheet when pressing contact link
-          //TODO: the above is particularly important so the behavior is consitent when things start to wrap
-
+          //Github
           webOverFlowMenuItem(
             context,
             title: "Github Profile",
@@ -403,6 +368,8 @@ class CustomAppBarTitle extends StatelessWidget {
             generalUrl: generalGithub,
             specificUrl: myGithub,
           ),
+
+          //LinkedIn
           webOverFlowMenuItem(
             context,
             title: "Linked In Profile",
@@ -410,13 +377,8 @@ class CustomAppBarTitle extends StatelessWidget {
             generalUrl: generalLinkedIn,
             specificUrl: myLinkedIn,
           ),
-          //phone number (with specifics highlighted) [also copies number]
-          //---
-          //call number
-          //text number
-          //copy number ***on mobile on tap assume this
-          //---
-          //save V-Card
+
+          //phone number
           overFlowMenuItem(
             context,
             label: myNumber,
@@ -445,32 +407,129 @@ class CustomAppBarTitle extends StatelessWidget {
               ),
 
               //call number
+              OptionButton(
+                icon: Icons.phone,
+                label: Text(
+                  "Call Me",
+                  style: TextStyle(
+                    color: Colors.black,
+                  ),
+                ),
+                onTap: () => callNumber(
+                  context,
+                  myNumber,
+                ),
+              ),
+
               //text number
+              OptionButton(
+                icon: Icons.message,
+                label: Text(
+                  "Message Me",
+                  style: TextStyle(
+                    color: Colors.black,
+                  ),
+                ),
+                onTap: () => textNumber(
+                  context,
+                  myNumber,
+                ),
+              ),
+
               //copy number ***on mobile on tap assume this
+              OptionButton(
+                icon: Icons.content_copy,
+                label: Text(
+                  myNumber,
+                  style: TextStyle(
+                    color: Colors.black,
+                  ),
+                ),
+                onTap: () => copyToClipboard(
+                  context,
+                  myNumber,
+                ),
+              ),
+
+              //allways try to get them to save my contact
+              VCardDownload(),
             ],
           ),
-          //email (with specifics higlighted) [also copies email]
-          //---
-          //send email
-          //copy email ***on mobile on tap assume this
-          //---
-          //save V-Card
+
+          //email
           overFlowMenuItem(
             context,
             label: myEmail,
             icon: PortfolioIcons.email,
+            quickAction: () => copyToClipboard(
+              context,
+              myEmail,
+            ),
+            menuItems: [
+              //tapping the title copies always
+              OptionButton(
+                isTitle: true,
+                icon: Icons.contact_phone,
+                label: Text(
+                  "Email Address",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+                onTap: () => copyToClipboard(
+                  context,
+                  myEmail,
+                ),
+              ),
+
+              //email number
+              OptionButton(
+                icon: Icons.phone,
+                label: Text(
+                  "Email Me",
+                  style: TextStyle(
+                    color: Colors.black,
+                  ),
+                ),
+                onTap: () => sendEmail(
+                  context,
+                  myEmail,
+                ),
+              ),
+
+              //copy number ***on mobile on tap assume this
+              OptionButton(
+                icon: Icons.content_copy,
+                label: Text(
+                  myEmail,
+                  style: TextStyle(
+                    color: Colors.black,
+                  ),
+                ),
+                onTap: () => copyToClipboard(
+                  context,
+                  myEmail,
+                ),
+              ),
+
+              //allways try to get them to save my contact
+              VCardDownload(),
+            ],
           ),
-          //TODO: actually get this to do stuff
+
+          //these are repeated just in case
           contactOverFlowMenuItem(
             context,
             label: "Save",
             icon: PortfolioIcons.address_card,
           ),
-          //TODO: actually get this to do stuff
+
+          //these are repeated just in case
           contactOverFlowMenuItem(
             context,
             label: "Scan",
-            icon: FontAwesomeIcons.qrcode, //TODO: optimize
+            icon: FontAwesomeIcons.qrcode,
           ),
         ],
       ),
@@ -509,144 +568,159 @@ openVCardPopUp(BuildContext context) {
     builder: (BuildContext context) {
       return Dialog(
         backgroundColor: Colors.white,
-        child: OpaqueOnHover(
-          invert: true,
-          child: Material(
-            color: Colors.transparent,
-            child: InkWell(
-              onTap: () async {
-                //NOTE: this only works in the web but that's where I need it to work
-                String fileName = "Bryan_Cancel.vcf";
-                String url = "vcards/" + fileName;
-                //TODO: remember to switch this to false when ready to build
-                bool testing = false;
-                if (testing == false) {
-                  //true if NOT TESTING
-                  url = ("assets/" + url);
-                }
-                if (await downloadFile(url)) {
-                  showSnackBar(
-                    context,
-                    text: "Contact Card Downloaded",
-                    icon: PortfolioIcons.check,
-                  );
-                } else {
-                  showSnackBar(
-                    context,
-                    text: 'Contact Card Download Not Supported',
-                  );
-                }
-              },
-              child: IntrinsicWidth(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 16,
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.only(
-                          top: 8.0,
-                        ),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: FittedBox(
-                                fit: BoxFit.contain,
-                                child: Text(
-                                  "Save My Contact Details",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            IconButton(
-                              icon: Icon(
-                                Icons.close,
-                                color: Colors.black,
-                              ),
-                              onPressed: () => Navigator.maybePop(context),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 16,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          Center(
-                            child: DefaultTextStyle(
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: MyApp.h4,
-                              ),
-                              child: Center(
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Text(PointerOnHover.isActive()
-                                        ? "Clicking"
-                                        : "Tapping"),
-                                    Text(
-                                      " || ",
-                                    ),
-                                    Text("Scanning"),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                          Center(
-                            child: Padding(
-                              padding: EdgeInsets.only(
-                                top: 8.0,
-                              ),
-                              child: Text(
-                                "the QR Code below",
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(16),
-                      child: ConstrainedBox(
-                        constraints: BoxConstraints(
-                          maxHeight: 250,
-                          maxWidth: 250,
-                        ),
-                        child: Container(
-                          width: 250,
-                          height: 250,
-                          child: AdjustableQrCode(
-                            squaresColor: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
+        child: QRWidget(
+          isDialog: true,
         ),
       );
     },
   );
+}
+
+class QRWidget extends StatelessWidget {
+  const QRWidget({
+    Key key,
+    this.isDialog: false,
+  }) : super(key: key);
+
+  final bool isDialog;
+
+  @override
+  Widget build(BuildContext context) {
+    return OpaqueOnHover(
+      invert: true,
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: () async {
+            if (isDialog) {
+              //NOTE: this only works in the web but that's where I need it to work
+              String fileName = "Bryan_Cancel.vcf";
+              String url = "vcards/" + fileName;
+              //TODO: remember to switch this to false when ready to build
+              bool testing = false;
+              if (testing == false) {
+                //true if NOT TESTING
+                url = ("assets/" + url);
+              }
+              if (await downloadFile(url)) {
+                showSnackBar(
+                  context,
+                  text: "Contact Card Downloaded",
+                  icon: PortfolioIcons.check,
+                );
+              } else {
+                showSnackBar(
+                  context,
+                  text: 'Contact Card Download Not Supported',
+                );
+              }
+            } else {
+              openVCardPopUp(context);
+            }
+          },
+          child: IntrinsicWidth(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 16,
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                      top: 8.0,
+                    ),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: FittedBox(
+                            fit: BoxFit.contain,
+                            child: Text(
+                              "Save My Contact Details",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Visibility(
+                          visible: isDialog == false,
+                          child: Container(
+                            height: 48,
+                          ),
+                        ),
+                        Visibility(
+                          visible: isDialog,
+                          child: IconButton(
+                            icon: Icon(
+                              Icons.close,
+                              color: Colors.black,
+                            ),
+                            onPressed: () => Navigator.maybePop(context),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 16,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Center(
+                        child: DefaultTextStyle(
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: MyApp.h4,
+                          ),
+                          child: Center(
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(PointerOnHover.isActive()
+                                    ? "Click"
+                                    : "Tap"),
+                                Text(
+                                  " || ",
+                                ),
+                                Text("Scan"),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(16),
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                      maxHeight: 250,
+                      maxWidth: 250,
+                    ),
+                    child: Container(
+                      width: 250,
+                      height: 250,
+                      child: AdjustableQrCode(
+                        squaresColor: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 class VCardDownload extends StatelessWidget {

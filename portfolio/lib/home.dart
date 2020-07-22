@@ -52,6 +52,26 @@ class Home extends StatelessWidget {
               ),
             ),
           ),
+          Positioned(
+            bottom: 16,
+            right: 16,
+            child: Material(
+              child: Container(
+                color: Colors.red,
+                padding: EdgeInsets.symmetric(
+                  horizontal: 8,
+                  vertical: 4,
+                ),
+                child: Text(
+                  "Under Construction",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+          ),
           Positioned.fill(
             //NOTE: transition handled internally
             child: ResumeInMenu(

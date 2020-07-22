@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
+import 'package:portfolio/contact.dart';
 import 'package:portfolio/data.dart';
 import 'package:portfolio/home.dart';
 import 'package:portfolio/main.dart';
@@ -123,6 +124,7 @@ class _MyWorkState extends State<MyWork> {
     double phonesThatFit = screenWidth / deviceWidth;
 
     int itemCount = 30;
+    double cardSpacing = 12;
 
     //build
     return AnimatedOpacity(
@@ -150,30 +152,43 @@ class _MyWorkState extends State<MyWork> {
                 itemCount: itemCount,
                 itemBuilder: (BuildContext context, int index) {
                   if (index != (itemCount - 1)) {
-                    return FutureBuilder(
-                      future: client.random(),
-                      builder: (BuildContext context,
-                          AsyncSnapshot<GiphyGif> snapShot) {
-                        if (snapShot.connectionState == ConnectionState.done) {
-                          print(snapShot.data.images.preview.mp4);
-                          return GiphyImage.video(
-                            gif: snapShot.data,
-                          );
-                        } else {
-                          return CircularProgressIndicator();
-                        }
-                      },
+                    return Card(
+                      margin: EdgeInsets.all(cardSpacing),
+                      child: FutureBuilder(
+                        future: client.random(),
+                        builder: (BuildContext context,
+                            AsyncSnapshot<GiphyGif> snapShot) {
+                          if (snapShot.connectionState ==
+                              ConnectionState.done) {
+                            print(snapShot.data.images.preview.mp4);
+                            return GiphyImage.video(
+                              gif: snapShot.data,
+                            );
+                          } else {
+                            return Center(
+                              child: Padding(
+                                padding: EdgeInsets.all(24),
+                                child: Theme(
+                                  data: Theme.of(context).copyWith(
+                                    accentColor: Colors.blue,
+                                  ),
+                                  child: CircularProgressIndicator(),
+                                ),
+                              ),
+                            );
+                          }
+                        },
+                      ),
                     );
                   } else {
-                    return SizedBox(
-                      width: screenWidth / phonesThatFit.ceil(),
-                      height: screenWidth / phonesThatFit.ceil(),
-                      child: Stack(
-                        children: [
-                          Positioned.fill(
-                            child: MyApp.qrCodeBlackWillExpand,
-                          ),
-                        ],
+                    return Card(
+                      margin: EdgeInsets.all(cardSpacing),
+                      color: Colors.white,
+                      child: FittedBox(
+                        fit: BoxFit.contain,
+                        child: QRWidget(
+                          isDialog: false,
+                        ),
                       ),
                     );
                   }
@@ -181,8 +196,9 @@ class _MyWorkState extends State<MyWork> {
                 gridDelegate:
                     SliverWaterfallFlowDelegateWithFixedCrossAxisCount(
                   crossAxisCount: phonesThatFit.ceil(),
-                  crossAxisSpacing: 8,
-                  mainAxisSpacing: 16,
+                  //spacing is handled by the cards each item is in
+                  crossAxisSpacing: 0,
+                  mainAxisSpacing: 0,
 
                   /// follow max child trailing layout offset and layout with full cross axis extend
                   /// last child as loadmore item/no more item in [GridView] and [WaterfallFlow]
