@@ -17,9 +17,11 @@ import 'package:portfolio/qrCode.dart';
 //utils
 import 'package:portfolio/utils/conditional.dart';
 import 'package:portfolio/utils/link/copyToClipboard.dart';
+import 'package:portfolio/utils/link/nonWebLink.dart';
 import 'package:portfolio/utils/link/openLink.dart';
 import 'package:portfolio/utils/link/ui/hover.dart';
 import 'package:portfolio/utils/link/ui/iconLink.dart';
+import 'package:portfolio/utils/mySnackBar.dart';
 
 //TODO: scrolling the main view should dismiss the little pop ups
 //TODO: tapping any item in the menu should dismiss the menu
@@ -237,6 +239,102 @@ class CustomAppBarTitle extends StatelessWidget {
     );
   }
 
+  OverFlowMenuItem contactOverFlowMenuItem(
+    BuildContext context, {
+    @required String label,
+    @required IconData icon,
+  }) {
+    String generalLabel = " My Contact Details";
+    Widget labelWidget = Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          label,
+          style: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Text(generalLabel),
+      ],
+    );
+
+    Function showTooltip = () => BotToast.showAttachedWidget(
+          targetContext: context,
+          //for all the icons that use it on top
+          preferDirection: PreferDirection.bottomRight,
+          //show forever until another shows or you dismiss it
+          duration: Duration(days: 1),
+          enableSafeArea: true,
+          onlyOne: true,
+          //regular old builder
+          attachedBuilder: (_) {
+            return Padding(
+              //only right since we are pushing it towards the right
+              padding: EdgeInsets.only(
+                right: 16,
+              ),
+              child: Material(
+                color: Colors.white,
+                elevation: 6,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 4,
+                  ),
+                  child: labelWidget,
+                ),
+              ),
+            );
+          },
+        );
+
+    return OverFlowMenuItem(
+      onPressed: () => openVCardPopUp(context),
+      icon: icon,
+      label: label + generalLabel,
+      child: OpaqueOnHover(
+        invert: false,
+        child: Material(
+          borderRadius: BorderRadius.circular(56),
+          color: Colors.transparent,
+          child: InkWell(
+            //tapping on mobile
+            //clicking on web
+            //both expect a quickAction
+            onTap: () => openVCardPopUp(context),
+            //on web
+            //used to replace right clicking before they realize its not available
+            onHover: (boolean) {
+              //NOTE: we don't allow hover if pointer doesn't exists... because this shouldn't be possible
+              if (PointerOnHover.isActive()) {
+                showTooltip();
+              }
+            },
+            //on mobile
+            //used to replace the context menu
+            onLongPress: () {
+              //NOTE: we don't allow long press if a pointer exists to avoid weird formatting issues
+              if (PointerOnHover.isActive() == false) {
+                showTooltip();
+              }
+            },
+            child: Container(
+              margin: EdgeInsets.symmetric(
+                horizontal: 4,
+              ),
+              height: 30,
+              width: 30,
+              child: Icon(
+                icon,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -363,15 +461,15 @@ class CustomAppBarTitle extends StatelessWidget {
             icon: PortfolioIcons.email,
           ),
           //TODO: actually get this to do stuff
-          overFlowMenuItem(
+          contactOverFlowMenuItem(
             context,
-            label: "Contact Card",
+            label: "Save",
             icon: PortfolioIcons.address_card,
           ),
           //TODO: actually get this to do stuff
-          overFlowMenuItem(
+          contactOverFlowMenuItem(
             context,
-            label: "Scannable Contact Card",
+            label: "Scan",
             icon: FontAwesomeIcons.qrcode, //TODO: optimize
           ),
         ],
@@ -416,8 +514,28 @@ openVCardPopUp(BuildContext context) {
           child: Material(
             color: Colors.transparent,
             child: InkWell(
-              onTap: () {
-                print("saving");
+              onTap: () async {
+                //NOTE: this only works in the web but that's where I need it to work
+                String fileName = "Bryan_Cancel.vcf";
+                String url = "vcards/" + fileName;
+                //TODO: remember to switch this to false when ready to build
+                bool testing = false;
+                if (testing == false) {
+                  //true if NOT TESTING
+                  url = ("assets/" + url);
+                }
+                if (await downloadFile(url)) {
+                  showSnackBar(
+                    context,
+                    text: "Contact Card Downloaded",
+                    icon: PortfolioIcons.check,
+                  );
+                } else {
+                  showSnackBar(
+                    context,
+                    text: 'Contact Card Download Not Supported',
+                  );
+                }
               },
               child: IntrinsicWidth(
                 child: Column(
@@ -494,6 +612,10 @@ openVCardPopUp(BuildContext context) {
                               ),
                               child: Text(
                                 "the QR Code below",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
                           ),
