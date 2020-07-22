@@ -8,19 +8,17 @@ import 'package:bot_toast/bot_toast.dart';
 
 //internal
 import 'package:portfolio/icons/portfolio_icons_icons.dart';
+import 'package:portfolio/overflowMenuBar.dart';
+import 'package:portfolio/qrCode.dart';
 import 'package:portfolio/data.dart';
 import 'package:portfolio/home.dart';
 import 'package:portfolio/main.dart';
-import 'package:portfolio/overflowMenuBar.dart';
-import 'package:portfolio/qrCode.dart';
 
 //utils
-import 'package:portfolio/utils/conditional.dart';
 import 'package:portfolio/utils/link/copyToClipboard.dart';
 import 'package:portfolio/utils/link/nonWebLink.dart';
 import 'package:portfolio/utils/link/openLink.dart';
 import 'package:portfolio/utils/link/ui/hover.dart';
-import 'package:portfolio/utils/link/ui/iconLink.dart';
 import 'package:portfolio/utils/mySnackBar.dart';
 
 //TODO: scrolling the main view should dismiss the little pop ups
@@ -294,17 +292,11 @@ class CustomAppBarTitle extends StatelessWidget {
         );
 
     Function onTap = () {
-      //remove all context menu and tool tips
+      //close the tooltip
       BotToast.cleanAll();
 
-      //close the pop up that called this
-      Navigator.of(context).maybePop();
-
-      //wait for the pop up to close before doing the action
-      //which in some cases is another pop up
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        showTooltip();
-      });
+      //open the little virutal card
+      openVCardPopUp(context);
     };
 
     return OverFlowMenuItem(
@@ -750,6 +742,9 @@ class VCardDownload extends StatelessWidget {
             ),
           ),
           onTap: () {
+            if (Navigator.canPop(context)) {
+              Navigator.of(context).pop();
+            }
             openVCardPopUp(context);
           },
         ),
@@ -777,8 +772,15 @@ class OptionButton extends StatelessWidget {
       color: Colors.transparent,
       child: InkWell(
         onTap: () {
+          //close the context menu(if we use one)
           BotToast.cleanAll();
-          Navigator.of(context).maybePop();
+
+          //close the context menu(in pop up form)
+          if (Navigator.canPop(context)) {
+            Navigator.of(context).maybePop();
+          }
+
+          //perform the action
           onTap();
         },
         child: IgnorePointer(
