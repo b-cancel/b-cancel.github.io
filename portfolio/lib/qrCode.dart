@@ -134,58 +134,6 @@ class AdjustableQrCode extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //No Point in Allowing Switching
-    //IF ANYTHING we should use automatic switching
-    //V4 has alot of variability
-    /*
-    QrCode qrCode = new QrCode.fromData(
-      data: MyVCard(
-        firstName: 'Bryan',
-        lastName: 'Cancel',
-        title: "Software Engineer/Developer",
-        phone: "(956) 777-2692",
-        email: "bryan.o.cancel@gmail.com",
-        website: 'https://b-cancel.github.io',
-      ).getV3(),
-      //this is only necessary for print
-      //where redundancy helps to correct whatever peice we don't see
-      errorCorrectLevel: QrErrorCorrectLevel.L,
-    );
-
-    //make the qr code
-    qrCode.make();
-
-    //create qr code widget
-    List<Widget> columnChildren = new List<Widget>();
-
-    //each row is a one of the columns children
-    for (int row = 0; row < qrCode.moduleCount; row++) {
-      //compile all the children for Row X
-      List<Widget> newRowChildren = new List<Widget>();
-
-      //for Row X grab the data from all of its columns
-      for (int col = 0; col < qrCode.moduleCount; col++) {
-        bool shouldFill = qrCode.isDark(row, col);
-        newRowChildren.add(Container(
-          height: 1,
-          width: 1,
-          color: shouldFill ? squaresColor : Colors.transparent,
-        ));
-      }
-
-      //add this new row as a child
-      columnChildren.add(
-        Row(
-          children: newRowChildren,
-        ),
-      );
-    }
-
-    //assemble all the rows we grabbed into a column
-    Widget qrCodeWidget = Column(
-      children: columnChildren,
-    );*/
-
     String data = MyVCard(
       firstName: 'Bryan',
       lastName: 'Cancel',

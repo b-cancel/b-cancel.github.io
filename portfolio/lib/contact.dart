@@ -12,6 +12,7 @@ import 'package:portfolio/data.dart';
 import 'package:portfolio/home.dart';
 import 'package:portfolio/main.dart';
 import 'package:portfolio/overflowMenuBar.dart';
+import 'package:portfolio/qrCode.dart';
 
 //utils
 import 'package:portfolio/utils/conditional.dart';
@@ -50,7 +51,8 @@ class CustomAppBarTitle extends StatelessWidget {
       quickAction: () => openWithHtml(
         context,
         url,
-        openHere: true,
+        //TODO: eventually get to a point where our site loads fast enough to make this the default
+        openHere: false,
       ),
       menuItems: [
         //assumed copy
@@ -128,6 +130,9 @@ class CustomAppBarTitle extends StatelessWidget {
             url,
           ),
         ),
+
+        //allways try to get them to save my contact
+        VCardDownload(),
       ],
     );
   }
@@ -161,10 +166,8 @@ class CustomAppBarTitle extends StatelessWidget {
               child: Material(
                 color: Colors.white,
                 elevation: 6,
-                child: IntrinsicWidth(
-                  child: MenuOptions(
-                    menuItems: menuItems,
-                  ),
+                child: MenuOptions(
+                  menuItems: menuItems,
                 ),
               ),
             );
@@ -387,69 +390,169 @@ class MenuOptions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: List.generate(
-        menuItems.length,
-        (index) {
-          return menuItems[index];
-        },
+    return IntrinsicWidth(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: List.generate(
+          menuItems.length,
+          (index) {
+            return menuItems[index];
+          },
+        ),
       ),
     );
   }
 }
 
-/*
-class VirtualCardDownload extends StatelessWidget {
+openVCardPopUp(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return Dialog(
+        backgroundColor: Colors.white,
+        child: OpaqueOnHover(
+          invert: true,
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              onTap: () {
+                print("saving");
+              },
+              child: IntrinsicWidth(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 16,
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                          top: 8.0,
+                        ),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: FittedBox(
+                                fit: BoxFit.contain,
+                                child: Text(
+                                  "Save My Contact Details",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            IconButton(
+                              icon: Icon(
+                                Icons.close,
+                                color: Colors.black,
+                              ),
+                              onPressed: () => Navigator.maybePop(context),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 16,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Center(
+                            child: DefaultTextStyle(
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: MyApp.h4,
+                              ),
+                              child: Center(
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(PointerOnHover.isActive()
+                                        ? "Clicking"
+                                        : "Tapping"),
+                                    Text(
+                                      " || ",
+                                    ),
+                                    Text("Scanning"),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          Center(
+                            child: Padding(
+                              padding: EdgeInsets.only(
+                                top: 8.0,
+                              ),
+                              child: Text(
+                                "the QR Code below",
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(16),
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(
+                          maxHeight: 250,
+                          maxWidth: 250,
+                        ),
+                        child: Container(
+                          width: 250,
+                          height: 250,
+                          child: AdjustableQrCode(
+                            squaresColor: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+    },
+  );
+}
+
+class VCardDownload extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Divider(
-          thickness: 1,
-          height: 1,
+          thickness: 0.5,
+          height: 0.5,
           color: Colors.black,
         ),
-        PopupMenuItem(
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.only(
-                  right: 6,
-                ),
-                child: Container(
-                  width: 30,
-                  height: 30,
-                  child: Icon(
-                    icon,
-                  ),
-                ),
-              ),
-              label,
-            ],
+        OptionButton(
+          icon: PortfolioIcons.address_card,
+          label: Text(
+            "Save My Contact Details",
+            style: TextStyle(
+              color: Colors.black,
+            ),
           ),
-        ),
-        OptionButton(
-          icon: PortfolioIcons.address_card,
-          label: Text("Download My Virutal Contact Card"),
           onTap: () {
-            print("download contact card here");
-          },
-        ),
-        OptionButton(
-          icon: PortfolioIcons.address_card,
-          label: Text("Scan My Virutal Contact Card"),
-          onTap: () {
-            print("scannable QR Code used in multiple areas");
+            openVCardPopUp(context);
           },
         ),
       ],
     );
   }
 }
-*/
 
 class OptionButton extends StatelessWidget {
   OptionButton({
@@ -472,6 +575,7 @@ class OptionButton extends StatelessWidget {
         onTap: () {
           onTap();
           BotToast.cleanAll();
+          Navigator.of(context).maybePop();
         },
         child: IgnorePointer(
           child: PopupMenuItem(
