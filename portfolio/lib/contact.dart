@@ -294,9 +294,17 @@ class CustomAppBarTitle extends StatelessWidget {
         );
 
     Function onTap = () {
+      //remove all context menu and tool tips
       BotToast.cleanAll();
-      Navigator.maybePop(context);
-      openVCardPopUp(context);
+
+      //close the pop up that called this
+      Navigator.of(context).maybePop();
+
+      //wait for the pop up to close before doing the action
+      //which in some cases is another pop up
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        showTooltip();
+      });
     };
 
     return OverFlowMenuItem(
@@ -769,9 +777,9 @@ class OptionButton extends StatelessWidget {
       color: Colors.transparent,
       child: InkWell(
         onTap: () {
-          onTap();
           BotToast.cleanAll();
           Navigator.of(context).maybePop();
+          onTap();
         },
         child: IgnorePointer(
           child: PopupMenuItem(

@@ -124,7 +124,7 @@ class _MyWorkState extends State<MyWork> {
     double phonesThatFit = screenWidth / deviceWidth;
 
     int itemCount = 30;
-    double cardSpacing = 12;
+    double cardSpacing = 8;
 
     //build
     return AnimatedOpacity(
@@ -181,13 +181,18 @@ class _MyWorkState extends State<MyWork> {
                       ),
                     );
                   } else {
-                    return Card(
-                      margin: EdgeInsets.all(cardSpacing),
-                      color: Colors.white,
-                      child: FittedBox(
-                        fit: BoxFit.contain,
-                        child: QRWidget(
-                          isDialog: false,
+                    return Padding(
+                      padding: EdgeInsets.only(
+                        bottom: 48,
+                      ),
+                      child: Card(
+                        margin: EdgeInsets.all(cardSpacing),
+                        color: Colors.white,
+                        child: FittedBox(
+                          fit: BoxFit.contain,
+                          child: QRWidget(
+                            isDialog: false,
+                          ),
                         ),
                       ),
                     );
