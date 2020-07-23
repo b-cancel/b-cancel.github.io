@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+//TODO: allow .png, .jpg, and .mp4
+
 enum ProjectType { AppDev, GameDev, WebDev, Graphics }
 Map<ProjectType, StdAspectRatio> projectTypeToDefaultAspectRatio = {
   ProjectType.AppDev: StdAspectRatio.Mobile,
@@ -82,12 +84,11 @@ Map<ProjectType, List<Project>> projectTypeToProjects = {
         "S8lbi2cusC5gVC0xOS",
         //main list
         "RKMMj20eRHONfImd0L",
-        /*
-    //sos settings
-    "S6Zdj4EiS99DlVZuDS",
-    //add new
-    "d5qOvltp866jRzktDZ",
-    */
+        //---
+        //sos settings
+        "S6Zdj4EiS99DlVZuDS",
+        //add new
+        "d5qOvltp866jRzktDZ",
       ],
     ),
     Project(
@@ -100,10 +101,11 @@ Map<ProjectType, List<Project>> projectTypeToProjects = {
       content: [
         //videos
         "Uqk7fPBnsNydSn2GZW",
-        //"W0QwfdozN3AFnw1sWn",
         "LM9EpmeAiYlIpSAcgH",
-        //"Xbh1CLWME0plFA8g2G",
-        //"UT4byKMOmrYWk8dTmb",
+        //---
+        "W0QwfdozN3AFnw1sWn",
+        "Xbh1CLWME0plFA8g2G",
+        "UT4byKMOmrYWk8dTmb",
         //jpgs
         /*
     "https://imgur.com/YWYmyOt.jpg",
@@ -121,8 +123,8 @@ Map<ProjectType, List<Project>> projectTypeToProjects = {
           "A re-usable timer and stopwatch with all the functionality you would expect.",
       github: "Flutter_Timer_And_Stopwatch",
       content: [
-        //"DQdmcrEwAFqneM6tiL",
-        //"5qFCRiENukaLzB7Yoy",
+        "DQdmcrEwAFqneM6tiL",
+        "5qFCRiENukaLzB7Yoy",
       ],
     ),
     Project(
@@ -132,10 +134,10 @@ Map<ProjectType, List<Project>> projectTypeToProjects = {
           " with the full control, gestures, handles and more.",
       github: "Flutter_MaterialSheetAndNavigationDrawer",
       content: [
-        //"35KhYdJ9CQAN6hzYbQ",
-        //"dkXLQACALhF6puhk3I",
-        //"dYng1K8blxvnsLhP81",
-        //"9rsWxrJaYOhCQbRDXD",
+        "35KhYdJ9CQAN6hzYbQ",
+        "dkXLQACALhF6puhk3I",
+        "dYng1K8blxvnsLhP81",
+        "9rsWxrJaYOhCQbRDXD",
       ],
     ),
     Project(
@@ -144,11 +146,11 @@ Map<ProjectType, List<Project>> projectTypeToProjects = {
       description: "A clone of instagram with flutter",
       github: "Flutter_Instagram",
       content: [
-        "https://media.giphy.com/media/UsT0dPQlVrVrJ4BC1z/giphy.gif",
-        //"https://media.giphy.com/media/KezTdVWA3JIOS3fwX5/giphy.gif",
-        //"https://media.giphy.com/media/S8BPNPf8i1CCYgv3LQ/giphy.gif",
-        //"https://media.giphy.com/media/LSc6Y83JW98nX47nYe/giphy.gif",
-        //"https://media.giphy.com/media/jUKJlmNzhbLRhetFtW/giphy.gif",
+        "UsT0dPQlVrVrJ4BC1z",
+        "KezTdVWA3JIOS3fwX5",
+        "S8BPNPf8i1CCYgv3LQ",
+        "LSc6Y83JW98nX47nYe",
+        "jUKJlmNzhbLRhetFtW",
       ],
     ),
     Project(
@@ -295,14 +297,14 @@ Map<ProjectType, List<Project>> projectTypeToProjects = {
                     "https://imgur.com/RC8XpUP.jpg",
                     "https://imgur.com/RYPOlzG.jpg",
                     */
-        "https://imgur.com/ptcQTII.jpg",
+        //"https://imgur.com/ptcQTII.jpg",
         /*
                     "https://imgur.com/0qlOAWd.jpg",
                     "https://imgur.com/bGpIQSd.jpg",
                     "https://imgur.com/P36SrPo.jpg",
                     */
-        "https://imgur.com/blI3yI0.jpg", //
-        "https://imgur.com/eAP5w5P.jpg",
+        //"https://imgur.com/blI3yI0.jpg",
+        //"https://imgur.com/eAP5w5P.jpg",
         /*
                     "https://imgur.com/vvpwpdx.jpg",
                     "https://imgur.com/3n0sXee.jpg",
@@ -330,7 +332,7 @@ Map<ProjectType, List<Project>> projectTypeToProjects = {
       github: "https://github.com/b-cancel/Ruby_Shazam_Clone",
       initiallyOpened: true,
       content: [
-        "https://media.giphy.com/media/hWGMQxaRodKOHaU5u5/giphy.gif",
+        "hWGMQxaRodKOHaU5u5",
       ],
     ),
     Project(

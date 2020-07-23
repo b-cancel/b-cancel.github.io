@@ -1,7 +1,7 @@
 //flutter
 import 'package:flutter/material.dart';
 import 'package:giphy_client/giphy_client.dart';
-import 'package:portfolio/data.dart';
+import 'package:portfolio/data/basic.dart';
 import 'package:portfolio/home.dart';
 
 //plugins

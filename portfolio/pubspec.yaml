@@ -23,6 +23,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  
+  shimmer: ^1.1.1
+  shimmer_animation: ^0.0.8
+  flutter_shimmer: ^1.3.0
 
   #TODO: remove as optimzation later
   font_awesome_flutter: ^8.8.1

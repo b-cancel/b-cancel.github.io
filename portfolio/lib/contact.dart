@@ -10,7 +10,7 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:portfolio/icons/portfolio_icons_icons.dart';
 import 'package:portfolio/overflowMenuBar.dart';
 import 'package:portfolio/qrCode.dart';
-import 'package:portfolio/data.dart';
+import 'package:portfolio/data/basic.dart';
 import 'package:portfolio/home.dart';
 import 'package:portfolio/main.dart';
 

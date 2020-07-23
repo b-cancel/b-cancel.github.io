@@ -3,7 +3,8 @@ import 'dart:ui';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/contact.dart';
-import 'package:portfolio/data.dart';
+import 'package:portfolio/data/basic.dart';
+import 'package:portfolio/data/projects.dart';
 import 'package:portfolio/home.dart';
 import 'package:portfolio/main.dart';
 import 'package:portfolio/utils/giphyImage.dart';
@@ -12,9 +13,20 @@ import 'package:universal_html/prefer_universal/html.dart' as uniHTML;
 import 'package:giphy_client/giphy_client.dart';
 
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:waterfall_flow/waterfall_flow.dart';
 
 import 'package:video_player_web/video_player_web.dart';
+
+class SomeContent {
+  String url;
+  double defaultAspectRatio;
+
+  SomeContent({
+    @required this.url,
+    @required this.defaultAspectRatio,
+  });
+}
 
 class MyWork extends StatefulWidget {
   MyWork({
@@ -56,7 +68,6 @@ class _MyWorkState extends State<MyWork> {
   }
 
   hideToasts() {
-    print("hiding toast");
     BotToast.cleanAll();
   }
 
@@ -103,6 +114,53 @@ class _MyWorkState extends State<MyWork> {
     }
   }
 
+  List<SomeContent> getContentFromProjectType({ProjectType projectType}) {
+    //grab all data
+    List<Project> projects = projectTypeToProjects[projectType];
+    StdAspectRatio stdAspectRatio =
+        projectTypeToDefaultAspectRatio[projectType];
+    double aspectRatio = stdAspectRatioToAspectRatio[stdAspectRatio];
+    print("\n\n\n\n\n" + aspectRatio.toString() + " AR");
+
+    //fill this with project data
+    List<SomeContent> content = new List<SomeContent>();
+
+    //for each project of this type
+    for (int projIndex = 0; projIndex < projects.length; projIndex++) {
+      Project thisProject = projects[projIndex];
+      if (thisProject.content != null) {
+        List<String> projectContent = thisProject.content;
+        for (int contIndex = 0;
+            contIndex < projectContent.length;
+            contIndex++) {
+          String thisContent = projectContent[contIndex];
+          if (thisContent.contains(".png") == false &&
+              thisContent.contains(".jpg") == false) {
+            content.add(
+              SomeContent(
+                url: thisContent,
+                defaultAspectRatio: aspectRatio,
+              ),
+            );
+          }
+        }
+      }
+    }
+
+    return content;
+  }
+
+  Map<String, GiphyGif> storedGifs = Map<String, GiphyGif>();
+
+  Future<GiphyGif> getGiphy(String url) async {
+    if (storedGifs.containsKey(url) == false) {
+      storedGifs[url] = await client.byId(
+        url,
+      );
+    }
+    return storedGifs[url];
+  }
+
   @override
   Widget build(BuildContext context) {
     //vars used to determine grid scaling
@@ -123,8 +181,28 @@ class _MyWorkState extends State<MyWork> {
     double screenWidth = MediaQuery.of(context).size.width;
     double phonesThatFit = screenWidth / deviceWidth;
 
-    int itemCount = 30;
+    //TODO: use better version of this
     double cardSpacing = 8;
+
+    //grab all the needed data
+    List<SomeContent> allContent = getContentFromProjectType(
+      projectType: ProjectType.AppDev,
+    );
+    /*
+    allContent.addAll(getContentFromProjectType(
+      projectType: ProjectType.GameDev,
+    ));
+    allContent.addAll(
+      getContentFromProjectType(
+        projectType: ProjectType.WebDev,
+      ),
+    );
+    allContent.addAll(
+      getContentFromProjectType(
+        projectType: ProjectType.Graphics,
+      ),
+    );
+    */
 
     //build
     return AnimatedOpacity(
@@ -146,38 +224,46 @@ class _MyWorkState extends State<MyWork> {
               onRefresh: _onRefresh,
               onLoading: _onLoading,
               child: WaterfallFlow.builder(
+                addAutomaticKeepAlives: true,
                 controller: scrollController,
                 //cacheExtent: 0.0,
                 padding: EdgeInsets.all(5.0),
-                itemCount: itemCount,
+                itemCount: allContent.length + 1,
                 itemBuilder: (BuildContext context, int index) {
-                  if (index != (itemCount - 1)) {
+                  if (index != allContent.length) {
                     return Card(
                       margin: EdgeInsets.all(cardSpacing),
-                      child: FutureBuilder(
-                        future: client.random(),
-                        builder: (BuildContext context,
-                            AsyncSnapshot<GiphyGif> snapShot) {
-                          if (snapShot.connectionState ==
-                              ConnectionState.done) {
-                            print(snapShot.data.images.preview.mp4);
-                            return GiphyImage.video(
-                              gif: snapShot.data,
-                            );
-                          } else {
-                            return Center(
-                              child: Padding(
-                                padding: EdgeInsets.all(24),
-                                child: Theme(
-                                  data: Theme.of(context).copyWith(
-                                    accentColor: Colors.blue,
-                                  ),
-                                  child: CircularProgressIndicator(),
+                      child: FittedBox(
+                        fit: BoxFit.contain,
+                        child: FutureBuilder(
+                          future: getGiphy(
+                            allContent[index].url,
+                          ),
+                          builder: (BuildContext context,
+                              AsyncSnapshot<GiphyGif> snapShot) {
+                            if (snapShot.connectionState ==
+                                ConnectionState.done) {
+                              print(snapShot.data.images.preview.mp4);
+                              return GiphyImage.downScaled(
+                                gif: snapShot.data,
+                                aspectRatio:
+                                    allContent[index].defaultAspectRatio,
+                              );
+                            } else {
+                              return Shimmer(
+                                duration: Duration(seconds: 2), //Default value
+                                color: Colors.white, //Default value
+                                enabled: true, //Default value
+                                direction: ShimmerDirection.fromLTRB(),
+                                child: Container(
+                                  height: 3,
+                                  width:
+                                      3 * allContent[index].defaultAspectRatio,
                                 ),
-                              ),
-                            );
-                          }
-                        },
+                              );
+                            }
+                          },
+                        ),
                       ),
                     );
                   } else {
@@ -200,7 +286,8 @@ class _MyWorkState extends State<MyWork> {
                 },
                 gridDelegate:
                     SliverWaterfallFlowDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: phonesThatFit.ceil(),
+                  crossAxisCount:
+                      phonesThatFit.ceil(), //TODO: +1 only para feitos
                   //spacing is handled by the cards each item is in
                   crossAxisSpacing: 0,
                   mainAxisSpacing: 0,

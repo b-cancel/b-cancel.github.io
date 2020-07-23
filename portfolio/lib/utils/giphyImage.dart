@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:giphy_client/giphy_client.dart';
+import 'package:shimmer_animation/shimmer_animation.dart';
 
 import 'package:video_player/video_player.dart';
 
@@ -42,22 +43,49 @@ class GiphyImage extends StatefulWidget {
   final double height;
   final BoxFit fit;
   final bool isVideo;
+  final double aspectRatio;
 
   /// Loads an image from given url.
   const GiphyImage({
     Key key,
     @required this.url,
     @required this.isVideo,
+    @required this.aspectRatio,
     this.placeholder,
     this.width,
     this.height,
     this.fit,
   }) : super(key: key);
 
+  GiphyImage.preview({
+    Key key,
+    @required GiphyGif gif,
+    @required this.aspectRatio,
+    this.placeholder,
+    this.width,
+    this.height,
+    this.fit,
+  })  : isVideo = false,
+        url = gif.images.previewGif.url,
+        super(key: key ?? Key(gif.id));
+
+  GiphyImage.downScaled({
+    Key key,
+    @required GiphyGif gif,
+    @required this.aspectRatio,
+    this.placeholder,
+    this.width,
+    this.height,
+    this.fit,
+  })  : isVideo = false,
+        url = gif.images.downsized.url,
+        super(key: key ?? Key(gif.id));
+
   /// Loads the original image for given Giphy gif.
   GiphyImage.original({
     Key key,
     @required GiphyGif gif,
+    @required this.aspectRatio,
     this.placeholder,
     this.width,
     this.height,
@@ -70,6 +98,7 @@ class GiphyImage extends StatefulWidget {
   GiphyImage.originalStill({
     Key key,
     @required GiphyGif gif,
+    @required this.aspectRatio,
     this.placeholder,
     this.width,
     this.height,
@@ -81,6 +110,7 @@ class GiphyImage extends StatefulWidget {
   GiphyImage.video({
     Key key,
     @required GiphyGif gif,
+    @required this.aspectRatio,
     this.placeholder,
     this.width,
     this.height,
@@ -137,8 +167,15 @@ class _GiphyImageState extends State<GiphyImage> {
             );
           } else {
             return widget.placeholder ??
-                Center(
-                  child: CircularProgressIndicator(),
+                Shimmer(
+                  duration: Duration(seconds: 2), //Default value
+                  color: Colors.white, //Default value
+                  enabled: true, //Default value
+                  direction: ShimmerDirection.fromLTRB(),
+                  child: Container(
+                    height: 3,
+                    width: 3 * widget.aspectRatio,
+                  ),
                 );
           }
         },
@@ -268,9 +305,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
         } else {
           // If the VideoPlayerController is still initializing, show a
           // loading spinner.
-          return Center(
-            child: CircularProgressIndicator(),
-          );
+          return Container();
         }
       },
     );

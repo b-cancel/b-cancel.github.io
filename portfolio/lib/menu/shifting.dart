@@ -8,7 +8,7 @@ import 'package:portfolio/menu/expandingText.dart';
 import 'package:portfolio/utils/goldenRatio.dart';
 import 'package:portfolio/utils/link/ui/iconLink.dart';
 import 'package:portfolio/menu/titleShuffle.dart';
-import 'package:portfolio/data.dart';
+import 'package:portfolio/data/basic.dart';
 import 'package:portfolio/home.dart';
 
 //main menu widget
