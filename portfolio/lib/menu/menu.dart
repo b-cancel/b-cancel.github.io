@@ -145,6 +145,7 @@ class _ResumeInMenuState extends State<ResumeInMenu>
 
     //init controller
     modalController = AnimationController(
+      vsync: this,
       duration: kTabScrollDuration,
     );
 
