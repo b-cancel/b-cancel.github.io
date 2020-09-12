@@ -46,7 +46,7 @@
         position: absolute;
         top: 0;
         left: 0;
-        background-color: #1E1E1E;
+        background-color: #030303;
         display:flex;
         justify-content: center;
         align-items: center;
@@ -115,8 +115,14 @@
     </style>
 </head>
 <body id="app-container">
+  <!--
   <div class="loader-wrapper">
     <span class="loader"><span class="loader-inner"></span></span>
+  </div>
+  -->
+
+  <div class="loader-wrapper">
+    <img src="miniLoader.gif"></img>
   </div>
 
   <!-- This script installs service_worker.js to provide PWA functionality to
@@ -129,6 +135,6 @@
       });
     }
   </script>
-  <script src="main.dart.js" type="application/javascript"></script>
+  <script src="main.dart.js?version=2" type="application/javascript"></script>
 </body>
 </html>

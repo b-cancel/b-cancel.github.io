@@ -1,5 +1,6 @@
 //flutter
 import 'package:flutter/material.dart';
+import 'package:portfolio/utils/conditional.dart';
 
 //plugin
 import 'package:universal_html/html.dart';
@@ -123,7 +124,9 @@ class MyName extends StatelessWidget {
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.end,
+            crossAxisAlignment: largerThanIDK
+                ? CrossAxisAlignment.end
+                : CrossAxisAlignment.center,
             children: [
               Text(
                 "Bryan Cancel",
@@ -132,41 +135,67 @@ class MyName extends StatelessWidget {
                 //bigger part, and smaller part of smaller part
                 style: nameStyle,
               ),
-              Visibility(
-                visible: openMenu != null && largerThanIDK,
-                child: openMenu != null
-                    ? AnimatedBuilder(
-                        animation: openMenu,
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              "'s Resume",
-                              style: TextStyle(
-                                fontWeight: FontWeight.w100,
-                                fontSize: MyApp.h4,
-                                letterSpacing: 2,
+              Ternary(
+                condition: largerThanIDK,
+                isTrue: Visibility(
+                  visible: openMenu != null,
+                  child: openMenu != null
+                      ? AnimatedBuilder(
+                          animation: openMenu,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                "'s Resume",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w100,
+                                  fontSize: MyApp.h4,
+                                  letterSpacing: 2,
+                                ),
                               ),
+                              Padding(
+                                padding: EdgeInsets.only(
+                                  left: 4.0,
+                                ),
+                                child: Icon(
+                                  Icons.arrow_left,
+                                ),
+                              ),
+                            ],
+                          ),
+                          builder: (BuildContext context, Widget child) {
+                            return AnimatedOpacity(
+                              duration: kTabScrollDuration,
+                              opacity: openMenu.value == false ? 1 : 0,
+                              child: child,
+                            );
+                          },
+                        )
+                      : Container(),
+                ),
+                isFalse: Visibility(
+                  visible: openMenu != null,
+                  child: openMenu != null
+                      ? AnimatedBuilder(
+                          animation: openMenu,
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                              top: 4.0,
                             ),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                left: 4.0,
-                              ),
-                              child: Icon(
-                                Icons.arrow_left,
-                              ),
+                            child: Icon(
+                              Icons.arrow_left,
                             ),
-                          ],
-                        ),
-                        builder: (BuildContext context, Widget child) {
-                          return AnimatedOpacity(
-                            duration: kTabScrollDuration,
-                            opacity: openMenu.value == false ? 1 : 0,
-                            child: child,
-                          );
-                        },
-                      )
-                    : Container(),
+                          ),
+                          builder: (BuildContext context, Widget child) {
+                            return AnimatedOpacity(
+                              duration: kTabScrollDuration,
+                              opacity: openMenu.value == false ? 1 : 0,
+                              child: child,
+                            );
+                          },
+                        )
+                      : Container(),
+                ),
               ),
             ],
           ),
