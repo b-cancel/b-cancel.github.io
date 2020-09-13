@@ -23,6 +23,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  
+  swipedetector: ^1.2.0
 
   shared_preferences: ^0.5.10
   

@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 //plugin
 import 'package:universal_html/html.dart';
+import 'package:swipedetector/swipedetector.dart';
 
 //internal: other
 import 'package:portfolio/contact.dart';
@@ -66,8 +67,16 @@ class Home extends StatelessWidget {
           ),
           Positioned.fill(
             //NOTE: transition handled internally
-            child: ResumeInMenu(
-              menuKey: menuKey,
+            child: SwipeDetector(
+              onSwipeLeft: () {
+                if (Home.openMenu.value) {
+                  Home.openMenu.value = false;
+                  setMenuOpenCookie(false);
+                }
+              },
+              child: ResumeInMenu(
+                menuKey: menuKey,
+              ),
             ),
           ),
           IgnorePointer(
