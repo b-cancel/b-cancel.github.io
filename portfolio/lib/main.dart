@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 //plugins
 import 'package:bot_toast/bot_toast.dart';
 import 'package:giphy_client/giphy_client.dart';
+import 'package:portfolio/demos/listDemo.dart';
 
 //internal
 import 'package:portfolio/home.dart';
@@ -11,7 +12,10 @@ import 'package:portfolio/qrCode.dart';
 
 GiphyClient client;
 
+void main() => runApp(ListDemo());
+
 //other
+/*
 void main() {
   //giphy setup
   client = new GiphyClient(
@@ -21,6 +25,7 @@ void main() {
   //start app
   runApp(MyApp());
 }
+*/
 
 class MyApp extends StatelessWidget {
   //the QR Codes used throughout
