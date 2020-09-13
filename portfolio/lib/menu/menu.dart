@@ -2,22 +2,19 @@
 import 'package:flutter/material.dart';
 
 //internal
-import 'package:portfolio/icons/portfolio_icons_icons.dart';
+import 'package:portfolio/menu/menuHelper.dart';
 import 'package:portfolio/utils/goldenRatio.dart';
 import 'package:portfolio/menu/shifting.dart';
 import 'package:portfolio/home.dart';
-import 'package:portfolio/main.dart';
 
 //widget
 class ResumeInMenu extends StatefulWidget {
   const ResumeInMenu({
     Key key,
     @required this.menuKey,
-    @required this.openMenu,
   }) : super(key: key);
 
   final GlobalKey menuKey;
-  final ValueNotifier<bool> openMenu;
 
   @override
   _ResumeInMenuState createState() => _ResumeInMenuState();
@@ -66,31 +63,20 @@ class _ResumeInMenuState extends State<ResumeInMenu>
   AnimationController modalController;
   Animation<Color> modalAnimation;
 
-  makeInvisibleOnComplete() {
-    //the menu just finished closing
-    //so we make the interactibles above it fully invisible
-    if (widget.openMenu.value == false) {
-      //status checking
-      AnimationStatus status = modalController.status;
-      bool animationComplete = (status == AnimationStatus.completed);
-      if (animationComplete) {
-        isFullyInvisible.value = true;
-      }
-    }
-  }
-
   animateModal() {
-    if (startedOpen) {
-      if (widget.openMenu.value) {
+    if (Home.openMenu.value) {
+      if (Home.startUpComplete.value) {
         modalController.reverse();
       } else {
-        modalController.forward();
+        isFullyInvisible.value = false;
+        modalController.value = 0;
       }
     } else {
-      if (widget.openMenu.value) {
+      if (Home.startUpComplete.value) {
         modalController.forward();
       } else {
-        modalController.reverse();
+        modalController.value = 1;
+        isFullyInvisible.value = true;
       }
     }
   }
@@ -111,24 +97,13 @@ class _ResumeInMenuState extends State<ResumeInMenu>
     //If the menu is being opened
     //we match the users intent by
     //making everything visible IMMEDIATELY
-    if (widget.openMenu.value) {
+    if (Home.openMenu.value) {
       isFullyInvisible.value = false;
     }
     //ELSE
     //we first need to wait for the animation to finish
     //and then when the animation finishes
     //the invisibility will be applied
-  }
-
-  isFullyInvisibleToggled() {
-    //we only reload if we have become invisible
-    //otherwise the toggleMenu function will handle reloading for us
-    if (isFullyInvisible.value) {
-      //the menu has finished animating
-
-      //so just make thing invisible
-      updateState();
-    }
   }
 
   //modal scrim colors
@@ -141,18 +116,18 @@ class _ResumeInMenuState extends State<ResumeInMenu>
     //save how we started
     //so we know the initial setup of our modalAnimation
     //and be able to go forward and reverse accordingly
-    startedOpen = widget.openMenu.value;
+    startedOpen = Home.openMenu.value;
 
     //init controller
     modalController = AnimationController(
       vsync: this,
-      duration: kTabScrollDuration,
+      duration: kTabScrollDuration, //TODO: modify this eventually
     );
 
     //the animation the controller plays with
     modalAnimation = ColorTween(
-      begin: widget.openMenu.value ? modal : null,
-      end: widget.openMenu.value ? null : modal,
+      begin: Home.openMenu.value ? modal : null,
+      end: Home.openMenu.value ? null : modal,
     ).animate(modalController);
 
     //after the close menu animations
@@ -160,12 +135,12 @@ class _ResumeInMenuState extends State<ResumeInMenu>
     //and right before
     //the menu has to be fully visible
     isFullyInvisible = new ValueNotifier<bool>(
-      widget.openMenu.value == false,
+      Home.openMenu.value == false,
     );
 
     //NOTE: this listener is might be added and removed in within itself
     //for reasons specified at the top of the file
-    widget.openMenu.addListener(
+    Home.openMenu.addListener(
       menuToggled,
     );
 
@@ -182,6 +157,30 @@ class _ResumeInMenuState extends State<ResumeInMenu>
     );
   }
 
+  makeInvisibleOnComplete() {
+    //the menu just finished closing
+    //so we make the interactibles above it fully invisible
+    if (Home.openMenu.value == false) {
+      //status checking
+      AnimationStatus status = modalController.status;
+      bool animationComplete = (status == AnimationStatus.completed);
+      if (animationComplete) {
+        isFullyInvisible.value = true;
+      }
+    }
+  }
+
+  isFullyInvisibleToggled() {
+    //we only reload if we have become invisible
+    //otherwise the toggleMenu function will handle reloading for us
+    if (isFullyInvisible.value) {
+      //the menu has finished animating
+
+      //so just make thing invisible
+      updateState();
+    }
+  }
+
   @override
   void dispose() {
     //remove all the listeners
@@ -193,7 +192,7 @@ class _ResumeInMenuState extends State<ResumeInMenu>
       isFullyInvisibleToggled,
     );
 
-    widget.openMenu.removeListener(
+    Home.openMenu.removeListener(
       menuToggled,
     );
 
@@ -220,7 +219,7 @@ class _ResumeInMenuState extends State<ResumeInMenu>
 
     Color baseColor = Colors.black;
 
-    print("menu open? " + widget.openMenu.value.toString());
+    print("menu open? " + Home.openMenu.value.toString());
     return Visibility(
       //lets us avoid to all the code gymnastics we did initially
       maintainState: true,
@@ -231,36 +230,30 @@ class _ResumeInMenuState extends State<ResumeInMenu>
       visible: isFullyInvisible.value == false,
       child: Stack(
         children: [
+          //the actual modal barier
           Positioned.fill(
             child: AnimatedModalBarrier(
               dismissible: false,
               color: modalAnimation,
             ),
           ),
+          //the button on top of it
           Positioned.fill(
             child: SizedBox.expand(
-              child: Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  onTap: () {
-                    if (widget.openMenu.value) {
-                      widget.openMenu.value = false;
-                    }
-                  },
-                ),
-              ),
+              child: ModalBarrierCloser(),
             ),
           ),
+          //everything on top of it
           AnimatedPositioned(
             height: screenHeight,
             width: screenWidth,
-            duration: kTabScrollDuration,
+            duration:
+                Home.startUpComplete.value ? kTabScrollDuration : Duration.zero,
             top: 0,
-            left: (widget.openMenu.value) ? 0 : -getMenuWidth(),
+            left: (Home.openMenu.value) ? 0 : -(getMenuWidth() ?? 0),
             child: Row(
               children: <Widget>[
                 ShiftingMenu(
-                  openMenu: widget.openMenu,
                   minWidth: minWidth,
                   maxWidth: maxWidth,
                 ),
@@ -271,55 +264,12 @@ class _ResumeInMenuState extends State<ResumeInMenu>
                         top: 0,
                         bottom: 0,
                         left: 0,
-                        child: AnimatedOpacity(
-                          duration: kTabScrollDuration,
-                          opacity: widget.openMenu.value ? 1 : 0,
-                          child: Container(
-                            //minimum size of close menu button
-                            width: 56 / 2,
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: [baseColor, baseColor.withOpacity(0)],
-                                stops: [0.0, 1.0],
-                              ),
-                            ),
-                            child: SizedBox.expand(
-                              child: Container(),
-                            ),
-                          ),
+                        child: GradientBorder(
+                          baseColor: baseColor,
                         ),
                       ),
                       Positioned.fill(
-                        child: IgnorePointer(
-                          child: SizedBox.expand(
-                            child: Center(
-                              child: AnimatedContainer(
-                                duration: kTabScrollDuration,
-                                transform: Matrix4.translationValues(
-                                  (widget.openMenu.value) ? 0 : getMenuWidth(),
-                                  0,
-                                  0,
-                                ),
-                                child: AnimatedOpacity(
-                                  duration: kTabScrollDuration,
-                                  opacity: widget.openMenu.value ? 1 : 0,
-                                  child: Material(
-                                    color: Colors.transparent,
-                                    child: Text(
-                                      "M\nY\n\nW\nO\nR\nK",
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: MyApp.h4,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
+                        child: VerticalMyWorkLabel(),
                       ),
                     ],
                   ),

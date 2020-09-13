@@ -14,10 +14,10 @@ import 'package:portfolio/main.dart';
 //function used for main page and menu shifting
 final GlobalKey menuKey = GlobalKey();
 double getMenuWidth() {
-  final keyContext = menuKey.currentContext;
+  final keyContext = menuKey?.currentContext;
   if (keyContext != null) {
     final box = keyContext.findRenderObject() as RenderBox;
-    return box.size.width;
+    return box?.size?.width;
   } else {
     return null;
   }
@@ -25,9 +25,16 @@ double getMenuWidth() {
 
 //widgets
 class Home extends StatelessWidget {
-  //TODO: read the web parameter to determine whether we want it initally opened or initially closed
-  final ValueNotifier<bool> openMenu = new ValueNotifier<bool>(
+  //TODO: replace with reading actual shared pref
+  static final bool endUpOpen = true;
+
+  //the menu MUST start off open
+  static final ValueNotifier<bool> openMenu = new ValueNotifier<bool>(
     true,
+  );
+
+  static final ValueNotifier<bool> startUpComplete = new ValueNotifier(
+    false,
   );
 
   //build
@@ -43,44 +50,50 @@ class Home extends StatelessWidget {
             child: Scaffold(
               appBar: AppBar(
                 titleSpacing: 0,
-                title: CustomAppBarTitle(
-                  openMenu: openMenu,
-                ),
+                title: CustomAppBarTitle(),
               ),
               //NOTE: transition handled internally
-              body: MyWork(
-                openMenu: openMenu,
-              ),
+              body: MyWork(),
             ),
           ),
           Positioned(
             bottom: 16,
             right: 16,
-            child: Material(
-              child: Container(
-                color: Colors.red,
-                padding: EdgeInsets.symmetric(
-                  horizontal: 8,
-                  vertical: 4,
-                ),
-                child: Text(
-                  "Under Construction",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
+            child: UnderConstructionChip(),
           ),
           Positioned.fill(
             //NOTE: transition handled internally
             child: ResumeInMenu(
               menuKey: menuKey,
-              openMenu: openMenu,
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class UnderConstructionChip extends StatelessWidget {
+  const UnderConstructionChip({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      child: Container(
+        color: Colors.red,
+        padding: EdgeInsets.symmetric(
+          horizontal: 8,
+          vertical: 4,
+        ),
+        child: Text(
+          "Under Construction",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
       ),
     );
   }
@@ -91,10 +104,7 @@ class Home extends StatelessWidget {
 class MyName extends StatelessWidget {
   const MyName({
     Key key,
-    this.openMenu,
   }) : super(key: key);
-
-  final ValueNotifier<bool> openMenu;
 
   @override
   Widget build(BuildContext context) {
@@ -110,11 +120,11 @@ class MyName extends StatelessWidget {
     return Material(
       color: Colors.transparent,
       child: InkWell(
-        onTap: openMenu == null
+        onTap: Home.openMenu == null
             ? null
             : () {
-                if (openMenu.value == false) {
-                  openMenu.value = true;
+                if (Home.openMenu.value == false) {
+                  Home.openMenu.value = true;
                 }
               },
         child: Padding(
@@ -138,10 +148,10 @@ class MyName extends StatelessWidget {
               Ternary(
                 condition: largerThanIDK,
                 isTrue: Visibility(
-                  visible: openMenu != null,
-                  child: openMenu != null
+                  visible: Home.openMenu != null,
+                  child: Home.openMenu != null
                       ? AnimatedBuilder(
-                          animation: openMenu,
+                          animation: Home.openMenu,
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
@@ -165,8 +175,10 @@ class MyName extends StatelessWidget {
                           ),
                           builder: (BuildContext context, Widget child) {
                             return AnimatedOpacity(
-                              duration: kTabScrollDuration,
-                              opacity: openMenu.value == false ? 1 : 0,
+                              duration: Home.startUpComplete.value
+                                  ? kTabScrollDuration
+                                  : Duration.zero,
+                              opacity: Home.openMenu.value == false ? 1 : 0,
                               child: child,
                             );
                           },
@@ -174,10 +186,10 @@ class MyName extends StatelessWidget {
                       : Container(),
                 ),
                 isFalse: Visibility(
-                  visible: openMenu != null,
-                  child: openMenu != null
+                  visible: Home.openMenu != null,
+                  child: Home.openMenu != null
                       ? AnimatedBuilder(
-                          animation: openMenu,
+                          animation: Home.openMenu,
                           child: Padding(
                             padding: EdgeInsets.only(
                               top: 4.0,
@@ -188,8 +200,10 @@ class MyName extends StatelessWidget {
                           ),
                           builder: (BuildContext context, Widget child) {
                             return AnimatedOpacity(
-                              duration: kTabScrollDuration,
-                              opacity: openMenu.value == false ? 1 : 0,
+                              duration: Home.startUpComplete.value
+                                  ? kTabScrollDuration
+                                  : Duration.zero,
+                              opacity: Home.openMenu.value == false ? 1 : 0,
                               child: child,
                             );
                           },

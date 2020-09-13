@@ -28,10 +28,7 @@ import 'package:portfolio/utils/mySnackBar.dart';
 class CustomAppBarTitle extends StatelessWidget {
   const CustomAppBarTitle({
     Key key,
-    @required this.openMenu,
   }) : super(key: key);
-
-  final ValueNotifier<bool> openMenu;
 
   //title = "Github Profile"
   //icon = PortfolioIcons.github
@@ -352,9 +349,7 @@ class CustomAppBarTitle extends StatelessWidget {
         right: 8,
       ),
       child: DynamicOverflowMenuBar(
-        title: MyName(
-          openMenu: openMenu,
-        ),
+        title: MyName(),
         actions: [
           //NOTE: the item in the front will always be in the front... GITHUB
           //VCard should show up for downloading

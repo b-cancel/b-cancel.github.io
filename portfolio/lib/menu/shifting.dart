@@ -17,12 +17,10 @@ class ShiftingMenu extends StatelessWidget {
     Key key,
     @required this.minWidth,
     @required this.maxWidth,
-    @required this.openMenu,
   }) : super(key: key);
 
   final double minWidth;
   final double maxWidth;
-  final ValueNotifier<bool> openMenu;
 
   @override
   Widget build(BuildContext context) {
@@ -70,9 +68,11 @@ class ShiftingMenu extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               AnimatedContainer(
-                duration: kTabScrollDuration,
+                duration: Home.startUpComplete.value
+                    ? kTabScrollDuration
+                    : Duration.zero,
                 transform: Matrix4.translationValues(
-                  (openMenu.value) ? 0 : getMenuWidth(),
+                  (Home.openMenu.value) ? 0 : (getMenuWidth() ?? 0),
                   0,
                   0,
                 ),
@@ -107,8 +107,8 @@ class ShiftingMenu extends StatelessWidget {
                         color: Colors.black,
                         child: InkWell(
                           onTap: () {
-                            if (openMenu.value) {
-                              openMenu.value = false;
+                            if (Home.openMenu.value) {
+                              Home.openMenu.value = false;
                             }
                           },
                           child: Container(

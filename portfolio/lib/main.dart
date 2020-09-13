@@ -1,16 +1,14 @@
 //flutter
 import 'package:flutter/material.dart';
-import 'package:giphy_client/giphy_client.dart';
-import 'package:portfolio/data/basic.dart';
-import 'package:portfolio/home.dart';
 
 //plugins
-import 'package:portfolio/icons/portfolio_icons_icons.dart';
 import 'package:bot_toast/bot_toast.dart';
-import 'package:portfolio/qrCode.dart';
-import 'package:portfolio/utils/wrappedText.dart';
+import 'package:giphy_client/giphy_client.dart';
 
 //internal
+import 'package:portfolio/home.dart';
+import 'package:portfolio/qrCode.dart';
+
 GiphyClient client;
 
 //other
