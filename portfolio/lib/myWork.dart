@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/contact.dart';
@@ -13,20 +11,9 @@ import 'package:universal_html/prefer_universal/html.dart' as uniHTML;
 import 'package:giphy_client/giphy_client.dart';
 
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:waterfall_flow/waterfall_flow.dart';
-
-import 'package:video_player_web/video_player_web.dart';
-
-class SomeContent {
-  String url;
-  double defaultAspectRatio;
-
-  SomeContent({
-    @required this.url,
-    @required this.defaultAspectRatio,
-  });
-}
 
 class MyWork extends StatefulWidget {
   @override
@@ -90,13 +77,24 @@ class _MyWorkState extends State<MyWork> {
   waitingForMenuWidth() {
     shiftValue = getMenuWidth();
     if (shiftValue == null) {
-      print("wait");
       WidgetsBinding.instance.addPostFrameCallback((_) {
         waitingForMenuWidth();
       });
     } else {
       print("Menu size: " + shiftValue.toString());
-      setState(() {});
+      //the menu size has been read
+      //now we can insta close the page
+      Home.openMenu.value = false;
+
+      //wait one from for that to happen before opening the page
+      WidgetsBinding.instance.addPostFrameCallback((_) async {
+        //check if the reload happened from an open or closed menu
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+
+        //react depending on how the menu was before reloading
+        Home.openMenu.value = prefs.getBool('menuOpened') ?? true;
+        Home.startUpComplete.value = true;
+      });
     }
   }
 

@@ -1,6 +1,7 @@
 //flutter
 import 'package:flutter/material.dart';
 import 'package:portfolio/utils/conditional.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 //plugin
 import 'package:universal_html/html.dart';
@@ -23,11 +24,13 @@ double getMenuWidth() {
   }
 }
 
+setMenuOpenCookie(bool newValue) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setBool('menuOpened', newValue);
+}
+
 //widgets
 class Home extends StatelessWidget {
-  //TODO: replace with reading actual shared pref
-  static final bool endUpOpen = true;
-
   //the menu MUST start off open
   static final ValueNotifier<bool> openMenu = new ValueNotifier<bool>(
     true,
@@ -65,6 +68,20 @@ class Home extends StatelessWidget {
             //NOTE: transition handled internally
             child: ResumeInMenu(
               menuKey: menuKey,
+            ),
+          ),
+          IgnorePointer(
+            ignoring: true,
+            child: AnimatedBuilder(
+              animation: startUpComplete,
+              builder: (context, child) {
+                return AnimatedContainer(
+                  duration: kTabScrollDuration,
+                  color: startUpComplete.value
+                      ? Colors.transparent
+                      : Color(0xFF030303),
+                );
+              },
             ),
           ),
         ],
@@ -122,9 +139,10 @@ class MyName extends StatelessWidget {
       child: InkWell(
         onTap: Home.openMenu == null
             ? null
-            : () {
+            : () async {
                 if (Home.openMenu.value == false) {
                   Home.openMenu.value = true;
+                  setMenuOpenCookie(true);
                 }
               },
         child: Padding(

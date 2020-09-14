@@ -1,12 +1,8 @@
-//dart
-import 'dart:math' as math;
-
 //flutter
 import 'package:flutter/material.dart';
 
 //plugin
 import 'package:portfolio/icons/portfolio_icons_icons.dart';
-import 'package:matrix4_transform/matrix4_transform.dart';
 
 //internal
 import 'package:portfolio/utils/link/ui/hover.dart';
@@ -141,10 +137,12 @@ class SpreadingTitle extends StatelessWidget {
     Key key,
     @required this.title,
     @required this.spreaded,
+    this.isWork: false,
   }) : super(key: key);
 
   final String title;
   final ValueNotifier<bool> spreaded;
+  final bool isWork;
 
   @override
   Widget build(BuildContext context) {
@@ -158,8 +156,9 @@ class SpreadingTitle extends StatelessWidget {
           style: TextStyle(
             fontSize: MyApp.h4,
             fontWeight: FontWeight.w900,
-            color: Colors.black,
-            letterSpacing: spreaded.value ? 8 : 0,
+            color: isWork ? Colors.white : Colors.black,
+            letterSpacing:
+                spreaded.value ? (isWork ? 16 : 8) : (isWork ? 8 : 0),
           ),
           duration: kTabScrollDuration,
         );

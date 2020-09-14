@@ -19,7 +19,7 @@ const RESOURCES = {
 "assets/google_fonts/RobotoMono-Regular.ttf": "b4618f1f7f4cee0ac09873fcc5a966f9",
 "assets/google_fonts/RobotoMono-Thin.ttf": "288302ea531af8be59f6ac2b5bbbfdd3",
 "assets/google_fonts/RobotoMono-ThinItalic.ttf": "355d559cc860016a068bcd16b66e4bd3",
-"assets/NOTICES": "18abc47e722fdeed77a5021082ae9828",
+"assets/NOTICES": "7c0faff7ae4fca178ac2bc02ee19c4dd",
 "assets/packages/font_awesome_flutter/lib/fonts/fa-brands-400.ttf": "5a37ae808cf9f652198acde612b5328d",
 "assets/packages/font_awesome_flutter/lib/fonts/fa-regular-400.ttf": "2bca5ec802e40d3f4b60343e346cedde",
 "assets/packages/font_awesome_flutter/lib/fonts/fa-solid-900.ttf": "2aa350bd2aeab88b601a593f793734c0",
@@ -47,7 +47,7 @@ const RESOURCES = {
 "faviconit/faviconit-instructions.txt": "53f9f214c478b425a7fb737b9f02eb1e",
 "index.html": "bf91b2bea94835258628fed71acbb4e2",
 "/": "bf91b2bea94835258628fed71acbb4e2",
-"main.dart.js": "68faa21ec2e8fc008b5c9a39091654de",
+"main.dart.js": "75a23c8e15008fcf81ad284ef139730b",
 "manifest.json": "d27d045a0c173386d93a4368bcf11389",
 "miniLoader.gif": "0098d8c7100448172595966afe90273d"
 };

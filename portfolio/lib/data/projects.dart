@@ -1,6 +1,16 @@
 import 'package:flutter/material.dart';
 
-//TODO: allow .png, .jpg, and .mp4
+class SomeContent {
+  String url;
+  double defaultAspectRatio;
+
+  SomeContent({
+    @required this.url,
+    @required this.defaultAspectRatio,
+  });
+}
+
+//content is a string, how its digested is determined later
 
 enum ProjectType { AppDev, GameDev, WebDev, Graphics }
 Map<ProjectType, StdAspectRatio> projectTypeToDefaultAspectRatio = {
@@ -108,12 +118,12 @@ Map<ProjectType, List<Project>> projectTypeToProjects = {
         "UT4byKMOmrYWk8dTmb",
         //jpgs
         /*
-    "https://imgur.com/YWYmyOt.jpg",
-    "https://imgur.com/9XWVhy3.jpg",
-    "https://imgur.com/jdxaWT0.jpg",
-    "https://imgur.com/yASI0vn.jpg",
-    "https://imgur.com/TDzYvgI.jpg",
-    */
+        "https://imgur.com/YWYmyOt.jpg",
+        "https://imgur.com/9XWVhy3.jpg",
+        "https://imgur.com/jdxaWT0.jpg",
+        "https://imgur.com/yASI0vn.jpg",
+        "https://imgur.com/TDzYvgI.jpg",
+        */
       ],
     ),
     Project(
