@@ -56,14 +56,14 @@ class MyApp extends StatelessWidget {
           BotToastNavigatorObserver(),
         ],
         title: 'Bryan Cancel\'s Portfolio',
-        theme: ThemeData(
+        theme: ThemeData.light().copyWith(
           //text selection
           textSelectionColor: Colors.blue,
           textSelectionHandleColor: Colors.blue,
           //light mode default
           brightness: Brightness.light,
           //none of that ugly green
-          primarySwatch: Colors.blue,
+          //primarySwatch: Colors.blue,
           // This makes the visual density adapt to the platform that you run
           // the app on. For desktop platforms, the controls will be smaller and
           // closer together (more dense) than on mobile platforms.

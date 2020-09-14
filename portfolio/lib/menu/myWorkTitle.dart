@@ -51,63 +51,68 @@ class _ExpandMyWorkOnHoverState extends State<ExpandMyWorkOnHover> {
 
   @override
   Widget build(BuildContext context) {
-    return PointerOnHover(
-      isHovering: isHovering,
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          hoverColor: Colors.transparent,
-          //toggle
-          onTap: () {},
-          child: Material(
-            color: Colors.black,
-            child: InkWell(
-              onTap: () {
-                if (Home.openMenu.value) {
-                  Home.openMenu.value = false;
-                  setMenuOpenCookie(false);
-                }
-              },
-              child: Container(
-                constraints: BoxConstraints(
-                  minWidth: widget.minWidth,
-                  maxWidth: widget.maxWidth,
-                ),
-                padding: EdgeInsets.symmetric(
-                  horizontal: 16,
-                ),
-                height: 56,
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    DefaultTextStyle(
-                      style: TextStyle(
-                        color: Colors.white,
+    return Padding(
+      padding: EdgeInsets.only(
+        top: 16.0,
+      ),
+      child: PointerOnHover(
+        isHovering: isHovering,
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            hoverColor: Colors.transparent,
+            //toggle
+            onTap: () {},
+            child: Material(
+              color: Colors.black,
+              child: InkWell(
+                onTap: () {
+                  if (Home.openMenu.value) {
+                    Home.openMenu.value = false;
+                    setMenuOpenCookie(false);
+                  }
+                },
+                child: Container(
+                  constraints: BoxConstraints(
+                    minWidth: widget.minWidth,
+                    maxWidth: widget.maxWidth,
+                  ),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 16,
+                  ),
+                  height: 56,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      DefaultTextStyle(
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                        child: SpreadingTitle(
+                          title: "My Work",
+                          spreaded: isSpreaded,
+                          isWork: true,
+                        ),
                       ),
-                      child: SpreadingTitle(
-                        title: "My Work",
-                        spreaded: isSpreaded,
-                        isWork: true,
-                      ),
-                    ),
-                    Center(
-                        child: AnimatedBuilder(
-                      animation: isSpreaded,
-                      builder: (context, child) {
-                        return AnimatedContainer(
-                          duration: kTabScrollDuration,
-                          padding: EdgeInsets.symmetric(
-                            horizontal: isSpreaded.value ? 12 : 6,
-                          ),
-                          child: Icon(
-                            Icons.arrow_right,
-                            color: Colors.white,
-                            size: MyApp.h2,
-                          ),
-                        );
-                      },
-                    )),
-                  ],
+                      Center(
+                          child: AnimatedBuilder(
+                        animation: isSpreaded,
+                        builder: (context, child) {
+                          return AnimatedContainer(
+                            duration: kTabScrollDuration,
+                            padding: EdgeInsets.symmetric(
+                              horizontal: isSpreaded.value ? 8 : 0,
+                            ),
+                            child: Icon(
+                              Icons.arrow_right,
+                              color: Colors.white,
+                              size: MyApp.h2,
+                            ),
+                          );
+                        },
+                      )),
+                    ],
+                  ),
                 ),
               ),
             ),
