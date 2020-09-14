@@ -73,9 +73,8 @@ class _MyWorkState extends State<MyWork> {
     super.dispose();
   }
 
-  double shiftValue;
   waitingForMenuWidth() {
-    shiftValue = getMenuWidth();
+    double shiftValue = getMenuWidth();
     if (shiftValue == null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         waitingForMenuWidth();
@@ -304,7 +303,7 @@ class _MyWorkState extends State<MyWork> {
           duration:
               Home.startUpComplete.value ? kTabScrollDuration : Duration.zero,
           transform: Matrix4.translationValues(
-            (Home.openMenu.value) ? shiftValue : 0,
+            (Home.openMenu.value) ? getMenuWidth() : 0,
             0,
             0,
           ),
