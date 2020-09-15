@@ -47,6 +47,7 @@ class ShiftingMenu extends StatelessWidget {
 
     //build
     return Material(
+      color: Colors.white,
       //ugly border that wont blend into my gradient
       shadowColor: Colors.transparent,
       type: MaterialType.canvas,
@@ -65,7 +66,6 @@ class ShiftingMenu extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               AnimatedContainer(
-                color: Colors.white,
                 duration: Home.startUpComplete.value
                     ? kTabScrollDuration
                     : Duration.zero,
@@ -74,7 +74,11 @@ class ShiftingMenu extends StatelessWidget {
                   0,
                   0,
                 ),
-                child: MyName(),
+                child: DefaultTextStyle(
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                    child: MyName()),
               ),
               Expanded(
                 child: ResumeInfo(
