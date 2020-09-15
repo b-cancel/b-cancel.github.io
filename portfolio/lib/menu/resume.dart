@@ -4,6 +4,7 @@ import 'package:portfolio/main.dart';
 import 'package:portfolio/menu/expandingText.dart';
 import 'package:portfolio/menu/myWorkTitle.dart';
 import 'package:portfolio/menu/sections/software.dart';
+import 'package:portfolio/menu/swapingText.dart';
 import 'package:portfolio/utils/chips.dart';
 import 'package:portfolio/utils/link/openLink.dart';
 import 'package:portfolio/utils/wrappedText.dart';
@@ -69,18 +70,177 @@ class _ResumeInfoState extends State<ResumeInfo> {
             title: "Experience",
             useSpreadingTitle: true,
             startOpen: true,
-            content: Text("XP DAWG"),
+            content: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SwappingSection(
+                  title: "Mobile Development and Design (Dart/Flutter)",
+                  content: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("05/2020 -> 08/2020"),
+                      Text("Mobile Development and Design (Dart/Flutter)",
+                          style: bold),
+                      Text("Lawn Buddy – Remote")
+                    ],
+                  ),
+                ),
+                SwappingSection(
+                  title: "Web Development (Google App Scripts)",
+                  content: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("03/2020 –> 09/2020"),
+                      Text("Web Development (Google App Scripts)", style: bold),
+                      Text("Lebron Group Land Surveying – Remote")
+                    ],
+                  ),
+                ),
+                SwappingSection(
+                  title: "Barista",
+                  startOpen: false,
+                  content: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("10/2019 –> 05/2020"),
+                      Text("Barista", style: bold),
+                      Text("Starbucks – Edinburg, TX")
+                    ],
+                  ),
+                ),
+                SwappingSection(
+                  title: "App Development (Dart / Flutter)",
+                  content: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("05/2018 – 08/2018"),
+                      Text("App Development (Dart / Flutter)", style: bold),
+                      Text("CleverSolve – Edinburg, TX"),
+                      Text("Summer Internship"),
+                    ],
+                  ),
+                ),
+                SwappingSection(
+                  title: "Web Development and Design",
+                  content: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("07/2017 – 08/2017"),
+                      Text("Web Development and Design", style: bold),
+                      Text("Lebron Group Land Surveying – Winter Park, FL"),
+                    ],
+                  ),
+                ),
+                SwappingSection(
+                  title: "Graphic Design and Video Editing",
+                  startOpen: false,
+                  content: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("09/2014 – 05/2015"),
+                      Text("Graphic Design and Video Editing", style: bold),
+                      Text("UT Center for Railway Safety – Edinburg, TX"),
+                    ],
+                  ),
+                ),
+                SwappingSection(
+                  title: "Graphic Design and Video Editing",
+                  startOpen: false,
+                  content: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("09/2013 – 05/2014"),
+                      Text("Graphic Design and Video Editing", style: bold),
+                      Text("IT Marketing Division at UTPA – Edinburg, TX"),
+                      Text("Internship"),
+                    ],
+                  ),
+                ),
+                SwappingSection(
+                  title: "Robotics Coach",
+                  startOpen: false,
+                  content: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("05/2013 – 05/2014"),
+                      Text("Robotics Coach", style: bold),
+                      Text(
+                          "Business Education Technology Academy – Edinburg, TX"),
+                      Text("Volunteer"),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
           ExpandingSection(
             title: "Education",
             useSpreadingTitle: true,
             startOpen: true,
+            content: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SwappingSection(
+                  title: "Bachelor of Science in Computer Science, 3.6",
+                  startOpen: false,
+                  content: IntrinsicWidth(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Bachelor of Science in Computer Science"),
+                        Text("University of Rio Grande Valley"),
+                        Text("May 2019: Cum Laude, 3.6 GPA"),
+                        ExpandingSection(
+                          title: "Relevant Coursework",
+                          startOpen: false,
+                          content: Padding(
+                            padding: const EdgeInsets.only(
+                              left: 8.0,
+                            ),
+                            child: Chips(
+                              wrapped: false,
+                              chips: [
+                                "Discrete Data Structures",
+                                "Algorithms & Data Structures",
+                                "Design & Analysis of Algorithms",
+                                "Automata, Formal Lang & Comp",
+                                "Software Engineering 1 & 2",
+                                "Internet Programming",
+                                "Intro. to Game Development",
+                                "Database Design & Implementation",
+                                "Systems Programming",
+                                "Computer Architecture",
+                                "Object Oriented Programming in C#",
+                                "Computer Org & Assembly Lang",
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SwappingSection(
+                  title: "High School Diploma, 3.9",
+                  startOpen: false,
+                  content: IntrinsicWidth(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("High School Distinguished Diploma"),
+                        Text("Business Education Technololgy Academy"),
+                        Text("May 2014: Magna Cum Laude, 3.9 GPA"),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
           ExpandMyWorkOnHover(
             minWidth: widget.minWidth,
             maxWidth: widget.maxWidth,
           ),
-
           ExpandingSection(
             title: "Software",
             useSpreadingTitle: true,

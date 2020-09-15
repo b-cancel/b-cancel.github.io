@@ -3,27 +3,38 @@ import 'package:flutter/material.dart';
 class Chips extends StatelessWidget {
   Chips({
     @required this.chips,
+    this.wrapped: true,
   });
 
   final List<String> chips;
+  final bool wrapped;
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      children: List.generate(
-        chips.length,
-        (index) {
-          return AChip(
-            child: Text(
-              chips[index],
-              style: TextStyle(
-                color: Colors.white,
-              ),
+    List<Widget> theChips = List.generate(
+      chips.length,
+      (index) {
+        return AChip(
+          child: Text(
+            chips[index],
+            style: TextStyle(
+              color: Colors.white,
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
+
+    if (wrapped) {
+      return Wrap(
+        children: theChips,
+      );
+    } else {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: theChips,
+      );
+    }
   }
 }
 
