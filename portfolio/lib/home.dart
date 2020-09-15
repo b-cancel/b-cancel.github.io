@@ -130,11 +130,15 @@ class UnderConstructionChip extends StatelessWidget {
 class MyName extends StatelessWidget {
   const MyName({
     Key key,
+    this.inMenu: true,
   }) : super(key: key);
+
+  final bool inMenu;
 
   @override
   Widget build(BuildContext context) {
     TextStyle nameStyle = TextStyle(
+      color: inMenu ? Colors.black : Colors.white,
       fontWeight: FontWeight.bold,
       fontSize: MyApp.h2,
       letterSpacing: 2,
@@ -185,6 +189,7 @@ class MyName extends StatelessWidget {
                               Text(
                                 "'s Resume",
                                 style: TextStyle(
+                                  color: inMenu ? Colors.black : Colors.white,
                                   fontWeight: FontWeight.w100,
                                   fontSize: MyApp.h4,
                                   letterSpacing: 2,
@@ -196,6 +201,7 @@ class MyName extends StatelessWidget {
                                 ),
                                 child: Icon(
                                   Icons.arrow_left,
+                                  color: inMenu ? Colors.black : Colors.white,
                                 ),
                               ),
                             ],
@@ -223,6 +229,7 @@ class MyName extends StatelessWidget {
                             ),
                             child: Icon(
                               Icons.arrow_left,
+                              color: inMenu ? Colors.black : Colors.white,
                             ),
                           ),
                           builder: (BuildContext context, Widget child) {

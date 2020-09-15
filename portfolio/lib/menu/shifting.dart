@@ -75,10 +75,11 @@ class ShiftingMenu extends StatelessWidget {
                   0,
                 ),
                 child: DefaultTextStyle(
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                    child: MyName()),
+                  style: TextStyle(
+                    color: Colors.black,
+                  ),
+                  child: MyName(),
+                ),
               ),
               Expanded(
                 child: ResumeInfo(

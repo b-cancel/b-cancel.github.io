@@ -349,7 +349,9 @@ class CustomAppBarTitle extends StatelessWidget {
         right: 8,
       ),
       child: DynamicOverflowMenuBar(
-        title: MyName(),
+        title: MyName(
+          inMenu: false,
+        ),
         actions: [
           //NOTE: the item in the front will always be in the front... GITHUB
           //VCard should show up for downloading

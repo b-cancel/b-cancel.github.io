@@ -150,7 +150,8 @@ class AdjustableQrCode extends StatelessWidget {
         child: QrImage(
           data: data,
           //colors
-          backgroundColor: Colors.transparent,
+          backgroundColor:
+              squaresColor == Colors.black ? Colors.black : Colors.white,
           foregroundColor:
               squaresColor == Colors.black ? Colors.white : Colors.black,
           //more accurate

@@ -343,32 +343,37 @@ class _ResumeInfoState extends State<ResumeInfo> {
                         padding: const EdgeInsets.only(
                           left: 16,
                         ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "2013 – 2014",
-                              style: bold,
-                            ),
-                            WrappedText(
-                                "Treasurer, for the Technology Student Association"),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                top: 8.0,
+                        child: DefaultTextStyle(
+                          style: TextStyle(
+                            color: Colors.black,
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "2013 – 2014",
+                                style: bold,
                               ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "2012 – 2014",
-                                    style: bold,
-                                  ),
-                                  WrappedText(
-                                      "Robotics Curriculum Precursor, at BETA"),
-                                ],
+                              WrappedText(
+                                  "Treasurer, for the Technology Student Association"),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                  top: 8.0,
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "2012 – 2014",
+                                      style: bold,
+                                    ),
+                                    WrappedText(
+                                        "Robotics Curriculum Precursor, at BETA"),
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -379,35 +384,40 @@ class _ResumeInfoState extends State<ResumeInfo> {
                         padding: const EdgeInsets.only(
                           left: 16,
                         ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "2013 – 2014",
-                              style: bold,
-                            ),
-                            WrappedText(
-                                "- TSA Vex Robotics: 1st Regionals 7th State"),
-                            WrappedText(
-                                "- TSA Web Design: 3rd State 4th Nationals"),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                top: 8.0,
+                        child: DefaultTextStyle(
+                          style: TextStyle(
+                            color: Colors.black,
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "2013 – 2014",
+                                style: bold,
                               ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "2012 – 2013",
-                                    style: bold,
-                                  ),
-                                  WrappedText("- TSA Member of the Year"),
-                                  WrappedText(
-                                      "- Technology Problem Solving: 2nd Regionals"),
-                                ],
+                              WrappedText(
+                                  "- TSA Vex Robotics: 1st Regionals 7th State"),
+                              WrappedText(
+                                  "- TSA Web Design: 3rd State 4th Nationals"),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                  top: 8.0,
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "2012 – 2013",
+                                      style: bold,
+                                    ),
+                                    WrappedText("- TSA Member of the Year"),
+                                    WrappedText(
+                                        "- Technology Problem Solving: 2nd Regionals"),
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),
