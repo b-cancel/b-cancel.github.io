@@ -1,28 +1,33 @@
 //flutter
 import 'package:flutter/material.dart';
+
 //widget
 class WrappedText extends StatelessWidget {
-  WrappedText(this.text, {
-    
+  WrappedText(
+    this.text, {
+    this.style,
     this.pattern: " ",
   });
 
   final String text;
   final String pattern;
+  final TextStyle style;
 
   @override
   Widget build(BuildContext context) {
     return Wrap(
       children: toWrappableText(
-        text, 
+        text,
         pattern: pattern,
+        style: style,
       ),
     );
   }
 }
 
 //function
-List<Widget> toWrappableText(String text, {String pattern: " "}) {
+List<Widget> toWrappableText(String text,
+    {TextStyle style, String pattern: " "}) {
   List<String> bits = text.split(pattern);
   List<Widget> widgets = new List<Widget>();
   for (int i = 0; i < bits.length; i++) {
@@ -30,6 +35,7 @@ List<Widget> toWrappableText(String text, {String pattern: " "}) {
     widgets.add(
       Text(
         bits[i] + (isLast ? "" : pattern),
+        style: style,
       ),
     );
   }

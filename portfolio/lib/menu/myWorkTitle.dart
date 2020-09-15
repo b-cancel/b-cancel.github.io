@@ -96,22 +96,23 @@ class _ExpandMyWorkOnHoverState extends State<ExpandMyWorkOnHover> {
                         ),
                       ),
                       Center(
-                          child: AnimatedBuilder(
-                        animation: isSpreaded,
-                        builder: (context, child) {
-                          return AnimatedContainer(
-                            duration: kTabScrollDuration,
-                            padding: EdgeInsets.symmetric(
-                              horizontal: isSpreaded.value ? 8 : 0,
-                            ),
-                            child: Icon(
-                              Icons.arrow_right,
-                              color: Colors.white,
-                              size: MyApp.h2,
-                            ),
-                          );
-                        },
-                      )),
+                        child: AnimatedBuilder(
+                          animation: isSpreaded,
+                          builder: (context, child) {
+                            return AnimatedContainer(
+                              duration: kTabScrollDuration,
+                              padding: EdgeInsets.symmetric(
+                                horizontal: isSpreaded.value ? 8 : 0,
+                              ),
+                              child: Icon(
+                                Icons.arrow_right,
+                                color: Colors.white,
+                                size: MyApp.h2,
+                              ),
+                            );
+                          },
+                        ),
+                      ),
                     ],
                   ),
                 ),
