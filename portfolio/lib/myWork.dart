@@ -202,72 +202,91 @@ class _MyWorkState extends State<MyWork> {
         child: Stack(
           children: <Widget>[
             SmartRefresher(
-              enablePullDown: true,
-              enablePullUp: false,
-              scrollController: scrollController,
-              controller: refreshController,
-              onRefresh: _onRefresh,
-              onLoading: _onLoading,
-              child: WaterfallFlow.builder(
+                enablePullDown: true,
+                enablePullUp: false,
+                scrollController: scrollController,
+                controller: refreshController,
+                onRefresh: _onRefresh,
+                onLoading: _onLoading,
+                child: CustomScrollView(
+                  controller: scrollController,
+                  slivers: [
+                    SliverStaggeredGrid.countBuilder(
+                      crossAxisCount: phonesThatFit.ceil(),
+                      staggeredTileBuilder: (int index) =>
+                          new StaggeredTile.count(1, 2),
+                      itemBuilder: (context, index) {
+                        if (index != allContent.length) {
+                          return Card(
+                            margin: EdgeInsets.all(cardSpacing),
+                            child: FittedBox(
+                              fit: BoxFit.contain,
+                              child: FutureBuilder(
+                                future: getGiphy(
+                                  allContent[index].url,
+                                ),
+                                builder: (BuildContext context,
+                                    AsyncSnapshot<GiphyGif> snapShot) {
+                                  if (snapShot.connectionState ==
+                                      ConnectionState.done) {
+                                    print(snapShot.data.images.preview.mp4);
+                                    return GiphyImage.downScaled(
+                                      gif: snapShot.data,
+                                      aspectRatio:
+                                          allContent[index].defaultAspectRatio,
+                                    );
+                                  } else {
+                                    return Shimmer(
+                                      duration:
+                                          Duration(seconds: 2), //Default value
+                                      color: Colors.white, //Default value
+                                      enabled: true, //Default value
+                                      direction: ShimmerDirection.fromLTRB(),
+                                      child: Container(
+                                        height: 3,
+                                        width: 3 *
+                                            allContent[index]
+                                                .defaultAspectRatio,
+                                      ),
+                                    );
+                                  }
+                                },
+                              ),
+                            ),
+                          );
+                        } else {
+                          return Padding(
+                            padding: EdgeInsets.only(
+                              bottom: 48,
+                            ),
+                            child: Card(
+                              margin: EdgeInsets.all(cardSpacing / 2),
+                              color: Colors.white,
+                              child: FittedBox(
+                                fit: BoxFit.contain,
+                                child: QRWidget(
+                                  isDialog: false,
+                                ),
+                              ),
+                            ),
+                          );
+                        }
+                      },
+                      itemCount: allContent.length + 1,
+                      mainAxisSpacing: 0,
+                      crossAxisSpacing: 0,
+                    ),
+                  ],
+                )
+
+                /*WaterfallFlow.builder(
                 addAutomaticKeepAlives: true,
                 controller: scrollController,
                 //cacheExtent: 0.0,
                 padding: EdgeInsets.all(5.0),
                 itemCount: allContent.length + 1,
                 itemBuilder: (BuildContext context, int index) {
-                  if (index != allContent.length) {
-                    return Card(
-                      margin: EdgeInsets.all(cardSpacing),
-                      child: FittedBox(
-                        fit: BoxFit.contain,
-                        child: FutureBuilder(
-                          future: getGiphy(
-                            allContent[index].url,
-                          ),
-                          builder: (BuildContext context,
-                              AsyncSnapshot<GiphyGif> snapShot) {
-                            if (snapShot.connectionState ==
-                                ConnectionState.done) {
-                              print(snapShot.data.images.preview.mp4);
-                              return GiphyImage.downScaled(
-                                gif: snapShot.data,
-                                aspectRatio:
-                                    allContent[index].defaultAspectRatio,
-                              );
-                            } else {
-                              return Shimmer(
-                                duration: Duration(seconds: 2), //Default value
-                                color: Colors.white, //Default value
-                                enabled: true, //Default value
-                                direction: ShimmerDirection.fromLTRB(),
-                                child: Container(
-                                  height: 3,
-                                  width:
-                                      3 * allContent[index].defaultAspectRatio,
-                                ),
-                              );
-                            }
-                          },
-                        ),
-                      ),
-                    );
-                  } else {
-                    return Padding(
-                      padding: EdgeInsets.only(
-                        bottom: 48,
-                      ),
-                      child: Card(
-                        margin: EdgeInsets.all(cardSpacing / 2),
-                        color: Colors.white,
-                        child: FittedBox(
-                          fit: BoxFit.contain,
-                          child: QRWidget(
-                            isDialog: false,
-                          ),
-                        ),
-                      ),
-                    );
-                  }
+                  
                 },
                 gridDelegate:
                     SliverWaterfallFlowDelegateWithFixedCrossAxisCount(
@@ -290,8 +309,8 @@ class _MyWorkState extends State<MyWork> {
                       ? LastChildLayoutType.foot
                       : LastChildLayoutType.none,
                 ),
-              ),
-            ),
+              ),*/
+                ),
             /*
             Positioned(
               right: 0,
