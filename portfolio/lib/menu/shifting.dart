@@ -65,6 +65,7 @@ class ShiftingMenu extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               AnimatedContainer(
+                color: Colors.white,
                 duration: Home.startUpComplete.value
                     ? kTabScrollDuration
                     : Duration.zero,
