@@ -1,5 +1,6 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
+import 'package:masonry_grid/masonry_grid.dart';
 import 'package:portfolio/contact.dart';
 import 'package:portfolio/data/basic.dart';
 import 'package:portfolio/data/projects.dart';
@@ -12,9 +13,10 @@ import 'package:swipedetector/swipedetector.dart';
 import 'package:universal_html/prefer_universal/html.dart' as uniHTML;
 import 'package:giphy_client/giphy_client.dart';
 
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
-import 'package:masonry_grid/masonry_grid.dart';
+import 'package:waterfall_flow/waterfall_flow.dart';
 
 class MyWork extends StatefulWidget {
   @override
@@ -199,142 +201,88 @@ class _MyWorkState extends State<MyWork> {
       child: AnimatedBuilder(
         animation: Home.openMenu,
         //the main page doesn't need to be rebuilt to be shifted
-        child: Stack(
-          children: <Widget>[
-            SmartRefresher(
-                enablePullDown: true,
-                enablePullUp: false,
-                scrollController: scrollController,
-                controller: refreshController,
-                onRefresh: _onRefresh,
-                onLoading: _onLoading,
-                child: CustomScrollView(
-                  controller: scrollController,
-                  slivers: [
-                    SliverToBoxAdapter(
-                      child: MasonryGrid(
-                        column: phonesThatFit.ceil() + 1,
-                        children: List.generate(
-                          allContent.length + 1,
-                          (index) {
-                            if (index != allContent.length) {
-                              return Card(
-                                margin: EdgeInsets.all(cardSpacing),
-                                child: FittedBox(
-                                  fit: BoxFit.contain,
-                                  child: FutureBuilder(
-                                    future: getGiphy(
-                                      allContent[index].url,
+        child: SmartRefresher(
+          enablePullDown: true,
+          enablePullUp: false,
+          scrollController: scrollController,
+          controller: refreshController,
+          onRefresh: _onRefresh,
+          onLoading: _onLoading,
+          child: CustomScrollView(
+            controller: scrollController,
+            slivers: [
+              SliverToBoxAdapter(
+                child: MasonryGrid(
+                  children: List.generate(
+                    allContent.length + 1,
+                    (index) {
+                      if (index != allContent.length) {
+                        return Card(
+                          margin: EdgeInsets.all(cardSpacing),
+                          child: FittedBox(
+                            fit: BoxFit.contain,
+                            child: FutureBuilder(
+                              future: getGiphy(
+                                allContent[index].url,
+                              ),
+                              builder: (BuildContext context,
+                                  AsyncSnapshot<GiphyGif> snapShot) {
+                                if (snapShot.connectionState ==
+                                    ConnectionState.done) {
+                                  print(snapShot.data.images.preview.mp4);
+                                  return GiphyImage.downScaled(
+                                    gif: snapShot.data,
+                                    aspectRatio:
+                                        allContent[index].defaultAspectRatio,
+                                  );
+                                } else {
+                                  return Shimmer(
+                                    duration:
+                                        Duration(seconds: 2), //Default value
+                                    color: Colors.white, //Default value
+                                    enabled: true, //Default value
+                                    direction: ShimmerDirection.fromLTRB(),
+                                    child: Container(
+                                      height: 3,
+                                      width: 3 *
+                                          allContent[index].defaultAspectRatio,
                                     ),
-                                    builder: (BuildContext context,
-                                        AsyncSnapshot<GiphyGif> snapShot) {
-                                      if (snapShot.connectionState ==
-                                          ConnectionState.done) {
-                                        print(snapShot.data.images.preview.mp4);
-                                        return GiphyImage.downScaled(
-                                          gif: snapShot.data,
-                                          aspectRatio: allContent[index]
-                                              .defaultAspectRatio,
-                                        );
-                                      } else {
-                                        return Shimmer(
-                                          duration: Duration(
-                                              seconds: 2), //Default value
-                                          color: Colors.white, //Default value
-                                          enabled: true, //Default value
-                                          direction:
-                                              ShimmerDirection.fromLTRB(),
-                                          child: Container(
-                                            height: 3,
-                                            width: 3 *
-                                                allContent[index]
-                                                    .defaultAspectRatio,
-                                          ),
-                                        );
-                                      }
-                                    },
-                                  ),
-                                ),
-                              );
-                            } else {
-                              return Padding(
-                                padding: EdgeInsets.only(
-                                  bottom: 48,
-                                ),
-                                child: Card(
-                                  margin: EdgeInsets.all(cardSpacing),
-                                  color: Colors.white,
-                                  child: FittedBox(
-                                    fit: BoxFit.contain,
-                                    child: QRWidget(
-                                      isDialog: false,
-                                    ),
-                                  ),
-                                ),
-                              );
-                            }
-                          },
-                        ),
-                        staggered: true,
-                        mainAxisSpacing: 0,
-                        crossAxisSpacing: 0,
-                      ),
-                    ),
-                    SliverToBoxAdapter(
-                      child: Center(
-                        child: RightsFooter(),
-                      ),
-                    )
-                  ],
-                )
-
-                /*WaterfallFlow.builder(
-                addAutomaticKeepAlives: true,
-                controller: scrollController,
-                //cacheExtent: 0.0,
-                padding: EdgeInsets.all(5.0),
-                itemCount: allContent.length + 1,
-                itemBuilder: (BuildContext context, int index) {
-                  
-                },
-                gridDelegate:
-                    SliverWaterfallFlowDelegateWithFixedCrossAxisCount(
-                  crossAxisCount:
-                      phonesThatFit.ceil(), //TODO: +1 only para feitos
+                                  );
+                                }
+                              },
+                            ),
+                          ),
+                        );
+                      } else {
+                        return Padding(
+                          padding: EdgeInsets.only(
+                            bottom: 48,
+                          ),
+                          child: Card(
+                            margin: EdgeInsets.all(cardSpacing),
+                            color: Colors.white,
+                            child: FittedBox(
+                              fit: BoxFit.contain,
+                              child: QRWidget(
+                                isDialog: false,
+                              ),
+                            ),
+                          ),
+                        );
+                      }
+                    },
+                  ),
+                  column: phonesThatFit.ceil(), //TODO: +1 only para feitos
                   //spacing is handled by the cards each item is in
                   crossAxisSpacing: 0,
                   mainAxisSpacing: 0,
-
-                  /// follow max child trailing layout offset and layout with full cross axis extend
-                  /// last child as loadmore item/no more item in [GridView] and [WaterfallFlow]
-                  /// with full cross axis extend
-                  //  LastChildLayoutType.fullCrossAxisExtend,
-
-                  /// as foot at trailing and layout with full cross axis extend
-                  /// show no more item at trailing when children are not full of viewport
-                  /// if children is full of viewport, it's the same as fullCrossAxisExtend
-                  //  LastChildLayoutType.foot,
-                  lastChildLayoutTypeBuilder: (index) => (index == 50)
-                      ? LastChildLayoutType.foot
-                      : LastChildLayoutType.none,
                 ),
-              ),*/
-                ),
-            /*
-            Positioned(
-              right: 0,
-              top: 0,
-              bottom: 0,
-              child: ScrollBar(
-                scrollController: scrollController,
-                //here they are updated
-                topScrolledAway: topScrolledAway,
-                overScroll: overScroll,
-                onTop: onTop,
               ),
-            ),
-            */
-          ],
+              SliverToBoxAdapter(
+                child: RightsFooter(),
+              ),
+            ],
+          ),
         ),
         //only handle shifting on isMenuOpened Toggle
         builder: (BuildContext context, Widget nonChangingChild) {
@@ -348,14 +296,6 @@ class _MyWorkState extends State<MyWork> {
             ),
             child: nonChangingChild,
           );
-          /*
-          return BackdropFilter(
-            filter: ImageFilter.blur(
-              sigmaX: 10.0, 
-              sigmaY: 10.0,
-            ),
-            child: 
-          );*/
         },
       ),
     );

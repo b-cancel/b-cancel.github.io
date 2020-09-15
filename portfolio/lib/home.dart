@@ -67,16 +67,8 @@ class Home extends StatelessWidget {
           ),
           Positioned.fill(
             //NOTE: transition handled internally
-            child: SwipeDetector(
-              onSwipeLeft: () {
-                if (Home.openMenu.value) {
-                  Home.openMenu.value = false;
-                  setMenuOpenCookie(false);
-                }
-              },
-              child: ResumeInMenu(
-                menuKey: menuKey,
-              ),
+            child: ResumeInMenu(
+              menuKey: menuKey,
             ),
           ),
           IgnorePointer(
