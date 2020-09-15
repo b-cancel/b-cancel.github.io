@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:portfolio/contact.dart';
 import 'package:portfolio/data/basic.dart';
 import 'package:portfolio/data/projects.dart';
+import 'package:portfolio/headerFooter.dart';
 import 'package:portfolio/home.dart';
 import 'package:portfolio/main.dart';
 import 'package:portfolio/utils/giphyImage.dart';
@@ -11,10 +12,9 @@ import 'package:swipedetector/swipedetector.dart';
 import 'package:universal_html/prefer_universal/html.dart' as uniHTML;
 import 'package:giphy_client/giphy_client.dart';
 
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
-import 'package:waterfall_flow/waterfall_flow.dart';
+import 'package:masonry_grid/masonry_grid.dart';
 
 class MyWork extends StatefulWidget {
   @override
@@ -211,71 +211,80 @@ class _MyWorkState extends State<MyWork> {
                 child: CustomScrollView(
                   controller: scrollController,
                   slivers: [
-                    SliverStaggeredGrid.countBuilder(
-                      crossAxisCount: phonesThatFit.ceil(),
-                      staggeredTileBuilder: (int index) =>
-                          new StaggeredTile.count(1, 2),
-                      itemBuilder: (context, index) {
-                        if (index != allContent.length) {
-                          return Card(
-                            margin: EdgeInsets.all(cardSpacing),
-                            child: FittedBox(
-                              fit: BoxFit.contain,
-                              child: FutureBuilder(
-                                future: getGiphy(
-                                  allContent[index].url,
+                    SliverToBoxAdapter(
+                      child: MasonryGrid(
+                        column: phonesThatFit.ceil() + 1,
+                        children: List.generate(
+                          allContent.length + 1,
+                          (index) {
+                            if (index != allContent.length) {
+                              return Card(
+                                margin: EdgeInsets.all(cardSpacing),
+                                child: FittedBox(
+                                  fit: BoxFit.contain,
+                                  child: FutureBuilder(
+                                    future: getGiphy(
+                                      allContent[index].url,
+                                    ),
+                                    builder: (BuildContext context,
+                                        AsyncSnapshot<GiphyGif> snapShot) {
+                                      if (snapShot.connectionState ==
+                                          ConnectionState.done) {
+                                        print(snapShot.data.images.preview.mp4);
+                                        return GiphyImage.downScaled(
+                                          gif: snapShot.data,
+                                          aspectRatio: allContent[index]
+                                              .defaultAspectRatio,
+                                        );
+                                      } else {
+                                        return Shimmer(
+                                          duration: Duration(
+                                              seconds: 2), //Default value
+                                          color: Colors.white, //Default value
+                                          enabled: true, //Default value
+                                          direction:
+                                              ShimmerDirection.fromLTRB(),
+                                          child: Container(
+                                            height: 3,
+                                            width: 3 *
+                                                allContent[index]
+                                                    .defaultAspectRatio,
+                                          ),
+                                        );
+                                      }
+                                    },
+                                  ),
                                 ),
-                                builder: (BuildContext context,
-                                    AsyncSnapshot<GiphyGif> snapShot) {
-                                  if (snapShot.connectionState ==
-                                      ConnectionState.done) {
-                                    print(snapShot.data.images.preview.mp4);
-                                    return GiphyImage.downScaled(
-                                      gif: snapShot.data,
-                                      aspectRatio:
-                                          allContent[index].defaultAspectRatio,
-                                    );
-                                  } else {
-                                    return Shimmer(
-                                      duration:
-                                          Duration(seconds: 2), //Default value
-                                      color: Colors.white, //Default value
-                                      enabled: true, //Default value
-                                      direction: ShimmerDirection.fromLTRB(),
-                                      child: Container(
-                                        height: 3,
-                                        width: 3 *
-                                            allContent[index]
-                                                .defaultAspectRatio,
-                                      ),
-                                    );
-                                  }
-                                },
-                              ),
-                            ),
-                          );
-                        } else {
-                          return Padding(
-                            padding: EdgeInsets.only(
-                              bottom: 48,
-                            ),
-                            child: Card(
-                              margin: EdgeInsets.all(cardSpacing / 2),
-                              color: Colors.white,
-                              child: FittedBox(
-                                fit: BoxFit.contain,
-                                child: QRWidget(
-                                  isDialog: false,
+                              );
+                            } else {
+                              return Padding(
+                                padding: EdgeInsets.only(
+                                  bottom: 48,
                                 ),
-                              ),
-                            ),
-                          );
-                        }
-                      },
-                      itemCount: allContent.length + 1,
-                      mainAxisSpacing: 0,
-                      crossAxisSpacing: 0,
+                                child: Card(
+                                  margin: EdgeInsets.all(cardSpacing),
+                                  color: Colors.white,
+                                  child: FittedBox(
+                                    fit: BoxFit.contain,
+                                    child: QRWidget(
+                                      isDialog: false,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }
+                          },
+                        ),
+                        staggered: true,
+                        mainAxisSpacing: 0,
+                        crossAxisSpacing: 0,
+                      ),
                     ),
+                    SliverToBoxAdapter(
+                      child: Center(
+                        child: RightsFooter(),
+                      ),
+                    )
                   ],
                 )
 

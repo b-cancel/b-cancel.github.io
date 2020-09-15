@@ -19,7 +19,7 @@ const RESOURCES = {
 "assets/google_fonts/RobotoMono-Regular.ttf": "b4618f1f7f4cee0ac09873fcc5a966f9",
 "assets/google_fonts/RobotoMono-Thin.ttf": "288302ea531af8be59f6ac2b5bbbfdd3",
 "assets/google_fonts/RobotoMono-ThinItalic.ttf": "355d559cc860016a068bcd16b66e4bd3",
-"assets/NOTICES": "24b02dc86177fa279635bf0cf5efa508",
+"assets/NOTICES": "04a907bbc4a20c60d1287800770fa42d",
 "assets/packages/font_awesome_flutter/lib/fonts/fa-brands-400.ttf": "5a37ae808cf9f652198acde612b5328d",
 "assets/packages/font_awesome_flutter/lib/fonts/fa-regular-400.ttf": "2bca5ec802e40d3f4b60343e346cedde",
 "assets/packages/font_awesome_flutter/lib/fonts/fa-solid-900.ttf": "2aa350bd2aeab88b601a593f793734c0",
@@ -45,9 +45,9 @@ const RESOURCES = {
 "faviconit/favicon-96.png": "bfec43944dbeb6f416e57b4144ff98d8",
 "faviconit/favicon.ico": "d9578e79850907c2d75fb6d2727626e9",
 "faviconit/faviconit-instructions.txt": "53f9f214c478b425a7fb737b9f02eb1e",
-"index.html": "5ca0a55cb8bfc4a939ca869d523dd837",
-"/": "5ca0a55cb8bfc4a939ca869d523dd837",
-"main.dart.js": "1bcc624e117cd78718b17d7de0612cd1",
+"index.html": "3917559663430efe96da28e7c814c9d7",
+"/": "3917559663430efe96da28e7c814c9d7",
+"main.dart.js": "58d55d338abe494181f7b2868b9e72b0",
 "manifest.json": "d27d045a0c173386d93a4368bcf11389",
 "miniLoader.gif": "0098d8c7100448172595966afe90273d"
 };

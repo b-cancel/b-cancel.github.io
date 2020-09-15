@@ -53,8 +53,7 @@ class Name extends StatelessWidget {
       ),
       child: Text(
         "Bryan_Cancel",
-        style: TextStyle(
-        ),
+        style: TextStyle(),
       ),
     );
   }
@@ -86,6 +85,7 @@ class RightsFooter extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(
         top: 16.0,
+        bottom: 56,
       ),
       child: Center(
         child: DefaultTextStyle(
