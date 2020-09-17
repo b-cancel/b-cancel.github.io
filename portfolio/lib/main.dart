@@ -14,7 +14,8 @@ GiphyClient client;
 void main() {
   //giphy setup
   client = new GiphyClient(
-    apiKey: 'YMQVelhTCeQcE0ShiI1j9bz4q5fWzxKQ',
+    //apiKey: 'YMQVelhTCeQcE0ShiI1j9bz4q5fWzxKQ',
+    apiKey: 'f6y8PDyNvi7WblWG76jS3V1Z9h2viokr',
   );
 
   //start app

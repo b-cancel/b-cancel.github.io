@@ -229,12 +229,40 @@ class _MyWorkState extends State<MyWork> {
                                   AsyncSnapshot<GiphyGif> snapShot) {
                                 if (snapShot.connectionState ==
                                     ConnectionState.done) {
-                                  print(snapShot.data.images.preview.mp4);
-                                  return GiphyImage.downScaled(
-                                    gif: snapShot.data,
-                                    aspectRatio:
-                                        allContent[index].defaultAspectRatio,
-                                  );
+                                  if (snapShot?.data?.images?.preview?.mp4 ==
+                                      null) {
+                                    print("\nurl " +
+                                        allContent[index].url.toString() +
+                                        " in index: " +
+                                        index.toString());
+                                    print("no data\n");
+                                    return Container(
+                                      color: Colors.red,
+                                      height: 3,
+                                      width: 3 *
+                                          allContent[index].defaultAspectRatio,
+                                    );
+                                  } else {
+                                    /*
+                                    print("data: " +
+                                        snapShot?.data?.images?.preview?.mp4
+                                            .toString());
+                                            */
+
+                                    return Shimmer(
+                                      duration:
+                                          Duration(seconds: 2), //Default value
+                                      color: Colors.white, //Default value
+                                      enabled: true, //Default value
+                                      direction: ShimmerDirection.fromLTRB(),
+                                      child: Container(
+                                        height: 3,
+                                        width: 3 *
+                                            allContent[index]
+                                                .defaultAspectRatio,
+                                      ),
+                                    );
+                                  }
                                 } else {
                                   return Shimmer(
                                     duration:
