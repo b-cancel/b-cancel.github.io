@@ -8,6 +8,7 @@ import 'package:portfolio/headerFooter.dart';
 import 'package:portfolio/home.dart';
 import 'package:portfolio/main.dart';
 import 'package:portfolio/utils/giphyImage.dart';
+import 'package:portfolio/workContent.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:swipedetector/swipedetector.dart';
 import 'package:universal_html/prefer_universal/html.dart' as uniHTML;
@@ -17,6 +18,16 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:waterfall_flow/waterfall_flow.dart';
+
+class SomeContent {
+  String url;
+  double defaultAspectRatio;
+
+  SomeContent({
+    @required this.url,
+    @required this.defaultAspectRatio,
+  });
+}
 
 class MyWork extends StatefulWidget {
   @override
@@ -100,6 +111,7 @@ class _MyWorkState extends State<MyWork> {
     }
   }
 
+  /*
   List<SomeContent> getContentFromProjectType({ProjectType projectType}) {
     //grab all data
     List<Project> projects = projectTypeToProjects[projectType];
@@ -135,6 +147,23 @@ class _MyWorkState extends State<MyWork> {
 
     return content;
   }
+  */
+
+  List<Widget> getAllProjectsOfType(
+      double cardSpacing, ProjectType projectType) {
+    List<Widget> projectWidgets = new List<Widget>();
+    List<Project> projectObjects = projectTypeToProjects[projectType];
+    for (int i = 0; i < projectObjects.length; i++) {
+      Project project = projectObjects[i];
+      projectWidgets.add(
+        WorkHeader(
+          cardSpacing: cardSpacing,
+          project: project,
+        ),
+      );
+    }
+    return projectWidgets;
+  }
 
   Map<String, GiphyGif> storedGifs = Map<String, GiphyGif>();
 
@@ -150,7 +179,8 @@ class _MyWorkState extends State<MyWork> {
   @override
   Widget build(BuildContext context) {
     //vars used to determine grid scaling
-    double requiredPhonesOnScreen = 2;
+    double requiredPhonesOnScreen =
+        1.5; //NOT 2 to avoid alot of gifs showing in phone portrait modes
     double screenHeight = MediaQuery.of(context).size.height;
     double deviceHeight = screenHeight / requiredPhonesOnScreen;
 
@@ -170,25 +200,22 @@ class _MyWorkState extends State<MyWork> {
     //TODO: use better version of this
     double cardSpacing = 8;
 
-    //grab all the needed data
-    List<SomeContent> allContent = getContentFromProjectType(
-      projectType: ProjectType.AppDev,
-    );
-    /*
-    allContent.addAll(getContentFromProjectType(
-      projectType: ProjectType.GameDev,
-    ));
-    allContent.addAll(
-      getContentFromProjectType(
-        projectType: ProjectType.WebDev,
+    //prep the widget list, where each item will be wrapped in sliverToBoxAdapters
+    List<Widget> listItems = new List<Widget>();
+
+    //grab all the data
+    listItems.addAll(
+      getAllProjectsOfType(
+        cardSpacing,
+        ProjectType.Apps,
       ),
     );
-    allContent.addAll(
-      getContentFromProjectType(
-        projectType: ProjectType.Graphics,
-      ),
+    //TODO: do the same thing for games, websites, and graphics
+
+    //add the rights footer
+    listItems.add(
+      RightsFooter(),
     );
-    */
 
     //build
     return SwipeDetector(
@@ -210,106 +237,11 @@ class _MyWorkState extends State<MyWork> {
           onLoading: _onLoading,
           child: CustomScrollView(
             controller: scrollController,
-            slivers: [
-              SliverToBoxAdapter(
-                child: MasonryGrid(
-                  children: List.generate(
-                    allContent.length + 1,
-                    (index) {
-                      if (index != allContent.length) {
-                        return Card(
-                          margin: EdgeInsets.all(cardSpacing),
-                          child: FittedBox(
-                            fit: BoxFit.contain,
-                            child: FutureBuilder(
-                              future: getGiphy(
-                                allContent[index].url,
-                              ),
-                              builder: (BuildContext context,
-                                  AsyncSnapshot<GiphyGif> snapShot) {
-                                if (snapShot.connectionState ==
-                                    ConnectionState.done) {
-                                  if (snapShot?.data?.images?.preview?.mp4 ==
-                                      null) {
-                                    print("\nurl " +
-                                        allContent[index].url.toString() +
-                                        " in index: " +
-                                        index.toString());
-                                    print("no data\n");
-                                    return Container(
-                                      color: Colors.red,
-                                      height: 3,
-                                      width: 3 *
-                                          allContent[index].defaultAspectRatio,
-                                    );
-                                  } else {
-                                    /*
-                                    print("data: " +
-                                        snapShot?.data?.images?.preview?.mp4
-                                            .toString());
-                                            */
-
-                                    return Shimmer(
-                                      duration:
-                                          Duration(seconds: 2), //Default value
-                                      color: Colors.white, //Default value
-                                      enabled: true, //Default value
-                                      direction: ShimmerDirection.fromLTRB(),
-                                      child: Container(
-                                        height: 3,
-                                        width: 3 *
-                                            allContent[index]
-                                                .defaultAspectRatio,
-                                      ),
-                                    );
-                                  }
-                                } else {
-                                  return Shimmer(
-                                    duration:
-                                        Duration(seconds: 2), //Default value
-                                    color: Colors.white, //Default value
-                                    enabled: true, //Default value
-                                    direction: ShimmerDirection.fromLTRB(),
-                                    child: Container(
-                                      height: 3,
-                                      width: 3 *
-                                          allContent[index].defaultAspectRatio,
-                                    ),
-                                  );
-                                }
-                              },
-                            ),
-                          ),
-                        );
-                      } else {
-                        return Padding(
-                          padding: EdgeInsets.only(
-                            bottom: 48,
-                          ),
-                          child: Card(
-                            margin: EdgeInsets.all(cardSpacing),
-                            color: Colors.white,
-                            child: FittedBox(
-                              fit: BoxFit.contain,
-                              child: QRWidget(
-                                isDialog: false,
-                              ),
-                            ),
-                          ),
-                        );
-                      }
-                    },
-                  ),
-                  column: phonesThatFit.ceil(), //TODO: +1 only para feitos
-                  //spacing is handled by the cards each item is in
-                  crossAxisSpacing: 0,
-                  mainAxisSpacing: 0,
-                ),
-              ),
-              SliverToBoxAdapter(
-                child: RightsFooter(),
-              ),
-            ],
+            slivers: listItems
+                .map((e) => SliverToBoxAdapter(
+                      child: e,
+                    ))
+                .toList(),
           ),
         ),
         //only handle shifting on isMenuOpened Toggle

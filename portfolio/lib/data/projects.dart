@@ -1,28 +1,91 @@
 import 'package:flutter/material.dart';
 
-class SomeContent {
-  String url;
-  double defaultAspectRatio;
+//handles 99% of cases
+enum StdAspectRatio { Mobile, Monitor, Square }
+Map<StdAspectRatio, double> stdAspectRatioToAspectRatio = {
+  StdAspectRatio.Mobile: (9 / 16),
+  StdAspectRatio.Monitor: (16 / 9),
+  StdAspectRatio.Square: 1,
+};
 
-  SomeContent({
-    @required this.url,
-    @required this.defaultAspectRatio,
+//classes used below
+enum ProjectStatus {
+  Released,
+  Prototype,
+  Toolkit,
+  Assignment,
+  Competition,
+}
+
+class Project {
+  String name; //should also be usable as ID
+  ProjectStatus status;
+  String description;
+  bool initiallyOpened;
+  String github;
+  String googlePlay;
+  String appleStore;
+  String web;
+  List<Content> content = new List<Content>();
+
+  Project({
+    @required this.name,
+    @required this.description,
+    @required this.status,
+    //I assume I want employeers to see my work
+    //unless I don't
+    this.initiallyOpened: true,
+    this.github,
+    this.googlePlay,
+    this.appleStore,
+    this.web,
+    this.content,
   });
 }
 
-//content is a string, how its digested is determined later
+//TODO: make, .pngs, .jpgs, and .mp4s work
+class Content {
+  String url; //required
+  double aspectRatioOverride; //can be null
+  String description; //can be null
 
-enum ProjectType { AppDev, GameDev, WebDev, Graphics }
+  Content(
+    String url, {
+    double aspectRatioOverride,
+    StdAspectRatio stdAspectRatioOverride,
+    String description,
+  }) {
+    this.url = url;
+    this.aspectRatioOverride = aspectRatioOverride ??
+        stdAspectRatioToAspectRatio[stdAspectRatioOverride];
+    this.description = description;
+  }
+}
+
+//we keep track of type to aspect ratio seperately since all of one type of project share the same aspect ratio
+enum ProjectType { Apps, Games, Websites, Graphics }
+
+//maps for easy access
 Map<ProjectType, StdAspectRatio> projectTypeToDefaultAspectRatio = {
-  ProjectType.AppDev: StdAspectRatio.Mobile,
-  ProjectType.GameDev: StdAspectRatio.Monitor,
-  ProjectType.WebDev: StdAspectRatio.Monitor,
+  ProjectType.Apps: StdAspectRatio.Mobile,
+  ProjectType.Games: StdAspectRatio.Monitor,
+  ProjectType.Websites: StdAspectRatio.Monitor,
   ProjectType.Graphics: StdAspectRatio.Square,
 };
+
+//could use function instead
+Map<ProjectType, String> projectTypeToName = {
+  ProjectType.Apps: "Apps",
+  ProjectType.Games: "Games",
+  ProjectType.Websites: "Websites",
+  ProjectType.Graphics: "Graphics"
+};
+
+//project data
 Map<ProjectType, List<Project>> projectTypeToProjects = {
-  ProjectType.AppDev: [
+  ProjectType.Apps: [
     Project(
-      name: "SWOL",
+      name: "Swol",
       status: ProjectStatus.Released,
       description:
           "Swol helps you use One Rep Max Equations to reach your Weightlifting Goals Faster." +
@@ -32,24 +95,24 @@ Map<ProjectType, List<Project>> projectTypeToProjects = {
       googlePlay: "the.swol.app",
       content: [
         //basic cycle
-        "kyoxrhAK1FqJbWe2UK",
+        Content("kyoxrhAK1FqJbWe2UK"),
         //add exercise
-        "QZ7sMYoyS9dtsjaYAn",
+        Content("QZ7sMYoyS9dtsjaYAn"),
         //onboarding
-        "j1gKlO4uAZM10dYXya",
+        Content("j1gKlO4uAZM10dYXya"),
         //search
-        "kfjRaDaE7xzVNJdGfr",
+        Content("kfjRaDaE7xzVNJdGfr"),
 
         //-----
 
         //calibration
-        "dC4FWH4NDOq76CUz68",
+        Content("dC4FWH4NDOq76CUz68"),
         //error checking
-        "YSqWsc9dSjkLTLUCWU",
+        Content("YSqWsc9dSjkLTLUCWU"),
         //notes
-        "Rgz7qmqwOImQxM8ygX",
+        Content("Rgz7qmqwOImQxM8ygX"),
         //learn section
-        "RLOvYGkKt6jvsIyovu",
+        Content("RLOvYGkKt6jvsIyovu"),
       ],
     ),
     Project(
@@ -61,9 +124,9 @@ Map<ProjectType, List<Project>> projectTypeToProjects = {
       github: "halfLife",
       content: [
         //change name scrub
-        "PiQF5YD82meF4uitmz",
+        Content("PiQF5YD82meF4uitmz"),
         //add dose
-        "Rk2zzd9k9l6MBBLTBY",
+        Content("Rk2zzd9k9l6MBBLTBY"),
       ],
     ),
     Project(
@@ -72,15 +135,16 @@ Map<ProjectType, List<Project>> projectTypeToProjects = {
       description:
           "Allow to Lawn Care Companies to create a Job Order or Proposal to send to their client." +
               "\nClient Name is on Top and tha map lets you pick between all of their addresses.",
+      github: "JobProposalPrototype",
       content: [
         //Address Picker
-        "dyvj1gBn4HYBfVDrpr",
+        Content("dyvj1gBn4HYBfVDrpr"),
         //Due Date Picker
-        "VJYrbNGSMxUZ38RuU9",
+        Content("VJYrbNGSMxUZ38RuU9"),
         //Line Item Manipulation
-        "UvK4kZ48BSmlVhiFQp",
+        Content("UvK4kZ48BSmlVhiFQp"),
         //Image Manipulation
-        "fsaqYZsD0P0x600rE1",
+        Content("fsaqYZsD0P0x600rE1"),
       ],
     ),
     Project(
@@ -91,14 +155,14 @@ Map<ProjectType, List<Project>> projectTypeToProjects = {
       github: "Leashed_Public",
       content: [
         //find ble
-        "S8lbi2cusC5gVC0xOS",
+        Content("S8lbi2cusC5gVC0xOS"),
         //main list
-        "RKMMj20eRHONfImd0L",
+        Content("RKMMj20eRHONfImd0L"),
         //---
         //sos settings
-        "S6Zdj4EiS99DlVZuDS",
+        Content("S6Zdj4EiS99DlVZuDS"),
         //add new
-        "d5qOvltp866jRzktDZ",
+        Content("d5qOvltp866jRzktDZ"),
       ],
     ),
     Project(
@@ -110,12 +174,12 @@ Map<ProjectType, List<Project>> projectTypeToProjects = {
       github: "Flutter_ContactPicker",
       content: [
         //videos
-        "Uqk7fPBnsNydSn2GZW",
-        "LM9EpmeAiYlIpSAcgH",
+        Content("Uqk7fPBnsNydSn2GZW"),
+        Content("LM9EpmeAiYlIpSAcgH"),
         //---
-        "W0QwfdozN3AFnw1sWn",
-        "Xbh1CLWME0plFA8g2G",
-        "UT4byKMOmrYWk8dTmb",
+        Content("W0QwfdozN3AFnw1sWn"),
+        Content("Xbh1CLWME0plFA8g2G"),
+        Content("UT4byKMOmrYWk8dTmb"),
         //jpgs
         /*
         "https://imgur.com/YWYmyOt.jpg",
@@ -133,8 +197,8 @@ Map<ProjectType, List<Project>> projectTypeToProjects = {
           "A re-usable timer and stopwatch with all the functionality you would expect.",
       github: "Flutter_Timer_And_Stopwatch",
       content: [
-        "DQdmcrEwAFqneM6tiL",
-        "5qFCRiENukaLzB7Yoy",
+        Content("DQdmcrEwAFqneM6tiL"),
+        Content("5qFCRiENukaLzB7Yoy"),
       ],
     ),
     Project(
@@ -144,10 +208,10 @@ Map<ProjectType, List<Project>> projectTypeToProjects = {
           " with the full control, gestures, handles and more.",
       github: "Flutter_MaterialSheetAndNavigationDrawer",
       content: [
-        "35KhYdJ9CQAN6hzYbQ",
-        "dkXLQACALhF6puhk3I",
-        "dYng1K8blxvnsLhP81",
-        "9rsWxrJaYOhCQbRDXD",
+        Content("35KhYdJ9CQAN6hzYbQ"),
+        Content("dkXLQACALhF6puhk3I"),
+        Content("dYng1K8blxvnsLhP81"),
+        Content("9rsWxrJaYOhCQbRDXD"),
       ],
     ),
     Project(
@@ -156,11 +220,11 @@ Map<ProjectType, List<Project>> projectTypeToProjects = {
       description: "A clone of instagram with flutter",
       github: "Flutter_Instagram",
       content: [
-        "UsT0dPQlVrVrJ4BC1z",
-        "KezTdVWA3JIOS3fwX5",
-        "S8BPNPf8i1CCYgv3LQ",
-        "LSc6Y83JW98nX47nYe",
-        "jUKJlmNzhbLRhetFtW",
+        Content("UsT0dPQlVrVrJ4BC1z"),
+        Content("KezTdVWA3JIOS3fwX5"),
+        Content("S8BPNPf8i1CCYgv3LQ"),
+        Content("LSc6Y83JW98nX47nYe"),
+        Content("jUKJlmNzhbLRhetFtW"),
       ],
     ),
     Project(
@@ -169,7 +233,7 @@ Map<ProjectType, List<Project>> projectTypeToProjects = {
       description: "A Tip Calculator with a very detailed text input formatter",
       github: "Flutter_CurrencyTextInputFormatter",
       content: [
-        "kBNoowA21gf9gsg69j",
+        Content("kBNoowA21gf9gsg69j"),
       ],
     ),
     Project(
@@ -178,7 +242,7 @@ Map<ProjectType, List<Project>> projectTypeToProjects = {
       description: "Keep track of the time and points during a Jiu Jitsu match",
       github: "Flutter_Cute_Score_Keeper",
       content: [
-        "j6prIja63xwUJmMLM5",
+        Content("j6prIja63xwUJmMLM5"),
       ],
     ),
     Project(
@@ -187,11 +251,12 @@ Map<ProjectType, List<Project>> projectTypeToProjects = {
       description: "Make the perfect coffee every time",
       github: "Flutter_AeroPress_Timer_Partial_Clone",
       content: [
-        "H1RmERiJD4D3pL8wKG",
+        Content("H1RmERiJD4D3pL8wKG"),
       ],
     ),
   ],
-  ProjectType.GameDev: [
+  /*
+  ProjectType.Games: [
     Project(
       name: "Squishables",
       status: ProjectStatus.Prototype,
@@ -281,7 +346,7 @@ Map<ProjectType, List<Project>> projectTypeToProjects = {
       github: "https://github.com/b-cancel/Unity3D_2DOutlineKit",
     ),
   ],
-  ProjectType.WebDev: [
+  ProjectType.Websites: [
     Project(
       name: "Portfolio Website",
       status: ProjectStatus.Released,
@@ -429,64 +494,5 @@ Map<ProjectType, List<Project>> projectTypeToProjects = {
         "https://imgur.com/iUsVQSS.jpg", //naruto
       ],
     ),
-  ],
+  ],*/
 };
-
-enum ProjectStatus {
-  Released,
-  Prototype,
-  Toolkit,
-  Assignment,
-  Competition,
-}
-
-class Project {
-  String name; //should also be usable as ID
-  ProjectStatus status;
-  String description;
-  bool initiallyOpened;
-  String github;
-  String googlePlay;
-  String appleStore;
-  String web;
-  List<String> content = new List<String>();
-
-  Project({
-    @required this.name,
-    @required this.description,
-    @required this.status,
-    //I assume I want employeers to see my work
-    //unless I don't
-    this.initiallyOpened: true,
-    this.github,
-    this.googlePlay,
-    this.appleStore,
-    this.web,
-    this.content,
-  });
-}
-
-enum StdAspectRatio { Mobile, Monitor, Square }
-Map<StdAspectRatio, double> stdAspectRatioToAspectRatio = {
-  StdAspectRatio.Mobile: (9 / 16),
-  StdAspectRatio.Monitor: (16 / 9),
-  StdAspectRatio.Square: 1,
-};
-
-class Content {
-  String url;
-  double aspectRatioOverride;
-  String description;
-
-  Content(
-    String url, {
-    double aspectRatio,
-    StdAspectRatio stdAspectRatio,
-    String description,
-  }) {
-    this.url = url;
-    this.aspectRatioOverride =
-        aspectRatio ?? stdAspectRatioToAspectRatio[stdAspectRatio];
-    this.description = description;
-  }
-}
