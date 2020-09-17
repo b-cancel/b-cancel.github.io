@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:giphy_client/giphy_client.dart';
 import 'package:masonry_grid/masonry_grid.dart';
 import 'package:portfolio/data/basic.dart';
 import 'package:portfolio/data/projects.dart';
 import 'package:portfolio/icons/portfolio_icons_icons.dart';
 import 'package:portfolio/main.dart';
+import 'package:portfolio/utils/giphyImage.dart';
 import 'package:portfolio/workLinks.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 
@@ -138,6 +140,16 @@ class WorkBody extends StatefulWidget {
 
 class _WorkBodyState extends State<WorkBody> {
   final ValueNotifier<bool> gifTapped = new ValueNotifier<bool>(false);
+  Map<String, GiphyGif> storedGifs = Map<String, GiphyGif>();
+
+  Future<GiphyGif> getGiphy(String url) async {
+    if (storedGifs.containsKey(url) == false) {
+      storedGifs[url] = await client.byId(
+        url,
+      );
+    }
+    return storedGifs[url];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -154,6 +166,9 @@ class _WorkBodyState extends State<WorkBody> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               ContentCard(
+                content: content,
+                gifTapped: gifTapped,
+                getGiphy: getGiphy,
                 cardSpacing: widget.cardSpacing,
                 aspectRatio: content.aspectRatioOverride ??
                     stdAspectRatioToAspectRatio[widget.defaultAspectRatio],
@@ -182,10 +197,16 @@ class _WorkBodyState extends State<WorkBody> {
 
 class ContentCard extends StatelessWidget {
   ContentCard({
+    @required this.content,
+    @required this.gifTapped,
+    @required this.getGiphy,
     @required this.cardSpacing,
     @required this.aspectRatio,
   });
 
+  final Content content;
+  final ValueNotifier<bool> gifTapped;
+  final Function getGiphy;
   final double cardSpacing;
   final double aspectRatio;
 
@@ -195,77 +216,58 @@ class ContentCard extends StatelessWidget {
       margin: EdgeInsets.all(cardSpacing),
       child: FittedBox(
         fit: BoxFit.contain,
-        child: Shimmer(
-          duration: Duration(seconds: 2), //Default value
-          color: Colors.white, //Default value
-          enabled: true, //Default value
-          direction: ShimmerDirection.fromLTRB(),
-          child: Container(
-            height: 3,
-            width: 3 * aspectRatio,
-            color: Colors.grey,
+        child: FutureBuilder(
+          future: getGiphy(
+            content.url,
           ),
+          builder: (BuildContext context, AsyncSnapshot<GiphyGif> snapShot) {
+            if (snapShot.connectionState == ConnectionState.done) {
+              if (snapShot.hasData == false) {
+                return ShimmeringContent(
+                  aspectRatio: aspectRatio,
+                  isLoading: false,
+                );
+              } else {
+                return GiphyController(
+                  gif: snapShot.data,
+                  aspectRatio: aspectRatio,
+                  gifTapped: gifTapped,
+                );
+              }
+            } else {
+              return ShimmeringContent(
+                aspectRatio: aspectRatio,
+              );
+            }
+          },
         ),
       ),
     );
   }
 }
 
-/*
-Card(
-                          margin: EdgeInsets.all(cardSpacing),
-                          child: FittedBox(
-                            fit: BoxFit.contain,
-                            child: FutureBuilder(
-                              future: getGiphy(
-                                allContent[index].url,
-                              ),
-                              builder: (BuildContext context,
-                                  AsyncSnapshot<GiphyGif> snapShot) {
-                                if (snapShot.connectionState ==
-                                    ConnectionState.done) {
-                                  if (snapShot?.data?.images?.preview?.mp4 ==
-                                      null) {
-                                    print("\nurl " +
-                                        allContent[index].url.toString() +
-                                        " in index: " +
-                                        index.toString());
-                                    print("no data\n");
-                                    return Container(
-                                      color: Colors.red,
-                                      height: 3,
-                                      width: 3 *
-                                          allContent[index].defaultAspectRatio,
-                                    );
-                                  } else {
-                                    /*
-                                    print("data: " +
-                                        snapShot?.data?.images?.preview?.mp4
-                                            .toString());
-                                            */
-                                    return Shimmer(
-                                      duration:
-                                          Duration(seconds: 2), //Default value
-                                      color: Colors.white, //Default value
-                                      enabled: true, //Default value
-                                      direction: ShimmerDirection.fromLTRB(),
-                                      child: Container(
-                                        height: 3,
-                                        width: 3 *
-                                            allContent[index]
-                                                .defaultAspectRatio,
-                                      ),
-                                    );
-                                  }
-                                } else {
-                                  return GiphyImage.downScaled(
-                                    gif: snapShot.data,
-                                    aspectRatio:
-                                        allContent[index].defaultAspectRatio,
-                                  );
-                                }
-                              },
-                            ),
-                          ),
-                        );
-*/
+class ShimmeringContent extends StatelessWidget {
+  const ShimmeringContent({
+    Key key,
+    @required this.aspectRatio,
+    this.isLoading: true,
+  }) : super(key: key);
+
+  final double aspectRatio;
+  final bool isLoading;
+
+  @override
+  Widget build(BuildContext context) {
+    return Shimmer(
+      duration: Duration(seconds: 2), //Default value
+      color: Colors.white, //Default value
+      enabled: true, //Default value
+      direction: ShimmerDirection.fromLTRB(),
+      child: Container(
+        height: 3,
+        width: 3 * aspectRatio,
+        color: isLoading ? Colors.transparent : Colors.red,
+      ),
+    );
+  }
+}

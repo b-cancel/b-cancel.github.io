@@ -179,17 +179,6 @@ class _MyWorkState extends State<MyWork> {
     return projectWidgets;
   }
 
-  Map<String, GiphyGif> storedGifs = Map<String, GiphyGif>();
-
-  Future<GiphyGif> getGiphy(String url) async {
-    if (storedGifs.containsKey(url) == false) {
-      storedGifs[url] = await client.byId(
-        url,
-      );
-    }
-    return storedGifs[url];
-  }
-
   @override
   Widget build(BuildContext context) {
     //vars used to determine grid scaling

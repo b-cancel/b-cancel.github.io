@@ -58,7 +58,7 @@ dependencies:
 
   #GIFS EVERYWHERE
   giphy_client: ^0.2.0
-  giphy_picker: ^1.0.6
+  #giphy_picker: ^1.0.6 #I created my own version of this
   
   #Universal (to avoid warning on flutter web)
   universal_platform: ^0.1.3

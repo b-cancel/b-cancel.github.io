@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:giphy_client/giphy_client.dart';
 import 'package:portfolio/utils/giphyVideo.dart';
-import 'package:shimmer_animation/shimmer_animation.dart';
-
-import 'package:video_player/video_player.dart';
+import 'package:portfolio/workContent.dart';
 
 //be able to pass ID... and let everything else be handled as expected
 //if its a giphy image we want to save the data so its accessible from anywhere
@@ -19,91 +17,21 @@ import 'package:video_player/video_player.dart';
 //4th if we tap on the gif we want to -> show the high quality version (perhaps even mp4)
 
 /// Loads and renders a Giphy image.
-class GiphyImage extends StatefulWidget {
-  final String url;
-  final Widget placeholder;
-  final double width;
-  final double height;
-  final BoxFit fit;
-  final bool isVideo;
+class GiphyController extends StatefulWidget {
+  final GiphyGif gif;
   final double aspectRatio;
+  final ValueNotifier<bool> gifTapped;
 
   /// Loads an image from given url.
-  const GiphyImage({
+  const GiphyController({
     Key key,
-    @required this.url,
-    @required this.isVideo,
+    @required this.gif,
     @required this.aspectRatio,
-    this.placeholder,
-    this.width,
-    this.height,
-    this.fit,
+    @required this.gifTapped,
   }) : super(key: key);
 
-  GiphyImage.preview({
-    Key key,
-    @required GiphyGif gif,
-    @required this.aspectRatio,
-    this.placeholder,
-    this.width,
-    this.height,
-    this.fit,
-  })  : isVideo = false,
-        url = gif.images.previewGif.url,
-        super(key: key ?? Key(gif.id));
-
-  GiphyImage.downScaled({
-    Key key,
-    @required GiphyGif gif,
-    @required this.aspectRatio,
-    this.placeholder,
-    this.width,
-    this.height,
-    this.fit,
-  })  : isVideo = false,
-        url = gif.images.downsized.url,
-        super(key: key ?? Key(gif.id));
-
-  /// Loads the original image for given Giphy gif.
-  GiphyImage.original({
-    Key key,
-    @required GiphyGif gif,
-    @required this.aspectRatio,
-    this.placeholder,
-    this.width,
-    this.height,
-    this.fit,
-  })  : isVideo = false,
-        url = gif.images.original.url,
-        super(key: key ?? Key(gif.id));
-
-  /// Loads the original still image for given Giphy gif.
-  GiphyImage.originalStill({
-    Key key,
-    @required GiphyGif gif,
-    @required this.aspectRatio,
-    this.placeholder,
-    this.width,
-    this.height,
-    this.fit,
-  })  : isVideo = false,
-        url = gif.images.originalStill.url,
-        super(key: key ?? Key(gif.id));
-
-  GiphyImage.video({
-    Key key,
-    @required GiphyGif gif,
-    @required this.aspectRatio,
-    this.placeholder,
-    this.width,
-    this.height,
-    this.fit,
-  })  : isVideo = true,
-        url = gif.images.downsizedSmall.mp4,
-        super(key: key ?? Key(gif.id));
-
   @override
-  _GiphyImageState createState() => _GiphyImageState();
+  _GiphyControllerState createState() => _GiphyControllerState();
 
   /// Loads the images bytes for given url from Giphy.
   static Future<Uint8List> load(String url, {Client client}) async {
@@ -119,54 +47,37 @@ class GiphyImage extends StatefulWidget {
   }
 }
 
-class _GiphyImageState extends State<GiphyImage> {
-  Future<Uint8List> _loadImage;
-
-  @override
-  void initState() {
-    _loadImage = GiphyImage.load(widget.url);
-    super.initState();
-  }
-
+class _GiphyControllerState extends State<GiphyController> {
   @override
   Widget build(BuildContext context) {
-    if (widget.isVideo == false) {
-      return FutureBuilder(
-        future: _loadImage,
-        builder: (
-          BuildContext context,
-          AsyncSnapshot<Uint8List> snapshot,
-        ) {
-          if (snapshot.hasData) {
-            return Stack(
-              children: <Widget>[
-                Image.memory(
-                  snapshot.data,
-                  width: widget.width,
-                  height: widget.height,
-                  fit: widget.fit,
-                ),
-              ],
+    return FutureBuilder(
+      future: GiphyController.load(
+        widget.gif.images.downsizedStill.url,
+      ),
+      builder: (BuildContext context, AsyncSnapshot<Uint8List> snapShot) {
+        if (snapShot.connectionState == ConnectionState.done) {
+          if (snapShot.hasData == false) {
+            return ShimmeringContent(
+              aspectRatio: widget.aspectRatio,
+              isLoading: false,
             );
           } else {
-            return widget.placeholder ??
-                Shimmer(
-                  duration: Duration(seconds: 2), //Default value
-                  color: Colors.white, //Default value
-                  enabled: true, //Default value
-                  direction: ShimmerDirection.fromLTRB(),
-                  child: Container(
-                    height: 3,
-                    width: 3 * widget.aspectRatio,
-                  ),
-                );
+            return ShimmeringContent(
+              aspectRatio: widget.aspectRatio,
+              isLoading: false,
+            );
+            /*
+            return VideoPlayerWidget(
+              url: widget.gif.images.downsizedSmall.mp4,
+            );
+            */
           }
-        },
-      );
-    } else {
-      return VideoPlayerWidget(
-        url: widget.url,
-      );
-    }
+        } else {
+          return ShimmeringContent(
+            aspectRatio: widget.aspectRatio,
+          );
+        }
+      },
+    );
   }
 }
