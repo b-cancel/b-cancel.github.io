@@ -95,24 +95,49 @@ Map<ProjectType, List<Project>> projectTypeToProjects = {
       playStore: "the.swol.app",
       content: [
         //basic cycle
-        Content("kyoxrhAK1FqJbWe2UK"),
+        Content(
+          "kyoxrhAK1FqJbWe2UK",
+          description:
+              "1. Set Rep Goal\n2. Grab Proper Weight\n3. Record Results\n4. Take Set Break",
+        ),
         //add exercise
-        Content("QZ7sMYoyS9dtsjaYAn"),
+        Content(
+          "QZ7sMYoyS9dtsjaYAn",
+          description: "Add An Exercise",
+        ),
         //onboarding
-        Content("j1gKlO4uAZM10dYXya"),
+        Content(
+          "j1gKlO4uAZM10dYXya",
+          description: "Swol Onboarding",
+        ),
         //search
-        Content("kfjRaDaE7xzVNJdGfr"),
+        Content(
+          "kfjRaDaE7xzVNJdGfr",
+          description: "Search Exercises",
+        ),
 
         //-----
 
         //calibration
-        Content("dC4FWH4NDOq76CUz68"),
+        Content(
+          "dC4FWH4NDOq76CUz68",
+          description: "Exercise Calibration",
+        ),
         //error checking
-        Content("YSqWsc9dSjkLTLUCWU"),
+        Content(
+          "YSqWsc9dSjkLTLUCWU",
+          description: "Checking For Mistakes",
+        ),
         //notes
-        Content("Rgz7qmqwOImQxM8ygX"),
+        Content(
+          "Rgz7qmqwOImQxM8ygX",
+          description: "Add Exercise Notes",
+        ),
         //learn section
-        Content("RLOvYGkKt6jvsIyovu"),
+        Content(
+          "RLOvYGkKt6jvsIyovu",
+          description: "Learn The Science",
+        ),
       ],
     ),
     Project(
@@ -124,9 +149,15 @@ Map<ProjectType, List<Project>> projectTypeToProjects = {
       github: "halfLife",
       content: [
         //change name scrub
-        Content("PiQF5YD82meF4uitmz"),
+        Content(
+          "PiQF5YD82meF4uitmz",
+          description: "Scrub Through Active Dosage Timeline",
+        ),
         //add dose
-        Content("Rk2zzd9k9l6MBBLTBY"),
+        Content(
+          "Rk2zzd9k9l6MBBLTBY",
+          description: "Add A Dose To The Timeline",
+        ),
       ],
     ),
     Project(
@@ -138,13 +169,25 @@ Map<ProjectType, List<Project>> projectTypeToProjects = {
       github: "JobProposalPrototype",
       content: [
         //Address Picker
-        Content("dyvj1gBn4HYBfVDrpr"),
+        Content(
+          "dyvj1gBn4HYBfVDrpr",
+          description: "Select An Address",
+        ),
         //Due Date Picker
-        Content("VJYrbNGSMxUZ38RuU9"),
+        Content(
+          "VJYrbNGSMxUZ38RuU9",
+          description: "Select A Due Date",
+        ),
         //Line Item Manipulation
-        Content("UvK4kZ48BSmlVhiFQp"),
+        Content(
+          "UvK4kZ48BSmlVhiFQp",
+          description: "Manipulate Line Items",
+        ),
         //Image Manipulation
-        Content("fsaqYZsD0P0x600rE1"),
+        Content(
+          "fsaqYZsD0P0x600rE1",
+          description: "Manipulate Images Within Items",
+        ),
       ],
     ),
     Project(
@@ -155,14 +198,26 @@ Map<ProjectType, List<Project>> projectTypeToProjects = {
       github: "Leashed_Public",
       content: [
         //find ble
-        Content("S8lbi2cusC5gVC0xOS"),
+        Content(
+          "S8lbi2cusC5gVC0xOS",
+          description: "Idenify Bluetooth Devices Through Signal Analysis",
+        ),
         //main list
-        Content("RKMMj20eRHONfImd0L"),
+        Content(
+          "RKMMj20eRHONfImd0L",
+          description: "Device List",
+        ),
         //---
         //sos settings
-        Content("S6Zdj4EiS99DlVZuDS"),
+        Content(
+          "S6Zdj4EiS99DlVZuDS",
+          description: "SOS Settings and Test",
+        ),
         //add new
-        Content("d5qOvltp866jRzktDZ"),
+        Content(
+          "d5qOvltp866jRzktDZ",
+          description: "Add New Device",
+        ),
       ],
     ),
     Project(
@@ -176,7 +231,7 @@ Map<ProjectType, List<Project>> projectTypeToProjects = {
         //videos
         Content("Uqk7fPBnsNydSn2GZW"),
         Content("LM9EpmeAiYlIpSAcgH"),
-        //---
+        //-----
         Content("W0QwfdozN3AFnw1sWn"),
         Content("Xbh1CLWME0plFA8g2G"),
         Content("UT4byKMOmrYWk8dTmb"),
