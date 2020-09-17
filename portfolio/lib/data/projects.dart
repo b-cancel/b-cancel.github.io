@@ -108,7 +108,7 @@ Map<ProjectType, List<Project>> projectTypeToProjects = {
         //onboarding
         Content(
           "j1gKlO4uAZM10dYXya",
-          description: "Swol Onboarding",
+          description: "Onboarding",
         ),
         //search
         Content(
@@ -144,7 +144,7 @@ Map<ProjectType, List<Project>> projectTypeToProjects = {
       name: "Half Life",
       status: ProjectStatus.Prototype,
       description: "Keep track of the active dosage of medications" +
-          " given their half life, so you can adjust your dosage" +
+          " (given their half life), so you can adjust your dosage" +
           " until the side effects are worth the desired effects.",
       github: "halfLife",
       content: [
@@ -198,10 +198,9 @@ Map<ProjectType, List<Project>> projectTypeToProjects = {
       github: "Leashed_Public",
       content: [
         //find ble
-        Content(
-          "S8lbi2cusC5gVC0xOS",
-          description: "Idenify Bluetooth Devices Through Signal Analysis",
-        ),
+        Content("S8lbi2cusC5gVC0xOS",
+            description: "Idenify Bluetooth Devices Through Signal Analysis",
+            stdAspectRatioOverride: StdAspectRatio.Monitor),
         //main list
         Content(
           "RKMMj20eRHONfImd0L",
@@ -220,6 +219,9 @@ Map<ProjectType, List<Project>> projectTypeToProjects = {
         ),
       ],
     ),
+
+    //Add image descriptions to the pictures below
+
     Project(
       name: "Contact Picker",
       status: ProjectStatus.Toolkit,

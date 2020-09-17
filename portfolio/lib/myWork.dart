@@ -150,15 +150,29 @@ class _MyWorkState extends State<MyWork> {
   */
 
   List<Widget> getAllProjectsOfType(
-      double cardSpacing, ProjectType projectType) {
+    double cardSpacing,
+    ProjectType projectType,
+    int columnCount,
+  ) {
+    StdAspectRatio stdAspectRatio =
+        projectTypeToDefaultAspectRatio[projectType];
     List<Widget> projectWidgets = new List<Widget>();
     List<Project> projectObjects = projectTypeToProjects[projectType];
     for (int i = 0; i < projectObjects.length; i++) {
       Project project = projectObjects[i];
       projectWidgets.add(
         WorkHeader(
+          isFirst: i == 0,
           cardSpacing: cardSpacing,
           project: project,
+        ),
+      );
+      projectWidgets.add(
+        WorkBody(
+          cardSpacing: cardSpacing,
+          content: project.content,
+          defaultAspectRatio: stdAspectRatio,
+          columnCount: columnCount,
         ),
       );
     }
@@ -180,7 +194,7 @@ class _MyWorkState extends State<MyWork> {
   Widget build(BuildContext context) {
     //vars used to determine grid scaling
     double requiredPhonesOnScreen =
-        1.5; //NOT 2 to avoid alot of gifs showing in phone portrait modes
+        2; //NOT 2 to avoid alot of gifs showing in phone portrait modes
     double screenHeight = MediaQuery.of(context).size.height;
     double deviceHeight = screenHeight / requiredPhonesOnScreen;
 
@@ -199,6 +213,7 @@ class _MyWorkState extends State<MyWork> {
 
     //TODO: use better version of this
     double cardSpacing = 8;
+    int columnCount = phonesThatFit.ceil(); //TODO: +1 only para feitos
 
     //prep the widget list, where each item will be wrapped in sliverToBoxAdapters
     List<Widget> listItems = new List<Widget>();
@@ -208,6 +223,7 @@ class _MyWorkState extends State<MyWork> {
       getAllProjectsOfType(
         cardSpacing,
         ProjectType.Apps,
+        columnCount,
       ),
     );
     //TODO: do the same thing for games, websites, and graphics
