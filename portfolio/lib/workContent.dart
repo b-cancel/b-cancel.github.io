@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:portfolio/data/basic.dart';
 import 'package:portfolio/data/projects.dart';
 import 'package:portfolio/icons/portfolio_icons_icons.dart';
+import 'package:portfolio/main.dart';
 import 'package:portfolio/workLinks.dart';
 
 class WorkHeader extends StatelessWidget {
@@ -24,21 +26,74 @@ class WorkHeader extends StatelessWidget {
         padding: EdgeInsets.symmetric(
           horizontal: cardSpacing,
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Text(project.name),
-            Wrap(
-              children: [
-                webLinkWidget(
-                  context,
-                  title: project.name + " Github Repository",
-                  icon: PortfolioIcons.github,
-                  generalUrl: generalGithub + myGithub + "/",
-                  specificUrl: project.github,
+            Text(
+              project.name,
+              style: TextStyle(
+                fontWeight: FontWeight.w100,
+                fontSize: MyApp.h2,
+                color: Colors.white,
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                bottom: 2.0,
+              ),
+              child: Align(
+                alignment: Alignment.bottomLeft,
+                child: Wrap(
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  children: [
+                    Visibility(
+                      visible: project.github != null,
+                      child: webLinkWidget(
+                        context,
+                        title: "Github Repository",
+                        icon: PortfolioIcons.github,
+                        generalUrl: generalGithub + myGithub + "/",
+                        specificUrl: project.github ?? "",
+                      ),
+                    ),
+                    Visibility(
+                      visible: project?.playStore != null &&
+                          project.playStore.length > 1,
+                      child: webLinkWidget(
+                        context,
+                        title: "Play Store",
+                        icon: FontAwesomeIcons.googlePlay,
+                        generalUrl: googlePlayPrefix,
+                        specificUrl: project.playStore ?? "",
+                      ),
+                    ),
+
+                    /*
+                    Visibility(
+                      visible: project.appleStore != null,
+                      child: webLinkWidget(
+                        context,
+                        title: "App Store",
+                        icon: null,
+                        generalUrl: null,
+                        specificUrl: null,
+                      ),
+                    ),
+                    */
+                    Visibility(
+                      visible: project.web != null,
+                      child: webLinkWidget(
+                        context,
+                        title: project.web ?? "",
+                        icon: Icons.web,
+                        generalUrl: "",
+                        specificUrl: project.web ?? "",
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            )
+              ),
+            ),
           ],
         ),
       ),

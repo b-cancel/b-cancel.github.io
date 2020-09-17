@@ -23,7 +23,7 @@ class Project {
   String description;
   bool initiallyOpened;
   String github;
-  String googlePlay;
+  String playStore;
   String appleStore;
   String web;
   List<Content> content = new List<Content>();
@@ -36,7 +36,7 @@ class Project {
     //unless I don't
     this.initiallyOpened: true,
     this.github,
-    this.googlePlay,
+    this.playStore,
     this.appleStore,
     this.web,
     this.content,
@@ -92,7 +92,7 @@ Map<ProjectType, List<Project>> projectTypeToProjects = {
               "Know exactly how much weight you should be lifting given your training type and your previous set," +
               "so that you are always pushing at your max but never beyond it to avoid injury and maximize results.",
       github: "swol",
-      googlePlay: "the.swol.app",
+      playStore: "the.swol.app",
       content: [
         //basic cycle
         Content("kyoxrhAK1FqJbWe2UK"),
