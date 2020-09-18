@@ -288,7 +288,7 @@ packages:
       name: pull_to_refresh
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.5.8"
+    version: "1.6.1"
   qr:
     dependency: "direct main"
     description:

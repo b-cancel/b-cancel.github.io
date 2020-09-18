@@ -35,32 +35,10 @@ class MyWork extends StatefulWidget {
 }
 
 class _MyWorkState extends State<MyWork> {
-  final RefreshController refreshController = RefreshController(
-    initialRefresh: false,
-  );
-
   final ScrollController scrollController = new ScrollController();
   final ValueNotifier<bool> onTop = new ValueNotifier(true);
   final ValueNotifier<double> overScroll = new ValueNotifier<double>(0);
   final ValueNotifier<bool> topScrolledAway = new ValueNotifier<bool>(false);
-
-  void _onRefresh() async {
-    //TODO: eventually pass a parameter that has the state of the menu, open or closed
-    uniHTML.window.location.reload();
-    //html.window.location.assign();
-    /*
-    html.window.location.replace(
-      "http://b-cancel.github.io/",
-    );
-    */
-    await Future.delayed(kTabScrollDuration);
-    refreshController.refreshCompleted();
-  }
-
-  void _onLoading() async {
-    await Future.delayed(kTabScrollDuration);
-    refreshController.loadComplete();
-  }
 
   hideToasts() {
     BotToast.cleanAll();
@@ -223,46 +201,30 @@ class _MyWorkState extends State<MyWork> {
     );
 
     //build
-    return SwipeDetector(
-      onSwipeRight: () {
-        if (Home.openMenu.value == false) {
-          Home.openMenu.value = true;
-          setMenuOpenCookie(true);
-        }
-      },
-      child: AnimatedBuilder(
-        animation: Home.openMenu,
-        //the main page doesn't need to be rebuilt to be shifted
-        child: SmartRefresher(
-          enablePullDown: true,
-          enablePullUp: false,
-          scrollController: scrollController,
-          controller: refreshController,
-          onRefresh: _onRefresh,
-          onLoading: _onLoading,
-          child: CustomScrollView(
-            controller: scrollController,
-            slivers: listItems
-                .map((e) => SliverToBoxAdapter(
-                      child: e,
-                    ))
-                .toList(),
-          ),
-        ),
-        //only handle shifting on isMenuOpened Toggle
-        builder: (BuildContext context, Widget nonChangingChild) {
-          return AnimatedContainer(
-            duration:
-                Home.startUpComplete.value ? kTabScrollDuration : Duration.zero,
-            transform: Matrix4.translationValues(
-              (Home.openMenu.value) ? getMenuWidth() : 0,
-              0,
-              0,
-            ),
-            child: nonChangingChild,
-          );
-        },
+    return AnimatedBuilder(
+      animation: Home.openMenu,
+      //the main page doesn't need to be rebuilt to be shifted
+      child: CustomScrollView(
+        controller: scrollController,
+        slivers: listItems
+            .map((e) => SliverToBoxAdapter(
+                  child: e,
+                ))
+            .toList(),
       ),
+      //only handle shifting on isMenuOpened Toggle
+      builder: (BuildContext context, Widget nonChangingChild) {
+        return AnimatedContainer(
+          duration:
+              Home.startUpComplete.value ? kTabScrollDuration : Duration.zero,
+          transform: Matrix4.translationValues(
+            (Home.openMenu.value) ? getMenuWidth() : 0,
+            0,
+            0,
+          ),
+          child: nonChangingChild,
+        );
+      },
     );
   }
 }

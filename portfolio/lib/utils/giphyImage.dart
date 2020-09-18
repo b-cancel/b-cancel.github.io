@@ -20,14 +20,14 @@ import 'package:portfolio/workContent.dart';
 class GiphyController extends StatefulWidget {
   final GiphyGif gif;
   final double aspectRatio;
-  final ValueNotifier<bool> gifTapped;
+  final ValueNotifier<bool> playableContentTapped;
 
   /// Loads an image from given url.
   const GiphyController({
     Key key,
     @required this.gif,
     @required this.aspectRatio,
-    @required this.gifTapped,
+    @required this.playableContentTapped,
   }) : super(key: key);
 
   @override
@@ -62,15 +62,11 @@ class _GiphyControllerState extends State<GiphyController> {
               isLoading: false,
             );
           } else {
-            return ShimmeringContent(
-              aspectRatio: widget.aspectRatio,
-              isLoading: false,
-            );
-            /*
             return VideoPlayerWidget(
+              background: snapShot.data,
               url: widget.gif.images.downsizedSmall.mp4,
+              playableContentTapped: widget.playableContentTapped,
             );
-            */
           }
         } else {
           return ShimmeringContent(

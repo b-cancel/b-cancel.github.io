@@ -2,10 +2,10 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/utils/conditional.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:swipedetector/swipedetector.dart';
 
 //plugin
 import 'package:universal_html/html.dart';
-import 'package:swipedetector/swipedetector.dart';
 
 //internal: other
 import 'package:portfolio/contact.dart';
@@ -44,48 +44,62 @@ class Home extends StatelessWidget {
   //build
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height,
-      child: Stack(
-        children: <Widget>[
-          Theme(
-            data: ThemeData.dark(),
-            child: Scaffold(
-              appBar: AppBar(
-                titleSpacing: 0,
-                title: CustomAppBarTitle(),
+    return SwipeDetector(
+      onSwipeLeft: () {
+        if (Home.openMenu.value) {
+          Home.openMenu.value = false;
+          setMenuOpenCookie(false);
+        }
+      },
+      onSwipeRight: () {
+        if (Home.openMenu.value == false) {
+          Home.openMenu.value = true;
+          setMenuOpenCookie(true);
+        }
+      },
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        child: Stack(
+          children: <Widget>[
+            Theme(
+              data: ThemeData.dark(),
+              child: Scaffold(
+                appBar: AppBar(
+                  titleSpacing: 0,
+                  title: CustomAppBarTitle(),
+                ),
+                //NOTE: transition handled internally
+                body: MyWork(),
               ),
+            ),
+            Positioned(
+              bottom: 16,
+              right: 16,
+              child: UnderConstructionChip(),
+            ),
+            Positioned.fill(
               //NOTE: transition handled internally
-              body: MyWork(),
+              child: ResumeInMenu(
+                menuKey: menuKey,
+              ),
             ),
-          ),
-          Positioned(
-            bottom: 16,
-            right: 16,
-            child: UnderConstructionChip(),
-          ),
-          Positioned.fill(
-            //NOTE: transition handled internally
-            child: ResumeInMenu(
-              menuKey: menuKey,
+            IgnorePointer(
+              ignoring: true,
+              child: AnimatedBuilder(
+                animation: startUpComplete,
+                builder: (context, child) {
+                  return AnimatedContainer(
+                    duration: kTabScrollDuration,
+                    color: startUpComplete.value
+                        ? Colors.transparent
+                        : Color(0xFF030303),
+                  );
+                },
+              ),
             ),
-          ),
-          IgnorePointer(
-            ignoring: true,
-            child: AnimatedBuilder(
-              animation: startUpComplete,
-              builder: (context, child) {
-                return AnimatedContainer(
-                  duration: kTabScrollDuration,
-                  color: startUpComplete.value
-                      ? Colors.transparent
-                      : Color(0xFF030303),
-                );
-              },
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

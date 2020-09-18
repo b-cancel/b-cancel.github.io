@@ -167,7 +167,7 @@ class _WorkBodyState extends State<WorkBody> {
             children: [
               ContentCard(
                 content: content,
-                gifTapped: gifTapped,
+                playableContentTapped: gifTapped,
                 getGiphy: getGiphy,
                 cardSpacing: widget.cardSpacing,
                 aspectRatio: content.aspectRatioOverride ??
@@ -198,20 +198,25 @@ class _WorkBodyState extends State<WorkBody> {
 class ContentCard extends StatelessWidget {
   ContentCard({
     @required this.content,
-    @required this.gifTapped,
+    //only for gifs and videos
+    @required this.playableContentTapped,
     @required this.getGiphy,
+    //don't change
     @required this.cardSpacing,
     @required this.aspectRatio,
   });
 
   final Content content;
-  final ValueNotifier<bool> gifTapped;
+  //only for gifs and videos
+  final ValueNotifier<bool> playableContentTapped;
   final Function getGiphy;
+  //don't change
   final double cardSpacing;
   final double aspectRatio;
 
   @override
   Widget build(BuildContext context) {
+    //TODO: handle .png, .jpg, and .mp4 content as well
     return Card(
       margin: EdgeInsets.all(cardSpacing),
       child: FittedBox(
@@ -228,10 +233,14 @@ class ContentCard extends StatelessWidget {
                   isLoading: false,
                 );
               } else {
+                return ShimmeringContent(
+                  aspectRatio: aspectRatio,
+                  isLoading: false,
+                );
                 return GiphyController(
                   gif: snapShot.data,
                   aspectRatio: aspectRatio,
-                  gifTapped: gifTapped,
+                  playableContentTapped: playableContentTapped,
                 );
               }
             } else {

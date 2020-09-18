@@ -53,10 +53,9 @@ class _ResumeInfoState extends State<ResumeInfo> {
 
     return Container(
       color: Colors.white,
+      //NOTE: avoiding fancy scroll physics for compatibilty sake
       child: SingleChildScrollView(
         controller: scrollController,
-        //iOS feel
-        physics: BouncingScrollPhysics(),
         //atleast spacing to match name
         padding: EdgeInsets.symmetric(
           horizontal: 0,

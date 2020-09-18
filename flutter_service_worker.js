@@ -3,7 +3,7 @@ const MANIFEST = 'flutter-app-manifest';
 const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 const RESOURCES = {
-  "assets/AssetManifest.json": "437059950f02bcb54937678f97026b90",
+  "assets/AssetManifest.json": "8c59d9bad57b1c1df80cd11b558a1bbb",
 "assets/assets/fonts/PortfolioIcons.ttf": "1349202f69777724328456aa7621446f",
 "assets/assets/vcards/Bryan_Cancel.vcf": "30e33d3198e95fc43998e59c3bcd2295",
 "assets/FontManifest.json": "093a7716fd3885b4a2241632c7e4012f",
@@ -19,11 +19,10 @@ const RESOURCES = {
 "assets/google_fonts/RobotoMono-Regular.ttf": "b4618f1f7f4cee0ac09873fcc5a966f9",
 "assets/google_fonts/RobotoMono-Thin.ttf": "288302ea531af8be59f6ac2b5bbbfdd3",
 "assets/google_fonts/RobotoMono-ThinItalic.ttf": "355d559cc860016a068bcd16b66e4bd3",
-"assets/NOTICES": "9254abb4edf416c290c1be9b271ffc0f",
+"assets/NOTICES": "3214c66cbd1cd0a1c33f28e65c9a09dc",
 "assets/packages/font_awesome_flutter/lib/fonts/fa-brands-400.ttf": "5a37ae808cf9f652198acde612b5328d",
 "assets/packages/font_awesome_flutter/lib/fonts/fa-regular-400.ttf": "2bca5ec802e40d3f4b60343e346cedde",
 "assets/packages/font_awesome_flutter/lib/fonts/fa-solid-900.ttf": "2aa350bd2aeab88b601a593f793734c0",
-"assets/packages/giphy_picker/assets/PoweredBy_200px-Black_HorizText.png": "439da1ed3ca70fb090eb98698485c21e",
 "faviconit/browserconfig.xml": "2077dd3fa170043e91525d9cd4cdd1ac",
 "faviconit/favicon-114.png": "ac68092d20f0e6f924c4716babb7bd76",
 "faviconit/favicon-120.png": "77fac968f73e94320e493fa064b8a563",
@@ -45,9 +44,9 @@ const RESOURCES = {
 "faviconit/favicon-96.png": "bfec43944dbeb6f416e57b4144ff98d8",
 "faviconit/favicon.ico": "d9578e79850907c2d75fb6d2727626e9",
 "faviconit/faviconit-instructions.txt": "53f9f214c478b425a7fb737b9f02eb1e",
-"index.html": "5d3d76a71e72d1bb70e7ce5ee085e640",
-"/": "5d3d76a71e72d1bb70e7ce5ee085e640",
-"main.dart.js": "7018a9c40f67f7ec8b9a42cbb7017bff",
+"index.html": "a3d200256ae74b70eeeceb634c1f6876",
+"/": "a3d200256ae74b70eeeceb634c1f6876",
+"main.dart.js": "bf49ceb93f48c1e94c9f03fe5d91ee40",
 "manifest.json": "d27d045a0c173386d93a4368bcf11389",
 "miniLoader.gif": "0098d8c7100448172595966afe90273d"
 };

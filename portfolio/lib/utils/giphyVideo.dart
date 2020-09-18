@@ -1,12 +1,18 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoPlayerWidget extends StatefulWidget {
   final String url;
+  final Uint8List background;
+  final ValueNotifier<bool> playableContentTapped;
 
   VideoPlayerWidget({
     Key key,
     @required this.url,
+    @required this.background,
+    @required this.playableContentTapped,
   }) : super(key: key);
 
   @override
@@ -65,11 +71,21 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
     return FutureBuilder(
       future: _initializeVideoPlayerFuture,
       builder: (context, snapshot) {
+        /*
+        return Image.memory(
+          widget.background,
+        );
+        */
+
         if (snapshot.connectionState == ConnectionState.done) {
           _controller.addListener(updateValues);
           timePassed.addListener(printValues);
           totalTime.addListener(printValues);
 
+          return Image.memory(
+            widget.background,
+          );
+/*
           // If the VideoPlayerController has finished initialization, use
           // the data it provides to limit the aspect ratio of the video.
           return Stack(
@@ -77,7 +93,9 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
               AspectRatio(
                 aspectRatio: _controller.value.aspectRatio,
                 // Use the VideoPlayer widget to display the video.
-                child: VideoPlayer(_controller),
+                child: VideoPlayer(
+                  _controller,
+                ),
               ),
               Positioned.fill(
                 child: InkWell(
@@ -95,14 +113,16 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
                     });
                   },
                   child: Center(
-                    child: Icon(
-                      _controller.value.isPlaying
-                          ? Icons.pause
-                          : Icons.play_arrow,
+                    child: Visibility(
+                      visible: _controller.value.isPlaying == false,
+                      child: Icon(
+                        Icons.play_arrow,
+                      ),
                     ),
                   ),
                 ),
               ),
+              /*
               Positioned(
                 left: 0,
                 right: 0,
@@ -113,12 +133,15 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
                   total: totalTime,
                 ),
               ),
+              */
             ],
           );
+          */
         } else {
-          // If the VideoPlayerController is still initializing, show a
-          // loading spinner.
-          return Container();
+          // If the VideoPlayerController is still initializing, show thumnail
+          return Image.memory(
+            widget.background,
+          );
         }
       },
     );
