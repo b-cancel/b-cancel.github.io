@@ -19,7 +19,7 @@ const RESOURCES = {
 "assets/google_fonts/RobotoMono-Regular.ttf": "b4618f1f7f4cee0ac09873fcc5a966f9",
 "assets/google_fonts/RobotoMono-Thin.ttf": "288302ea531af8be59f6ac2b5bbbfdd3",
 "assets/google_fonts/RobotoMono-ThinItalic.ttf": "355d559cc860016a068bcd16b66e4bd3",
-"assets/NOTICES": "3214c66cbd1cd0a1c33f28e65c9a09dc",
+"assets/NOTICES": "fd40da60cff837aef9b5f4b47978c4f8",
 "assets/packages/font_awesome_flutter/lib/fonts/fa-brands-400.ttf": "5a37ae808cf9f652198acde612b5328d",
 "assets/packages/font_awesome_flutter/lib/fonts/fa-regular-400.ttf": "2bca5ec802e40d3f4b60343e346cedde",
 "assets/packages/font_awesome_flutter/lib/fonts/fa-solid-900.ttf": "2aa350bd2aeab88b601a593f793734c0",
@@ -44,11 +44,12 @@ const RESOURCES = {
 "faviconit/favicon-96.png": "bfec43944dbeb6f416e57b4144ff98d8",
 "faviconit/favicon.ico": "d9578e79850907c2d75fb6d2727626e9",
 "faviconit/faviconit-instructions.txt": "53f9f214c478b425a7fb737b9f02eb1e",
-"index.html": "a3d200256ae74b70eeeceb634c1f6876",
-"/": "a3d200256ae74b70eeeceb634c1f6876",
-"main.dart.js": "bf49ceb93f48c1e94c9f03fe5d91ee40",
+"index.html": "9587b8d6e1e0cead9405cc3c423d9052",
+"/": "9587b8d6e1e0cead9405cc3c423d9052",
+"main.dart.js": "269eac39c813713e2131b02b95d1077d",
 "manifest.json": "d27d045a0c173386d93a4368bcf11389",
-"miniLoader.gif": "0098d8c7100448172595966afe90273d"
+"miniLoader.gif": "0098d8c7100448172595966afe90273d",
+"version.json": "426313f2f3133c2f20415344c4a22df3"
 };
 
 // The application shell files that are downloaded before a service worker can

@@ -146,13 +146,9 @@ class _MyWorkState extends State<MyWork> {
       child: AnimatedBuilder(
         animation: Home.openMenu,
         //the main page doesn't need to be rebuilt to be shifted
-        child: CustomScrollView(
+        child: ListView(
           controller: scrollController,
-          slivers: listItems
-              .map((e) => SliverToBoxAdapter(
-                    child: e,
-                  ))
-              .toList(),
+          children: listItems,
         ),
         //only handle shifting on isMenuOpened Toggle
         builder: (BuildContext context, Widget nonChangingChild) {

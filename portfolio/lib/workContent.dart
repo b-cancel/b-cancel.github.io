@@ -4,13 +4,14 @@ import 'package:giphy_client/giphy_client.dart';
 import 'package:masonry_grid/masonry_grid.dart';
 import 'package:portfolio/data/basic.dart';
 import 'package:portfolio/data/projects.dart';
+import 'package:portfolio/home.dart';
 import 'package:portfolio/icons/portfolio_icons_icons.dart';
 import 'package:portfolio/main.dart';
 import 'package:portfolio/utils/giphyImage.dart';
 import 'package:portfolio/workLinks.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 
-class WorkHeader extends StatelessWidget {
+class WorkHeader extends StatefulWidget {
   WorkHeader({
     @required this.cardSpacing,
     @required this.project,
@@ -22,23 +23,77 @@ class WorkHeader extends StatelessWidget {
   final bool isFirst;
 
   @override
+  _WorkHeaderState createState() => _WorkHeaderState();
+}
+
+class _WorkHeaderState extends State<WorkHeader> {
+  updateState() {
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
+  @override
+  void initState() {
+    Home.openMenu.addListener(updateState);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    Home.openMenu.removeListener(updateState);
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedSwitcher(
+      duration: kTabScrollDuration,
+      transitionBuilder: (widget, animation) {
+        return SizeTransition(
+          child: widget,
+          sizeFactor: Tween<double>(
+            begin: 0,
+            end: 1,
+          ).animate(animation),
+        );
+      },
+      child: (Home.openMenu.value)
+          ? EmptyContainer()
+          : TheTitle(
+              widget: widget,
+            ),
+    );
+  }
+}
+
+class TheTitle extends StatelessWidget {
+  const TheTitle({
+    Key key,
+    @required this.widget,
+  }) : super(key: key);
+
+  final WorkHeader widget;
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(
-        top: isFirst ? 16 : 36,
+        top: widget.isFirst ? 16 : 36,
         bottom: 16,
       ),
       child: Padding(
         padding: EdgeInsets.symmetric(
-          horizontal: cardSpacing,
+          horizontal: widget.cardSpacing,
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  project.name,
+                  widget.project.name,
                   style: TextStyle(
                     fontWeight: FontWeight.w100,
                     fontSize: MyApp.h2,
@@ -55,47 +110,47 @@ class WorkHeader extends StatelessWidget {
                       crossAxisAlignment: WrapCrossAlignment.center,
                       children: [
                         Visibility(
-                          visible: project.github != null,
+                          visible: widget.project.github != null,
                           child: webLinkWidget(
                             context,
                             title: "Github Repository",
                             icon: PortfolioIcons.github,
                             generalUrl: generalGithub + myGithub + "/",
-                            specificUrl: project.github ?? "",
+                            specificUrl: widget.project.github ?? "",
                           ),
                         ),
                         Visibility(
-                          visible: project?.playStore != null &&
-                              project.playStore.length > 1,
+                          visible: widget.project?.playStore != null &&
+                              widget.project.playStore.length > 1,
                           child: webLinkWidget(
                             context,
                             title: "Play Store",
                             icon: FontAwesomeIcons.googlePlay,
                             generalUrl: googlePlayPrefix,
-                            specificUrl: project.playStore ?? "",
+                            specificUrl: widget.project.playStore ?? "",
                           ),
                         ),
 
                         /*
+                  Visibility(
+                    visible: project.appleStore != null,
+                    child: webLinkWidget(
+                      context,
+                      title: "App Store",
+                      icon: null,
+                      generalUrl: null,
+                      specificUrl: null,
+                    ),
+                  ),
+                  */
                         Visibility(
-                          visible: project.appleStore != null,
+                          visible: widget.project.web != null,
                           child: webLinkWidget(
                             context,
-                            title: "App Store",
-                            icon: null,
-                            generalUrl: null,
-                            specificUrl: null,
-                          ),
-                        ),
-                        */
-                        Visibility(
-                          visible: project.web != null,
-                          child: webLinkWidget(
-                            context,
-                            title: project.web ?? "",
+                            title: widget.project.web ?? "",
                             icon: Icons.web,
                             generalUrl: "",
-                            specificUrl: project.web ?? "",
+                            specificUrl: widget.project.web ?? "",
                           ),
                         ),
                       ],
@@ -107,16 +162,40 @@ class WorkHeader extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(
                 top: 4.0,
+                bottom: 4.0,
               ),
               child: Divider(
                 height: 1,
                 thickness: .5,
                 color: Colors.white,
               ),
-            )
+            ),
+            Visibility(
+              visible: widget.project.description != null,
+              child: Text(
+                widget.project.description ?? "",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class EmptyContainer extends StatelessWidget {
+  const EmptyContainer({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 0,
+      width: 0,
     );
   }
 }
@@ -153,52 +232,90 @@ class _WorkBodyState extends State<WorkBody> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      shrinkWrap: true,
-      scrollDirection: Axis.horizontal,
-      /*
-      column: widget.columnCount,
-      //spacing is handled by the cards each item is in
-      crossAxisSpacing: 0,
-      mainAxisSpacing: 0,
-      */
-      children: List.generate(
-        widget.content.length,
-        (index) {
-          Content content = widget.content[index];
-          return Container(
-            width: MediaQuery.of(context).size.width / widget.columnCount,
-            height: 250,
-            /*
-            child: Column(
-              children: [
-                ContentCard(
-                  content: content,
-                  playableContentTapped: gifTapped,
-                  getGiphy: getGiphy,
-                  cardSpacing: widget.cardSpacing,
-                  aspectRatio: content.aspectRatioOverride ??
-                      stdAspectRatioToAspectRatio[widget.defaultAspectRatio],
-                ),
-                Visibility(
-                  visible: content.description != null,
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                      bottom: 16,
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: List.generate(
+            widget.content.length,
+            (index) {
+              Content content = widget.content[index];
+              return Container(
+                width: MediaQuery.of(context).size.width / widget.columnCount,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ContentCard(
+                      isFirst: index == 0,
+                      content: content,
+                      playableContentTapped: gifTapped,
+                      getGiphy: getGiphy,
+                      cardSpacing: widget.cardSpacing,
+                      aspectRatio: content.aspectRatioOverride ??
+                          stdAspectRatioToAspectRatio[
+                              widget.defaultAspectRatio],
                     ),
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: widget.cardSpacing,
-                      ),
-                      child: Text(content.description ?? ""),
+                    AnimatedBuilder(
+                      animation: Home.openMenu,
+                      builder: (context, child) {
+                        return AnimatedSwitcher(
+                          duration: kTabScrollDuration,
+                          transitionBuilder: (widget, animation) {
+                            return SizeTransition(
+                              child: widget,
+                              sizeFactor: Tween<double>(
+                                begin: 0,
+                                end: 1,
+                              ).animate(animation),
+                            );
+                          },
+                          child: (Home.openMenu.value)
+                              ? EmptyContainer()
+                              : TheDescription(
+                                  content: content,
+                                  widget: widget,
+                                ),
+                        );
+                      },
                     ),
-                  ),
+                  ],
                 ),
-              ],
-            ),*/
-          );
-        },
-      ).toList(),
+              );
+            },
+          ).toList(),
+        ),
+      ),
+    );
+  }
+}
+
+class TheDescription extends StatelessWidget {
+  const TheDescription({
+    Key key,
+    @required this.content,
+    @required this.widget,
+  }) : super(key: key);
+
+  final Content content;
+  final WorkBody widget;
+
+  @override
+  Widget build(BuildContext context) {
+    return Visibility(
+      visible: content.description != null,
+      child: Padding(
+        padding: EdgeInsets.only(
+          bottom: 16,
+        ),
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: widget.cardSpacing,
+          ),
+          child: Text(content.description ?? ""),
+        ),
+      ),
     );
   }
 }
@@ -212,6 +329,7 @@ class ContentCard extends StatelessWidget {
     //don't change
     @required this.cardSpacing,
     @required this.aspectRatio,
+    @required this.isFirst,
   });
 
   final Content content;
@@ -221,6 +339,7 @@ class ContentCard extends StatelessWidget {
   //don't change
   final double cardSpacing;
   final double aspectRatio;
+  final bool isFirst;
 
   @override
   Widget build(BuildContext context) {
@@ -244,6 +363,7 @@ class ContentCard extends StatelessWidget {
                 gif: snapShot.data,
                 aspectRatio: aspectRatio,
                 playableContentTapped: playableContentTapped,
+                isFirst: isFirst,
               );
             }
           } else {

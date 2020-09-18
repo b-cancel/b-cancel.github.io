@@ -21,6 +21,7 @@ class GiphyController extends StatefulWidget {
   final GiphyGif gif;
   final double aspectRatio;
   final ValueNotifier<bool> playableContentTapped;
+  final bool isFirst;
 
   /// Loads an image from given url.
   const GiphyController({
@@ -28,6 +29,7 @@ class GiphyController extends StatefulWidget {
     @required this.gif,
     @required this.aspectRatio,
     @required this.playableContentTapped,
+    @required this.isFirst,
   }) : super(key: key);
 
   @override
@@ -68,6 +70,7 @@ class _GiphyControllerState extends State<GiphyController> {
               background: snapShot.data,
               url: widget.gif.images.originalMp4.mp4,
               playableContentTapped: widget.playableContentTapped,
+              startPlaying: widget.isFirst,
             );
           }
         } else {

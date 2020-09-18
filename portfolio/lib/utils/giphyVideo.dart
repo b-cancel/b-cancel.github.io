@@ -7,12 +7,14 @@ class VideoPlayerWidget extends StatefulWidget {
   final String url;
   final Uint8List background;
   final ValueNotifier<bool> playableContentTapped;
+  final bool startPlaying;
 
   VideoPlayerWidget({
     Key key,
     @required this.url,
     @required this.background,
     @required this.playableContentTapped,
+    @required this.startPlaying,
   }) : super(key: key);
 
   @override
@@ -32,6 +34,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
 
   @override
   void initState() {
+    widget.playableContentTapped.addListener(contentTapped);
     // Create and store the VideoPlayerController. The VideoPlayerController
     // offers several different constructors to play videos from assets, files,
     // or the internet.
@@ -39,23 +42,32 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
       widget.url,
     );
 
-    // Initialize the controller and store the Future for later use.
-    _initializeVideoPlayerFuture = _controller.initialize();
-
     // Use the controller to loop the video.
     _controller.setLooping(true);
-    _controller.pause();
+
+    // Initialize the controller and store the Future for later use.
+    _initializeVideoPlayerFuture = _controller.initialize();
 
     super.initState();
   }
 
   @override
   void dispose() {
+    widget.playableContentTapped.removeListener(contentTapped);
     _controller.dispose();
     _controller.removeListener(updateValues);
     timePassed.removeListener(printValues);
     totalTime.removeListener(printValues);
     super.dispose();
+  }
+
+  contentTapped() {
+    if (widget.playableContentTapped.value) {
+      if (_controller.value.isPlaying) {
+        _controller.pause();
+        setState(() {});
+      }
+    }
   }
 
   updateValues() async {
@@ -77,107 +89,86 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
           timePassed.addListener(printValues);
           totalTime.addListener(printValues);
 
-          return FittedBox(
-            fit: BoxFit.contain,
-            child: Stack(
-              children: [
-                //sets the size that is saved
-                Image.memory(
-                  widget.background,
-                  fit: BoxFit.contain,
-                ),
-                //follows the above
-                Positioned.fill(
-                  child: Stack(
-                    children: [
-                      Container(
-                        color: Colors.red.withOpacity(0.25),
-                      ),
-/*
-                      Positioned.fill(
-                        child: Center(
-                          child: AspectRatio(
-                            aspectRatio: _controller.value.aspectRatio,
-                            child: VideoPlayer(
-                              _controller,
-                            ),
-                          ),
-                        ),
-                      ),
-/*
-                      Positioned.fill(
-                        child: FittedBox(
-                          fit: BoxFit.contain,
-                          child: Container(
-                            height: 3,
-                            width: _controller.value.aspectRatio,
-                            child: AspectRatio(
-                              aspectRatio: _controller.value.aspectRatio,
-                              child: VideoPlayer(
-                                _controller,
-                              ),
-                            ),
-                          ),
-                        ),
+          return Stack(
+            children: [
+              //sets the size that is saved
+              Image.memory(
+                widget.background,
+                fit: BoxFit.contain,
+              ),
+              //follows the above
 
-                        /*AspectRatio(
-                          aspectRatio: _controller.value.aspectRatio,
-                          // Use the VideoPlayer widget to display the video.
-                          child: VideoPlayer(
-                            _controller,
-                          ),
-                        ),*/
-                      ),*/
-                      */
-/*
-                      AspectRatio(
-                        aspectRatio: _controller.value.aspectRatio,
-                        child: VideoPlayer(
-                          _controller,
-                        ),
-                      ),
-                      */
-                      InkWell(
-                        onTap: () {
-                          // Wrap the play or pause in a call to `setState`. This ensures the
-                          // correct icon is shown.
-                          setState(() {
-                            // If the video is playing, pause it.
-                            if (_controller.value.isPlaying) {
-                              _controller.pause();
-                            } else {
-                              // If the video is paused, play it.
-                              _controller.play();
-                            }
-                          });
-                        },
-                        child: Center(
-                          child: Visibility(
-                            visible: _controller.value.isPlaying == false,
-                            child: Stack(
-                              alignment: Alignment.center,
-                              children: [
-                                Icon(
-                                  Icons.play_arrow,
-                                  color: Colors.black,
-                                  size: 36,
-                                ),
-                                Icon(
-                                  Icons.play_arrow,
-                                  color: Colors.white,
-                                  size: 24,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
+              Positioned.fill(
+                child: Center(
+                  child: AspectRatio(
+                    aspectRatio: _controller.value.aspectRatio,
+                    child: VideoPlayer(
+                      _controller,
+                    ),
                   ),
                 ),
-              ],
-            ),
+              ),
+              Positioned.fill(
+                child: Material(
+                  color: Colors.black
+                      .withOpacity(_controller.value.isPlaying ? 0 : 0.75),
+                  child: InkWell(
+                    onTap: () {
+                      // If the video is playing, pause it.
+                      if (_controller.value.isPlaying) {
+                        _controller.pause();
+                        setState(() {});
+                      } else {
+                        //cause all videos including our own to stop
+                        widget.playableContentTapped.value = true;
+
+                        //wait one second for all the videos to register the action
+                        WidgetsBinding.instance.addPostFrameCallback((_) {
+                          //reset the value, nothing will happen
+                          widget.playableContentTapped.value = false;
+
+                          //play ourselves
+                          _controller.play();
+                          setState(() {});
+                        });
+                      }
+                    },
+                    child: Center(
+                      child: Visibility(
+                        visible: _controller.value.isPlaying == false,
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            Icon(
+                              Icons.play_arrow,
+                              color: Colors.black,
+                              size: 36,
+                            ),
+                            Icon(
+                              Icons.play_arrow,
+                              color: Colors.white,
+                              size: 24,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           );
+        } else {
+          // If the VideoPlayerController is still initializing, show thumnail
+          return Image.memory(
+            widget.background,
+            fit: BoxFit.contain,
+          );
+        }
+      },
+    );
+  }
+}
 
 /*
           // If the VideoPlayerController has finished initialization, use
@@ -201,17 +192,6 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
             ],
           );
           */
-        } else {
-          // If the VideoPlayerController is still initializing, show thumnail
-          return Image.memory(
-            widget.background,
-            fit: BoxFit.contain,
-          );
-        }
-      },
-    );
-  }
-}
 
 class UpdatingSlider extends StatefulWidget {
   UpdatingSlider({
