@@ -153,41 +153,49 @@ class _WorkBodyState extends State<WorkBody> {
 
   @override
   Widget build(BuildContext context) {
-    return MasonryGrid(
+    return ListView(
+      shrinkWrap: true,
+      scrollDirection: Axis.horizontal,
+      /*
       column: widget.columnCount,
       //spacing is handled by the cards each item is in
       crossAxisSpacing: 0,
       mainAxisSpacing: 0,
+      */
       children: List.generate(
         widget.content.length,
         (index) {
           Content content = widget.content[index];
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              ContentCard(
-                content: content,
-                playableContentTapped: gifTapped,
-                getGiphy: getGiphy,
-                cardSpacing: widget.cardSpacing,
-                aspectRatio: content.aspectRatioOverride ??
-                    stdAspectRatioToAspectRatio[widget.defaultAspectRatio],
-              ),
-              Visibility(
-                visible: content.description != null,
-                child: Padding(
-                  padding: EdgeInsets.only(
-                    bottom: 16,
-                  ),
+          return Container(
+            width: MediaQuery.of(context).size.width / widget.columnCount,
+            height: 250,
+            /*
+            child: Column(
+              children: [
+                ContentCard(
+                  content: content,
+                  playableContentTapped: gifTapped,
+                  getGiphy: getGiphy,
+                  cardSpacing: widget.cardSpacing,
+                  aspectRatio: content.aspectRatioOverride ??
+                      stdAspectRatioToAspectRatio[widget.defaultAspectRatio],
+                ),
+                Visibility(
+                  visible: content.description != null,
                   child: Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: widget.cardSpacing,
+                    padding: EdgeInsets.only(
+                      bottom: 16,
                     ),
-                    child: Text(content.description ?? ""),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: widget.cardSpacing,
+                      ),
+                      child: Text(content.description ?? ""),
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),*/
           );
         },
       ).toList(),
@@ -219,37 +227,31 @@ class ContentCard extends StatelessWidget {
     //TODO: handle .png, .jpg, and .mp4 content as well
     return Card(
       margin: EdgeInsets.all(cardSpacing),
-      child: FittedBox(
-        fit: BoxFit.contain,
-        child: FutureBuilder(
-          future: getGiphy(
-            content.url,
-          ),
-          builder: (BuildContext context, AsyncSnapshot<GiphyGif> snapShot) {
-            if (snapShot.connectionState == ConnectionState.done) {
-              if (snapShot.hasData == false) {
-                return ShimmeringContent(
-                  aspectRatio: aspectRatio,
-                  isLoading: false,
-                );
-              } else {
-                return ShimmeringContent(
-                  aspectRatio: aspectRatio,
-                  isLoading: false,
-                );
-                return GiphyController(
-                  gif: snapShot.data,
-                  aspectRatio: aspectRatio,
-                  playableContentTapped: playableContentTapped,
-                );
-              }
-            } else {
+      child: FutureBuilder(
+        future: getGiphy(
+          content.url,
+        ),
+        builder: (BuildContext context, AsyncSnapshot<GiphyGif> snapShot) {
+          if (snapShot.connectionState == ConnectionState.done) {
+            if (snapShot.hasData == false) {
+              print("no gify");
               return ShimmeringContent(
                 aspectRatio: aspectRatio,
+                isLoading: false,
+              );
+            } else {
+              return GiphyController(
+                gif: snapShot.data,
+                aspectRatio: aspectRatio,
+                playableContentTapped: playableContentTapped,
               );
             }
-          },
-        ),
+          } else {
+            return ShimmeringContent(
+              aspectRatio: aspectRatio,
+            );
+          }
+        },
       ),
     );
   }
@@ -267,15 +269,18 @@ class ShimmeringContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Shimmer(
-      duration: Duration(seconds: 2), //Default value
-      color: Colors.white, //Default value
-      enabled: true, //Default value
-      direction: ShimmerDirection.fromLTRB(),
-      child: Container(
-        height: 3,
-        width: 3 * aspectRatio,
-        color: isLoading ? Colors.transparent : Colors.red,
+    return FittedBox(
+      fit: BoxFit.contain,
+      child: Shimmer(
+        duration: Duration(seconds: 2), //Default value
+        color: Colors.white, //Default value
+        enabled: true, //Default value
+        direction: ShimmerDirection.fromLTRB(),
+        child: Container(
+          height: 3,
+          width: 3 * aspectRatio,
+          color: isLoading ? Colors.transparent : Colors.red,
+        ),
       ),
     );
   }

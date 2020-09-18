@@ -44,6 +44,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
 
     // Use the controller to loop the video.
     _controller.setLooping(true);
+    _controller.pause();
 
     super.initState();
   }
@@ -63,7 +64,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   }
 
   printValues() {
-    print(totalTime.value.toString() + " => " + timePassed.value.toString());
+    //fprint(totalTime.value.toString() + " => " + timePassed.value.toString());
   }
 
   @override
@@ -71,57 +72,120 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
     return FutureBuilder(
       future: _initializeVideoPlayerFuture,
       builder: (context, snapshot) {
-        /*
-        return Image.memory(
-          widget.background,
-        );
-        */
-
         if (snapshot.connectionState == ConnectionState.done) {
           _controller.addListener(updateValues);
           timePassed.addListener(printValues);
           totalTime.addListener(printValues);
 
-          return Image.memory(
-            widget.background,
+          return FittedBox(
+            fit: BoxFit.contain,
+            child: Stack(
+              children: [
+                //sets the size that is saved
+                Image.memory(
+                  widget.background,
+                  fit: BoxFit.contain,
+                ),
+                //follows the above
+                Positioned.fill(
+                  child: Stack(
+                    children: [
+                      Container(
+                        color: Colors.red.withOpacity(0.25),
+                      ),
+/*
+                      Positioned.fill(
+                        child: Center(
+                          child: AspectRatio(
+                            aspectRatio: _controller.value.aspectRatio,
+                            child: VideoPlayer(
+                              _controller,
+                            ),
+                          ),
+                        ),
+                      ),
+/*
+                      Positioned.fill(
+                        child: FittedBox(
+                          fit: BoxFit.contain,
+                          child: Container(
+                            height: 3,
+                            width: _controller.value.aspectRatio,
+                            child: AspectRatio(
+                              aspectRatio: _controller.value.aspectRatio,
+                              child: VideoPlayer(
+                                _controller,
+                              ),
+                            ),
+                          ),
+                        ),
+
+                        /*AspectRatio(
+                          aspectRatio: _controller.value.aspectRatio,
+                          // Use the VideoPlayer widget to display the video.
+                          child: VideoPlayer(
+                            _controller,
+                          ),
+                        ),*/
+                      ),*/
+                      */
+/*
+                      AspectRatio(
+                        aspectRatio: _controller.value.aspectRatio,
+                        child: VideoPlayer(
+                          _controller,
+                        ),
+                      ),
+                      */
+                      InkWell(
+                        onTap: () {
+                          // Wrap the play or pause in a call to `setState`. This ensures the
+                          // correct icon is shown.
+                          setState(() {
+                            // If the video is playing, pause it.
+                            if (_controller.value.isPlaying) {
+                              _controller.pause();
+                            } else {
+                              // If the video is paused, play it.
+                              _controller.play();
+                            }
+                          });
+                        },
+                        child: Center(
+                          child: Visibility(
+                            visible: _controller.value.isPlaying == false,
+                            child: Stack(
+                              alignment: Alignment.center,
+                              children: [
+                                Icon(
+                                  Icons.play_arrow,
+                                  color: Colors.black,
+                                  size: 36,
+                                ),
+                                Icon(
+                                  Icons.play_arrow,
+                                  color: Colors.white,
+                                  size: 24,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           );
+
 /*
           // If the VideoPlayerController has finished initialization, use
           // the data it provides to limit the aspect ratio of the video.
           return Stack(
             children: [
-              AspectRatio(
-                aspectRatio: _controller.value.aspectRatio,
-                // Use the VideoPlayer widget to display the video.
-                child: VideoPlayer(
-                  _controller,
-                ),
-              ),
-              Positioned.fill(
-                child: InkWell(
-                  onTap: () {
-                    // Wrap the play or pause in a call to `setState`. This ensures the
-                    // correct icon is shown.
-                    setState(() {
-                      // If the video is playing, pause it.
-                      if (_controller.value.isPlaying) {
-                        _controller.pause();
-                      } else {
-                        // If the video is paused, play it.
-                        _controller.play();
-                      }
-                    });
-                  },
-                  child: Center(
-                    child: Visibility(
-                      visible: _controller.value.isPlaying == false,
-                      child: Icon(
-                        Icons.play_arrow,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+              
+              
               /*
               Positioned(
                 left: 0,
@@ -141,6 +205,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
           // If the VideoPlayerController is still initializing, show thumnail
           return Image.memory(
             widget.background,
+            fit: BoxFit.contain,
           );
         }
       },

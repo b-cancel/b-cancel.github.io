@@ -52,11 +52,13 @@ class _GiphyControllerState extends State<GiphyController> {
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: GiphyController.load(
+        //this is only going to be viewable for a second
         widget.gif.images.downsizedStill.url,
       ),
       builder: (BuildContext context, AsyncSnapshot<Uint8List> snapShot) {
         if (snapShot.connectionState == ConnectionState.done) {
           if (snapShot.hasData == false) {
+            print("no data");
             return ShimmeringContent(
               aspectRatio: widget.aspectRatio,
               isLoading: false,
@@ -64,7 +66,7 @@ class _GiphyControllerState extends State<GiphyController> {
           } else {
             return VideoPlayerWidget(
               background: snapShot.data,
-              url: widget.gif.images.downsizedSmall.mp4,
+              url: widget.gif.images.originalMp4.mp4,
               playableContentTapped: widget.playableContentTapped,
             );
           }
