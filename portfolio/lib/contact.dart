@@ -620,45 +620,22 @@ class QRWidget extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 16,
-                  ),
+                Center(
                   child: Padding(
-                    padding: EdgeInsets.only(
-                      top: 8.0,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 16,
                     ),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: FittedBox(
-                            fit: BoxFit.contain,
-                            child: Text(
-                              "Save My Contact Details",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ),
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                        top: 8.0,
+                      ),
+                      child: Text(
+                        "Save My Contact Details",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
                         ),
-                        Visibility(
-                          visible: isDialog == false,
-                          child: Container(
-                            height: 48,
-                          ),
-                        ),
-                        Visibility(
-                          visible: isDialog,
-                          child: IconButton(
-                            icon: Icon(
-                              Icons.close,
-                              color: Colors.black,
-                            ),
-                            onPressed: () => Navigator.maybePop(context),
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
                   ),
                 ),
@@ -672,7 +649,7 @@ class QRWidget extends StatelessWidget {
                       Center(
                         child: DefaultTextStyle(
                           style: TextStyle(
-                            color: Colors.black,
+                            color: Colors.white,
                             fontWeight: FontWeight.bold,
                             fontSize: MyApp.h4,
                           ),

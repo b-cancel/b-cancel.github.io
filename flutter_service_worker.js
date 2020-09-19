@@ -3,8 +3,9 @@ const MANIFEST = 'flutter-app-manifest';
 const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 const RESOURCES = {
-  "assets/AssetManifest.json": "8c59d9bad57b1c1df80cd11b558a1bbb",
+  "assets/AssetManifest.json": "2492e37b03670e1fb8ae2fecc3497079",
 "assets/assets/fonts/PortfolioIcons.ttf": "1349202f69777724328456aa7621446f",
+"assets/assets/miniLoader.gif": "0098d8c7100448172595966afe90273d",
 "assets/assets/vcards/Bryan_Cancel.vcf": "30e33d3198e95fc43998e59c3bcd2295",
 "assets/FontManifest.json": "093a7716fd3885b4a2241632c7e4012f",
 "assets/fonts/MaterialIcons-Regular.otf": "a68d2a28c526b3b070aefca4bac93d25",
@@ -44,9 +45,9 @@ const RESOURCES = {
 "faviconit/favicon-96.png": "bfec43944dbeb6f416e57b4144ff98d8",
 "faviconit/favicon.ico": "d9578e79850907c2d75fb6d2727626e9",
 "faviconit/faviconit-instructions.txt": "53f9f214c478b425a7fb737b9f02eb1e",
-"index.html": "7b6f78a8fa9edbd7708a8376dacb0313",
-"/": "7b6f78a8fa9edbd7708a8376dacb0313",
-"main.dart.js": "05702000d070505eebdf4d89aaf1205c",
+"index.html": "4a9a2f41b185888e2c91b4975b3860d5",
+"/": "4a9a2f41b185888e2c91b4975b3860d5",
+"main.dart.js": "4a8d9aef04f2e6b6f9b2d391226b54f7",
 "manifest.json": "d27d045a0c173386d93a4368bcf11389",
 "miniLoader.gif": "0098d8c7100448172595966afe90273d",
 "version.json": "426313f2f3133c2f20415344c4a22df3"

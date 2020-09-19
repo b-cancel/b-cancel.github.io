@@ -1,5 +1,6 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
+import 'package:portfolio/contact.dart';
 import 'package:portfolio/data/projects.dart';
 import 'package:portfolio/headerFooter.dart';
 import 'package:portfolio/home.dart';
@@ -84,6 +85,7 @@ class _MyWorkState extends State<MyWork> {
           project: project,
         ),
       );
+
       projectWidgets.add(
         WorkBody(
           cardSpacing: cardSpacing,
@@ -133,6 +135,10 @@ class _MyWorkState extends State<MyWork> {
       ),
     );
     //TODO: do the same thing for games, websites, and graphics
+
+    listItems.add(
+      QRWidget(),
+    );
 
     //add the rights footer
     listItems.add(
