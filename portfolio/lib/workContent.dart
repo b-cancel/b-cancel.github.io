@@ -228,6 +228,7 @@ class WorkBody extends StatefulWidget {
 }
 
 class _WorkBodyState extends State<WorkBody> {
+  final ScrollController controller = new ScrollController();
   final ValueNotifier<bool> gifTapped = new ValueNotifier<bool>(false);
   Map<String, GiphyGif> storedGifs = Map<String, GiphyGif>();
 
@@ -242,71 +243,130 @@ class _WorkBodyState extends State<WorkBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: List.generate(
-            widget.content.length,
-            (index) {
-              Content content = widget.content[index];
-              return Container(
-                width: MediaQuery.of(context).size.width / widget.columnCount,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ContentCard(
-                      isFirst: index == 0,
-                      content: content,
-                      playableContentTapped: gifTapped,
-                      getGiphy: getGiphy,
-                      cardSpacing: widget.cardSpacing,
-                      aspectRatio: content.aspectRatioOverride ??
-                          stdAspectRatioToAspectRatio[
-                              widget.defaultAspectRatio],
-                    ),
-                    AnimatedBuilder(
-                      animation: Home.openMenu,
-                      builder: (context, child) {
-                        if (Home.openMenu.value) {
-                          return EmptyContainer();
-                        } else {
-                          return TheDescription(
-                            content: content,
-                            widget: widget,
-                          );
-                        }
-                        /*
-                        return AnimatedSwitcher(
-                          duration: kTabScrollDuration,
-                          transitionBuilder: (widget, animation) {
-                            return SizeTransition(
-                              child: widget,
-                              sizeFactor: Tween<double>(
-                                begin: 0,
-                                end: 1,
-                              ).animate(animation),
+    bool hasScroll = ((MediaQuery.of(context).size.width / widget.columnCount) *
+            widget.content.length) >
+        MediaQuery.of(context).size.width;
+    return Stack(
+      children: [
+        Container(
+          width: MediaQuery.of(context).size.width,
+          child: SingleChildScrollView(
+            controller: controller,
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: List.generate(
+                widget.content.length,
+                (index) {
+                  Content content = widget.content[index];
+                  return Container(
+                    width:
+                        MediaQuery.of(context).size.width / widget.columnCount,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ContentCard(
+                          isFirst: index == 0,
+                          content: content,
+                          playableContentTapped: gifTapped,
+                          getGiphy: getGiphy,
+                          cardSpacing: widget.cardSpacing,
+                          aspectRatio: content.aspectRatioOverride ??
+                              stdAspectRatioToAspectRatio[
+                                  widget.defaultAspectRatio],
+                        ),
+                        AnimatedBuilder(
+                          animation: Home.openMenu,
+                          builder: (context, child) {
+                            if (Home.openMenu.value) {
+                              return EmptyContainer();
+                            } else {
+                              return TheDescription(
+                                content: content,
+                                widget: widget,
+                              );
+                            }
+                            /*
+                            return AnimatedSwitcher(
+                              duration: kTabScrollDuration,
+                              transitionBuilder: (widget, animation) {
+                                return SizeTransition(
+                                  child: widget,
+                                  sizeFactor: Tween<double>(
+                                    begin: 0,
+                                    end: 1,
+                                  ).animate(animation),
+                                );
+                              },
+                              child: (Home.openMenu.value)
+                                  ? EmptyContainer()
+                                  : TheDescription(
+                                      content: content,
+                                      widget: widget,
+                                    ),
                             );
+                            */
                           },
-                          child: (Home.openMenu.value)
-                              ? EmptyContainer()
-                              : TheDescription(
-                                  content: content,
-                                  widget: widget,
-                                ),
-                        );
-                        */
-                      },
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-              );
-            },
-          ).toList(),
+                  );
+                },
+              ).toList(),
+            ),
+          ),
         ),
-      ),
+        Positioned(
+          top: 0,
+          bottom: 0,
+          right: 0,
+          child: Visibility(
+            visible: hasScroll,
+            child: Material(
+              color: Colors.transparent,
+              child: IconButton(
+                onPressed: () {
+                  controller.animateTo(
+                    controller.offset + MediaQuery.of(context).size.width,
+                    duration: kTabScrollDuration,
+                    curve: Curves.easeInOut,
+                  );
+                },
+                icon: Icon(
+                  FontAwesomeIcons.chevronCircleRight,
+                  color: Colors.white,
+                  size: 24,
+                ),
+              ),
+            ),
+          ),
+        ),
+        Positioned(
+          top: 0,
+          bottom: 0,
+          left: 0,
+          child: Visibility(
+            visible: hasScroll,
+            child: Material(
+              color: Colors.transparent,
+              child: IconButton(
+                onPressed: () {
+                  controller.animateTo(
+                    controller.offset - MediaQuery.of(context).size.width,
+                    duration: kTabScrollDuration,
+                    curve: Curves.easeInOut,
+                  );
+                },
+                icon: Icon(
+                  FontAwesomeIcons.chevronCircleLeft,
+                  color: Colors.white,
+                  size: 24,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
