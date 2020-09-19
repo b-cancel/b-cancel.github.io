@@ -45,9 +45,9 @@ const RESOURCES = {
 "faviconit/favicon-96.png": "bfec43944dbeb6f416e57b4144ff98d8",
 "faviconit/favicon.ico": "d9578e79850907c2d75fb6d2727626e9",
 "faviconit/faviconit-instructions.txt": "53f9f214c478b425a7fb737b9f02eb1e",
-"index.html": "11106dd1f71b61c95865b481703362b3",
-"/": "11106dd1f71b61c95865b481703362b3",
-"main.dart.js": "bc95a72de081165e90fa33f76070ea4e",
+"index.html": "944943c3fdd0d54543cdb692f18a70ed",
+"/": "944943c3fdd0d54543cdb692f18a70ed",
+"main.dart.js": "457081829afb3ff8dd9bf36190d4486d",
 "manifest.json": "d27d045a0c173386d93a4368bcf11389",
 "miniLoader.gif": "0098d8c7100448172595966afe90273d",
 "version.json": "426313f2f3133c2f20415344c4a22df3"

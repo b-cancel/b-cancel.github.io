@@ -577,9 +577,11 @@ class QRWidget extends StatelessWidget {
   const QRWidget({
     Key key,
     this.isDialog: false,
+    this.isNormal: true,
   }) : super(key: key);
 
   final bool isDialog;
+  final bool isNormal;
 
   @override
   Widget build(BuildContext context) {
@@ -628,12 +630,13 @@ class QRWidget extends StatelessWidget {
                     child: Padding(
                       padding: EdgeInsets.only(
                         top: 8.0,
+                        bottom: 8,
                       ),
                       child: Text(
                         "Save My Contact Details",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: isNormal ? Colors.black : Colors.white,
                         ),
                       ),
                     ),
@@ -649,7 +652,7 @@ class QRWidget extends StatelessWidget {
                       Center(
                         child: DefaultTextStyle(
                           style: TextStyle(
-                            color: Colors.white,
+                            color: isNormal ? Colors.black : Colors.white,
                             fontWeight: FontWeight.bold,
                             fontSize: MyApp.h4,
                           ),

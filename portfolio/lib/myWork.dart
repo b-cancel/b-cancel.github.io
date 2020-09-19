@@ -137,7 +137,9 @@ class _MyWorkState extends State<MyWork> {
     //TODO: do the same thing for games, websites, and graphics
 
     listItems.add(
-      QRWidget(),
+      QRWidget(
+        isNormal: false,
+      ),
     );
 
     //add the rights footer
