@@ -23,6 +23,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
+  visibility_detector: ^0.1.5
   
   swipedetector: ^1.2.0
 

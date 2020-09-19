@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 
 class VideoPlayerWidget extends StatefulWidget {
   final String url;
@@ -62,12 +63,13 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   }
 
   contentTapped() {
+    /*
     if (widget.playableContentTapped.value) {
       if (_controller.value.isPlaying) {
         _controller.pause();
-        setState(() {});
       }
     }
+    */
   }
 
   updateValues() async {
@@ -100,57 +102,25 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
 
               Positioned.fill(
                 child: Center(
-                  child: AspectRatio(
-                    aspectRatio: _controller.value.aspectRatio,
-                    child: VideoPlayer(
-                      _controller,
-                    ),
-                  ),
-                ),
-              ),
-              Positioned.fill(
-                child: Material(
-                  color: Colors.black
-                      .withOpacity(_controller.value.isPlaying ? 0 : 0.75),
-                  child: InkWell(
-                    onTap: () {
-                      // If the video is playing, pause it.
-                      if (_controller.value.isPlaying) {
-                        _controller.pause();
-                        setState(() {});
-                      } else {
-                        //cause all videos including our own to stop
-                        widget.playableContentTapped.value = true;
-
-                        //wait one second for all the videos to register the action
-                        WidgetsBinding.instance.addPostFrameCallback((_) {
-                          //reset the value, nothing will happen
-                          widget.playableContentTapped.value = false;
-
-                          //play ourselves
+                  child: VisibilityDetector(
+                    key: Key(widget.background.toString()),
+                    onVisibilityChanged: (visibilityInfo) {
+                      var visiblePercentage =
+                          visibilityInfo.visibleFraction * 100;
+                      if (visiblePercentage >= 100) {
+                        if (_controller.value.isPlaying == false) {
                           _controller.play();
-                          setState(() {});
-                        });
+                        }
+                      } else {
+                        if (_controller.value.isPlaying) {
+                          _controller.pause();
+                        }
                       }
                     },
-                    child: Center(
-                      child: Visibility(
-                        visible: _controller.value.isPlaying == false,
-                        child: Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            Icon(
-                              Icons.play_arrow,
-                              color: Colors.black,
-                              size: 36,
-                            ),
-                            Icon(
-                              Icons.play_arrow,
-                              color: Colors.white,
-                              size: 24,
-                            ),
-                          ],
-                        ),
+                    child: AspectRatio(
+                      aspectRatio: _controller.value.aspectRatio,
+                      child: VideoPlayer(
+                        _controller,
                       ),
                     ),
                   ),
