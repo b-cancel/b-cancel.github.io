@@ -120,9 +120,7 @@ class UnderConstructionChip extends StatelessWidget {
           vertical: 4,
         ),
         child: Text(
-          "Under Construction" +
-              "\nKnown Flutter Engine Bug" +
-              "\nMay Cause Crash",
+          "Under Construction",
           textAlign: TextAlign.right,
           style: TextStyle(
             fontWeight: FontWeight.bold,

@@ -197,10 +197,6 @@ Map<ProjectType, List<Project>> projectTypeToProjects = {
           "Create a digital Leash between your Bluetooth Devices and your phone to avoid loss. Prevention > Recovery.",
       github: "Leashed_Public",
       content: [
-        //find ble
-        Content("S8lbi2cusC5gVC0xOS",
-            description: "Idenify Bluetooth Devices Through Signal Analysis",
-            stdAspectRatioOverride: StdAspectRatio.Monitor),
         //main list
         Content(
           "RKMMj20eRHONfImd0L",
@@ -216,6 +212,12 @@ Map<ProjectType, List<Project>> projectTypeToProjects = {
         Content(
           "d5qOvltp866jRzktDZ",
           description: "Add New Device",
+        ),
+        //find ble
+        Content(
+          "S8lbi2cusC5gVC0xOS",
+          description: "Idenify Bluetooth Devices Through Signal Analysis",
+          stdAspectRatioOverride: StdAspectRatio.Monitor,
         ),
       ],
     ),

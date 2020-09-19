@@ -47,9 +47,19 @@ class _WorkHeaderState extends State<WorkHeader> {
 
   @override
   Widget build(BuildContext context) {
+    if (Home.openMenu.value) {
+      return EmptyContainer();
+    } else {
+      return TheTitle(
+        widget: widget,
+      );
+    }
+    /*
     return AnimatedSwitcher(
       duration: kTabScrollDuration,
       transitionBuilder: (widget, animation) {
+        
+        
         return SizeTransition(
           child: widget,
           sizeFactor: Tween<double>(
@@ -63,7 +73,7 @@ class _WorkHeaderState extends State<WorkHeader> {
           : TheTitle(
               widget: widget,
             ),
-    );
+    );*/
   }
 }
 
@@ -260,6 +270,15 @@ class _WorkBodyState extends State<WorkBody> {
                     AnimatedBuilder(
                       animation: Home.openMenu,
                       builder: (context, child) {
+                        if (Home.openMenu.value) {
+                          return EmptyContainer();
+                        } else {
+                          return TheDescription(
+                            content: content,
+                            widget: widget,
+                          );
+                        }
+                        /*
                         return AnimatedSwitcher(
                           duration: kTabScrollDuration,
                           transitionBuilder: (widget, animation) {
@@ -278,6 +297,7 @@ class _WorkBodyState extends State<WorkBody> {
                                   widget: widget,
                                 ),
                         );
+                        */
                       },
                     ),
                   ],
