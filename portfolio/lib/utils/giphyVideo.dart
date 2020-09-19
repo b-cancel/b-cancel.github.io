@@ -113,7 +113,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
                   builder: (context, child) {
                     return Material(
                       color: Colors.black
-                          .withOpacity(_controller.value.isPlaying ? 0 : 0.75),
+                          .withOpacity(_controller.value.isPlaying ? 0 : 0.30),
                       child: InkWell(
                         onTap: () {
                           // If the video is playing, pause it.
@@ -171,7 +171,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
               Positioned.fill(
                 child: Container(
                   color: Colors.black
-                      .withOpacity(_controller.value.isPlaying ? 0 : 0.75),
+                      .withOpacity(_controller.value.isPlaying ? 0 : 0.60),
                   child: Center(
                     child: CircularProgressIndicator(
                       valueColor: AlwaysStoppedAnimation<Color>(
