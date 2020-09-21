@@ -54,26 +54,6 @@ class _WorkHeaderState extends State<WorkHeader> {
         widget: widget,
       );
     }
-    /*
-    return AnimatedSwitcher(
-      duration: kTabScrollDuration,
-      transitionBuilder: (widget, animation) {
-        
-        
-        return SizeTransition(
-          child: widget,
-          sizeFactor: Tween<double>(
-            begin: 0,
-            end: 1,
-          ).animate(animation),
-        );
-      },
-      child: (Home.openMenu.value)
-          ? EmptyContainer()
-          : TheTitle(
-              widget: widget,
-            ),
-    );*/
   }
 }
 

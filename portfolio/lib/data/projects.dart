@@ -197,6 +197,12 @@ Map<ProjectType, List<Project>> projectTypeToProjects = {
           "Create a digital Leash between your Bluetooth Devices and your phone to avoid loss. Prevention > Recovery.",
       github: "Leashed_Public",
       content: [
+        //find ble
+        Content(
+          "S8lbi2cusC5gVC0xOS",
+          description: "Idenify Bluetooth Devices Through Signal Analysis",
+          stdAspectRatioOverride: StdAspectRatio.Monitor,
+        ),
         //main list
         Content(
           "RKMMj20eRHONfImd0L",
@@ -213,12 +219,6 @@ Map<ProjectType, List<Project>> projectTypeToProjects = {
           "d5qOvltp866jRzktDZ",
           description: "Add New Device",
         ),
-        //find ble
-        Content(
-          "S8lbi2cusC5gVC0xOS",
-          description: "Idenify Bluetooth Devices Through Signal Analysis",
-          stdAspectRatioOverride: StdAspectRatio.Monitor,
-        ),
       ],
     ),
 
@@ -233,12 +233,27 @@ Map<ProjectType, List<Project>> projectTypeToProjects = {
       github: "Flutter_ContactPicker",
       content: [
         //videos
-        Content("Uqk7fPBnsNydSn2GZW"),
-        Content("LM9EpmeAiYlIpSAcgH"),
+        Content(
+          "Uqk7fPBnsNydSn2GZW",
+          description: "Smooth Contracting Quick Access Slider",
+        ),
+        Content(
+          "LM9EpmeAiYlIpSAcgH",
+          description: "Add A Contact,",
+        ),
         //-----
-        Content("W0QwfdozN3AFnw1sWn"),
-        Content("Xbh1CLWME0plFA8g2G"),
-        Content("UT4byKMOmrYWk8dTmb"),
+        Content(
+          "W0QwfdozN3AFnw1sWn",
+          description: "Light Mode",
+        ),
+        Content(
+          "Xbh1CLWME0plFA8g2G",
+          description: "Add Contact Picture (Gallery/Camera)",
+        ),
+        Content(
+          "UT4byKMOmrYWk8dTmb",
+          description: "Portrait Mode",
+        ),
         //jpgs
         /*
         "https://imgur.com/YWYmyOt.jpg",
@@ -256,8 +271,14 @@ Map<ProjectType, List<Project>> projectTypeToProjects = {
           "A re-usable timer and stopwatch with all the functionality you would expect.",
       github: "Flutter_Timer_And_Stopwatch",
       content: [
-        Content("DQdmcrEwAFqneM6tiL"),
-        Content("5qFCRiENukaLzB7Yoy"),
+        Content(
+          "5qFCRiENukaLzB7Yoy",
+          description: "Timer",
+        ),
+        Content(
+          "DQdmcrEwAFqneM6tiL",
+          description: "Stopwatch",
+        ),
       ],
     ),
     Project(
@@ -267,10 +288,22 @@ Map<ProjectType, List<Project>> projectTypeToProjects = {
           " with the full control, gestures, handles and more.",
       github: "Flutter_MaterialSheetAndNavigationDrawer",
       content: [
-        Content("35KhYdJ9CQAN6hzYbQ"),
-        Content("dkXLQACALhF6puhk3I"),
-        Content("dYng1K8blxvnsLhP81"),
-        Content("9rsWxrJaYOhCQbRDXD"),
+        Content(
+          "dkXLQACALhF6puhk3I",
+          description: "Smooth Gesture Controlled Sheet",
+        ),
+        Content(
+          "35KhYdJ9CQAN6hzYbQ",
+          description: "Interactive Bottom Sheet",
+        ),
+        Content(
+          "dYng1K8blxvnsLhP81",
+          description: "Persistent Bottom Sheet",
+        ),
+        Content(
+          "9rsWxrJaYOhCQbRDXD",
+          description: "Sheets Everywhere!",
+        ),
       ],
     ),
     Project(
@@ -279,11 +312,26 @@ Map<ProjectType, List<Project>> projectTypeToProjects = {
       description: "A clone of instagram with flutter",
       github: "Flutter_Instagram",
       content: [
-        Content("UsT0dPQlVrVrJ4BC1z"),
-        Content("KezTdVWA3JIOS3fwX5"),
-        Content("S8BPNPf8i1CCYgv3LQ"),
-        Content("LSc6Y83JW98nX47nYe"),
-        Content("jUKJlmNzhbLRhetFtW"),
+        Content(
+          "UsT0dPQlVrVrJ4BC1z",
+          description: "Basic Navigation",
+        ),
+        Content(
+          "LSc6Y83JW98nX47nYe",
+          description: "Log in/Sign Up Form",
+        ),
+        Content(
+          "KezTdVWA3JIOS3fwX5",
+          description: "New Post",
+        ),
+        Content(
+          "S8BPNPf8i1CCYgv3LQ",
+          description: "Profile Picture Editing",
+        ),
+        Content(
+          "jUKJlmNzhbLRhetFtW",
+          description: "Post Editing",
+        ),
       ],
     ),
     Project(

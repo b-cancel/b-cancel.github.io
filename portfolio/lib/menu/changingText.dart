@@ -7,66 +7,103 @@ import 'package:portfolio/utils/link/ui/hover.dart';
 class SpecialTitle extends StatelessWidget {
   const SpecialTitle({
     Key key,
-    @required this.isOpen,
     @required this.useSpreadingTitle,
     @required this.title,
-    @required this.isHovering,
-    @required this.rotatingArrow,
-    @required this.isSpreaded,
+    this.isOpen,
+    this.isHovering,
+    this.rotatingArrow,
+    this.isSpreaded,
   }) : super(key: key);
 
-  final ValueNotifier<bool> isOpen;
   final bool useSpreadingTitle;
   final String title;
+  final ValueNotifier<bool> isOpen;
   final ValueNotifier<bool> isHovering;
   final Widget rotatingArrow;
   final ValueNotifier<bool> isSpreaded;
 
   @override
   Widget build(BuildContext context) {
-    return PointerOnHover(
-      isHovering: isHovering,
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          hoverColor: Colors.transparent,
-          //toggle
-          onTap: () {
-            isOpen.value = !isOpen.value;
-          },
-          child: Padding(
-            padding: EdgeInsets.only(
-              top: useSpreadingTitle ? 16 : 8,
-              bottom: 8.0,
+    if (isHovering == null) {
+      return Padding(
+        padding: EdgeInsets.only(
+          top: useSpreadingTitle ? 16 : 8,
+          bottom: 8.0,
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Visibility(
+              visible: useSpreadingTitle == false,
+              child: Opacity(
+                opacity: 0,
+                child: Icon(Icons.keyboard_arrow_down),
+              ),
             ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Visibility(
-                  visible: useSpreadingTitle == false,
-                  child: rotatingArrow,
-                ),
-                Ternary(
-                  condition: useSpreadingTitle,
-                  isTrue: SpreadingTitle(
-                    title: title,
-                    spreaded: isSpreaded,
+            Ternary(
+              condition: useSpreadingTitle,
+              isTrue: SpreadingTitle(
+                title: title,
+              ),
+              isFalse: BoldingTitle(
+                title: title,
+              ),
+            ),
+            Visibility(
+              visible: useSpreadingTitle,
+              child: Opacity(
+                opacity: 0,
+                child: Icon(Icons.keyboard_arrow_down),
+              ),
+            ),
+          ],
+        ),
+      );
+    } else {
+      return PointerOnHover(
+        isHovering: isHovering,
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            hoverColor: Colors.transparent,
+            //toggle
+            onTap: () {
+              isOpen.value = !isOpen.value;
+            },
+            child: Padding(
+              padding: EdgeInsets.only(
+                top: useSpreadingTitle ? 16 : 8,
+                bottom: 8.0,
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Visibility(
+                    visible: useSpreadingTitle == false,
+                    child: rotatingArrow,
                   ),
-                  isFalse: BoldingTitle(
-                    title: title,
-                    bolded: isSpreaded,
+                  Ternary(
+                    condition: useSpreadingTitle,
+                    isTrue: SpreadingTitle(
+                      title: title,
+                      spreaded: isSpreaded,
+                    ),
+                    isFalse: BoldingTitle(
+                      title: title,
+                      bolded: isSpreaded,
+                    ),
                   ),
-                ),
-                Visibility(
-                  visible: useSpreadingTitle,
-                  child: rotatingArrow,
-                ),
-              ],
+                  Visibility(
+                    visible: useSpreadingTitle,
+                    child: rotatingArrow,
+                  ),
+                ],
+              ),
             ),
           ),
         ),
-      ),
-    );
+      );
+    }
   }
 }
 
@@ -74,7 +111,7 @@ class SpreadingTitle extends StatelessWidget {
   const SpreadingTitle({
     Key key,
     @required this.title,
-    @required this.spreaded,
+    this.spreaded,
     this.isWork: false,
   }) : super(key: key);
 
@@ -84,24 +121,36 @@ class SpreadingTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: spreaded,
-      builder: (context, child) {
-        return AnimatedDefaultTextStyle(
-          child: Text(
-            title,
-          ),
-          style: TextStyle(
-            fontSize: MyApp.h4,
-            fontWeight: FontWeight.w900,
-            color: isWork ? Colors.white : Colors.black,
-            letterSpacing:
-                spreaded.value ? (isWork ? 16 : 8) : (isWork ? 8 : 0),
-          ),
-          duration: kTabScrollDuration,
-        );
-      },
-    );
+    if (spreaded == null) {
+      return Text(
+        title,
+        style: TextStyle(
+          fontSize: MyApp.h4,
+          fontWeight: FontWeight.w900,
+          color: isWork ? Colors.white : Colors.black,
+          letterSpacing: (isWork ? 16 : 8),
+        ),
+      );
+    } else {
+      return AnimatedBuilder(
+        animation: spreaded,
+        builder: (context, child) {
+          return AnimatedDefaultTextStyle(
+            child: Text(
+              title,
+            ),
+            style: TextStyle(
+              fontSize: MyApp.h4,
+              fontWeight: FontWeight.w900,
+              color: isWork ? Colors.white : Colors.black,
+              letterSpacing:
+                  spreaded.value ? (isWork ? 16 : 8) : (isWork ? 8 : 0),
+            ),
+            duration: kTabScrollDuration,
+          );
+        },
+      );
+    }
   }
 }
 
@@ -109,7 +158,7 @@ class BoldingTitle extends StatelessWidget {
   const BoldingTitle({
     Key key,
     @required this.title,
-    @required this.bolded,
+    this.bolded,
     this.isWork: false,
   }) : super(key: key);
 
@@ -119,22 +168,33 @@ class BoldingTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: bolded,
-      builder: (context, child) {
-        return AnimatedDefaultTextStyle(
-          child: Text(
-            title,
-          ),
-          style: TextStyle(
-            fontSize: MyApp.h5,
-            fontWeight: bolded.value ? FontWeight.bold : FontWeight.normal,
-            color: isWork ? Colors.white : Colors.black,
-          ),
-          duration: kTabScrollDuration,
-        );
-      },
-    );
+    if (bolded == null) {
+      return Text(
+        title,
+        style: TextStyle(
+          fontSize: MyApp.h5,
+          fontWeight: FontWeight.bold,
+          color: isWork ? Colors.white : Colors.black,
+        ),
+      );
+    } else {
+      return AnimatedBuilder(
+        animation: bolded,
+        builder: (context, child) {
+          return AnimatedDefaultTextStyle(
+            child: Text(
+              title,
+            ),
+            style: TextStyle(
+              fontSize: MyApp.h5,
+              fontWeight: bolded.value ? FontWeight.bold : FontWeight.normal,
+              color: isWork ? Colors.white : Colors.black,
+            ),
+            duration: kTabScrollDuration,
+          );
+        },
+      );
+    }
   }
 }
 

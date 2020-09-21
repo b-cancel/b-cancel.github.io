@@ -52,78 +52,60 @@
         align-items: center;
       }
 
-      .loader {
-        display: inline-block;
-        width: 30px;
-        height: 30px;
-        position: relative;
-        border: 4px solid #Fff;
-        animation: loader 2s infinite ease;
-      }
-      
-      .loader-inner {
-        vertical-align: top;
-        display: inline-block;
+      .back {
+        background-color: #030303;
         width: 100%;
-        background-color: #fff;
-        animation: loader-inner 2s infinite ease-in;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        text-align: center;
       }
-      
-      @keyframes loader {
-        0% {
-          transform: rotate(0deg);
-        }
-        
-        25% {
-          transform: rotate(180deg);
-        }
-        
-        50% {
-          transform: rotate(180deg);
-        }
-        
-        75% {
-          transform: rotate(360deg);
-        }
-        
-        100% {
-          transform: rotate(360deg);
-        }
+
+      .middle {
+        position: absolute;
+        margin: 0px auto;
+        bottom: 45%;
+        left: 0%;
+        right: 0%;
       }
-      
-      @keyframes loader-inner {
-        0% {
-          height: 0%;
-        }
-        
-        25% {
-          height: 0%;
-        }
-        
-        50% {
-          height: 100%;
-        }
-        
-        75% {
-          height: 100%;
-        }
-        
-        100% {
-          height: 0%;
-        }
+
+      h2, h3, h4, h5 {
+        color: white;
+        font-family: "Arial", "Arial Black", "Arial Bold", Gadget, sans-serif;
+        line-height: 50%;
+      }
+
+      .loader {
+        width: 50px;
+        margin: 0px auto;
+        height: 50px;
+        margin-bottom: 24;
+      }
+
+      .loaderImg {
+        width: 100%;
+        height: 100%;
+      }
+
+      .boldy {
+        font-family: "Arial Black", "Arial Bold", Gadget, sans-serif;
       }
     </style>
 </head>
 <body id="app-container">
-  <!--
-  <div class="loader-wrapper">
-    <span class="loader"><span class="loader-inner"></span></span>
-  </div>
-  -->
-
-  <div class="loader-wrapper">
-    <div style="width:50px; height:50px;">
-      <img src="miniLoader.gif" style="width:100%; height:100%;"></img>
+  <div class="back">
+    <div class="middle">
+      
+      <div class="loader">
+        <img class="loaderImg" src="miniLoader.gif"></img>
+      </div>
+      <br>
+      <h4>Hello! I'm</h4>
+      <h2 class="boldy">Bryan</h2>
+      <h2 class="boldy">Cancel</h2>
     </div>
   </div>
 
@@ -137,6 +119,6 @@
       });
     }
   </script>
-  <script src="main.dart.js?version=24" type="application/javascript"></script>
+  <script src="main.dart.js?version=26" type="application/javascript"></script>
 </body>
 </html>

@@ -27,16 +27,40 @@ class _SwappingSectionState extends State<SwappingSection> {
   @override
   void initState() {
     super.initState();
-    isOpen = new ValueNotifier(widget.startOpen);
+    if (widget.startOpen == false) {
+      isOpen = new ValueNotifier(widget.startOpen);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return SpreadTitleOnHover(
-      title: widget.title,
-      content: widget.content,
-      isOpen: isOpen,
-    );
+    if (widget.startOpen) {
+      return Padding(
+        padding: EdgeInsets.only(
+          top: 8,
+          bottom: 8.0,
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Opacity(
+              opacity: 0,
+              child: Icon(
+                Icons.keyboard_arrow_down,
+              ),
+            ),
+            widget.content,
+          ],
+        ),
+      );
+    } else {
+      return SpreadTitleOnHover(
+        title: widget.title,
+        content: widget.content,
+        isOpen: isOpen,
+      );
+    }
   }
 }
 

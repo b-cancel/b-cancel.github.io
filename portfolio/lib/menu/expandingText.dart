@@ -28,17 +28,47 @@ class _ExpandingSectionState extends State<ExpandingSection> {
   @override
   void initState() {
     super.initState();
-    isOpen = new ValueNotifier(widget.startOpen);
+    //if its open stay open
+    if (widget.startOpen == false) {
+      isOpen = new ValueNotifier(widget.startOpen);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return SpreadTitleOnHover(
-      title: widget.title,
-      content: widget.content,
-      useSpreadingTitle: widget.useSpreadingTitle,
-      isOpen: isOpen,
-    );
+    if (widget.startOpen) {
+      return Container(
+        padding: EdgeInsets.only(
+          right: widget.useSpreadingTitle ? 16 : 0,
+          left: widget.useSpreadingTitle ? 16 : 0,
+        ),
+        child: IntrinsicWidth(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SpecialTitle(
+                useSpreadingTitle: widget.useSpreadingTitle,
+                title: widget.title,
+              ),
+              Padding(
+                padding: EdgeInsets.only(
+                  left: widget.useSpreadingTitle ? 0 : 16,
+                ),
+                child: (widget.content ?? Text("content here eventually")),
+              ),
+            ],
+          ),
+        ),
+      );
+    } else {
+      return SpreadTitleOnHover(
+        title: widget.title,
+        content: widget.content,
+        useSpreadingTitle: widget.useSpreadingTitle,
+        isOpen: isOpen,
+      );
+    }
   }
 }
 
