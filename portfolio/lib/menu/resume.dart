@@ -83,7 +83,7 @@ class _ResumeInfoState extends State<ResumeInfo> {
                       content: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          WrappedText("05/2020 -> 08/2020"),
+                          WrappedText("05/2020 -> 07/2020"),
                           WrappedText(
                               "Mobile Development and Design (Dart/Flutter)",
                               style: bold),
@@ -133,11 +133,12 @@ class _ResumeInfoState extends State<ResumeInfo> {
                       content: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          WrappedText("07/2017 -> 08/2017"),
+                          WrappedText("07/2017 -> 09/2017"),
                           WrappedText("Web Development and Design",
                               style: bold),
                           WrappedText(
-                              "Lebron Group Land Surveying – Winter Park, FL"),
+                            "Lebron Group Land Surveying – Winter Park, FL",
+                          ),
                         ],
                       ),
                     ),
@@ -151,7 +152,8 @@ class _ResumeInfoState extends State<ResumeInfo> {
                           WrappedText("Graphic Design and Video Editing",
                               style: bold),
                           WrappedText(
-                              "UT Center for Railway Safety – Edinburg, TX"),
+                            "UT Center for Railway Safety – Edinburg, TX",
+                          ),
                         ],
                       ),
                     ),
@@ -165,7 +167,8 @@ class _ResumeInfoState extends State<ResumeInfo> {
                           WrappedText("Graphic Design and Video Editing",
                               style: bold),
                           WrappedText(
-                              "IT Marketing Division at UTPA – Edinburg, TX"),
+                            "IT Marketing Division at UTPA – Edinburg, TX",
+                          ),
                           WrappedText("Internship"),
                         ],
                       ),
@@ -179,7 +182,8 @@ class _ResumeInfoState extends State<ResumeInfo> {
                           WrappedText("05/2013 -> 05/2014"),
                           WrappedText("Robotics Coach", style: bold),
                           WrappedText(
-                              "Business Education Technology Academy – Edinburg, TX"),
+                            "Business Education Technology Academy – Edinburg, TX",
+                          ),
                           WrappedText("Volunteer"),
                         ],
                       ),
