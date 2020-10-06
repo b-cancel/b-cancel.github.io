@@ -70,7 +70,7 @@ class Home extends StatelessWidget {
                   title: CustomAppBarTitle(),
                 ),
                 //NOTE: transition handled internally
-                body: MyWork(),
+                body: MyWork2(),
               ),
             ),
             Positioned(
