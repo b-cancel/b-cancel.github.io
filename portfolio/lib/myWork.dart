@@ -7,10 +7,6 @@ import 'package:portfolio/home.dart';
 import 'package:portfolio/workContent.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'dart:ui' as ui;
-
-import 'package:universal_html/html.dart';
-
 class MyWork extends StatefulWidget {
   @override
   _MyWorkState createState() => _MyWorkState();
@@ -186,9 +182,6 @@ class MyWork2 extends StatefulWidget {
 }
 
 class _MyWork2State extends State<MyWork2> {
-  final IFrameElement _iframeElement = IFrameElement();
-  Widget _iframeWidget;
-
   final ScrollController scrollController = new ScrollController();
   final ValueNotifier<bool> onTop = new ValueNotifier(true);
   final ValueNotifier<double> overScroll = new ValueNotifier<double>(0);
@@ -196,12 +189,6 @@ class _MyWork2State extends State<MyWork2> {
 
   hideToasts() {
     BotToast.cleanAll();
-  }
-
-  bool closeMenu(var event) {
-    print("/n/n/ntapped/n/n/n");
-    //Home.openMenu.value = false;
-    return true;
   }
 
   @override
@@ -217,59 +204,6 @@ class _MyWork2State extends State<MyWork2> {
     //you wait until you can shift
     //and after you shift you progressively fade in
     waitingForMenuWidth();
-
-    //the basics
-    _iframeElement.height = '9';
-    _iframeElement.width = '16';
-    _iframeElement.src = 'https://b-cancel.github.io/websites/';
-    _iframeElement.style.border = 'none';
-
-    //both
-    /*
-    _iframeElement.onScroll.any((event) => closeMenu(event));
-
-    //close menu [desktop]
-    _iframeElement.onMouseWheel.any((event) => closeMenu(event));
-    _iframeElement.onWheel.any((event) => closeMenu(event));
-
-    _iframeElement.onClick.any((event) => closeMenu(event));
-    _iframeElement.onDoubleClick.any((event) => closeMenu(event));
-
-    //NOTE: on up since we can move mouse and "cancel" action
-    //_iframeElement.onMouseDown.capture((event) {});
-    _iframeElement.onMouseUp.any((event) => closeMenu(event));
-    _iframeElement.onMouseOver.capture((element) => closeMenu(element));
-    //_iframeElement.onMouseOver.any((element) => closeMenu);
-
-    //close menu [mobile]
-    //_iframeElement.onTouchStart.capture((event) {});
-    //_iframeElement.onTouchEnter.capture((event) {});
-    //_iframeElement.onTouchMove.capture((event) {});
-    //_iframeElement.onTouchLeave.capture((event) {});
-
-    //_iframeElement.onTouchCancel.capture((event) {});
-    _iframeElement.onTouchEnd.capture((event) => closeMenu(event));
-    */
-
-    /*
-    //these below should only relate to dragging and dropping
-    _iframeElement.onDragEnd.capture((event) {});
-    _iframeElement.onDragEnter.capture((event) {});
-    _iframeElement.onDragLeave.capture((event) {});
-    _iframeElement.onDragOver.capture((event) {});
-    _iframeElement.onDragStart.capture((event) {});
-    */
-
-    // ignore: ERROR undefined_prefixed_name
-    ui.platformViewRegistry.registerViewFactory(
-      'iframeElement',
-      (int viewId) => _iframeElement,
-    );
-
-    _iframeWidget = HtmlElementView(
-      key: UniqueKey(),
-      viewType: 'iframeElement',
-    );
   }
 
   @override
@@ -343,7 +277,7 @@ class _MyWork2State extends State<MyWork2> {
           child: SizedBox(
             width: iframeWidth.toDouble(),
             height: iframeHeight,
-            child: _iframeWidget,
+            child: HtmlView(),
           ),
         ),
         //only handle shifting on isMenuOpened Toggle
@@ -360,6 +294,20 @@ class _MyWork2State extends State<MyWork2> {
           );
         },
       ),
+    );
+  }
+}
+
+class HtmlView extends StatelessWidget {
+  const HtmlView({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return HtmlElementView(
+      key: UniqueKey(),
+      viewType: 'iframeElement',
     );
   }
 }

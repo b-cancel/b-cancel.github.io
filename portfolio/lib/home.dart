@@ -163,6 +163,9 @@ class MyName extends StatelessWidget {
                 if (Home.openMenu.value == false) {
                   Home.openMenu.value = true;
                   setMenuOpenCookie(true);
+                } else {
+                  Home.openMenu.value = false;
+                  setMenuOpenCookie(false);
                 }
               },
         child: Padding(
@@ -182,6 +185,16 @@ class MyName extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 //bigger part, and smaller part of smaller part
                 style: nameStyle,
+              ),
+              Visibility(
+                visible: inMenu,
+                child: IconButton(
+                  icon: Icon(
+                    Icons.close,
+                    color: Colors.black,
+                  ),
+                  onPressed: null,
+                ),
               ),
               Ternary(
                 condition: largerThanIDK,

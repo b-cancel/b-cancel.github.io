@@ -8,10 +8,90 @@ import 'package:giphy_client/giphy_client.dart';
 //internal
 import 'package:portfolio/home.dart';
 import 'package:portfolio/qrCode.dart';
+import 'package:universal_html/html.dart';
+import 'dart:ui' as ui;
 
 GiphyClient client;
 
+closeMenu(var event) {
+  Home.openMenu.value = false;
+}
+
 void main() {
+  // ignore: ERROR undefined_prefixed_name
+  ui.platformViewRegistry.registerViewFactory(
+    'iframeElement',
+    (int viewId) {
+      final wrapper = DivElement()
+        ..style.width = '100%'
+        ..style.height = '100%';
+
+      final IFrameElement _iframeElement = IFrameElement()
+        ..contentEditable = 'true'
+        ..style.width = '100%'
+        ..style.height = '100%'
+        ..src = 'https://b-cancel.github.io/websites/'
+        ..style.border = 'none';
+
+      //workaround
+      _iframeElement.onMouseOver.capture((element) => closeMenu(element));
+
+      //both
+      _iframeElement.onScroll.capture((event) => closeMenu(event));
+
+      //close menu [desktop]
+      _iframeElement.onMouseWheel.capture((event) => closeMenu(event));
+      _iframeElement.onWheel.capture((event) => closeMenu(event));
+
+      _iframeElement.onClick.capture((event) => closeMenu(event));
+      _iframeElement.onDoubleClick.capture((event) => closeMenu(event));
+
+      //NOTE: on up since we can move mouse and "cancel" action
+      //_iframeElement.onMouseDown.capture((event) {});
+      _iframeElement.onMouseUp.capture((event) => closeMenu(event));
+      //_iframeElement.onMouseOver.any((element) => closeMenu);
+
+      //close menu [mobile]
+      //_iframeElement.onTouchStart.capture((event) {});
+      //_iframeElement.onTouchEnter.capture((event) {});
+      //_iframeElement.onTouchMove.capture((event) {});
+      //_iframeElement.onTouchLeave.capture((event) {});
+
+      //_iframeElement.onTouchCancel.capture((event) {});
+      _iframeElement.onTouchEnd.capture((event) => closeMenu(event));
+
+      /*
+    //these below should only relate to dragging and dropping
+    _iframeElement.onDragEnd.capture((event) {});
+
+    _iframeElement.onDragEnter.capture((event) {});
+    _iframeElement.onDragLeave.capture((event) {});
+    _iframeElement.onDragOver.capture((event) {});
+    _iframeElement.onDragStart.capture((event) {});
+    */
+
+      wrapper.append(_iframeElement);
+      return wrapper;
+    },
+  );
+
+  /*
+    ui.platformViewRegistry.registerViewFactory('someViewType', (int viewId) {
+    final wrapper = DivElement()
+      ..style.width = '100%'
+      ..style.height = '100%';
+    
+    final div = DivElement()
+      ..contentEditable = 'true'
+      ..style.width = '100%'
+      ..style.color = "red"
+      ..style.backgroundColor = 'red'
+      ..style.height = '100%';
+    wrapper.append(div);
+    return wrapper;
+  });
+  */
+
   //giphy setup
   client = new GiphyClient(
     //apiKey: 'YMQVelhTCeQcE0ShiI1j9bz4q5fWzxKQ',
