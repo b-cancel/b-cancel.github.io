@@ -7,8 +7,9 @@ import 'package:portfolio/home.dart';
 import 'package:portfolio/workContent.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'dart:html';
 import 'dart:ui' as ui;
+
+import 'package:universal_html/html.dart';
 
 class MyWork extends StatefulWidget {
   @override
@@ -197,6 +198,10 @@ class _MyWork2State extends State<MyWork2> {
     BotToast.cleanAll();
   }
 
+  check() {
+    print("/n/n/ntapped/n/n/n");
+  }
+
   @override
   void initState() {
     super.initState();
@@ -215,6 +220,77 @@ class _MyWork2State extends State<MyWork2> {
     _iframeElement.width = '16';
     _iframeElement.src = 'https://b-cancel.github.io/websites/';
     _iframeElement.style.border = 'none';
+    //hidden hides and restore function
+    //attributes
+    _iframeElement.onAbort.capture((event) {});
+    _iframeElement.onBeforeCopy.capture((event) {});
+    _iframeElement.onBeforeCut.capture((event) {});
+    _iframeElement.onBeforePaste.capture((event) {});
+    _iframeElement.onBlur.capture((event) {});
+    _iframeElement.onCanPlay.capture((event) {});
+    _iframeElement.onCanPlayThrough.capture((event) {});
+    _iframeElement.onChange.capture((event) {});
+    _iframeElement.onClick.capture((event) {});
+    _iframeElement.onContextMenu.capture((event) {});
+    _iframeElement.onCopy.capture((event) {});
+    _iframeElement.onCut.capture((event) {});
+    _iframeElement.onDoubleClick.capture((event) {});
+    _iframeElement.onDrag.capture((event) {});
+    _iframeElement.onDragEnd.capture((event) {});
+    _iframeElement.onDragEnter.capture((event) {});
+    _iframeElement.onDragLeave.capture((event) {});
+    _iframeElement.onDragOver.capture((event) {});
+    _iframeElement.onDragStart.capture((event) {});
+    _iframeElement.onDrop.capture((event) {});
+    _iframeElement.onDurationChange.capture((event) {});
+    _iframeElement.onEmptied.capture((event) {});
+    _iframeElement.onEnded.capture((event) {});
+    _iframeElement.onError.capture((event) {});
+    _iframeElement.onFocus.capture((event) {});
+    _iframeElement.onFullscreenChange.capture((event) {});
+    _iframeElement.onFullscreenError.capture((event) {});
+    _iframeElement.onInput.capture((event) {});
+    _iframeElement.onInvalid.capture((event) {});
+    _iframeElement.onKeyDown.capture((event) {});
+    _iframeElement.onKeyPress.capture((event) {});
+    _iframeElement.onKeyUp.capture((event) {});
+    _iframeElement.onLoad.capture((event) {});
+    _iframeElement.onLoadedData.capture((event) {});
+    _iframeElement.onLoadedMetadata.capture((event) {});
+    _iframeElement.onMouseEnter.capture((event) {});
+    _iframeElement.onMouseLeave.capture((event) {});
+    _iframeElement.onMouseMove.capture((event) {});
+    _iframeElement.onMouseOut.capture((event) {});
+    _iframeElement.onMouseOver.capture((event) {});
+    _iframeElement.onMouseUp.capture((event) {});
+    _iframeElement.onMouseWheel.capture((event) {});
+    _iframeElement.onPaste.capture((event) {});
+    _iframeElement.onPause.capture((event) {});
+    _iframeElement.onPlay.capture((event) {});
+    _iframeElement.onPlaying.capture((event) {});
+    _iframeElement.onRateChange.capture((event) {});
+    _iframeElement.onReset.capture((event) {});
+    _iframeElement.onResize.capture((event) {});
+    _iframeElement.onScroll.capture((event) {});
+    _iframeElement.onSearch.capture((event) {});
+    _iframeElement.onSeeked.capture((event) {});
+    _iframeElement.onSeeking.capture((event) {});
+    _iframeElement.onSelect.capture((event) {});
+    _iframeElement.onSelectStart.capture((event) {});
+    _iframeElement.onStalled.capture((event) {});
+    _iframeElement.onSubmit.capture((event) {});
+    _iframeElement.onSuspend.capture((event) {});
+    _iframeElement.onTimeUpdate.capture((event) {});
+    _iframeElement.onTouchCancel.capture((event) {});
+    _iframeElement.onTouchEnd.capture((event) {});
+    _iframeElement.onTouchEnter.capture((event) {});
+    _iframeElement.onTouchLeave.capture((event) {});
+    _iframeElement.onTouchMove.capture((event) {});
+    _iframeElement.onTouchStart.capture((event) {});
+    _iframeElement.onTransitionEnd.capture((event) {});
+    _iframeElement.onVolumeChange.capture((event) {});
+    _iframeElement.onWaiting.capture((event) {});
+    _iframeElement.onWheel.capture((event) {});
 
     // ignore: ERROR undefined_prefixed_name
     ui.platformViewRegistry.registerViewFactory(
