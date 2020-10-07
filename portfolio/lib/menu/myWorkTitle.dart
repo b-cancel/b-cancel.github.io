@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:portfolio/home.dart';
 import 'package:portfolio/main.dart';
 import 'package:portfolio/menu/changingText.dart';
-import 'package:portfolio/menu/expandingText.dart';
 import 'package:portfolio/utils/link/ui/hover.dart';
 
 class ExpandMyWorkOnHover extends StatefulWidget {

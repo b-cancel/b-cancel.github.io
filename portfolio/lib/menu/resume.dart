@@ -6,7 +6,6 @@ import 'package:portfolio/menu/myWorkTitle.dart';
 import 'package:portfolio/menu/sections/software.dart';
 import 'package:portfolio/menu/swapingText.dart';
 import 'package:portfolio/utils/chips.dart';
-import 'package:portfolio/utils/link/openLink.dart';
 import 'package:portfolio/utils/wrappedText.dart';
 
 class ResumeInfo extends StatefulWidget {

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 //plugins
 import 'package:bot_toast/bot_toast.dart';
-import 'package:giphy_client/giphy_client.dart';
+//import 'package:giphy_client/giphy_client.dart';
 
 //internal
 import 'package:portfolio/home.dart';
@@ -11,7 +11,7 @@ import 'package:portfolio/qrCode.dart';
 import 'package:universal_html/html.dart';
 import 'dart:ui' as ui;
 
-GiphyClient client;
+//GiphyClient client;
 
 closeMenu(var event) {
   Home.openMenu.value = false;
@@ -93,10 +93,12 @@ void main() {
   */
 
   //giphy setup
+  /*
   client = new GiphyClient(
     //apiKey: 'YMQVelhTCeQcE0ShiI1j9bz4q5fWzxKQ',
     apiKey: 'f6y8PDyNvi7WblWG76jS3V1Z9h2viokr',
   );
+  */
 
   //start app
   runApp(MyApp());

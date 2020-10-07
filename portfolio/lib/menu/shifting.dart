@@ -2,10 +2,8 @@
 import 'package:flutter/material.dart';
 
 //internal
-import 'package:portfolio/icons/portfolio_icons_icons.dart';
 import 'package:portfolio/menu/resume.dart';
 import 'package:portfolio/utils/goldenRatio.dart';
-import 'package:portfolio/utils/link/ui/iconLink.dart';
 import 'package:portfolio/home.dart';
 
 //main menu widget
@@ -90,57 +88,6 @@ class ShiftingMenu extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class CanSpeak extends StatelessWidget {
-  const CanSpeak({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return IconLabelLink(
-      label: "speak",
-      icon: IconLinkIcon(
-        mini: true,
-        icon: PortfolioIcons.volume_up,
-      ),
-    );
-  }
-}
-
-class CanWrite extends StatelessWidget {
-  const CanWrite({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return IconLabelLink(
-      label: "write",
-      icon: IconLinkIcon(
-        mini: true,
-        icon: PortfolioIcons.pen_alt,
-      ),
-    );
-  }
-}
-
-class CanRead extends StatelessWidget {
-  const CanRead({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return IconLabelLink(
-      label: "read",
-      icon: IconLinkIcon(
-        mini: true,
-        icon: PortfolioIcons.book_reader,
       ),
     );
   }
