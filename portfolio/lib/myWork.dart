@@ -223,13 +223,23 @@ class _MyWork2State extends State<MyWork2> {
     _iframeElement.src = 'https://b-cancel.github.io/websites/';
     _iframeElement.style.border = 'none';
 
-    //should trigger the menu to close [desktop]
+    //close menu [desktop]
     _iframeElement.onScroll.capture((event) {});
+    _iframeElement.onMouseWheel.capture((event) {});
+    _iframeElement.onWheel.capture((event) {});
 
     _iframeElement.onClick.capture((event) {});
     _iframeElement.onDoubleClick.capture((event) {});
 
-    //should trigger the menu to close [mobile]
+    //maybes
+    _iframeElement.onMouseEnter.capture((event) {});
+    _iframeElement.onMouseUp.capture((event) {});
+    _iframeElement.onMouseLeave.capture((event) {});
+    _iframeElement.onMouseOut.capture((event) {});
+
+    //close menu [mobile]
+
+    //all below are maybes
     _iframeElement.onDragEnd.capture((event) {});
     _iframeElement.onDragEnter.capture((event) {});
     _iframeElement.onDragLeave.capture((event) {});
@@ -242,27 +252,6 @@ class _MyWork2State extends State<MyWork2> {
     _iframeElement.onTouchLeave.capture((event) {});
     _iframeElement.onTouchMove.capture((event) {});
     _iframeElement.onTouchStart.capture((event) {});
-
-    //should possibly trigger menu to close
-    _iframeElement.onWheel.capture((event) {});
-    _iframeElement.onChange.capture((event) {});
-    _iframeElement.onFocus.capture((event) {});
-    _iframeElement.onInput.capture((event) {});
-    _iframeElement.onDrop.capture((event) {});
-    _iframeElement.onEnded.capture((event) {});
-
-    _iframeElement.onKeyDown.capture((event) {});
-    _iframeElement.onKeyPress.capture((event) {});
-    _iframeElement.onKeyUp.capture((event) {});
-
-    _iframeElement.onMouseEnter.capture((event) {});
-    _iframeElement.onMouseUp.capture((event) {});
-    _iframeElement.onMouseWheel.capture((event) {});
-    _iframeElement.onMouseLeave.capture((event) {});
-    _iframeElement.onMouseOut.capture((event) {});
-
-    _iframeElement.onSelect.capture((event) {});
-    _iframeElement.onSelectStart.capture((event) {});
 
     // ignore: ERROR undefined_prefixed_name
     ui.platformViewRegistry.registerViewFactory(
