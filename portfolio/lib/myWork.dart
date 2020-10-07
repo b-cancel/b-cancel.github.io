@@ -198,9 +198,10 @@ class _MyWork2State extends State<MyWork2> {
     BotToast.cleanAll();
   }
 
-  closeMenu() {
+  bool closeMenu(var event) {
     print("/n/n/ntapped/n/n/n");
-    Home.openMenu.value = false;
+    //Home.openMenu.value = false;
+    return true;
   }
 
   @override
@@ -223,35 +224,41 @@ class _MyWork2State extends State<MyWork2> {
     _iframeElement.src = 'https://b-cancel.github.io/websites/';
     _iframeElement.style.border = 'none';
 
+    //both
+    /*
+    _iframeElement.onScroll.any((event) => closeMenu(event));
+
     //close menu [desktop]
-    _iframeElement.onScroll.capture((event) {});
-    _iframeElement.onMouseWheel.capture((event) {});
-    _iframeElement.onWheel.capture((event) {});
+    _iframeElement.onMouseWheel.any((event) => closeMenu(event));
+    _iframeElement.onWheel.any((event) => closeMenu(event));
 
-    _iframeElement.onClick.capture((event) {});
-    _iframeElement.onDoubleClick.capture((event) {});
+    _iframeElement.onClick.any((event) => closeMenu(event));
+    _iframeElement.onDoubleClick.any((event) => closeMenu(event));
 
-    //maybes
-    _iframeElement.onMouseEnter.capture((event) {});
-    _iframeElement.onMouseUp.capture((event) {});
-    _iframeElement.onMouseLeave.capture((event) {});
-    _iframeElement.onMouseOut.capture((event) {});
+    //NOTE: on up since we can move mouse and "cancel" action
+    //_iframeElement.onMouseDown.capture((event) {});
+    _iframeElement.onMouseUp.any((event) => closeMenu(event));
+    _iframeElement.onMouseOver.capture((element) => closeMenu(element));
+    //_iframeElement.onMouseOver.any((element) => closeMenu);
 
     //close menu [mobile]
+    //_iframeElement.onTouchStart.capture((event) {});
+    //_iframeElement.onTouchEnter.capture((event) {});
+    //_iframeElement.onTouchMove.capture((event) {});
+    //_iframeElement.onTouchLeave.capture((event) {});
 
-    //all below are maybes
+    //_iframeElement.onTouchCancel.capture((event) {});
+    _iframeElement.onTouchEnd.capture((event) => closeMenu(event));
+    */
+
+    /*
+    //these below should only relate to dragging and dropping
     _iframeElement.onDragEnd.capture((event) {});
     _iframeElement.onDragEnter.capture((event) {});
     _iframeElement.onDragLeave.capture((event) {});
     _iframeElement.onDragOver.capture((event) {});
     _iframeElement.onDragStart.capture((event) {});
-
-    _iframeElement.onTouchCancel.capture((event) {});
-    _iframeElement.onTouchEnd.capture((event) {});
-    _iframeElement.onTouchEnter.capture((event) {});
-    _iframeElement.onTouchLeave.capture((event) {});
-    _iframeElement.onTouchMove.capture((event) {});
-    _iframeElement.onTouchStart.capture((event) {});
+    */
 
     // ignore: ERROR undefined_prefixed_name
     ui.platformViewRegistry.registerViewFactory(
