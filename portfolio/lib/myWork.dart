@@ -264,55 +264,6 @@ class _MyWork2State extends State<MyWork2> {
     _iframeElement.onSelect.capture((event) {});
     _iframeElement.onSelectStart.capture((event) {});
 
-    //should NOT TRIGGER the menu to close
-    _iframeElement.onAbort.capture((event) {});
-    _iframeElement.onBlur.capture((event) {});
-    _iframeElement.onDurationChange.capture((event) {});
-    _iframeElement.onEmptied.capture((event) {});
-    _iframeElement.onError.capture((event) {});
-    _iframeElement.onInvalid.capture((event) {});
-    _iframeElement.onSearch.capture((event) {});
-    _iframeElement.onStalled.capture((event) {});
-    _iframeElement.onSubmit.capture((event) {});
-    _iframeElement.onSuspend.capture((event) {});
-    _iframeElement.onTimeUpdate.capture((event) {});
-    _iframeElement.onTransitionEnd.capture((event) {});
-    _iframeElement.onVolumeChange.capture((event) {});
-    _iframeElement.onWaiting.capture((event) {});
-    _iframeElement.onRateChange.capture((event) {});
-    _iframeElement.onReset.capture((event) {});
-    _iframeElement.onResize.capture((event) {});
-
-    _iframeElement.onSeeked.capture((event) {});
-    _iframeElement.onSeeking.capture((event) {});
-
-    _iframeElement.onCanPlay.capture((event) {});
-    _iframeElement.onCanPlayThrough.capture((event) {});
-
-    _iframeElement.onFullscreenChange.capture((event) {});
-    _iframeElement.onFullscreenError.capture((event) {});
-
-    _iframeElement.onLoad.capture((event) {});
-    _iframeElement.onLoadedData.capture((event) {});
-    _iframeElement.onLoadedMetadata.capture((event) {});
-
-    _iframeElement.onContextMenu.capture((event) {});
-
-    _iframeElement.onBeforePaste.capture((event) {});
-    _iframeElement.onBeforeCopy.capture((event) {});
-    _iframeElement.onBeforeCut.capture((event) {});
-
-    _iframeElement.onPaste.capture((event) {});
-    _iframeElement.onCopy.capture((event) {});
-    _iframeElement.onCut.capture((event) {});
-
-    _iframeElement.onMouseMove.capture((event) {});
-    _iframeElement.onMouseOver.capture((event) {});
-
-    _iframeElement.onPause.capture((event) {});
-    _iframeElement.onPlaying.capture((event) {});
-    _iframeElement.onPlay.capture((event) {});
-
     // ignore: ERROR undefined_prefixed_name
     ui.platformViewRegistry.registerViewFactory(
       'iframeElement',
