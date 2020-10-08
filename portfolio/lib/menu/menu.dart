@@ -251,30 +251,33 @@ class _ResumeInMenuState extends State<ResumeInMenu>
                 Home.startUpComplete.value ? kTabScrollDuration : Duration.zero,
             top: 0,
             left: (Home.openMenu.value) ? 0 : -(getMenuWidth() ?? 0),
-            child: Row(
-              children: <Widget>[
-                ShiftingMenu(
-                  minWidth: minWidth,
-                  maxWidth: maxWidth,
-                ),
-                Expanded(
-                  child: Stack(
-                    children: <Widget>[
-                      Positioned(
-                        top: 0,
-                        bottom: 0,
-                        left: 0,
-                        child: GradientBorder(
-                          baseColor: baseColor,
-                        ),
-                      ),
-                      Positioned.fill(
-                        child: VerticalMyWorkLabel(),
-                      ),
-                    ],
+            child: Scaffold(
+              backgroundColor: Colors.transparent,
+              body: Row(
+                children: <Widget>[
+                  ShiftingMenu(
+                    minWidth: minWidth,
+                    maxWidth: maxWidth,
                   ),
-                ),
-              ],
+                  Expanded(
+                    child: Stack(
+                      children: <Widget>[
+                        Positioned(
+                          top: 0,
+                          bottom: 0,
+                          left: 0,
+                          child: GradientBorder(
+                            baseColor: baseColor,
+                          ),
+                        ),
+                        Positioned.fill(
+                          child: VerticalMyWorkLabel(),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ],

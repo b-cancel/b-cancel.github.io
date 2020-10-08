@@ -46,7 +46,8 @@ copyToClipboard(
 }) async {
   //prep string
   String intentTypeString = intentTypeToString(initialIntent) ?? "";
-  String intent = "Unable To " + intentTypeString + " \"" + url + "\"";
+  //open, call, text, email, download
+  String intent = "Unable To " + intentTypeString + " " + url;
 
   //process
   if (await _copyToClipboard(url)) {
@@ -54,15 +55,21 @@ copyToClipboard(
       //originally wanted to copy
       showSnackBar(
         context,
-        text: "\"" + url + "\" Copied To Clipboard",
+        backgroundColor: Colors.green,
+        textColor: Colors.black,
         icon: PortfolioIcons.content_copy,
+        suffix: " Copied To Clipboard",
+        message: url,
       );
     } else {
       //copying is something else
       showSnackBar(
         context,
-        text: intent + "\n" + "But it was copied to your clipboard",
+        backgroundColor: Colors.yellow,
+        textColor: Colors.black,
         icon: PortfolioIcons.content_copy,
+        message: intent,
+        suffix: "\n" + "But it was copied to your clipboard",
       );
     }
   } else {
@@ -80,7 +87,11 @@ copyToClipboard(
     //show alternative message if needed
     showSnackBar(
       context,
-      text: failureMessage + secondaryMessage,
+      backgroundColor: Colors.red,
+      textColor: Colors.black,
+      icon: PortfolioIcons.content_copy,
+      message: failureMessage,
+      suffix: secondaryMessage,
     );
   }
 }

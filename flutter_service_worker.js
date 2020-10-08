@@ -3,11 +3,11 @@ const MANIFEST = 'flutter-app-manifest';
 const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 const RESOURCES = {
-  "assets/AssetManifest.json": "2492e37b03670e1fb8ae2fecc3497079",
+  "assets/AssetManifest.json": "8d886b669ecc4fb9382ac0d716a88071",
 "assets/assets/fonts/PortfolioIcons.ttf": "1349202f69777724328456aa7621446f",
 "assets/assets/miniLoader.gif": "0098d8c7100448172595966afe90273d",
 "assets/assets/vcards/Bryan_Cancel.vcf": "30e33d3198e95fc43998e59c3bcd2295",
-"assets/FontManifest.json": "093a7716fd3885b4a2241632c7e4012f",
+"assets/FontManifest.json": "78698bedc3d7a928d6286c913eaff730",
 "assets/fonts/MaterialIcons-Regular.otf": "1288c9e28052e028aba623321f7826ac",
 "assets/google_fonts/LICENSE.txt": "d273d63619c9aeaf15cdaf76422c4f87",
 "assets/google_fonts/RobotoMono-Bold.ttf": "7c13b04382bb3c4a6a50211300a1b072",
@@ -21,9 +21,6 @@ const RESOURCES = {
 "assets/google_fonts/RobotoMono-Thin.ttf": "288302ea531af8be59f6ac2b5bbbfdd3",
 "assets/google_fonts/RobotoMono-ThinItalic.ttf": "355d559cc860016a068bcd16b66e4bd3",
 "assets/NOTICES": "b83196423d60b0db97917c1e13733c6f",
-"assets/packages/font_awesome_flutter/lib/fonts/fa-brands-400.ttf": "5a37ae808cf9f652198acde612b5328d",
-"assets/packages/font_awesome_flutter/lib/fonts/fa-regular-400.ttf": "2bca5ec802e40d3f4b60343e346cedde",
-"assets/packages/font_awesome_flutter/lib/fonts/fa-solid-900.ttf": "2aa350bd2aeab88b601a593f793734c0",
 "faviconit/browserconfig.xml": "2077dd3fa170043e91525d9cd4cdd1ac",
 "faviconit/favicon-114.png": "ac68092d20f0e6f924c4716babb7bd76",
 "faviconit/favicon-120.png": "77fac968f73e94320e493fa064b8a563",
@@ -45,9 +42,9 @@ const RESOURCES = {
 "faviconit/favicon-96.png": "bfec43944dbeb6f416e57b4144ff98d8",
 "faviconit/favicon.ico": "d9578e79850907c2d75fb6d2727626e9",
 "faviconit/faviconit-instructions.txt": "53f9f214c478b425a7fb737b9f02eb1e",
-"index.html": "3dca7ba070a1045d5d9668dcb7fddef2",
-"/": "3dca7ba070a1045d5d9668dcb7fddef2",
-"main.dart.js": "ca42121f3ef0f254e2532cf05cf190ee",
+"index.html": "0c87bc51b50dfe56a30cabe464f221a0",
+"/": "0c87bc51b50dfe56a30cabe464f221a0",
+"main.dart.js": "a3b42b1c71ce52f43c82116e74a5292e",
 "manifest.json": "d27d045a0c173386d93a4368bcf11389",
 "miniLoader.gif": "0098d8c7100448172595966afe90273d"
 };

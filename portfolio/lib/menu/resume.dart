@@ -1,6 +1,5 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:portfolio/data/basic.dart';
 import 'package:portfolio/icons/portfolio_icons_icons.dart';
 import 'package:portfolio/main.dart';
@@ -70,27 +69,7 @@ class _ResumeInfoState extends State<ResumeInfo> {
   Widget saveContactLink() {
     return MyIconLink(
       action: () async {
-        //NOTE: this only works in the web but that's where I need it to work
-        String fileName = "Bryan_Cancel.vcf";
-        String url = "vcards/" + fileName;
-        //TODO: remember to switch this to false when ready to build
-        bool testing = false;
-        if (testing == false) {
-          //true if NOT TESTING
-          url = ("assets/" + url);
-        }
-        if (await downloadFile(url)) {
-          showSnackBar(
-            context,
-            text: "Contact Card Downloaded",
-            icon: PortfolioIcons.check,
-          );
-        } else {
-          showSnackBar(
-            context,
-            text: 'Contact Card Download Not Supported',
-          );
-        }
+        downloadQrCode(context);
       },
       icon: PortfolioIcons.address_card,
     );
@@ -184,9 +163,13 @@ class _ResumeInfoState extends State<ResumeInfo> {
                           saveContactLink(),
                           MyIconLink(
                             action: () {
-                              print("scroll all the way down");
+                              scrollController.animateTo(
+                                scrollController.position.maxScrollExtent,
+                                duration: kTabScrollDuration,
+                                curve: Curves.easeOut,
+                              );
                             },
-                            icon: FontAwesomeIcons.qrcode,
+                            icon: Icons.qr_code,
                           ),
                         ],
                       ),
@@ -707,27 +690,7 @@ class QRWidget extends StatelessWidget {
         color: Colors.transparent,
         child: InkWell(
           onTap: () async {
-            //NOTE: this only works in the web but that's where I need it to work
-            String fileName = "Bryan_Cancel.vcf";
-            String url = "vcards/" + fileName;
-            //TODO: remember to switch this to false when ready to build
-            bool testing = false;
-            if (testing == false) {
-              //true if NOT TESTING
-              url = ("assets/" + url);
-            }
-            if (await downloadFile(url)) {
-              showSnackBar(
-                context,
-                text: "Contact Card Downloaded",
-                icon: PortfolioIcons.check,
-              );
-            } else {
-              showSnackBar(
-                context,
-                text: 'Contact Card Download Not Supported',
-              );
-            }
+            downloadQrCode(context);
           },
           child: Padding(
             padding: EdgeInsets.all(16),
@@ -748,5 +711,35 @@ class QRWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+downloadQrCode(BuildContext context) async {
+  //NOTE: this only works in the web but that's where I need it to work
+  String fileName = "Bryan_Cancel.vcf";
+  String url = "vcards/" + fileName;
+  //TODO: remember to switch this to false when ready to build
+  bool testing = false;
+  if (testing == false) {
+    //true if NOT TESTING
+    url = ("assets/" + url);
+  }
+  if (await downloadFile(url)) {
+    showSnackBar(
+      context,
+      backgroundColor: Colors.green,
+      textColor: Colors.black,
+      icon: PortfolioIcons.check,
+      prefix: "Contact Card ",
+      message: "Downloaded",
+    );
+  } else {
+    showSnackBar(context,
+        backgroundColor: Colors.red,
+        textColor: Colors.black,
+        icon: PortfolioIcons.warning,
+        prefix: 'Contact Card Download ',
+        message: 'Not Supported',
+        suffix: ', Trying Scanning The QR Code Instead');
   }
 }
