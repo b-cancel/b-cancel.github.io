@@ -42,23 +42,21 @@ class _ExpandingSectionState extends State<ExpandingSection> {
           right: widget.useSpreadingTitle ? 16 : 0,
           left: widget.useSpreadingTitle ? 16 : 0,
         ),
-        child: IntrinsicWidth(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SpecialTitle(
-                useSpreadingTitle: widget.useSpreadingTitle,
-                title: widget.title,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SpecialTitle(
+              useSpreadingTitle: widget.useSpreadingTitle,
+              title: widget.title,
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                left: widget.useSpreadingTitle ? 0 : 16,
               ),
-              Padding(
-                padding: EdgeInsets.only(
-                  left: widget.useSpreadingTitle ? 0 : 16,
-                ),
-                child: (widget.content ?? Text("content here eventually")),
-              ),
-            ],
-          ),
+              child: (widget.content ?? Text("content here eventually")),
+            ),
+          ],
         ),
       );
     } else {
@@ -137,50 +135,48 @@ class _SpreadTitleOnHoverState extends State<SpreadTitleOnHover> {
         right: widget.useSpreadingTitle ? 16 : 0,
         left: widget.useSpreadingTitle ? 16 : 0,
       ),
-      child: IntrinsicWidth(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SpecialTitle(
-              isOpen: widget.isOpen,
-              useSpreadingTitle: widget.useSpreadingTitle,
-              title: widget.title,
-              isHovering: isHovering,
-              rotatingArrow: rotatingArrow,
-              isSpreaded: isSpreaded,
-            ),
-            AnimatedBuilder(
-              animation: widget.isOpen,
-              builder: (context, child) {
-                return AnimatedSwitcher(
-                  duration: kTabScrollDuration,
-                  transitionBuilder: (widget, animation) {
-                    return SizeTransition(
-                      child: widget,
-                      sizeFactor: Tween<double>(
-                        begin: 0,
-                        end: 1,
-                      ).animate(animation),
-                    );
-                  },
-                  child: (widget.isOpen.value)
-                      ? Padding(
-                          padding: EdgeInsets.only(
-                            left: widget.useSpreadingTitle ? 0 : 16,
-                          ),
-                          child: (widget.content ??
-                              Text("content here eventually")),
-                        )
-                      : Container(
-                          height: 0,
-                          width: 0,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SpecialTitle(
+            isOpen: widget.isOpen,
+            useSpreadingTitle: widget.useSpreadingTitle,
+            title: widget.title,
+            isHovering: isHovering,
+            rotatingArrow: rotatingArrow,
+            isSpreaded: isSpreaded,
+          ),
+          AnimatedBuilder(
+            animation: widget.isOpen,
+            builder: (context, child) {
+              return AnimatedSwitcher(
+                duration: kTabScrollDuration,
+                transitionBuilder: (widget, animation) {
+                  return SizeTransition(
+                    child: widget,
+                    sizeFactor: Tween<double>(
+                      begin: 0,
+                      end: 1,
+                    ).animate(animation),
+                  );
+                },
+                child: (widget.isOpen.value)
+                    ? Padding(
+                        padding: EdgeInsets.only(
+                          left: widget.useSpreadingTitle ? 0 : 16,
                         ),
-                );
-              },
-            ),
-          ],
-        ),
+                        child:
+                            (widget.content ?? Text("content here eventually")),
+                      )
+                    : Container(
+                        height: 0,
+                        width: 0,
+                      ),
+              );
+            },
+          ),
+        ],
       ),
     );
   }

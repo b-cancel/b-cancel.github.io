@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:portfolio/home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class MyWork extends StatefulWidget {
+class IframeSection extends StatefulWidget {
   @override
-  _MyWorkState createState() => _MyWorkState();
+  _IframeSectionState createState() => _IframeSectionState();
 }
 
-class _MyWorkState extends State<MyWork> {
+class _IframeSectionState extends State<IframeSection> {
   final ScrollController scrollController = new ScrollController();
   final ValueNotifier<bool> onTop = new ValueNotifier(true);
   final ValueNotifier<double> overScroll = new ValueNotifier<double>(0);

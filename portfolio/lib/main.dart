@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 //plugins
 import 'package:bot_toast/bot_toast.dart';
-//import 'package:giphy_client/giphy_client.dart';
 
 //internal
 import 'package:portfolio/home.dart';
@@ -75,45 +74,11 @@ void main() {
     },
   );
 
-  /*
-    ui.platformViewRegistry.registerViewFactory('someViewType', (int viewId) {
-    final wrapper = DivElement()
-      ..style.width = '100%'
-      ..style.height = '100%';
-    
-    final div = DivElement()
-      ..contentEditable = 'true'
-      ..style.width = '100%'
-      ..style.color = "red"
-      ..style.backgroundColor = 'red'
-      ..style.height = '100%';
-    wrapper.append(div);
-    return wrapper;
-  });
-  */
-
-  //giphy setup
-  /*
-  client = new GiphyClient(
-    //apiKey: 'YMQVelhTCeQcE0ShiI1j9bz4q5fWzxKQ',
-    apiKey: 'f6y8PDyNvi7WblWG76jS3V1Z9h2viokr',
-  );
-  */
-
   //start app
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  //the QR Codes used throughout
-  //used like this to avoid regeneration
-  static Widget qrCodeWhiteWillExpand = AdjustableQrCode(
-    squaresColor: Colors.white,
-  );
-  static Widget qrCodeBlackWillExpand = AdjustableQrCode(
-    squaresColor: Colors.black,
-  );
-
   //headers
   static const double h1 = 32;
   static const double h2 = 28;

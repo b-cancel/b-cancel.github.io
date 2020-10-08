@@ -52,11 +52,15 @@ class ShiftingMenu extends StatelessWidget {
       borderOnForeground: false,
       elevation: 0,
       //build
-      child: ConstrainedBox(
-        constraints: BoxConstraints(
-          minWidth: minWidth,
-          maxWidth: maxWidth,
-        ),
+      //890 is our magic number
+      //below it we go with it or the maxWidth
+      //above it we go with max width
+      child: Container(
+        width: MediaQuery.of(context).size.width > 890
+            ? minWidth
+            : (toGoldenRatioSmall(890) < maxWidth
+                ? toGoldenRatioSmall(890)
+                : maxWidth),
         child: Container(
           key: menuKey,
           child: Column(

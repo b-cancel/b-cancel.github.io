@@ -8,7 +8,6 @@ import 'package:swipedetector/swipedetector.dart';
 import 'package:universal_html/html.dart';
 
 //internal: other
-import 'package:portfolio/contact.dart';
 import 'package:portfolio/menu/menu.dart';
 import 'package:portfolio/myWork.dart';
 import 'package:portfolio/main.dart';
@@ -67,16 +66,13 @@ class Home extends StatelessWidget {
               child: Scaffold(
                 appBar: AppBar(
                   titleSpacing: 0,
-                  title: CustomAppBarTitle(),
+                  title: MyName(
+                    inMenu: false,
+                  ),
                 ),
                 //NOTE: transition handled internally
-                body: MyWork(),
+                body: IframeSection(),
               ),
-            ),
-            Positioned(
-              bottom: 16,
-              right: 16,
-              child: UnderConstructionChip(),
             ),
             Positioned.fill(
               //NOTE: transition handled internally
@@ -105,33 +101,6 @@ class Home extends StatelessWidget {
   }
 }
 
-class UnderConstructionChip extends StatelessWidget {
-  const UnderConstructionChip({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      child: Container(
-        color: Colors.red,
-        padding: EdgeInsets.symmetric(
-          horizontal: 8,
-          vertical: 4,
-        ),
-        child: Text(
-          "Under Construction",
-          textAlign: TextAlign.right,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
 //NOTE: must be the same for both appbar and the menu
 //so that you get the cool transition effect
 class MyName extends StatelessWidget {
@@ -152,7 +121,7 @@ class MyName extends StatelessWidget {
     );
 
     //415, 428, 560
-    bool largerThanIDK = MediaQuery.of(context).size.width > 560;
+    bool largerThanIDK = MediaQuery.of(context).size.width > 445;
 
     return Material(
       color: Colors.transparent,

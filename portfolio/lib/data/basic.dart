@@ -1,10 +1,15 @@
 //general
 String myNumber = "(956) 777-2692";
 String myEmail = "bryan.o.cancel@gmail.com";
+
 String generalGithub = "https://github.com/";
 String myGithub = "b-cancel";
+
 String generalLinkedIn = "https://www.linkedin.com/in/";
 String myLinkedIn = "bryan-cancel-069a197a";
+
+String generalHackerRank = "https://www.hackerrank.com/";
+String myHackerRank = "bryan_o_cancel";
 
 //extras
 String resume =
