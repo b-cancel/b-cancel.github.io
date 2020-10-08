@@ -26,44 +26,49 @@ showSnackBar(
         onTap: () {
           Scaffold.of(context).hideCurrentSnackBar();
         },
-        child: Row(
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.only(
-                right: 8.0,
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: 16.0,
+          ),
+          child: Row(
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(
+                  right: 8.0,
+                ),
+                child: Icon(
+                  icon,
+                  color: textColor,
+                ),
               ),
-              child: Icon(
-                icon,
-                color: textColor,
+              Expanded(
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      prefix,
+                      style: TextStyle(
+                        color: textColor,
+                      ),
+                    ),
+                    Text(
+                      message,
+                      style: TextStyle(
+                        color: textColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      suffix,
+                      style: TextStyle(
+                        color: textColor,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            Expanded(
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    prefix,
-                    style: TextStyle(
-                      color: textColor,
-                    ),
-                  ),
-                  Text(
-                    message,
-                    style: TextStyle(
-                      color: textColor,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    suffix,
-                    style: TextStyle(
-                      color: textColor,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
       duration: duration,
