@@ -32,43 +32,32 @@ void main() {
         ..src = 'https://b-cancel.github.io/websites/'
         ..style.border = 'none';
 
-      //workaround
-      _iframeElement.onMouseOver.capture((element) => closeMenu(element));
-
-      //both
+      //if they scroll without closing it
+      //they might think thats how the website should work
+      //which would be worse than them not knowing how to open the resume again immediately
+      //surely a white button on the top right with the menu icon should be obvious enough
       _iframeElement.onScroll.capture((event) => closeMenu(event));
-
-      //close menu [desktop]
       _iframeElement.onMouseWheel.capture((event) => closeMenu(event));
       _iframeElement.onWheel.capture((event) => closeMenu(event));
 
+      //in all the cases below
+      //they have already screwed up and tapped or clicked when I wanted them to close with the close button
+      //there isn't much I can do about that except TRY to catch that intent
+      //and then have them deal with the fact that they may have opened up a gif
+
+      //TODO: read event and trigger a click to close the pop up that MAY have come up
+
+      //on desktop what MIGHT be a click
       _iframeElement.onClick.capture((event) => closeMenu(event));
       _iframeElement.onDoubleClick.capture((event) => closeMenu(event));
-
-      //NOTE: on up since we can move mouse and "cancel" action
-      //_iframeElement.onMouseDown.capture((event) {});
+      _iframeElement.onMouseDown.capture((event) => closeMenu(event));
       _iframeElement.onMouseUp.capture((event) => closeMenu(event));
-      //_iframeElement.onMouseOver.any((element) => closeMenu);
 
-      //close menu [mobile]
-      //_iframeElement.onTouchStart.capture((event) {});
-      //_iframeElement.onTouchEnter.capture((event) {});
-      //_iframeElement.onTouchMove.capture((event) {});
-      //_iframeElement.onTouchLeave.capture((event) {});
-
-      //_iframeElement.onTouchCancel.capture((event) {});
+      //on mobile what MIGHT be a click
+      _iframeElement.onTouchStart.capture((event) => closeMenu(event));
       _iframeElement.onTouchEnd.capture((event) => closeMenu(event));
 
-      /*
-    //these below should only relate to dragging and dropping
-    _iframeElement.onDragEnd.capture((event) {});
-
-    _iframeElement.onDragEnter.capture((event) {});
-    _iframeElement.onDragLeave.capture((event) {});
-    _iframeElement.onDragOver.capture((event) {});
-    _iframeElement.onDragStart.capture((event) {});
-    */
-
+      //odd return
       wrapper.append(_iframeElement);
       return wrapper;
     },
@@ -94,6 +83,38 @@ class MyApp extends StatelessWidget {
   static double smallButtonSize = 48;
   static double smallestButtonSize = 36;
 
+  static ThemeData themeWithModifications({@required bool isDark}) {
+    if (isDark) {
+      return ThemeData.dark().copyWith(
+        //text selection
+        textSelectionColor: Colors.blue,
+        textSelectionHandleColor: Colors.blue,
+        //light mode default
+        //brightness: Brightness.light,
+        //none of that ugly green
+        //primarySwatch: Colors.blue,
+        // This makes the visual density adapt to the platform that you run
+        // the app on. For desktop platforms, the controls will be smaller and
+        // closer together (more dense) than on mobile platforms.
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      );
+    } else {
+      return ThemeData.light().copyWith(
+        //text selection
+        textSelectionColor: Colors.blue,
+        textSelectionHandleColor: Colors.blue,
+        //light mode default
+        //brightness: Brightness.light,
+        //none of that ugly green
+        //primarySwatch: Colors.blue,
+        // This makes the visual density adapt to the platform that you run
+        // the app on. For desktop platforms, the controls will be smaller and
+        // closer together (more dense) than on mobile platforms.
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      );
+    }
+  }
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -104,18 +125,8 @@ class MyApp extends StatelessWidget {
           BotToastNavigatorObserver(),
         ],
         title: 'Bryan Cancel\'s Portfolio',
-        theme: ThemeData.light().copyWith(
-          //text selection
-          textSelectionColor: Colors.blue,
-          textSelectionHandleColor: Colors.blue,
-          //light mode default
-          brightness: Brightness.light,
-          //none of that ugly green
-          //primarySwatch: Colors.blue,
-          // This makes the visual density adapt to the platform that you run
-          // the app on. For desktop platforms, the controls will be smaller and
-          // closer together (more dense) than on mobile platforms.
-          visualDensity: VisualDensity.adaptivePlatformDensity,
+        theme: themeWithModifications(
+          isDark: false,
         ),
         home: Home(),
       ),
