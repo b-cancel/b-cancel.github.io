@@ -3,7 +3,8 @@ const MANIFEST = 'flutter-app-manifest';
 const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 const RESOURCES = {
-  "assets/AssetManifest.json": "07a40683a72e4b77a924d77a8311b990",
+  "assets/AssetManifest.json": "a396d12e420ab096e4b373e9ef95e165",
+"assets/assets/assets/BryanCancelsResume_10_2020.pdf": "f62297a600ae5ad5600f99233dce93ec",
 "assets/assets/fonts/PortfolioIcons.ttf": "1349202f69777724328456aa7621446f",
 "assets/assets/miniLoader.gif": "0098d8c7100448172595966afe90273d",
 "assets/assets/vcards/Bryan_Cancel.vcf": "30e33d3198e95fc43998e59c3bcd2295",
@@ -31,8 +32,8 @@ const RESOURCES = {
 "faviconit/favicon-96.png": "bfec43944dbeb6f416e57b4144ff98d8",
 "faviconit/favicon.ico": "d9578e79850907c2d75fb6d2727626e9",
 "faviconit/faviconit-instructions.txt": "53f9f214c478b425a7fb737b9f02eb1e",
-"index.html": "c6caf762b1bc414e3b581b4053389515",
-"/": "c6caf762b1bc414e3b581b4053389515",
+"index.html": "688fab241e84c712d8df3e18c8ee35db",
+"/": "688fab241e84c712d8df3e18c8ee35db",
 "main.dart.js": "eedf11ad4d6d3f08e2c72c8835f8e2db",
 "manifest.json": "d27d045a0c173386d93a4368bcf11389",
 "miniLoader.gif": "0098d8c7100448172595966afe90273d"

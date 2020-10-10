@@ -156,6 +156,7 @@ flutter:
     # contact info
     - assets/vcards/Bryan_Cancel.vcf
     - assets/miniLoader.gif
+    - assets/BryanCancelsResume_10_2020.pdf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
