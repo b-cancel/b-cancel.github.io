@@ -55,6 +55,8 @@ class Home extends StatelessWidget {
   //build
   @override
   Widget build(BuildContext context) {
+    double size = AppBar().preferredSize.height;
+
     return Scaffold(
       backgroundColor: Color(0xFF303030),
       body: SwipeDetector(
@@ -97,9 +99,16 @@ class Home extends StatelessWidget {
               //48 is our desired button size
               //8 difference so 4 padding
               Positioned(
-                right: 8,
-                top: 8,
-                child: AnimatedIconButton(),
+                right: 0,
+                top: 0,
+                child: SizedBox(
+                  height: size,
+                  width: size,
+                  child: Padding(
+                    padding: EdgeInsets.all(8),
+                    child: AnimatedIconButton(),
+                  ),
+                ),
               ),
               FadeAfterLoaded(
                 startUpComplete: startUpComplete,
