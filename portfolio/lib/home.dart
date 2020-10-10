@@ -31,6 +31,8 @@ setMenuOpenCookie(bool newValue) async {
 
 //widgets
 class Home extends StatelessWidget {
+  static double appBarSize;
+
   //the menu MUST start off open
   static final ValueNotifier<bool> openMenu = new ValueNotifier<bool>(
     true,
@@ -55,7 +57,8 @@ class Home extends StatelessWidget {
   //build
   @override
   Widget build(BuildContext context) {
-    double size = AppBar().preferredSize.height;
+    //varies depending on device size
+    appBarSize = AppBar().preferredSize.height;
 
     return Scaffold(
       backgroundColor: Color(0xFF303030),
@@ -95,15 +98,12 @@ class Home extends StatelessWidget {
                   ),
                 ),
               ),
-              //56 is the appbar size
-              //48 is our desired button size
-              //8 difference so 4 padding
               Positioned(
                 right: 0,
                 top: 0,
                 child: SizedBox(
-                  height: size,
-                  width: size,
+                  height: appBarSize,
+                  width: appBarSize,
                   child: Padding(
                     padding: EdgeInsets.all(8),
                     child: AnimatedIconButton(),

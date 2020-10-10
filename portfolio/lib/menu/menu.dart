@@ -215,7 +215,7 @@ class _ResumeInMenuState extends State<ResumeInMenu>
     );
 
     //compromise golden ratio when small for cool transition effect
-    double maxWidth = screenWidth - 56;
+    double maxWidth = screenWidth - Home.appBarSize;
 
     Color baseColor = Colors.black;
 

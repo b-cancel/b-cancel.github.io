@@ -91,7 +91,8 @@ class _IframeSectionState extends State<IframeSection> {
     int iframeWidth = colWidth + gutterWidth;
 
     //calcing height
-    double iframeHeight = iframeWidth * ((screenHeight - 56) / screenWidth);
+    double iframeHeight =
+        iframeWidth * ((screenHeight - Home.appBarSize) / screenWidth);
 
     return Container(
       width: screenWidth,

@@ -17,7 +17,7 @@ class GradientBorder extends StatelessWidget {
       opacity: Home.openMenu.value ? 1 : 0,
       child: Container(
         //minimum size of close menu button
-        width: 56 / 2,
+        width: Home.appBarSize / 2,
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [baseColor, baseColor.withOpacity(0)],
