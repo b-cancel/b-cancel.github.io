@@ -31,6 +31,9 @@ void main() {
         ..src = 'https://b-cancel.github.io/websites/'
         ..style.border = 'none';
 
+      //TODO: note that onMouseOver is the only one that actually works
+      //but it produces behavior so odd on desktop that I'm just keeping it off
+
       //if they scroll without closing it
       //they might think thats how the website should work
       //which would be worse than them not knowing how to open the resume again immediately

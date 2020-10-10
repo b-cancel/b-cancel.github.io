@@ -16,8 +16,8 @@ import 'package:portfolio/utils/link/ui/hover.dart';
 import 'package:portfolio/utils/mySnackBar.dart';
 import 'package:portfolio/utils/wrappedText.dart';
 
-class ResumeInfo extends StatefulWidget {
-  const ResumeInfo({
+class ResumeInfo extends StatelessWidget {
+  ResumeInfo({
     Key key,
     @required this.minWidth,
     @required this.maxWidth,
@@ -26,14 +26,18 @@ class ResumeInfo extends StatefulWidget {
   final double minWidth;
   final double maxWidth;
 
-  @override
-  _ResumeInfoState createState() => _ResumeInfoState();
-}
+  final ValueNotifier openQR = new ValueNotifier(false);
+  final ScrollController scrollController = new ScrollController();
 
-class _ResumeInfoState extends State<ResumeInfo> {
-  ScrollController scrollController = new ScrollController();
+  //NOTE: can't smart refresh from here and keep the menu scaling as desired
+  //also there really is no reason why they would be reloading from here
+  //everything should always load in properly
+  TextStyle bold = TextStyle(
+    fontWeight: FontWeight.bold,
+  );
 
-  Widget copyLink({
+  Widget copyLink(
+    BuildContext context, {
     IconData icon,
     String thingToCopy,
   }) {
@@ -48,7 +52,8 @@ class _ResumeInfoState extends State<ResumeInfo> {
     );
   }
 
-  Widget webLink({
+  Widget webLink(
+    BuildContext context, {
     String title,
     IconData icon,
     String generalUrl,
@@ -66,7 +71,7 @@ class _ResumeInfoState extends State<ResumeInfo> {
     );
   }
 
-  Widget saveContactLink() {
+  Widget saveContactLink(BuildContext context) {
     return MyIconLink(
       action: () async {
         downloadQrCode(context);
@@ -80,25 +85,9 @@ class _ResumeInfoState extends State<ResumeInfo> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    scrollController.addListener(hideToasts);
-  }
-
-  @override
-  void dispose() {
-    scrollController.removeListener(hideToasts);
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    //NOTE: can't smart refresh from here and keep the menu scaling as desired
-    //also there really is no reason why they would be reloading from here
-    //everything should always load in properly
-    TextStyle bold = TextStyle(
-      fontWeight: FontWeight.bold,
-    );
+    scrollController.removeListener(hideToasts);
+    scrollController.addListener(hideToasts);
 
     return Stack(
       children: [
@@ -135,44 +124,73 @@ class _ResumeInfoState extends State<ResumeInfo> {
                           //copy is easy from here
                           //open in this tab not allowed
                           webLink(
+                            context,
                             title: "Github",
                             icon: PortfolioIcons.github,
                             generalUrl: generalGithub,
                             specificUrl: myGithub,
                           ),
                           webLink(
+                            context,
                             title: "Linked In",
                             icon: PortfolioIcons.linkedin,
                             generalUrl: generalLinkedIn,
                             specificUrl: myLinkedIn,
                           ),
                           webLink(
+                            context,
                             title: "Hacker Rank",
                             icon: PortfolioIcons.hackerrank,
                             generalUrl: generalHackerRank,
                             specificUrl: myHackerRank,
                           ),
                           copyLink(
+                            context,
                             icon: PortfolioIcons.phone,
                             thingToCopy: myNumber,
                           ),
                           copyLink(
+                            context,
                             icon: PortfolioIcons.email,
                             thingToCopy: myEmail,
                           ),
-                          saveContactLink(),
+                          saveContactLink(
+                            context,
+                          ),
                           MyIconLink(
                             action: () {
-                              scrollController.animateTo(
-                                scrollController.position.maxScrollExtent,
-                                duration: kTabScrollDuration,
-                                curve: Curves.easeOut,
-                              );
+                              openQR.value = !openQR.value;
                             },
                             icon: Icons.qr_code,
                           ),
+                          webLink(
+                            context,
+                            title: "Download Resume",
+                            icon: PortfolioIcons.file_pdf,
+                            generalUrl:
+                                "https://b-cancel.github.io/assets/assets/assets/",
+                            specificUrl: "BryanCancelsResume_10_2020.pdf",
+                          ),
                         ],
                       ),
+                    ),
+                    AnimatedBuilder(
+                      animation: openQR,
+                      builder: (context, child) {
+                        return AnimatedSwitcher(
+                          duration: kTabScrollDuration,
+                          transitionBuilder: (widget, animation) {
+                            return SizeTransition(
+                              child: widget,
+                              sizeFactor: Tween<double>(
+                                begin: 0,
+                                end: 1,
+                              ).animate(animation),
+                            );
+                          },
+                          child: openQR.value ? QRWidget() : Container(),
+                        );
+                      },
                     ),
                     //NOTE: we start spreaded when the secation starts open
                     ExpandingSection(
@@ -374,8 +392,8 @@ class _ResumeInfoState extends State<ResumeInfo> {
                       ),
                     ),
                     ExpandMyWorkOnHover(
-                      minWidth: widget.minWidth,
-                      maxWidth: widget.maxWidth,
+                      minWidth: minWidth,
+                      maxWidth: maxWidth,
                     ),
                     ExpandingSection(
                       title: "Software",
@@ -546,6 +564,7 @@ class _ResumeInfoState extends State<ResumeInfo> {
                         top: 8,
                         left: 16,
                         right: 16,
+                        bottom: 16,
                       ),
                       child: DefaultTextStyle(
                         style: TextStyle(
@@ -559,41 +578,10 @@ class _ResumeInfoState extends State<ResumeInfo> {
                             WrappedText(
                               "Bilingual (English/Spanish)",
                             ),
-                            /*
-                            InkWell(
-                              onTap: () {
-                                openWithHtml(
-                                  context,
-                                  "https://docs.google.com/document/d/1UBKxKsYBhC5d6IxjRxmYIItFoTFb9Fs_AgX5b64sjlA/edit?usp=sharing",
-                                  //don't close ourselves if at all possible
-                                  openHere: false,
-                                );
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.only(bottom: 8.0),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    WrappedText(
-                                      "View Paper Copy",
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 4.0),
-                                      child: Icon(
-                                        Icons.link,
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            */
                           ],
                         ),
                       ),
                     ),
-                    QRWidget(),
                   ],
                 ),
               ),

@@ -136,13 +136,9 @@ class _AnimatedIconButtonState extends State<AnimatedIconButton>
   Widget build(BuildContext context) {
     return FittedBox(
       fit: BoxFit.contain,
-      child: IgnorePointer(
-        ignoring: true,
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            shape: BoxShape.circle,
-          ),
+      child: ClipOval(
+        child: Material(
+          color: Colors.white,
           child: IconButton(
             color: Colors.black,
             icon: AnimatedIcon(
@@ -151,7 +147,9 @@ class _AnimatedIconButtonState extends State<AnimatedIconButton>
               icon: AnimatedIcons.menu_close,
               progress: animation,
             ),
-            onPressed: () {},
+            onPressed: () {
+              Home.toggleMenu();
+            },
           ),
         ),
       ),
@@ -194,20 +192,20 @@ class GalleryInBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Material(
-          color: Theme.of(context).primaryColor,
-          child: InkWell(
-            onTap: () {
-              Home.toggleMenu();
-            },
-            child: AppBar(
-              backgroundColor: Colors.transparent,
-              titleSpacing: 0,
-              title: MyName(
-                inMenu: false,
-              ),
-            ),
+        AppBar(
+          backgroundColor: Theme.of(context).primaryColor,
+          titleSpacing: 0,
+          title: MyName(
+            inMenu: false,
           ),
+          actions: [
+            //spacer so button on top causes name to overflow as expected
+            Container(
+              height: Home.appBarSize,
+              width: Home.appBarSize,
+              color: Colors.transparent,
+            )
+          ],
         ),
         Expanded(
           child: IframeSection(),
@@ -230,102 +228,24 @@ class MyName extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TextStyle nameStyle = TextStyle(
+      inherit: false,
       color: inMenu ? Colors.black : Colors.white,
       fontWeight: FontWeight.bold,
       fontSize: MyApp.h2,
       letterSpacing: 2,
     );
 
-    //415, 428, 560
-    bool largerThanIDK = MediaQuery.of(context).size.width > 445;
-
     return Padding(
       padding: EdgeInsets.symmetric(
         horizontal: 16,
         vertical: 12,
       ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment:
-            largerThanIDK ? CrossAxisAlignment.end : CrossAxisAlignment.center,
-        children: [
-          Text(
-            "Bryan Cancel",
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            //bigger part, and smaller part of smaller part
-            style: nameStyle,
-          ),
-          Ternary(
-            condition: largerThanIDK,
-            isTrue: Visibility(
-              visible: Home.openMenu != null,
-              child: Home.openMenu != null
-                  ? AnimatedBuilder(
-                      animation: Home.openMenu,
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            "'s Resume",
-                            style: TextStyle(
-                              color: inMenu ? Colors.black : Colors.white,
-                              fontWeight: FontWeight.w100,
-                              fontSize: MyApp.h4,
-                              letterSpacing: 2,
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(
-                              left: 4.0,
-                            ),
-                            child: Icon(
-                              Icons.arrow_right,
-                              color: inMenu ? Colors.black : Colors.white,
-                            ),
-                          ),
-                        ],
-                      ),
-                      builder: (BuildContext context, Widget child) {
-                        return AnimatedOpacity(
-                          duration: Home.startUpComplete.value
-                              ? kTabScrollDuration
-                              : Duration.zero,
-                          opacity: Home.openMenu.value == false ? 1 : 0,
-                          child: child,
-                        );
-                      },
-                    )
-                  : Container(),
-            ),
-            isFalse: Visibility(
-              visible: Home.openMenu != null,
-              child: Home.openMenu != null
-                  ? AnimatedBuilder(
-                      animation: Home.openMenu,
-                      child: Padding(
-                        padding: EdgeInsets.only(
-                          top: 4.0,
-                        ),
-                        child: Icon(
-                          Icons.arrow_left,
-                          color: inMenu ? Colors.black : Colors.white,
-                        ),
-                      ),
-                      builder: (BuildContext context, Widget child) {
-                        return AnimatedOpacity(
-                          duration: Home.startUpComplete.value
-                              ? kTabScrollDuration
-                              : Duration.zero,
-                          opacity: Home.openMenu.value == false ? 1 : 0,
-                          child: child,
-                        );
-                      },
-                    )
-                  : Container(),
-            ),
-          ),
-        ],
+      child: Text(
+        "Bryan Cancel",
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+        //bigger part, and smaller part of smaller part
+        style: nameStyle,
       ),
     );
   }

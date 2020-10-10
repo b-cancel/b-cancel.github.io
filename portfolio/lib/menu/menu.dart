@@ -238,11 +238,14 @@ class _ResumeInMenuState extends State<ResumeInMenu>
             ),
           ),
           //the button on top of it
+          //TODO: eventually when flutter fixes their problem enable this again
+          /*
           Positioned.fill(
             child: SizedBox.expand(
               child: ModalBarrierCloser(),
             ),
           ),
+          */
           //everything on top of it
           AnimatedPositioned(
             height: screenHeight,

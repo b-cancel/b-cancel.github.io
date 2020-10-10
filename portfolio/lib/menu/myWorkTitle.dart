@@ -67,6 +67,7 @@ class _ExpandMyWorkOnHoverState extends State<ExpandMyWorkOnHover> {
               color: Colors.black,
               child: InkWell(
                 onTap: () {
+                  //my work in resume can close the menu
                   if (Home.openMenu.value) {
                     Home.openMenu.value = false;
                   }
