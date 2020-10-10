@@ -6,7 +6,6 @@ import 'package:bot_toast/bot_toast.dart';
 
 //internal
 import 'package:portfolio/home.dart';
-import 'package:portfolio/qrCode.dart';
 import 'package:universal_html/html.dart';
 import 'dart:ui' as ui;
 

@@ -1,7 +1,5 @@
-import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/home.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class IframeSection extends StatefulWidget {
   @override
@@ -14,16 +12,9 @@ class _IframeSectionState extends State<IframeSection> {
   final ValueNotifier<double> overScroll = new ValueNotifier<double>(0);
   final ValueNotifier<bool> topScrolledAway = new ValueNotifier<bool>(false);
 
-  hideToasts() {
-    BotToast.cleanAll();
-  }
-
   @override
   void initState() {
     super.initState();
-
-    //dimiss attached bot toasts on scroll
-    scrollController.addListener(hideToasts);
 
     //when the menu is automatically opened
     //to avoid snapping into place
@@ -35,7 +26,6 @@ class _IframeSectionState extends State<IframeSection> {
 
   @override
   void dispose() {
-    scrollController.removeListener(hideToasts);
     super.dispose();
   }
 
@@ -52,12 +42,8 @@ class _IframeSectionState extends State<IframeSection> {
       Home.openMenu.value = false;
 
       //wait one from for that to happen before opening the page
-      WidgetsBinding.instance.addPostFrameCallback((_) async {
-        //check if the reload happened from an open or closed menu
-        SharedPreferences prefs = await SharedPreferences.getInstance();
-
-        //react depending on how the menu was before reloading
-        Home.openMenu.value = prefs.getBool('menuOpened') ?? true;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Home.openMenu.value = true;
         Home.startUpComplete.value = true;
       });
     }

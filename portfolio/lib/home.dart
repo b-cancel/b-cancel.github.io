@@ -1,8 +1,6 @@
 //flutter
 import 'package:flutter/material.dart';
 import 'package:portfolio/utils/conditional.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:swipedetector/swipedetector.dart';
 
 //plugin
 import 'package:universal_html/html.dart';
@@ -24,11 +22,6 @@ double getMenuWidth() {
   }
 }
 
-setMenuOpenCookie(bool newValue) async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  prefs.setBool('menuOpened', newValue);
-}
-
 //widgets
 class Home extends StatelessWidget {
   static double appBarSize;
@@ -46,10 +39,8 @@ class Home extends StatelessWidget {
     if (Home.openMenu != null) {
       if (Home.openMenu.value == false) {
         Home.openMenu.value = true;
-        setMenuOpenCookie(true);
       } else {
         Home.openMenu.value = false;
-        setMenuOpenCookie(false);
       }
     }
   }
@@ -62,59 +53,45 @@ class Home extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Color(0xFF303030),
-      body: SwipeDetector(
-        onSwipeLeft: () {
-          if (Home.openMenu.value) {
-            Home.openMenu.value = false;
-            setMenuOpenCookie(false);
-          }
-        },
-        onSwipeRight: () {
-          if (Home.openMenu.value == false) {
-            Home.openMenu.value = true;
-            setMenuOpenCookie(true);
-          }
-        },
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          child: Stack(
-            children: <Widget>[
-              Positioned.fill(
-                child: Theme(
-                  data: MyApp.themeWithModifications(
-                    isDark: true,
-                  ),
-                  child: GalleryInBody(),
+      body: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        child: Stack(
+          children: <Widget>[
+            Positioned.fill(
+              child: Theme(
+                data: MyApp.themeWithModifications(
+                  isDark: true,
+                ),
+                child: GalleryInBody(),
+              ),
+            ),
+            Positioned.fill(
+              child: Theme(
+                data: MyApp.themeWithModifications(
+                  isDark: false,
+                ),
+                child: ResumeInMenu(
+                  menuKey: menuKey,
                 ),
               ),
-              Positioned.fill(
-                child: Theme(
-                  data: MyApp.themeWithModifications(
-                    isDark: false,
-                  ),
-                  child: ResumeInMenu(
-                    menuKey: menuKey,
-                  ),
+            ),
+            Positioned(
+              right: 0,
+              top: 0,
+              child: SizedBox(
+                height: appBarSize,
+                width: appBarSize,
+                child: Padding(
+                  padding: EdgeInsets.all(8),
+                  child: AnimatedIconButton(),
                 ),
               ),
-              Positioned(
-                right: 0,
-                top: 0,
-                child: SizedBox(
-                  height: appBarSize,
-                  width: appBarSize,
-                  child: Padding(
-                    padding: EdgeInsets.all(8),
-                    child: AnimatedIconButton(),
-                  ),
-                ),
-              ),
-              FadeAfterLoaded(
-                startUpComplete: startUpComplete,
-              ),
-            ],
-          ),
+            ),
+            FadeAfterLoaded(
+              startUpComplete: startUpComplete,
+            ),
+          ],
         ),
       ),
     );

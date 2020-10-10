@@ -25,10 +25,9 @@ dependencies:
     sdk: flutter
 
   #visibility_detector: ^0.1.5
-  
-  swipedetector: ^1.2.0
+  #swipedetector: ^1.2.0
 
-  shared_preferences: ^0.5.10
+  #shared_preferences: ^0.5.10
   
   #shimmer: ^1.1.1
   #shimmer_animation: ^0.1.1+1
@@ -47,7 +46,7 @@ dependencies:
   #animator: ^2.0.1
 
   #overflowing contact info
-  dynamic_overflow_menu_bar: ^0.1.2
+  #dynamic_overflow_menu_bar: ^0.1.2
 
   #video
   #video_player: ^0.10.12+3
@@ -63,7 +62,7 @@ dependencies:
   #giphy_picker: ^1.0.6 #I created my own version of this
   
   #Universal (to avoid warning on flutter web)
-  universal_platform: ^0.1.3
+  #universal_platform: ^0.1.3
   universal_html: ^1.2.2
   #universal_io: ^1.0.1
 
@@ -105,7 +104,7 @@ dependencies:
   flutter_clipboard_manager: ^0.0.2
   clipboard_manager: ^0.0.4
 
-  #Toasts
+  #Toasts (labels on top of programming language icons)
   bot_toast: ^2.4.0
   #toast: ^0.1.5
 
@@ -145,15 +144,15 @@ flutter:
   - family: PortfolioIcons
     fonts:
       - asset: assets/fonts/PortfolioIcons.ttf
-  - family: RobotoMono
-    fonts:
-      - asset: google_fonts/RobotoMono-Regular.ttf
-      - asset: google_fonts/RobotoMono-Bold.ttf
-        weight: 700
+  #- family: RobotoMono
+  #  fonts:
+      #- asset: google_fonts/RobotoMono-Regular.ttf
+      #- asset: google_fonts/RobotoMono-Bold.ttf
+      #  weight: 700
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - google_fonts/
+    #- google_fonts/
     # contact info
     - assets/vcards/Bryan_Cancel.vcf
     - assets/miniLoader.gif

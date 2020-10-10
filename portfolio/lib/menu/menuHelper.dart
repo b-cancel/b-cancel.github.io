@@ -88,7 +88,6 @@ class ModalBarrierCloser extends StatelessWidget {
         onTap: () {
           if (Home.openMenu.value) {
             Home.openMenu.value = false;
-            setMenuOpenCookie(false);
           }
         },
       ),

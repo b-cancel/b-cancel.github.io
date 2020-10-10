@@ -69,7 +69,6 @@ class _ExpandMyWorkOnHoverState extends State<ExpandMyWorkOnHover> {
                 onTap: () {
                   if (Home.openMenu.value) {
                     Home.openMenu.value = false;
-                    setMenuOpenCookie(false);
                   }
                 },
                 child: Container(
