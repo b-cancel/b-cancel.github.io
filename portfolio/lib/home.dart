@@ -93,10 +93,79 @@ class Home extends StatelessWidget {
                   ),
                 ),
               ),
+              //56 is the appbar size
+              //48 is our desired button size
+              //8 difference so 4 padding
+              Positioned(
+                right: 8,
+                top: 8,
+                child: AnimatedIconButton(),
+              ),
               FadeAfterLoaded(
                 startUpComplete: startUpComplete,
               ),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class AnimatedIconButton extends StatefulWidget {
+  @override
+  _AnimatedIconButtonState createState() => _AnimatedIconButtonState();
+}
+
+class _AnimatedIconButtonState extends State<AnimatedIconButton>
+    with SingleTickerProviderStateMixin {
+  AnimationController animation;
+
+  menuStateChanged() {
+    if (Home.openMenu.value) {
+      animation.forward();
+    } else {
+      animation.reverse();
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    animation = AnimationController(
+      vsync: this,
+      duration: kTabScrollDuration,
+    );
+    Home.openMenu.addListener(menuStateChanged);
+  }
+
+  @override
+  void dispose() {
+    animation.dispose();
+    Home.openMenu.removeListener(menuStateChanged);
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FittedBox(
+      fit: BoxFit.contain,
+      child: IgnorePointer(
+        ignoring: true,
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            shape: BoxShape.circle,
+          ),
+          child: IconButton(
+            color: Colors.black,
+            icon: AnimatedIcon(
+              //menus always start off closed
+              //so the menu button should show
+              icon: AnimatedIcons.menu_close,
+              progress: animation,
+            ),
+            onPressed: () {},
           ),
         ),
       ),
@@ -225,7 +294,7 @@ class MyName extends StatelessWidget {
                               left: 4.0,
                             ),
                             child: Icon(
-                              Icons.arrow_left,
+                              Icons.arrow_right,
                               color: inMenu ? Colors.black : Colors.white,
                             ),
                           ),
