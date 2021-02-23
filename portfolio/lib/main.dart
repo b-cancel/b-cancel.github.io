@@ -120,18 +120,17 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return BotToastInit(
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        navigatorObservers: [
-          BotToastNavigatorObserver(),
-        ],
-        title: 'Bryan Cancel\'s Portfolio',
-        theme: themeWithModifications(
-          isDark: false,
-        ),
-        home: Home(),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      builder: BotToastInit(), //1. call BotToastInit
+      navigatorObservers: [
+        BotToastNavigatorObserver(),
+      ],
+      title: 'Bryan Cancel\'s Portfolio',
+      theme: themeWithModifications(
+        isDark: false,
       ),
+      home: Home(),
     );
   }
 }

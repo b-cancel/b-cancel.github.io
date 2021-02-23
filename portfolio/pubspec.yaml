@@ -105,7 +105,7 @@ dependencies:
   clipboard_manager: ^0.0.4
 
   #Toasts (labels on top of programming language icons)
-  bot_toast: ^2.4.0
+  bot_toast: ^3.0.5
   #toast: ^0.1.5
 
   #scrollbars
