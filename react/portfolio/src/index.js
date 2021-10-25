@@ -1,17 +1,26 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Button from "@mui/material/Button";
+import AllProjects from "./project";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
 
 function App() {
+  const darkTheme = createTheme({
+    palette: {
+      mode: "dark",
+    },
+  });
+
   return (
-    <Button variant="contained" color="primary">
-      Hello World
-    </Button>
+    <ThemeProvider theme={darkTheme}>
+      <AllProjects/>
+    </ThemeProvider>
   );
 }
 
 ReactDOM.render(<App />, document.querySelector("#root"));
-
 
 /*
 import React from 'react';
