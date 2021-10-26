@@ -1,13 +1,13 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import useWindowDimensions from "./window.js"
 import measurementToGoldenRatio from './golden.js'
+
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -68,20 +68,26 @@ export default function AllProjects() {
 
   function ProjectCard({ project }) {
     const { height, width } = useWindowDimensions();
-    const golden = measurementToGoldenRatio({value: height});
+
+    //remove insets
+    const insets = useSafeAreaInsets();
+    const actualHeight = height - insets.top - insets.bottom;
+    const actualWidth = width - insets.left - insets.right;
+
+    //do the math
+    const golden = measurementToGoldenRatio({value: actualHeight});
     const imageHeight = golden.big;
     //imageHeight/imageWidth = 16/9
     //imageHeight = (16/9) * imageWidth
     //imageHeight / (16/9) = imageWidth
     var imageWidth = imageHeight / (16/9);
-    //24 padding on each side
-    imageWidth = imageWidth;
+    imageWidth = imageWidth + (16*2);
 
     //width = ()
-    const slidesPerView = (width / imageWidth);
+    const slidesPerView = (actualWidth / imageWidth);
 
     return (
-      <Card sx={{margin: 1, mb: 3}}>
+      <Card sx={{margin: "16px", mb: "36px"}}>
         <CardContent>
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
             {project.name}
@@ -98,7 +104,8 @@ export default function AllProjects() {
             {'"a benevolent smile"'}
           </Typography>
         </CardContent>
-        <Box sx={{ pb: 2, backgroundColor: "#1e1e1e", height: golden.big}}>
+        <Box sx={{ pb: "16px", backgroundColor: "#1e1e1e"}}>
+          <Box sx={{height: golden.big}}>
           <Swiper
             navigation={true}
             slidesPerView={slidesPerView}
@@ -120,10 +127,11 @@ export default function AllProjects() {
             {project.gallery &&
               project.gallery.map((media) => (
                 <SwiperSlide key={media}>
-                  <img src={media}/>
+                  <img src={media} alt={media}/>
                 </SwiperSlide>
               ))}
           </Swiper>
+          </Box>
         </Box>
       </Card>
     );

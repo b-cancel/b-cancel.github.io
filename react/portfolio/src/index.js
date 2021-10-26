@@ -1,11 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Button from "@mui/material/Button";
 import AllProjects from "./project";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 function App() {
   const darkTheme = createTheme({
@@ -15,11 +13,13 @@ function App() {
   });
 
   return (
+    <SafeAreaProvider>
     <ThemeProvider theme={darkTheme} >
-      <Box sx={{mt: 7}}>
+      <Box sx={{mt:  "56px"}}>
         <AllProjects/>
       </Box>
     </ThemeProvider>
+    </SafeAreaProvider>
   );
 }
 
