@@ -10,6 +10,14 @@ import measurementToGoldenRatio from "./golden.js";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import ProgressiveImage from "react-progressive-graceful-image";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import {
+  faGithub,
+  faAppStore,
+  faGooglePlay,
+} from "@fortawesome/free-brands-svg-icons";
+import MyButton from "./myButton";
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -88,26 +96,58 @@ export default function AllProjects() {
 
     //width = ()
     const slidesPerView = actualWidth / imageWidthWithHorizontalPadding;
+    const appStoreButton = project.appstore ? (
+      <MyButton
+        variant="outlined"
+        prefixIcon={<FontAwesomeIcon icon={faAppStore} color="primary" />}
+        tooltip={project.appstore}
+        text="App Store"
+        sx={{ mr: "8px", my: "4px" }}
+        onClick={() => window.open(project.appstore)}
+      />
+    ) : null;
+    const googlePlayButton = project.googleplay ? (
+      <MyButton
+        variant="outlined"
+        prefixIcon={<FontAwesomeIcon icon={faGooglePlay} color="primary" />}
+        tooltip={project.googleplay}
+        text="Google Play"
+        sx={{ mr: "8px", my: "4px" }}
+        onClick={() => window.open(project.googleplay)}
+      />
+    ) : null;
+
+    const repositioryButton = project.github ? (
+      <MyButton
+        variant="outlined"
+        prefixIcon={<FontAwesomeIcon icon={faGithub} color="primary" />}
+        tooltip={project.github}
+        text="Repository"
+        color="primary"
+        sx={{ my: "4px" }}
+        onClick={() => window.open(project.github)}
+      />
+    ) : null;
 
     return (
       <Card sx={{ margin: "16px", mb: "36px" }}>
         <CardContent>
-          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-            {project.name}
+          <Typography
+            variant="h5"
+            component="span"
+            sx={{
+              verticalAlign: "middle",
+              pr: "8px",
+            }}
+          >
+            / {project.name}
           </Typography>
-          <Typography variant="h5" component="div">
-            aaa
-          </Typography>
-          <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            ddd
-          </Typography>
-          <Typography variant="body2">
-            well meaning and kindly.
-            <br />
-            {'"a benevolent smile"'}
-          </Typography>
+
+          {appStoreButton}
+          {googlePlayButton}
+          {repositioryButton}
         </CardContent>
-        <Box sx={{ backgroundColor: "#1e1e1e", pb: "24px" }}>
+        <Box sx={{ backgroundColor: "#1e1e1e" }}>
           <Box>
             <style
               dangerouslySetInnerHTML={{
@@ -175,6 +215,9 @@ export default function AllProjects() {
             </Swiper>
           </Box>
         </Box>
+        <CardContent>
+          <Typography variant="body2">{project.description}</Typography>
+        </CardContent>
       </Card>
     );
   }

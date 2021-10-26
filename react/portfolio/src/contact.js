@@ -3,18 +3,23 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHand, faAddressCard, faCommentDots, faPhone, faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import {
+  faHand,
+  faAddressCard,
+  faCommentDots,
+  faPhone,
+  faEnvelope,
+} from "@fortawesome/free-solid-svg-icons";
 import {} from "@fortawesome/free-regular-svg-icons";
 import {} from "@fortawesome/fontawesome-svg-core";
 import { faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
 
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
+
+import MyIconButton from "./myIconButton";
+import MyButton from "./myButton";
 
 export default function QuickLinks() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -32,116 +37,100 @@ export default function QuickLinks() {
     },
   });
   const renderMenu = (
-    
-
     <ThemeProvider theme={lightTheme}>
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={() => {
+      <Menu
+        anchorEl={anchorEl}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+        id={menuId}
+        keepMounted
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+        open={isMenuOpen}
+        onClose={handleMenuClose}
+      >
+        <MenuItem
+          onClick={() => {
             handleMenuClose();
             window.open("https://vcard.link/card/DZIy");
-          }}>
-              <FontAwesomeIcon icon={faAddressCard}/>
-              <Typography
-              variant="subtitle2"
-              sx={{ pl: "8px" }}
-            >
+          }}
+        >
+          <FontAwesomeIcon icon={faAddressCard} />
+          <Typography variant="subtitle2" sx={{ pl: "8px" }}>
             Contact Card
-              </Typography>
+          </Typography>
         </MenuItem>
-      <MenuItem onClick={() => {
+        <MenuItem
+          onClick={() => {
             handleMenuClose();
             window.open("sms:(956) 777 2692");
-          }}>
-      
-      <FontAwesomeIcon icon={faCommentDots}/>
-              <Typography
-              variant="subtitle2"
-              sx={{ pl: "8px" }}
-            >
-              Message Me
-              </Typography>
-      </MenuItem>
-      <MenuItem onClick={() => {
+          }}
+        >
+          <FontAwesomeIcon icon={faCommentDots} />
+          <Typography variant="subtitle2" sx={{ pl: "8px" }}>
+            Message Me
+          </Typography>
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
             handleMenuClose();
             window.open("mailto:bryan.o.cancel@gmail.com");
-          }}>
-      <FontAwesomeIcon icon={faEnvelope}/>
-              <Typography
-              variant="subtitle2"
-              sx={{ pl: "8px" }}
-            >
-              Email Me
-              </Typography>
-      </MenuItem>
-      <MenuItem onClick={() => {
+          }}
+        >
+          <FontAwesomeIcon icon={faEnvelope} />
+          <Typography variant="subtitle2" sx={{ pl: "8px" }}>
+            Email Me
+          </Typography>
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
             handleMenuClose();
             window.open("tel:(956) 777-2692");
-          }}>
-      <FontAwesomeIcon icon={faPhone}/>
-              <Typography
-              variant="subtitle2"
-              sx={{ pl: "8px" }}
-            >
-              Call Me
-              </Typography>
-      </MenuItem>
-    </Menu>
+          }}
+        >
+          <FontAwesomeIcon icon={faPhone} />
+          <Typography variant="subtitle2" sx={{ pl: "8px" }}>
+            Call Me
+          </Typography>
+        </MenuItem>
+      </Menu>
     </ThemeProvider>
   );
   return (
     <Stack direction="row" spacing="16px" sx={{ py: "16px", margin: "auto" }}>
-        <Tooltip title="GitHub">
-        <IconButton
-          color="default"
-          aria-label="linked in"
-          component="span"
-          onClick={() => window.open("https://github.com/b-cancel")}
-        >
-          <FontAwesomeIcon icon={faGithub} />
-        </IconButton>
-      </Tooltip>
-      <Tooltip title="contact me">
-      <Button
+      <MyIconButton
+        tooltip="Github"
+        color="default"
+        onClick={() => window.open("https://github.com/b-cancel")}
+        icon={faGithub}
+      />
+      <MyButton
         variant="outlined"
+        tooltip="Contact Me"
         onClick={handleProfileMenuOpen}
-        endIcon={
-          <FontAwesomeIcon icon={faHand} transform={{ rotate: -22.5 }} color="white"/>
+        color="white"
+        text="Say Hello!"
+        suffixIcon={
+          <FontAwesomeIcon
+            icon={faHand}
+            transform={{ rotate: -22.5 }}
+            color="white"
+          />
         }
-        style={{
-            borderColor:"white",
-        }}
-      >
-        <Typography style={{ textTransform: "none" }} color="white">Say Hello!</Typography>
-      </Button>
-      </Tooltip>
+      />
       {renderMenu}
-      
-      <Tooltip title="Linked-In">
-        <IconButton
-          color="default"
-          aria-label="linked in"
-          component="span"
-          onClick={() =>
-            window.open("https://www.linkedin.com/in/bryan-cancel-069a197a")
-          }
-        >
-          <FontAwesomeIcon icon={faLinkedin} />
-        </IconButton>
-      </Tooltip>
+      <MyIconButton
+        tooltip="Linked-In"
+        color="default"
+        onClick={() =>
+          window.open("https://www.linkedin.com/in/bryan-cancel-069a197a")
+        }
+        icon={faLinkedin}
+      />
     </Stack>
   );
 }
