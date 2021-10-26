@@ -9,6 +9,8 @@ import measurementToGoldenRatio from './golden.js'
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import ProgressiveImage from "react-progressive-graceful-image";
+
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.min.css";
@@ -80,11 +82,12 @@ export default function AllProjects() {
     //imageHeight/imageWidth = 16/9
     //imageHeight = (16/9) * imageWidth
     //imageHeight / (16/9) = imageWidth
-    var imageWidth = imageHeight / (16/9);
-    imageWidth = imageWidth + (16*2);
+    const imageWidth = imageHeight / (16/9);
+    const horizontalPadding = 16;
+    const imageWidthWithHorizontalPadding = imageWidth + (horizontalPadding * 2);
 
     //width = ()
-    const slidesPerView = (actualWidth / imageWidth);
+    const slidesPerView = (actualWidth / imageWidthWithHorizontalPadding);
 
     return (
       <Card sx={{margin: "16px", mb: "36px"}}>
@@ -127,7 +130,17 @@ export default function AllProjects() {
             {project.gallery &&
               project.gallery.map((media) => (
                 <SwiperSlide key={media}>
-                  <img src={media} alt={media}/>
+                  <ProgressiveImage src={media} placeholder="" >
+                    {(src, loading) => {
+                      return loading ? (
+                        <Box sx={{height: imageHeight, width: imageWidth, bgcolor: "#000", borderRadius: "8px"}}>
+                          <Box sx={{height: 56, width: 56, margin: "auto", pt: "50%"}}>
+                            <img src="./miniLoader.gif" alt="loading"/>
+                          </Box>
+                        </Box>
+                      ) : <img src={src} alt={src} />;
+                    }}
+                  </ProgressiveImage>
                 </SwiperSlide>
               ))}
           </Swiper>
