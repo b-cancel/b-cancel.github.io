@@ -14,9 +14,8 @@ import ProgressiveImage from "react-progressive-graceful-image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Stack from "@mui/material/Stack";
 
-import { Markup } from 'react-render-markup';
-import { renderMarkup } from 'react-render-markup';
-
+import { Markup } from "react-render-markup";
+import { renderMarkup } from "react-render-markup";
 
 import {
   faGithub,
@@ -46,11 +45,17 @@ import SwiperCore, {
 SwiperCore.use([Mousewheel, Keyboard, Lazy, Pagination, Navigation]);
 
 export default function AllProjects() {
+  //TODO: add gif description to show below when non full screen & above when full screen
+  //TODO: add playback speed param as well
+  //TODO: identify gifs when we have them and use the play back speed and appropriate gif player
+  //TODO: when GIF in non full screen gallery auto play immediately at passed playback speed
+  //TODO: when tapped... full screen comes up... but GIF restarts...
+  //TODO: in full screen mode.... show play button... start over button if stopped and not at begining
+  //TODO: if playing... tapping again will pause
   const projects = [
     {
       name: "Service Helper",
-      description: 
-      `A Digital Version of the "House To House Record" created to solve all the problems that arise when using pen and paper like<br>
+      description: `A Digital Version of the "House To House Record" created to solve all the problems that arise when using pen and paper like<br>
       [1] Forgetting a pen and/or paper<br>
       [2] Forgetting "Who's In Charge" of the territory and not knowing who to send the record to<br>
       [3] Forgetting to write down the "Territory Number" and not knowing what territory the records belong to<br>
@@ -72,8 +77,7 @@ export default function AllProjects() {
     },
     {
       name: "Get Swol App",
-      description: 
-      `One Rep Max equations can estimate your one rep max given any other set.<br>
+      description: `One Rep Max equations can estimate your one rep max given any other set.<br>
       The "Get Swol App" re-purposes these equations, and uses an average of the 7 equations out there to<br>
       "calculate the max ammount of weight you sould be able to lift given your desired rep target"<br>
       <br>
@@ -154,25 +158,12 @@ export default function AllProjects() {
 
     function NewlineText(props) {
       const text = props.text;
-      const newText = text.split('\n').map(str => {return (<span>{str}</span>)});
-      return (<Stack>{newText}</Stack>);
+      const newText = text.split("\n").map((str) => {
+        return <span>{str}</span>;
+      });
+      return <Stack>{newText}</Stack>;
     }
-    /*
-    <style
-              dangerouslySetInnerHTML={{
-                __html: `
-                .swiper {
-                  height: ${imageHeight}px;
-                }
-                
-                .swiper-slide {
-                  height: ${imageHeight}px;
-                }
-              `,
-              }}
-            />
-    */
-    
+
     return (
       <Card sx={{ margin: "16px", mb: "36px" }}>
         <CardContent>
@@ -193,7 +184,31 @@ export default function AllProjects() {
         </CardContent>
         <Box sx={{ backgroundColor: "#1e1e1e" }}>
           <Box>
-            
+            <style
+              dangerouslySetInnerHTML={{
+                __html: `
+                .swiper-button-prev, .swiper-button-next{
+                  background-color: black;
+                  border-radius: 1000px;
+                  height: 24px;
+                  width: 24px;
+                  padding: 8px;
+                }
+
+                .swiper-button-prev:after, .swiper-button-next:after{
+                  font-size: 24px;
+                }
+
+                .swiper-button-next:after {
+                  margin-left: 4px;
+                }
+
+                .swiper-button-prev:after {
+                  margin-right: 4px;
+                }
+                `,
+              }}
+            />
             <Swiper
               navigation={true}
               slidesPerView={slidesPerView}
@@ -220,7 +235,7 @@ export default function AllProjects() {
                         return loading ? (
                           <Box
                             sx={{
-                              height:imageHeight,
+                              height: imageHeight,
                               width: "90%",
                               bgcolor: "#000",
                               borderRadius: "8px",
@@ -238,7 +253,7 @@ export default function AllProjects() {
                             </Box>
                           </Box>
                         ) : (
-                          <img src={src} alt={src} height={imageHeight}/>
+                          <img src={src} alt={src} height={imageHeight} />
                         );
                       }}
                     </ProgressiveImage>
@@ -248,9 +263,8 @@ export default function AllProjects() {
           </Box>
         </Box>
         <CardContent>
-          
           <Typography variant="body2">
-          {renderMarkup(project.description)}
+            {renderMarkup(project.description)}
           </Typography>
         </CardContent>
       </Card>
