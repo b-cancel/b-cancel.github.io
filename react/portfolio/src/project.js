@@ -4,10 +4,10 @@ import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import useWindowDimensions from "./window.js"
-import measurementToGoldenRatio from './golden.js'
+import useWindowDimensions from "./window.js";
+import measurementToGoldenRatio from "./golden.js";
 
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import ProgressiveImage from "react-progressive-graceful-image";
 
@@ -77,20 +77,20 @@ export default function AllProjects() {
     const actualWidth = width - insets.left - insets.right;
 
     //do the math
-    const golden = measurementToGoldenRatio({value: actualHeight});
+    const golden = measurementToGoldenRatio({ value: actualHeight });
     const imageHeight = golden.big;
     //imageHeight/imageWidth = 16/9
     //imageHeight = (16/9) * imageWidth
     //imageHeight / (16/9) = imageWidth
-    const imageWidth = imageHeight / (16/9);
-    const horizontalPadding = 16;
-    const imageWidthWithHorizontalPadding = imageWidth + (horizontalPadding * 2);
+    const imageWidth = imageHeight / (16 / 9);
+    const horizontalPadding = 0;
+    const imageWidthWithHorizontalPadding = imageWidth + horizontalPadding * 2;
 
     //width = ()
-    const slidesPerView = (actualWidth / imageWidthWithHorizontalPadding);
+    const slidesPerView = actualWidth / imageWidthWithHorizontalPadding;
 
     return (
-      <Card sx={{margin: "16px", mb: "36px"}}>
+      <Card sx={{ margin: "16px", mb: "36px" }}>
         <CardContent>
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
             {project.name}
@@ -107,43 +107,72 @@ export default function AllProjects() {
             {'"a benevolent smile"'}
           </Typography>
         </CardContent>
-        <Box sx={{ pb: "16px", backgroundColor: "#1e1e1e"}}>
-          <Box sx={{height: golden.big}}>
-          <Swiper
-            navigation={true}
-            slidesPerView={slidesPerView}
-            grabCursor={true}
-            loop={true}
-            centeredSlides={false}
-            keyboard={{
-              enabled: true,
-            }}
-            pagination={{
-              type: "progressbar",
-            }}
-            style={{
-              "--swiper-navigation-color": "#fff",
-              "--swiper-pagination-color": "#fff",
-            }}
-            className="mySwiper"
-          >
-            {project.gallery &&
-              project.gallery.map((media) => (
-                <SwiperSlide key={media}>
-                  <ProgressiveImage src={media} placeholder="" >
-                    {(src, loading) => {
-                      return loading ? (
-                        <Box sx={{height: imageHeight, width: imageWidth, bgcolor: "#000", borderRadius: "8px"}}>
-                          <Box sx={{height: 56, width: 56, margin: "auto", pt: "50%"}}>
-                            <img src="./miniLoader.gif" alt="loading"/>
+        <Box sx={{ backgroundColor: "#1e1e1e", pb: "24px" }}>
+          <Box>
+            <style
+              dangerouslySetInnerHTML={{
+                __html: `
+                .swiper {
+                  height: ${imageHeight}px;
+                }
+                
+                .swiper-slide {
+                  height: ${imageHeight}px;
+                }
+              `,
+              }}
+            />
+            <Swiper
+              navigation={true}
+              slidesPerView={slidesPerView}
+              grabCursor={true}
+              loop={true}
+              centeredSlides={false}
+              keyboard={{
+                enabled: true,
+              }}
+              pagination={{
+                type: "progressbar",
+              }}
+              style={{
+                "--swiper-navigation-color": "#fff",
+                "--swiper-pagination-color": "#fff",
+              }}
+              className="mySwiper"
+            >
+              {project.gallery &&
+                project.gallery.map((media) => (
+                  <SwiperSlide key={media} height={imageHeight}>
+                    <ProgressiveImage src={media} placeholder="">
+                      {(src, loading) => {
+                        return loading ? (
+                          <Box
+                            sx={{
+                              height: "100%",
+                              width: "90%",
+                              bgcolor: "#000",
+                              borderRadius: "8px",
+                            }}
+                          >
+                            <Box
+                              sx={{
+                                height: 56,
+                                width: 56,
+                                margin: "auto",
+                                pt: "50%",
+                              }}
+                            >
+                              <img src="./miniLoader.gif" alt="loading" />
+                            </Box>
                           </Box>
-                        </Box>
-                      ) : <img src={src} alt={src} />;
-                    }}
-                  </ProgressiveImage>
-                </SwiperSlide>
-              ))}
-          </Swiper>
+                        ) : (
+                          <img src={src} alt={src} />
+                        );
+                      }}
+                    </ProgressiveImage>
+                  </SwiperSlide>
+                ))}
+            </Swiper>
           </Box>
         </Box>
       </Card>

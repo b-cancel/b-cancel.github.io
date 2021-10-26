@@ -2,14 +2,6 @@ body {
   background: #000;
 }
 
-.swiper {
-  height: 428px;
-}
-
-.swiper-slide {
-  height: 428px;
-}
-
 .swiper-slide img {
   display: inline-block;
   height: 100%;

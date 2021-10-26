@@ -18,10 +18,27 @@ function App() {
   return (
     <SafeAreaProvider>
       <ThemeProvider theme={darkTheme}>
-        <Box sx={{ mt: "28px" }}>
+        <Box sx={{ mt: "56px"}}>
           <Stack>
             <AllProjects />
+            <Stack sx ={{mt:"72px", mb: "56px"}}>
             <QuickLinks />
+            <Typography
+              variant="subtitle2"
+              color="primary"
+              sx={{ textAlign: "center" }}
+            >
+              All Right Reserved
+            </Typography>
+            <Typography
+              variant="subtitle2"
+              color="primary"
+              sx={{ textAlign: "center" }}
+            >
+              @ 2021 Bryan Cancel
+            </Typography>
+              </Stack>
+            
           </Stack>
         </Box>
         <Box
