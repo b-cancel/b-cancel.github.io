@@ -4596,6 +4596,11 @@
     "domutils" "^2.6.0"
     "nth-check" "^2.0.0"
 
+"css-to-style@^1.4.0":
+  "integrity" "sha512-FxLJRS+zzAjICI/AwpXUQR+aXrDOksrMTPpoKVwcGP0ARCxY5K3eRfgPW+pJrFXG46SKuxWOufJheis8Bhc2kg=="
+  "resolved" "https://registry.npmjs.org/css-to-style/-/css-to-style-1.4.0.tgz"
+  "version" "1.4.0"
+
 "css-tree@^1.1.2":
   "integrity" "sha512-wCoWush5Aeo48GLhfHPbmvZs59Z+M7k5+B1xDnXbdWNcEF423DoFdqSWE0PM5aNk5nI5cp1q7ms36zGApY/sKQ=="
   "resolved" "https://registry.npmjs.org/css-tree/-/css-tree-1.1.2.tgz"
@@ -5090,6 +5095,13 @@
   dependencies:
     "@babel/runtime" "^7.8.7"
     "csstype" "^3.0.2"
+
+"dom-parse@^2.1.0":
+  "integrity" "sha512-nOVBDjbbptJhCaGm6da86HTcMfO8Wt6qmOnMMXLWHr1VLccpvo4LUKsJ4howvgiy4HG1LgHSFOMJMpyG0PyqZA=="
+  "resolved" "https://registry.npmjs.org/dom-parse/-/dom-parse-2.1.0.tgz"
+  "version" "2.1.0"
+  dependencies:
+    "jsdom" "^16.4.0"
 
 "dom-serializer@^1.0.1":
   "integrity" "sha512-5c54Bk5Dw4qAxNOI1pFEizPSjVsx5+bpJKmL2kPn8JhBUq2q09tTCa3mjijun2NfK78NMouDYNMBkOrPZiS+ig=="
@@ -10711,6 +10723,11 @@
     "shell-quote" "^1.6.1"
     "ws" "^7"
 
+"react-display-name@^0.2.5":
+  "integrity" "sha512-I+vcaK9t4+kypiSgaiVWAipqHRXYmZIuAiS8vzFvXHHXVigg/sMKwlRgLy6LH2i3rmP+0Vzfl5lFsFRwF1r3pg=="
+  "resolved" "https://registry.npmjs.org/react-display-name/-/react-display-name-0.2.5.tgz"
+  "version" "0.2.5"
+
 "react-dom@*", "react-dom@^15.0.0-0 || ^16.0.0-0 || ^17.0.0-0", "react-dom@^16.3.2", "react-dom@^17.0.2", "react-dom@>=16.6.0", "react-dom@>=17.0.1":
   "integrity" "sha512-s4h96KtLDUQlsENhMn1ar8t2bEa+q/YAtj8pPPdIjPDGBDIVNsrD9aXNWqspUe6AzKCIG0C1HZZLqLV7qpOBGA=="
   "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-17.0.2.tgz"
@@ -10840,6 +10857,17 @@
   "resolved" "https://registry.npmjs.org/react-refresh/-/react-refresh-0.8.3.tgz"
   "version" "0.8.3"
 
+"react-render-markup@^3.4.0":
+  "integrity" "sha512-vFlu74x1KVgrkMbJXT3t2ImuVZuLTcduIfFJlOKHhKGZjudxQFQjPvl2zTXuZ/yp05nBQRZuf9eLaokGgv9N1Q=="
+  "resolved" "https://registry.npmjs.org/react-render-markup/-/react-render-markup-3.4.0.tgz"
+  "version" "3.4.0"
+  dependencies:
+    "css-to-style" "^1.4.0"
+    "dom-parse" "^2.1.0"
+    "prop-types" "^15.7.2"
+    "react-display-name" "^0.2.5"
+    "tiny-invariant" "^1.1.0"
+
 "react-scripts@4.0.3":
   "integrity" "sha512-S5eO4vjUzUisvkIPB7jVsKtuH2HhWcASREYWHAQ1FP5HyCv3xgn+wpILAEWkmy+A+tTNbSZClhxjT3qz6g4L1A=="
   "resolved" "https://registry.npmjs.org/react-scripts/-/react-scripts-4.0.3.tgz"
@@ -10916,7 +10944,7 @@
     "loose-envify" "^1.4.0"
     "prop-types" "^15.6.2"
 
-"react@*", "react@^15.0.0-0 || ^16.0.0-0 || ^17.0.0-0", "react@^16.3.2", "react@^16.8.0 || ^17.0.0", "react@^17.0.2", "react@>= 16", "react@>=0.12.0", "react@>=16.6.0", "react@>=16.8.0", "react@>=16.x", "react@>=17.0.1", "react@17.0.2":
+"react@*", "react@^15.0.0-0 || ^16.0.0-0 || ^17.0.0-0", "react@^16.3.2", "react@^16.6.0 || ^17.0.0", "react@^16.8.0 || ^17.0.0", "react@^17.0.2", "react@>= 16", "react@>=0.12.0", "react@>=16.6.0", "react@>=16.8.0", "react@>=16.x", "react@>=17.0.1", "react@17.0.2":
   "integrity" "sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.2.tgz"
   "version" "17.0.2"
@@ -12514,6 +12542,11 @@
   "integrity" "sha1-QFQRqOfmM5/mTbmiNN4R3DHgK9Q="
   "resolved" "https://registry.npmjs.org/timsort/-/timsort-0.3.0.tgz"
   "version" "0.3.0"
+
+"tiny-invariant@^1.1.0":
+  "integrity" "sha512-ytxQvrb1cPc9WBEI/HSeYYoGD0kWnGEOR8RY6KomWLBVhqz0RgTwVO9dLrGz7dC+nN9llyI7OKAgRq8Vq4ZBSw=="
+  "resolved" "https://registry.npmjs.org/tiny-invariant/-/tiny-invariant-1.1.0.tgz"
+  "version" "1.1.0"
 
 "tmpl@1.0.x":
   "integrity" "sha512-3f0uOEAQwIqGuWW2MVzYg8fV/QNnc/IpuJNG837rLuczAaLVHslWHZQj4IGiEl5Hs3kkbhwL9Ab7Hrsmuj+Smw=="
