@@ -25,14 +25,14 @@ function App() {
             <QuickLinks />
             <Typography
               variant="subtitle2"
-              color="primary"
+              color="white"
               sx={{ textAlign: "center" }}
             >
               All Right Reserved
             </Typography>
             <Typography
               variant="subtitle2"
-              color="primary"
+              color="white"
               sx={{ textAlign: "center" }}
             >
               @ 2021 Bryan Cancel

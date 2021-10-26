@@ -1,6 +1,7 @@
 import React from "react";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
@@ -25,7 +26,15 @@ export default function QuickLinks() {
     setAnchorEl(null);
   };
   const menuId = "primary-search-account-menu";
+  const lightTheme = createTheme({
+    palette: {
+      mode: "light",
+    },
+  });
   const renderMenu = (
+    
+
+    <ThemeProvider theme={lightTheme}>
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{
@@ -91,12 +100,13 @@ export default function QuickLinks() {
               </Typography>
       </MenuItem>
     </Menu>
+    </ThemeProvider>
   );
   return (
     <Stack direction="row" spacing="16px" sx={{ py: "16px", margin: "auto" }}>
         <Tooltip title="GitHub">
         <IconButton
-          color="primary"
+          color="default"
           aria-label="linked in"
           component="span"
           onClick={() => window.open("https://github.com/b-cancel")}
@@ -109,17 +119,20 @@ export default function QuickLinks() {
         variant="outlined"
         onClick={handleProfileMenuOpen}
         endIcon={
-          <FontAwesomeIcon icon={faHand} transform={{ rotate: -22.5 }} />
+          <FontAwesomeIcon icon={faHand} transform={{ rotate: -22.5 }} color="white"/>
         }
+        style={{
+            borderColor:"white",
+        }}
       >
-        <Typography style={{ textTransform: "none" }}>Say Hello!</Typography>
+        <Typography style={{ textTransform: "none" }} color="white">Say Hello!</Typography>
       </Button>
       </Tooltip>
       {renderMenu}
       
       <Tooltip title="Linked-In">
         <IconButton
-          color="primary"
+          color="default"
           aria-label="linked in"
           component="span"
           onClick={() =>
