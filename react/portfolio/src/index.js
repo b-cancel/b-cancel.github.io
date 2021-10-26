@@ -5,6 +5,7 @@ import AllProjects from "./project";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
+import Box from "@mui/material/Box";
 
 function App() {
   const darkTheme = createTheme({
@@ -14,8 +15,10 @@ function App() {
   });
 
   return (
-    <ThemeProvider theme={darkTheme}>
-      <AllProjects/>
+    <ThemeProvider theme={darkTheme} >
+      <Box sx={{mt: 7}}>
+        <AllProjects/>
+      </Box>
     </ThemeProvider>
   );
 }
