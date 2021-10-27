@@ -9,3 +9,110 @@ body {
 a {
   text-decoration: none;
 }
+
+/* Position and sizing of burger button */
+.bm-burger-button {
+  z-index: 999 !important;
+  background-color: white;
+  height: 44px;
+  width: 44px;
+  border: 2px solid black;
+  border-radius: 100%;
+  top: 16px;
+  right: 16px;
+  left: auto;
+  position: fixed;
+}
+
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
+  height: 4px !important;
+  background: black;
+  width: 24px !important;
+  margin: auto;
+  position: absolute !important;
+  padding: 0px !important;
+  top: 0px;
+  bottom: auto !important;
+}
+
+/*what makes the menu icon*/
+.bm-burger-bars:nth-of-type(1) {
+  top: 12px !important;
+}
+
+.bm-burger-bars:nth-of-type(2) {
+  top: 20px !important;
+}
+
+.bm-burger-bars:nth-of-type(3) {
+  top: 28px !important;
+}
+
+/* General sidebar styles */
+.bm-menu {
+  background: #373a47;
+}
+
+/* Morph shape necessary with bubble or elastic */
+.bm-morph-shape {
+  fill: #373a47;
+}
+
+/* Styling of overlay */
+.bm-overlay {
+  background: rgba(0, 0, 0, 0.75) !important;
+}
+
+/* making the little X disapear */
+.bm-cross-button {
+  display: none !important;
+}
+
+/*-----*/
+
+#App {
+  font-family: sans-serif;
+
+  /* Give app full page to work with */
+  height: 100vh;
+}
+
+#page-wrap {
+  text-align: center;
+
+  /* Prevent sidebar from showing a scrollbar on page */
+  overflow: auto;
+}
+
+/* Individual item */
+.bm-item {
+  display: inline-block;
+
+  /* Our sidebar item styling */
+  text-decoration: none;
+  margin-bottom: 10px;
+  color: #d1d1d1;
+  transition: color 0.2s;
+}
+
+/* Change color on hover */
+.bm-item:hover {
+  color: white;
+}
+
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+  height: 24px;
+  width: 24px;
+}
+
+/* Color/shape of close button cross */
+.bm-cross {
+  background: #bdc3c7;
+}
+
+/* Wrapper for item list */
+.bm-item-list {
+  color: #b8b7ad;
+}
