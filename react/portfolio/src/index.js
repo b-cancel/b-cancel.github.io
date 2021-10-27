@@ -7,6 +7,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import QuickLinks from "./contact.js";
+import ShowIfVisible from "./visible.js";
 
 function App() {
   const darkTheme = createTheme({
@@ -27,6 +28,7 @@ function App() {
         <Box sx={{ mt: "56px"}}>
           <Stack>
             <AllProjects />
+            <ShowIfVisible threshold={.5} />
             <Stack sx ={{mb: "56px"}}>
             <QuickLinks />
             <Typography
