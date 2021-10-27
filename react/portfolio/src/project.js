@@ -13,7 +13,7 @@ import Stack from "@mui/material/Stack";
 
 import { renderMarkup } from "react-render-markup";
 
-import PlayGifWhenVisible from './visible.js';
+import PlayGifWhenVisible from "./visible.js";
 
 import {
   faGithub,
@@ -196,7 +196,8 @@ export default function AllProjects() {
       client: "Flutter Community",
       clientLink: "https://flutter.dev/",
       description: `Custom Material Shets`,
-      github: "https://github.com/b-cancel/Flutter_MaterialSheetAndNavigationDrawer",
+      github:
+        "https://github.com/b-cancel/Flutter_MaterialSheetAndNavigationDrawer",
       gallery: [
         {
           src: "https://i.giphy.com/media/dkXLQACALhF6puhk3I/giphy.gif",
@@ -289,17 +290,17 @@ export default function AllProjects() {
     const imageWidth = imageHeight / (16 / 9);
 
     //NOTE: we want our images to be at most... imageWidth by imageHeight...
-    //but we also want spacing betweenthose images... 
+    //but we also want spacing betweenthose images...
     //so we can't just do the slidesPerView math with that value
 
     //arrow variables will impact the desired spacing
     const arrowMarginFromBorder = 16;
     const arrowButtonBorder = 2;
     const arrowButtonInnerSize = 32;
-    const arrowButtonSize = arrowButtonInnerSize + (arrowButtonBorder * 2)
+    const arrowButtonSize = arrowButtonInnerSize + arrowButtonBorder * 2;
 
     //enough padding so half the button is over an image on the left
-    const horizontalPadding = arrowMarginFromBorder + (arrowButtonSize / 2);
+    const horizontalPadding = arrowMarginFromBorder + arrowButtonSize / 2;
 
     //[space + image width] * slidesPerView = full width
     const imageWidthWithHorizontalPadding = imageWidth + horizontalPadding;
@@ -386,8 +387,20 @@ export default function AllProjects() {
                       //landscape images fill the width
                       //portrait image fill the height
                       var image;
-                      if(src.includes('.gif')){
-                        image = <PlayGifWhenVisible src={media.src} threshold={.5} />
+                      if (src.includes(".gif")) {
+                        var identifier = media.src;
+                        identifier = identifier.replace(`https://i.giphy.com/media/`, '');
+                        identifier = identifier.replace(`/giphy.gif`,'');
+
+                        //we created ID for custom GIF styling
+                        image = (
+                          <PlayGifWhenVisible
+                            identifier={identifier}
+                            src={media.src}
+                            threshold={0.75}
+                            landscape={media.landscape}
+                          />
+                        );
                       } else {
                         image = media.landscape ? (
                           <img
@@ -395,7 +408,7 @@ export default function AllProjects() {
                             alt={src}
                             width="100%"
                             object-fit="contain"
-                            class="_8pxborder"
+                            className="_8pxborder"
                           />
                         ) : (
                           <img
@@ -403,13 +416,13 @@ export default function AllProjects() {
                             alt={src}
                             height="100%"
                             object-fit="contain"
-                            class="_8pxborder"
+                            className="_8pxborder"
                           />
                         );
                       }
 
                       const isLastImage = lastSrc === src;
-                      if(isLastImage){
+                      if (isLastImage) {
                         console.log(`${src} is last image? ${isLastImage}`);
                       }
 
@@ -444,8 +457,8 @@ export default function AllProjects() {
                             display: "inline-block",
                           }}
                         >
-                          { image }
-                          </Box>
+                          {image}
+                        </Box>
                       );
                     }}
                   </ProgressiveImage>
