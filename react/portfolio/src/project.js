@@ -49,50 +49,228 @@ export default function AllProjects() {
   //TODO: in full screen mode.... show play button... start over button if stopped and not at begining
   //TODO: if playing... tapping again will pause
 
+  //TODO: add [*] Lawn Buddy(revamped customer details, job details, shape calcualtor)
 
-  //TODO: add [*] Lawn Buddy(revamped customer details, job details, shape calcualtor) 
-  //TODO: add personal [*] Lawn Buddy Job Proposal [*] Half Life  [*] leashed [*] contact picker [*] material sheets
+  /*
+  client: "JWs",
+  clientLink: "https://jw.org",
+  */
   const projects = [
     {
       name: "Service Helper",
-      description: 
-      `A Digital Version of the "House To House Record" & "Follow Up" Form,
+      description: `A Digital Version of the "House To House Record" & "Follow Up" Form,
       created to solve all the problems that arise when using pen and paper`,
       repoIsPrivate: true,
       github: "https://github.com/b-cancel/house_to_house",
       appstore: "https://testflight.apple.com/join/ZFowXCT4",
       gallery: [
-        "https://i.imgur.com/tARG4m0.jpg",
-        "https://i.imgur.com/ST8VhbZ.jpg",
-        "https://i.imgur.com/mqQYv0v.jpg",
-        "https://i.imgur.com/oPfmGVV.jpg",
-        "https://i.imgur.com/tfAz8lp.jpg",
-        "https://i.imgur.com/0IHtYld.jpg",
-        "https://i.imgur.com/edfqUaa.jpg",
+        { src: "https://i.imgur.com/tARG4m0.jpg" },
+        { src: "https://i.imgur.com/ST8VhbZ.jpg" },
+        { src: "https://i.imgur.com/mqQYv0v.jpg" },
+        { src: "https://i.imgur.com/oPfmGVV.jpg" },
+        { src: "https://i.imgur.com/tfAz8lp.jpg" },
+        { src: "https://i.imgur.com/0IHtYld.jpg" },
+        { src: "https://i.imgur.com/edfqUaa.jpg" },
       ],
     },
     {
       name: "Get Swol App",
-      description: 
-      `Created to help users gain muscle faster by exploiting progressive overload;
+      description: `Created to help users gain muscle faster by exploiting progressive overload;
       8 one rep max equations have been re-purposed to calculate the max ammount of weight
       that one should be able to lift given a desired rep target.`,
       github: "https://github.com/b-cancel/swol",
       appstore: "https://apps.apple.com/us/app/get-swol-app/id1576936894",
       googleplay: "https://play.google.com/store/apps/details?id=get.swol.app",
       gallery: [
-        "https://i.imgur.com/SLpWBkv.jpg",
-        "https://i.imgur.com/nLhuzZR.jpg",
-        "https://i.imgur.com/eiERhkP.jpg",
-        "https://i.imgur.com/UgtbjK8.jpg",
-        "https://i.imgur.com/cqPSXbg.jpg",
-        "https://i.imgur.com/yne1JDc.jpg",
-        "https://i.imgur.com/gkcEJHH.jpg",
+        { src: "https://i.imgur.com/SLpWBkv.jpg" },
+        { src: "https://i.imgur.com/nLhuzZR.jpg" },
+        { src: "https://i.imgur.com/eiERhkP.jpg" },
+        { src: "https://i.imgur.com/UgtbjK8.jpg" },
+        { src: "https://i.imgur.com/cqPSXbg.jpg" },
+        { src: "https://i.imgur.com/yne1JDc.jpg" },
+        { src: "https://i.imgur.com/gkcEJHH.jpg" },
+      ],
+    },
+    {
+      name: "Job Proposal",
+      description: `Allow clients to create job proposals for their clients, 
+      convert them immediately into job requests, or send them as quotes.`,
+      client: "Lawn Buddy",
+      clientLink: "https://www.lawnbuddy.com/",
+      github: "https://github.com/b-cancel/JobProposalPrototype",
+      gallery: [
+        {
+          src: "https://i.giphy.com/media/dyvj1gBn4HYBfVDrpr/giphy.gif",
+          title: "Select from clients' addresses",
+        },
+        {
+          src: "https://i.giphy.com/media/VJYrbNGSMxUZ38RuU9/giphy.gif",
+          title: "Select a Due Date",
+        },
+        {
+          src: "https://i.giphy.com/media/UvK4kZ48BSmlVhiFQp/giphy.gif",
+          title: "Manipulate line items",
+        },
+        {
+          src: "https://i.giphy.com/media/fsaqYZsD0P0x600rE1/giphy.gif",
+          title: "Manipulate images within items",
+        },
+      ],
+    },
+    {
+      name: "Half Life",
+      description: `Avoid the negative side effects of medication by changing your dosage or frequency on the fly, 
+      by taking into consideration how you feel given the ammount of active ingredient currently in your system,
+      calculated with that medication's half-life.`,
+      github: "https://github.com/b-cancel/halfLife",
+      gallery: [
+        {
+          src: "https://i.giphy.com/media/PiQF5YD82meF4uitmz/giphy.gif",
+          title: "Scrub through the dose timeline",
+        },
+        {
+          src: "https://i.giphy.com/media/Rk2zzd9k9l6MBBLTBY/giphy.gif",
+          title: "Add a dose to the timeline",
+        },
+      ],
+    },
+    {
+      name: "Leashed",
+      description: `Senior Project: Wirelessly leash any bluetooth device to your phone to avoid losing anything ever again.
+      AirTag sepration alerts before airtags existed.`,
+      github: "https://github.com/b-cancel/Leashed",
+      gallery: [
+        {
+          src: "https://i.giphy.com/media/S8lbi2cusC5gVC0xOS/giphy.gif",
+          landscape: true,
+          title: "Identify device throught signal analysis",
+        },
+        {
+          src: "https://i.giphy.com/media/RKMMj20eRHONfImd0L/giphy.gif",
+          title: "Device list",
+        },
+        {
+          src: "https://i.giphy.com/media/S6Zdj4EiS99DlVZuDS/giphy.gif",
+          title: "SOS mode and test",
+        },
+        {
+          src: "https://i.giphy.com/media/d5qOvltp866jRzktDZ/giphy.gif",
+          title: "Add New Device",
+        },
+      ],
+    },
+    {
+      name: "Flutter Contact Picker",
+      client: "Flutter Community",
+      clientLink: "https://flutter.dev/",
+      description: `Custom platform contact picker for flutter projects`,
+      github: "https://github.com/b-cancel/Flutter_ContactPicker",
+      gallery: [
+        {
+          src: "https://i.giphy.com/media/Uqk7fPBnsNydSn2GZW/giphy.gif",
+          title: "Smooth contracting quick access slider",
+        },
+        {
+          src: "https://i.giphy.com/media/LM9EpmeAiYlIpSAcgH/giphy.gif",
+          title: "Add a contact",
+        },
+        {
+          src: "https://i.giphy.com/media/W0QwfdozN3AFnw1sWn/giphy.gif",
+          title: "Light Mode",
+        },
+        {
+          src: "https://i.giphy.com/media/Xbh1CLWME0plFA8g2G/giphy.gif",
+          title: "Gallery or Picture",
+        },
+        {
+          src: "https://i.giphy.com/media/UT4byKMOmrYWk8dTmb/giphy.gif",
+          landscape: true,
+          title: "Landscape Mode",
+        },
+      ],
+    },
+    {
+      name: "Flutter Material Sheets",
+      client: "Flutter Community",
+      clientLink: "https://flutter.dev/",
+      description: `Custom Material Shets`,
+      github: "https://github.com/b-cancel/Flutter_MaterialSheetAndNavigationDrawer",
+      gallery: [
+        {
+          src: "https://i.giphy.com/media/dkXLQACALhF6puhk3I/giphy.gif",
+          title: "Smooth gesture controlled sheet",
+        },
+        {
+          src: "https://i.giphy.com/media/35KhYdJ9CQAN6hzYbQ/giphy.gif",
+          title: "Interactive bottom sheet",
+        },
+        {
+          src: "https://i.giphy.com/media/dYng1K8blxvnsLhP81/giphy.gif",
+          title: "Persistent bottom sheet",
+        },
+        {
+          src: "https://i.giphy.com/media/9rsWxrJaYOhCQbRDXD/giphy.gif",
+          title: "Sheets everywhere",
+        },
       ],
     },
   ];
 
   function ProjectCard({ project }) {
+    const clientButtonText = `Made for ${project.client}`;
+    const clientButton = project.clientLink ? (
+      <MyButton
+        sx={{ mr: "12px", mt: "8px" }}
+        variant="outlined"
+        color="white"
+        tooltip={project.clientLink}
+        text={clientButtonText}
+        onClick={() => window.open(project.clientLink)}
+      />
+    ) : null;
+    const appStoreButton = project.appstore ? (
+      <MyButton
+        sx={{ mr: "12px", mt: "8px" }}
+        variant="outlined"
+        prefixIcon={<FontAwesomeIcon icon={faAppStore} color="primary" />}
+        tooltip={project.appstore}
+        text="iOS"
+        onClick={() => window.open(project.appstore)}
+      />
+    ) : null;
+    const googlePlayButton = project.googleplay ? (
+      <MyButton
+        sx={{ mr: "12px", mt: "8px" }}
+        variant="outlined"
+        prefixIcon={<FontAwesomeIcon icon={faGooglePlay} color="primary" />}
+        tooltip={project.googleplay}
+        text="Android"
+        onClick={() => window.open(project.googleplay)}
+      />
+    ) : null;
+
+    const repositioryButton = project.github ? (
+      <MyButton
+        sx={{ mr: "12px", mt: "8px" }}
+        variant="contained"
+        prefixIcon={<FontAwesomeIcon icon={faGithub} color="primary" />}
+        tooltip={project.github}
+        color="white"
+        onClick={() => window.open(project.github)}
+        repoIsPrivate={project.repoIsPrivate}
+        child={
+          <Typography
+            style={{ textTransform: "none" }}
+            variant="body1"
+            sx={{ fontWeight: "bold" }}
+          >
+            / {project.name}
+          </Typography>
+        }
+      />
+    ) : null;
+
+    //everything slide related below
     const { height, width } = useWindowDimensions();
 
     //remove insets
@@ -107,95 +285,69 @@ export default function AllProjects() {
     //imageHeight = (16/9) * imageWidth
     //imageHeight / (16/9) = imageWidth
     const imageWidth = imageHeight / (16 / 9);
-    const horizontalPadding = 16 + (36/2);
+
+    //NOTE: we want our images to be at most... imageWidth by imageHeight...
+    //but we also want spacing betweenthose images... 
+    //so we can't just do the slidesPerView math with that value
+
+    //arrow variables will impact the desired spacing
+    const arrowMarginFromBorder = 16;
+    const arrowButtonBorder = 2;
+    const arrowButtonInnerSize = 32;
+    const arrowButtonSize = arrowButtonInnerSize + (arrowButtonBorder * 2)
+
+    //enough padding so half the button is over an image on the left
+    const horizontalPadding = arrowMarginFromBorder + (arrowButtonSize / 2);
+
+    //[space + image width] * slidesPerView = full width
     const imageWidthWithHorizontalPadding = imageWidth + horizontalPadding;
-
-    //width = ()
     const slidesPerView = actualWidth / imageWidthWithHorizontalPadding;
-    console.log(slidesPerView);
 
+    const horizontalPaddingPx = `${horizontalPadding}px`;
 
-    const appStoreButton = project.appstore ? (
-      <MyButton
-      sx={{mr:"12px", mt:"8px"}}
-        variant="outlined"
-        prefixIcon={<FontAwesomeIcon icon={faAppStore} color="primary" />}
-        tooltip={project.appstore}
-        text="iOS"
-        onClick={() => window.open(project.appstore)}
-      />
-    ) : null;
-    const googlePlayButton = project.googleplay ? (
-      <MyButton
-      sx={{mr:"12px", mt:"8px"}}
-        variant="outlined"
-        prefixIcon={<FontAwesomeIcon icon={faGooglePlay} color="primary" />}
-        tooltip={project.googleplay}
-        text="Android"
-        onClick={() => window.open(project.googleplay)}
-      />
-    ) : null;
-
-    const repositioryButton = project.github ? (
-      <MyButton
-      sx={{mr:"12px", mt:"8px"}}
-        variant="contained"
-        prefixIcon={<FontAwesomeIcon icon={faGithub} color="primary" />}
-        tooltip={project.github}
-        color="white"
-        onClick={() => window.open(project.github)}
-        repoIsPrivate={project.repoIsPrivate}
-        child={<Typography
-          style={{ textTransform: "none" }}
-          variant="body1"
-          sx={{ fontWeight: 'bold'}}
-        >
-          / {project.name}
-        </Typography>}
-      />
-    ) : null;
-
-    const horizontalPaddingPx = `${horizontalPadding}px`
+    const lastSrc = project.gallery[project.gallery.length - 1].src;
+    console.log(lastSrc);
 
     return (
-      <Stack sx={{mb:"76px"}}>
-        <Stack sx={{mx:horizontalPaddingPx, my:"8px",}}>
-        <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'flex-start',
-          alignItems: 'flex-start',
-          flexWrap: 'wrap',
-        }}
+      <Stack sx={{ mb: "76px" }}>
+        <Stack sx={{ mx: horizontalPaddingPx, my: "8px" }}>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "flex-start",
+              alignItems: "flex-start",
+              flexWrap: "wrap",
+            }}
           >
-          {repositioryButton}
-          {appStoreButton}
-          {googlePlayButton}
+            {repositioryButton}
+            {clientButton}
+            {appStoreButton}
+            {googlePlayButton}
           </Box>
-          <Typography variant="body2" color="white" sx={{py:"16px"}}>
+          <Typography variant="body2" color="white" sx={{ py: "16px" }}>
             {renderMarkup(project.description)}
           </Typography>
         </Stack>
-          
-          <Box>
+
+        <Box>
           <style
-              dangerouslySetInnerHTML={{
-                __html: `
+            dangerouslySetInnerHTML={{
+              __html: `
                 .swiper-button-prev {
-                  left: 16px;
+                  left: ${arrowMarginFromBorder}px;
                 }
 
                 .swiper-button-next {
-                  right: 16px;
+                  right: ${arrowMarginFromBorder}px;
                 }
 
                 .swiper-button-prev, .swiper-button-next{
-                  border: 2px solid black;
+                  border: ${arrowButtonBorder}px solid black;
                   background-color: white;
                   border-radius: 8px;
-                  height: 32px;
-                  width: 32px;
+                  height: ${arrowButtonInnerSize}px;
+                  width: ${arrowButtonInnerSize}px;
                 }
                 .swiper-button-prev:after, .swiper-button-next:after{
                   color: black;
@@ -212,56 +364,90 @@ export default function AllProjects() {
                   opacity: 0;
                 }
                 `,
-              }}
-            />
+            }}
+          />
           <Swiper
-              navigation={true}
-              slidesPerView={slidesPerView}
-              grabCursor={true}
-              centeredSlides={false}
-              style={{
-                "--swiper-navigation-color": "#fff",
-                "--swiper-pagination-color": "#fff",
-              }}
-              className="mySwiper"
-            >
-              {project.gallery &&
-                project.gallery.map((media) => (
-                  <SwiperSlide key={media}>
-                    <ProgressiveImage src={media} placeholder="">
-                      {(src, loading) => {
-                        return loading ? (
+            navigation={true}
+            slidesPerView={slidesPerView}
+            grabCursor={true}
+            centeredSlides={false}
+            style={{
+              "--swiper-navigation-color": "#fff",
+              "--swiper-pagination-color": "#fff",
+            }}
+            className="mySwiper"
+          >
+            {project.gallery &&
+              project.gallery.map((media) => (
+                <SwiperSlide key={media.src}>
+                  <ProgressiveImage src={media.src} placeholder="">
+                    {(src, loading) => {
+                      //landscape images fill the width
+                      //portrait image fill the height
+                      const image = media.landscape ? (
+                        <img
+                          src={src}
+                          alt={src}
+                          width="100%"
+                          object-fit="contain"
+                          class="_8pxborder"
+                        />
+                      ) : (
+                        <img
+                          src={src}
+                          alt={src}
+                          height="100%"
+                          object-fit="contain"
+                          class="_8pxborder"
+                        />
+                      );
+
+                      const isLastImage = lastSrc === src;
+                      if(isLastImage){
+                        console.log(`${src} is last image? ${isLastImage}`);
+                      }
+                      
+
+                      return loading ? (
+                        <Box
+                          sx={{
+                            ml: horizontalPaddingPx,
+                            height: imageHeight,
+                            width: imageWidth,
+                            bgcolor: "#fff",
+                            borderRadius: "8px",
+                          }}
+                        >
                           <Box
                             sx={{
-                              ml:horizontalPaddingPx,
-                              height: imageHeight,
-                              width: "90%",
-                              bgcolor: "#000",
-                              borderRadius: "8px",
+                              height: 56,
+                              width: 56,
+                              margin: "auto",
+                              pt: "50%",
                             }}
                           >
-                            <Box
-                              sx={{
-                                height: 56,
-                                width: 56,
-                                margin: "auto",
-                                pt: "50%",
-                              }}
-                            >
-                              <img src="./miniLoader.gif" alt="loading" />
-                            </Box>
+                            <img src="./miniLoaderBlack.gif" alt="loading" />
                           </Box>
-                        ) : (
-                          <Box sx={{ml:horizontalPaddingPx, display:"inline-block", height:imageHeight, borderRadius:"8px", overflow:"hidden"}}>
-                          <img src={src} alt={src} height="100%"/>
+                        </Box>
+                      ) : (
+                        <Box
+                          sx={{
+                            ml: horizontalPaddingPx,
+                            mr: isLastImage ? horizontalPaddingPx : "0px",
+                            height: imageHeight,
+                            width: imageWidth,
+                            display: "inline-block",
+                          }}
+                        >
+                          { image }
                           </Box>
-                        );
-                      }}
-                    </ProgressiveImage>
-                  </SwiperSlide>
-                ))}
-            </Swiper>
-            </Box>
+                      );
+                    }}
+                  </ProgressiveImage>
+                </SwiperSlide>
+              ))}
+          </Swiper>
+        </Box>
       </Stack>
     );
   }
