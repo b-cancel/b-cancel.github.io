@@ -1,12 +1,13 @@
-import React, { Component, createRef } from 'react';
-import Observer from '@researchgate/react-intersection-observer';
-import ReactFreezeframe from 'react-freezeframe';
+import React, { Component, createRef } from "react";
+import Observer from "@researchgate/react-intersection-observer";
+import ReactFreezeframe from "react-freezeframe";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 
 const getPrintableThreshold = (ratio, range) =>
   range.reduce((prev, curr) =>
-    Math.abs(curr - ratio) < Math.abs(prev - ratio) ? curr : prev);
+    Math.abs(curr - ratio) < Math.abs(prev - ratio) ? curr : prev
+  );
 
 //TODO: I should fix this so the GIFs also autoplay when they show while initially showing page
 export default class PlayGifWhenVisible extends Component {
@@ -23,22 +24,23 @@ export default class PlayGifWhenVisible extends Component {
   render() {
     var identifier = this.props.identifier;
     const desiredThreshold = this.props.threshold;
-    const stylingString = this.props.landscape ? `` : `
+    const stylingString = this.props.landscape
+      ? ``
+      : `
       #${identifier}, #${identifier} div, #${identifier} span {
         height:100%;
       }
 
-      #${identifier} img {
+      #${identifier} img, #${identifier} canvas {
         object-fit: contain;
         height: 100%;
         width: auto;
       }
     `;
     return (
-        
-        <Observer
+      <Observer
         onChange={({ isIntersecting, intersectionRatio }) => {
-          if(isIntersecting){
+          if (isIntersecting) {
             this.start();
             this.start();
           } else {
@@ -48,23 +50,25 @@ export default class PlayGifWhenVisible extends Component {
         threshold={[desiredThreshold]}
       >
         <Stack id={identifier}>
-        <style
-      dangerouslySetInnerHTML={{
-        __html: stylingString,
-      }}
-    />
-        <ReactFreezeframe
-          key={this.props.src}
-          src={this.props.src}
-          ref={this.freeze}
-          options={{
-            trigger: false,
-            overlay: false,
-          }}
-          onToggle={(items, isPlaying) => this.logEvent('toggle', items, isPlaying)}
-          onStart={(items) => this.logEvent('start', items)}
-          onStop={(items) => this.logEvent('stop', items)}
-        />
+          <style
+            dangerouslySetInnerHTML={{
+              __html: stylingString,
+            }}
+          />
+          <ReactFreezeframe
+            key={this.props.src}
+            src={this.props.src}
+            ref={this.freeze}
+            options={{
+              trigger: false,
+              overlay: false,
+            }}
+            onToggle={(items, isPlaying) =>
+              this.logEvent("toggle", items, isPlaying)
+            }
+            onStart={(items) => this.logEvent("start", items)}
+            onStop={(items) => this.logEvent("stop", items)}
+          />
         </Stack>
       </Observer>
     );

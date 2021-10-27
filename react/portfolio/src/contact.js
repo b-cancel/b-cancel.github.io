@@ -105,7 +105,7 @@ export default function QuickLinks() {
       <MyIconButton
         tooltip="Github"
         color="default"
-        onClick={() => window.open("https://github.com/b-cancel")}
+        src="https://github.com/b-cancel"
         icon={faGithub}
       />
       <MyButton
@@ -126,9 +126,7 @@ export default function QuickLinks() {
       <MyIconButton
         tooltip="Linked-In"
         color="default"
-        onClick={() =>
-          window.open("https://www.linkedin.com/in/bryan-cancel-069a197a")
-        }
+        src="https://www.linkedin.com/in/bryan-cancel-069a197a"
         icon={faLinkedin}
       />
     </Stack>

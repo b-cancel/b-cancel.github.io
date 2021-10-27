@@ -1,17 +1,18 @@
 import React from "react";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
-import { styled } from '@mui/material/styles';
-import Zoom from '@mui/material/Zoom';
+import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
+import { styled } from "@mui/material/styles";
+import Zoom from "@mui/material/Zoom";
+import Link from '@mui/material/Link';
 
 const WhiteOnBlackToolTip = styled(({ className, ...props }) => (
   <Tooltip {...props} classes={{ popper: className }} />
 ))(({ theme }) => ({
   [`& .${tooltipClasses.tooltip}`]: {
-    maxWidth: 'none',
+    maxWidth: "none",
     backgroundColor: "white",
-    color: 'black',
+    color: "black",
     fontSize: 12,
   },
 }));
@@ -20,10 +21,11 @@ const ErrorToolTip = styled(({ className, ...props }) => (
   <Tooltip {...props} classes={{ popper: className }} />
 ))(({ theme }) => ({
   [`& .${tooltipClasses.tooltip}`]: {
-    maxWidth: 'none',
+    maxWidth: "none",
     backgroundColor: "red",
-    color: 'white',
+    color: "white",
     fontSize: 14,
+    fontWeight:"bold",
   },
 }));
 
@@ -37,34 +39,60 @@ export default function MyButton(props) {
     </Typography>
   );
 
-  const computedStyle = props.variant === "contained" ? {
-    backgroundColor: props.color,
-  } : {
-    borderColor: props.color,
-  };
+  const computedStyle =
+    props.variant === "contained"
+      ? {
+          backgroundColor: props.color,
+        }
+      : {
+          borderColor: props.color,
+        };
 
-  const theButton = <Button
-  variant={props.variant}
-  onClick={props.onClick}
-  startIcon={props.prefixIcon}
-  endIcon={props.suffixIcon}
-  style={computedStyle}
-  sx={props.sx}
->
-  {child}
-</Button>;
+  const theButton = (
+    <Button
+      variant={props.variant}
+      onClick={props.onClick}
+      startIcon={props.prefixIcon}
+      endIcon={props.suffixIcon}
+      style={computedStyle}
+      sx={props.sx}
+    >
+      {child}
+    </Button>
+  );
 
-  if(props.repoIsPrivate){
-    return (
-      <ErrorToolTip title="Private Repository" TransitionComponent={Zoom} placement="top">
+  var buttonWithToolTip = theButton;
+  const stringLength = props.tooltip ? props.tooltip.length : 0;
+  const hasTooltip = stringLength !== 0;
+  console.log("len " + stringLength + " is not zero " + hasTooltip);
+  if(hasTooltip || props.repoIsPrivate){
+    console.log("should have tooltip");
+    buttonWithToolTip = props.repoIsPrivate ? (
+      <ErrorToolTip
+        title="Private Repository"
+        TransitionComponent={Zoom}
+        placement="top"
+      >
         {theButton}
       </ErrorToolTip>
-    );
-  } else {
-    return (
-      <WhiteOnBlackToolTip title={props.tooltip} TransitionComponent={Zoom} placement="top">
+    ) : (
+      <WhiteOnBlackToolTip
+        title={props.tooltip}
+        TransitionComponent={Zoom}
+        placement="top"
+      >
         {theButton}
       </WhiteOnBlackToolTip>
     );
+  }
+
+  if (props.src) {
+    return (
+          <a href={props.src} target="_blank" rel="noreferrer">
+        {buttonWithToolTip}
+        </a>
+    );
+  } else {
+    return buttonWithToolTip;
   }
 }

@@ -226,9 +226,8 @@ export default function AllProjects() {
         sx={{ mr: "12px", mt: "8px" }}
         variant="outlined"
         color="white"
-        tooltip={project.clientLink}
         text={clientButtonText}
-        onClick={() => window.open(project.clientLink)}
+        src={project.clientLink}
       />
     ) : null;
     const appStoreButton = project.appstore ? (
@@ -236,9 +235,8 @@ export default function AllProjects() {
         sx={{ mr: "12px", mt: "8px" }}
         variant="outlined"
         prefixIcon={<FontAwesomeIcon icon={faAppStore} color="primary" />}
-        tooltip={project.appstore}
         text="iOS"
-        onClick={() => window.open(project.appstore)}
+        src={project.appstore}
       />
     ) : null;
     const googlePlayButton = project.googleplay ? (
@@ -246,9 +244,8 @@ export default function AllProjects() {
         sx={{ mr: "12px", mt: "8px" }}
         variant="outlined"
         prefixIcon={<FontAwesomeIcon icon={faGooglePlay} color="primary" />}
-        tooltip={project.googleplay}
         text="Android"
-        onClick={() => window.open(project.googleplay)}
+        src={project.googleplay}
       />
     ) : null;
 
@@ -257,15 +254,14 @@ export default function AllProjects() {
         sx={{ mr: "12px", mt: "8px" }}
         variant="contained"
         prefixIcon={<FontAwesomeIcon icon={faGithub} color="primary" />}
-        tooltip={project.github}
         color="white"
-        onClick={() => window.open(project.github)}
+        src={project.github}
         repoIsPrivate={project.repoIsPrivate}
         child={
           <Typography
             style={{ textTransform: "none" }}
             variant="body1"
-            sx={{ fontWeight: "bold" }}
+            sx={{ fontWeight: "bold"}}
           >
             / {project.name}
           </Typography>
@@ -389,8 +385,11 @@ export default function AllProjects() {
                       var image;
                       if (src.includes(".gif")) {
                         var identifier = media.src;
-                        identifier = identifier.replace(`https://i.giphy.com/media/`, '');
-                        identifier = identifier.replace(`/giphy.gif`,'');
+                        identifier = identifier.replace(
+                          `https://i.giphy.com/media/`,
+                          ""
+                        );
+                        identifier = identifier.replace(`/giphy.gif`, "");
 
                         //we created ID for custom GIF styling
                         image = (
@@ -455,9 +454,12 @@ export default function AllProjects() {
                             height: imageHeight,
                             width: imageWidth,
                             display: "inline-block",
+                            textDecoration: 'none' 
                           }}
                         >
-                          {image}
+                          <a href={media.src} target="_blank" rel="noreferrer">
+                            {image}
+                          </a>
                         </Box>
                       );
                     }}

@@ -7,7 +7,6 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import QuickLinks from "./contact.js";
-import ShowIfVisible from "./visible.js";
 
 function App() {
   const darkTheme = createTheme({
@@ -25,30 +24,26 @@ function App() {
   return (
     <SafeAreaProvider>
       <ThemeProvider theme={darkTheme}>
-        <Box sx={{ mt: "56px"}}>
+        <Box sx={{ mt: "56px" }}>
           <Stack>
             <AllProjects />
-            <ShowIfVisible threshold={.5} />
-            <Stack sx ={{mb: "56px"}}>
-            <QuickLinks />
-            <Typography
-              variant="subtitle2"
-              color="white"
-              sx={{ textAlign: "center" }}
-            >
-              All Right Reserved
-            </Typography>
-            <Typography
-              variant="subtitle2"
-              color="white"
-              sx={{ textAlign: "center" }}
-            >
-              @ 2021 Bryan Cancel
-            </Typography>
-            
-              </Stack>
-              
-            
+            <Stack sx={{ mb: "56px" }}>
+              <QuickLinks />
+              <Typography
+                variant="subtitle2"
+                color="white"
+                sx={{ textAlign: "center" }}
+              >
+                All Right Reserved
+              </Typography>
+              <Typography
+                variant="subtitle2"
+                color="white"
+                sx={{ textAlign: "center" }}
+              >
+                @ 2021 Bryan Cancel
+              </Typography>
+            </Stack>
           </Stack>
         </Box>
         <Box
@@ -70,7 +65,7 @@ function App() {
             }}
           >
             <Stack>
-              <Typography variant="subtitle2" sx={{ fontWeight: 'bold'}}>
+              <Typography variant="subtitle2" sx={{ fontWeight: "bold" }}>
                 DEV, UX & UI by Bryan Cancel
               </Typography>
             </Stack>
