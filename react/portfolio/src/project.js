@@ -48,6 +48,10 @@ export default function AllProjects() {
   //TODO: when tapped... full screen comes up... but GIF restarts...
   //TODO: in full screen mode.... show play button... start over button if stopped and not at begining
   //TODO: if playing... tapping again will pause
+
+
+  //TODO: add [*] Lawn Buddy(revamped customer details, job details, shape calcualtor) 
+  //TODO: add personal [*] Lawn Buddy Job Proposal [*] Half Life  [*] leashed [*] contact picker [*] material sheets
   const projects = [
     {
       name: "Service Helper",

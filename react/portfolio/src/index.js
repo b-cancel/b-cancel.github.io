@@ -37,7 +37,11 @@ function App() {
             >
               @ 2021 Bryan Cancel
             </Typography>
+            <Box sx={{margin:"auto", mt:"16px"}}>
+            <img src="./miniLoader.gif" alt="loading" height="56px" width="56px"/>
+            </Box>
               </Stack>
+              
             
           </Stack>
         </Box>
