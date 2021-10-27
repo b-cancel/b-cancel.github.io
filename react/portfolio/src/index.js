@@ -21,7 +21,7 @@ function App() {
         <Box sx={{ mt: "56px"}}>
           <Stack>
             <AllProjects />
-            <Stack sx ={{mt:"72px", mb: "56px"}}>
+            <Stack sx ={{mb: "56px"}}>
             <QuickLinks />
             <Typography
               variant="subtitle2"
@@ -60,7 +60,7 @@ function App() {
             }}
           >
             <Stack>
-              <Typography variant="subtitle2">
+              <Typography variant="subtitle2" sx={{ fontWeight: 'bold'}}>
                 DEV, UX & UI by Bryan Cancel
               </Typography>
             </Stack>

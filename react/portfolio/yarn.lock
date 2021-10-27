@@ -10715,6 +10715,13 @@
     "strip-ansi" "6.0.0"
     "text-table" "0.2.0"
 
+"react-device-detect@^2.1.2":
+  "integrity" "sha512-N42xttwez3ECgu4KpOL2ICesdfoz8NCBfmc1rH9FRYSjH7NmMyANPSrQ3EvAtJyj/6TzJNhrANSO38iXjCB2Ug=="
+  "resolved" "https://registry.npmjs.org/react-device-detect/-/react-device-detect-2.1.2.tgz"
+  "version" "2.1.2"
+  dependencies:
+    "ua-parser-js" "^0.7.30"
+
 "react-devtools-core@^4.13.0":
   "integrity" "sha512-ep2j84M1ZtDFWsTtFrKyLyg4GEbnw4gFj/8brA+BZtsINgKHhWEVzscz5E/bFWRdyTM8mWdcaKQAk2hR+IezPw=="
   "resolved" "https://registry.npmjs.org/react-devtools-core/-/react-devtools-core-4.20.2.tgz"
@@ -10728,7 +10735,7 @@
   "resolved" "https://registry.npmjs.org/react-display-name/-/react-display-name-0.2.5.tgz"
   "version" "0.2.5"
 
-"react-dom@*", "react-dom@^15.0.0-0 || ^16.0.0-0 || ^17.0.0-0", "react-dom@^16.3.2", "react-dom@^17.0.2", "react-dom@>=16.6.0", "react-dom@>=17.0.1":
+"react-dom@*", "react-dom@^15.0.0-0 || ^16.0.0-0 || ^17.0.0-0", "react-dom@^16.3.2", "react-dom@^17.0.2", "react-dom@>= 0.14.0 < 18.0.0", "react-dom@>=16.6.0", "react-dom@>=17.0.1":
   "integrity" "sha512-s4h96KtLDUQlsENhMn1ar8t2bEa+q/YAtj8pPPdIjPDGBDIVNsrD9aXNWqspUe6AzKCIG0C1HZZLqLV7qpOBGA=="
   "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-17.0.2.tgz"
   "version" "17.0.2"
@@ -10944,7 +10951,7 @@
     "loose-envify" "^1.4.0"
     "prop-types" "^15.6.2"
 
-"react@*", "react@^15.0.0-0 || ^16.0.0-0 || ^17.0.0-0", "react@^16.3.2", "react@^16.6.0 || ^17.0.0", "react@^16.8.0 || ^17.0.0", "react@^17.0.2", "react@>= 16", "react@>=0.12.0", "react@>=16.6.0", "react@>=16.8.0", "react@>=16.x", "react@>=17.0.1", "react@17.0.2":
+"react@*", "react@^15.0.0-0 || ^16.0.0-0 || ^17.0.0-0", "react@^16.3.2", "react@^16.6.0 || ^17.0.0", "react@^16.8.0 || ^17.0.0", "react@^17.0.2", "react@>= 0.14.0 < 18.0.0", "react@>= 16", "react@>=0.12.0", "react@>=16.6.0", "react@>=16.8.0", "react@>=16.x", "react@>=17.0.1", "react@17.0.2":
   "integrity" "sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.2.tgz"
   "version" "17.0.2"
