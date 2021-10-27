@@ -1,9 +1,6 @@
 import React from "react";
-import { Text } from "react-native";
 
 import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import useWindowDimensions from "./window.js";
 import measurementToGoldenRatio from "./golden.js";
@@ -14,7 +11,6 @@ import ProgressiveImage from "react-progressive-graceful-image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Stack from "@mui/material/Stack";
 
-import { Markup } from "react-render-markup";
 import { renderMarkup } from "react-render-markup";
 
 import {
@@ -55,15 +51,11 @@ export default function AllProjects() {
   const projects = [
     {
       name: "Service Helper",
-      description: `A Digital Version of the "House To House Record" created to solve all the problems that arise when using pen and paper like<br>
-      [1] Forgetting a pen and/or paper<br>
-      [2] Forgetting "Who's In Charge" of the territory and not knowing who to send the record to<br>
-      [3] Forgetting to write down the "Territory Number" and not knowing what territory the records belong to<br>
-      [4] Not being able to locate the address of a revisit because your wrote "St" instead of "Ct"<br>
-      [5] Finding someone that is interested but speaks another language but not having a "Follow Up" Form<br>
-      [7] Forgetting to write down the address of the previous house and having to walk back to get it
-      [6] and more!<br>
-      `,
+      description: 
+      `A Digital Version of the "House To House Record" & "Follow Up" Form,
+      created to solve all the problems that arise when using pen and paper`,
+      repoIsPrivate: true,
+      github: "https://github.com/b-cancel/house_to_house",
       appstore: "https://testflight.apple.com/join/ZFowXCT4",
       gallery: [
         "https://i.imgur.com/tARG4m0.jpg",
@@ -77,17 +69,10 @@ export default function AllProjects() {
     },
     {
       name: "Get Swol App",
-      description: `One Rep Max equations can estimate your one rep max given any other set.<br>
-      The "Get Swol App" re-purposes these equations, and uses an average of the 7 equations out there to<br>
-      "calculate the max ammount of weight you sould be able to lift given your desired rep target"<br>
-      <br>
-      By knowing your upper limit you will be able to<br>
-      [a] plan your workout even better [b] reach your weight lifting goals faster [c] and avoid injury<br>
-      <br>
-      Additionally, it will help you<br>
-      [1] do the right amount of reps [2] take appropriate break between your sets [3] and do the right amount of sets<br>
-      for your selected training style<br>
-      `,
+      description: 
+      `Created to help users gain muscle faster by exploiting progressive overload;
+      8 one rep max equations have been re-purposed to calculate the max ammount of weight
+      that one should be able to lift given a desired rep target.`,
       github: "https://github.com/b-cancel/swol",
       appstore: "https://apps.apple.com/us/app/get-swol-app/id1576936894",
       googleplay: "https://play.google.com/store/apps/details?id=get.swol.app",
@@ -118,109 +103,118 @@ export default function AllProjects() {
     //imageHeight = (16/9) * imageWidth
     //imageHeight / (16/9) = imageWidth
     const imageWidth = imageHeight / (16 / 9);
-    const horizontalPadding = 0;
-    const imageWidthWithHorizontalPadding = imageWidth + horizontalPadding * 2;
+    const horizontalPadding = 16 + (36/2);
+    const imageWidthWithHorizontalPadding = imageWidth + horizontalPadding;
 
     //width = ()
     const slidesPerView = actualWidth / imageWidthWithHorizontalPadding;
+    console.log(slidesPerView);
+
+
     const appStoreButton = project.appstore ? (
       <MyButton
+      sx={{mr:"12px", mt:"8px"}}
         variant="outlined"
         prefixIcon={<FontAwesomeIcon icon={faAppStore} color="primary" />}
         tooltip={project.appstore}
-        text="App Store"
-        sx={{ mr: "8px", my: "4px" }}
+        text="iOS"
         onClick={() => window.open(project.appstore)}
       />
     ) : null;
     const googlePlayButton = project.googleplay ? (
       <MyButton
+      sx={{mr:"12px", mt:"8px"}}
         variant="outlined"
         prefixIcon={<FontAwesomeIcon icon={faGooglePlay} color="primary" />}
         tooltip={project.googleplay}
-        text="Google Play"
-        sx={{ mr: "8px", my: "4px" }}
+        text="Android"
         onClick={() => window.open(project.googleplay)}
       />
     ) : null;
 
     const repositioryButton = project.github ? (
       <MyButton
-        variant="outlined"
+      sx={{mr:"12px", mt:"8px"}}
+        variant="contained"
         prefixIcon={<FontAwesomeIcon icon={faGithub} color="primary" />}
         tooltip={project.github}
-        text="Repository"
-        color="primary"
-        sx={{ my: "4px" }}
+        color="white"
         onClick={() => window.open(project.github)}
+        repoIsPrivate={project.repoIsPrivate}
+        child={<Typography
+          style={{ textTransform: "none" }}
+          variant="body1"
+          sx={{ fontWeight: 'bold'}}
+        >
+          / {project.name}
+        </Typography>}
       />
     ) : null;
 
-    function NewlineText(props) {
-      const text = props.text;
-      const newText = text.split("\n").map((str) => {
-        return <span>{str}</span>;
-      });
-      return <Stack>{newText}</Stack>;
-    }
+    const horizontalPaddingPx = `${horizontalPadding}px`
 
     return (
-      <Card sx={{ margin: "16px", mb: "36px" }}>
-        <CardContent>
-          <Typography
-            variant="h5"
-            component="span"
-            sx={{
-              verticalAlign: "middle",
-              pr: "8px",
-            }}
+      <Stack sx={{mb:"76px"}}>
+        <Stack sx={{mx:horizontalPaddingPx, my:"8px",}}>
+        <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'flex-start',
+          alignItems: 'flex-start',
+          flexWrap: 'wrap',
+        }}
           >
-            / {project.name}
-          </Typography>
-
+          {repositioryButton}
           {appStoreButton}
           {googlePlayButton}
-          {repositioryButton}
-        </CardContent>
-        <Box sx={{ backgroundColor: "#1e1e1e" }}>
+          </Box>
+          <Typography variant="body2" color="white" sx={{py:"16px"}}>
+            {renderMarkup(project.description)}
+          </Typography>
+        </Stack>
+          
           <Box>
-            <style
+          <style
               dangerouslySetInnerHTML={{
                 __html: `
-                .swiper-button-prev, .swiper-button-next{
-                  background-color: black;
-                  border-radius: 1000px;
-                  height: 24px;
-                  width: 24px;
-                  padding: 8px;
+                .swiper-button-prev {
+                  left: 16px;
                 }
 
+                .swiper-button-next {
+                  right: 16px;
+                }
+
+                .swiper-button-prev, .swiper-button-next{
+                  border: 2px solid black;
+                  background-color: white;
+                  border-radius: 8px;
+                  height: 32px;
+                  width: 32px;
+                }
                 .swiper-button-prev:after, .swiper-button-next:after{
+                  color: black;
                   font-size: 24px;
                 }
-
                 .swiper-button-next:after {
                   margin-left: 4px;
                 }
-
                 .swiper-button-prev:after {
                   margin-right: 4px;
+                }
+
+                .swiper-button-next.swiper-button-disabled, .swiper-button-prev.swiper-button-disabled {
+                  opacity: 0;
                 }
                 `,
               }}
             />
-            <Swiper
+          <Swiper
               navigation={true}
               slidesPerView={slidesPerView}
               grabCursor={true}
-              loop={true}
               centeredSlides={false}
-              keyboard={{
-                enabled: true,
-              }}
-              pagination={{
-                type: "progressbar",
-              }}
               style={{
                 "--swiper-navigation-color": "#fff",
                 "--swiper-pagination-color": "#fff",
@@ -235,6 +229,7 @@ export default function AllProjects() {
                         return loading ? (
                           <Box
                             sx={{
+                              ml:horizontalPaddingPx,
                               height: imageHeight,
                               width: "90%",
                               bgcolor: "#000",
@@ -253,21 +248,17 @@ export default function AllProjects() {
                             </Box>
                           </Box>
                         ) : (
-                          <img src={src} alt={src} height={imageHeight} />
+                          <Box sx={{ml:horizontalPaddingPx, display:"inline-block", height:imageHeight, borderRadius:"8px", overflow:"hidden"}}>
+                          <img src={src} alt={src} height="100%"/>
+                          </Box>
                         );
                       }}
                     </ProgressiveImage>
                   </SwiperSlide>
                 ))}
             </Swiper>
-          </Box>
-        </Box>
-        <CardContent>
-          <Typography variant="body2">
-            {renderMarkup(project.description)}
-          </Typography>
-        </CardContent>
-      </Card>
+            </Box>
+      </Stack>
     );
   }
 
