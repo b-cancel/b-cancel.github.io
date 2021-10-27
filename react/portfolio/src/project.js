@@ -13,6 +13,8 @@ import Stack from "@mui/material/Stack";
 
 import { renderMarkup } from "react-render-markup";
 
+import PlayGifWhenVisible from './visible.js';
+
 import {
   faGithub,
   faAppStore,
@@ -369,7 +371,6 @@ export default function AllProjects() {
           <Swiper
             navigation={true}
             slidesPerView={slidesPerView}
-            grabCursor={true}
             centeredSlides={false}
             style={{
               "--swiper-navigation-color": "#fff",
@@ -384,29 +385,33 @@ export default function AllProjects() {
                     {(src, loading) => {
                       //landscape images fill the width
                       //portrait image fill the height
-                      const image = media.landscape ? (
-                        <img
-                          src={src}
-                          alt={src}
-                          width="100%"
-                          object-fit="contain"
-                          class="_8pxborder"
-                        />
-                      ) : (
-                        <img
-                          src={src}
-                          alt={src}
-                          height="100%"
-                          object-fit="contain"
-                          class="_8pxborder"
-                        />
-                      );
+                      var image;
+                      if(src.includes('.gif')){
+                        image = <PlayGifWhenVisible src={media.src} threshold={.5} />
+                      } else {
+                        image = media.landscape ? (
+                          <img
+                            src={src}
+                            alt={src}
+                            width="100%"
+                            object-fit="contain"
+                            class="_8pxborder"
+                          />
+                        ) : (
+                          <img
+                            src={src}
+                            alt={src}
+                            height="100%"
+                            object-fit="contain"
+                            class="_8pxborder"
+                          />
+                        );
+                      }
 
                       const isLastImage = lastSrc === src;
                       if(isLastImage){
                         console.log(`${src} is last image? ${isLastImage}`);
                       }
-                      
 
                       return loading ? (
                         <Box
