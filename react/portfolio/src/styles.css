@@ -10,6 +10,11 @@ a {
   text-decoration: none;
 }
 
+.disableScroll{
+  overflow-y:hidden;
+  overflow-x:hidden;
+}
+
 /* Position and sizing of burger button */
 .bm-burger-button {
   z-index: 999 !important;

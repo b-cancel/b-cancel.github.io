@@ -261,7 +261,7 @@ export default function AllProjects() {
           <Typography
             style={{ textTransform: "none" }}
             variant="body1"
-            sx={{ fontWeight: "bold"}}
+            sx={{ fontWeight: "bold" }}
           >
             / {project.name}
           </Typography>
@@ -324,7 +324,11 @@ export default function AllProjects() {
             {appStoreButton}
             {googlePlayButton}
           </Box>
-          <Typography variant="body2" color="white" sx={{ py: "16px" }}>
+          <Typography
+            variant="body2"
+            color="white"
+            sx={{ py: "16px", textAlign: "left" }}
+          >
             {renderMarkup(project.description)}
           </Typography>
         </Stack>
@@ -454,7 +458,8 @@ export default function AllProjects() {
                             height: imageHeight,
                             width: imageWidth,
                             display: "inline-block",
-                            textDecoration: 'none' 
+                            textDecoration: "none",
+                            textAlign: "left",
                           }}
                         >
                           <a href={media.src} target="_blank" rel="noreferrer">

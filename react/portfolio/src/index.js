@@ -3,16 +3,15 @@ import ReactDOM from "react-dom";
 
 import "./styles.css";
 import SideBar from "./sidebar";
-
 import Gallery from "./gallery.js"
 
 function App() {
   return (
-    <div id="App">
-      <SideBar pageWrapId={"page-wrap"} outerContainerId={"App"} />
-      <div id="page-wrap">
+    <div id="outer-container">
+      <SideBar pageWrapId={"page-wrap"}/>
+      <main id="page-wrap">
         <Gallery/>
-      </div>
+      </main>
     </div>
   );
 }

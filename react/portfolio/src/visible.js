@@ -32,9 +32,12 @@ export default class PlayGifWhenVisible extends Component {
       }
 
       #${identifier} img, #${identifier} canvas {
-        object-fit: contain;
         height: 100%;
-        width: auto;
+      }
+
+      #${identifier} img {
+        object-fit: contain;
+        object-position: left;
       }
     `;
     return (

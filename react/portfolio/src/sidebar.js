@@ -1,5 +1,6 @@
 import React from "react";
-import { slide as Menu } from "react-burger-menu";
+//push, pushRotate, elastic
+import { push as Menu } from "react-burger-menu";
 
 export default props => {
   return (
