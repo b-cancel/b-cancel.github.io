@@ -4,7 +4,6 @@ import Button from "@mui/material/Button";
 import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
 import { styled } from "@mui/material/styles";
 import Zoom from "@mui/material/Zoom";
-import Link from '@mui/material/Link';
 
 const WhiteOnBlackToolTip = styled(({ className, ...props }) => (
   <Tooltip {...props} classes={{ popper: className }} />
@@ -64,9 +63,7 @@ export default function MyButton(props) {
   var buttonWithToolTip = theButton;
   const stringLength = props.tooltip ? props.tooltip.length : 0;
   const hasTooltip = stringLength !== 0;
-  console.log("len " + stringLength + " is not zero " + hasTooltip);
   if(hasTooltip || props.repoIsPrivate){
-    console.log("should have tooltip");
     buttonWithToolTip = props.repoIsPrivate ? (
       <ErrorToolTip
         title="Private Repository"

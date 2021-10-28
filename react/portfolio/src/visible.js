@@ -1,13 +1,7 @@
 import React, { Component, createRef } from "react";
 import Observer from "@researchgate/react-intersection-observer";
 import ReactFreezeframe from "react-freezeframe";
-import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-
-const getPrintableThreshold = (ratio, range) =>
-  range.reduce((prev, curr) =>
-    Math.abs(curr - ratio) < Math.abs(prev - ratio) ? curr : prev
-  );
 
 //TODO: I should fix this so the GIFs also autoplay when they show while initially showing page
 export default class PlayGifWhenVisible extends Component {
@@ -87,6 +81,6 @@ export default class PlayGifWhenVisible extends Component {
     this.freeze.current.toggle();
   }
   logEvent(event, items, isPlaying) {
-    console.log(event, items, isPlaying);
+    //console.log(event, items, isPlaying);
   }
 }

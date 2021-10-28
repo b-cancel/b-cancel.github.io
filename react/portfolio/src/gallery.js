@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import AllProjects from "./project";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -8,14 +7,22 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import QuickLinks from "./contact.js";
 
-export default function Gallery() {
-  const darkTheme = createTheme({
-    palette: {
-      mode: "dark",
-    },
-  });
+export default class Gallery extends React.Component {
+  componentDidMount() {
+    console.log("Gallery mounted");
+  }
 
-  return (
+  render() {
+    const darkTheme = createTheme({
+      palette: {
+        mode: "dark",
+      },
+    });
+
+    console.log("rendering gallery");
+
+    return (
+    
     <SafeAreaProvider>
       <ThemeProvider theme={darkTheme}>
         <Box sx={{ mt: "56px" }}>
@@ -67,5 +74,5 @@ export default function Gallery() {
         </Box>
       </ThemeProvider>
     </SafeAreaProvider>
-  );
+  )};
 }

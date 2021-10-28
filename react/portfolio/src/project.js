@@ -305,7 +305,6 @@ export default function AllProjects() {
     const horizontalPaddingPx = `${horizontalPadding}px`;
 
     const lastSrc = project.gallery[project.gallery.length - 1].src;
-    console.log(lastSrc);
 
     return (
       <Stack sx={{ mb: "76px" }}>
@@ -425,9 +424,6 @@ export default function AllProjects() {
                       }
 
                       const isLastImage = lastSrc === src;
-                      if (isLastImage) {
-                        console.log(`${src} is last image? ${isLastImage}`);
-                      }
 
                       return loading ? (
                         <Box
