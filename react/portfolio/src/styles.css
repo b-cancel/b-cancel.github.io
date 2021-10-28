@@ -59,8 +59,9 @@ a {
   transition: all 0.25s ease 0s !important;
 }
 
-.bm-burger-button {
-  transition: right 0.25s ease 0s !important;
+/*both of these will follow the menu when we add a particular class*/
+.bm-burger-button, #topFixed {
+  transition: all 0.25s ease 0s !important;
 }
 
 #page-wrap {
@@ -69,11 +70,6 @@ a {
 
 .bm-overlay {
   transition: opacity 0.25s ease 0s !important;
-}
-
-/*burger button classes*/
-.bm-burger-button-menu-opened {
-  right: -48px;
 }
 
 /* Color/shape of burger icon bars */
@@ -103,12 +99,13 @@ a {
 
 /* General sidebar styles */
 .bm-menu {
-  background: #373a47;
+  background-color: white;
+  color: black;
 }
 
 /* Morph shape necessary with bubble or elastic */
 .bm-morph-shape {
-  fill: #373a47;
+  fill: white;
 }
 
 /* Styling of overlay */
@@ -121,11 +118,9 @@ a {
   display: none !important;
 }
 
-/*-----*/
+/*-----copied directly from example, haven't removed to avoid potential side effects-----*/
 
 #App {
-  font-family: sans-serif;
-
   /* Give app full page to work with */
   height: 100vh;
 }
@@ -140,31 +135,5 @@ a {
 /* Individual item */
 .bm-item {
   display: inline-block;
-
-  /* Our sidebar item styling */
-  text-decoration: none;
   margin-bottom: 10px;
-  color: #d1d1d1;
-  transition: color 0.2s;
-}
-
-/* Change color on hover */
-.bm-item:hover {
-  color: white;
-}
-
-/* Position and sizing of clickable cross button */
-.bm-cross-button {
-  height: 24px;
-  width: 24px;
-}
-
-/* Color/shape of close button cross */
-.bm-cross {
-  background: #bdc3c7;
-}
-
-/* Wrapper for item list */
-.bm-item-list {
-  color: #b8b7ad;
 }

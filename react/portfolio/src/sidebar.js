@@ -10,12 +10,11 @@ import measurementToGoldenRatio from "./golden.js";
 
 export default function SideBar(props) {
   //everything slide related below
-  const { height, width } = useWindowDimensions();
+  const screenWidth = useWindowDimensions().width;
 
   //remove insets
   const insets = useSafeAreaInsets();
-  const actualHeight = height - insets.top - insets.bottom;
-  const actualWidth = width - insets.left - insets.right;
+  const actualWidth = screenWidth - insets.left - insets.right;
 
   //ideally we want to be visually pleasing
   var largestMenuWidth;
@@ -46,7 +45,7 @@ export default function SideBar(props) {
       <style
         dangerouslySetInnerHTML={{
           __html: `
-              .page-wrap-opened {
+              .page-wrap-opened, .bm-burger-button-menu-opened {
                 transform: translate3d(${sideBarWidth}, 0px, 0px) !important;
               }
                 `,

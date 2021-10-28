@@ -44,6 +44,8 @@
       //burger menu
       var menuButton = document.getElementsByClassName("bm-burger-button")[0];
       menuButton.classList.add("bm-burger-button-menu-opened");
+      var topFixed = document.getElementById("topFixed")
+      topFixed.classList.add("bm-burger-button-menu-opened");
 
       //other
       console.log("custom open");
@@ -59,6 +61,8 @@
       //burger menu
       var menuButton = document.getElementsByClassName("bm-burger-button")[0];
       menuButton.classList.remove("bm-burger-button-menu-opened");
+      var topFixed = document.getElementById("topFixed")
+      topFixed.classList.remove("bm-burger-button-menu-opened");
 
       //other
       console.log("custom close");
