@@ -1,15 +1,18 @@
 import React from "react";
 
+//material
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import useWindowDimensions from "./window.js";
-import measurementToGoldenRatio from "./golden.js";
+import Stack from "@mui/material/Stack";
 
+//window calculation
+import measurementToGoldenRatio from "./golden.js";
+import useWindowDimensions from "./window.js";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
+//other
 import ProgressiveImage from "react-progressive-graceful-image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Stack from "@mui/material/Stack";
 
 import { renderMarkup } from "react-render-markup";
 

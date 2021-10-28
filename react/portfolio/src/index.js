@@ -2,11 +2,16 @@ import React from "react";
 import ReactDOM from "react-dom";
 import SideBar from "./sidebar";
 import Gallery from "./gallery.js";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 class App extends React.Component {
   render() {
     const gallery = <Gallery />;
-    return <ReloadingApp child={gallery} />;
+    return (
+      <SafeAreaProvider>
+        <ReloadingApp child={gallery} />;
+      </SafeAreaProvider>
+    );
   }
 }
 
@@ -23,14 +28,14 @@ class ReloadingApp extends React.Component {
   handleStateChange(state) {
     console.log("STATE CHANGED TO: " + state.isOpen);
     this.setState({ menuOpen: state.isOpen });
-    if(state.isOpen){
+    if (state.isOpen) {
       window.openTheMenu();
     } else {
       window.closeTheMenu();
     }
 
     //we keep track of wether or not the menu is initialized by inspecting this variable
-    if(this.isInitialized !== true){
+    if (this.isInitialized !== true) {
       //when the menu is initialized... open it
       this.isInitialized = true;
       this.openMenu();
@@ -62,52 +67,12 @@ class ReloadingApp extends React.Component {
   }
 
   render() {
-    const sideBarWidth = "280px";
     return (
       <div id="outer-container">
-        <style
-            dangerouslySetInnerHTML={{
-              __html: `
-              .page-wrap-opened {
-                transform: translate3d(${sideBarWidth}, 0px, 0px) !important;
-              }
-
-              .page-wrap-closed {
-                transform: translate3d(0px, 0px, 0px) !important; 
-              }
-              
-              .bm-menu-wrap-opened {
-                display: block !important;
-                transform: translate3d(0px, 0px, 0px) !important;
-              }
-
-              .bm-menu-wrap-closed {
-                transform: translate3d(-100%, 0px, 0px) !important;
-              }
-
-              .bm-overlay-opened {
-                opacity: 1 !important;
-              }
-
-              .bm-overlay-closed {
-                opacity: 0 !important;
-              }
-
-              .other-opened {
-                overflow-x: hidden !important;
-              }
-
-              .other-closed {
-                overflow-x: auto !important;
-              }
-                `,
-            }}
-          />
         <SideBar
           pageWrapId={"page-wrap"}
           isOpen={this.state.menuOpen}
           onStateChange={(state) => this.handleStateChange(state)}
-          width={sideBarWidth}
         />
         <div id="page-wrap">{this.props.child}</div>
       </div>

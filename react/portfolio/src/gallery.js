@@ -22,8 +22,6 @@ export default class Gallery extends React.Component {
     console.log("rendering gallery");
 
     return (
-    
-    <SafeAreaProvider>
       <ThemeProvider theme={darkTheme}>
         <Box sx={{ mt: "56px" }}>
           <Stack>
@@ -73,6 +71,6 @@ export default class Gallery extends React.Component {
           </Box>
         </Box>
       </ThemeProvider>
-    </SafeAreaProvider>
-  )};
+    );
+  }
 }

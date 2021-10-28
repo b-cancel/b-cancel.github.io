@@ -24,7 +24,7 @@ const ErrorToolTip = styled(({ className, ...props }) => (
     backgroundColor: "red",
     color: "white",
     fontSize: 14,
-    fontWeight:"bold",
+    fontWeight: "bold",
   },
 }));
 
@@ -63,7 +63,7 @@ export default function MyButton(props) {
   var buttonWithToolTip = theButton;
   const stringLength = props.tooltip ? props.tooltip.length : 0;
   const hasTooltip = stringLength !== 0;
-  if(hasTooltip || props.repoIsPrivate){
+  if (hasTooltip || props.repoIsPrivate) {
     buttonWithToolTip = props.repoIsPrivate ? (
       <ErrorToolTip
         title="Private Repository"
@@ -85,9 +85,9 @@ export default function MyButton(props) {
 
   if (props.src) {
     return (
-          <a href={props.src} target="_blank" rel="noreferrer">
+      <a href={props.src} target="_blank" rel="noreferrer">
         {buttonWithToolTip}
-        </a>
+      </a>
     );
   } else {
     return buttonWithToolTip;
