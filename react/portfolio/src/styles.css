@@ -10,11 +10,6 @@ a {
   text-decoration: none;
 }
 
-.disableScroll{
-  overflow-y:hidden;
-  overflow-x:hidden;
-}
-
 /* Position and sizing of burger button */
 .bm-burger-button {
   z-index: 999 !important;
@@ -27,6 +22,19 @@ a {
   right: 16px;
   left: auto;
   position: fixed;
+  /*for transitions when we open the menu*/
+  transition-property: right;
+  transition-duration: 200ms;
+  transition-delay: 0s;
+}
+
+/*sync the transition*/
+.bm-burger-button, .bm-menu-wrap{
+  transition: all 0.5s ease 0s;
+}
+
+.bm-burger-button-menu-opened {
+  right: -48px;
 }
 
 /* Color/shape of burger icon bars */

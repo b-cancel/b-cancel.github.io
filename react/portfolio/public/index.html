@@ -36,6 +36,19 @@
     <!--icon imports-->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 
+    <script type="text/javascript">
+      function onMenuOpened(){
+        var menuButton = document.getElementsByClassName("bm-burger-button")[0];
+        console.log('onMenuOpened');
+        menuButton.classList.add("bm-burger-button-menu-opened");
+      }
+
+      function onMenuClosed(){
+        var menuButton = document.getElementsByClassName("bm-burger-button")[0];
+        console.log('onMenuClosed');
+        menuButton.classList.remove("bm-burger-button-menu-opened");
+      }
+    </script>
 
     <title>React App</title>
   </head>
