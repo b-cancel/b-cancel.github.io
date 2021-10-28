@@ -38,7 +38,6 @@ a {
 }
 
 .bm-overlay {
-  transform: translate3d(0px, 0px, 0px) !important;
   transition: opacity 0.25s ease 0s !important;
 }
 

@@ -4,26 +4,9 @@ import SideBar from "./sidebar";
 import Gallery from "./gallery.js";
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.childRef = React.createRef();
-  }
-
-  //now that everything is loaded...
-  componentDidMount() {
-    console.log("App mounted");
-    //wait a bit and attempt to open the menu
-    //200ms works reliably... anything less does not
-    this.childRef.current.openMenu();
-    
-    setTimeout(() => {
-//      this.childRef.current.openMenu();
-    }, 10);
-  }
-
   render() {
     const gallery = <Gallery />;
-    return <ReloadingApp child={gallery} ref={this.childRef} />;
+    return <ReloadingApp child={gallery} />;
   }
 }
 
@@ -40,6 +23,19 @@ class ReloadingApp extends React.Component {
   handleStateChange(state) {
     console.log("STATE CHANGED TO: " + state.isOpen);
     this.setState({ menuOpen: state.isOpen });
+    if(state.isOpen){
+      window.openTheMenu();
+    } else {
+      window.closeTheMenu();
+    }
+
+    //we keep track of wether or not the menu is initialized by inspecting this variable
+    if(this.isInitialized !== true){
+      //when the menu is initialized... open it
+      this.isInitialized = true;
+      this.openMenu();
+      console.log("AUTO OPENING MENU AFTER INITIALIZATION");
+    }
   }
 
   // This can be used to close the menu, e.g. when a user clicks a menu item
@@ -54,7 +50,7 @@ class ReloadingApp extends React.Component {
   }
 
   //<Menu isOpen={ true } />
-  //<Menu width={ '280px' } />
+  //<Menu  />
   //<Menu onClose={ handleOnClose } />
   //<Menu onOpen={ handleOnOpen } />
 
@@ -66,29 +62,52 @@ class ReloadingApp extends React.Component {
   }
 
   render() {
-    
-    //#page-wrap styling when open (nothing when closed)
-    //OPEN: transform: translate3d(300px, 0px, 0px); 
-    //CLOSE: 
-
-    //.bm-menu-wrap styling when open 
-    //OPEN: display: block
-    //CLOSE: display:none && transform: translate3d(-100%, 0px, 0px);
-
-    //.bm-overlay
-    //OPEN: opacity: 1; 
-    //CLOSE: opacity: 0;
-
-    //html and body tags
-    //OPEN: overflow-x: hidden;
-    //CLOSE: overflow-x: auto;
-
+    const sideBarWidth = "280px";
     return (
       <div id="outer-container">
+        <style
+            dangerouslySetInnerHTML={{
+              __html: `
+              .page-wrap-opened {
+                transform: translate3d(${sideBarWidth}, 0px, 0px) !important;
+              }
+
+              .page-wrap-closed {
+                transform: translate3d(0px, 0px, 0px) !important; 
+              }
+              
+              .bm-menu-wrap-opened {
+                display: block !important;
+                transform: translate3d(0px, 0px, 0px) !important;
+              }
+
+              .bm-menu-wrap-closed {
+                transform: translate3d(-100%, 0px, 0px) !important;
+              }
+
+              .bm-overlay-opened {
+                opacity: 1 !important;
+              }
+
+              .bm-overlay-closed {
+                opacity: 0 !important;
+              }
+
+              .other-opened {
+                overflow-x: hidden !important;
+              }
+
+              .other-closed {
+                overflow-x: auto !important;
+              }
+                `,
+            }}
+          />
         <SideBar
           pageWrapId={"page-wrap"}
           isOpen={this.state.menuOpen}
           onStateChange={(state) => this.handleStateChange(state)}
+          width={sideBarWidth}
         />
         <div id="page-wrap">{this.props.child}</div>
       </div>
