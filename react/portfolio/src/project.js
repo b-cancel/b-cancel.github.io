@@ -69,13 +69,13 @@ export default function AllProjects() {
       github: "https://github.com/b-cancel/house_to_house",
       appstore: "https://testflight.apple.com/join/ZFowXCT4",
       gallery: [
-        { src: "https://i.imgur.com/tARG4m0.jpg" },
-        { src: "https://i.imgur.com/ST8VhbZ.jpg" },
-        { src: "https://i.imgur.com/mqQYv0v.jpg" },
-        { src: "https://i.imgur.com/oPfmGVV.jpg" },
-        { src: "https://i.imgur.com/tfAz8lp.jpg" },
-        { src: "https://i.imgur.com/0IHtYld.jpg" },
-        { src: "https://i.imgur.com/edfqUaa.jpg" },
+        { src: "https://i.imgur.com/tARG4m0.jpg", height: 790, width: 365 },
+        { src: "https://i.imgur.com/ST8VhbZ.jpg", height: 790, width: 365 },
+        { src: "https://i.imgur.com/mqQYv0v.jpg", height: 790, width: 365 },
+        { src: "https://i.imgur.com/oPfmGVV.jpg", height: 790, width: 365 },
+        { src: "https://i.imgur.com/tfAz8lp.jpg", height: 790, width: 365 },
+        { src: "https://i.imgur.com/0IHtYld.jpg", height: 790, width: 365 },
+        { src: "https://i.imgur.com/edfqUaa.jpg", height: 790, width: 365 },
       ],
     },
     {
@@ -87,13 +87,13 @@ export default function AllProjects() {
       appstore: "https://apps.apple.com/us/app/get-swol-app/id1576936894",
       googleplay: "https://play.google.com/store/apps/details?id=get.swol.app",
       gallery: [
-        { src: "https://i.imgur.com/SLpWBkv.jpg" },
-        { src: "https://i.imgur.com/nLhuzZR.jpg" },
-        { src: "https://i.imgur.com/eiERhkP.jpg" },
-        { src: "https://i.imgur.com/UgtbjK8.jpg" },
-        { src: "https://i.imgur.com/cqPSXbg.jpg" },
-        { src: "https://i.imgur.com/yne1JDc.jpg" },
-        { src: "https://i.imgur.com/gkcEJHH.jpg" },
+        { src: "https://i.imgur.com/SLpWBkv.jpg", height: 790, width: 365 },
+        { src: "https://i.imgur.com/nLhuzZR.jpg", height: 790, width: 365 },
+        { src: "https://i.imgur.com/eiERhkP.jpg", height: 790, width: 365 },
+        { src: "https://i.imgur.com/UgtbjK8.jpg", height: 790, width: 365 },
+        { src: "https://i.imgur.com/cqPSXbg.jpg", height: 790, width: 365 },
+        { src: "https://i.imgur.com/yne1JDc.jpg", height: 790, width: 365 },
+        { src: "https://i.imgur.com/gkcEJHH.jpg", height: 790, width: 365 },
       ],
     },
     {
@@ -107,18 +107,26 @@ export default function AllProjects() {
         {
           src: "https://i.giphy.com/media/dyvj1gBn4HYBfVDrpr/giphy.gif",
           title: "Select from clients' addresses",
+          height: 480,
+          width: 227,
         },
         {
           src: "https://i.giphy.com/media/VJYrbNGSMxUZ38RuU9/giphy.gif",
           title: "Select a Due Date",
+          height: 480,
+          width: 227,
         },
         {
           src: "https://i.giphy.com/media/UvK4kZ48BSmlVhiFQp/giphy.gif",
           title: "Manipulate line items",
+          height: 480,
+          width: 227,
         },
         {
           src: "https://i.giphy.com/media/fsaqYZsD0P0x600rE1/giphy.gif",
           title: "Manipulate images within items",
+          height: 480,
+          width: 227,
         },
       ],
     },
@@ -132,10 +140,14 @@ export default function AllProjects() {
         {
           src: "https://i.giphy.com/media/PiQF5YD82meF4uitmz/giphy.gif",
           title: "Scrub through the dose timeline",
+          height: 480,
+          width: 227,
         },
         {
           src: "https://i.giphy.com/media/Rk2zzd9k9l6MBBLTBY/giphy.gif",
           title: "Add a dose to the timeline",
+          height: 480,
+          width: 227,
         },
       ],
     },
@@ -147,20 +159,28 @@ export default function AllProjects() {
       gallery: [
         {
           src: "https://i.giphy.com/media/S8lbi2cusC5gVC0xOS/giphy.gif",
-          landscape: true,
           title: "Identify device throught signal analysis",
+          height: 264,
+          width: 480,
+          landscape: true,
         },
         {
           src: "https://i.giphy.com/media/RKMMj20eRHONfImd0L/giphy.gif",
           title: "Device list",
+          height: 480,
+          width: 227,
         },
         {
           src: "https://i.giphy.com/media/S6Zdj4EiS99DlVZuDS/giphy.gif",
           title: "SOS mode and test",
+          height: 480,
+          width: 227,
         },
         {
           src: "https://i.giphy.com/media/d5qOvltp866jRzktDZ/giphy.gif",
           title: "Add New Device",
+          height: 480,
+          width: 227,
         },
       ],
     },
@@ -174,23 +194,33 @@ export default function AllProjects() {
         {
           src: "https://i.giphy.com/media/Uqk7fPBnsNydSn2GZW/giphy.gif",
           title: "Smooth contracting quick access slider",
+          height: 480,
+          width: 235,
         },
         {
           src: "https://i.giphy.com/media/LM9EpmeAiYlIpSAcgH/giphy.gif",
           title: "Add a contact",
+          height: 480,
+          width: 235,
         },
         {
           src: "https://i.giphy.com/media/W0QwfdozN3AFnw1sWn/giphy.gif",
           title: "Light Mode",
+          height: 480,
+          width: 235,
         },
         {
           src: "https://i.giphy.com/media/Xbh1CLWME0plFA8g2G/giphy.gif",
           title: "Gallery or Picture",
+          height: 480,
+          width: 235,
         },
         {
           src: "https://i.giphy.com/media/UT4byKMOmrYWk8dTmb/giphy.gif",
-          landscape: true,
           title: "Landscape Mode",
+          height: 480,
+          width: 235,
+          landscape: true,
         },
       ],
     },
@@ -205,18 +235,26 @@ export default function AllProjects() {
         {
           src: "https://i.giphy.com/media/dkXLQACALhF6puhk3I/giphy.gif",
           title: "Smooth gesture controlled sheet",
+          height: 790,
+          width: 444,
         },
         {
           src: "https://i.giphy.com/media/35KhYdJ9CQAN6hzYbQ/giphy.gif",
           title: "Interactive bottom sheet",
+          height: 790,
+          width: 444,
         },
         {
           src: "https://i.giphy.com/media/dYng1K8blxvnsLhP81/giphy.gif",
           title: "Persistent bottom sheet",
+          height: 790,
+          width: 444,
         },
         {
           src: "https://i.giphy.com/media/9rsWxrJaYOhCQbRDXD/giphy.gif",
           title: "Sheets everywhere",
+          height: 790,
+          width: 444,
         },
       ],
     },
@@ -228,7 +266,7 @@ export default function AllProjects() {
       <MyButton
         sx={{ mr: "12px", mt: "8px" }}
         variant="outlined"
-        color="white"
+        color="#e0e0e0"
         text={clientButtonText}
         src={project.clientLink}
       />
@@ -257,7 +295,7 @@ export default function AllProjects() {
         sx={{ mr: "12px", mt: "8px" }}
         variant="contained"
         prefixIcon={<FontAwesomeIcon icon={faGithub} color="primary" />}
-        color="white"
+        color="#e0e0e0"
         src={project.github}
         repoIsPrivate={project.repoIsPrivate}
         child={
@@ -282,33 +320,37 @@ export default function AllProjects() {
 
     //do the math
     const golden = measurementToGoldenRatio({ value: actualHeight });
-    const imageHeight = golden.big;
-    //imageHeight/imageWidth = 16/9
-    //imageHeight = (16/9) * imageWidth
-    //imageHeight / (16/9) = imageWidth
-    const imageWidth = imageHeight / (16 / 9);
+    const sharedImageHeight = golden.big;
+    //calculate porportional border radius
+    const sharedBorderRadius = (sharedImageHeight/24) + "px";
+
+    //limits for portrait mode images
+    const goldenWidth = measurementToGoldenRatio({ value: actualWidth });
+    const largestImageWidth = goldenWidth.big;
 
     //NOTE: we want our images to be at most... imageWidth by imageHeight...
     //but we also want spacing betweenthose images...
     //so we can't just do the slidesPerView math with that value
 
     //arrow variables will impact the desired spacing
-    const arrowMarginFromBorder = 0;
+    const arrowMarginFromBorder = 16;
     const arrowButtonBorder = 2;
     const arrowButtonInnerSize = 32;
     const arrowButtonSize = arrowButtonInnerSize + arrowButtonBorder * 2;
 
     //enough padding so half the button is over an image on the left
     const horizontalPadding = arrowMarginFromBorder + arrowButtonSize / 2;
-
-    //[space + image width] * slidesPerView = full width
-    const imageWidthWithHorizontalPadding = imageWidth + horizontalPadding;
-    const slidesPerView = actualWidth / imageWidthWithHorizontalPadding;
-
     const horizontalPaddingPx = `${horizontalPadding}px`;
 
+    //identifies our swiper
+    var projectID = project.name;
+    projectID = projectID.replaceAll(" ", "");
+
+    //no two swiper will have the same GIF
+    const swiperName = "swiperFor" + projectID;
     const lastSrc = project.gallery[project.gallery.length - 1].src;
 
+    //return the swiper
     return (
       <Stack sx={{ mb: "76px" }}>
         <Stack sx={{ mx: horizontalPaddingPx, my: "8px" }}>
@@ -328,7 +370,7 @@ export default function AllProjects() {
           </Box>
           <Typography
             variant="body2"
-            color="white"
+            color="#e0e0e0"
             sx={{ py: "16px", textAlign: "left" }}
           >
             {renderMarkup(project.description)}
@@ -339,6 +381,10 @@ export default function AllProjects() {
           <style
             dangerouslySetInnerHTML={{
               __html: `
+                .swiper-slide {
+                  width: auto !important;
+                }
+
                 .swiper-button-prev {
                   left: ${arrowMarginFromBorder}px;
                 }
@@ -348,14 +394,14 @@ export default function AllProjects() {
                 }
 
                 .swiper-button-prev, .swiper-button-next{
-                  border: ${arrowButtonBorder}px solid black;
-                  background-color: white;
+                  border: ${arrowButtonBorder}px solid #202020;
+                  background-color: #e0e0e0;
                   border-radius: 8px;
                   height: ${arrowButtonInnerSize}px;
                   width: ${arrowButtonInnerSize}px;
                 }
                 .swiper-button-prev:after, .swiper-button-next:after{
-                  color: black;
+                  color: #202020;
                   font-size: 24px;
                 }
                 .swiper-button-next:after {
@@ -373,71 +419,81 @@ export default function AllProjects() {
           />
           <Swiper
             navigation={true}
-            slidesPerView={slidesPerView}
+            slidesPerView={"auto"}
             centeredSlides={false}
             style={{
-              "--swiper-navigation-color": "#fff",
-              "--swiper-pagination-color": "#fff",
+              "--swiper-navigation-color": "#e0e0e0",
+              "--swiper-pagination-color": "#e0e0e0",
             }}
-            className="mySwiper"
+            className={swiperName}
           >
             {project.gallery &&
               project.gallery.map((media) => (
                 <SwiperSlide key={media.src}>
-                  <ProgressiveImage src={media.src} placeholder="">
-                    {(src, loading) => {
-                      //landscape images fill the width
-                      //portrait image fill the height
-                      var image;
-                      if (src.includes(".gif")) {
-                        var identifier = media.src;
-                        identifier = identifier.replace(
-                          `https://i.giphy.com/media/`,
-                          ""
-                        );
-                        identifier = identifier.replace(`/giphy.gif`, "");
+                  <a href={media.src} target="_blank" rel="noreferrer">
+                    <ProgressiveImage src={media.src} placeholder="">
+                      {(src, loading) => {
+                        //here we calculate the width given the calculated image height
+                        //HOWEVER... just like with the height...
+                        //the width must at most be...
+                        //the largest part of the golden ratio of the width
+                        const imageWidth =
+                          (media.width / media.height) * sharedImageHeight;
 
-                        //we created ID for custom GIF styling
-                        image = (
-                          <PlayGifWhenVisible
-                            identifier={identifier}
-                            src={media.src}
-                            threshold={0.75}
-                            landscape={media.landscape}
-                          />
-                        );
-                      } else {
-                        image = media.landscape ? (
-                          <img
-                            src={src}
-                            alt={src}
-                            width="100%"
-                            object-fit="contain"
-                            className="_8pxborder"
-                          />
-                        ) : (
-                          <img
-                            src={src}
-                            alt={src}
-                            height="100%"
-                            object-fit="contain"
-                            className="_8pxborder"
-                          />
-                        );
-                      }
+                        //start the value off
+                        var thisImageHeight = sharedImageHeight;
+                        var thisImageWidth = imageWidth;
 
-                      const isLastImage = lastSrc === src;
+                        //adjust if needed
+                        if(thisImageWidth > largestImageWidth){
+                          console.log(`ADJUST from ${thisImageHeight} x ${thisImageWidth}`);
+                          //imageHeightForLargestImageWidth / largestImageWidth = thisImageHeight / thisImageWidth
+                          const newImageHeight = (thisImageHeight / thisImageWidth) * largestImageWidth;
 
-                      return loading ? (
-                        <Box
-                          sx={{
-                            ml: horizontalPaddingPx,
-                            height: imageHeight,
-                            width: imageWidth,
-                            bgcolor: "#fff",
-                            borderRadius: "8px",
-                          }}
-                        >
+                          //apply new values
+                          thisImageWidth = largestImageWidth;
+                          thisImageHeight = newImageHeight;
+                          console.log(`DONE from ${thisImageHeight} x ${thisImageWidth}`);
+                        }
+
+                        //IF our image Width is above that then we must make the appropriate adjustments
+                        //scale down the width to it's max... then change the height to match...
+                        //ELSE we simply keep out values and use them
+
+                        //all the media is given a height and width
+                        //GIF ---or--- IMAGE
+                        var mediaComponent;
+                        if (src.includes(".gif")) {
+                          var identifier = media.src;
+                          identifier = identifier.replace(
+                            `https://i.giphy.com/media/`,
+                            ""
+                          );
+                          identifier = identifier.replace(`/giphy.gif`, "");
+
+                          //after creating a identifier we move forward
+                          mediaComponent = (
+                            <PlayGifWhenVisible
+                              identifier={identifier}
+                              src={media.src}
+                              threshold={0.75}
+                              height={thisImageHeight}
+                              width={thisImageWidth}
+                            />
+                          );
+                        } else {
+                          mediaComponent = (
+                            <img
+                              src={src}
+                              alt={src}
+                              height={thisImageHeight}
+                              width={thisImageWidth}
+                            />
+                          );
+                        }
+
+                        //LOADING ---or--- MEDIA
+                        const display = loading ? (
                           <Box
                             sx={{
                               height: 56,
@@ -446,28 +502,40 @@ export default function AllProjects() {
                               pt: "50%",
                             }}
                           >
-                            <img src="./miniLoaderBlack.gif" alt="loading" />
+                            <img src="./miniLoaderOffWhite.gif" alt="loading" />
                           </Box>
-                        </Box>
-                      ) : (
-                        <Box
-                          sx={{
-                            ml: horizontalPaddingPx,
-                            mr: isLastImage ? horizontalPaddingPx : "0px",
-                            height: imageHeight,
-                            width: imageWidth,
-                            display: "inline-block",
-                            textDecoration: "none",
-                            textAlign: "left",
-                          }}
-                        >
-                          <a href={media.src} target="_blank" rel="noreferrer">
-                            {image}
-                          </a>
-                        </Box>
-                      );
-                    }}
-                  </ProgressiveImage>
+                        ) : (
+                          mediaComponent
+                        );
+
+                        //only add right padding to the last item
+                        const isLastImage = media.src === lastSrc;
+                        const paddingRight = isLastImage
+                          ? horizontalPadding
+                          : 0;
+                        const paddingRightPx = `${paddingRight}px`;
+
+                        //add margins as desired
+                        return (
+                          <Box
+                            sx={{ pl: horizontalPaddingPx, pr: paddingRightPx }}
+                          >
+                            <Box
+                              sx={{
+                                bgcolor: "#404040",
+                                height: thisImageHeight,
+                                width: thisImageWidth,
+                                borderRadius: sharedBorderRadius,
+                                overflow: "hidden",
+                              }}
+                            >
+                              {display}
+                            </Box>
+                          </Box>
+                        );
+                      }}
+                    </ProgressiveImage>
+                  </a>
                 </SwiperSlide>
               ))}
           </Swiper>

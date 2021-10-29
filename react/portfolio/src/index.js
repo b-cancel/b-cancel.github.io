@@ -24,7 +24,7 @@ class App extends React.Component {
           <Box
             sx={{
               display: "inline-block",
-              backgroundColor: "#fff",
+              backgroundColor: "#e0e0e0",
               borderRadius: "8px",
               px: "8px",
               py: "4px",

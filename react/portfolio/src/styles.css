@@ -1,5 +1,5 @@
 body {
-  background: #000;
+  background: #202020;
 }
 
 ._8pxborder {
@@ -41,21 +41,23 @@ a {
   opacity: 0 !important;
 }
 
+
 .other-opened {
   overflow-x: hidden !important;
 }
-
+/*
 .other-closed {
   overflow-x: auto !important;
 }
+*/
 
 /* Position and sizing of burger button */
 .bm-burger-button {
   z-index: 999 !important;
-  background-color: white;
+  background-color: #e0e0e0;
   height: 44px;
   width: 44px;
-  border: 2px solid black;
+  border: 2px solid #202020;
   border-radius: 100%;
   top: 16px;
   right: 16px;
@@ -84,7 +86,7 @@ a {
 /* Color/shape of burger icon bars */
 .bm-burger-bars {
   height: 4px !important;
-  background: black;
+  background: #202020;
   width: 24px !important;
   margin: auto;
   position: absolute !important;
@@ -108,13 +110,13 @@ a {
 
 /* General sidebar styles */
 .bm-menu {
-  background-color: white;
-  color: black;
+  background-color: #e0e0e0;
+  color: #202020;
 }
 
 /* Morph shape necessary with bubble or elastic */
 .bm-morph-shape {
-  fill: white;
+  fill: #e0e0e0;
 }
 
 /* Styling of overlay */

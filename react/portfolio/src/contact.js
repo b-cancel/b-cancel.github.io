@@ -137,14 +137,14 @@ const right = <Box/>;
         tooltip="Contact Me"
         onClick={handleProfileMenuOpen}
         text="Say Hello!"
-        color={props.lightMode ? "black" : "white"}
+        color={props.lightMode ? "#202020" : "#e0e0e0"}
         lightMode={props.lightMode}
         sx={{marginRight:itemSpacing}}
         suffixIcon={
           <FontAwesomeIcon
             icon={faHand}
             transform={{ rotate: -22.5 }}
-            color={props.lightMode ? "black" : "white"}
+            color={props.lightMode ? "#202020" : "#e0e0e0"}
           />
         }
       />

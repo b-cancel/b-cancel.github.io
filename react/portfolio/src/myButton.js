@@ -10,8 +10,8 @@ const WhiteOnBlackToolTip = styled(({ className, ...props }) => (
 ))(({ theme }) => ({
   [`& .${tooltipClasses.tooltip}`]: {
     maxWidth: "none",
-    backgroundColor: "black",
-    color: "white",
+    backgroundColor: "#202020",
+    color: "#e0e0e0",
     fontSize: 12,
   },
 }));
@@ -21,8 +21,8 @@ const BlackOnWhiteTooltip = styled(({ className, ...props }) => (
 ))(({ theme }) => ({
   [`& .${tooltipClasses.tooltip}`]: {
     maxWidth: "none",
-    backgroundColor: "white",
-    color: "black",
+    backgroundColor: "#e0e0e0",
+    color: "#202020",
     fontSize: 12,
   },
 }));
@@ -43,7 +43,7 @@ const ErrorToolTip = styled(({ className, ...props }) => (
 export default function MyButton(props) {
   var color = props.color;
   if(color === undefined){
-    color = props.lightMode === undefined ? "inherit" : (props.lightMode ? "black" : "white");
+    color = props.lightMode === undefined ? "inherit" : (props.lightMode ? "#202020" : "#e0e0e0");
   }
 
   const child = props.child ? (

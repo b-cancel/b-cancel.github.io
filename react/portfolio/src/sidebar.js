@@ -82,7 +82,7 @@ export default function SideBar(props) {
               <Box
                 height="96px"
                 width="96px"
-                backgroundColor="black"
+                backgroundColor="#202020"
                 borderRadius="128px"
                 padding="16px"
                 position="relative"
@@ -105,7 +105,7 @@ export default function SideBar(props) {
             <Grid item>
             <Typography
                 variant="h6"
-                color="black"
+                color="#202020"
                 sx={{ textAlign: "center", mb:"4px" }}
               >
                 Hi! I'm Bryan Cancel
@@ -117,7 +117,7 @@ export default function SideBar(props) {
           </Grid>
         </Box>
         <Box
-          sx={{ backgroundColor: "black" }}
+          sx={{ backgroundColor: "#202020" }}
           height="48px"
           width={sideBarWidth}
         ></Box>
@@ -239,7 +239,7 @@ export default function SideBar(props) {
         </a>
 
         <a className="menu-item" href="/desserts">
-          Desserts
+          LAST LAST LAST
         </a>
       </Menu>
     </Stack>

@@ -10,8 +10,8 @@ const WhiteOnBlackToolTip = styled(({ className, ...props }) => (
 ))(({ theme }) => ({
   [`& .${tooltipClasses.tooltip}`]: {
     maxWidth: "none",
-    backgroundColor: "black",
-    color: "white",
+    backgroundColor: "#202020",
+    color: "#e0e0e0",
     fontSize: 12,
   },
 }));
@@ -21,15 +21,15 @@ const BlackOnWhiteTooltip = styled(({ className, ...props }) => (
 ))(({ theme }) => ({
   [`& .${tooltipClasses.tooltip}`]: {
     maxWidth: "none",
-    backgroundColor: "white",
-    color: "black",
+    backgroundColor: "#e0e0e0",
+    color: "#202020",
     fontSize: 12,
   },
 }));
 
 /// tooltip, color, onClick, icon
 export default function MyIconButton(props) {
-  const color = props.lightMode ? "black" : "white";
+  const color = props.lightMode ? "#202020" : "#e0e0e0";
   const iconButton = (
     <a href={props.src} target="_blank" rel="noreferrer">
       <IconButton

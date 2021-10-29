@@ -31,14 +31,14 @@ export default class Gallery extends React.Component {
               </Box>
               <Typography
                 variant="subtitle2"
-                color="white"
+                color="#e0e0e0"
                 sx={{ textAlign: "center" }}
               >
                 All Right Reserved
               </Typography>
               <Typography
                 variant="subtitle2"
-                color="white"
+                color="#e0e0e0"
                 sx={{ textAlign: "center" }}
               >
                 @ 2021 Bryan Cancel
