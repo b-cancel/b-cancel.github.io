@@ -6,11 +6,21 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 class App extends React.Component {
   render() {
+    const lightTheme = createTheme({
+      typography: {
+        fontFamily: 'Courier New, monospace',
+      },
+      palette: {
+        mode: "dark",
+      },
+    });
     const gallery = <Gallery />;
     return (
+      <ThemeProvider theme={lightTheme}>
       <SafeAreaProvider>
         <Box
           id="topFixed"
@@ -40,6 +50,7 @@ class App extends React.Component {
         </Box>
         <ReloadingApp child={gallery} />;
       </SafeAreaProvider>
+      </ThemeProvider>
     );
   }
 }
@@ -102,6 +113,7 @@ class ReloadingApp extends React.Component {
           pageWrapId={"page-wrap"}
           isOpen={this.state.menuOpen}
           onStateChange={(state) => this.handleStateChange(state)}
+          menuCloser={() => this.closeMenu()}
         />
         <div id="page-wrap">{this.props.child}</div>
       </div>

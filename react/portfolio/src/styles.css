@@ -1,13 +1,22 @@
 body {
   background: #202020;
+  font-family: 'Courier New', monospace !important;
 }
 
 ._8pxborder {
   border-radius: 8px;
 }
 
-a {
+a, a p {
   text-decoration: none;
+}
+
+.spreadOnHover{
+  transition: letter-spacing 0.25s ease 0s;
+}
+
+.spreadOnHover:hover{
+  letter-spacing: 4px;
 }
 
 .heart { 
@@ -119,6 +128,10 @@ a {
 /* making the little X disapear */
 .bm-cross-button {
   display: none !important;
+}
+
+.bm-overlay-opened:hover, .clickable:hover{
+  cursor: pointer;
 }
 
 /*

@@ -32,11 +32,17 @@ export default function QuickLinks(props) {
   };
   const menuId = "primary-search-account-menu";
   const lightTheme = createTheme({
+    typography: {
+      fontFamily: 'Courier New, monospace',
+    },
     palette: {
       mode: "light",
     },
   });
   const darkTheme = createTheme({
+    typography: {
+      fontFamily: 'Courier New, monospace',
+    },
     palette: {
       mode: "dark",
     },

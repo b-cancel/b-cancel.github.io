@@ -7,7 +7,7 @@ import Stack from "@mui/material/Stack";
 
 //window calculation
 import measurementToGoldenRatio from "./golden.js";
-import useWindowDimensions from "./window.js";
+import useModifiedWindowDimensions from "./window.js";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 //other
@@ -17,6 +17,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { renderMarkup } from "react-render-markup";
 
 import PlayGifWhenVisible from "./visible.js";
+
 
 import {
   faGithub,
@@ -159,7 +160,7 @@ export default function AllProjects() {
       gallery: [
         {
           src: "https://i.giphy.com/media/S8lbi2cusC5gVC0xOS/giphy.gif",
-          title: "Identify device throught signal analysis",
+          title: "Identify device through signal analysis",
           height: 264,
           width: 480,
           landscape: true,
@@ -228,7 +229,7 @@ export default function AllProjects() {
       name: "Flutter Material Sheets",
       client: "Flutter Community",
       clientLink: "https://flutter.dev/",
-      description: `Custom Material Shets`,
+      description: `Custom Material Sheets`,
       github:
         "https://github.com/b-cancel/Flutter_MaterialSheetAndNavigationDrawer",
       gallery: [
@@ -311,7 +312,7 @@ export default function AllProjects() {
     ) : null;
 
     //everything slide related below
-    const { height, width } = useWindowDimensions();
+    const { height, width } = useModifiedWindowDimensions();
 
     //remove insets
     const insets = useSafeAreaInsets();
@@ -322,7 +323,7 @@ export default function AllProjects() {
     const golden = measurementToGoldenRatio({ value: actualHeight });
     const sharedImageHeight = golden.big;
     //calculate porportional border radius
-    const sharedBorderRadius = (sharedImageHeight/24) + "px";
+    const sharedBorderRadius = sharedImageHeight / 24 + "px";
 
     //limits for portrait mode images
     const goldenWidth = measurementToGoldenRatio({ value: actualWidth });
@@ -445,15 +446,15 @@ export default function AllProjects() {
                         var thisImageWidth = imageWidth;
 
                         //adjust if needed
-                        if(thisImageWidth > largestImageWidth){
-                          console.log(`ADJUST from ${thisImageHeight} x ${thisImageWidth}`);
+                        if (thisImageWidth > largestImageWidth) {
                           //imageHeightForLargestImageWidth / largestImageWidth = thisImageHeight / thisImageWidth
-                          const newImageHeight = (thisImageHeight / thisImageWidth) * largestImageWidth;
+                          const newImageHeight =
+                            (thisImageHeight / thisImageWidth) *
+                            largestImageWidth;
 
                           //apply new values
                           thisImageWidth = largestImageWidth;
                           thisImageHeight = newImageHeight;
-                          console.log(`DONE from ${thisImageHeight} x ${thisImageWidth}`);
                         }
 
                         //IF our image Width is above that then we must make the appropriate adjustments
@@ -515,7 +516,14 @@ export default function AllProjects() {
                           : 0;
                         const paddingRightPx = `${paddingRight}px`;
 
-                        //add margins as desired
+                        //add margins as desired AND add descriptions if they exist
+                        const descriptions = media.title ? (
+                          <Typography variant="body2" style={{color:"#e0e0e0"}} sx={{mt:"16px", textAlign:"center"}}>
+                            {media.title}
+                          </Typography>
+                        ) : (
+                          <Box />
+                        );
                         return (
                           <Box
                             sx={{ pl: horizontalPaddingPx, pr: paddingRightPx }}
@@ -531,6 +539,7 @@ export default function AllProjects() {
                             >
                               {display}
                             </Box>
+                            {descriptions}
                           </Box>
                         );
                       }}

@@ -7,18 +7,15 @@ import Typography from "@mui/material/Typography";
 import QuickLinks from "./contact.js";
 
 export default class Gallery extends React.Component {
-  componentDidMount() {
-    console.log("Gallery mounted");
-  }
-
   render() {
     const darkTheme = createTheme({
+      typography: {
+        fontFamily: 'Courier New, monospace',
+      },
       palette: {
         mode: "dark",
       },
     });
-
-    console.log("rendering gallery");
 
     return (
       <ThemeProvider theme={darkTheme}>

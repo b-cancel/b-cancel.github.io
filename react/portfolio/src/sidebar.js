@@ -1,5 +1,6 @@
 import React from "react";
 import QuickLinks from "./contact.js";
+import Section from "./section.js";
 
 //burger menu
 //push, pushRotate, elastic
@@ -12,9 +13,15 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
 //window calculation
-import useWindowDimensions from "./window.js";
+import useWindowDimensions from "./menuWindow.js";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import measurementToGoldenRatio from "./golden.js";
+
+//icon
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowAltCircleRight } from "@fortawesome/free-solid-svg-icons";
+import {} from "@fortawesome/free-regular-svg-icons";
+import {} from "@fortawesome/fontawesome-svg-core";
 
 //widget
 export default function SideBar(props) {
@@ -34,7 +41,7 @@ export default function SideBar(props) {
   //ideally we want to be visually pleasing
   var largestMenuWidth = measurementToGoldenRatio({ value: actualWidth }).small;
 
-  const smallestDesiredMenuWidth = 240;
+  const smallestDesiredMenuWidth = 260;
   //if our visually pleasing menu size is too small...
   //it must atleast be as large as the smallestDesiredMenuWidth
   if (largestMenuWidth < smallestDesiredMenuWidth) {
@@ -66,10 +73,7 @@ export default function SideBar(props) {
         }}
       />
       <Menu {...props} width={sideBarWidth}>
-        <Box
-          width={sideBarWidth}
-          height={headerHeightPx}
-        >
+        <Box width={sideBarWidth} height={headerHeightPx}>
           <Grid
             container
             spacing={0}
@@ -86,7 +90,7 @@ export default function SideBar(props) {
                 borderRadius="128px"
                 padding="16px"
                 position="relative"
-                sx={{mb:"8px"}}
+                sx={{ mb: "8px" }}
               >
                 <img
                   src="./graphics/whiteProfile.png"
@@ -103,27 +107,88 @@ export default function SideBar(props) {
               </Box>
             </Grid>
             <Grid item>
-            <Typography
+              <Typography
                 variant="h6"
                 color="#202020"
-                sx={{ textAlign: "center", mb:"4px" }}
+                sx={{ textAlign: "center", mb: "4px" }}
               >
                 Hi! I'm Bryan Cancel
               </Typography>
-              </Grid>
+            </Grid>
             <Grid item>
-            <QuickLinks lightMode={true} />
-              </Grid>
+              <QuickLinks lightMode={true} />
+            </Grid>
           </Grid>
         </Box>
+
+        <Section title="/ About Me" />
+
+        <a className="menu-item" href="/">
+          Home
+        </a>
+
+        <a className="menu-item" href="/burgers">
+          Burgers
+        </a>
+
+        <a className="menu-item" href="/pizzas">
+          Pizzas
+        </a>
+
+        <Section title="/ Experience" />
+
+        <a className="menu-item" href="/desserts">
+          Desserts
+        </a>
+        <a className="menu-item" href="/">
+          Home
+        </a>
+
+        <a className="menu-item" href="/burgers">
+          Burgers
+        </a>
+        <Section title="/ Education" />
+
+        <a className="menu-item" href="/pizzas">
+          Pizzas
+        </a>
+
         <Box
-          sx={{ backgroundColor: "#202020" }}
-          height="48px"
-          width={sideBarWidth}
-        ></Box>
+          onClick={() => {
+            console.log("clicked");
+            props.menuCloser();
+          }}
+          sx={{
+            backgroundColor: "#101010",
+            color: "#e0e0e0",
+            px: "16px",
+            py: "8px",
+          }}
+        >
+          <Stack
+            direction="row"
+            justifyContent="flex-start"
+            alignItems="center"
+            spacing="12px"
+            className="clickable spreadOnHover"
+          >
+            <Typography variant="body1" fontWeight="bold">
+              / My Work
+            </Typography>
+            <FontAwesomeIcon icon={faArrowAltCircleRight} />
+          </Stack>
+        </Box>
+
+        <Section title="/ Tools" />
+
+        <a className="menu-item" href="/desserts">
+          Desserts
+        </a>
         <a className="menu-item" href="/">
           Home
         </a>
+
+        <Section title="/ Cerifications" />
 
         <a className="menu-item" href="/burgers">
           Burgers
@@ -148,35 +213,7 @@ export default function SideBar(props) {
           Pizzas
         </a>
 
-        <a className="menu-item" href="/desserts">
-          Desserts
-        </a>
-        <a className="menu-item" href="/">
-          Home
-        </a>
-
-        <a className="menu-item" href="/burgers">
-          Burgers
-        </a>
-
-        <a className="menu-item" href="/pizzas">
-          Pizzas
-        </a>
-
-        <a className="menu-item" href="/desserts">
-          Desserts
-        </a>
-        <a className="menu-item" href="/">
-          Home
-        </a>
-
-        <a className="menu-item" href="/burgers">
-          Burgers
-        </a>
-
-        <a className="menu-item" href="/pizzas">
-          Pizzas
-        </a>
+        <Section title="/ Other" />
 
         <a className="menu-item" href="/desserts">
           Desserts
