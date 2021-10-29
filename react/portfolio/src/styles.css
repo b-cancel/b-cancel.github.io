@@ -41,16 +41,6 @@ a {
   opacity: 0 !important;
 }
 
-
-.other-opened {
-  overflow-x: hidden !important;
-}
-/*
-.other-closed {
-  overflow-x: auto !important;
-}
-*/
-
 /* Position and sizing of burger button */
 .bm-burger-button {
   z-index: 999 !important;
@@ -110,6 +100,8 @@ a {
 
 /* General sidebar styles */
 .bm-menu {
+  overflow: auto;
+  overscroll-behavior: contain;
   background-color: #e0e0e0;
   color: #202020;
 }
@@ -129,21 +121,16 @@ a {
   display: none !important;
 }
 
-/*-----copied directly from example, haven't removed to avoid potential side effects-----*/
-
-#App {
-  /* Give app full page to work with */
-  height: 100vh;
+/*
+fixing prevent scroll issue (didn't work)
+https://css-tricks.com/prevent-page-scrolling-when-a-modal-is-open/
+*/
+.other-opened {
+  overflow-x: hidden !important;
+  height: 100% !important;
 }
 
-#page-wrap {
-  text-align: center;
-
-  /* Prevent sidebar from showing a scrollbar on page */
-  overflow: auto;
-}
-
-/* Individual item */
-.bm-item {
-  display: inline-block;
+.other-closed {
+  height: auto !important;
+  /*overflow-x: auto !important;*/
 }
