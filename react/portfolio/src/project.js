@@ -293,7 +293,7 @@ export default function AllProjects() {
     //so we can't just do the slidesPerView math with that value
 
     //arrow variables will impact the desired spacing
-    const arrowMarginFromBorder = 16;
+    const arrowMarginFromBorder = 0;
     const arrowButtonBorder = 2;
     const arrowButtonInnerSize = 32;
     const arrowButtonSize = arrowButtonInnerSize + arrowButtonBorder * 2;

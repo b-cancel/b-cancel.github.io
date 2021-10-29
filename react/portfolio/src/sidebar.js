@@ -1,27 +1,40 @@
 import React from "react";
+import QuickLinks from "./contact.js";
+
+//burger menu
 //push, pushRotate, elastic
 import { push as Menu } from "react-burger-menu";
+
+//material
+import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 
 //window calculation
 import useWindowDimensions from "./window.js";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import measurementToGoldenRatio from "./golden.js";
 
+//widget
 export default function SideBar(props) {
   //everything slide related below
-  const screenWidth = useWindowDimensions().width;
+  const screenSize = useWindowDimensions();
+  const screenWidth = screenSize.width;
+  const screenHeight = screenSize.height;
 
   //remove insets
   const insets = useSafeAreaInsets();
   const actualWidth = screenWidth - insets.left - insets.right;
+  const actualHeight = screenHeight - insets.top - insets.bottom;
+
+  //calculate header height
+  var headerHeight = measurementToGoldenRatio({ value: actualHeight }).small;
 
   //ideally we want to be visually pleasing
-  var largestMenuWidth;
-  const golden = measurementToGoldenRatio({ value: actualWidth });
-  largestMenuWidth = golden.small;
+  var largestMenuWidth = measurementToGoldenRatio({ value: actualWidth }).small;
 
-  const smallestDesiredMenuWidth = 360;
+  const smallestDesiredMenuWidth = 240;
   //if our visually pleasing menu size is too small...
   //it must atleast be as large as the smallestDesiredMenuWidth
   if (largestMenuWidth < smallestDesiredMenuWidth) {
@@ -31,7 +44,7 @@ export default function SideBar(props) {
   //our smallestDesiredMenuWidth might be too large
   //to include space for the smallestDesiredTapable Area
   //which is more important because users have to be able to close the menu
-  const smallestDesiredTapableWidth = 56;
+  const smallestDesiredTapableWidth = 56 + 24;
   const largestPossibleMenuSize = actualWidth - smallestDesiredTapableWidth;
   if (largestMenuWidth > largestPossibleMenuSize) {
     largestMenuWidth = largestPossibleMenuSize;
@@ -39,6 +52,7 @@ export default function SideBar(props) {
 
   //math to string for use
   const sideBarWidth = `${largestMenuWidth}px`;
+  const headerHeightPx = `${headerHeight}px`;
 
   return (
     <Stack>
@@ -52,6 +66,61 @@ export default function SideBar(props) {
         }}
       />
       <Menu {...props} width={sideBarWidth}>
+        <Box
+          width={sideBarWidth}
+          height={headerHeightPx}
+        >
+          <Grid
+            container
+            spacing={0}
+            direction="column"
+            justifyContent="center"
+            alignItems="center"
+            style={{ height: headerHeightPx }}
+          >
+            <Grid item>
+              <Box
+                height="96px"
+                width="96px"
+                backgroundColor="black"
+                borderRadius="128px"
+                padding="16px"
+                position="relative"
+                sx={{mb:"8px"}}
+              >
+                <img
+                  src="./graphics/whiteProfile.png"
+                  alt="profile"
+                  object-fit="contain"
+                  heigth="100%"
+                  width="100%"
+                />
+                <img
+                  src="./graphics/whiteLoader.gif"
+                  alt="profile"
+                  className="heart"
+                />
+              </Box>
+            </Grid>
+            <Grid item>
+            <Typography
+                variant="h6"
+                color="black"
+                sx={{ textAlign: "center", mb:"4px" }}
+              >
+                Hi! I'm Bryan Cancel
+              </Typography>
+              </Grid>
+            <Grid item>
+            <QuickLinks lightMode={true} />
+              </Grid>
+          </Grid>
+        </Box>
+        <Box
+          sx={{ backgroundColor: "black" }}
+          height="48px"
+          width={sideBarWidth}
+        ></Box>
         <a className="menu-item" href="/">
           Home
         </a>

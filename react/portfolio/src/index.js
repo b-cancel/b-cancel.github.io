@@ -33,7 +33,7 @@ class App extends React.Component {
           >
             <Stack>
               <Typography variant="subtitle2" sx={{ fontWeight: "bold" }}>
-                DEV, UX & UI by Bryan Cancel
+                DEV, UX & UI by Me
               </Typography>
             </Stack>
           </Box>

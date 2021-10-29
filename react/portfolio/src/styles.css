@@ -10,6 +10,15 @@ a {
   text-decoration: none;
 }
 
+.heart { 
+  display: none;
+  height:36px;
+  width:36px;
+  position:absolute;
+  bottom:4px;
+  left:56px;
+}
+
 /* FIX BUGS from menu */
 .page-wrap-closed {
   transform: translate3d(0px, 0px, 0px) !important;
@@ -110,7 +119,7 @@ a {
 
 /* Styling of overlay */
 .bm-overlay {
-  background: rgba(0, 0, 0, 0.75) !important;
+  background: rgba(0, 0, 0, 0.5) !important;
 }
 
 /* making the little X disapear */
@@ -135,5 +144,4 @@ a {
 /* Individual item */
 .bm-item {
   display: inline-block;
-  margin-bottom: 10px;
 }

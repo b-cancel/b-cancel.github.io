@@ -1,5 +1,4 @@
 import React from "react";
-import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
@@ -17,11 +16,12 @@ import { faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
 
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
+import Box from "@mui/material/Box";
 
 import MyIconButton from "./myIconButton";
 import MyButton from "./myButton";
 
-export default function QuickLinks() {
+export default function QuickLinks(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const isMenuOpen = Boolean(anchorEl);
   const handleProfileMenuOpen = (event) => {
@@ -36,8 +36,14 @@ export default function QuickLinks() {
       mode: "light",
     },
   });
+  const darkTheme = createTheme({
+    palette: {
+      mode: "dark",
+    },
+  });
+  const theme = props.lightMode ? darkTheme : lightTheme;
   const renderMenu = (
-    <ThemeProvider theme={lightTheme}>
+    <ThemeProvider theme={theme}>
       <Menu
         anchorEl={anchorEl}
         anchorOrigin={{
@@ -100,35 +106,56 @@ export default function QuickLinks() {
       </Menu>
     </ThemeProvider>
   );
+
+  const itemSpacing = "8px";
+  const github = <MyIconButton
+  tooltip="Github"
+  src="https://github.com/b-cancel"
+  icon={faGithub}
+  lightMode={props.lightMode}
+  sx={{marginRight:itemSpacing}}
+/>;
+/*
+const left = props.lightMode ? <Box/> : github;
+const right = props.lightMode ? github : <Box/>;
+*/
+const left = github;
+const right = <Box/>;
   return (
-    <Stack direction="row" spacing="16px" sx={{ py: "16px", margin: "auto" }}>
-      <MyIconButton
-        tooltip="Github"
-        color="default"
-        src="https://github.com/b-cancel"
-        icon={faGithub}
-      />
+      <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: props.center ? "center" : "flex-start",
+              alignItems: "center",
+              flexWrap: "wrap",
+            }}
+          >
+      {left}
       <MyButton
         variant="outlined"
         tooltip="Contact Me"
         onClick={handleProfileMenuOpen}
-        color="white"
         text="Say Hello!"
+        color={props.lightMode ? "black" : "white"}
+        lightMode={props.lightMode}
+        sx={{marginRight:itemSpacing}}
         suffixIcon={
           <FontAwesomeIcon
             icon={faHand}
             transform={{ rotate: -22.5 }}
-            color="white"
+            color={props.lightMode ? "black" : "white"}
           />
         }
       />
+      {right}
       {renderMenu}
       <MyIconButton
         tooltip="Linked-In"
-        color="default"
         src="https://www.linkedin.com/in/bryan-cancel-069a197a"
         icon={faLinkedin}
+        lightMode={props.lightMode}
       />
-    </Stack>
+    </Box>
   );
 }

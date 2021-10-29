@@ -26,7 +26,9 @@ export default class Gallery extends React.Component {
           <Stack>
             <AllProjects />
             <Stack sx={{ mb: "56px" }}>
-              <QuickLinks />
+              <Box sx={{ py: "16px" }}>
+                <QuickLinks center={true} />
+              </Box>
               <Typography
                 variant="subtitle2"
                 color="white"
