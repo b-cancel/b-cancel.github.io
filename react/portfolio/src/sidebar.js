@@ -100,7 +100,7 @@ export default function SideBar(props) {
                   width="100%"
                 />
                 <img
-                  src="./graphics/whiteLoader.gif"
+                  src="./graphics/loader/whiteLoader.gif"
                   alt="profile"
                   className="heart"
                 />
