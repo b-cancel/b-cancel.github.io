@@ -1,31 +1,7 @@
 import React from "react";
 import IconButton from "@mui/material/IconButton";
-import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
-import { styled } from "@mui/material/styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Zoom from "@mui/material/Zoom";
-
-const WhiteOnBlackToolTip = styled(({ className, ...props }) => (
-  <Tooltip {...props} classes={{ popper: className }} />
-))(({ theme }) => ({
-  [`& .${tooltipClasses.tooltip}`]: {
-    maxWidth: "none",
-    backgroundColor: "#202020",
-    color: "#e0e0e0",
-    fontSize: 12,
-  },
-}));
-
-const BlackOnWhiteTooltip = styled(({ className, ...props }) => (
-  <Tooltip {...props} classes={{ popper: className }} />
-))(({ theme }) => ({
-  [`& .${tooltipClasses.tooltip}`]: {
-    maxWidth: "none",
-    backgroundColor: "#e0e0e0",
-    color: "#202020",
-    fontSize: 12,
-  },
-}));
+import MyToolTip from "./tooltips";
 
 /// tooltip, color, onClick, icon
 export default function MyIconButton(props) {
@@ -45,23 +21,20 @@ export default function MyIconButton(props) {
 
   if (props.lightMode) {
     return (
-      <WhiteOnBlackToolTip
+      <MyToolTip
         title={props.tooltip}
-        TransitionComponent={Zoom}
         placement="bottom"
-      >
-        {iconButton}
-      </WhiteOnBlackToolTip>
+        type="whiteOnBlack"
+        child={iconButton}
+         />
     );
   } else {
     return (
-      <BlackOnWhiteTooltip
+      <MyToolTip
         title={props.tooltip}
-        TransitionComponent={Zoom}
         placement="top"
-      >
-        {iconButton}
-      </BlackOnWhiteTooltip>
+        type="blackOnWhite"
+        child={iconButton} />
     );
   }
 }

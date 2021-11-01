@@ -1,43 +1,7 @@
 import React from "react";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
-import { styled } from "@mui/material/styles";
-import Zoom from "@mui/material/Zoom";
-
-const WhiteOnBlackToolTip = styled(({ className, ...props }) => (
-  <Tooltip {...props} classes={{ popper: className }} />
-))(({ theme }) => ({
-  [`& .${tooltipClasses.tooltip}`]: {
-    maxWidth: "none",
-    backgroundColor: "#202020",
-    color: "#e0e0e0",
-    fontSize: 12,
-  },
-}));
-
-const BlackOnWhiteTooltip = styled(({ className, ...props }) => (
-  <Tooltip {...props} classes={{ popper: className }} />
-))(({ theme }) => ({
-  [`& .${tooltipClasses.tooltip}`]: {
-    maxWidth: "none",
-    backgroundColor: "#e0e0e0",
-    color: "#202020",
-    fontSize: 12,
-  },
-}));
-
-const ErrorToolTip = styled(({ className, ...props }) => (
-  <Tooltip {...props} classes={{ popper: className }} />
-))(({ theme }) => ({
-  [`& .${tooltipClasses.tooltip}`]: {
-    maxWidth: "none",
-    backgroundColor: "red",
-    color: "white",
-    fontSize: 14,
-    fontWeight: "bold",
-  },
-}));
+import MyToolTip from "./tooltips";
 
 /// variant, tooltip, color, onClick, suffixIcon, text, startIcon
 export default function MyButton(props) {
@@ -82,29 +46,23 @@ export default function MyButton(props) {
   const toolTipPosition = props.lightMode ? "bottom" : "top";
   if (hasTooltip || props.repoIsPrivate) {
     buttonWithToolTip = props.repoIsPrivate ? (
-      <ErrorToolTip
+      <MyToolTip
         title="Private Repository"
-        TransitionComponent={Zoom}
-        placement={toolTipPosition}
-      >
-        {theButton}
-      </ErrorToolTip>
+        placement={toolTipPosition} 
+        type="whiteOnRed"
+        child={theButton} />
     ) : props.lightMode ? (
-      <WhiteOnBlackToolTip
+      <MyToolTip
         title={props.tooltip}
-        TransitionComponent={Zoom}
         placement={toolTipPosition}
-      >
-        {theButton}
-      </WhiteOnBlackToolTip>
+        type="whiteOnBlack"
+        child={theButton} />
     ) : (
-      <BlackOnWhiteTooltip
+      <MyToolTip
         title={props.tooltip}
-        TransitionComponent={Zoom}
         placement={toolTipPosition}
-      >
-        {theButton}
-      </BlackOnWhiteTooltip>
+        type="blackOnWhite"
+        child={theButton} />
     );
   }
 
