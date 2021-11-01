@@ -1,12 +1,13 @@
 import React from "react";
 
+//TODO: display all the logos and organize them into their respective sections
+
+import React from "react";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { 
     //---mobile stuff
     faSwift, //#ec3b2e
-    //missing dart //#0e5695
-    //missing flutter //#35b4eb
-    //missing firebase //#f1c13d
 
     //---web stuff
     faReact, //#62ceec
@@ -16,71 +17,47 @@ import {
     faJsSquare, //#e9d137
     faHtml5, //#e36132
     faCss3Alt, //#30a1d2
-    //mention ruby on rails //#ca0812
-    //mention .NET framework //#572f88
 
     //---game stuff
     faUnity, //black
-    //missing C# //#a17ad7
-
-    //---IDEs
-    //missing VS-Code //#2c9fe2
-    //missing Visual Studios //#572f88
 
     //---other stuff
     faPython, //black
-    //missing C++ //#679cd1
-    //missing C //#0b5a9b
-    //missing java //#dd222b
 
     //---source control
     faGithub, //black
     faBitbucket, //#1454bc
 
-    //---graphic stuff
-    //missing photoshop //#37a2ef
-    //missing premiere //#9851a4
-
     //---baby stuff
     faWix, //#efb372 or black
     faShopify, //#8bb04b
     faWordpressSimple, //#0e7090
-    //missing webflow //#4256ec
 } from "@fortawesome/free-brands-svg-icons";
 
-//---------IMAGES NEEDED
-
-//---mobile
-//missing flutter
-//missing firebase
+//---mobile stuff
+//missing dart ./graphics/tools/dart.png
+//missing flutter ./graphics/tools/flutter.png
+//missing firebase ./graphics/tools/firebase.png
 
 //---web
-//mention ruby
-//mention ruby on rails
-//mention .NET framework
-
-//---IDEs
-//VS-Code=
-
-//---other
-//missing C
-//missing C++
-//missing java
+//mention ruby on rails ./graphics/tools/rails.png
+//mention .NET framework ./graphics/tools/dotNet.png
 
 //---baby stuff
-//missing webflow
-
-//---------DONE
-
-//---mobile
-//missing dart
+//missing webflow ./graphics/tools/webflow.png
 
 //---game
-//get C#
+//get C# ./graphics/tools/cSharp.png
 
 //---IDEs
-//Visual Studios
+//VS Code ./graphics/tools/vsCode.png
+//Visual Studios ./graphics/tools/visualStudios.png
 
 //---graphics
-//missing photoshop 
-//missing premiere
+//missing photoshop ./graphics/tools/photoshop.png
+//missing premiere ./graphics/tools/premiere.png
+
+//---other
+//missing C ./graphics/tools/c.png
+//missing C++ ./graphics/tools/cPlusPlus.png
+//missing java ./graphics/tools/java.png
