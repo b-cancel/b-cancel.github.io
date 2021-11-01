@@ -1,6 +1,7 @@
 import React from "react";
 import QuickLinks from "./contact.js";
 import Section from "./section.js";
+import Tool from "./tools.js";
 
 //burger menu
 //push, pushRotate, elastic
@@ -93,7 +94,7 @@ export default function SideBar(props) {
                 sx={{ mb: "8px" }}
               >
                 <img
-                  src="./graphics/whiteProfile.png"
+                  src="./graphics/profile/whiteProfile.png"
                   alt="profile"
                   object-fit="contain"
                   heigth="100%"
@@ -134,6 +135,26 @@ export default function SideBar(props) {
         <a className="menu-item" href="/pizzas">
           Pizzas
         </a>
+
+        <Tool tool="swift" />
+        <Tool tool="react" />
+        <Tool tool="node" />
+        <Tool tool="aws" />
+        <Tool tool="php" />
+        <Tool tool="js" />
+        <Tool tool="html" />
+        <Tool tool="css" />
+        <Tool tool="unity" />
+        <Tool tool="python" />
+        <Tool tool="github" />
+        <Tool tool="bitbucket" />
+        <Tool tool="wix" />
+        <Tool tool="shopify" />
+        <Tool tool="wordpress" />
+        <Tool tool="dart" />
+        <Tool tool="flutter" />
+        <Tool tool="firebase" />
+        
 
         <Section title="/ Experience" />
 
