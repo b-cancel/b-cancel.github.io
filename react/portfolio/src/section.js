@@ -2,21 +2,26 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
+import AnimateHeight from "react-animate-height";
 
 export default class Section extends React.Component {
-  //TODO: eventually pass is opened in props
   constructor(props) {
     super(props);
     this.state = {
-      isOpened: false,
+      isOpened: this.props.isOpened,
       isHovered: false,
     };
   }
 
-  //normal "title"
-  //hover and closed "% cd title"
-  //hover and opened "title % cd.."
   render() {
+    var heightID = this.props.title;
+    heightID = heightID.replaceAll(" ", "");
+    //height attribute that depends on opened var
+    const height = this.state.isOpened ? "auto" : 0;
+
+    //normal "title"
+    //hover and closed "% cd title"
+    //hover and opened "title % cd.."
     return (
       <Stack>
         <Box
@@ -28,7 +33,7 @@ export default class Section extends React.Component {
           }}
           onMouseEnter={() => this.setState({ isHovered: true })}
           onMouseLeave={() => this.setState({ isHovered: false })}
-          onClick={() => this.setState({ isOpened: !this.state.isOpened})}
+          onClick={() => this.setState({ isOpened: !this.state.isOpened })}
           className="aSection"
         >
           <Stack direction="row">
@@ -51,11 +56,14 @@ export default class Section extends React.Component {
             )}
           </Stack>
         </Box>
-        {this.state.isOpened ? (
-          <Typography variant="body1">OPENED</Typography>
-        ) : (
-          <Box />
-        )}
+        <AnimateHeight
+          id={heightID}
+          duration={250}
+          height={height}
+          style={{ flexShrink: 0 }}
+        >
+          {this.props.child}
+        </AnimateHeight>
       </Stack>
     );
   }

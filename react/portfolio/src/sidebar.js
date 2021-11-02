@@ -24,6 +24,134 @@ import { faArrowAltCircleRight } from "@fortawesome/free-solid-svg-icons";
 import {} from "@fortawesome/free-regular-svg-icons";
 import {} from "@fortawesome/fontawesome-svg-core";
 
+const mobile = <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "flex-start",
+              alignItems: "center",
+              flexWrap: "wrap",
+            }}
+          >
+            <Tool tool="dart" />
+        <Tool tool="flutter" />
+        <Tool tool="swift" />
+            </Box>;
+        
+        const backend = <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "flex-start",
+              alignItems: "center",
+              flexWrap: "wrap",
+            }}
+          >
+        <Tool tool="firebase" />
+        <Tool tool="aws" />
+        </Box>;
+
+const web = <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "flex-start",
+              alignItems: "center",
+              flexWrap: "wrap",
+            }}
+          >
+            <Tool tool="react" />
+            <Tool tool="node" />
+            <Tool tool="rails" />
+            <Tool tool="dotNet" />
+            <Tool tool="php" />
+            <Tool tool="js" />
+            <Tool tool="html" />
+            <Tool tool="css" />
+            </Box>;
+
+const game = <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "flex-start",
+              alignItems: "center",
+              flexWrap: "wrap",
+            }}
+          >
+            <Tool tool="unity" />
+            <Tool tool="cSharp" />
+            </Box>;
+
+            const ide = <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "flex-start",
+              alignItems: "center",
+              flexWrap: "wrap",
+            }}
+          >
+            <Tool tool="vsCode" />
+            <Tool tool="visualStudios" />
+            </Box>;
+
+const versionControl =  <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "flex-start",
+              alignItems: "center",
+              flexWrap: "wrap",
+            }}
+          >
+            <Tool tool="github" />
+        <Tool tool="bitbucket" />
+        </Box>;
+
+const builder = <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "flex-start",
+              alignItems: "center",
+              flexWrap: "wrap",
+            }}
+          >
+        <Tool tool="webflow" />
+        <Tool tool="wordpress" />
+        <Tool tool="shopify" />
+        <Tool tool="wix" />
+        </Box>;
+
+const graphic = <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "flex-start",
+              alignItems: "center",
+              flexWrap: "wrap",
+            }}
+          >
+          <Tool tool="photoshop" />
+          <Tool tool="premiere" />
+          </Box>;
+
+          const other = <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "flex-start",
+              alignItems: "center",
+              flexWrap: "wrap",
+            }}
+          >
+            <Tool tool="java" />
+            <Tool tool="python" />
+            <Tool tool="cPlusPlus" />
+            <Tool tool="c" />
+            </Box>;
+
 //widget
 export default function SideBar(props) {
   //everything slide related below
@@ -122,57 +250,25 @@ export default function SideBar(props) {
           </Grid>
         </Box>
 
-        <Section title="/ About Me" />
+        <Section title="/ About Me"  isOpened={true} child={
+          //creative and quick?
+          <Box sx={{mx:"16px", mb:"24px"}}>
+            I love to learn!
+            <br/>
+            <br/>
+            That love for learning and the experience gained from the opportunities it's created
+            <br/>
+            allows me to tackle challenges from many angles,
+            gives me a better understanding of the concerns of each team member,
+            and enables me to find solutions to even the hardest problems
+          </Box>
+        }/>
 
-        <a className="menu-item" href="/">
-          Home
-        </a>
-
-        <a className="menu-item" href="/burgers">
-          Burgers
-        </a>
-
-        <a className="menu-item" href="/pizzas">
-          Pizzas
-        </a>
-
-        <Tool tool="swift" />
-        <Tool tool="react" />
-        <Tool tool="node" />
-        <Tool tool="aws" />
-        <Tool tool="php" />
-        <Tool tool="js" />
-        <Tool tool="html" />
-        <Tool tool="css" />
-        <Tool tool="unity" />
-        <Tool tool="python" />
-        <Tool tool="github" />
-        <Tool tool="bitbucket" />
-        <Tool tool="wix" />
-        <Tool tool="shopify" />
-        <Tool tool="wordpress" />
-        <Tool tool="dart" />
-        <Tool tool="flutter" />
-        <Tool tool="firebase" />
-        
-
-        <Section title="/ Experience" />
-
-        <a className="menu-item" href="/desserts">
-          Desserts
-        </a>
-        <a className="menu-item" href="/">
-          Home
-        </a>
-
-        <a className="menu-item" href="/burgers">
-          Burgers
-        </a>
-        <Section title="/ Education" />
-
-        <a className="menu-item" href="/pizzas">
-          Pizzas
-        </a>
+        <Section title="/ Experience"  isOpened={false} child={
+          <Box>
+            passed this in a box
+            </Box>
+        }/>
 
         <Box
           onClick={() => {
@@ -200,101 +296,30 @@ export default function SideBar(props) {
           </Stack>
         </Box>
 
-        <Section title="/ Tools" />
+        <Section title="/ Tools"  isOpened={false} child={
+          <Box>
+        {mobile}
+        {backend}
+        {web}
+        {game}
+        {ide}
+        {versionControl}
+        {builder}
+        {graphic}
+        {other}
+            </Box>
+        }/>
 
-        <a className="menu-item" href="/desserts">
-          Desserts
-        </a>
-        <a className="menu-item" href="/">
-          Home
-        </a>
-
-        <Section title="/ Cerifications" />
-
-        <a className="menu-item" href="/burgers">
-          Burgers
-        </a>
-
-        <a className="menu-item" href="/pizzas">
-          Pizzas
-        </a>
-
-        <a className="menu-item" href="/desserts">
-          Desserts
-        </a>
-        <a className="menu-item" href="/">
-          Home
-        </a>
-
-        <a className="menu-item" href="/burgers">
-          Burgers
-        </a>
-
-        <a className="menu-item" href="/pizzas">
-          Pizzas
-        </a>
-
-        <Section title="/ Other" />
-
-        <a className="menu-item" href="/desserts">
-          Desserts
-        </a>
-        <a className="menu-item" href="/">
-          Home
-        </a>
-
-        <a className="menu-item" href="/burgers">
-          Burgers
-        </a>
-
-        <a className="menu-item" href="/pizzas">
-          Pizzas
-        </a>
-
-        <a className="menu-item" href="/desserts">
-          Desserts
-        </a>
-        <a className="menu-item" href="/">
-          Home
-        </a>
-
-        <a className="menu-item" href="/burgers">
-          Burgers
-        </a>
-
-        <a className="menu-item" href="/pizzas">
-          Pizzas
-        </a>
-
-        <a className="menu-item" href="/desserts">
-          Desserts
-        </a>
-        <a className="menu-item" href="/">
-          Home
-        </a>
-
-        <a className="menu-item" href="/burgers">
-          Burgers
-        </a>
-
-        <a className="menu-item" href="/pizzas">
-          Pizzas
-        </a>
-
-        <a className="menu-item" href="/desserts">
-          Desserts
-        </a>
-        <a className="menu-item" href="/">
-          Home
-        </a>
-
-        <a className="menu-item" href="/burgers">
-          Burgers
-        </a>
-
-        <a className="menu-item" href="/pizzas">
-          Pizzas
-        </a>
+        <Section title="/ Cerifications"  isOpened={false} child={
+          <Box>
+            passed this in a box
+            </Box>
+        }/>
+        <Section title="/ Other" isOpened={false} child={
+          <Box>
+            passed this in a box
+            </Box>
+        }/>
 
         <Typography
                 variant="body2"

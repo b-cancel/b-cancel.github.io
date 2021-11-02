@@ -29,34 +29,6 @@ import {
   faWordpressSimple, //#0e7090
 } from "@fortawesome/free-brands-svg-icons";
 
-//---mobile stuff
-//missing dart ./graphics/tools/dart.png
-//missing flutter ./graphics/tools/flutter.png
-//missing firebase ./graphics/tools/firebase.png
-
-//---web
-//mention ruby on rails ./graphics/tools/rails.png
-//mention .NET framework ./graphics/tools/dotNet.png
-
-//---baby stuff
-//missing webflow ./graphics/tools/webflow.png
-
-//---game
-//get C# ./graphics/tools/cSharp.png
-
-//---IDEs
-//VS Code ./graphics/tools/vsCode.png
-//Visual Studios ./graphics/tools/visualStudios.png
-
-//---graphics
-//missing photoshop ./graphics/tools/photoshop.png
-//missing premiere ./graphics/tools/premiere.png
-
-//---other
-//missing C ./graphics/tools/c.png
-//missing C++ ./graphics/tools/cPlusPlus.png
-//missing java ./graphics/tools/java.png
-
 import IconTool from "./tools/iconTool.js";
 import PngTool from "./tools/pngTool.js";
 
@@ -238,48 +210,106 @@ const size = 48;
             src="https://firebase.google.com"
           />
         );
-        
-
-//---web
-//mention ruby on rails 
-//./graphics/tools/rails.png
-//https://rubyonrails.org/
-
-//mention .NET framework 
-//./graphics/tools/dotNet.png
-//https://dotnet.microsoft.com
-
-//---baby stuff
-//missing webflow ./graphics/tools/webflow.png
-//https://webflow.com
-
-//---game
-//get C# ./graphics/tools/cSharp.png
-//https://docs.microsoft.com/en-us/dotnet/csharp/
-
-//---IDEs
-//VS Code ./graphics/tools/vsCode.png
-//https://code.visualstudio.com/
-
-//Visual Studios ./graphics/tools/visualStudios.png
-//https://visualstudio.microsoft.com/
-
-//---graphics
-//missing photoshop ./graphics/tools/photoshop.png
-//https://www.adobe.com/products/photoshop.html
-
-//missing premiere ./graphics/tools/premiere.png
-//https://www.adobe.com/products/premiere.html
-
-//---other
-//missing C ./graphics/tools/c.png
-//https://en.wikipedia.org/wiki/C_(programming_language)
-
-//missing C++ ./graphics/tools/cPlusPlus.png
-//https://en.wikipedia.org/wiki/C%2B%2B
-
-//missing java ./graphics/tools/java.png
-//https://www.java.com/
+        //-----
+        case "rails":
+        return (
+          <PngTool
+          size={size}
+            tip="Ruby On Rails"
+            png="./graphics/tools/rails.png"
+            src="https://rubyonrails.org/"
+          />
+        );
+        case "dotNet":
+          return (
+            <PngTool
+            size={size}
+              tip=".NET Framework"
+              png="./graphics/tools/dotNet.png"
+              src="https://dotnet.microsoft.com"
+            />
+          );
+          case "webflow":
+          return (
+            <PngTool
+            size={size}
+              tip="Webflow"
+              png="./graphics/tools/webflow.png"
+              src="https://webflow.com"
+            />
+          );
+          case "cSharp":
+          return (
+            <PngTool
+            size={size}
+              tip="C#"
+              png="./graphics/tools/cSharp.png"
+              src="https://docs.microsoft.com/en-us/dotnet/csharp/"
+            />
+          );
+          case "vsCode":
+          return (
+            <PngTool
+            size={size}
+              tip="VS Code"
+              png="./graphics/tools/vsCode.png"
+              src="https://code.visualstudio.com/"
+            />
+          );
+          case "visualStudios":
+          return (
+            <PngTool
+            size={size}
+              tip="Visual Studios"
+              png="./graphics/tools/visualStudios.png"
+              src="https://visualstudio.microsoft.com/"
+            />
+          );
+          case "photoshop":
+          return (
+            <PngTool
+            size={size}
+              tip="Photoshop"
+              png="./graphics/tools/photoshop.png"
+              src="https://www.adobe.com/products/photoshop.html"
+            />
+          );
+          case "premiere":
+          return (
+            <PngTool
+            size={size}
+              tip="Premiere"
+              png="./graphics/tools/premiere.png"
+              src="https://www.adobe.com/products/premiere.html"
+            />
+          );
+          case "c":
+          return (
+            <PngTool
+            size={size}
+              tip="C"
+              png="./graphics/tools/c.png"
+              src="https://en.wikipedia.org/wiki/C_(programming_language)"
+            />
+          );
+          case "cPlusPlus":
+          return (
+            <PngTool
+            size={size}
+              tip="C++"
+              png="./graphics/tools/cPlusPlus.png"
+              src="https://en.wikipedia.org/wiki/C%2B%2B"
+            />
+          );
+          case "java":
+          return (
+            <PngTool
+            size={size}
+              tip="Java"
+              png="./graphics/tools/java.png"
+              src="https://www.java.com/"
+            />
+          );
     default:
       return (
         <IconTool
