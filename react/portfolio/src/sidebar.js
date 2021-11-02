@@ -13,7 +13,7 @@ import { push as Menu } from "react-burger-menu";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
-import Chip from '@mui/material/Chip';
+import Chip from "@mui/material/Chip";
 import Box from "@mui/material/Box";
 
 //window calculation
@@ -31,32 +31,32 @@ const iconSpacing = { mt: "4px", mr: "8px" };
 const wideIconSpacing = { mt: "4px", mr: "24px" };
 const sectionBox = {
   display: "inline-flex",
-      flexDirection: "row",
-      justifyContent: "flex-start",
-      alignItems: "flex-start",
-      flexWrap: "wrap",
-border: "2px solid black",
-borderRadius: "8px",
-paddingLeft: "8px",
-paddingBotom: "4px",
-marginRight: "16px",
-marginBottom: "8px",
-minHeight: "64px",
-}
+  flexDirection: "row",
+  justifyContent: "flex-start",
+  alignItems: "flex-start",
+  flexWrap: "wrap",
+  border: "2px solid black",
+  borderRadius: "8px",
+  paddingLeft: "8px",
+  paddingBotom: "4px",
+  marginRight: "16px",
+  marginBottom: "8px",
+  minHeight: "64px",
+};
 
 const mobile = (
   <Box sx={sectionBox}>
     <Typography
-                variant="body2"
-                fontWeight="bold"
-                textAlign="center"
-                color="#202020"
-                sx={iconSpacing}
-              >
-                Mobile
-                <br/>
-                Dev
-              </Typography>
+      variant="body2"
+      fontWeight="bold"
+      textAlign="center"
+      color="#202020"
+      sx={iconSpacing}
+    >
+      Mobile
+      <br />
+      Dev
+    </Typography>
     <Box sx={iconSpacing}>
       <Tool tool="dart" />
     </Box>
@@ -72,16 +72,16 @@ const mobile = (
 const backend = (
   <Box sx={sectionBox}>
     <Typography
-                variant="body2"
-                fontWeight="bold"
-                textAlign="center"
-                color="#202020"
-                sx={iconSpacing}
-              >
-                Backend
-                <br/>
-                Dev
-              </Typography>
+      variant="body2"
+      fontWeight="bold"
+      textAlign="center"
+      color="#202020"
+      sx={iconSpacing}
+    >
+      Backend
+      <br />
+      Dev
+    </Typography>
     <Box sx={iconSpacing}>
       <Tool tool="firebase" />
     </Box>
@@ -94,16 +94,16 @@ const backend = (
 const web = (
   <Box sx={sectionBox}>
     <Typography
-                variant="body2"
-                fontWeight="bold"
-                textAlign="center"
-                color="#202020"
-                sx={iconSpacing}
-              >
-                Web
-                <br/>
-                Dev
-              </Typography>
+      variant="body2"
+      fontWeight="bold"
+      textAlign="center"
+      color="#202020"
+      sx={iconSpacing}
+    >
+      Web
+      <br />
+      Dev
+    </Typography>
     <Box sx={iconSpacing}>
       <Tool tool="react" />
     </Box>
@@ -134,16 +134,16 @@ const web = (
 const game = (
   <Box sx={sectionBox}>
     <Typography
-                variant="body2"
-                fontWeight="bold"
-                textAlign="center"
-                color="#202020"
-                sx={iconSpacing}
-              >
-                Game
-                <br/>
-                Dev
-              </Typography>
+      variant="body2"
+      fontWeight="bold"
+      textAlign="center"
+      color="#202020"
+      sx={iconSpacing}
+    >
+      Game
+      <br />
+      Dev
+    </Typography>
     <Box sx={iconSpacing}>
       <Tool tool="unity" />
     </Box>
@@ -156,14 +156,14 @@ const game = (
 const ide = (
   <Box sx={sectionBox}>
     <Typography
-                variant="body2"
-                fontWeight="bold"
-                textAlign="center"
-                color="#202020"
-                sx={iconSpacing}
-              >
-                IDEs
-              </Typography>
+      variant="body2"
+      fontWeight="bold"
+      textAlign="center"
+      color="#202020"
+      sx={iconSpacing}
+    >
+      IDEs
+    </Typography>
     <Box sx={iconSpacing}>
       <Tool tool="vsCode" />
     </Box>
@@ -176,16 +176,16 @@ const ide = (
 const versionControl = (
   <Box sx={sectionBox}>
     <Typography
-                variant="body2"
-                fontWeight="bold"
-                textAlign="center"
-                color="#202020"
-                sx={iconSpacing}
-              >
-                Version
-                <br/>
-                Control
-              </Typography>
+      variant="body2"
+      fontWeight="bold"
+      textAlign="center"
+      color="#202020"
+      sx={iconSpacing}
+    >
+      Version
+      <br />
+      Control
+    </Typography>
     <Box sx={iconSpacing}>
       <Tool tool="github" />
     </Box>
@@ -198,16 +198,16 @@ const versionControl = (
 const builder = (
   <Box sx={sectionBox}>
     <Typography
-                variant="body2"
-                fontWeight="bold"
-                textAlign="center"
-                color="#202020"
-                sx={iconSpacing}
-              >
-                Page
-                <br/>
-                Builder
-              </Typography>
+      variant="body2"
+      fontWeight="bold"
+      textAlign="center"
+      color="#202020"
+      sx={iconSpacing}
+    >
+      Page
+      <br />
+      Builder
+    </Typography>
     <Box sx={iconSpacing}>
       <Tool tool="webflow" />
     </Box>
@@ -226,16 +226,16 @@ const builder = (
 const graphic = (
   <Box sx={sectionBox}>
     <Typography
-                variant="body2"
-                fontWeight="bold"
-                textAlign="center"
-                color="#202020"
-                sx={iconSpacing}
-              >
-                Graphic
-                <br/>
-                Tools
-              </Typography>
+      variant="body2"
+      fontWeight="bold"
+      textAlign="center"
+      color="#202020"
+      sx={iconSpacing}
+    >
+      Graphic
+      <br />
+      Tools
+    </Typography>
     <Box sx={iconSpacing}>
       <Tool tool="photoshop" />
     </Box>
@@ -248,16 +248,16 @@ const graphic = (
 const other = (
   <Box sx={sectionBox}>
     <Typography
-                variant="body2"
-                fontWeight="bold"
-                textAlign="center"
-                color="#202020"
-                sx={iconSpacing}
-              >
-                Other
-                <br/>
-                Langs
-              </Typography>
+      variant="body2"
+      fontWeight="bold"
+      textAlign="center"
+      color="#202020"
+      sx={iconSpacing}
+    >
+      Other
+      <br />
+      Langs
+    </Typography>
     <Box sx={iconSpacing}>
       <Tool tool="java" />
     </Box>
@@ -272,6 +272,89 @@ const other = (
     </Box>
   </Box>
 );
+
+const experience = [
+  {
+    startOpen: true,
+    title: "Mobile Dev, UX, & UI",
+    company: "Lawn Buddy",
+    location: "Remote",
+    startMonth: 5,
+    startYear: 2020,
+    endMonth: 8,
+    endYear: 2020,
+  },
+  {
+    startOpen: true,
+    title: "Web Developer",
+    company: "Lebron Group Land Surveying",
+    location: "Remote",
+    startMonth: 3,
+    startYear: 2020,
+    endMonth: 9,
+    endYear: 2020,
+  },
+  {
+    startOpen: false,
+    title: "Barista / Disaster Relief Volunteer",
+    company: "Starbucks",
+    location: "Mc-Allen, Texas",
+    startMonth: 10,
+    startYear: 2019,
+    endMonth: 5,
+    endYear: 2020,
+  },
+  {
+    startOpen: false,
+    title: "App Development Intern",
+    company: "Cleversolve",
+    location: "Edinburg, TX",
+    startMonth: 5,
+    startYear: 2018,
+    endMonth: 8,
+    endYear: 2018,
+  },
+  {
+    startOpen: false,
+    title: "Web Dev and Design",
+    company: "Lebron Group Land Surveying",
+    location: "Winter Park, FL",
+    startMonth: 7,
+    startYear: 2017,
+    endMonth: 9,
+    endYear: 2017,
+  },
+  {
+    startOpen: false,
+    title: "Graphic Design and Video Editing",
+    company: "UT Center For Railway Safety",
+    location: "Edinburg, TX",
+    startMonth: 9,
+    startYear: 2014,
+    endMonth: 5,
+    endYear: 2015,
+  },
+  {
+    startOpen: false,
+    title: "Graphic Design and Video Editing",
+    company: "IT Marketing Division at UT",
+    location: "Edinburg, TX",
+    startMonth: 9,
+    startYear: 2013,
+    endMonth: 5,
+    endYear: 2014,
+  },
+  {
+    startOpen: false,
+    title: "Robotics Coach Volunteer",
+    company: "Business Education Technology Academy",
+    location: "Edinburg, TX",
+    startMonth: 5,
+    startYear: 2013,
+    endMonth: 5,
+    endYear: 2014,
+  },
+];
 
 //widget
 export default function SideBar(props) {
@@ -310,6 +393,9 @@ export default function SideBar(props) {
   //math to string for use
   const sideBarWidth = `${largestMenuWidth}px`;
   const headerHeightPx = `${headerHeight}px`;
+
+  //decorative listing
+  var xpCount = 0;
 
   return (
     <Stack>
@@ -380,10 +466,7 @@ export default function SideBar(props) {
               I love to learn!
               <br />
               <br />
-              That love for learning and the experience gained from the
-              opportunities it's created
-              <br />
-              allows me to tackle challenges from many angles, gives me a better
+              That love allows me to tackle challenges from many angles, gives me a better
               understanding of the concerns of each team member, and enables me
               to find solutions to even the hardest problems
             </Box>
@@ -394,17 +477,31 @@ export default function SideBar(props) {
           title="/ Experience"
           isOpened={true}
           child={
-            <SwapSection title="subsection"
-            isOpened={true}
-            child={
-              <Box> box is subsection </Box>
-            } />
+            experience.map((anExperience) => {
+              //for decoration
+              xpCount = xpCount + 1;
+              const theNumber = experience.length - xpCount;
+              //pass all params over
+              return (<SwapSection
+              left={16}
+              key={theNumber}
+              number={theNumber}
+              title={anExperience.title}
+              company={anExperience.company}
+              location={anExperience.location}
+              startMonth={anExperience.startMonth}
+              startYear={anExperience.startYear}
+              endMonth={anExperience.endMonth}
+              endYear={anExperience.endYear}
+              //other stuff
+              isOpened={anExperience.startOpen}
+            />);
+            })
           }
         />
 
         <Box
           onClick={() => {
-            console.log("clicked");
             props.menuCloser();
           }}
           sx={{
@@ -432,7 +529,7 @@ export default function SideBar(props) {
           title="/ Tools"
           isOpened={true}
           child={
-            <Box sx={{ml:"16px", mr:"8px"}}>
+            <Box sx={{ ml: "16px", mr: "8px" }}>
               {mobile}
               {backend}
               {web}
@@ -464,7 +561,7 @@ export default function SideBar(props) {
         >
           English & Spanish (read, write, & speak)
           <Chip label="Chip Filled" />
-<Chip label="Chip Outlined" variant="outlined" />
+          <Chip label="Chip Outlined" variant="outlined" />
         </Typography>
       </Menu>
     </Stack>

@@ -17,10 +17,25 @@ export default class SwapSection extends React.Component {
     };
   }
 
+
+
   render() {
+    function padLeadingZeros(num, size) {
+        var s = num+"";
+        while (s.length < size) s = "0" + s;
+        return s;
+    }
+
     //height attribute that depends on opened var
     const height = this.state.isOpened ? "auto" : 0;
     const iconColor = this.state.isHovered ? "#202020" : "transparent";
+    const titleWeight = this.state.isOpened ? "normal" : "bold";
+
+    //date related
+    const number = padLeadingZeros(this.props.number,2);
+    const start = `${this.props.startMonth}_${this.props.startYear}`;
+    const end = this.props.endMonth ? `${this.props.endMonth}_${this.props.endYear}` : "";
+    const duration = `${start} > ${end}`;
 
     //normal "title"
     //hover and closed "D title"
@@ -29,7 +44,7 @@ export default class SwapSection extends React.Component {
       <Stack>
         <Box
           sx={{
-            color: "#101010",
+            color: "#202020",
             backgroundColor: "#e0e0e0",
             pl: `${this.props.left}px`,
             pr: "16px",
@@ -40,21 +55,57 @@ export default class SwapSection extends React.Component {
           onClick={() => this.setState({ isOpened: !this.state.isOpened })}
           className="aSection"
         >
-          <Stack direction="row">
-            {this.state.isOpened ? 
-                <FontAwesomeIcon icon={faMinusSquare} color={iconColor}/> : <FontAwesomeIcon icon={faPlusSquare} color={iconColor}/>}
-            <Typography variant="body2" fontWeight="bold" sx={{ml:"8px"}}>
-              {this.props.title}
-            </Typography>
-          </Stack>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "flex-start",
+              alignItems: "center",
+            }}
+          >
+            {this.state.isHovered ? (this.state.isOpened ? (
+              <FontAwesomeIcon icon={faMinusSquare} color={iconColor} />
+            ) : (
+              <FontAwesomeIcon icon={faPlusSquare} color={iconColor} />
+            )) : (
+                <Typography variant="body1">
+                  {number}
+                  </Typography>
+            )}
+            <Stack sx={{ ml: "8px" }}>
+            <AnimateHeight
+                duration={250}
+                height={height}
+                style={{ flexShrink: 0 }}
+              >
+                  <Typography variant="body2" fontWeight="bold">
+                  {duration}
+                  </Typography>
+              </AnimateHeight>
+              <Typography variant="body1" fontWeight={titleWeight}>
+                {this.props.title}
+              </Typography>
+              <AnimateHeight
+                duration={250}
+                height={height}
+                style={{ flexShrink: 0 }}
+              >
+                  <Typography variant="body2">
+                {this.props.company}
+                </Typography>
+              </AnimateHeight>
+              <AnimateHeight
+                duration={250}
+                height={height}
+                style={{ flexShrink: 0 }}
+              >
+                  <Typography variant="body2">
+                {this.props.location}
+                </Typography>
+              </AnimateHeight>
+            </Stack>
+          </Box>
         </Box>
-        <AnimateHeight
-          duration={250}
-          height={height}
-          style={{ flexShrink: 0 }}
-        >
-          {this.props.child}
-        </AnimateHeight>
       </Stack>
     );
   }

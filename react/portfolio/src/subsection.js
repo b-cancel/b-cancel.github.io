@@ -29,7 +29,7 @@ export default class SubSection extends React.Component {
       <Stack>
         <Box
           sx={{
-            color: "#101010",
+            color: "#202020",
             backgroundColor: "#e0e0e0",
             pl: `${this.props.left}px`,
             pr: "16px",
