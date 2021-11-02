@@ -296,9 +296,13 @@ export default function SideBar(props) {
           Pizzas
         </a>
 
-        <a className="menu-item" href="/desserts">
-          LAST LAST LAST
-        </a>
+        <Typography
+                variant="body2"
+                color="#202020"
+                sx={{pb:"56px", mx: "16px"}}
+              >
+                English & Spanish (read, write, & speak)
+              </Typography>
       </Menu>
     </Stack>
   );

@@ -1,31 +1,32 @@
 body {
   background: #202020;
-  font-family: 'Courier New', monospace !important;
+  font-family: "Courier New", monospace !important;
 }
 
 ._8pxborder {
   border-radius: 8px;
 }
 
-a, a p {
+a,
+a p {
   text-decoration: none;
 }
 
-.spreadOnHover{
+.spreadOnHover {
   transition: letter-spacing 0.25s ease 0s;
 }
 
-.spreadOnHover:hover{
+.spreadOnHover:hover {
   letter-spacing: 4px;
 }
 
-.heart { 
+.heart {
   display: none;
-  height:36px;
-  width:36px;
-  position:absolute;
-  bottom:4px;
-  left:56px;
+  height: 36px;
+  width: 36px;
+  position: absolute;
+  bottom: 4px;
+  left: 56px;
 }
 
 /* FIX BUGS from menu */
@@ -70,7 +71,8 @@ a, a p {
 }
 
 /*both of these will follow the menu when we add a particular class*/
-.bm-burger-button, #topFixed {
+.bm-burger-button,
+#topFixed {
   transition: all 0.25s ease 0s !important;
 }
 
@@ -130,7 +132,8 @@ a, a p {
   display: none !important;
 }
 
-.bm-overlay-opened:hover, .clickable:hover{
+.bm-overlay-opened:hover,
+.clickable:hover {
   cursor: pointer;
 }
 
@@ -146,4 +149,8 @@ https://css-tricks.com/prevent-page-scrolling-when-a-modal-is-open/
 .other-closed {
   height: auto !important;
   /*overflow-x: auto !important;*/
+}
+
+.aSection:hover {
+  cursor: pointer;
 }
