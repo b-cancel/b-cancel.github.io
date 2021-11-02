@@ -269,7 +269,7 @@ const size = 48;
           return (
             <PngTool
             size={size}
-              tip="Photoshop"
+              tip='Photoshop Certified'
               png="./graphics/tools/photoshop.png"
               src="https://www.adobe.com/products/photoshop.html"
             />
@@ -278,7 +278,7 @@ const size = 48;
           return (
             <PngTool
             size={size}
-              tip="Premiere"
+              tip="Premiere Certified"
               png="./graphics/tools/premiere.png"
               src="https://www.adobe.com/products/premiere.html"
             />

@@ -294,7 +294,7 @@ const education = [
       "Systems Programming",
       "Computer Architecture",
       "Object Oriented Prog. in C#",
-      "Computer Org. and Assembly Lang."
+      "Computer Org. and Assembly Lang.",
     ],
   },
   {
@@ -390,6 +390,41 @@ const experience = [
   },
 ];
 
+const extras = [
+  {
+    title: "Leadership",
+    list: [
+      {
+        time: "2013 > 2014",
+        things: ["Treasurer for the Technology Student Association"],
+      },
+      {
+        time: "2012 > 2014",
+        things: ["Robotics Curriculum Precusor at BETA"],
+      },
+    ],
+  },
+  {
+    title: "Awards",
+    list: [
+      {
+        time: "2013 > 2014",
+        things: [
+          "TSA Vex Robotics @Regionals 1st @State 7th",
+          "TSA Web Design @State 3rd @Nationals 4th ",
+        ],
+      },
+      {
+        time: "2012 > 2013",
+        things: [
+          "TSA Member Of The Year",
+          "Technology Problem Solving @Regionals 2nd",
+        ],
+      },
+    ],
+  },
+];
+
 //widget
 export default function SideBar(props) {
   //everything slide related below
@@ -408,7 +443,8 @@ export default function SideBar(props) {
   //ideally we want to be visually pleasing
   var largestMenuWidth = measurementToGoldenRatio({ value: actualWidth }).small;
 
-  const smallestDesiredMenuWidth = 260;
+  //show the tools as nicely as possible
+  const smallestDesiredMenuWidth = 375; 
   //if our visually pleasing menu size is too small...
   //it must atleast be as large as the smallestDesiredMenuWidth
   if (largestMenuWidth < smallestDesiredMenuWidth) {
@@ -501,65 +537,65 @@ export default function SideBar(props) {
               I love to learn!
               <br />
               <br />
-              That love allows me to tackle challenges from many angles, gives me a better
-              understanding of the concerns of each team member, and enables me
-              to find solutions to even the hardest problems
+              That love allows me to tackle challenges from many angles, gives
+              me a better understanding of the concerns of each team member, and
+              enables me to find solutions to even the hardest problems
             </Box>
           }
         />
 
-<Section
+        <Section
           title="/ Education"
           isOpened={true}
-          child={
-            education.map((anEducation) => {
-              //for key
-              educationCount = educationCount + 1;
-              const theNumber = education.length - educationCount  + "education";
+          child={education.map((anEducation) => {
+            //for key
+            educationCount = educationCount + 1;
+            const theNumber = education.length - educationCount + "education";
 
-              //pass all params over
-              return (<EducationSwapItem
-              left={9}
-              key={theNumber}
-              //params
-              title={anEducation.title}
-              institution={anEducation.institution}
-              graduation={anEducation.graduation}
-              gpaDetail={anEducation.gpaDetail}
-              gpa={anEducation.gpa}
-              coursework={anEducation.coursework}
-              //other stuff
-              isOpened={anEducation.startOpen}
-            />);
-            })
-          }
+            //pass all params over
+            return (
+              <EducationSwapItem
+                left={9}
+                key={theNumber}
+                //params
+                title={anEducation.title}
+                institution={anEducation.institution}
+                graduation={anEducation.graduation}
+                gpaDetail={anEducation.gpaDetail}
+                gpa={anEducation.gpa}
+                coursework={anEducation.coursework}
+                //other stuff
+                isOpened={anEducation.startOpen}
+              />
+            );
+          })}
         />
 
         <Section
           title="/ Experience"
           isOpened={true}
-          child={
-            experience.map((anExperience) => {
-              //for decoration
-              xpCount = xpCount + 1;
-              const theNumber = experience.length - xpCount;
-              //pass all params over
-              return (<ExperienceSwapItem
-              left={9}
-              key={theNumber}
-              number={theNumber}
-              title={anExperience.title}
-              company={anExperience.company}
-              location={anExperience.location}
-              startMonth={anExperience.startMonth}
-              startYear={anExperience.startYear}
-              endMonth={anExperience.endMonth}
-              endYear={anExperience.endYear}
-              //other stuff
-              isOpened={anExperience.startOpen}
-            />);
-            })
-          }
+          child={experience.map((anExperience) => {
+            //for decoration
+            xpCount = xpCount + 1;
+            const theNumber = experience.length - xpCount;
+            //pass all params over
+            return (
+              <ExperienceSwapItem
+                left={9}
+                key={theNumber}
+                number={theNumber}
+                title={anExperience.title}
+                company={anExperience.company}
+                location={anExperience.location}
+                startMonth={anExperience.startMonth}
+                startYear={anExperience.startYear}
+                endMonth={anExperience.endMonth}
+                endYear={anExperience.endYear}
+                //other stuff
+                isOpened={anExperience.startOpen}
+              />
+            );
+          })}
         />
 
         <Box
@@ -605,11 +641,6 @@ export default function SideBar(props) {
           }
         />
 
-        <Section
-          title="/ Cerifications"
-          isOpened={false}
-          child={<Box>passed this in a box</Box>}
-        />
         <Section
           title="/ Other"
           isOpened={false}

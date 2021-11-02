@@ -503,7 +503,7 @@ export default function AllProjects() {
                               pt: "50%",
                             }}
                           >
-                            <img src="./miniLoaderOffWhite.gif" alt="loading" />
+                            <img src="./graphics/loader/miniLoaderOffWhite.gif" alt="loading" />
                           </Box>
                         ) : (
                           mediaComponent
