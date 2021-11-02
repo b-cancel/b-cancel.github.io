@@ -524,9 +524,13 @@ export default function AllProjects() {
                         ) : (
                           <Box />
                         );
+
+                        //put it all together
                         return (
                           <Box
-                            sx={{ pl: horizontalPaddingPx, pr: paddingRightPx }}
+                          width={thisImageWidth}
+                            sx={{ pl: horizontalPaddingPx, pr: paddingRightPx, 
+                            }}
                           >
                             <Box
                               sx={{

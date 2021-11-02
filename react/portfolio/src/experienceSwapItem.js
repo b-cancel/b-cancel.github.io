@@ -27,7 +27,7 @@ export default class ExperienceSwapItem extends React.Component {
     //height attribute that depends on opened var
     const height = this.state.isOpened ? "auto" : 0;
     const iconColor = this.state.isHovered ? "#202020" : "transparent";
-    const titleWeight = this.state.isOpened ? "bold" : "bold";
+    const numberWeight = this.state.isOpened ? "bold" : "normal";
 
     //date related
     const number = padLeadingZeros(this.props.number, 2);
@@ -60,7 +60,7 @@ export default class ExperienceSwapItem extends React.Component {
               display: "flex",
               flexDirection: "row",
               justifyContent: "flex-start",
-              alignItems: "center",
+              alignItems: "flex-start",
             }}
           >
             <Box sx={{ width: "18px" }}>
@@ -71,7 +71,7 @@ export default class ExperienceSwapItem extends React.Component {
                   <FontAwesomeIcon icon={faPlusSquare} color={iconColor} />
                 )
               ) : (
-                <Typography variant="body2">{number}</Typography>
+                <Typography variant="body2" fontWeight={numberWeight}>{number}</Typography>
               )}
             </Box>
             <Stack sx={{ ml: "8px" }}>
@@ -82,7 +82,7 @@ export default class ExperienceSwapItem extends React.Component {
               >
                 <Typography variant="body2">{duration}</Typography>
               </AnimateHeight>
-              <Typography variant="body2" fontWeight={titleWeight}>
+              <Typography variant="body2" fontWeight="bold">
                 {this.props.title}
               </Typography>
               <AnimateHeight

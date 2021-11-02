@@ -1,7 +1,6 @@
 import React from "react";
 import QuickLinks from "./contact.js";
 import Section from "./section.js";
-import SubSection from "./subsection.js";
 import ExperienceSwapItem from "./experienceSwapItem.js";
 import EducationSwapItem from "./educationSwapItem.js";
 import Tool from "./tools.js";
@@ -14,7 +13,6 @@ import { push as Menu } from "react-burger-menu";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
-import Chip from "@mui/material/Chip";
 import Box from "@mui/material/Box";
 
 //window calculation
@@ -25,8 +23,6 @@ import measurementToGoldenRatio from "./golden.js";
 //icon
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowAltCircleRight } from "@fortawesome/free-solid-svg-icons";
-import {} from "@fortawesome/free-regular-svg-icons";
-import {} from "@fortawesome/fontawesome-svg-core";
 
 const iconSpacing = { mt: "4px", mr: "8px" };
 const wideIconSpacing = { mt: "4px", mr: "24px" };
@@ -444,7 +440,7 @@ export default function SideBar(props) {
   var largestMenuWidth = measurementToGoldenRatio({ value: actualWidth }).small;
 
   //show the tools as nicely as possible
-  const smallestDesiredMenuWidth = 375; 
+  const smallestDesiredMenuWidth = 375;
   //if our visually pleasing menu size is too small...
   //it must atleast be as large as the smallestDesiredMenuWidth
   if (largestMenuWidth < smallestDesiredMenuWidth) {
@@ -469,7 +465,7 @@ export default function SideBar(props) {
   var educationCount = 0;
 
   return (
-    <Stack>
+    <Stack key={"the side bar"}>
       <style
         dangerouslySetInnerHTML={{
           __html: `
@@ -550,13 +546,13 @@ export default function SideBar(props) {
           child={education.map((anEducation) => {
             //for key
             educationCount = educationCount + 1;
-            const theNumber = education.length - educationCount + "education";
+            const educationKey = education.length - educationCount + "education";
 
             //pass all params over
             return (
               <EducationSwapItem
                 left={9}
-                key={theNumber}
+                key={educationKey}
                 //params
                 title={anEducation.title}
                 institution={anEducation.institution}
@@ -578,11 +574,12 @@ export default function SideBar(props) {
             //for decoration
             xpCount = xpCount + 1;
             const theNumber = experience.length - xpCount;
+            const xpKey = "xpkey" + theNumber;
             //pass all params over
             return (
               <ExperienceSwapItem
                 left={9}
-                key={theNumber}
+                key={xpKey}
                 number={theNumber}
                 title={anExperience.title}
                 company={anExperience.company}
@@ -644,17 +641,61 @@ export default function SideBar(props) {
         <Section
           title="/ Other"
           isOpened={false}
-          child={<Box>passed this in a box</Box>}
+          child={extras.map((anOther) => {
+            const title = anOther.title;
+            const list = anOther.list;
+            const extraKey = "extra" + title;
+            return (
+              <Stack sx={{ ml: "34px", mr: "16px" }} key={extraKey}>
+                <Typography
+                  variant="body2"
+                  color="#202020"
+                  fontWeight="bold"
+                >
+                  {title}
+                </Typography>
+                <Box sx={{ ml: "16px" }}>
+                  {list.map((aListItem) => {
+                    const time = aListItem.time;
+                    const things = aListItem.things;
+                    const timeKey = "time" + time;
+                    return (
+                      <Stack key={timeKey}>
+                      <Typography
+                        
+                        variant="body2"
+                        color="#202020"
+                        fontWeight="bold"
+                      >
+                        {time}
+                      </Typography>
+                      {things.map((thing) => {
+                        return (
+                        <Typography
+                        key={thing}
+                        variant="body2"
+                        color="#202020"
+                        
+                      >
+                        - {thing}
+                        </Typography>);
+                      })}
+                      </Stack>
+                    );
+                  })}
+                </Box>
+              </Stack>
+            );
+          })}
         />
 
         <Typography
           variant="body2"
           color="#202020"
+          fontWeight="bold"
           sx={{ pb: "56px", mx: "16px" }}
         >
           English & Spanish (read, write, & speak)
-          <Chip label="Chip Filled" />
-          <Chip label="Chip Outlined" variant="outlined" />
         </Typography>
       </Menu>
     </Stack>

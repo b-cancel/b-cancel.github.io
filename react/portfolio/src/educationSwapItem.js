@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import AnimateHeight from "react-animate-height";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMinusSquare, faPlusSquare } from "@fortawesome/free-solid-svg-icons";
+import { faChevronDown, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
 ///36px was a well selected left the first time
 export default class EducationSwapItem extends React.Component {
@@ -18,16 +18,9 @@ export default class EducationSwapItem extends React.Component {
   }
 
   render() {
-    function padLeadingZeros(num, size) {
-      var s = num + "";
-      while (s.length < size) s = "0" + s;
-      return s;
-    }
-
     //height attribute that depends on opened var
     const height = this.state.isOpened ? "auto" : 0;
     const iconColor = this.state.isHovered ? "#202020" : "transparent";
-    const space = "  ";
     const extraTitle = this.state.isOpened ? "" : `,${this.props.gpa}`;
     const gpaLine = this.props.gpa + " | " + this.props.gpaDetail;
 
@@ -54,14 +47,14 @@ export default class EducationSwapItem extends React.Component {
               display: "flex",
               flexDirection: "row",
               justifyContent: "flex-start",
-              alignItems: "center",
+              alignItems: "flex-start",
             }}
           >
             <Box sx={{ width: "18px" }}>
               {this.state.isOpened ? (
-                <FontAwesomeIcon icon={faMinusSquare} color={iconColor} />
+                <FontAwesomeIcon icon={faChevronDown} color={iconColor} />
               ) : (
-                <FontAwesomeIcon icon={faPlusSquare} color={iconColor} />
+                <FontAwesomeIcon icon={faChevronRight} color={iconColor} />
               )}
             </Box>
             <Stack sx={{ ml: "8px" }}>
