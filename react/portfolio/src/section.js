@@ -21,7 +21,7 @@ export default class Section extends React.Component {
     //hover and closed "% cd title"
     //hover and opened "title % cd.."
     return (
-      <Stack>
+      <Stack sx={{mb:"16px"}}>
         <Box
           sx={{
             color: "#101010",

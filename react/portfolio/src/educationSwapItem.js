@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinusSquare, faPlusSquare } from "@fortawesome/free-solid-svg-icons";
 
 ///36px was a well selected left the first time
-export default class SwapSection extends React.Component {
+export default class EducationSwapItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,25 +17,19 @@ export default class SwapSection extends React.Component {
     };
   }
 
-
-
   render() {
     function padLeadingZeros(num, size) {
-        var s = num+"";
-        while (s.length < size) s = "0" + s;
-        return s;
+      var s = num + "";
+      while (s.length < size) s = "0" + s;
+      return s;
     }
 
     //height attribute that depends on opened var
     const height = this.state.isOpened ? "auto" : 0;
     const iconColor = this.state.isHovered ? "#202020" : "transparent";
-    const titleWeight = this.state.isOpened ? "normal" : "bold";
-
-    //date related
-    const number = padLeadingZeros(this.props.number,2);
-    const start = `${this.props.startMonth}_${this.props.startYear}`;
-    const end = this.props.endMonth ? `${this.props.endMonth}_${this.props.endYear}` : "";
-    const duration = `${start} > ${end}`;
+    const space = "  ";
+    const extraTitle = this.state.isOpened ? "" : `,${this.props.gpa}`;
+    const gpaLine = this.props.gpa + " | " + this.props.gpaDetail;
 
     //normal "title"
     //hover and closed "D title"
@@ -63,35 +57,25 @@ export default class SwapSection extends React.Component {
               alignItems: "center",
             }}
           >
-            {this.state.isHovered ? (this.state.isOpened ? (
-              <FontAwesomeIcon icon={faMinusSquare} color={iconColor} />
-            ) : (
-              <FontAwesomeIcon icon={faPlusSquare} color={iconColor} />
-            )) : (
-                <Typography variant="body1">
-                  {number}
-                  </Typography>
-            )}
+            <Box sx={{ width: "18px" }}>
+              {this.state.isOpened ? (
+                <FontAwesomeIcon icon={faMinusSquare} color={iconColor} />
+              ) : (
+                <FontAwesomeIcon icon={faPlusSquare} color={iconColor} />
+              )}
+            </Box>
             <Stack sx={{ ml: "8px" }}>
-            <AnimateHeight
-                duration={250}
-                height={height}
-                style={{ flexShrink: 0 }}
-              >
-                  <Typography variant="body2" fontWeight="bold">
-                  {duration}
-                  </Typography>
-              </AnimateHeight>
-              <Typography variant="body1" fontWeight={titleWeight}>
+              <Typography variant="body2" fontWeight="bold">
                 {this.props.title}
+                {extraTitle}
               </Typography>
               <AnimateHeight
                 duration={250}
                 height={height}
                 style={{ flexShrink: 0 }}
               >
-                  <Typography variant="body2">
-                {this.props.company}
+                <Typography variant="body2">
+                  {this.props.institution}
                 </Typography>
               </AnimateHeight>
               <AnimateHeight
@@ -99,9 +83,14 @@ export default class SwapSection extends React.Component {
                 height={height}
                 style={{ flexShrink: 0 }}
               >
-                  <Typography variant="body2">
-                {this.props.location}
-                </Typography>
+                <Typography variant="body2">{gpaLine}</Typography>
+              </AnimateHeight>
+              <AnimateHeight
+                duration={250}
+                height={height}
+                style={{ flexShrink: 0 }}
+              >
+                <Typography variant="body2">{this.props.graduation}</Typography>
               </AnimateHeight>
             </Stack>
           </Box>
@@ -110,3 +99,4 @@ export default class SwapSection extends React.Component {
     );
   }
 }
+//coursework={anEducation.coursework}

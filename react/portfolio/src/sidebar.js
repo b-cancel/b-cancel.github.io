@@ -2,7 +2,8 @@ import React from "react";
 import QuickLinks from "./contact.js";
 import Section from "./section.js";
 import SubSection from "./subsection.js";
-import SwapSection from "./swapSection.js";
+import ExperienceSwapItem from "./experienceSwapItem.js";
+import EducationSwapItem from "./educationSwapItem.js";
 import Tool from "./tools.js";
 
 //burger menu
@@ -273,6 +274,39 @@ const other = (
   </Box>
 );
 
+const education = [
+  {
+    startOpen: false,
+    title: "BS in Computer Science",
+    institution: "University of Rio Grande Valley",
+    graduation: "May 2019",
+    gpaDetail: "Cum Laude",
+    gpa: "3.6",
+    coursework: [
+      "Discrete Data Structures",
+      "Algorithms & Data Structures",
+      "Design and Analysis of Algorithms",
+      "Automata, Formal Lang. & Computation",
+      "Software Engineering 1 & 2",
+      "Internet Programming",
+      "Intro. to Game Development",
+      "Database Design & Implementation",
+      "Systems Programming",
+      "Computer Architecture",
+      "Object Oriented Prog. in C#",
+      "Computer Org. and Assembly Lang."
+    ],
+  },
+  {
+    startOpen: false,
+    title: "HS Distinguished Diploma",
+    institution: "Business Education Technology Academy",
+    graduation: "May 2014",
+    gpaDetail: "Magna Cum Laude",
+    gpa: "3.9",
+  },
+];
+
 const experience = [
   {
     startOpen: true,
@@ -396,6 +430,7 @@ export default function SideBar(props) {
 
   //decorative listing
   var xpCount = 0;
+  var educationCount = 0;
 
   return (
     <Stack>
@@ -473,6 +508,33 @@ export default function SideBar(props) {
           }
         />
 
+<Section
+          title="/ Education"
+          isOpened={true}
+          child={
+            education.map((anEducation) => {
+              //for key
+              educationCount = educationCount + 1;
+              const theNumber = education.length - educationCount  + "education";
+
+              //pass all params over
+              return (<EducationSwapItem
+              left={9}
+              key={theNumber}
+              //params
+              title={anEducation.title}
+              institution={anEducation.institution}
+              graduation={anEducation.graduation}
+              gpaDetail={anEducation.gpaDetail}
+              gpa={anEducation.gpa}
+              coursework={anEducation.coursework}
+              //other stuff
+              isOpened={anEducation.startOpen}
+            />);
+            })
+          }
+        />
+
         <Section
           title="/ Experience"
           isOpened={true}
@@ -482,8 +544,8 @@ export default function SideBar(props) {
               xpCount = xpCount + 1;
               const theNumber = experience.length - xpCount;
               //pass all params over
-              return (<SwapSection
-              left={16}
+              return (<ExperienceSwapItem
+              left={9}
               key={theNumber}
               number={theNumber}
               title={anExperience.title}
