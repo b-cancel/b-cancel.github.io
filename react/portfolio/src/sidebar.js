@@ -1,6 +1,8 @@
 import React from "react";
 import QuickLinks from "./contact.js";
 import Section from "./section.js";
+import SubSection from "./subsection.js";
+import SwapSection from "./swapSection.js";
 import Tool from "./tools.js";
 
 //burger menu
@@ -391,7 +393,13 @@ export default function SideBar(props) {
         <Section
           title="/ Experience"
           isOpened={true}
-          child={<Box>passed this in a box</Box>}
+          child={
+            <SwapSection title="subsection"
+            isOpened={true}
+            child={
+              <Box> box is subsection </Box>
+            } />
+          }
         />
 
         <Box

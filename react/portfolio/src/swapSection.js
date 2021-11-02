@@ -4,7 +4,11 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import AnimateHeight from "react-animate-height";
 
-export default class Section extends React.Component {
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMinusSquare, faPlusSquare } from "@fortawesome/free-solid-svg-icons";
+
+///36px was a well selected left the first time
+export default class SwapSection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -16,17 +20,19 @@ export default class Section extends React.Component {
   render() {
     //height attribute that depends on opened var
     const height = this.state.isOpened ? "auto" : 0;
+    const iconColor = this.state.isHovered ? "#202020" : "transparent";
 
     //normal "title"
-    //hover and closed "% cd title"
-    //hover and opened "title % cd.."
+    //hover and closed "D title"
+    //hover and opened "U title"
     return (
       <Stack>
         <Box
           sx={{
             color: "#101010",
             backgroundColor: "#e0e0e0",
-            px: "16px",
+            pl: `${this.props.left}px`,
+            pr: "16px",
             py: "8px",
           }}
           onMouseEnter={() => this.setState({ isHovered: true })}
@@ -35,23 +41,11 @@ export default class Section extends React.Component {
           className="aSection"
         >
           <Stack direction="row">
-            {this.state.isOpened === false && this.state.isHovered ? (
-              <Typography variant="body1" sx={{ pr: "8px" }}>
-                % cd
-              </Typography>
-            ) : (
-              <Box />
-            )}
-            <Typography variant="body1" fontWeight="bold">
+            {this.state.isOpened ? 
+                <FontAwesomeIcon icon={faMinusSquare} color={iconColor}/> : <FontAwesomeIcon icon={faPlusSquare} color={iconColor}/>}
+            <Typography variant="body2" fontWeight="bold" sx={{ml:"8px"}}>
               {this.props.title}
             </Typography>
-            {this.state.isOpened && this.state.isHovered ? (
-              <Typography variant="body1" sx={{ pl: "8px" }}>
-                % cd..
-              </Typography>
-            ) : (
-              <Box />
-            )}
           </Stack>
         </Box>
         <AnimateHeight
