@@ -1,5 +1,5 @@
 {
   "dependencies": {
-    "react-native-safe-area-context": "^3.3.2"
+    "@mui/material": "^5.0.4"
   }
 }
