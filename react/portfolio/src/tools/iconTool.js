@@ -15,10 +15,16 @@ export default function IconTool(props) {
     const hoverCode = props.hoverColor ? `color: ${props.hoverColor};` : 'opacity:0.5;'; 
     const tool = (
         
-    <a href={props.src} target="_blank" rel="noreferrer">
+    <a href={props.src} target="_blank" rel="noreferrer" className="tool">
         <style
             dangerouslySetInnerHTML={{
               __html: `
+              .tool {
+                display:inline-block;
+                height:${props.size}px;
+                width:${props.size}px
+              }
+
               .${theClassName}{
                   font-size: ${props.size}px;
                   color: black;
@@ -30,7 +36,7 @@ export default function IconTool(props) {
                 `,
             }}
           />
-        <FontAwesomeIcon icon={props.icon} size="lg" className={theClassName}/>
+        <FontAwesomeIcon icon={props.icon} size="lg" className={theClassName} fixedWidth/>
     </a>
     );
 

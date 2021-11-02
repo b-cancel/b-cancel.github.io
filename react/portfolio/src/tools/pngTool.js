@@ -19,6 +19,8 @@ export default function PngTool(props) {
               __html: `
               .${theClassName} {
                   display:inline-block;
+                  height:${props.size}px;
+                  width:${props.size}px
               }
               .${theClassName}:hover div div{
                   filter: none !important;

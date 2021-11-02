@@ -8,10 +8,11 @@ import Tool from "./tools.js";
 import { push as Menu } from "react-burger-menu";
 
 //material
-import Grid from "@mui/material/Grid";
-import Stack from "@mui/material/Stack";
-import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import Stack from "@mui/material/Stack";
+import Grid from "@mui/material/Grid";
+import Chip from '@mui/material/Chip';
+import Box from "@mui/material/Box";
 
 //window calculation
 import useWindowDimensions from "./menuWindow.js";
@@ -24,133 +25,251 @@ import { faArrowAltCircleRight } from "@fortawesome/free-solid-svg-icons";
 import {} from "@fortawesome/free-regular-svg-icons";
 import {} from "@fortawesome/fontawesome-svg-core";
 
-const mobile = <Box
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "flex-start",
-              alignItems: "center",
-              flexWrap: "wrap",
-            }}
-          >
-            <Tool tool="dart" />
-        <Tool tool="flutter" />
-        <Tool tool="swift" />
-            </Box>;
-        
-        const backend = <Box
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "flex-start",
-              alignItems: "center",
-              flexWrap: "wrap",
-            }}
-          >
-        <Tool tool="firebase" />
-        <Tool tool="aws" />
-        </Box>;
+const iconSpacing = { mt: "4px", mr: "8px" };
+const wideIconSpacing = { mt: "4px", mr: "24px" };
+const sectionBox = {
+  display: "inline-flex",
+      flexDirection: "row",
+      justifyContent: "flex-start",
+      alignItems: "flex-start",
+      flexWrap: "wrap",
+border: "2px solid black",
+borderRadius: "8px",
+paddingLeft: "8px",
+paddingBotom: "4px",
+marginRight: "16px",
+marginBottom: "8px",
+minHeight: "64px",
+}
 
-const web = <Box
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "flex-start",
-              alignItems: "center",
-              flexWrap: "wrap",
-            }}
-          >
-            <Tool tool="react" />
-            <Tool tool="node" />
-            <Tool tool="rails" />
-            <Tool tool="dotNet" />
-            <Tool tool="php" />
-            <Tool tool="js" />
-            <Tool tool="html" />
-            <Tool tool="css" />
-            </Box>;
+const mobile = (
+  <Box sx={sectionBox}>
+    <Typography
+                variant="body2"
+                fontWeight="bold"
+                textAlign="center"
+                color="#202020"
+                sx={iconSpacing}
+              >
+                Mobile
+                <br/>
+                Dev
+              </Typography>
+    <Box sx={iconSpacing}>
+      <Tool tool="dart" />
+    </Box>
+    <Box sx={iconSpacing}>
+      <Tool tool="flutter" />
+    </Box>
+    <Box sx={iconSpacing}>
+      <Tool tool="swift" />
+    </Box>
+  </Box>
+);
 
-const game = <Box
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "flex-start",
-              alignItems: "center",
-              flexWrap: "wrap",
-            }}
-          >
-            <Tool tool="unity" />
-            <Tool tool="cSharp" />
-            </Box>;
+const backend = (
+  <Box sx={sectionBox}>
+    <Typography
+                variant="body2"
+                fontWeight="bold"
+                textAlign="center"
+                color="#202020"
+                sx={iconSpacing}
+              >
+                Backend
+                <br/>
+                Dev
+              </Typography>
+    <Box sx={iconSpacing}>
+      <Tool tool="firebase" />
+    </Box>
+    <Box sx={wideIconSpacing}>
+      <Tool tool="aws" />
+    </Box>
+  </Box>
+);
 
-            const ide = <Box
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "flex-start",
-              alignItems: "center",
-              flexWrap: "wrap",
-            }}
-          >
-            <Tool tool="vsCode" />
-            <Tool tool="visualStudios" />
-            </Box>;
+const web = (
+  <Box sx={sectionBox}>
+    <Typography
+                variant="body2"
+                fontWeight="bold"
+                textAlign="center"
+                color="#202020"
+                sx={iconSpacing}
+              >
+                Web
+                <br/>
+                Dev
+              </Typography>
+    <Box sx={iconSpacing}>
+      <Tool tool="react" />
+    </Box>
+    <Box sx={iconSpacing}>
+      <Tool tool="node" />
+    </Box>
+    <Box sx={iconSpacing}>
+      <Tool tool="rails" />
+    </Box>
+    <Box sx={iconSpacing}>
+      <Tool tool="dotNet" />
+    </Box>
+    <Box sx={iconSpacing}>
+      <Tool tool="php" />
+    </Box>
+    <Box sx={iconSpacing}>
+      <Tool tool="js" />
+    </Box>
+    <Box sx={iconSpacing}>
+      <Tool tool="html" />
+    </Box>
+    <Box sx={iconSpacing}>
+      <Tool tool="css" />
+    </Box>
+  </Box>
+);
 
-const versionControl =  <Box
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "flex-start",
-              alignItems: "center",
-              flexWrap: "wrap",
-            }}
-          >
-            <Tool tool="github" />
-        <Tool tool="bitbucket" />
-        </Box>;
+const game = (
+  <Box sx={sectionBox}>
+    <Typography
+                variant="body2"
+                fontWeight="bold"
+                textAlign="center"
+                color="#202020"
+                sx={iconSpacing}
+              >
+                Game
+                <br/>
+                Dev
+              </Typography>
+    <Box sx={iconSpacing}>
+      <Tool tool="unity" />
+    </Box>
+    <Box sx={iconSpacing}>
+      <Tool tool="cSharp" />
+    </Box>
+  </Box>
+);
 
-const builder = <Box
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "flex-start",
-              alignItems: "center",
-              flexWrap: "wrap",
-            }}
-          >
-        <Tool tool="webflow" />
-        <Tool tool="wordpress" />
-        <Tool tool="shopify" />
-        <Tool tool="wix" />
-        </Box>;
+const ide = (
+  <Box sx={sectionBox}>
+    <Typography
+                variant="body2"
+                fontWeight="bold"
+                textAlign="center"
+                color="#202020"
+                sx={iconSpacing}
+              >
+                IDEs
+              </Typography>
+    <Box sx={iconSpacing}>
+      <Tool tool="vsCode" />
+    </Box>
+    <Box sx={iconSpacing}>
+      <Tool tool="visualStudios" />
+    </Box>
+  </Box>
+);
 
-const graphic = <Box
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "flex-start",
-              alignItems: "center",
-              flexWrap: "wrap",
-            }}
-          >
-          <Tool tool="photoshop" />
-          <Tool tool="premiere" />
-          </Box>;
+const versionControl = (
+  <Box sx={sectionBox}>
+    <Typography
+                variant="body2"
+                fontWeight="bold"
+                textAlign="center"
+                color="#202020"
+                sx={iconSpacing}
+              >
+                Version
+                <br/>
+                Control
+              </Typography>
+    <Box sx={iconSpacing}>
+      <Tool tool="github" />
+    </Box>
+    <Box sx={iconSpacing}>
+      <Tool tool="bitbucket" />
+    </Box>
+  </Box>
+);
 
-          const other = <Box
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "flex-start",
-              alignItems: "center",
-              flexWrap: "wrap",
-            }}
-          >
-            <Tool tool="java" />
-            <Tool tool="python" />
-            <Tool tool="cPlusPlus" />
-            <Tool tool="c" />
-            </Box>;
+const builder = (
+  <Box sx={sectionBox}>
+    <Typography
+                variant="body2"
+                fontWeight="bold"
+                textAlign="center"
+                color="#202020"
+                sx={iconSpacing}
+              >
+                Page
+                <br/>
+                Builder
+              </Typography>
+    <Box sx={iconSpacing}>
+      <Tool tool="webflow" />
+    </Box>
+    <Box sx={iconSpacing}>
+      <Tool tool="wordpress" />
+    </Box>
+    <Box sx={iconSpacing}>
+      <Tool tool="shopify" />
+    </Box>
+    <Box sx={wideIconSpacing}>
+      <Tool tool="wix" />
+    </Box>
+  </Box>
+);
+
+const graphic = (
+  <Box sx={sectionBox}>
+    <Typography
+                variant="body2"
+                fontWeight="bold"
+                textAlign="center"
+                color="#202020"
+                sx={iconSpacing}
+              >
+                Graphic
+                <br/>
+                Tools
+              </Typography>
+    <Box sx={iconSpacing}>
+      <Tool tool="photoshop" />
+    </Box>
+    <Box sx={iconSpacing}>
+      <Tool tool="premiere" />
+    </Box>
+  </Box>
+);
+
+const other = (
+  <Box sx={sectionBox}>
+    <Typography
+                variant="body2"
+                fontWeight="bold"
+                textAlign="center"
+                color="#202020"
+                sx={iconSpacing}
+              >
+                Other
+                <br/>
+                Langs
+              </Typography>
+    <Box sx={iconSpacing}>
+      <Tool tool="java" />
+    </Box>
+    <Box sx={iconSpacing}>
+      <Tool tool="python" />
+    </Box>
+    <Box sx={iconSpacing}>
+      <Tool tool="cPlusPlus" />
+    </Box>
+    <Box sx={iconSpacing}>
+      <Tool tool="c" />
+    </Box>
+  </Box>
+);
 
 //widget
 export default function SideBar(props) {
@@ -250,25 +369,30 @@ export default function SideBar(props) {
           </Grid>
         </Box>
 
-        <Section title="/ About Me"  isOpened={true} child={
-          //creative and quick?
-          <Box sx={{mx:"16px", mb:"24px"}}>
-            I love to learn!
-            <br/>
-            <br/>
-            That love for learning and the experience gained from the opportunities it's created
-            <br/>
-            allows me to tackle challenges from many angles,
-            gives me a better understanding of the concerns of each team member,
-            and enables me to find solutions to even the hardest problems
-          </Box>
-        }/>
-
-        <Section title="/ Experience"  isOpened={false} child={
-          <Box>
-            passed this in a box
+        <Section
+          title="/ About Me"
+          isOpened={true}
+          child={
+            //creative and quick?
+            <Box sx={{ mx: "16px", mb: "8px" }}>
+              I love to learn!
+              <br />
+              <br />
+              That love for learning and the experience gained from the
+              opportunities it's created
+              <br />
+              allows me to tackle challenges from many angles, gives me a better
+              understanding of the concerns of each team member, and enables me
+              to find solutions to even the hardest problems
             </Box>
-        }/>
+          }
+        />
+
+        <Section
+          title="/ Experience"
+          isOpened={true}
+          child={<Box>passed this in a box</Box>}
+        />
 
         <Box
           onClick={() => {
@@ -296,38 +420,44 @@ export default function SideBar(props) {
           </Stack>
         </Box>
 
-        <Section title="/ Tools"  isOpened={false} child={
-          <Box>
-        {mobile}
-        {backend}
-        {web}
-        {game}
-        {ide}
-        {versionControl}
-        {builder}
-        {graphic}
-        {other}
+        <Section
+          title="/ Tools"
+          isOpened={true}
+          child={
+            <Box sx={{ml:"16px", mr:"8px"}}>
+              {mobile}
+              {backend}
+              {web}
+              {game}
+              {ide}
+              {versionControl}
+              {graphic}
+              {builder}
+              {other}
             </Box>
-        }/>
+          }
+        />
 
-        <Section title="/ Cerifications"  isOpened={false} child={
-          <Box>
-            passed this in a box
-            </Box>
-        }/>
-        <Section title="/ Other" isOpened={false} child={
-          <Box>
-            passed this in a box
-            </Box>
-        }/>
+        <Section
+          title="/ Cerifications"
+          isOpened={false}
+          child={<Box>passed this in a box</Box>}
+        />
+        <Section
+          title="/ Other"
+          isOpened={false}
+          child={<Box>passed this in a box</Box>}
+        />
 
         <Typography
-                variant="body2"
-                color="#202020"
-                sx={{pb:"56px", mx: "16px"}}
-              >
-                English & Spanish (read, write, & speak)
-              </Typography>
+          variant="body2"
+          color="#202020"
+          sx={{ pb: "56px", mx: "16px" }}
+        >
+          English & Spanish (read, write, & speak)
+          <Chip label="Chip Filled" />
+<Chip label="Chip Outlined" variant="outlined" />
+        </Typography>
       </Menu>
     </Stack>
   );
