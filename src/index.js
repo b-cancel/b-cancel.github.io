@@ -68,11 +68,19 @@ class ReloadingApp extends React.Component {
   handleStateChange(state) {
     console.log("STATE CHANGED TO: " + state.isOpen);
     this.setState({ menuOpen: state.isOpen });
+
+    //handle the stuff
     if (state.isOpen) {
       window.openTheMenu();
     } else {
       window.closeTheMenu();
     }
+
+    //blur our the auto focus
+    //This is necessary to force the blur to happen after in the event loop
+    window.setTimeout(() => { 
+      document.activeElement.blur();
+    });
 
     //we keep track of wether or not the menu is initialized by inspecting this variable
     if (this.isInitialized !== true) {

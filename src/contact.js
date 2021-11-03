@@ -48,6 +48,7 @@ export default function QuickLinks(props) {
     },
   });
   const theme = props.lightMode ? darkTheme : lightTheme;
+  //<img src="img/icon.svg" />
   const renderMenu = (
     <ThemeProvider theme={theme}>
       <Menu

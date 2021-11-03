@@ -22,7 +22,16 @@ import measurementToGoldenRatio from "./golden.js";
 
 //icon
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowAltCircleRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowAltCircleRight,
+  /*for the menu stuff*/
+  faFileImport,
+  //faFileAlt,
+  //faFile,
+  //faScroll,
+  //faClipboardList,
+  //faListAlt,
+} from "@fortawesome/free-solid-svg-icons";
 
 const iconSpacing = { mt: "4px", mr: "8px" };
 const wideIconSpacing = { mt: "4px", mr: "24px" };
@@ -464,6 +473,7 @@ export default function SideBar(props) {
   var xpCount = 0;
   var educationCount = 0;
 
+  //build
   return (
     <Stack key={"the side bar"}>
       <style
@@ -475,7 +485,18 @@ export default function SideBar(props) {
                 `,
         }}
       />
-      <Menu {...props} width={sideBarWidth}>
+      <Menu
+        {...props}
+        width={sideBarWidth}
+        customBurgerIcon={
+          <Box sx={{fontSize:"28px", textAlign:"center", mt:"8px"}}>
+            <FontAwesomeIcon
+              icon={faFileImport}
+              color="black"
+            />
+          </Box>
+        }
+      >
         <Box width={sideBarWidth} height={headerHeightPx}>
           <Grid
             container
@@ -540,7 +561,8 @@ export default function SideBar(props) {
           child={education.map((anEducation) => {
             //for key
             educationCount = educationCount + 1;
-            const educationKey = education.length - educationCount + "education";
+            const educationKey =
+              education.length - educationCount + "education";
 
             //pass all params over
             return (
@@ -597,7 +619,7 @@ export default function SideBar(props) {
             backgroundColor: "#101010",
             color: "#e0e0e0",
             px: "16px",
-            py: "8px",
+            py: "16px",
           }}
         >
           <Stack
@@ -607,9 +629,8 @@ export default function SideBar(props) {
             spacing="12px"
             className="clickable spreadOnHover"
           >
-            <Typography variant="body1" fontWeight="bold">
-              / My Work
-            </Typography>
+            <Typography variant="body1">{"/ "}</Typography>
+            <Typography variant="h6">My Work</Typography>
             <FontAwesomeIcon icon={faArrowAltCircleRight} />
           </Stack>
         </Box>
@@ -641,11 +662,7 @@ export default function SideBar(props) {
             const extraKey = "extra" + title;
             return (
               <Stack sx={{ ml: "34px", mr: "16px" }} key={extraKey}>
-                <Typography
-                  variant="body2"
-                  color="#202020"
-                  fontWeight="bold"
-                >
+                <Typography variant="body2" color="#202020" fontWeight="bold">
                   {title}
                 </Typography>
                 <Box sx={{ ml: "16px" }}>
@@ -655,25 +672,24 @@ export default function SideBar(props) {
                     const timeKey = "time" + time;
                     return (
                       <Stack key={timeKey}>
-                      <Typography
-                        
-                        variant="body2"
-                        color="#202020"
-                        fontWeight="bold"
-                      >
-                        {time}
-                      </Typography>
-                      {things.map((thing) => {
-                        return (
                         <Typography
-                        key={thing}
-                        variant="body2"
-                        color="#202020"
-                        
-                      >
-                        - {thing}
-                        </Typography>);
-                      })}
+                          variant="body2"
+                          color="#202020"
+                          fontWeight="bold"
+                        >
+                          {time}
+                        </Typography>
+                        {things.map((thing) => {
+                          return (
+                            <Typography
+                              key={thing}
+                              variant="body2"
+                              color="#202020"
+                            >
+                              - {thing}
+                            </Typography>
+                          );
+                        })}
                       </Stack>
                     );
                   })}

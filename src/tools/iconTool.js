@@ -26,13 +26,14 @@ export default function IconTool(props) {
               }
 
               .${theClassName}{
-                  font-size: ${props.size}px;
-                  color: black;
+                font-size: ${props.size}px;
+                ${hoverCode}
               }
 
               .${theClassName}:hover{
-                  ${hoverCode}
-            }
+                color: black;
+                opacity: 1.0;    
+              }
                 `,
             }}
           />
