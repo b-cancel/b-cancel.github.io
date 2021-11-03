@@ -10,7 +10,7 @@ export default class Gallery extends React.Component {
   render() {
     const darkTheme = createTheme({
       typography: {
-        fontFamily: 'Courier New, monospace',
+        fontFamily: "Courier New, monospace",
       },
       palette: {
         mode: "dark",
@@ -40,6 +40,26 @@ export default class Gallery extends React.Component {
               >
                 @ 2021 Bryan Cancel
               </Typography>
+              <Box className="pageViews" sx={{mt:"0px", textAlign:"center"}}>
+                <a href="https://www.hitwebcounter.com" target="_blank">
+                  <img
+                    src="https://hitwebcounter.com/counter/counter.php?page=7891501&style=0007&nbdigits=5&type=page&initCount=0"
+                    title="Free Counter"
+                    alt="web counter"
+                    border="0"
+                  />
+                </a>
+              </Box>
+              <Box className="uniqueVisitors" sx={{mt:"0px", textAlign:"center"}}>
+                <a href="https://www.hitwebcounter.com" target="_blank">
+                  <img
+                    src="https://hitwebcounter.com/counter/counter.php?page=7891500&style=0007&nbdigits=5&type=ip&initCount=0"
+                    title="Free Counter"
+                    alt="web counter"
+                    border="0"
+                  />
+                </a>
+              </Box>
             </Stack>
           </Stack>
         </Box>

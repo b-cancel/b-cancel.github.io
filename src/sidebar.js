@@ -203,7 +203,7 @@ const builder = (
     >
       Page
       <br />
-      Builder
+      Builders
     </Typography>
     <Box sx={iconSpacing}>
       <Tool tool="webflow" />
@@ -498,14 +498,8 @@ export default function SideBar(props) {
                 <img
                   src="./graphics/profile/whiteProfile.png"
                   alt="profile"
-                  object-fit="contain"
-                  heigth="100%"
-                  width="100%"
-                />
-                <img
-                  src="./graphics/loader/whiteLoader.gif"
-                  alt="profile"
-                  className="heart"
+                  heigth="96px"
+                  width="96px"
                 />
               </Box>
             </Grid>

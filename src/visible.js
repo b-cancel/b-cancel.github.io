@@ -18,20 +18,10 @@ export default class PlayGifWhenVisible extends Component {
   render() {
     var identifier = this.props.identifier;
     const desiredThreshold = this.props.threshold;
-    const stylingString = this.props.landscape
-      ? ``
-      : `
-      #${identifier}, #${identifier} div, #${identifier} span {
-        height:100%;
-      }
-
+    const stylingString = `
       #${identifier} img, #${identifier} canvas {
-        height: 100%;
-      }
-
-      #${identifier} img {
-        object-fit: contain;
-        object-position: left;
+        height: ${this.props.height}px;
+        width: ${this.props.width}px;
       }
     `;
     return (
@@ -46,7 +36,10 @@ export default class PlayGifWhenVisible extends Component {
         }}
         threshold={[desiredThreshold]}
       >
-        <Stack id={identifier}>
+        <Stack id={identifier} onClick={() => {
+          //i'd like to use "this.freeze.current.isPlaying"
+          //to conver the case where someone clicks the gif because it isn't playing yet
+        }}>
           <style
             dangerouslySetInnerHTML={{
               __html: stylingString,

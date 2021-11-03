@@ -18,7 +18,6 @@ import { renderMarkup } from "react-render-markup";
 
 import PlayGifWhenVisible from "./visible.js";
 
-
 import {
   faGithub,
   faAppStore,
@@ -431,49 +430,49 @@ export default function AllProjects() {
             {project.gallery &&
               project.gallery.map((media) => (
                 <SwiperSlide key={media.src}>
-                  <a href={media.src} target="_blank" rel="noreferrer">
-                    <ProgressiveImage src={media.src} placeholder="">
-                      {(src, loading) => {
-                        //here we calculate the width given the calculated image height
-                        //HOWEVER... just like with the height...
-                        //the width must at most be...
-                        //the largest part of the golden ratio of the width
-                        const imageWidth =
-                          (media.width / media.height) * sharedImageHeight;
+                  <ProgressiveImage src={media.src} placeholder="">
+                    {(src, loading) => {
+                      //here we calculate the width given the calculated image height
+                      //HOWEVER... just like with the height...
+                      //the width must at most be...
+                      //the largest part of the golden ratio of the width
+                      const imageWidth =
+                        (media.width / media.height) * sharedImageHeight;
 
-                        //start the value off
-                        var thisImageHeight = sharedImageHeight;
-                        var thisImageWidth = imageWidth;
+                      //start the value off
+                      var thisImageHeight = sharedImageHeight;
+                      var thisImageWidth = imageWidth;
 
-                        //adjust if needed
-                        if (thisImageWidth > largestImageWidth) {
-                          //imageHeightForLargestImageWidth / largestImageWidth = thisImageHeight / thisImageWidth
-                          const newImageHeight =
-                            (thisImageHeight / thisImageWidth) *
-                            largestImageWidth;
+                      //adjust if needed
+                      if (thisImageWidth > largestImageWidth) {
+                        //imageHeightForLargestImageWidth / largestImageWidth = thisImageHeight / thisImageWidth
+                        const newImageHeight =
+                          (thisImageHeight / thisImageWidth) *
+                          largestImageWidth;
 
-                          //apply new values
-                          thisImageWidth = largestImageWidth;
-                          thisImageHeight = newImageHeight;
-                        }
+                        //apply new values
+                        thisImageWidth = largestImageWidth;
+                        thisImageHeight = newImageHeight;
+                      }
 
-                        //IF our image Width is above that then we must make the appropriate adjustments
-                        //scale down the width to it's max... then change the height to match...
-                        //ELSE we simply keep out values and use them
+                      //IF our image Width is above that then we must make the appropriate adjustments
+                      //scale down the width to it's max... then change the height to match...
+                      //ELSE we simply keep out values and use them
 
-                        //all the media is given a height and width
-                        //GIF ---or--- IMAGE
-                        var mediaComponent;
-                        if (src.includes(".gif")) {
-                          var identifier = media.src;
-                          identifier = identifier.replace(
-                            `https://i.giphy.com/media/`,
-                            ""
-                          );
-                          identifier = identifier.replace(`/giphy.gif`, "");
+                      //all the media is given a height and width
+                      //GIF ---or--- IMAGE
+                      var mediaComponent;
+                      if (src.includes(".gif")) {
+                        var identifier = media.src;
+                        identifier = identifier.replace(
+                          `https://i.giphy.com/media/`,
+                          ""
+                        );
+                        identifier = identifier.replace(`/giphy.gif`, "");
 
-                          //after creating a identifier we move forward
-                          mediaComponent = (
+                        //after creating a identifier we move forward
+                        mediaComponent = (
+                          <a href={media.src} target="_blank" rel="noreferrer">
                             <PlayGifWhenVisible
                               identifier={identifier}
                               src={media.src}
@@ -481,74 +480,118 @@ export default function AllProjects() {
                               height={thisImageHeight}
                               width={thisImageWidth}
                             />
-                          );
+                          </a>
+                        );
+                      } else {
+                        //TODO: change the .src to retreive the right size photo instead of the full sized photo
+                        // t = Small Thumbnail (160×160)
+                        // m = Medium Thumbnail (320×320)
+                        // l = Large Thumbnail (640×640) as seen in the example above
+                        // h = Huge Thumbnail (1024×1024)
+                        var largestDimension =
+                          thisImageHeight > thisImageWidth
+                            ? thisImageHeight
+                            : thisImageWidth;
+
+                        //make it look a little nicer than 1 pixel per web unit
+                        console.log("ratio: " + window.devicePixelRatio);
+                        largestDimension =
+                          largestDimension * window.devicePixelRatio;
+
+                        var modifiedSrc = src;
+                        //if it's larger then we simply show the original image
+                        if (largestDimension >= 1024) {
+                          //add h
+                          modifiedSrc = src.replace(".jpg", "h.jpg");
                         } else {
-                          mediaComponent = (
+                          if (largestDimension >= 640) {
+                            //add l
+                            modifiedSrc = src.replace(".jpg", "l.jpg");
+                          } else {
+                            if (largestDimension >= 320) {
+                              //add m
+                              modifiedSrc = src.replace(".jpg", "m.jpg");
+                            } else {
+                              //add t
+                              modifiedSrc = src.replace(".jpg", "t.jpg");
+                            }
+                          }
+                        }
+
+                        //show the image
+                        mediaComponent = (
+                          <a href={media.src} target="_blank" rel="noreferrer">
                             <img
-                              src={src}
-                              alt={src}
+                              src={modifiedSrc}
+                              alt={modifiedSrc}
                               height={thisImageHeight}
                               width={thisImageWidth}
                             />
-                          );
-                        }
+                          </a>
+                        );
+                      }
 
-                        //LOADING ---or--- MEDIA
-                        const display = loading ? (
+                      //LOADING ---or--- MEDIA
+                      const display = loading ? (
+                        <Box
+                          sx={{
+                            height: 56,
+                            width: 56,
+                            margin: "auto",
+                            pt: "50%",
+                          }}
+                        >
+                          <img
+                            src="./graphics/loader/miniLoaderOffWhite.gif"
+                            alt="loading"
+                            height="56px"
+                            width="56px"
+                          />
+                        </Box>
+                      ) : (
+                        mediaComponent
+                      );
+
+                      //only add right padding to the last item
+                      const isLastImage = media.src === lastSrc;
+                      const paddingRight = isLastImage ? horizontalPadding : 0;
+                      const paddingRightPx = `${paddingRight}px`;
+
+                      //add margins as desired AND add descriptions if they exist
+                      const descriptions = media.title ? (
+                        <Typography
+                          variant="body2"
+                          style={{ color: "#e0e0e0" }}
+                          sx={{ mt: "16px", textAlign: "center" }}
+                        >
+                          {media.title}
+                        </Typography>
+                      ) : (
+                        <Box />
+                      );
+
+                      //put it all together
+                      return (
+                        <Box
+                          width={thisImageWidth}
+                          sx={{ pl: horizontalPaddingPx, pr: paddingRightPx }}
+                        >
                           <Box
                             sx={{
-                              height: 56,
-                              width: 56,
-                              margin: "auto",
-                              pt: "50%",
+                              bgcolor: "#404040",
+                              height: thisImageHeight,
+                              width: thisImageWidth,
+                              borderRadius: sharedBorderRadius,
+                              overflow: "hidden",
                             }}
                           >
-                            <img src="./graphics/loader/miniLoaderOffWhite.gif" alt="loading" />
+                            {display}
                           </Box>
-                        ) : (
-                          mediaComponent
-                        );
-
-                        //only add right padding to the last item
-                        const isLastImage = media.src === lastSrc;
-                        const paddingRight = isLastImage
-                          ? horizontalPadding
-                          : 0;
-                        const paddingRightPx = `${paddingRight}px`;
-
-                        //add margins as desired AND add descriptions if they exist
-                        const descriptions = media.title ? (
-                          <Typography variant="body2" style={{color:"#e0e0e0"}} sx={{mt:"16px", textAlign:"center"}}>
-                            {media.title}
-                          </Typography>
-                        ) : (
-                          <Box />
-                        );
-
-                        //put it all together
-                        return (
-                          <Box
-                          width={thisImageWidth}
-                            sx={{ pl: horizontalPaddingPx, pr: paddingRightPx, 
-                            }}
-                          >
-                            <Box
-                              sx={{
-                                bgcolor: "#404040",
-                                height: thisImageHeight,
-                                width: thisImageWidth,
-                                borderRadius: sharedBorderRadius,
-                                overflow: "hidden",
-                              }}
-                            >
-                              {display}
-                            </Box>
-                            {descriptions}
-                          </Box>
-                        );
-                      }}
-                    </ProgressiveImage>
-                  </a>
+                          {descriptions}
+                        </Box>
+                      );
+                    }}
+                  </ProgressiveImage>
                 </SwiperSlide>
               ))}
           </Swiper>
