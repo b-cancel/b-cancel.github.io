@@ -2,11 +2,6 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import MyToolTip from "../tooltips";
 
-//TODO: show a black icon 
-//TODO: on hover color that icon in
-//TODO: it also and it displays title of what is being hovered over
-//TODO: and it links to that tech stacks page with a link tag
-
 export default function IconTool(props) {
     var theClassName = props.tip;
     theClassName = theClassName.replaceAll(' ','');

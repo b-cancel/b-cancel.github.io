@@ -154,3 +154,7 @@ https://css-tricks.com/prevent-page-scrolling-when-a-modal-is-open/
 .aSection:hover {
   cursor: pointer;
 }
+
+.underlineLinks {
+  text-decoration: underline !important;
+}

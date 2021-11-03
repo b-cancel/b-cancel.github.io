@@ -40,8 +40,14 @@ export default class ExperienceSwapItem extends React.Component {
     //normal "title"
     //hover and closed "D title"
     //hover and opened "U title"
+    const toggleState = () => this.setState({ isOpened: !this.state.isOpened });
+    const hoverStart = () => this.setState({ isHovered: true });
+    const hoverEnd = () => this.setState({ isHovered: true });
+
+    console.log(this.props.companyLink + " is the link");
+
+    //build
     return (
-      <Stack>
         <Box
           sx={{
             color: "#202020",
@@ -50,9 +56,9 @@ export default class ExperienceSwapItem extends React.Component {
             pr: "16px",
             py: "8px",
           }}
-          onMouseEnter={() => this.setState({ isHovered: true })}
-          onMouseLeave={() => this.setState({ isHovered: false })}
-          onClick={() => this.setState({ isOpened: !this.state.isOpened })}
+          onMouseEnter={this.state.isOpened ? null : hoverStart}
+          onMouseLeave={this.state.isOpened ? null : hoverEnd}
+          onClick={this.state.isOpened ? null : toggleState}
           className="aSection"
         >
           <Box
@@ -63,7 +69,12 @@ export default class ExperienceSwapItem extends React.Component {
               alignItems: "flex-start",
             }}
           >
-            <Box sx={{ width: "18px" }}>
+            <Box
+              sx={{ width: "18px" }}
+              onMouseEnter={this.state.isOpened ? hoverStart : null}
+              onMouseLeave={this.state.isOpened ? hoverEnd : null}
+              onClick={this.state.isOpened ? toggleState : null}
+            >
               {this.state.isHovered ? (
                 this.state.isOpened ? (
                   <FontAwesomeIcon icon={faMinusSquare} color={iconColor} />
@@ -71,7 +82,9 @@ export default class ExperienceSwapItem extends React.Component {
                   <FontAwesomeIcon icon={faPlusSquare} color={iconColor} />
                 )
               ) : (
-                <Typography variant="body2" fontWeight={numberWeight}>{number}</Typography>
+                <Typography variant="body2" fontWeight={numberWeight}>
+                  {number}
+                </Typography>
               )}
             </Box>
             <Stack sx={{ ml: "8px" }}>
@@ -85,13 +98,17 @@ export default class ExperienceSwapItem extends React.Component {
               <Typography variant="body2" fontWeight="bold">
                 {this.props.title}
               </Typography>
+              <a href={this.props.companyLink} target="_blank" rel="noreferrer">
               <AnimateHeight
                 duration={250}
                 height={height}
                 style={{ flexShrink: 0 }}
               >
-                <Typography variant="body2">{this.props.company}</Typography>
+                
+                  <Typography variant="body2" className="underlineLinks">{this.props.company}</Typography>
+                
               </AnimateHeight>
+              </a>
               <AnimateHeight
                 duration={250}
                 height={height}
@@ -102,7 +119,6 @@ export default class ExperienceSwapItem extends React.Component {
             </Stack>
           </Box>
         </Box>
-      </Stack>
     );
   }
 }

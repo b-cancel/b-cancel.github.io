@@ -535,15 +535,16 @@ export default function AllProjects() {
                       const display = loading ? (
                         <Box
                           sx={{
+                            textAlign: "center",
+                            margin: "auto",
                             height: 56,
                             width: 56,
-                            margin: "auto",
                             pt: "50%",
                           }}
                         >
                           <img
                             src="./graphics/loader/miniLoaderOffWhite.gif"
-                            alt="loading"
+                            alt="load"
                             height="56px"
                             width="56px"
                           />

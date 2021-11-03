@@ -3,11 +3,6 @@ import Box from "@mui/material/Box";
 import { Image } from "react-native";
 import MyToolTip from "../tooltips";
 
-//TODO: show a png with a black tint at first...
-//TODO: that black tint goes away on hover...
-//TODO: it also and it displays title of what is being hovered over
-//TODO: and it links to that tech stacks page with a link tag
-
 export default class PngTool extends React.Component {
   constructor(props) {
     super(props);

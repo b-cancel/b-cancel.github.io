@@ -315,8 +315,29 @@ const education = [
 const experience = [
   {
     startOpen: true,
+    title: "Lead Software Engineer (Dev, UX, & UI)",
+    company: "Tier Four Solutions Contractor",
+    companyLink: "https://www.linkedin.com/in/todd-fortier-9119b212/",
+    location: "Remote",
+    startMonth: 6,
+    startYear: 2021,
+  },
+  {
+    startOpen: true,
+    title: "Software Support & Development Engineer",
+    company: "L.O.F.T.",
+    companyLink: "https://poweredbyloft.com/",
+    location: "Remote",
+    startMonth: 9,
+    startYear: 2020,
+    endMonth: 6,
+    endYear: 2021,
+  },
+  {
+    startOpen: true,
     title: "Mobile Dev, UX, & UI",
     company: "Lawn Buddy",
+    companyLink: "https://www.lawnbuddy.com",
     location: "Remote",
     startMonth: 5,
     startYear: 2020,
@@ -325,8 +346,9 @@ const experience = [
   },
   {
     startOpen: true,
-    title: "Web Developer",
+    title: "Web Dev (Internal Tools)",
     company: "Lebron Group Land Surveying",
+    companyLink: "https://www.lebrongroup.com/",
     location: "Remote",
     startMonth: 3,
     startYear: 2020,
@@ -337,6 +359,7 @@ const experience = [
     startOpen: false,
     title: "Barista / Disaster Relief Volunteer",
     company: "Starbucks",
+    companyLink: "https://www.starbucks.com/",
     location: "Mc-Allen, Texas",
     startMonth: 10,
     startYear: 2019,
@@ -347,6 +370,7 @@ const experience = [
     startOpen: false,
     title: "App Development Intern",
     company: "Cleversolve",
+    companyLink: "https://www.linkedin.com/company/cleversolve-llc",
     location: "Edinburg, TX",
     startMonth: 5,
     startYear: 2018,
@@ -355,8 +379,9 @@ const experience = [
   },
   {
     startOpen: false,
-    title: "Web Dev and Design",
+    title: "Web Dev (Internal Tools)",
     company: "Lebron Group Land Surveying",
+    companyLink: "https://www.lebrongroup.com/",
     location: "Winter Park, FL",
     startMonth: 7,
     startYear: 2017,
@@ -367,6 +392,7 @@ const experience = [
     startOpen: false,
     title: "Graphic Design and Video Editing",
     company: "UT Center For Railway Safety",
+    companyLink: "https://www.utrgv.edu/railwaysafety/",
     location: "Edinburg, TX",
     startMonth: 9,
     startYear: 2014,
@@ -377,6 +403,7 @@ const experience = [
     startOpen: false,
     title: "Graphic Design and Video Editing",
     company: "IT Marketing Division at UT",
+    companyLink: "https://www.utrgv.edu/marketing/",
     location: "Edinburg, TX",
     startMonth: 9,
     startYear: 2013,
@@ -387,6 +414,7 @@ const experience = [
     startOpen: false,
     title: "Robotics Coach Volunteer",
     company: "Business Education Technology Academy",
+    companyLink: "https://worldscholars.stisd.net/",
     location: "Edinburg, TX",
     startMonth: 5,
     startYear: 2013,
@@ -599,6 +627,7 @@ export default function SideBar(props) {
                 number={theNumber}
                 title={anExperience.title}
                 company={anExperience.company}
+                companyLink={anExperience.companyLink}
                 location={anExperience.location}
                 startMonth={anExperience.startMonth}
                 startYear={anExperience.startYear}
