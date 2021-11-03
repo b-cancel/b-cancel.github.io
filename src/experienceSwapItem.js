@@ -40,54 +40,52 @@ export default class ExperienceSwapItem extends React.Component {
     //normal "title"
     //hover and closed "D title"
     //hover and opened "U title"
-    const toggleState = () => this.setState({ isOpened: !this.state.isOpened });
-    const hoverStart = () => this.setState({ isHovered: true });
-    const hoverEnd = () => this.setState({ isHovered: true });
 
     console.log(this.props.companyLink + " is the link");
 
     //build
     return (
+      <Box
+        sx={{
+          color: "#202020",
+          backgroundColor: "#e0e0e0",
+          pl: `${this.props.left}px`,
+          pr: "16px",
+          py: "8px",
+        }}
+        onMouseEnter={() => this.setState({ isHovered: true })}
+        onMouseLeave={() => this.setState({ isHovered: false })}
+        className="aSection"
+      >
         <Box
           sx={{
-            color: "#202020",
-            backgroundColor: "#e0e0e0",
-            pl: `${this.props.left}px`,
-            pr: "16px",
-            py: "8px",
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "flex-start",
+            alignItems: "stretch",
           }}
-          onMouseEnter={this.state.isOpened ? null : hoverStart}
-          onMouseLeave={this.state.isOpened ? null : hoverEnd}
-          onClick={this.state.isOpened ? null : toggleState}
-          className="aSection"
         >
           <Box
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "flex-start",
-              alignItems: "flex-start",
-            }}
+            sx={{ width: "18px" }}
+            onClick={() => this.setState({ isOpened: !this.state.isOpened })}
           >
-            <Box
-              sx={{ width: "18px" }}
-              onMouseEnter={this.state.isOpened ? hoverStart : null}
-              onMouseLeave={this.state.isOpened ? hoverEnd : null}
-              onClick={this.state.isOpened ? toggleState : null}
-            >
-              {this.state.isHovered ? (
-                this.state.isOpened ? (
-                  <FontAwesomeIcon icon={faMinusSquare} color={iconColor} />
-                ) : (
-                  <FontAwesomeIcon icon={faPlusSquare} color={iconColor} />
-                )
+            {this.state.isHovered ? (
+              this.state.isOpened ? (
+                <FontAwesomeIcon icon={faMinusSquare} color={iconColor} />
               ) : (
-                <Typography variant="body2" fontWeight={numberWeight}>
-                  {number}
-                </Typography>
-              )}
-            </Box>
-            <Stack sx={{ ml: "8px" }}>
+                <FontAwesomeIcon icon={faPlusSquare} color={iconColor} />
+              )
+            ) : (
+              <Typography variant="body2" fontWeight={numberWeight}>
+                {number}
+              </Typography>
+            )}
+          </Box>
+          <Stack>
+            <Box
+              onClick={() => this.setState({ isOpened: !this.state.isOpened })}
+              sx={{ pl: "8px" }}
+            >
               <AnimateHeight
                 duration={250}
                 height={height}
@@ -98,17 +96,24 @@ export default class ExperienceSwapItem extends React.Component {
               <Typography variant="body2" fontWeight="bold">
                 {this.props.title}
               </Typography>
-              <a href={this.props.companyLink} target="_blank" rel="noreferrer">
+            </Box>
+            <Box sx={{ pl: "8px" }}>
+            <a href={this.props.companyLink} target="_blank" rel="noreferrer">
               <AnimateHeight
                 duration={250}
                 height={height}
                 style={{ flexShrink: 0 }}
               >
-                
-                  <Typography variant="body2" className="underlineLinks">{this.props.company}</Typography>
-                
+                <Typography variant="body2" className="underlineLinks">
+                  {this.props.company}
+                </Typography>
               </AnimateHeight>
-              </a>
+            </a>
+            </Box>
+            <Box
+              onClick={() => this.setState({ isOpened: !this.state.isOpened })}
+              sx={{ pl: "8px" }}
+            >
               <AnimateHeight
                 duration={250}
                 height={height}
@@ -116,9 +121,10 @@ export default class ExperienceSwapItem extends React.Component {
               >
                 <Typography variant="body2">{this.props.location}</Typography>
               </AnimateHeight>
-            </Stack>
-          </Box>
+            </Box>
+          </Stack>
         </Box>
+      </Box>
     );
   }
 }
