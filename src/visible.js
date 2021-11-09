@@ -2,6 +2,7 @@ import React, { Component, createRef } from "react";
 import Observer from "@researchgate/react-intersection-observer";
 import ReactFreezeframe from "react-freezeframe";
 import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
 
 //TODO: I should fix this so the GIFs also autoplay when they show while initially showing page
 export default class PlayGifWhenVisible extends Component {
@@ -24,11 +25,11 @@ export default class PlayGifWhenVisible extends Component {
         width: ${this.props.width}px;
       }
     `;
+
     return (
-      <Observer
+        <Observer
         onChange={({ isIntersecting, intersectionRatio }) => {
           if (isIntersecting) {
-            this.start();
             this.start();
           } else {
             this.stop();
@@ -36,10 +37,7 @@ export default class PlayGifWhenVisible extends Component {
         }}
         threshold={[desiredThreshold]}
       >
-        <Stack id={identifier} onClick={() => {
-          //i'd like to use "this.freeze.current.isPlaying"
-          //to conver the case where someone clicks the gif because it isn't playing yet
-        }}>
+        <Stack id={identifier}>
           <style
             dangerouslySetInnerHTML={{
               __html: stylingString,
@@ -50,8 +48,8 @@ export default class PlayGifWhenVisible extends Component {
             src={this.props.src}
             ref={this.freeze}
             options={{
-              trigger: false,
-              overlay: false,
+              trigger: 'click',
+              overlay: true,
             }}
             onToggle={(items, isPlaying) =>
               this.logEvent("toggle", items, isPlaying)

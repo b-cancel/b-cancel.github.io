@@ -557,7 +557,6 @@ export default function AllProjects() {
 
                         //after creating a identifier we move forward
                         mediaComponent = (
-                          <a href={media.src} target="_blank" rel="noreferrer">
                             <PlayGifWhenVisible
                               identifier={identifier}
                               src={media.src}
@@ -565,7 +564,6 @@ export default function AllProjects() {
                               height={thisImageHeight}
                               width={thisImageWidth}
                             />
-                          </a>
                         );
                       } else {
                         //TODO: change the .src to retreive the right size photo instead of the full sized photo
