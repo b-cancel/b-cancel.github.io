@@ -66,7 +66,7 @@ export default function AllProjects() {
       description: `A Digital Version of the "House To House Record" & "Follow Up" Form,
       created to solve all the problems that arise when using pen and paper`,
       repoIsPrivate: true,
-      github: "https://github.com/b-cancel/house_to_house",
+      github: "https://github.com/b-cancel",
       appstore: "https://testflight.apple.com/join/ZFowXCT4",
       gallery: [
         { src: "https://i.imgur.com/tARG4m0.jpg", height: 790, width: 365 },
@@ -76,6 +76,91 @@ export default function AllProjects() {
         { src: "https://i.imgur.com/tfAz8lp.jpg", height: 790, width: 365 },
         { src: "https://i.imgur.com/0IHtYld.jpg", height: 790, width: 365 },
         { src: "https://i.imgur.com/edfqUaa.jpg", height: 790, width: 365 },
+      ],
+    },
+    {
+      name: "Boat Management and Security App",
+      description: `
+      [1] boats will auto shut off if anyone falls off
+      [2] control boats from your phone and watch, and let others do the same
+      [3] track everyones safety metrics
+      [4] make sure your boat is in good shape
+      [*] and more`,
+      client: "TierFour Solutions",
+      clientLink: "https://www.linkedin.com/in/todd-fortier-9119b212/",
+      repoIsPrivate: true,
+      //https://github.com/Modern-Marine/app
+      github: "https://github.com/b-cancel",
+      //222 x 480
+      //444 x 480
+      gallery: [
+        {
+          src: "https://i.giphy.com/media/RmLQgWKnw5OyjeSx1l/giphy.gif",
+          title: "menu and boat slider",
+          height: 480,
+          width: 222,
+        },
+        {
+          src: "https://i.giphy.com/media/WEbYyjyoaoUzalOmoj/giphy.gif",
+          title: "ignition control from apple watch",
+          width: 480,
+          height: 444,
+        },
+        {
+          src: "https://i.giphy.com/media/vaZJ79nsP5GtoniMPV/giphy.gif",
+          title: "boat specific events, insights, and users",
+          height: 480,
+          width: 222,
+        },
+        {
+          src: "https://i.giphy.com/media/LRSLbXdXRL773wBIbT/giphy.gif",
+          title: "devices connected to boat for security",
+          height: 480,
+          width: 222,
+        },
+        {
+          src: "https://i.giphy.com/media/27T2QWRW3XXczaAmXB/giphy.gif",
+          title: "auto shut off triggered due to lost connection",
+          height: 480,
+          width: 222,
+        },
+        {
+          src: "https://i.giphy.com/media/PXdk48pcOyhTnRIOqr/giphy.gif",
+          title: "control access for multiple boats at once",
+          height: 480,
+          width: 222,
+        },
+        {
+          src: "https://i.giphy.com/media/P8oMpUFyshskFSeUxr/giphy.gif",
+          title:
+            "safety insights, the events that led to them, and potential actions",
+          height: 480,
+          width: 222,
+        },
+        {
+          src: "https://i.giphy.com/media/S57CJcaW4HlUJkxrff/giphy.gif",
+          title: "add, edit, and view insurance documents",
+          height: 480,
+          width: 222,
+        },
+        {
+          src: "https://i.giphy.com/media/yj5pQZiuq6wJEuDm22/giphy.gif",
+          title: "fleet events and insights",
+          height: 480,
+          width: 222,
+        },
+        {
+          src: "https://i.giphy.com/media/FYklChLcuCCZ5XjkF3/giphy.gif",
+          title: "user access management to specific boat",
+          height: 480,
+          width: 222,
+        },
+        {
+          src: "https://i.giphy.com/media/gi52QHgXUFSvFDtfbC/giphy.gif",
+          title: "Help Center Mock Up",
+          height: 480,
+          width: 222,
+        },
       ],
     },
     {

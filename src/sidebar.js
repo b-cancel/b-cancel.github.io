@@ -316,7 +316,7 @@ const experience = [
   {
     startOpen: true,
     title: "Lead Software Engineer (Dev, UX, & UI)",
-    company: "Tier Four Solutions Contractor",
+    company: "TierFour Solutions Contractor",
     companyLink: "https://www.linkedin.com/in/todd-fortier-9119b212/",
     location: "Remote",
     startMonth: 6,
@@ -501,6 +501,17 @@ export default function SideBar(props) {
   var xpCount = 0;
   var educationCount = 0;
 
+  /*
+      customBurgerIcon={
+          <Box sx={{fontSize:"28px", textAlign:"center", mt:"8px"}}>
+            <FontAwesomeIcon
+              icon={faFileImport}
+              color="black"
+            />
+          </Box>
+        }
+      */
+
   //build
   return (
     <Stack key={"the side bar"}>
@@ -516,14 +527,7 @@ export default function SideBar(props) {
       <Menu
         {...props}
         width={sideBarWidth}
-        customBurgerIcon={
-          <Box sx={{fontSize:"28px", textAlign:"center", mt:"8px"}}>
-            <FontAwesomeIcon
-              icon={faFileImport}
-              color="black"
-            />
-          </Box>
-        }
+        
       >
         <Box width={sideBarWidth} height={headerHeightPx}>
           <Grid
