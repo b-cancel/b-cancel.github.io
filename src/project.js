@@ -1,4 +1,5 @@
 import React from "react";
+import { isMobile } from "react-device-detect";
 
 //material
 import Box from "@mui/material/Box";
@@ -189,15 +190,60 @@ export default function AllProjects() {
       client: "Lawn Buddy",
       clientLink: "https://www.lawnbuddy.com/",
       gallery: [
-        { title: "Jobs Map/List View", src: "https://i.imgur.com/cx7v5Dl.jpg", height: 762, width: 360 },
-        { title: "Job Details Page", src: "https://i.imgur.com/uZTExkD.jpg", height: 762, width: 360 },
-        { title: "Onboarding Pop Up", src: "https://i.imgur.com/8Vqvx57.jpg", height: 762, width: 360 },
-        { title: "Volume/Area Calculator", src: "https://i.imgur.com/Cz4GnCn.jpg", height: 762, width: 360 },
-        { title: "Customer Details V1", src: "https://i.imgur.com/XThQbFs.jpg", height: 762, width: 360 },
-        { title: "Customer Details V2", src: "https://i.imgur.com/lkPRuBl.jpg", height: 762, width: 360 },
-        { title: "Customer Specific Jobs", src: "https://i.imgur.com/cX1ZDFq.jpg", height: 762, width: 360 },
-        { title: "Instant Pricing V1", src: "https://i.imgur.com/1vTsqt4.jpg", height: 762, width: 360 },
-        { title: "Instant Pricing V2", src: "https://i.imgur.com/6UhJ8zt.jpg", height: 762, width: 360 },
+        {
+          title: "Jobs Map/List View",
+          src: "https://i.imgur.com/cx7v5Dl.jpg",
+          height: 762,
+          width: 360,
+        },
+        {
+          title: "Job Details Page",
+          src: "https://i.imgur.com/uZTExkD.jpg",
+          height: 762,
+          width: 360,
+        },
+        {
+          title: "Onboarding Pop Up",
+          src: "https://i.imgur.com/8Vqvx57.jpg",
+          height: 762,
+          width: 360,
+        },
+        {
+          title: "Volume/Area Calculator",
+          src: "https://i.imgur.com/Cz4GnCn.jpg",
+          height: 762,
+          width: 360,
+        },
+        {
+          title: "Customer Details V1",
+          src: "https://i.imgur.com/XThQbFs.jpg",
+          height: 762,
+          width: 360,
+        },
+        {
+          title: "Customer Details V2",
+          src: "https://i.imgur.com/lkPRuBl.jpg",
+          height: 762,
+          width: 360,
+        },
+        {
+          title: "Customer Specific Jobs",
+          src: "https://i.imgur.com/cX1ZDFq.jpg",
+          height: 762,
+          width: 360,
+        },
+        {
+          title: "Instant Pricing V1",
+          src: "https://i.imgur.com/1vTsqt4.jpg",
+          height: 762,
+          width: 360,
+        },
+        {
+          title: "Instant Pricing V2",
+          src: "https://i.imgur.com/6UhJ8zt.jpg",
+          height: 762,
+          width: 360,
+        },
       ],
     },
     {
@@ -576,13 +622,13 @@ export default function AllProjects() {
 
                         //after creating a identifier we move forward
                         mediaComponent = (
-                            <PlayGifWhenVisible
-                              identifier={identifier}
-                              src={media.src}
-                              threshold={0.75}
-                              height={thisImageHeight}
-                              width={thisImageWidth}
-                            />
+                          <PlayGifWhenVisible
+                            identifier={identifier}
+                            src={media.src}
+                            threshold={0.75}
+                            height={thisImageHeight}
+                            width={thisImageWidth}
+                          />
                         );
                       } else {
                         //TODO: change the .src to retreive the right size photo instead of the full sized photo
@@ -665,10 +711,29 @@ export default function AllProjects() {
                         <Typography
                           variant="body2"
                           style={{ color: "#e0e0e0" }}
-                          sx={{ mt: "16px", textAlign: "center" }}
+                          sx={{ mt: "8px", textAlign: "center" }}
                         >
                           {media.title}
                         </Typography>
+                      ) : (
+                        <Box />
+                      );
+
+                      const link = isMobile ? (
+                        <a href={media.src} target="_blank" rel="noreferrer">
+                          <Typography
+                            variant="caption"
+                            className="underlineOnHover"
+                            style={{
+                              color: "#a0a0a0",
+                              wordBreak: "break-all",
+                              display: "block",
+                            }}
+                            sx={{ mt: "8px", textAlign: "center" }}
+                          >
+                            {media.src}
+                          </Typography>
+                        </a>
                       ) : (
                         <Box />
                       );
@@ -690,7 +755,14 @@ export default function AllProjects() {
                           >
                             {display}
                           </Box>
-                          {descriptions}
+                          <Box
+                            sx={{
+                              pt: "8px",
+                            }}
+                          >
+                            {descriptions}
+                            {link}
+                          </Box>
                         </Box>
                       );
                     }}

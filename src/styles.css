@@ -160,6 +160,10 @@ https://css-tricks.com/prevent-page-scrolling-when-a-modal-is-open/
   text-decoration: underline !important;
 }
 
+.underlineOnHover:hover {
+  text-decoration: underline !important;
+}
+
 /*for the play button that appears in front of GIFs*/
 .ff-container .ff-overlay {
   max-width: 56px !important;
