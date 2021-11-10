@@ -3,10 +3,11 @@ import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import AnimateHeight from "react-animate-height";
-
+import { isMobile } from "react-device-detect";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
+//TODO: if on mobile... and closed... 
 ///36px was a well selected left the first time
 export default class EducationSwapItem extends React.Component {
   constructor(props) {
@@ -20,7 +21,7 @@ export default class EducationSwapItem extends React.Component {
   render() {
     //height attribute that depends on opened var
     const height = this.state.isOpened ? "auto" : 0;
-    const iconColor = this.state.isHovered ? "#202020" : "transparent";
+    const iconColor = (this.state.isHovered || (isMobile && this.state.isOpened === false)) ? "#202020" : "transparent";
     const extraTitle = this.state.isOpened ? "" : `,${this.props.gpa}`;
     const gpaLine = this.props.gpa + " | " + this.props.gpaDetail;
 

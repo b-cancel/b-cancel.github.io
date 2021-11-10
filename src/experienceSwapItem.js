@@ -3,10 +3,11 @@ import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import AnimateHeight from "react-animate-height";
-
+import { isMobile } from "react-device-detect";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinusSquare, faPlusSquare } from "@fortawesome/free-solid-svg-icons";
 
+//TODO: if on mobile... and closed... 
 ///36px was a well selected left the first time
 export default class ExperienceSwapItem extends React.Component {
   constructor(props) {
@@ -26,7 +27,7 @@ export default class ExperienceSwapItem extends React.Component {
 
     //height attribute that depends on opened var
     const height = this.state.isOpened ? "auto" : 0;
-    const iconColor = this.state.isHovered ? "#202020" : "transparent";
+    const iconColor = (this.state.isHovered || isMobile) ? "#202020" : "transparent";
     const numberWeight = this.state.isOpened ? "bold" : "normal";
 
     //date related
@@ -42,6 +43,8 @@ export default class ExperienceSwapItem extends React.Component {
     //hover and opened "U title"
 
     console.log(this.props.companyLink + " is the link");
+
+    const showIcon = this.state.isHovered || (isMobile && this.state.isOpened === false);
 
     //build
     return (
@@ -69,7 +72,7 @@ export default class ExperienceSwapItem extends React.Component {
             sx={{ width: "18px" }}
             onClick={() => this.setState({ isOpened: !this.state.isOpened })}
           >
-            {this.state.isHovered ? (
+            {showIcon ? (
               this.state.isOpened ? (
                 <FontAwesomeIcon icon={faMinusSquare} color={iconColor} />
               ) : (

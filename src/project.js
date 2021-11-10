@@ -628,6 +628,7 @@ export default function AllProjects() {
                             threshold={0.75}
                             height={thisImageHeight}
                             width={thisImageWidth}
+                            borderRadius={sharedBorderRadius}
                           />
                         );
                       } else {

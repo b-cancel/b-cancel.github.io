@@ -23,6 +23,7 @@ export default class PlayGifWhenVisible extends Component {
       #${identifier} img, #${identifier} canvas {
         height: ${this.props.height}px;
         width: ${this.props.width}px;
+        border-radius: ${this.props.borderRadius}px;
       }
     `;
 

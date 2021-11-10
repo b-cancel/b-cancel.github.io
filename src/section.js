@@ -3,7 +3,9 @@ import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import AnimateHeight from "react-animate-height";
+import { isMobile } from "react-device-detect";
 
+//TODO: if on mobile... and closed... 
 export default class Section extends React.Component {
   constructor(props) {
     super(props);
@@ -16,6 +18,8 @@ export default class Section extends React.Component {
   render() {
     //height attribute that depends on opened var
     const height = this.state.isOpened ? "auto" : 0;
+    const showOpenDir = this.state.isOpened === false && (this.state.isHovered || isMobile);
+    const showCloseDir = (this.state.isOpened && this.state.isHovered);
 
     //normal "title"
     //hover and closed "% cd title"
@@ -35,7 +39,7 @@ export default class Section extends React.Component {
           className="aSection"
         >
           <Stack direction="row">
-            {this.state.isOpened === false && this.state.isHovered ? (
+            {showOpenDir ? (
               <Typography variant="body1" sx={{ pr: "8px" }}>
                 % cd
               </Typography>
@@ -45,7 +49,7 @@ export default class Section extends React.Component {
             <Typography variant="body1" fontWeight="bold">
               {this.props.title}
             </Typography>
-            {this.state.isOpened && this.state.isHovered ? (
+            {showCloseDir ? (
               <Typography variant="body1" sx={{ pl: "8px" }}>
                 % cd..
               </Typography>
