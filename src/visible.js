@@ -2,7 +2,7 @@ import React, { Component, createRef } from "react";
 import Observer from "@researchgate/react-intersection-observer";
 import ReactFreezeframe from "react-freezeframe";
 import Stack from "@mui/material/Stack";
-import Box from "@mui/material/Box";
+//import Box from "@mui/material/Box";
 
 //TODO: I should fix this so the GIFs also autoplay when they show while initially showing page
 export default class PlayGifWhenVisible extends Component {

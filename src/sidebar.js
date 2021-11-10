@@ -25,7 +25,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowAltCircleRight,
   /*for the menu stuff*/
-  faFileImport,
+  //faFileImport,
   //faFileAlt,
   //faFile,
   //faScroll,
