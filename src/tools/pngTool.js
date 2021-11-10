@@ -1,4 +1,5 @@
 import React from "react";
+import { isMobile } from "react-device-detect";
 import Box from "@mui/material/Box";
 import { Image } from "react-native";
 import MyToolTip from "../tooltips";
@@ -35,34 +36,44 @@ export default class PngTool extends React.Component {
       />
     );
 
-    return (
-      <a
-        href={this.props.src}
-        target="_blank"
-        rel="noreferrer"
-        className={theClassName}
+    //wrap the hovered on non hovered image
+    const wrappedTool = (
+      <Box
+        onMouseEnter={() => this.setState({ isHovered: true })}
+        onMouseLeave={() => this.setState({ isHovered: false })}
       >
         <style
           dangerouslySetInnerHTML={{
             __html: `
-              .${theClassName} {
-                  display:inline-block;
-              }
-                `,
+        .${theClassName} {
+            display:inline-block;
+        }
+          `,
           }}
         />
-        <Box
-          onMouseEnter={() => this.setState({ isHovered: true })}
-          onMouseLeave={() => this.setState({ isHovered: false })}
-        >
-          <MyToolTip
-            title={this.props.tip}
-            placement="top"
-            child={tool}
-            type="whiteOnBlack"
-          />
-        </Box>
-      </a>
+        <MyToolTip
+          title={this.props.tip}
+          placement="top"
+          child={tool}
+          type="whiteOnBlack"
+        />
+      </Box>
     );
+
+    //less function on mobile
+    if (isMobile) {
+      return (<Box>{ wrappedTool }</Box>);
+    } else {
+      return (
+        <a
+          href={this.props.src}
+          target="_blank"
+          rel="noreferrer"
+          className={theClassName}
+        >
+          {wrappedTool}
+        </a>
+      );
+    }
   }
 }
