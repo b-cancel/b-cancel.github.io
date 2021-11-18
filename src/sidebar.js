@@ -328,36 +328,36 @@ const experience = [
     company: "L.O.F.T.",
     companyLink: "https://poweredbyloft.com/",
     location: "Remote",
-    startMonth: 9,
+    startMonth: 11,
     startYear: 2020,
     endMonth: 6,
     endYear: 2021,
   },
   {
     startOpen: true,
-    title: "Mobile Dev, UX, & UI",
+    title: "Mobile Application Developer, UX, & UI",
     company: "Lawn Buddy",
     companyLink: "https://www.lawnbuddy.com",
     location: "Remote",
     startMonth: 5,
     startYear: 2020,
-    endMonth: 8,
+    endMonth: 7,
     endYear: 2020,
   },
   {
     startOpen: true,
-    title: "Web Dev (Internal Tools)",
+    title: "Internal Web Tools Developer",
     company: "Lebron Group Land Surveying",
     companyLink: "https://www.lebrongroup.com/",
     location: "Remote",
     startMonth: 3,
     startYear: 2020,
-    endMonth: 9,
+    endMonth: 6,
     endYear: 2020,
   },
   {
     startOpen: false,
-    title: "Barista / Disaster Relief Volunteer",
+    title: "Disaster Relief Volunteer / Barista",
     company: "Starbucks",
     companyLink: "https://www.starbucks.com/",
     location: "Mc-Allen, Texas",
@@ -379,7 +379,7 @@ const experience = [
   },
   {
     startOpen: false,
-    title: "Web Dev (Internal Tools)",
+    title: "Web Development and Design",
     company: "Lebron Group Land Surveying",
     companyLink: "https://www.lebrongroup.com/",
     location: "Winter Park, FL",
@@ -390,7 +390,7 @@ const experience = [
   },
   {
     startOpen: false,
-    title: "Graphic Design and Video Editing",
+    title: "Marketing and Graphic Design",
     company: "UT Center For Railway Safety",
     companyLink: "https://www.utrgv.edu/railwaysafety/",
     location: "Edinburg, TX",
@@ -487,7 +487,7 @@ export default function SideBar(props) {
   //our smallestDesiredMenuWidth might be too large
   //to include space for the smallestDesiredTapable Area
   //which is more important because users have to be able to close the menu
-  const smallestDesiredTapableWidth = 56 + 24;
+  const smallestDesiredTapableWidth = 48 + (2*2) + (16*2);
   const largestPossibleMenuSize = actualWidth - smallestDesiredTapableWidth;
   if (largestMenuWidth > largestPossibleMenuSize) {
     largestMenuWidth = largestPossibleMenuSize;
@@ -518,17 +518,19 @@ export default function SideBar(props) {
       <style
         dangerouslySetInnerHTML={{
           __html: `
-              .page-wrap-opened, .bm-burger-button-menu-opened {
+              .page-wrap-opened, .shiftRight {
                 transform: translate3d(${sideBarWidth}, 0px, 0px) !important;
+              }
+
+              .bm-burger-button-menu-opened {
+                z-index: 1111 !important;
               }
                 `,
         }}
       />
-      <Menu
-        {...props}
-        width={sideBarWidth}
-        
-      >
+      <Menu {...props} width={sideBarWidth} customBurgerIcon={
+        props.customIcon
+      }>
         <Box width={sideBarWidth} height={headerHeightPx}>
           <Grid
             container
@@ -587,6 +589,30 @@ export default function SideBar(props) {
           }
         />
 
+        <Box
+          onClick={() => {
+            props.menuCloser();
+          }}
+          sx={{
+            backgroundColor: "#101010",
+            color: "#e0e0e0",
+            px: "16px",
+            py: "16px",
+          }}
+        >
+          <Stack
+            direction="row"
+            justifyContent="flex-start"
+            alignItems="center"
+            spacing="12px"
+            className="clickable spreadOnHover"
+          >
+            <Typography variant="body1">{"/ "}</Typography>
+            <Typography variant="h6">My Work</Typography>
+            <FontAwesomeIcon icon={faArrowAltCircleRight} />
+          </Stack>
+        </Box>
+
         <Section
           title="/ Education"
           isOpened={true}
@@ -643,30 +669,6 @@ export default function SideBar(props) {
             );
           })}
         />
-
-        <Box
-          onClick={() => {
-            props.menuCloser();
-          }}
-          sx={{
-            backgroundColor: "#101010",
-            color: "#e0e0e0",
-            px: "16px",
-            py: "16px",
-          }}
-        >
-          <Stack
-            direction="row"
-            justifyContent="flex-start"
-            alignItems="center"
-            spacing="12px"
-            className="clickable spreadOnHover"
-          >
-            <Typography variant="body1">{"/ "}</Typography>
-            <Typography variant="h6">My Work</Typography>
-            <FontAwesomeIcon icon={faArrowAltCircleRight} />
-          </Stack>
-        </Box>
 
         <Section
           title="/ Tools"

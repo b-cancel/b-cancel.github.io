@@ -7,6 +7,7 @@ import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { Squash as Hamburger } from 'hamburger-react'
 
 class App extends React.Component {
   render() {
@@ -120,6 +121,7 @@ class ReloadingApp extends React.Component {
         <SideBar
           pageWrapId={"page-wrap"}
           isOpen={this.state.menuOpen}
+          customIcon={<Hamburger toggled={this.state.menuOpen} size={24}/>}
           onStateChange={(state) => this.handleStateChange(state)}
           menuCloser={() => this.closeMenu()}
         />
