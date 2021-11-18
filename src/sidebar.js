@@ -511,8 +511,6 @@ export default function SideBar(props) {
           </Box>
         }
       */
-  
-        //customBurgerIcon={props.customIcon}
 
   //build
   return (
@@ -530,7 +528,9 @@ export default function SideBar(props) {
                 `,
         }}
       />
-      <Menu {...props} width={sideBarWidth}>
+      <Menu {...props} width={sideBarWidth} customBurgerIcon={
+        props.customIcon
+      }>
         <Box width={sideBarWidth} height={headerHeightPx}>
           <Grid
             container
