@@ -542,19 +542,19 @@ export default function SideBar(props) {
           >
             <Grid item>
               <Box
-                height="96px"
-                width="96px"
+                height="64px"
+                width="64px"
                 backgroundColor="#202020"
-                borderRadius="128px"
-                padding="16px"
+                borderRadius="16px"
+                padding="8px"
                 position="relative"
                 sx={{ mb: "8px" }}
               >
                 <img
                   src="./graphics/profile/whiteProfile.png"
                   alt="profile"
-                  heigth="96px"
-                  width="96px"
+                  heigth="64px"
+                  width="64px"
                 />
               </Box>
             </Grid>
